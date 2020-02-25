@@ -1,0 +1,15 @@
+<div *ngIf="legislator">
+
+  <figure class="snip1344" (click)="gotoLegislator(legislator)">
+    <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
+    <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/>
+    <figcaption>
+      <h3>{{legislator.full_name}}</h3>
+      <p>State: {{legislator.state}}</p>
+      <p>District: {{legislator.district}}</p>          
+      <p>Chamber: {{legislator.chamber}}</p>
+      <p>Party: {{legislator.party}}</p>          
+    
+    </figcaption>
+  </figure>
+</div>

@@ -1,0 +1,22 @@
+[
+	{
+	"profile_template_id":"ptemp0010",
+	"type":"legislativeDistrict-Federal",
+	"properties" : ["name", "description"]
+	},
+	{
+	"profile_template_id":"ptemp0011",
+	"type":"legislativeDistrict-Federal",
+	"properties" : ["population", "maleCount", "femaleCount", "othersCount"]
+	},
+	{
+	"profile_template_id":"ptemp0012",
+	"type":"legislativeDistrict-Federal",	
+	"properties" : []
+	},
+	{
+	"profile_template_id":"uptemp001",
+	"type":"publicUser",
+	"properties" : ["firstName", "lastName", "imageUrl"]
+	}
+]

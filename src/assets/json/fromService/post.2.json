@@ -1,0 +1,91 @@
+[
+		{
+		"id":"post001",
+		"entityId":"user6@gmail.com",
+		"userId":"u001",
+		"parentPostId":"",
+		"postCategory":"water supply",
+		"postText":"World's most beautiful car in Curabitur <a href='#' title=''>#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website",
+		"imageUrl":"",
+		"videoUrl":"",
+		"districtId":"g0010",
+		"likedByEntityIds":["u001"],
+		"likedByCurrentUser":true,
+		"postType":"IT", 
+		"createdTimestamp":"",
+		"comments":[
+			{
+			"id":"post0011",
+			"entityId":"user4@gmail.com",
+			"userId":"u0012",
+			"parentPostId":"u001",
+			"postCategory":"water supply",
+			"postText":"Water pipe broke at first ave-comment1,we are working for the dance and sing songs. this car is very awesome for the youngster. please vote this car and like our post",
+			"imageUrl":"",
+			"videoUrl":"",
+			"districtId":"g0010",
+			"likedByEntityIds":["u002"],
+			"likedByCurrentUser":false,
+			"postType":"T",
+			"createdTimestamp":"",
+			"comments":[
+				{
+				"id":"post00111",
+				"entityId":"user4@gmail.com",
+				"userId":"u0012",
+				"parentPostId":"u0011",
+				"postCategory":"water supply",
+				"postText":"yes, really very awesome car i see the features of this car in the official website of <a href='#' title=''>#Mercedes-Benz</a> and really impressed :-)",
+				"imageUrl":"",
+				"videoUrl":"",
+				"districtId":"g0010",
+				"likedByEntityIds":["u002"],
+				"likedByCurrentUser":false,
+				"postType":"T",
+				"createdTimestamp":""
+				}]
+			}]
+		},
+		{
+		"id":"post002",
+		"entityId":"user6@gmail.com",
+		"userId":"u001",
+		"parentPostId":"",
+		"postCategory":"health",
+		"postText":"Mr.X senator launched health awareness campaign",
+		"imageUrl":"",
+		"videoUrl":"",
+		"districtId":"g0010",
+		"likedByCurrentUser":false,
+		"postType":"T",
+		"createdTimestamp":""
+		},
+		{
+		"id":"post003",
+		"entityId":"user6@gmail.com",
+		"userId":"u001",
+		"parentPostId":"",
+		"postCategory":"transportation",
+		"postText":"Too much traffic in peak hours near X tunnel",
+		"imageUrl":"",
+		"videoUrl":"",
+		"districtId":"g0010",
+		"likedByCurrentUser":false,
+		"postType":"I",
+		"createdTimestamp":""		
+		},
+		{
+		"id":"post004",
+		"entityId":"user6@gmail.com",
+		"userId":"u001",
+		"parentPostId":"",
+		"postCategory":"bill",
+		"postText":"Senator co-sponsored bill X",
+		"imageUrl":"",
+		"videoUrl":"",
+		"districtId":"g0010",
+		"likedByCurrentUser":false,
+		"postType":"VIT",
+		"createdTimestamp":""		
+		}
+	]

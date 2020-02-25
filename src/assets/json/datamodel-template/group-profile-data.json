@@ -1,0 +1,38 @@
+[
+	{
+		"group_profile_id":"gp0010",
+		"group_id" : "g0010",
+		"profile_template_id":"ptemp0010",
+		"data" : [
+			{"name":"Pennsylvania's 14th congressional district"}, 
+			{"description":"Pennsylvania's 14th congressional district includes the entire city of Pittsburgh and parts of surrounding suburbs. A variety of working class and majority black suburbs located to the east of the city are included, such as McKeesport and Wilkinsburg. Also a major part of the district are number of middle class suburbs that have historic Democratic roots, such as Pleasant Hills and Penn Hills. The seat has been held by Democrat Mike Doyle since 1995. In the 2006 election, he faced Green Party candidate Titus North and returned to the house with 90% of the vote."}
+			]
+	},
+	{
+		"group_profile_id":"gp0011",
+		"group_id" : "g0010",
+		"profile_template_id":"ptemp0011",	
+		"data" : [
+			{"population":"100"}, 
+			{"maleCount":"40"},
+			{"femaleCount":"55"},
+			{"othersCount":"5"}
+			]
+	}
+	,
+	{
+		"group_profile_id":"gp0012",
+		"group_id" : "g0010",
+		"profile_template_id":"ptemp0012",	
+		"data" : []
+	},
+	{
+		"group_profile_id":"gp0013",
+		"group_id" : "g0011",
+		"profile_template_id":"ptemp0010",
+		"data" : [
+			{"name":"Pennsylvania's 27th congressional district"}, 
+			{"description":"Pennsylvania's 27th congressional district includes the entire city of Pittsburgh."}
+			]
+	}	
+]

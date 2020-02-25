@@ -1,0 +1,59 @@
+<div class="address">
+  Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
+  <!-- <input [(ngModel)]="address" type="text" placeholder="Enter address here" />
+  -->
+  </div>
+
+<div class="col-xs-12">
+  <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>
+  <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>
+</div>
+
+<!-- 
+
+
+      <div>Your State: 
+        <button type="button" class="btn btn-primary">{{state}}</button>
+      </div>
+      
+      <div>{{districtLabel}} 
+        <button *ngFor="let congressDistrict of congressDistricts" type="button" class="btn btn-primary" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
+      </div>
+-->
+      <div class="col-xs-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="lblState">State</span>
+          <div class="input-group-append">
+            <button class="btn btn-info" type="button" id="btnState">{{state}}</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="lblDistrict">{{districtLabel}}</span>
+          <div class="input-group-append" *ngFor="let congressDistrict of congressDistricts">
+            <button class="btn btn-info" type="button" id="btnDistrict" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div>
+        <label>Find your legislators: </label>
+     
+        <input type="text" class="searchLegisBox" [(ngModel)]="ipZipcode" placeholder="Zipcode" />
+
+        <label class="btn btn-success" uncheckable (click)="getCongressLegislatorsByZip(ipZipcode)">Search</label>
+      </div>
+        -->
+
+
+      <div class="searchTip">{{searchTip}}</div>
+
+      <div>
+        <ul style="list-style-type:none">
+          <li *ngFor="let legislator of legislators">
+            <app-legislator [legislator]=legislator></app-legislator>
+          </li>
+        </ul>
+      </div>      

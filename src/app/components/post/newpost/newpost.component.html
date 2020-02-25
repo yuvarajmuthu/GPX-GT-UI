@@ -1,0 +1,37 @@
+<!--
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+  -->
+    <div class="central-meta">
+    <div class="new-postbox">
+        <!--LOGGED IN USER'S PROFILE IMAGE
+
+      <figure>
+        <img src="assets/images/yeoman.png" alt="">
+      </figure>
+      -->
+      <div class="newpst-input">
+        <img [src]="stagingImage" id="stageUploadedImgFile" alt="">
+          <textarea rows="2" placeholder="You can share the happenings around you !" [(ngModel)]='txtPost'  (change)="doTextareaValueChange($event)"></textarea>
+          <div class="attachments">
+            <ul>
+              <li>
+                <i class="fa fa-image"></i>
+                <label class="fileContainer">
+                  <input type="file" id="stageUploadedFile" (change)="onFileSelected($event)">
+                </label>
+              </li>
+              <li>
+                <i class="fa fa-video-camera"></i>
+                <label class="fileContainer">
+                  <input type="file">
+                </label>
+              </li>
+              <li>
+                <button type="submit" (click)="submitPost()">Post</button>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>

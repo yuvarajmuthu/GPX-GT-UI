@@ -1,0 +1,31 @@
+.legisBoundary{
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+  .legisBoundary:hover{
+    border: 2px solid lightblue;
+  }
+
+  .searchLegisBox{
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+
+  .searchTip{
+
+    position:relative;
+    padding: 1em;
+    margin: 1em;
+
+  }
+
+  .address{
+    padding: 0.5em;
+  }
+
+  .address input{
+    width: 500px;
+  }

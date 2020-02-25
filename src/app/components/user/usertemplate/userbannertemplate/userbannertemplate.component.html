@@ -1,0 +1,63 @@
+<div class="userProfileHeader">
+  <header>
+  <!--
+    <figure class="profile-banner">
+      <img src="{{imageUrl}}" />
+    </figure>
+    -->
+    <figure class="profile-picture" 
+    [ngStyle]="{'background-image': 'url(' + bioguideImageUrl + ')'}">
+    </figure>
+    <div class="profile-stats">
+      <ul>
+        <li *ngIf="committeesLength > 0">{{committeesLength}}    <span>Committees</span></li>
+        <li>{{followers}}<span>Followers</span></li>
+      </ul>
+
+<div class="right col-lg-2" *ngIf="!allowed()">
+ <button *ngIf="following" type="button" class="btn btn-success glyphicon glyphicon-ok">Following</button>       
+ <button *ngIf="requestedToFollow" type="button" class="btn btn-success glyphicon glyphicon-ok">Request Pending Approval</button>       
+ <button *ngIf="followRequestRejected" type="button" class="btn btn-success glyphicon glyphicon-ok">Request Rejected</button>       
+ <button *ngIf="!following && !requestedToFollow && !followRequestRejected" type="button" class="btn btn-primary" (click)="followPerson()">Follow</button>
+</div>
+
+    </div>
+
+    <!-- <h1>
+           <app-gpx-input [permission]="allowed()" [min]="2" [max]="50"  [title]="'firstName'" [placeholder]="firstName" (onSave)="setValue($event)"></app-gpx-input>
+           <app-gpx-input [permission]="allowed()" [min]="2" [max]="50"  [title]="'lastName'" [placeholder]="lastName" (onSave)="setValue($event)"></app-gpx-input>                             
+    </h1> -->
+    
+      <div>
+        <label>
+          Firstname:
+        </label>
+        <input [formControl]="firstName1" />
+      </div>
+      <div>
+        <label>
+          Lastname:
+        </label>
+        <input [formControl]="lastName1" />
+      </div>
+
+  </header>
+</div>
+<!--
+   <div class="districtTemplate">
+      <div id="userName" class="constitutionDescription">
+           <h5>User Name:</h5>           
+           <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'userName'" [placeholder]="userName" (onSave)="setValue($event)"></ndv-edit>                    
+      </div>
+
+      <div id="userEmailId" class="constitutionDescription">
+           <h5>Email Id:</h5>           
+           <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'emailId'" [placeholder]="emailId" (onSave)="setValue($event)"></ndv-edit>                    
+      </div>
+
+      <div id="userAddress" class="constitutionDescription">
+           <h5>Address:</h5>           
+           <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'address'" [placeholder]="address" (onSave)="setValue($event)"></ndv-edit>                    
+      </div>
+    </div>  
+-->

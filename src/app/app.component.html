@@ -1,0 +1,145 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand mylogo" routerLink="/"></a>
+        <button class="navbar-toggler" type="button" (click)="isCollaped = !isCollaped"
+                [attr.aria-expanded]="!isCollaped" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" (click)="route('searchLegislator')"><i class="fa fa-home"></i> Legislator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="route('news')"><i class="fa fa-edit"></i> News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="route('group')"><i class="fa fa-bell"></i> District</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="route('request')"><i class="fa fa-bell"></i> Connection Requests</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
+                <li class="nav-item">
+                    <a class="nav-link" (click)="route('login')"><i class="fa fa-sign-in"></i> Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="route('register')"><i class="fa fa-registered"></i> Register</a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0 col-md-5">
+                <input class="myform-control mr-sm-2" type="search" placeholder="Search GoPolitix" aria-label="Search">
+                <button class="btn btn-light"><i class="fa fa-search"></i></button>
+            </form>
+            <ul class="navbar-nav ml-auto">
+                <!--<li>
+                    <a href="#" id="add-question" class="btn mybtn btn-success">Add Question</a>
+                </li>-->
+                <li class="avatar-profile d-none d-sm-block " [ngbPopover]="popContent">
+                    <a href="javascript:void(0)"><img src="assets/images/avatars/avatar.png"
+                                                      class="img-responsive"/></a>
+                </li>
+            </ul>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+            <ng-template #popContent>
+                <button *ngIf="!isUserLogged" class="btn btn-outline-warning my-2 my-sm-0" type="submit"
+                        (click)="route('register')">Register
+                </button>
+                <button *ngIf="!isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        (click)="route('login')">Login
+                </button>
+                <button *ngIf="isUserLogged" class="btn btn-outline-warning   my-2 my-sm-0 <!--list-group-item-->" type="submit"
+                        (click)="loadUser()">View Profile
+                </button>
+                <button *ngIf="isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                        (click)="logout()">Logout
+                </button>
+            </ng-template>
+        </form>
+    </div>
+</nav>
+<body>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="d-lg-none d-xl-none col-xs-12">
+            <a href="javascript:void(0)" class="mx-auto d-flex justify-content-center flex-wrap">
+                <img src="assets/images/avatars/avatar.png" class="img-responsive text-center mx-auto d-flex justify-content-center flex-wrap"/>
+            </a>
+        </div>
+
+
+        <div class="col-lg-2 ">
+            <div class=" aff-right">
+                <div class="ui-block">
+                    <h6 class="my-4">Recent</h6>
+                    <hr>
+                    <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist"
+                         aria-orientation="vertical">
+                        <!--<a class="nav-link active" data-toggle="pill" href="javascript:void(0);"> Top Stories</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">New Questions</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Bookmarked Answers</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Links</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Payment Gateways</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Education</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">E-commerce</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Android Applications</a>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class=" aff-right">
+                <div class="ui-block">
+                    <h6 class="my-4" >Activities</h6>
+                    <hr>
+                    <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist"
+                         aria-orientation="vertical">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+        <div class="col-lg-7">
+
+            <router-outlet></router-outlet>
+
+
+        </div>
+        <!-- /.col-lg-6 -->
+        <!--col-lg-3-->
+        <div class="col-lg-3 ">
+            <div class=" q-wid">
+                <div class="ui-block">
+                    <h6 class="my-4">Today's News and Views</h6>
+                    <hr>
+                    <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
+                        <!--<a class="nav-link" data-toggle="pill" href="javascript:void(0);"> Upvote 5 more good
+                            answers</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Ask your first question</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Add 3 credentials</a>
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Answer a question</a>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class=" q-wid">
+                <div class="ui-block">
+                    <h6 class="my-4">Followers</h6>
+                    <hr>
+                    <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-3 -->
+    </div>
+</div>
+<!-- /.container -->
+<!-- The Modal -->
+</body>

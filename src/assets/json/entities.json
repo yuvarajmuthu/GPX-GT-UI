@@ -1,0 +1,26 @@
+[
+	{
+		"entity-id":"eld001",
+		"type":"legislativeDistrict-Federal"
+	},
+	{
+		"entity-id":"eld002",
+		"type":"legislativeDistrict-State"
+	},
+	{
+		"entity-id":"eld003",
+		"type":"legislativeDistrict-County"
+	},
+	{
+		"entity-id":"eld004",
+		"type":"legislativeDistrict-Township"
+	},
+	{
+		"entity-id":"elp001",
+		"type":"legislator"
+	},
+	{
+		"entity-id":"ep001",
+		"type":"publicUser"
+	}
+]

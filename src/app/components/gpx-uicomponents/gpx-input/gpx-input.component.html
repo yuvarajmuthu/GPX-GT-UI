@@ -1,0 +1,14 @@
+<!--
+<span *ngIf="!permission">{{text}}</span>
+<span *ngIf="permission" class='ndv-comp' [ngClass]="{'ndv-active':show}">
+  <input *ngIf='show' [ngClass]="{'ng-invalid': invalid}" (ngModelChange)="validate($event)" type='text' [(ngModel)]='text' />
+  <div class='err-bubble' *ngIf="invalid">{{error || " must contain " + min + " to -" + max +" chars."}}</div>
+  <i id='ndv-ic' *ngIf='!show'>✎</i>
+  <span *ngIf='!show' (click)='makeEditable()'>{{text || '-Empty Field-'}}</span>
+</span>
+<div class='ndv-buttons' *ngIf='show'>
+  <button class='btn-x-sm' (click)='callSave()'><i>✔</i></button>
+  <button class='btn-x-sm' (click)='cancelEditable()'><i>✖</i></button>
+</div>
+-->
+GPX Input component

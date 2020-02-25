@@ -1,0 +1,78 @@
+{
+    "results" : [
+       {
+          "address_components" : [
+             {
+                "long_name" : "300",
+                "short_name" : "300",
+                "types" : [ "street_number" ]
+             },
+             {
+                "long_name" : "Chatham Park Drive",
+                "short_name" : "Chatham Park Dr",
+                "types" : [ "route" ]
+             },
+             {
+                "long_name" : "Pittsburgh",
+                "short_name" : "Pittsburgh",
+                "types" : [ "locality", "political" ]
+             },
+             {
+                "long_name" : "Scott Township",
+                "short_name" : "Scott Township",
+                "types" : [ "administrative_area_level_3", "political" ]
+             },
+             {
+                "long_name" : "Allegheny County",
+                "short_name" : "Allegheny County",
+                "types" : [ "administrative_area_level_2", "political" ]
+             },
+             {
+                "long_name" : "Pennsylvania",
+                "short_name" : "PA",
+                "types" : [ "administrative_area_level_1", "political" ]
+             },
+             {
+                "long_name" : "United States",
+                "short_name" : "US",
+                "types" : [ "country", "political" ]
+             },
+             {
+                "long_name" : "15220",
+                "short_name" : "15220",
+                "types" : [ "postal_code" ]
+             },
+             {
+                "long_name" : "2203",
+                "short_name" : "2203",
+                "types" : [ "postal_code_suffix" ]
+             }
+          ],
+          "formatted_address" : "300 Chatham Park Dr, Pittsburgh, PA 15220, USA",
+          "geometry" : {
+             "location" : {
+                "lat" : 40.402777,
+                "lng" : -80.0585435
+             },
+             "location_type" : "ROOFTOP",
+             "viewport" : {
+                "northeast" : {
+                   "lat" : 40.4041259802915,
+                   "lng" : -80.05719451970849
+                },
+                "southwest" : {
+                   "lat" : 40.4014280197085,
+                   "lng" : -80.05989248029151
+                }
+             }
+          },
+          "place_id" : "ChIJp9zvYaj3NIgRrHJOaTD-qc8",
+          "plus_code" : {
+             "compound_code" : "CW3R+4H Scott Township, PA, United States",
+             "global_code" : "86GXCW3R+4H"
+          },
+          "types" : [ "street_address" ]
+       }
+    ],
+    "status" : "OK"
+ }

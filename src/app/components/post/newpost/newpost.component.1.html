@@ -1,0 +1,34 @@
+<div class="newPostBox">
+
+	<div>
+        <div class="col-xs-10 newPost">
+<!--    		<textarea rows="2" cols="50" [(ngModel)]="txtPost"></textarea>
+-->
+  <textarea rows="2" cols="50">{{txtPost}}</textarea>
+</div>
+
+    	<div class="col-xs-2">
+    		<button type="button" class="btn btn-primary" (click)="submitPost(txtPost)">Post</button>
+    	</div>
+    </div>
+
+    <div class="col-xs-12">
+
+        <button type="button" class="btn btn-outline-primary" (click)="isFileStagingAreaCollapsed = !isFileStagingAreaCollapsed"
+        [attr.aria-expanded]="!isFileStagingAreaCollapsed" aria-controls="collapseExample">
+        Pictures
+        </button>
+
+    </div>
+</div>
+
+<div id="collapseExample" [ngbCollapse]="isFileStagingAreaCollapsed">
+  <div class="card">
+    <div class="card-body">
+      <app-gpx-fileupload></app-gpx-fileupload>
+     <!--
+      <file-upload></file-upload>
+      -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="usercard1">
+<figure (click)="loadUser()">
+      <img [src]="profileSmImage"
+      alt="Place image title"
+      *ngIf="!isImageLoading">
+    </figure> 
+
+    <span class="friend-meta">
+        <h4><a [routerLink]="['/user', user.username]" title="">{{user.username}}</a></h4>
+        <!--
+        <button class="btn" type="button" *ngIf="loggedUser.username != user.username" (click)="followEntity()">Follow</button>
+        -->
+        <button *ngIf="loggedUser.username != user.username" type="button" [class]="followCntrlCSS" (click)="followEntity()">
+          <span [class]="followStatusCSS"></span>{{followCntrlLabel}} 
+      </button> 
+      </span>
+  </div>
+    <!--
+	<section id="what-we-do">
+					<div class="card">
+						<div class="card-block">
+
+              <div class="col-lg-3">
+              <img [src]="profileSmImage"
+              alt="Place image title"
+              *ngIf="!isImageLoading">
+              </div>
+
+              <div class="col-lg-9">
+							<h3 class="card-title">
+                <a [routerLink]="['/user', user.username]" title="">{{user.username}}</a>
+              </h3>
+							<p class="card-text"></p>
+              <button class="btn" type="button" *ngIf="loggedUser.username != user.username" (click)="followEntity()">Follow</button>  
+            </div>
+
+
+          </div>
+          </div>
+  </section>
+-->

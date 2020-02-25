@@ -1,0 +1,33 @@
+<div class='row'> 
+	<div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownProfileEditOption" ngbDropdownToggle>{{profileEditOption}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownProfileEditOption">
+				<button class="dropdown-item" (click)="setPermission('Editor')">Editor</button>
+        <button class="dropdown-item" (click)="setPermission('Viewer')">Viewer</button>				
+      </div>
+    </div>
+	</div>
+
+	<div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownAddSection" ngbDropdownToggle>Add Section</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownAddSection">
+        <button class="dropdown-item" *ngFor="let profileTemplate of profilesTemplates" (click)="loadTemplate(profileTemplate.profile_template_id)">{{profileTemplate.name}}</button>
+      </div>
+    </div>
+	</div>
+	
+	<div *ngIf="allowed()" class="col">
+	     <button type="button" class="btn btn-primary" (click)="saveProfile()">Save Profile</button>
+	</div>    
+
+	<div *ngIf="!allowed()" class="col">
+	     <button type="button" class="btn btn-primary">Follow</button>
+	</div>    
+</div>            
+
+<hr>
+<div>
+	<app-usertemplate [type]="templateType"></app-usertemplate>
+</div>

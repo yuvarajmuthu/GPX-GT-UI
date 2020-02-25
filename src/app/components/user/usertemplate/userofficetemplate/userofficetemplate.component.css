@@ -1,0 +1,16 @@
+.officeProfileCard {
+    background-color: #fcfcfc;
+    margin-top: 27px;
+}
+.table td, .table th{
+  border: none;
+  text-align: left;
+}
+.lg-fa{
+  font-size: 36px;
+}
+.box-shadow{
+  transition: 10ms;
+  -webkit-box-shadow: 1px 6px 23px 4px rgba(0,0,0,0.31);
+  box-shadow: 1px 6px 23px 4px rgba(0,0,0,0.31);
+}

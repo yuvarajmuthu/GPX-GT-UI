@@ -1,0 +1,57 @@
+
+<!--
+<div class="mesg-meta" *ngFor="let request of connectionRequest">
+  <a class="nav-link p-0" [routerLink]="" (click)="loadUser()">
+    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0 gpx-avatar"
+      alt="avatar image">
+    Connection <span>{{request.status}}</span>
+  </a>
+  <div class="mesg-meta">
+    <h6>{{request.targetEntityId}}</h6>
+  </div>
+  <button *ngIf="request.status == 'REQUESTED'" class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="loadUser()">Interested</button>
+  <button *ngIf="request.status == 'REQUESTED'" class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="loadUser()">Later</button>
+</div>
+-->
+<div class="container">
+  <div class="row userMain">
+      <div class="col-md-3 col-sm-4">
+          <div class="userBlock">
+              <div class="backgrounImg">
+                  <img src="https://preview.ibb.co/miQjb7/photography4.jpg">
+              </div>
+              <div class="userImg">
+                 <!-- 
+                   <img src="https://image.ibb.co/es4AG7/author4.jpg">
+                  -->
+                  <img [src]="profileSmImage"
+                  alt="Place image title"
+                  *ngIf="!isImageLoading">
+              </div>
+              <div class="userDescription">
+                  <h5>{{connection.sourceEntityId}}</h5> <!--sourceEntityId IS ONE WHO SENT REQUEST-->
+                  <!--
+                  <p>Postion xx</p>
+                 
+                  
+                   <div class="followrs">
+                      <span class="number">137</span>
+                       <span>Followers</span>
+                   </div>
+                  -->
+                   <div *ngIf="connection.status === 'REQUESTED'">
+                       <button class="btn btn-outline-primary" type="button" (click)="acceptRequest(connection)">Accept</button>
+                       <button class="btn btn-outline-danger" type="button" (click)="denyRequest(connection)">Not Interested</button>                       
+                   </div>
+                   <!--
+                   <span class="separator"></span>
+                   <a href="">
+                    <button class="btn">Later</button>
+                </a>   
+                -->             
+              </div>
+             
+          </div>
+      </div>
+    </div>
+  </div>    

@@ -1,0 +1,25 @@
+{
+	"partyId":"p001",
+	"profile":
+	[
+		{
+		"profile_template_id":"partyProfileDefault",
+		"name":"Default",
+		"properties" : ["name", "type", "establishedDate", "registeredAddress", "ideology", "profileImage"]
+		}
+	],	
+	"profileData":[
+		{
+		"party_profile_id":"0010",
+		"profile_template_id":"partyProfileDefault",
+		"data" : [
+			{"name":"Dravida Munnetra Kazhagam (DMK)"},
+			{"type" : "State Party"},
+			{"establishedDate":"15-01-1980"},
+			{"registeredAddress":"Anna Arivalayam,268- 269, Anna Salai, Teynampet, Chennai-600018, Tamil Nadu,India"},
+			{"ideology":"Dravidian"},
+			{"profileImage":"http://bioguide.congress.gov/bioguide/photo/C/C001070.jpg"}
+			]
+		}
+	]
+}

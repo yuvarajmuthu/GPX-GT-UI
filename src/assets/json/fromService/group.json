@@ -1,0 +1,46 @@
+{
+	"id":"g0010",
+	"parent_group_id":"",
+	"id-natural": "18",
+    "geoLocation":"",
+   	"groupLevel": "Federal", 
+	"groupType": "legislativeDistrict-Federal",
+	"sourceId":"",
+	"profile":
+	[
+		{
+		"profileTemplateId":"districtIntroTemplate",
+		"name":"Introduction",
+		"type":"legislativeDistrict-Federal",
+		"properties" : ["name", "description", "sourceId"]
+		},
+		{
+		"profileTemplateId":"districtPopulationTemplate",
+		"name":"Population",		
+		"type":"legislativeDistrict-Federal",
+		"properties" : ["population", "maleCount", "femaleCount", "race", "unemployment", "highSchoolGraduationRate", "collegeGraduationRate"]
+		},
+		{
+		"profileTemplateId":"districtBusinessTemplate",
+		"name":"Popular Business",
+		"type":"legislativeDistrict-Federal",	
+		"properties" : []
+		}
+	],
+	"profileData":
+	[
+		{
+			"group_profile_id":"gp0010",
+			"group_id" : "g0010",
+			"profileTemplateId":"districtIntroTemplate",
+			"data" : [
+				{"name":"Pennsylvania's 18th congressional district"}, 
+				{"description":"Pennsylvania's 18th congressional district includes parts of Greene County, Washington County, Allegheny and Westmoreland Counties."}
+				]
+		}
+	],
+	"activities":[
+		{"user_id":"u001", "txtPost":"u00l post"},
+		{"user_id":"u002", "txtPost":"u00l post"}
+	]		
+}

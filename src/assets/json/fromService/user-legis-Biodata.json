@@ -1,0 +1,21 @@
+{
+    "id":"5daa409af453cd4348b00e67",
+    "profileTemplateId":"upCongressLegislatorExternal",
+    "data":{
+       "leg_id":"PAL000515",
+       "full_name":"Dan L. Miller",
+       "first_name":"Dan L.",
+       "last_name":"Miller",
+       "district":"42", 
+       "party":"Democratic",
+       "chamber":"lower",
+       "state":"pa"
+    },
+    "dataList":null,
+    "entityId":"PAL000515",
+    "entityType":"LEGISLATOROPENSTATE",
+    "current":false,
+    "jsondata":{
+       "empty":false
+    }
+ }

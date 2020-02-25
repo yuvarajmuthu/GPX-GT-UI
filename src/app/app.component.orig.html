@@ -1,0 +1,137 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">GPX</a>
+
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li>    
+          <div class="navbar-form">
+	        <div class="form-group">
+	          <app-typeahead></app-typeahead>
+	        </div>
+	        <button type="submit" class="btn btn-default glyphicon glyphicon-search" aria-hidden="true"></button>
+	      </div>
+        <!--	
+	      <form class="navbar-form" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search Party, People">
+	        </div>
+	        <button type="submit" class="btn btn-default glyphicon glyphicon-search" aria-hidden="true"></button>
+	      </form>
+	      -->
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li *ngIf="!isUserLogged"><a routerLink="/register" class="glyphicon glyphicon-user" aria-hidden="true">Register</a></li>
+        <li *ngIf="!isUserLogged"><a routerLink="/login" class="glyphicon glyphicon-user" aria-hidden="true">Login</a></li>       
+        <li *ngIf="isUserLogged"><a href="#" class="glyphicon glyphicon-user" aria-hidden="true" (click)="logout()">Logout</a></li>                 -->
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+
+       <div class="row">
+           <div class="col-md-8">
+
+              <ngb-tabset type="pills">
+                  <ngb-tab title="Simple">
+                    <ng-template ngbTabContent>
+                      <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                      master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
+                      dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+                      iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                    </ng-template>
+                  </ngb-tab>
+                  <ngb-tab>
+                    <ng-template ngbTabTitle><b>Fancy</b> title</ng-template>
+                    <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
+                      <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
+                      craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+                      cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
+                      yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+                      shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
+                      sint qui sapiente accusamus tattooed echo park.</p>
+                    </ng-template>
+                  </ngb-tab>
+              </ngb-tabset>      
+<!-- 
+            <ngb-tabset type="pills" (tabChange)="tabclick($event)">
+              <ngb-tab id="legislatorTab" title="Legislators">
+                  <template ngbTabTitle>title</template>
+                  <template ngbTabContent><p>content</p></template>
+              </ngb-tab>
+
+              <ngb-tab id="socialTab" title="Social">
+                  <template ngbTabTitle>title1</template>
+                  <template ngbTabContent><p>content1</p></template>                
+              </ngb-tab>
+
+              <ngb-tab title="Parties" (select)="clickTab('Parties')">
+              </ngb-tab>
+              <ngb-tab title="Constituency/District Profile" (select)="clickTab('District')"> 
+              </ngb-tab>
+             <ngb-tab title="Party Profile" (select)="clickTab('Party')">             
+             </ngb-tab>              
+             <ngb-tab title="User Profile" (select)="clickTab('User')">             
+             </ngb-tab>
+             <ngb-tab title="MyCircle" (select)="clickTab('mycircle')">
+             Upcoming Election
+             Polling station             
+             </ngb-tab>              
+            </ngb-tabset> -->
+
+          </div>
+<!-- 
+          <div class="btn-group" dropdown class="col-md-4">
+            <button dropdownToggle type="button" class="btn add btn-warning dropdown-toggle">
+              <span class="glyphicon glyphicon-plus"></span>
+              Create Page
+            </button>
+
+            <ul dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('District')">Create District</a>
+              </li>
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('Legislator')">Create Legislator</a>
+              </li>                
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('User')">Create User</a>
+              </li>                              
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('Party')">Create Party</a>
+              </li>                                            
+            </ul>
+
+          </div>              -->
+
+          
+
+      </div> 
+
+    <!-- view area -->
+    <!-- <div class="wrapper">
+        <alert dismissOnTimeout="5000"></alert>
+
+        <router-outlet></router-outlet>
+    </div> -->
+
+   </div>
+

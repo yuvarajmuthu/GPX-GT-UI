@@ -1,0 +1,8 @@
+{
+	"user_id":"",
+	"connection_group_id":"",
+	"connection_position_id":"",
+	"connection_user_id":"",
+	"status":"request_sent | connected",
+	"default":"true | false"
+}

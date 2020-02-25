@@ -1,0 +1,141 @@
+<div class='row'>	
+	<!-- <div class="col-md-4">
+	  <h5>View Mode:</h5>
+	  <select [ngModel]="getPermission()" (ngModelChange)="setPermission($event)">
+	    <option>Editor</option>
+	    <option>Viewer</option>
+	  </select>
+	</div> -->
+	<div class="col">
+    <div ngbDropdown class="d-inline-block"> 
+      <button class="btn btn-outline-primary" id="dropdownProfileEditOption" ngbDropdownToggle>{{profileEditOption}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownProfileEditOption">
+				<button class="dropdown-item" (click)="setPermission('Editor')">Editor</button>
+        <button class="dropdown-item" (click)="setPermission('Viewer')">Viewer</button>				
+      </div>
+    </div>
+	</div>
+
+
+	<!-- <div class="btn-group" dropdown *ngIf="allowed()" class="col-md-4">
+	  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+	    Add Sections <span class="caret"></span>
+	  </button>
+
+	  <ul dropdownMenu class="dropdown-menu" role="menu">
+	    <li role="menuitem" *ngFor="let profileTemplate of profilesTemplates">
+	    	<a class="dropdown-item" (click)="loadTemplate(profileTemplate.profileTemplateId)">{{profileTemplate.name}}</a>
+	    	
+	    </li>
+	  </ul>
+
+  </div>
+   -->
+	<div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownAddSection" ngbDropdownToggle>Add Section</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownAddSection">
+        <button class="dropdown-item" *ngFor="let profileTemplate of profilesTemplates" (click)="loadTemplate(profileTemplate.profileTemplateId)">{{profileTemplate.name}}</button>
+      </div>
+    </div>
+	</div>
+
+
+
+	<div *ngIf="allowed()" class="col">
+	     <button type="button" class="btn btn-primary" (click)="saveProfile()">Save Profile</button>
+	</div>    
+
+
+</div>            
+
+<!--Constitution Detail section - Begin-->
+<div class="col-xs-12">
+
+<!--Constitution Summary section - Begin-->
+  <div>
+  <main>
+    <div class="row">
+      <div class="left col-lg-10">
+        <div class="photo-left">
+           <div class="activePhoto"></div>
+        </div>
+        <h4 class="name">District: 
+                 <!-- <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'name'" [placeholder]="name" (onSave)="setValue($event)"></ndv-edit> -->
+
+        </h4>
+        <div class="stats row">
+          <div class="stat col-xs-6" style="padding-right: 50px;">
+            <p class="number-stat">{{followers}}</p>
+            <p class="desc-stat">Followers</p>
+          </div>
+          <div class="activityDiv stat col-xs-6" style="padding-left: 50px;" (click)="showActivities()">
+            <p class="number-stat">{{activities}}</p>
+            <p class="desc-stat">Activities</p>
+          </div>
+        </div>
+        <p class="desc">Description:                  
+        	<!-- <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'description'" [placeholder]="description" (onSave)="setValue($event)"></ndv-edit> -->
+        </p>
+        <p class="desc">Source Id:                  
+        	<!-- <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'sourceId'" [placeholder]="sourceId" (onSave)="setValue($event)"></ndv-edit> -->
+        </p>
+
+			</div>
+
+      <div class="right col-lg-2" *ngIf="!allowed()">
+
+       <button *ngIf="!connected" type="button" class="btn btn-primary" (click)="followDistrict()">Follow</button>
+       <button *ngIf="connected" type="button" class="btn btn-success glyphicon glyphicon-ok">Following</button>       
+        
+      </div>
+     </div> 
+  </main>
+
+</div>
+<!--Constitution Summary section - End-->
+
+<!--Constitution tab section - Begin-->
+	<div class="constitutionDetail">
+
+      <ngb-tabset type="pills" (tabChange)="tabclick($event)">
+          <ngb-tab id="legislatorTab" title="Legislators">
+          </ngb-tab>
+      </ngb-tabset>    
+              <!-- <tabset type="pills" #staticTabs>
+                <tab heading='Profile'>
+	   				<div>
+						<dynamic-content [type]="templateType"></dynamic-content>
+				    </div>
+
+                </tab>
+                <tab heading='Current Legislators'>
+										<div class="form-group">
+											Tag Legislators:
+											<typeahead-gpx></typeahead-gpx>
+											<button type="submit" class="btn btn-default glyphicon glyphicon-search" aria-hidden="true"></button>
+									</div>
+
+				    <ul style="list-style-type:none;padding-left:0;">
+						<li *ngFor="let electedPerson of electedPersons"
+						        [class.selected]="selectedPerson === electedPerson"
+						        class="legisBoundary">
+
+					    	<legislator [legislator]=electedPerson></legislator>
+
+					  </li>
+					</ul>
+
+                </tab>
+                <tab heading='Parties'>
+			    	<party-list></party-list>                	
+                </tab>                            
+                <tab heading='Activities'>
+					<post-gpx [type]="'group'" [groupId]=operation></post-gpx>
+                </tab>                                            
+              </tabset> -->
+	</div>              
+<!--Constitution tab section - End-->
+
+</div>
+<!--Constitution Detail section - End-->

@@ -1,0 +1,74 @@
+<!--
+<form [formGroup]="roleTemplateForm">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">
+      </a>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 float-right custom-add-position">
+      <a href="javascript:void(0);" class="lg-fa">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+  </div>
+  <div *ngFor="let role of roles">
+    <div class="form-group row">
+      <div class=" q-wid">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <a class="nav-link" data-toggle="pill" href="javascript:void(0);">
+
+            </a>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 float-right custom-edit-position">
+            <a href="javascript:void(0);" class="lg-fa">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ui-block">
+          <div class="nav flex-column custom-pad nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
+            <div class="row" *ngFor="let displayProperty of displayProperties; let i = index">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a class="nav-link" data-toggle="pill" href="javascript:void(0);">
+                  {{displayProperty.displayLabel}}
+                </a>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a class="nav-link" data-toggle="pill" href="javascript:void(0);">
+                  {{displayProperty.displayLabel}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+-->
+
+
+<form [formGroup]="roleTemplateForm">
+  <a href="javascript:void(0);" class="lg-fa float-right">
+    <i class="fa fa-plus"></i>
+  </a>
+  <div *ngFor="let role of roles">
+    <table class="table">
+      <tbody class="box-shadow">
+      <tr>
+        <td></td>
+        <td>
+          <a href="javascript:void(0);" class="lg-fa float-right">
+            <i class="fa fa-pencil-square-o"></i>
+          </a>
+        </td>
+      </tr>
+      <tr class="info" *ngFor="let displayProperty of displayProperties">
+        <td>{{displayProperty.displayLabel}} </td>
+        <td>{{displayProperty.displayLabel}} </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

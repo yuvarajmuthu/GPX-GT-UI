@@ -1,0 +1,45 @@
+.btn-legis {
+    display: inline-block;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+    vertical-align: middle;   
+    background-color: transparent;    
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0px !important;
+    margin:18px 6px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.btn-legis-outline-secondary {
+    color: #5CB85C !important;
+     border-color: #ced4da !important;
+     border-left: 0px !important;
+     font-weight: 700;
+ }
+
+.congress{
+	border:1px solid #DDDDDD;margin:18px 0px;color:#373A3C;
+}
+
+.btn-legis-select {
+    color: #fff;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+	padding: 6px 26px !important;
+    border-radius: 0px !important;
+}
+.btn-legis-select:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-legis-select:not(:disabled):not(.disabled):active{
+	 color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+	
+}

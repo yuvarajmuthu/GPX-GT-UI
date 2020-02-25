@@ -1,0 +1,73 @@
+{
+	"userId":"T000461",
+	"userType": "legislator",
+	"geoLocation": "",
+	"photo_url":"http://www.legis.state.pa.us/images/members/200/1187.jpg",	
+	"connections":[ 
+		{"groups":[{"entityId":"g0010"}]},
+		{"users":[{"entityId":"PAL000515", "connectionStatus":"REJECTED"}]},		
+		{"positions":[{"entityId":"p001"}]}
+	
+	],
+	"followers":[{"user_id":"u003"}],  
+	"profile":
+	[
+		{ 
+		"profile_template_id":"upCongressLegislatorExternal",
+		"name":"Biodata",
+		"type":"legislator",
+		"properties" : [ 
+			{"propId":"leg_id", "displayLabel":"Legislator External ID"},
+			{"propId":"full_name", "displayLabel":"Full Name"},
+			{"propId":"first_name", "displayLabel":"First Name"},
+			{"propId":"last_name", "displayLabel":"Last Name"},
+			{"propId":"district", "displayLabel":"District"},
+			{"propId":"party", "displayLabel":"Party"},
+			{"propId":"chamber", "displayLabel":"Chamber"},
+			{"propId":"state", "displayLabel":"State"}
+		 ]
+		},
+		{
+		"profile_template_id":"upRole",
+		"name":"Role",
+		"type":"legislator",
+		"properties" : [
+			{"propId":"start", "displayLabel":"Start Date"},
+			{"propId":"end", "displayLabel":"End Date"},
+			{"propId":"district", "displayLabel":"District"},
+			{"propId":"chamber", "displayLabel":"Chamber"},
+			{"propId":"state", "displayLabel":"State"},
+			{"propId":"party", "displayLabel":"Party"},
+			{"propId":"member", "displayLabel":"Member"},
+			{"propId":"committee", "displayLabel":"Committee"},
+			{"propId":"position", "displayLabel":"Position"},
+			{"propId":"type", "displayLabel":"Type"}
+			
+		]
+		},
+		{
+		"profile_template_id":"upOffices",
+		"name":"Office",
+		"type":"legislator",
+		"properties" : [
+			{"propId":"name", "displayLabel":"Name"},
+			{"propId":"type", "displayLabel":"Type"},
+			{"propId":"phone", "displayLabel":"Phone"},		
+			{"propId":"address", "displayLabel":"Address"},
+			{"propId":"start", "displayLabel":"Start Date"},
+			{"propId":"end", "displayLabel":"End Date"},
+			{"propId":"email", "displayLabel":"Email"},	
+			{"propId":"fax", "displayLabel":"Fax"}			
+		] 
+		}
+
+	],	
+	"profileData":[
+		{
+		"user_profile_id":"up0010",
+		"profile_template_id":"upCongressLegislatorExternal",
+		"data" : [{      "first_name":"Dan L._json",
+			"last_name":"Fontana_json"}] 
+		}
+	]
+}

@@ -1,0 +1,11 @@
+[
+	{
+		"user_profile_id":"up0010",
+		"user_id" : "u001",
+		"profile_template_id":"upDefault",
+		"data" : [
+			{"firstName":"Yuvaraj"}, 
+			{"lastName":"Muthu"}
+			]
+	}
+]

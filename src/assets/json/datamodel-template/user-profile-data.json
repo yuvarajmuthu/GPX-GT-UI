@@ -1,0 +1,11 @@
+[
+	{
+		"user_profile_id":"up0010",
+		"user_id" : "u001",
+		"user_profile_template_id":"uptemp0010",
+		"data" : [
+			{"firstName":"Yuvaraj"}, 
+			{"lastName":"Muthu"}
+			]
+	}
+]

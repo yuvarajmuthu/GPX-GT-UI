@@ -1,0 +1,84 @@
+<!--
+<div>Legislative Data:</div>
+
+<div class="biodata legisProfileData col-xs-12">
+  <table class="table">
+
+    <tbody>
+        <tr class="info" *ngFor="let displayProperty of displayProperties">
+          <td>{{displayProperty.displayLabel}}</td>
+          <td>{{legislator[displayProperty.propId]}}</td>
+
+        </tr>
+
+    </tbody>
+  </table>
+</div>
+{{profileInEditMode}} TEST
+-->
+<!--
+<form role="form">
+  <div class="form-group row" *ngFor="let displayProperty of displayProperties">
+
+      <label class="col-lg-3 col-form-label form-control-label">{{displayProperty.displayLabel}}</label>
+
+      <div class="col-lg-9">
+          <input *ngIf="isProfileInEditMode" class="form-control" type="text" value="{{legislator[displayProperty.propId]}}">
+          <label *ngIf="!isProfileInEditMode" class="col-form-label form-control-label">{{legislator[displayProperty.propId]}}</label>
+        </div>
+
+  </div>
+</form>
+-->
+<form [formGroup]="biodataTemplateForm">
+  <div class="row">
+    <div class="col" *ngIf="!isProfileInEditMode">
+        <button class="btn btn-outline-warning btn-xs float-right" (click)="editProfile()">
+            <i class="fa fa-pencil-square-o"></i>
+        </button>
+    </div>
+    <div class="col" *ngIf="isProfileInEditMode">
+      <button class="btn btn-outline-success btn-xs float-right" (click)="saveProfile()">
+          <i class="fa fa-save"></i>
+      </button>
+  </div>
+  <div class="col" *ngIf="isProfileInEditMode">
+    <button class="btn btn-outline-warning btn-xs float-right" (click)="cancelEditProfile()">
+        <i class="fa fa-close"></i>
+    </button>
+  </div>
+  <div class="col">
+    <button class="btn btn-outline-danger btn-xs float-right" (click)="deleteProfile()">
+      <i class="fa fa-trash"></i>
+    </button>
+  </div>
+</div>
+  <div class="bioProfileCard" *ngIf="externalUser">
+  <div class="group" *ngFor="let displayProperty of displayProperties">
+    <input *ngIf="isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
+    <input disabled *ngIf="!isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
+    <span class="highlight"></span>
+    <span class="bar"></span>
+    <label>
+        <span class="span-input ">{{displayProperty.displayLabel}}</span>
+    </label>
+  </div>
+</div>
+
+<div *ngIf="!externalUser">
+    <div class="form-group row" *ngFor="let displayProperty of displayProperties">
+
+        <label class="col-lg-3 col-form-label form-control-label">{{displayProperty.displayLabel}}</label>
+
+        <div class="col-lg-9">
+          <!--
+            <input *ngIf="isProfileInEditMode" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
+            <label *ngIf="!isProfileInEditMode" class="col-form-label form-control-label">{{biodata[displayProperty.propId]}}</label>
+ -->
+          </div>
+
+    </div>
+  </div>
+
+  <button class="btn btn-primary" (click)="getFormData()">Display</button>
+</form>

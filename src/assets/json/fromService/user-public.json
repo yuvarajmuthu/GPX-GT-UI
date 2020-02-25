@@ -1,0 +1,70 @@
+{
+    "userId":"5e0fa92ef453cd9f8cc72a3b",
+    "username":"user6@gmail.com",
+    "password":null,
+    "userType":null,
+    "status":"active",
+    "sourceSystem":null,
+    "sourceId":null,
+    "firstName":"user",
+    "lastName":"six",
+    "emailId":null,
+    "phone":null,
+    "address":null,
+    "tagName":null,
+    "connections":null,
+    "userProfile":null,
+    "profileTemplates":[
+       {
+          "id":"5e1bfaa1f453cdb5c8c54d54",
+          "profileTemplateId":"upDefault",
+          "type":"public",
+          "name":"Default",
+          "profileIcon":"person",
+          "properties":[
+             {
+                "propId":"first_name",
+                "displayLabel":"First Name"
+             },
+             {
+                "propId":"last_name",
+                "displayLabel":"Last Name"
+             },
+             {
+                "propId":"username",
+                "displayLabel":"User Name"
+             },
+             {
+                "propId":"emailId",
+                "displayLabel":"Email Id"
+             },
+             {
+                "propId":"phone",
+                "displayLabel":"Phone number"
+             },
+             {
+                "propId":"address",
+                "displayLabel":"Address"
+             }
+          ]
+       }
+    ],
+    "profileDatas":[
+       {
+          "id":"5e0fa92ff453cd9f8cc72a3c",
+          "profileTemplateId":"upDefault",
+          "data":{
+             "profileSMImageId":"5e1a5444f453cdb5c8c54d4f",
+             "last_name":"six",
+             "first_name":"user"
+          },
+          "dataList":null,
+          "entityId":"user6@gmail.com",
+          "entityType":"publicUser",
+          "current":false,
+          "jsondata":{
+             "empty":false
+          }
+       }
+    ]
+ }

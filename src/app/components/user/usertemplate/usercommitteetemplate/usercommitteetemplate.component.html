@@ -1,0 +1,13 @@
+Committees:
+<div class="committeeData col-xs-12" *ngFor="let committee of committees">
+  <table class="table">
+
+     <tbody>
+         <tr class="info" *ngFor="let key of committeeKeys">
+           <td>{{key}}</td>
+           <td>{{committee[key]}}</td>
+         </tr>
+
+     </tbody>
+  </table>     
+ </div> 

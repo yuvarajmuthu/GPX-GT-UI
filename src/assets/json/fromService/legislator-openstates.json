@@ -1,0 +1,426 @@
+[  
+   {  
+      "last_name":"Miller",
+      "+youtube":"https://www.youtube.com/playlist?list=PLjtqNtfs0bgUKeWXUxQSWHzQzU74mgw-5",
+      "updated_at":"2017-10-13 14:11:02",
+      "sources":[  
+         {  
+            "url":"http://www.legis.state.pa.us/cfdocs/legis/home/member_information/representatives_alpha.cfm"
+         },
+         {  
+            "url":"http://www.legis.state.pa.us/cfdocs/legis/home/member_information/House_bio.cfm?id=1679"
+         }
+      ],
+      "full_name":"Miller, Dan L.",
+      "old_roles":{  
+         "2015-2016":[  ]
+      },
+      "id":"PAL000515",
+      "first_name":"Dan L.",
+      "middle_name":"",
+      "district":"42",
+      "state":"pa",
+      "boundary_id":"ocd-division/country:us/state:pa/sldl:42",
+      "email":"",
+      "all_ids":[  
+         "PAL000515"
+      ],
+      "leg_id":"PAL000515",
+      "party":"Democratic",
+      "active":true,
+      "photo_url":"http://www.legis.state.pa.us/images/members/200/1679.jpg",
+      "roles":[  
+         {  
+            "term":"2017-2018",
+            "end_date":null,
+            "district":"42",
+            "chamber":"lower",
+            "state":"pa",
+            "party":"Democratic", 
+            "type":"member",
+            "start_date":null
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000342",
+            "chamber":"lower",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Judiciary",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000349",
+            "chamber":"lower",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Human Services",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000337",
+            "chamber":"lower",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Labor & Industry",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000334",
+            "chamber":"lower",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Education",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000336",
+            "chamber":"lower",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Children & Youth",
+            "position":"member",
+            "type":"committee member"
+         }
+      ],
+      "url":"http://www.legis.state.pa.us/cfdocs/legis/home/member_information/representatives_alpha.cfm",
+      "created_at":"2015-01-06 21:25:12",
+      "chamber":"lower",
+      "offices":[  
+         {  
+            "fax":"717-780-4756",
+            "name":"Capitol Office",
+            "phone":"717-783-1850",
+            "address":"116A East Wing PO Box 202042 Harrisburg, PA 17120-2042",
+            "type":"capitol",
+            "email":null
+         },
+         {  
+            "fax":"412-343-2050",
+            "name":"District Office",
+            "phone":"412-343-3870",
+            "address":"650 Washington Road Suite 102 Mt. Lebanon, PA 15228",
+            "type":"district",
+            "email":null
+         }
+      ],
+      "suffixes":""
+   },
+   {  
+      "last_name":"Fontana",
+      "updated_at":"2017-10-13 14:11:02",
+      "sources":[  
+         {  
+            "url":"http://www.legis.state.pa.us/cfdocs/legis/home/member_information/senators_alpha.cfm"
+         },
+         {  
+            "url":"http://www.legis.state.pa.us/cfdocs/legis/home/member_information/Senate_bio.cfm?id=1041"
+         }
+      ],
+      "nimsp_candidate_id":null,
+      "full_name":"Wayne D Fontana",
+      "old_roles":{  
+         "2009-2010":[  
+            {  
+               "term":"2009-2010",
+               "end_date":null,
+               "district":"42",
+               "level":"state",
+               "country":"us",
+               "chamber":"upper",
+               "state":"pa",
+               "party":"Democratic",
+               "type":"member",
+               "start_date":null
+            }
+         ],
+         "2013-2014":[  
+            {  
+               "term":"2013-2014",
+               "end_date":null,
+               "district":"42",
+               "chamber":"upper",
+               "state":"pa",
+               "party":"Democratic",
+               "type":"member",
+               "start_date":null
+            },
+            {  
+               "term":"2013-2014",
+               "committee_id":"PAC000319",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Law  & Justice",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2013-2014",
+               "committee_id":"PAC000322",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Urban Affairs  & Housing",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2013-2014",
+               "committee_id":"PAC000314",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Community, Economic  & Recreational Development",
+               "position":" minority chair",
+               "type":"committee member"
+            },
+            {  
+               "term":"2013-2014",
+               "committee_id":"PAC000253",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Judiciary",
+               "position":"member",
+               "type":"committee member"
+            }
+         ],
+         "2011-2012":[  
+            {  
+               "term":"2011-2012",
+               "end_date":null,
+               "district":"42",
+               "chamber":"upper",
+               "state":"pa",
+               "party":"Democratic",
+               "type":"member",
+               "start_date":null
+            },
+            {  
+               "term":"2011-2012",
+               "committee_id":"PAC000014",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Community, Economic & Recreational Development",
+               "position":"minority chair",
+               "type":"committee member"
+            },
+            {  
+               "term":"2011-2012",
+               "committee_id":"PAC000022",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Urban Affairs & Housing",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2011-2012",
+               "committee_id":"PAC000020",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Law & Justice",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2011-2012",
+               "committee_id":"PAC000256",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Appropriations",
+               "position":"member",
+               "type":"committee member"
+            }
+         ],
+         "2015-2016":[  
+            {  
+               "term":"2015-2016",
+               "end_date":null,
+               "district":"42",
+               "chamber":"upper",
+               "state":"pa",
+               "party":"Democratic",
+               "type":"member",
+               "start_date":null
+            },
+            {  
+               "term":"2015-2016",
+               "committee_id":"PAC000322",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Urban Affairs  & Housing",
+               "position":" minority chair",
+               "type":"committee member"
+            },
+            {  
+               "term":"2015-2016",
+               "committee_id":"PAC000319",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Law  & Justice",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2015-2016",
+               "committee_id":"PAC000316",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Rules  & Executive Nominations",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2015-2016",
+               "committee_id":"PAC000314",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Community, Economic  & Recreational Development",
+               "position":"member",
+               "type":"committee member"
+            },
+            {  
+               "term":"2015-2016",
+               "committee_id":"PAC000315",
+               "chamber":"upper",
+               "state":"pa",
+               "subcommittee":null,
+               "committee":"Communications  & Technology",
+               "position":"member",
+               "type":"committee member"
+            }
+         ]
+      },
+      "id":"PAL000016",
+      "first_name":"Wayne",
+      "middle_name":"D",
+      "district":"42",
+      "+twitter":"http://twitter.com/waynedfontana",
+      "state":"pa",
+      "votesmart_id":"55684",
+      "boundary_id":"ocd-division/country:us/state:pa/sldu:42",
+      "email":"fontana@pasenate.com",
+      "all_ids":[  
+         "PAL000016"
+      ],
+      "leg_id":"PAL000016",
+      "party":"Democratic",
+      "active":true,
+      "transparencydata_id":"9396321830bd41dd9405f66afb50077a",
+      "photo_url":"http://www.legis.state.pa.us/images/members/200/1041.jpg",
+      "roles":[  
+         {  
+            "term":"2017-2018",
+            "end_date":null,
+            "district":"42",
+            "chamber":"upper",
+            "state":"pa",
+            "party":"Democratic",
+            "type":"member",
+            "start_date":null
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000315",
+            "chamber":"upper",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Communications  & Technology",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000319",
+            "chamber":"upper",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Law  & Justice",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000316",
+            "chamber":"upper",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Rules  & Executive Nominations",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000314",
+            "chamber":"upper",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Community, Economic  & Recreational Development",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000321",
+            "chamber":"upper",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Consumer Protection  & Professional Licensure",
+            "position":"member",
+            "type":"committee member"
+         },
+         {  
+            "term":"2017-2018",
+            "committee_id":"PAC000322",
+            "chamber":"upper",
+            "state":"pa",
+            "subcommittee":null,
+            "committee":"Urban Affairs  & Housing",
+            "position":" minority chair",
+            "type":"committee member"
+         }
+      ],
+      "url":"http://www.legis.state.pa.us/cfdocs/legis/home/member_information/senators_alpha.cfm",
+      "country":"us",
+      "created_at":"2010-07-21 17:38:03",
+      "level":"state",
+      "chamber":"upper",
+      "offices":[  
+         {  
+            "fax":"717-772-5484",
+            "name":"Capitol Office",
+            "phone":"717-787-5300",
+            "address":"Senate Box 203042\nHarrisburg, PA 17120-3042\nRoom:\n543 Main Capitol",
+            "type":"capitol",
+            "email":"fontana@pasenate.com"
+         },
+         {  
+            "fax":"412-344-3400",
+            "name":"District Office",
+            "phone":"412-344-2551",
+            "address":"932 Brookline Boulevard\nPittsburgh, PA 15226",
+            "type":"district",
+            "email":"fontana@pasenate.com"
+         }
+      ],
+      "suffixes":""
+   }
+]

@@ -1,0 +1,8 @@
+{
+	"id":"g0010",
+	"parent_group_id":"",
+	"id-natural": "id from other source",
+    "geoLocation":"",
+	"groupLevel": "Federal | State | County | Township",
+	"groupType": "legislativeDistrict-Federal | Executive | Justice | School"		
+}

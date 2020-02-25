@@ -1,0 +1,52 @@
+{
+	"results":[
+		{
+		"post_id":"post001",
+		"user_id":"u001",
+		"parent_post_id":"",
+		"post_type":"water supply",
+		"txtPost":"Water pipe broke at first ave",
+		"image_url":"",
+		"video_url":"",
+		"district_id":"g0010",
+		"likedBy":["u001"],
+		"likedByCurrentUser":true
+		},
+		{
+		"post_id":"post002",
+		"user_id":"u001",
+		"parent_post_id":"",
+		"post_type":"health",
+		"txtPost":"Mr.X senator launched health awareness campaign",
+		"image_url":"",
+		"video_url":"",
+		"district_id":"g0010",
+		"likedByCurrentUser":false		
+
+		},
+		{
+		"post_id":"post003",
+		"user_id":"u001",
+		"parent_post_id":"",
+		"post_type":"transportation",
+		"txtPost":"Too much traffic in peak hours near X tunnel",
+		"image_url":"",
+		"video_url":"",
+		"district_id":"g0010",
+		"likedByCurrentUser":false		
+
+		},
+		{
+		"post_id":"post004",
+		"user_id":"u001",
+		"parent_post_id":"",
+		"post_type":"bill",
+		"txtPost":"Senator co-sponsored bill X",
+		"image_url":"",
+		"video_url":"",
+		"district_id":"g0010",
+		"likedByCurrentUser":false		
+
+		}
+	]
+}

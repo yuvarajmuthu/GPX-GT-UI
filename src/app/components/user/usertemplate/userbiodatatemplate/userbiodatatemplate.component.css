@@ -1,0 +1,58 @@
+.bioProfileCard {
+    background-color: #fcfcfc;
+    margin-top: 27px;
+    border: solid 1px #206584;
+}
+
+.bioProfileCard:before {
+    display: block;
+    background-image: linear-gradient(-272deg,#206584,#83d0f2);
+    content: '';
+    height: 4px;
+}
+
+.group {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.group input:focus {
+    outline: none;
+}
+/* LABEL ======================================= */
+
+.group label {
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 5px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+/* active durum */
+
+.group input:focus ~ label,
+input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+}
+.span-input{
+    font-size: 15px;
+    color: #12A89D;
+}
+
+.group input:disabled, .group input:read-only {
+    font-size: 18px !important;
+    font-weight: normal !important;
+    position: relative !important;
+    pointer-events: none !important;
+    left: 10px !important;
+    top: 25px !important;
+    transition: 0.2s ease all !important;
+    -moz-transition: 0.2s ease all !important;
+    -webkit-transition: 0.2s ease all !important;
+  }
+  

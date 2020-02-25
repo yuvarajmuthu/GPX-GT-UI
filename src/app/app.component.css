@@ -1,12 +1,17 @@
+.active {
+    color: #028ece !important;
+}
+
 body {
     padding-top: 90px;
     /* background: #edf2f6 !important; */
     background: #fff !important;
 }
 
-.nav-link ,.text-center{
+.nav-link, .text-center {
     text-align: center;
 }
+
 a {
     cursor: pointer;
 }

@@ -8,17 +8,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" (click)="route('searchLegislator')"><i class="fa fa-home"></i> Legislator</a>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': searchLegislator}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-user"></i> Legislator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('news')"><i class="fa fa-edit"></i> News</a>
+                    <a class="nav-link" [ngClass]="{'active': news}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i> News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('group')"><i class="fa fa-bell"></i> District</a>
+                    <a class="nav-link" [ngClass]="{'active': group}"  routerLink="group" routerLinkActive="active"><i class="fa fa-map-marker"></i> District</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('request')"><i class="fa fa-bell"></i> Connection Requests</a>
+                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-bell"></i> Connection Requests</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
@@ -74,20 +74,20 @@
 
 
         <div class="col-lg-2 ">
-            <div class=" aff-right">
+            <!--<div class=" aff-right">
                 <div class="ui-block">
                     <h6 class="my-4">Recent</h6>
                     <hr>
                     <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist"
                          aria-orientation="vertical">
-                        <!--<a class="nav-link active" data-toggle="pill" href="javascript:void(0);"> Top Stories</a>
+                        &lt;!&ndash;<a class="nav-link active" data-toggle="pill" href="javascript:void(0);"> Top Stories</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">New Questions</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Bookmarked Answers</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Links</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Payment Gateways</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Education</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">E-commerce</a>
-                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Android Applications</a>-->
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Android Applications</a>&ndash;&gt;
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <!-- /.col-lg-3 -->
         <div class="col-lg-7">
@@ -113,16 +113,16 @@
         <!-- /.col-lg-6 -->
         <!--col-lg-3-->
         <div class="col-lg-3 ">
-            <div class=" q-wid">
+            <!--<div class=" q-wid">
                 <div class="ui-block">
                     <h6 class="my-4">Today's News and Views</h6>
                     <hr>
                     <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
-                        <!--<a class="nav-link" data-toggle="pill" href="javascript:void(0);"> Upvote 5 more good
+                        &lt;!&ndash;<a class="nav-link" data-toggle="pill" href="javascript:void(0);"> Upvote 5 more good
                             answers</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Ask your first question</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Add 3 credentials</a>
-                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Answer a question</a>-->
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Answer a question</a>&ndash;&gt;
                     </div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <!-- /.col-lg-3 -->
     </div>

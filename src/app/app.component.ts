@@ -20,6 +20,7 @@ import {User} from '../app/models/user';
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+    navigateList = ['searchLegislator', 'news','group','request'];
     //public tabSet: NgbTabset;
 
     title = 'gpx-ui';

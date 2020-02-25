@@ -24,7 +24,7 @@
     "@icon/themify-icons": "^1.0.1-alpha.2",
     "@ng-bootstrap/ng-bootstrap": "^4.0.1",
     "@types/googlemaps": "^3.39.0",
-    "angular-font-awesome": "^3.1.2", 
+    "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.2.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",

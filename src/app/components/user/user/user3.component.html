@@ -15,20 +15,20 @@
             <h4><b>{{firstName}} {{lastName}} </b></h4>
             <!--<h5>Administrator</h5>-->
           </li>
-          <li class="list-group-item pointer">
+          <li class="list-group-item pointer" (click)="Followers()" [ngClass]="{ 'active': folowers, 'in-active': !folowers}">
             <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()">
               {{followersCount}} Followers
             </span>
           </li>
-          <li class="list-group-item pointer">
+          <li class="list-group-item pointer" (click)="FollowingCount()" [ngClass]="{ 'active': folow, 'in-active': !folow}">
             <span class="badge">245</span>
             <span class="">Following</span>
           </li>
-          <li class="list-group-item pointer" (click)="isProfileCollapsed=true; isActivityCollapsed=false;">
+          <li class="list-group-item pointer" (click)="isProfileCollapsed=true; isActivityCollapsed=false;" (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
             <span class="pointer">Activities</span>
           </li>
 
-          <li class="list-group-item pointer" (click)="isProfileCollapsed=false; isActivityCollapsed=true;">
+          <li class="list-group-item pointer" (click)="isProfileCollapsed=false; isActivityCollapsed=true;" (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
             <span class="pointer">Profile</span>
           </li>
         </ul>
@@ -63,10 +63,11 @@
                                 <li class="nav-item" *ngFor="let profileTemplate of profilesTemplates">
 
                                   <a class="nav-link text-black-50" data-toggle="tab" [routerLink]=""
-                                     (click)="loadTemplate(profileTemplate.profileTemplateId)">
+                                     (click)="loadTemplate(profileTemplate.profileTemplateId)" *ngIf="profileTemplate.profileTemplateId">
                                     <i class="material-icons">{{profileTemplate.profileIcon}}</i>
                                     {{profileTemplate.name}}
                                   </a>
+
                                 </li>
                                 <li *ngIf="isProfileEditable()" class="nav-item">
                                   <div ngbDropdown class="d-inline-block">

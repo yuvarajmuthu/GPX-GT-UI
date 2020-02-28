@@ -60,12 +60,16 @@
                               <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
                                   data-tabs="tabs">
 
-                                <li class="nav-item" *ngFor="let profileTemplate of profilesTemplates">
+                                <li class="nav-item" *ngFor="let profileTemplate of profilesTemplates" >
+
+
+
 
                                   <a class="nav-link text-black-50" data-toggle="tab" [routerLink]=""
                                      (click)="loadTemplate(profileTemplate.profileTemplateId)" *ngIf="profileTemplate.profileTemplateId">
                                     <i class="material-icons">{{profileTemplate.profileIcon}}</i>
                                     {{profileTemplate.name}}
+                                    <!--{{profileTemplate.profileTemplateId}}-->
                                   </a>
 
                                 </li>

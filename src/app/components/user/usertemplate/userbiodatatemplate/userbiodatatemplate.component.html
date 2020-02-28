@@ -57,7 +57,7 @@
   <div class="group" *ngFor="let displayProperty of displayProperties">
     <input *ngIf="isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
     <input disabled *ngIf="!isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
-    <span class="highlight"></span>
+      <span class="highlight"></span>
     <span class="bar"></span>
     <label>
         <span class="span-input ">{{displayProperty.displayLabel}}</span>

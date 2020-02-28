@@ -86,6 +86,7 @@ export class UserComponent implements OnInit {
     activitiesTabSelected: boolean = false;
     isSelfProfile: boolean = false;
     activitiesData:boolean = false;
+    tap:boolean = false;
     profileData:boolean = false;
     folow:boolean = false;
     folowers:boolean = false;
@@ -742,6 +743,7 @@ export class UserComponent implements OnInit {
 
 //load the template based on tab selection
     loadTemplate(type: string) {
+        this.tap = true;
         let compTypes = [];
         compTypes.push(type);
         this.templateType = compTypes;

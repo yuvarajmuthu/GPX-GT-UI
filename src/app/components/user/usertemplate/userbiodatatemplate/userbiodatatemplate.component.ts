@@ -9,6 +9,7 @@ import { LegislatorService } from '../../../../services/legislator.service';
 import { IfStmt } from '@angular/compiler';
 import { Legislator } from 'src/app/models/legislator';
 
+
 @Component({
   selector: 'app-userbiodatatemplate',
   templateUrl: './userbiodatatemplate.component.html',
@@ -17,7 +18,6 @@ import { Legislator } from 'src/app/models/legislator';
 export class UserbiodatatemplateComponent extends AbstractTemplateComponent  implements OnInit{ 
   //userId = "u001";
   //legisId:string = "";
-  
   id = "upCongressLegislatorExternal";
   profileDataId:string = "";
   profileIcon = "person";
@@ -200,4 +200,3 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
     }
 
   }
-  

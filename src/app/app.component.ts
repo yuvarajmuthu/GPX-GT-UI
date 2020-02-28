@@ -21,7 +21,7 @@ import {User} from '../app/models/user';
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-
+    public editorData = '';
     /*CKEDITOR DATA FUNCTION STARAT*/
     public onChange(event: CKEditor4.EventInfo) {
         console.log(event.editor.getData());

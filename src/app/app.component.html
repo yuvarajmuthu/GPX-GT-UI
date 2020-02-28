@@ -108,7 +108,10 @@
 
             <router-outlet></router-outlet>
 
-            <ckeditor data="<p>Hello, world!</p>" (change)="onChange($event)"></ckeditor>
+            <!--<ckeditor data="<p>Hello, world!</p>" (change)="onChange($event)"></ckeditor>-->
+            <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
+
+            <p>{{editorData}}</p>
 
         </div>
         <!-- /.col-lg-6 -->

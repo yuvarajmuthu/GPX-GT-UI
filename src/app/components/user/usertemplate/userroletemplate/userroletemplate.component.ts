@@ -23,7 +23,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     //roles:any = null;
     roles: JSON[] = [];
     displayProperties = [];
-    //role = {};
+    role = {};
     viewingUser = {};
     roleTemplateForm: FormGroup;
 
@@ -43,7 +43,8 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
 
     }
 
-    open(content) {
+    open(content, role) {
+        this.role = role;
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
         }, (reason) => {

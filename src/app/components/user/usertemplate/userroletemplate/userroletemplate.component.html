@@ -50,7 +50,7 @@
 
 
 <form [formGroup]="roleTemplateForm">
-    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content)">
+    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content)"> 
         <i class="fa fa-plus"></i>
     </a>
     <ng-template #content let-modal>
@@ -63,6 +63,13 @@
         <div class="modal-body">
             <form>
                 <div class="form-group">
+                  <div *ngFor="let displayProperty of displayProperties">
+                    <label for="displayProperty.propId">{{displayProperty.displayLabel}}</label>
+                    <div class="input-group">
+                        <input id="displayProperty.propId" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                    </div>
+                  </div>
+<!--
                     <label for="startdate">Start Date</label>
                     <div class="input-group">
                         <input id="startdate" class="form-control" placeholder="yyyy-mm-dd">
@@ -112,6 +119,7 @@
                     <div class="input-group">
                         <input id="type" class="form-control" placeholder="">
                     </div>
+                  -->
                 </div>
             </form>
         </div>
@@ -125,14 +133,14 @@
             <tr>
                 <td></td>
                 <td>
-                    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content)">
+                    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, role)">
                         <i class="fa fa-pencil-square-o"></i>
                     </a>
                 </td>
             </tr>
             <tr class="info" *ngFor="let displayProperty of displayProperties">
-                <!--<td>{{displayProperty.displayLabel}} </td>-->
-                <td>{{displayProperty.displayLabel}}</td>
+                <td>{{displayProperty.displayLabel}} </td>
+                <td>{{role[displayProperty.propId]}}</td>
             </tr>
             </tbody>
         </table>

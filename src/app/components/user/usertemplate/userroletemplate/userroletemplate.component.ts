@@ -9,6 +9,8 @@ import {LegislatorService} from '../../../../services/legislator.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 
+import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
+
 
 @Component({
     selector: 'app-userroletemplate',
@@ -26,6 +28,8 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     role = {};
     viewingUser = {};
     roleTemplateForm: FormGroup;
+    editorData = '';
+
 
     constructor(private legislatorsService2: LegislatorService,
                 private userService2: UserService,
@@ -51,7 +55,9 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     }
-
+    public onChange(event: CKEditor4.EventInfo) {
+        console.log(event.editor.getData());
+    }
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';

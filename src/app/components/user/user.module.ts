@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 import { UserComponent } from './user/user.component';
 import { UsertemplateComponent } from './usertemplate/usertemplate.component';
@@ -30,6 +31,7 @@ import { Usercard2Component } from './usercard2/usercard2.component';
     CommonModule, 
     FormsModule,
     ReactiveFormsModule,
+    CKEditorModule,
     UserRoutingModule,
     GpxUIComponentsModule,
     NgbModule,

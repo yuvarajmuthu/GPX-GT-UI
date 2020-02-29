@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {CKEditor4} from 'ckeditor4-angular/ckeditor';
+//import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
 //import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,13 +21,14 @@ import {User} from '../app/models/user';
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+    /*CKEDITOR 
     public editorData = '';
-    /*CKEDITOR DATA FUNCTION STARAT*/
+    
     public onChange(event: CKEditor4.EventInfo) {
         console.log(event.editor.getData());
     }
 
-    /*CKEDITOR DATA FUNCTION END*/
+    END*/
     navigateList = ['searchLegislator', 'news', 'group', 'request'];
     //public tabSet: NgbTabset;
 

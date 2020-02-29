@@ -24,7 +24,7 @@ import {GpxUIComponentsModule} from './components/gpx-uicomponents/gpx-uicompone
 import {ConnectionModule} from './components/connection/connection.module';
 
 import {AppComponent} from './app.component';
-import { CKEditorModule } from 'ckeditor4-angular';
+//import { CKEditorModule } from 'ckeditor4-angular';
 
 import {BannerComponent} from './components/banner/banner.component';
 import {TypeaheadComponent} from './components/typeahead/typeahead.component';
@@ -80,7 +80,7 @@ export function tokenGetter() {
         HttpClientModule,
         HttpClientJsonpModule,
         FormsModule,
-        CKEditorModule,
+        //CKEditorModule,
         //ReactiveFormsModule, // formGroup
         //NgbTabsetModule,
         //NgbDropdownModule,

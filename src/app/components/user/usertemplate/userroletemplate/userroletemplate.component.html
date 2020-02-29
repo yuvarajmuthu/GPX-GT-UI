@@ -50,24 +50,31 @@
 
 
 <form [formGroup]="roleTemplateForm">
-    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content)"> 
+    <!-- Add new role -->
+    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, '')"> 
         <i class="fa fa-plus"></i>
     </a>
     <ng-template #content let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Role</h4>
+            <!-- Close the Role modal-->
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
             <form>
-                <div class="form-group">
+                <div class="form-group"> 
                   <div *ngFor="let displayProperty of displayProperties">
-                    <label for="displayProperty.propId">{{displayProperty.displayLabel}}</label>
+                    <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
                     <div class="input-group">
-                        <input id="displayProperty.propId" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                        <input id="{{displayProperty.propId}}" class="form-control" placeholder="{{role[displayProperty.propId]}}">
                     </div>
+                  </div>
+                  <div>
+                    <label for="addtionalInfo">Additional Information:</label>
+                    <ckeditor id="addtionalInfo" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
+                    <p>{{editorData}}</p>
                   </div>
 <!--
                     <label for="startdate">Start Date</label>
@@ -123,6 +130,7 @@
                 </div>
             </form>
         </div>
+        <!-- Save Role information -->
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Save</button>
         </div>

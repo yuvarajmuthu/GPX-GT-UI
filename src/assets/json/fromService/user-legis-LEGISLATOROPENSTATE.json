@@ -65,43 +65,53 @@
           "properties":[
              {
                 "propId":"start",
-                "displayLabel":"Start Date"
+                "displayLabel":"Start Date",
+                "type":"date"
              },
              {
                 "propId":"end",
-                "displayLabel":"End Date"
+                "displayLabel":"End Date",
+                "type":"date"
              },
              {
                 "propId":"district",
-                "displayLabel":"District"
+                "displayLabel":"District",
+                "type":"text"
              },
              {
                 "propId":"chamber",
-                "displayLabel":"Chamber"
+                "displayLabel":"Chamber",
+                "type":"text"
              },
              {
                 "propId":"state",
-                "displayLabel":"State"
+                "displayLabel":"State",
+                "type":"text"
              },
              {
                 "propId":"party",
-                "displayLabel":"Party"
+                "displayLabel":"Party",
+                "type":"text"
              },
              {
                 "propId":"member",
-                "displayLabel":"Member"
+                "displayLabel":"Member",
+                "type":"text"
              },
              {
                 "propId":"committee",
-                "displayLabel":"Committee"
+                "displayLabel":"Committee",
+                "type":"text"
              },
              {
                 "propId":"position",
-                "displayLabel":"Position"
+                "displayLabel":"Position",
+                "type":"text"
              },
              {
                 "propId":"type",
-                "displayLabel":"Type"
+                "displayLabel":"Type",
+                "type":"text"
              }
           ]
        },
@@ -121,7 +131,7 @@
                 "displayLabel":"Type"
              },
              {
-                "propId":"phone",
+                "propId":"phone", 
                 "displayLabel":"Phone"
              },
              {

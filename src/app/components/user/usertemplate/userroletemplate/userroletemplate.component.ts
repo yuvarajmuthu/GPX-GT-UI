@@ -26,9 +26,12 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     roles: JSON[] = [];
     displayProperties = [];
     role = {};
+    data = {};
     viewingUser = {};
     roleTemplateForm: FormGroup;
     editorData = '';
+    isProfileInEditMode:boolean = false;
+
 
 
     constructor(private legislatorsService2: LegislatorService,
@@ -82,6 +85,8 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     }
 
     loadDisplayProperties() {
+        //TODO
+        //profile template for this template shall also loaded instead of getting all the template properties
         for (let profileTemplates of this.viewingUser['profileTemplates']) {
             //console.log("reading template component properties: ", profileTemplates['profile_template_id']);
             //this.templateType.push(profileData['profile_template_id']);
@@ -147,18 +152,39 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         this.changeDetector.detectChanges();
     }
 
+    getFormData():any{
+        console.log("Object.assign({}, this.biodataTemplateForm.value) ", Object.assign({}, this.roleTemplateForm.value));
+        const result: {} = Object.assign({}, this.roleTemplateForm.value);
+        console.log("Role form ", result);
+        return result;
+      }
+  
     getData(): string {
-        /*
-           let data = {};
-           data["firstName"] = this.firstName;
-           data["lastName"] = this.lastName;
-
-
-           let dataString:string = JSON.stringify(data);
-           console.log("TemplateIntroductionComponent data " + dataString);
-           return dataString;
-           */
-        return '';
+        let data = {};
+  
+        this.displayProperties.forEach(element => {
+          data[element['propId']] = this.role[element['propId']];
+        });
+  
+        return JSON.stringify(data);
     }
+
+    saveProfile(){
+        this.data["id"] = this.role['id'] ? this.role['id'] : ""; //primary key
+        this.data["profileTemplateId"] = this.id; //unique key
+        this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?
+        this.data["data"] = this.getFormData();
+        console.log("Data " + JSON.stringify(this.data));
+        this.userService2.updateProfileData(this.data).subscribe((response) => {
+          console.log('Profile updated sucessfully');
+          this.isProfileInEditMode = false;
+          this.role = this.data["data"];
+          this.changeDetector.detectChanges();
+  
+        } 
+        );
+  
+      }
+
 
 }

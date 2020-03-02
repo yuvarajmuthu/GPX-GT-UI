@@ -63,76 +63,30 @@
             </button>
         </div>
         <div class="modal-body">
-            <form>
+            <form [formGroup]="roleTemplateForm">
                 <div class="form-group"> 
                   <div *ngFor="let displayProperty of displayProperties">
                     <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
-                    <div class="input-group">
+                    <div *ngIf="displayProperty.type === 'text'" class="input-group">
                         <input id="{{displayProperty.propId}}" class="form-control" placeholder="{{role[displayProperty.propId]}}">
                     </div>
+                    <div *ngIf="displayProperty.type === 'date'" class="input-group">
+                      <input type='date' id="{{displayProperty.propId}}" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                  </div>
                   </div>
                   <div>
                     <label for="addtionalInfo">Additional Information:</label>
                     <ckeditor id="addtionalInfo" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
                     <p>{{editorData}}</p>
                   </div>
-<!--
-                    <label for="startdate">Start Date</label>
-                    <div class="input-group">
-                        <input id="startdate" class="form-control" placeholder="yyyy-mm-dd">
-                    </div>
 
-                    <label for="endDate">End Date</label>
-                    <div class="input-group">
-                        <input id="endDate" class="form-control" placeholder="yyyy-mm-dd">
-                    </div>
-
-                    <label for="district">District</label>
-                    <div class="input-group">
-                        <input id="district" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="chamber">Chamber</label>
-                    <div class="input-group">
-                        <input id="chamber" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="state">State</label>
-                    <div class="input-group">
-                        <input id="state" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="party">Party</label>
-                    <div class="input-group">
-                        <input id="party" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="member">Member</label>
-                    <div class="input-group">
-                        <input id="member" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="committee">Committee</label>
-                    <div class="input-group">
-                        <input id="committee" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="position">Position</label>
-                    <div class="input-group">
-                        <input id="position" class="form-control" placeholder="">
-                    </div>
-
-                    <label for="type">Type</label>
-                    <div class="input-group">
-                        <input id="type" class="form-control" placeholder="">
-                    </div>
-                  -->
+                  
                 </div>
             </form>
         </div>
         <!-- Save Role information -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Save</button>
+            <button type="button" class="btn btn-outline-success" (click)="saveProfile();modal.close('Save click')">Save</button>
         </div>
     </ng-template>
     <div *ngFor="let role of roles">

@@ -109,12 +109,12 @@ export function tokenGetter() {
         // )
     ],
     providers: [
-        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION */
+        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION 
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
-        },
+        },*/
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe

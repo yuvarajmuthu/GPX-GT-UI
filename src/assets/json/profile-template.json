@@ -4,7 +4,7 @@
 	"type":"legislativeDistrict-Federal",
 	"properties" : ["name", "description"]
 	},
-	{
+	{ 
 	"profile_template_id":"ptemp0011",
 	"type":"legislativeDistrict-Federal",
 	"properties" : ["population", "maleCount", "femaleCount", "othersCount"]

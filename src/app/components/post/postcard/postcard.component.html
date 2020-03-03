@@ -58,94 +58,102 @@
 </div>-->
 
 
-<div class="card gedf-card">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
-                    <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
-                </div>
-                <div class="ml-2">
-                    <div class="h5 m-0">
-                        <a href="javascript:void(0);">
-                            {{post.entityId}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="dropdown">
-                    <div class="btn-group">
-                        <div ngbDropdown class="d-inline-block">
-                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" id="postRightDropdown" ngbDropdownToggle>
-                                <i class="{{ icon }}"></i> {{ name }}
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                            <div ngbDropdownMenu aria-labelledby="postRightDropdown">
-                                <button class="btn btn-outline-success" ngbDropdownItem (click)="save('Saved')"
-                                        [ngClass]="{ 'active': savePost, 'in-active': !savePost}"><i
-                                        class="fa fa-floppy-o" aria-hidden="true"></i> Save
-                                </button>
-                                <button class="btn btn-outline-warning" ngbDropdownItem (click)="hide('Hide')"
-                                        [ngClass]="{ 'active': hidePost, 'in-active': !hidePost}"><i
-                                        class="fa fa-eye-slash" aria-hidden="true"></i> Hide
-                                </button>
-                                <button class="btn btn-outline-danger" ngbDropdownItem (click)="report('Report')"
-                                        [ngClass]="{ 'active': reportPost, 'in-active': !reportPost}"><i
-                                        class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report
-                                </button>
+
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0">
+                                    <a href="javascript:void(0);">
+                                        {{post.entityId}}
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                        <div>
+                            <div class="dropdown">
+                                <div class="btn-group">
+                                    <div ngbDropdown class="d-inline-block">
+                                        <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false" id="postRightDropdown" ngbDropdownToggle>
+                                            <i class="{{ icon }}"></i> {{ name }}
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div ngbDropdownMenu aria-labelledby="postRightDropdown">
+                                            <button class="btn btn-outline-success" ngbDropdownItem (click)="save('Saved')"
+                                                    [ngClass]="{ 'active': savePost, 'in-active': !savePost}"><i
+                                                    class="fa fa-floppy-o" aria-hidden="true"></i> Save
+                                            </button>
+                                            <button class="btn btn-outline-warning" ngbDropdownItem (click)="hide('Hide')"
+                                                    [ngClass]="{ 'active': hidePost, 'in-active': !hidePost}"><i
+                                                    class="fa fa-eye-slash" aria-hidden="true"></i> Hide
+                                            </button>
+                                            <button class="btn btn-outline-danger" ngbDropdownItem (click)="report('Report')"
+                                                    [ngClass]="{ 'active': reportPost, 'in-active': !reportPost}"><i
+                                                    class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report
+                                            </button>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2">
+                        <i class="fa fa-clock-o"></i>
+                        published: {{post.createdDate | dateFormatPipe}}
+                    </div>
+
+                    <div *ngIf="post.containsImage" class="post-meta">
+                        <img [src]="postImage" alt="">
+                    </div>
+
+                    <div *ngIf="post.containsVideo" class="post-meta">
+                        <div class="we-video-info">
+
+                        </div>
+                    </div>
+                    <div *ngIf="post.containsText" class="description">
+                        <p class="card-text">
+                            {{post.postText}}
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row post-card-footer">
+                        <!--<div class="col">-->
+                        <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
+                            <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
+                            Like
+                        </a>
+                        <!--</div>-->
+                        <!--<div class="col">-->
+                        <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+                            <i class="fa fa-comment custom-size"></i>
+                            Comment
+                        </a>
+                        <!--</div>-->
+                        <!--<div class="col">-->
+                        <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+                            <i class="fa fa-mail-forward custom-size"></i>
+                            Share
+                        </a>
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
-        </div>
+            <br/>
 
-    </div>
-    <div class="card-body">
-        <div class="text-muted h7 mb-2">
-            <i class="fa fa-clock-o"></i>
-            published: {{post.createdDate | dateFormatPipe}}
-        </div>
+<!--        </ng-container>
+    </cdk-virtual-scroll-viewport>
+</div>-->
 
-        <div *ngIf="post.containsImage" class="post-meta">
-            <img [src]="postImage" alt="">
-        </div>
 
-        <div *ngIf="post.containsVideo" class="post-meta">
-            <div class="we-video-info">
 
-            </div>
-        </div>
-        <div *ngIf="post.containsText" class="description">
-            <p class="card-text">
-                {{post.postText}}
-            </p>
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="row post-card-footer">
-            <!--<div class="col">-->
-                <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
-                    <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
-                     Like
-                </a>
-            <!--</div>-->
-            <!--<div class="col">-->
-                <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
-                    <i class="fa fa-comment custom-size"></i>
-                    Comment
-                </a>
-            <!--</div>-->
-            <!--<div class="col">-->
-                <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
-                    <i class="fa fa-mail-forward custom-size"></i>
-                    Share
-                </a>
-            <!--</div>-->
-        </div>
-    </div>
-</div>
-<br/>

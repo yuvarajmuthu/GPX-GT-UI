@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {GpxUIComponentsModule} from '../gpx-uicomponents/gpx-uicomponents.module';
 import {BannerComponent} from '../banner/banner.component';
 import {dateFormatPipe} from '../../util/pipes/dateformat.pipe';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import {dateFormatPipe} from '../../util/pipes/dateformat.pipe';
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
-    GpxUIComponentsModule
+    GpxUIComponentsModule,
+    ScrollingModule
   ],
   declarations: [
     //BannerComponent, 

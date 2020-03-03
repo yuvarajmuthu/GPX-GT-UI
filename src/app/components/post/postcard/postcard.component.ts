@@ -27,12 +27,15 @@ export class PostcardComponent implements OnInit {
     postImage: any = 'assets/images/avatar1.png';
     isPostImageLoading: boolean = false;
     entityId: string;
+    numbers: number[] = [];
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
                 private userService: UserService) {
+        for (let index = 0; index < 10000; index++) {
+            this.numbers.push(index);
+        }
         this.devMode = isDevMode();
-
     }
 
     ngOnInit(): void {

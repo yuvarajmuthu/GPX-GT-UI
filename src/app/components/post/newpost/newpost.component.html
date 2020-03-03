@@ -1,37 +1,108 @@
 <!--
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-  -->
-    <div class="central-meta">
+<div class="central-meta">
     <div class="new-postbox">
-        <!--LOGGED IN USER'S PROFILE IMAGE
-
-      <figure>
-        <img src="assets/images/yeoman.png" alt="">
-      </figure>
-      -->
-      <div class="newpst-input">
-        <img [src]="stagingImage" id="stageUploadedImgFile" alt="">
-          <textarea rows="2" placeholder="You can share the happenings around you !" [(ngModel)]='txtPost'  (change)="doTextareaValueChange($event)"></textarea>
-          <div class="attachments">
-            <ul>
-              <li>
-                <i class="fa fa-image"></i>
-                <label class="fileContainer">
-                  <input type="file" id="stageUploadedFile" (change)="onFileSelected($event)">
-                </label>
-              </li>
-              <li>
-                <i class="fa fa-video-camera"></i>
-                <label class="fileContainer">
-                  <input type="file">
-                </label>
-              </li>
-              <li>
-                <button type="submit" (click)="submitPost()">Post</button>
-              </li>
-            </ul>
-          </div>
-      </div>
+        <div class="newpst-input">
+            <img [src]="stagingImage" id="stageUploadedImgFile" alt="">
+            <textarea rows="2" placeholder="You can share the happenings around you !" [(ngModel)]='txtPost'
+                      (change)="doTextareaValueChange($event)"></textarea>
+            <div class="attachments">
+                <ul>
+                    <li>
+                        <i class="fa fa-image"></i>
+                        <label class="fileContainer">
+                            <input type="file" id="stageUploadedFile" (change)="onFileSelected($event)">
+                        </label>
+                    </li>
+                    <li>
+                        <i class="fa fa-video-camera"></i>
+                        <label class="fileContainer">
+                            <input type="file">
+                        </label>
+                    </li>
+                    <li>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <label class="fileContainer">
+                            <input type="file">
+                        </label>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn btn-xs btn-primary" (click)="submitPost()">Post</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+-->
+
+<div class="card gedf-card">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                   aria-controls="posts" aria-selected="true">Make
+                    a publication</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                <div class="form-group">
+                    <label class="sr-only" for="message">post</label>
+                    <textarea class="form-control" id="message" rows="3"
+                              placeholder="What are you thinking?"></textarea>
+                    <div class="attachments">
+                        <ul>
+                            <li>
+                                <i class="fa fa-image"></i>
+                                <label class="fileContainer">
+                                    <input type="file" id="stageUploadedFile" (change)="onFileSelected($event)">
+                                </label>
+                            </li>
+                            <li>
+                                <i class="fa fa-video-camera"></i>
+                                <label class="fileContainer">
+                                    <input type="file">
+                                </label>
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <label class="fileContainer">
+                                    <input type="checkbox" class="location" id="location">
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="btn-toolbar justify-content-between">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-xs btn-primary" (click)="submitPost()">Post</button>
+            </div>
+            <div class="btn-group">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>
+                        <i class="{{ icon }}"></i> {{ name }}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="Public('Public')"
+                                [ngClass]="{ 'active': public, 'in-active': !public}"><i class="fa fa-globe"></i> Public
+                        </button>
+                        <button ngbDropdownItem (click)="Friends('Friends')"
+                                [ngClass]="{ 'active': friends, 'in-active': !friends}"><i class="fa fa-users"></i>
+                            Friends
+                        </button>
+                        <button ngbDropdownItem (click)="OnlyMe('Only Me')"
+                                [ngClass]="{ 'active': onlyMe, 'in-active': !onlyMe}"><i class="fa fa-user"></i> Only Me
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br/>

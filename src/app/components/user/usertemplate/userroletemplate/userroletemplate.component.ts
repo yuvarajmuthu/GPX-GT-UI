@@ -51,6 +51,9 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     }
 
     open(content, role) {
+        if(role === ''){
+            role = null;
+        }
         this.role = role;
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
@@ -159,6 +162,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         return result;
       }
   
+      //OBSOLETE
     getData(): string {
         let data = {};
   
@@ -170,7 +174,9 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     }
 
     saveProfile(){
-        this.data["id"] = this.role['id'] ? this.role['id'] : ""; //primary key
+        if(this.role && this.role['id']){
+            this.data["id"] = this.role['id']; //primary key
+        }
         this.data["profileTemplateId"] = this.id; //unique key
         this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?
         this.data["data"] = this.getFormData();

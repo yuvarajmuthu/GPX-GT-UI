@@ -49,7 +49,7 @@
 -->
 
 
-<form [formGroup]="roleTemplateForm">
+<form [formGroup]="rolesTemplateForm">
     <!-- Add new role -->
     <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, '')"> 
         <i class="fa fa-plus"></i>
@@ -63,25 +63,29 @@
             </button>
         </div>
         <div class="modal-body">
-            <form [formGroup]="roleTemplateForm">
-                <div class="form-group"> 
-                  <div *ngFor="let displayProperty of displayProperties">
+            <form [formGroup]="roleTemplateForm"> 
+                  <div class="form-group row" *ngFor="let displayProperty of displayProperties">
                     <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
                     <div *ngIf="displayProperty.type === 'text'" class="input-group">
-                        <input id="{{displayProperty.propId}}" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                        <input *ngIf="role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                        <input *ngIf="!role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+
                     </div>
                     <div *ngIf="displayProperty.type === 'date'" class="input-group">
-                      <input type='date' id="{{displayProperty.propId}}" class="form-control" placeholder="{{role[displayProperty.propId]}}">
-                  </div>
-                  </div>
+                      <input type='date' *ngIf="role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                      <input type='date' *ngIf="!role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+                    </div>
+                    
+                  </div> 
+                  <!--
                   <div>
                     <label for="addtionalInfo">Additional Information:</label>
+                    <ckeditor id="addtionalInfo" class="form-control" [formControlName]="editorData"></ckeditor>
                     <ckeditor id="addtionalInfo" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
+                    
                     <p>{{editorData}}</p>
                   </div>
-
-                  
-                </div>
+                -->                  
             </form>
         </div>
         <!-- Save Role information -->

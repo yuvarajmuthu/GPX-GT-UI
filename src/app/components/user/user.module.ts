@@ -25,6 +25,7 @@ import {GpxUIComponentsModule} from '../../components/gpx-uicomponents/gpx-uicom
 
 import { UserstageComponent } from './userstage/userstage.component';
 import { Usercard2Component } from './usercard2/usercard2.component';
+import { UserroleComponent } from './usertemplate/userroletemplate/userrole/userrole.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,7 @@ import { Usercard2Component } from './usercard2/usercard2.component';
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 
-    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component
+    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent
   ],
   entryComponents:[UserstageComponent,UserbannertemplateComponent, UsercommitteetemplateComponent, 
     UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent],

@@ -1,16 +1,16 @@
 import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
-
-import {DatashareService} from '../../../../services/datashare.service';
-import {ComponentcommunicationService} from '../../../../services/componentcommunication.service';
-import {UserService} from '../../../../services/user.service';
-import {LegislatorService} from '../../../../services/legislator.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs';
 
 import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
+import {DatashareService} from '../../../../services/datashare.service';
+import {ComponentcommunicationService} from '../../../../services/componentcommunication.service';
+import {UserService} from '../../../../services/user.service';
+import {LegislatorService} from '../../../../services/legislator.service';
+import {UserroleComponent} from './userrole/userrole.component';
 
 @Component({
     selector: 'app-userroletemplate',
@@ -28,11 +28,9 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     role = {};
     data = {};
     viewingUser = {};
-    roleTemplateForm: FormGroup;
+    roleTemplateForm: FormGroup; 
     editorData = '';
     isProfileInEditMode:boolean = false;
-
-
 
     constructor(private legislatorsService2: LegislatorService,
                 private userService2: UserService,
@@ -50,7 +48,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
 
     }
 
-    open(content, role) {
+    open(content, role) { 
         if(role === ''){
             role = null;
         }
@@ -61,9 +59,11 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
     }
+
     public onChange(event: CKEditor4.EventInfo) {
         console.log(event.editor.getData());
     }
+
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';
@@ -73,6 +73,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
             return  `with: ${reason}`;
         }
     }
+
     ngOnInit() {
         console.log('ngOnInit() userroletemplate.component');
         /*
@@ -162,7 +163,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         return result;
       }
   
-      //OBSOLETE
+      //OBSOLETE, though part of AbstractTemplateComponent
     getData(): string {
         let data = {};
   

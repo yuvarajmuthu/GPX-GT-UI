@@ -1,0 +1,56 @@
+<table class="table">
+  <tbody class="box-shadow">
+  <tr>
+      <td></td>
+      <td>
+          <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, role)">
+              <i class="fa fa-pencil-square-o"></i>
+          </a>
+      </td>
+  </tr>
+  <tr class="info" *ngFor="let displayProperty of displayProperties">
+      <td>{{displayProperty.displayLabel}} </td>
+      <td>{{role[displayProperty.propId]}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Role</h4>
+        <!-- Close the Role modal-->
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="roleForm"> 
+              <div class="form-group row" *ngFor="let displayProperty of displayProperties">
+                <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
+                <div *ngIf="displayProperty.type === 'text'" class="input-group">
+                    <input *ngIf="role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                    <input *ngIf="!role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+
+                </div>
+                <div *ngIf="displayProperty.type === 'date'" class="input-group">
+                  <input type='date' *ngIf="role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{role[displayProperty.propId]}}">
+                  <input type='date' *ngIf="!role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+                </div>
+                
+              </div> 
+              <!--
+              <div>
+                <label for="addtionalInfo">Additional Information:</label>
+                <ckeditor id="addtionalInfo" class="form-control" [formControlName]="editorData"></ckeditor>
+                <ckeditor id="addtionalInfo" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
+                
+                <p>{{editorData}}</p>
+              </div>
+            -->                  
+        </form>
+    </div>
+    <!-- Save Role information -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success" (click)="saveProfile();modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

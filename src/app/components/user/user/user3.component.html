@@ -52,6 +52,14 @@
                     <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
                       <app-post [type]="user" [userId]="admin1" [disableNewPost]=true></app-post>
                     </div>
+                    <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed" class="widget stick-widget">
+                      <h4 class="widget-title">Followers</h4>
+
+                      <ul class="followers">
+                        <li *ngFor="let followingUser of followers">
+                        <app-usercard1 [user]=followingUser></app-usercard1>
+                        </li>
+                    </ul>                        </div>  
                     <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
                       <div class="card card-nav-tabs">
                         <div class="card-header-1 card-header-primary">

@@ -64,6 +64,7 @@ export class UserComponent implements OnInit {
     isImageLoading: boolean = false;
     isProfileCollapsed: boolean = false;
     isActivityCollapsed: boolean = true;
+    isFollowersCollapsed:boolean = true;
 
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
@@ -190,6 +191,11 @@ export class UserComponent implements OnInit {
         this.profileData = false;
         this.folow = false;
         this.folowers = true;
+        this.getFollowers(this.profileUserId);
+        this.isFollowersCollapsed = false;
+        this.isProfileCollapsed = true;
+        this.isActivityCollapsed = true;
+     
     }
     loadComponent(id: string) {
         this.profileEditOption = this.getPermission();
@@ -643,7 +649,7 @@ export class UserComponent implements OnInit {
             .subscribe(
                 (result) => {
                     console.log('getFollowersCount response ' + result);
-                    this.followersCount = result;
+                    this.followersCount = result; 
 
                 },
                 (err) => {

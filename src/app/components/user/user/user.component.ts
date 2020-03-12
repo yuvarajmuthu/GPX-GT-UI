@@ -64,7 +64,7 @@ export class UserComponent implements OnInit {
     isImageLoading: boolean = false;
     isProfileCollapsed: boolean = false;
     isActivityCollapsed: boolean = true;
-    isFollowersCollapsed:boolean = true;
+    isFollowersCollapsed: boolean = true;
 
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
@@ -86,12 +86,12 @@ export class UserComponent implements OnInit {
     profileTabSelected: boolean = true;
     activitiesTabSelected: boolean = false;
     isSelfProfile: boolean = false;
-    activitiesData:boolean = false;
-    tap:boolean = false;
-    profileData:boolean = false;
-    folow:boolean = false;
-    folowers:boolean = false;
-    navTabs:boolean = false;
+    activitiesData: boolean = false;
+    tap: boolean = false;
+    profileData: boolean = false;
+    folow: boolean = false;
+    folowers: boolean = false;
+    navTabs: boolean = false;
 
     followCntrlLabel: string = '';
     followCntrlCSS: string = '';
@@ -168,25 +168,29 @@ export class UserComponent implements OnInit {
             file: ['']
         });
     }
-    Activities(){
+
+    Activities() {
         this.activitiesData = true;
         this.profileData = false;
         this.folow = false;
         this.folowers = false;
     }
-    Profiles(){
+
+    Profiles() {
         this.activitiesData = false;
         this.profileData = true;
         this.folow = false;
         this.folowers = false;
     }
-    FollowingCount(){
+
+    FollowingCount() {
         this.activitiesData = false;
         this.profileData = false;
         this.folow = true;
         this.folowers = false;
     }
-    Followers(){
+
+    Followers() {
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
@@ -195,8 +199,9 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = false;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
-     
+
     }
+
     loadComponent(id: string) {
         this.profileEditOption = this.getPermission();
         this.loggedUser = this.datashareService.getCurrentUser();
@@ -649,7 +654,7 @@ export class UserComponent implements OnInit {
             .subscribe(
                 (result) => {
                     console.log('getFollowersCount response ' + result);
-                    this.followersCount = result; 
+                    this.followersCount = result;
 
                 },
                 (err) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, isDevMode } from '@angular/core';
 import { Router } from "@angular/router";
 
 import {UserService} from '../../../services/user.service';
@@ -34,7 +34,11 @@ export class Usercard1Component implements OnInit {
 
   ngOnInit() {
     if(this.user && this.user.username){
-      this.getProfileSmImage(this.user.username);
+      if (isDevMode()) {
+        this.profileSmImage = "assets/images/avatar-male.png";
+      }else{
+        this.getProfileSmImage(this.user.username);
+      }
     }  
 
     this.loggedUser = this.datashareService.getCurrentUser();

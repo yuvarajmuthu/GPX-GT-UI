@@ -5,7 +5,7 @@
       *ngIf="!isImageLoading">
     </figure> 
 
-    <span class="friend-meta">
+    <span class="friend-meta"> 
         <h4><a [routerLink]="['/user', user.username]" title="">{{user.username}}</a></h4>
         <!--
         <button class="btn" type="button" *ngIf="loggedUser.username != user.username" (click)="followEntity()">Follow</button>

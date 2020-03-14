@@ -174,6 +174,10 @@ export class UserComponent implements OnInit {
         this.profileData = false;
         this.folow = false;
         this.folowers = false;
+
+        this.isFollowersCollapsed = true;
+        this.isProfileCollapsed = true;
+        this.isActivityCollapsed = false;
     }
 
     Profiles() {
@@ -181,6 +185,10 @@ export class UserComponent implements OnInit {
         this.profileData = true;
         this.folow = false;
         this.folowers = false;
+
+        this.isFollowersCollapsed = true;
+        this.isProfileCollapsed = false;
+        this.isActivityCollapsed = true;
     }
 
     FollowingCount() {

@@ -33,7 +33,7 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
   public profilesData = [];
   public profilesTemplates = [];
   isProfileInEditMode:boolean = false;
-  private templateProperties = [];
+  private templateProperties = []; 
   private templateData = [];
   group:FormGroup;
   biodataTemplateForm: FormGroup;

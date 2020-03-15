@@ -16,47 +16,6 @@
     "userProfile":null,
     "profileTemplates":[
        {
-          "id":"5d90330969965152f0f9c173",
-          "profileTemplateId":"upCongressLegislatorExternal",
-          "type":"legislator",
-          "name":"Biodata",
-          "profileIcon":"person",
-          "properties":[
-             {
-                "propId":"leg_id",
-                "displayLabel":"Legislator External ID"
-             },
-             {
-                "propId":"full_name",
-                "displayLabel":"Full Name"
-             },
-             {
-                "propId":"first_name",
-                "displayLabel":"First Name"
-             },
-             {
-                "propId":"last_name",
-                "displayLabel":"Last Name"
-             },
-             {
-                "propId":"district",
-                "displayLabel":"District"
-             },
-             {
-                "propId":"party",
-                "displayLabel":"Party"
-             },
-             {
-                "propId":"chamber",
-                "displayLabel":"Chamber"
-             },
-             {
-                "propId":"state",
-                "displayLabel":"State"
-             }
-          ]
-       },
-       {
           "id":"5e1e3c7af453cd4988773a0b",
           "profileTemplateId":"upRole",
           "type":"legislator",

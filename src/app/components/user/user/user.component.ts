@@ -65,6 +65,8 @@ export class UserComponent implements OnInit {
     isProfileCollapsed: boolean = false;
     isActivityCollapsed: boolean = true;
     isFollowersCollapsed: boolean = true;
+    externalUser:boolean;
+    biodata={};
 
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
@@ -167,8 +169,30 @@ export class UserComponent implements OnInit {
         this.uploadForm = this.formBuilder.group({
             file: ['']
         });
+//////////Biodata
+        if(this.profileUserId == 'external'){
+            this.externalUser = true;  
+          }
+      
+          //this.loadDisplayProperties();     
+        
+          this.loadBioData();
+
     }
 
+    loadBioData(){
+        let userType:string = this.externalUser?"external": "internal";
+        this.userService.getBiodata(this.profileUserId, userType)
+        .subscribe((response) => {
+          //this.profileDataId = response['id'];
+          this.biodata= response['data'];
+          
+          console.log('biodata response data ', this.biodata);
+          
+          //this.createFormGroup();
+        });  
+      }
+  
     Activities() {
         this.activitiesData = true;
         this.profileData = false;
@@ -287,7 +311,7 @@ export class UserComponent implements OnInit {
 
 
             this.userService.getUserData(this.viewingUser['userId'], this.viewingUser['external']).subscribe(
-                data => {
+                data => { 
                     this.userData = data;
                     console.log('User data from service: ', this.userData);
 

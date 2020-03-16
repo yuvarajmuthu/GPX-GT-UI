@@ -80,6 +80,7 @@ export class UserComponent implements OnInit {
     loggedUser: User = null;
     postFormData: FormData;
     editLabel: string = null;
+    inEditMode:boolean = false;
     followersCount: string = null;
     followers: User[] = [];
     selectedProfileSmImage: File;
@@ -116,9 +117,10 @@ export class UserComponent implements OnInit {
         this.currentUser = this.datashareService.getCurrentUser();
 
         missionService.userProfileEditChanged$.subscribe(
-            mission => {
-                console.log('Received edit-save Profile message ' + mission);
-                if (!mission) {
+            editmode => {
+                console.log('Received edit-save Profile message ' + editmode);
+                this.inEditMode = editmode;
+                if (!editmode) {
                     this.saveProfile();
                 }
 
@@ -170,7 +172,7 @@ export class UserComponent implements OnInit {
             file: ['']
         });
 //////////Biodata
-        if(this.profileUserId == 'external'){
+        if(this.paramUsername && this.paramUsername == 'external'){
             this.externalUser = true;  
           }
       
@@ -455,6 +457,7 @@ export class UserComponent implements OnInit {
 
     }
 
+    //MAY NOT BE REQUIRED
     isProfileEditable() {
         return this.datashareService.isProfileEditable() && this.loggedUser;//and     //logged in?
     }

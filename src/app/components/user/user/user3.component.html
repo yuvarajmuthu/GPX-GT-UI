@@ -1,7 +1,15 @@
+<!--if inEditMode==true, show add/edit image option -->
 <div class="profile-banner" style="background-image: url('../../../../assets/images/user-banner1.jpg');">
     <div class="col-sm-3 avatar-container">
         <img [src]="profileSmImage" class="twPc-avatarImg img-circle profile-avatar"
              *ngIf="!isImageLoading" alt="User avatar">
+        <div class="edit-phto" *ngIf="inEditMode">
+            <i class="fa fa-camera-retro"></i>
+            <label class="fileContainer">
+                Add/Change Profile Picture
+                <input type="file" (change)="onProfileSmImageSelected($event)"/>
+            </label>
+        </div> 
     </div>
 </div>
 <div class="content">

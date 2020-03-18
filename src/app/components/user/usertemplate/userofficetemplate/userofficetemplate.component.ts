@@ -17,18 +17,26 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
   //roles:any = null;
   offices:JSON[] = [];
   displayProperties = [];
+  inEditMode:boolean = false;
+
   //role = {};
 
   constructor(private legislatorsService2:LegislatorService, 
     private userService2:UserService, 
     private dataShareService2:DatashareService, 
-    private missionService2: ComponentcommunicationService, 
+    private communicationService: ComponentcommunicationService, 
     private changeDetector : ChangeDetectorRef) {
   
-      super(legislatorsService2, dataShareService2, missionService2);
+      super(legislatorsService2, dataShareService2, communicationService);
   
       console.log("constructor() userofficetemplate.component");
-      
+      communicationService.userProfileEditChanged$.subscribe(
+        editmode => {
+            console.log('Received edit-save Profile message ' + editmode);
+            this.inEditMode = editmode;
+            this.changeDetector.detectChanges();
+
+        });    
   }
 
   ngOnInit() {
@@ -43,6 +51,10 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
      this.loadDisplayProperties();     
 
       this.loadTemplateData();   
+      this.inEditMode = this.dataShareService2.isProfileEditable();
+      //this.changeDetector.detectChanges();
+      
+
   }
 
   loadDisplayProperties(){

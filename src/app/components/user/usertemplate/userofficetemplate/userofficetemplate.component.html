@@ -1,5 +1,10 @@
 <div>
+  <a *ngIf="inEditMode" href="javascript:void(0);" class="lg-fa float-right"> 
+    <i class="fa fa-plus"></i>
+</a>
+
   <div class="officeProfileCard col-xs-12" *ngFor="let office of offices">
+
     <table class="table">
       <tbody class="box-shadow">
       <tr>

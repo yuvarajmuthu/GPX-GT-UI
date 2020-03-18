@@ -106,7 +106,7 @@ export class UserComponent implements OnInit {
                 private route: ActivatedRoute,
                 private userService: UserService,
                 private profileService: ProfileService,
-                private missionService: ComponentcommunicationService,
+                private communicationService: ComponentcommunicationService,
                 //private elementRef:ElementRef,
                 //private renderer: Renderer,
                 private legislatorsService: LegislatorService,
@@ -116,7 +116,7 @@ export class UserComponent implements OnInit {
                 private formBuilder: FormBuilder) {
         this.currentUser = this.datashareService.getCurrentUser();
 
-        missionService.userProfileEditChanged$.subscribe(
+        communicationService.userProfileEditChanged$.subscribe(
             editmode => {
                 console.log('Received edit-save Profile message ' + editmode);
                 this.inEditMode = editmode;
@@ -443,7 +443,7 @@ export class UserComponent implements OnInit {
         } else {
             this.editLabel = 'Edit Profile';
         }
-        this.missionService.userProfileChanged(edit);
+        this.communicationService.userProfileChanged(edit);
 
     }
 
@@ -452,14 +452,14 @@ export class UserComponent implements OnInit {
         this.editLabel = 'Edit Profile';
 
         this.datashareService.editProfile(false);
-        this.missionService.userProfileChanged(false);
+        this.communicationService.userProfileChanged(false);
 
 
     }
 
-    //MAY NOT BE REQUIRED
     isProfileEditable() {
-        return this.datashareService.isProfileEditable() && this.loggedUser;//and     //logged in?
+        //return this.datashareService.isProfileEditable() && this.loggedUser;//and     //logged in?
+        return this.datashareService.isProfileEditable();
     }
 
     isUserLogged() {

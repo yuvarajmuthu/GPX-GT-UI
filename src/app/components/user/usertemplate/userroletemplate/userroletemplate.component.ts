@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,9 @@ import {UserroleComponent} from './userrole/userrole.component';
 @Component({
     selector: 'app-userroletemplate',
     templateUrl: './userroletemplate.component.html',
-    styleUrls: ['./userroletemplate.component.css']
+    styleUrls: ['./userroletemplate.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 
 export class UserroletemplateComponent extends AbstractTemplateComponent implements OnInit {
@@ -31,20 +33,29 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     roleTemplateForm: FormGroup; 
     editorData = '';
     isProfileInEditMode:boolean = false;
+    inEditMode:boolean = false;
 
     constructor(private legislatorsService2: LegislatorService,
                 private userService2: UserService,
                 private dataShareService2: DatashareService,
-                private missionService2: ComponentcommunicationService,
+                private communicationService: ComponentcommunicationService,
                 private changeDetector: ChangeDetectorRef,
                 private fbuilder: FormBuilder,
-                private modalService: NgbModal
+                private modalService: NgbModal 
     ) {
 
-        super(legislatorsService2, dataShareService2, missionService2);
+        super(legislatorsService2, dataShareService2, communicationService);
 
         console.log('constructor() userroletemplate.component');
         this.viewingUser = this.dataShareService2.getViewingUser();
+
+        communicationService.userProfileEditChanged$.subscribe(
+            editmode => {
+                console.log('Received edit-save Profile message ' + editmode);
+                this.inEditMode = editmode;
+                this.changeDetector.detectChanges();
+
+            });
 
     }
 
@@ -86,6 +97,8 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         this.loadDisplayProperties();
 
         this.loadTemplateData();
+        this.inEditMode = this.dataShareService2.isProfileEditable();
+
     }
 
     loadDisplayProperties() {

@@ -16,11 +16,14 @@ export class PostcardComponent implements OnInit {
     commentPost: boolean = false;
     devMode: boolean = true;
     savePost: boolean = false;
+    commandModeEnable: boolean = false;
     hidePost: boolean = false;
     reportPost: boolean = false;
     liked: boolean = false;
     name: any = '';
     icon: any = '';
+    public show:boolean = false;
+    public buttonName:any = 'Show';
 
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
@@ -87,6 +90,15 @@ export class PostcardComponent implements OnInit {
             this.hidePost = false;
             this.reportPost = false;*/
         }
+    }
+    toggle() {
+        this.show = !this.show;
+
+        // CHANGE THE NAME OF THE BUTTON.
+        if(this.show)
+            this.buttonName = "Hide";
+        else
+            this.buttonName = "Show";
     }
 
     hide(val) {

@@ -1,17 +1,39 @@
 <!--if inEditMode==true, show add/edit image option -->
 <div class="profile-banner" style="background-image: url('../../../../assets/images/user-banner1.jpg');">
     <div class="col-sm-3 avatar-container">
-        <img [src]="profileSmImage" class="twPc-avatarImg img-circle profile-avatar"
-             *ngIf="!isImageLoading" alt="User avatar">
-        <div class="card edit-photo" *ngIf="inEditMode">
-            <i class="fa fa-camera-retro"></i>
-            <label class="fileContainer">
-                Add/Change Profile Picture
-                <input type="file" (change)="onProfileSmImageSelected($event)"/>
-            </label>
-        </div> 
+        <!--<img [src]="profileSmImage" class="twPc-avatarImg img-circle profile-avatar"-->
+        <!--*ngIf="!isImageLoading" alt="User avatar">-->
+        <!--<div class="card edit-photo" *ngIf="inEditMode">-->
+
+
+        <!--<i class="fa fa-camera-retro"></i>
+        <label class="fileContainer">
+            Add/Change Profile Picture
+            <input type="file" (change)="onProfileSmImageSelected($event)"/>
+        </label>-->
+
+
+        <!--<div class="p-image">-->
+        <!--<i class="fa fa-camera upload-button"></i>-->
+        <!--<input class="file-upload" type="file" accept="image/*"/>-->
+        <!--</div>-->
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2 imgUp">
+                    <img [src]="profileSmImage" class="twPc-avatarImg img-circle profile-avatar" *ngIf="!isImageLoading" alt="User avatar">
+                    <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
+                        <i class="fa fa-camera-retro"></i>
+                        <input type="file" class="uploadFile img" value="Upload Photo"
+                                     style="width: 0px;height: 0px;overflow: hidden;">
+                    </label>
+                </div><!-- col-2 -->
+            </div><!-- row -->
+        </div><!-- container -->
     </div>
 </div>
+
 <div class="content">
 
     <div class="row">
@@ -31,8 +53,8 @@
                             </a>
                         </h5>
                         <h5>
-                            <a [routerLink]="['/district', biodata.district]">{{biodata.district}}</a>, 
-                            <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>, 
+                            <a [routerLink]="['/district', biodata.district]">{{biodata.district}}</a>,
+                            <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>,
                             <a [routerLink]="['/state', biodata.state]">{{biodata.state}}</a></h5>
                     </li>
                     <li class="list-group-item pointer" (click)="Followers()"
@@ -41,12 +63,12 @@
               {{followersCount}} Followers
             </span>
                     </li>
-<!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
-                        [ngClass]="{ 'active': folow, 'in-active': !folow}">
-                        <span class="badge">245</span>
-                        <span class="">Following</span>
-                    </li>
-                    -->
+                    <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
+                                            [ngClass]="{ 'active': folow, 'in-active': !folow}">
+                                            <span class="badge">245</span>
+                                            <span class="">Following</span>
+                                        </li>
+                                        -->
                     <li class="list-group-item pointer" (click)="isProfileCollapsed=true; isActivityCollapsed=false;"
                         (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
                         <span class="pointer">Activities</span>

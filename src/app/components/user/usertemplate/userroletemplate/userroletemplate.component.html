@@ -67,13 +67,11 @@
                   <div class="form-group row" *ngFor="let displayProperty of displayProperties">
                     <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
                     <div *ngIf="displayProperty.type === 'text'" class="input-group">
-                        <input *ngIf="role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{role[displayProperty.propId]}}">
-                        <input *ngIf="!role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+                        <input id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
 
                     </div>
                     <div *ngIf="displayProperty.type === 'date'" class="input-group">
-                      <input type='date' *ngIf="role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{role[displayProperty.propId]}}">
-                      <input type='date' *ngIf="!role" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+                      <input type='date' id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
                     </div>
                     
                   </div> 

@@ -83,35 +83,51 @@
           "properties":[
              {
                 "propId":"name",
-                "displayLabel":"Name"
+                "displayLabel":"Name",
+                "type":"text"
+
              },
              {
                 "propId":"type",
-                "displayLabel":"Type"
+                "displayLabel":"Type",
+                "type":"text"
+
              },
              {
                 "propId":"phone", 
-                "displayLabel":"Phone"
+                "displayLabel":"Phone",
+                "type":"text"
+
              },
              {
                 "propId":"address",
-                "displayLabel":"Address"
+                "displayLabel":"Address",
+                "type":"text"
+
              },
              {
                 "propId":"start",
-                "displayLabel":"Start Date"
+                "displayLabel":"Start Date",
+                "type":"date"
+
              },
              {
                 "propId":"end",
-                "displayLabel":"End Date"
+                "displayLabel":"End Date",
+                "type":"date"
+
              },
              {
                 "propId":"email",
-                "displayLabel":"Email"
+                "displayLabel":"Email",
+                "type":"text"
+
              },
              {
                 "propId":"fax",
-                "displayLabel":"Fax"
+                "displayLabel":"Fax",
+                "type":"text"
+
              }
           ]
        }

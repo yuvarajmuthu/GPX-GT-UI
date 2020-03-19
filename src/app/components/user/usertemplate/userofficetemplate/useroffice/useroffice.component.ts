@@ -8,21 +8,20 @@ import {UserService} from '../../../../../services/user.service';
 import {DatashareService} from '../../../../../services/datashare.service';
 import {ComponentcommunicationService} from '../../../../../services/componentcommunication.service';
 
-
 @Component({
-  selector: 'app-userrole',
-  templateUrl: './userrole.component.html',
-  styleUrls: ['./userrole.component.css']
+  selector: 'app-useroffice',
+  templateUrl: './useroffice.component.html',
+  styleUrls: ['./useroffice.component.css']
 })
-export class UserroleComponent extends AbstractTemplateComponent implements OnInit {
-  @Input() role: {}; 
+export class UserofficeComponent extends AbstractTemplateComponent implements OnInit {
+  @Input() office: {}; 
   @Input() displayProperties: [];
-  id = 'upRole';
+  id = 'upOffice';
 
   closeResult: string;
-  roleForm: FormGroup;
+  officeForm: FormGroup;
   data = {};
-  isProfileInEditMode:boolean = false;
+  isProfileInEditMode:boolean = false; 
   inEditMode:boolean = false;
 
 
@@ -53,21 +52,21 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
   createFormGroup() {
     //this.biodataTemplateForm = this.fbuilder.group({});
     //let struct:string = "\"{";//"new FormGroup({";
-    this.roleForm = this.fbuilder.group({});
+    this.officeForm = this.fbuilder.group({});
 
     this.displayProperties.forEach((element, index) => {
-        let value = this.role[element['propId']];
-        console.log('element[propId] ', element['propId'], ' this.role[element[propId]] ', this.role[element['propId']]);
-        this.roleForm.setControl(element['propId'], new FormControl(value));
+        let value = this.office[element['propId']];
+        console.log('element[propId] ', element['propId'], ' this.office[element[propId]] ', this.office[element['propId']]);
+        this.officeForm.setControl(element['propId'], new FormControl(value));
     });
     this.changeDetector.detectChanges();
   }
 
-  open(content, role) {
-    if(role === ''){
-        role = null;
+  open(content, office) {
+    if(office === ''){
+        office = null;
     }
-    this.role = role;
+    this.office = office;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -94,16 +93,16 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
   }
 
   getFormData():any{
-    console.log("Object.assign({}, this.roleForm.value) ", Object.assign({}, this.roleForm.value));
-    const result: {} = Object.assign({}, this.roleForm.value);
-    console.log("Role form ", result);
+    console.log("Object.assign({}, this.officeForm.value) ", Object.assign({}, this.officeForm.value));
+    const result: {} = Object.assign({}, this.officeForm.value);
+    console.log("office form ", result);
     return result;
   }
 
 
 saveProfile(){
-    if(this.role && this.role['id']){
-        this.data["id"] = this.role['id']; //primary key
+    if(this.office && this.office['id']){
+        this.data["id"] = this.office['id']; //primary key
     }
     this.data["profileTemplateId"] = this.id; //unique key
     this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?
@@ -112,7 +111,7 @@ saveProfile(){
     this.userService.updateProfileData(this.data).subscribe((response) => {
       console.log('Profile updated sucessfully');
       this.isProfileInEditMode = false;
-      this.role = this.data["data"];
+      this.office = this.data["data"];
       this.changeDetector.detectChanges();
 
     } 

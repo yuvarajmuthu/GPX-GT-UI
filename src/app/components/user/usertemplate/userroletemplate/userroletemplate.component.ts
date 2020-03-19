@@ -2,7 +2,6 @@ import {Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy} from '@an
 import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import {Observable} from 'rxjs';
 
 import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
@@ -10,7 +9,6 @@ import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService} from '../../../../services/componentcommunication.service';
 import {UserService} from '../../../../services/user.service';
 import {LegislatorService} from '../../../../services/legislator.service';
-import {UserroleComponent} from './userrole/userrole.component';
 
 @Component({
     selector: 'app-userroletemplate',
@@ -21,7 +19,6 @@ import {UserroleComponent} from './userrole/userrole.component';
 })
 
 export class UserroletemplateComponent extends AbstractTemplateComponent implements OnInit {
-    closeResult: string;
     id = 'upRole';
     profileIcon = 'group';
     //roles:any = null;
@@ -30,10 +27,11 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     role = {};
     data = {};
     viewingUser = {};
-    roleTemplateForm: FormGroup; 
     editorData = '';
     isProfileInEditMode:boolean = false;
     inEditMode:boolean = false;
+    roleTemplateForm: FormGroup; 
+    closeResult: string;
 
     constructor(private legislatorsService2: LegislatorService,
                 private userService2: UserService,

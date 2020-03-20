@@ -131,10 +131,11 @@
                                                                 </li>
                                                                 <li *ngIf="isProfileEditable()" class="nav-item">
                                                                     <div ngbDropdown class="d-inline-block">
-                                                                        <button class="btn btn-outline-primary"
+                                                                        <button class="btn btn-outline-primary btn-xs"
                                                                                 id="dropdownAddSection"
                                                                                 ngbDropdownToggle>
-                                                                            Add Section
+                                                                            <!--Add Section-->
+                                                                            <i class="fa fa-plus" aria-hidden="true"></i>
                                                                         </button>
                                                                         <div ngbDropdownMenu
                                                                              aria-labelledby="dropdownAddSection">
@@ -148,14 +149,16 @@
                                                                 </li>
                                                                 <li *ngIf="isUserLogged()" class="nav-item">
                                                                     <div>
-                                                                        <button type="button" class="btn btn-primary"
-                                                                                (click)="editProfile()">{{editLabel}}
+                                                                        <button type="button" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                            <!--{{editLabel}}-->
+                                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                                         </button>
                                                                         <button type="button"
                                                                                 *ngIf="isProfileEditable()"
-                                                                                class="btn btn-primary"
-                                                                                (click)="cancelEditProfile()">Cancel
-                                                                            Edit
+                                                                                class="btn btn-primary btn-danger"
+                                                                                (click)="cancelEditProfile()">
+                                                                            <!--Cancel Edit-->
+                                                                            <i class="fa fa-times" aria-hidden="true"></i>
                                                                         </button>
                                                                     </div>
                                                                 </li>

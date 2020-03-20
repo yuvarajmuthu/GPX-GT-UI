@@ -430,7 +430,7 @@ export class UserComponent implements OnInit {
         //loggedin? and not edited?, then set edit as false
 
         let edit: boolean = false;
-        if (this.editLabel === 'Edit Profile') {//Enabling to update the profile
+        if (this.editLabel) {//Enabling to update the profile
             edit = true;
         } else {//Saving profile
             edit = false;

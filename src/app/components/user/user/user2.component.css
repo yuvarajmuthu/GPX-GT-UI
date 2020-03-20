@@ -221,4 +221,16 @@ input[type="file"] {
     left: 170px;
     top: 355px;
 }
+/*.profile-edit-btn-custom-position{
+    position: relative;
+    top: 5px;
+}*/
 /*Profile Pic End*/
+@media only screen and (max-width: 600px) {
+    .edit-photo{
+        position: absolute;
+        z-index: 100;
+        left: 225px;
+        top: 355px;
+    }
+}

@@ -91,7 +91,7 @@ export class UserComponent implements OnInit {
     isSelfProfile: boolean = false;
     activitiesData: boolean = false;
     tap: boolean = false;
-    profileData: boolean = false;
+    profileData: boolean = true;
     folow: boolean = false;
     folowers: boolean = false;
     navTabs: boolean = false;

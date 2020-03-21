@@ -15,10 +15,11 @@ import {ComponentcommunicationService} from '../../../../../services/componentco
   styleUrls: ['./userrole.component.css']
 })
 export class UserroleComponent extends AbstractTemplateComponent implements OnInit {
-  @Input() role: {}; 
-  @Input() displayProperties: [];
   id = 'upRole';
-
+  @Input() roleObj:{}; 
+  @Input() displayProperties: [];
+  
+  role: {};
   closeResult: string;
   roleForm: FormGroup;
   data = {};
@@ -45,6 +46,7 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
   }
 
   ngOnInit() {
+    this.role = this.roleObj['data'];
     this.createFormGroup();
     this.inEditMode = this.dataShareService2.isProfileEditable();
 
@@ -102,8 +104,8 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
 
 
 saveProfile(){
-    if(this.role && this.role['id']){
-        this.data["id"] = this.role['id']; //primary key
+    if(this.roleObj && this.roleObj['id']){
+        this.data["id"] = this.roleObj['id']; //primary key
     }
     this.data["profileTemplateId"] = this.id; //unique key
     this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?

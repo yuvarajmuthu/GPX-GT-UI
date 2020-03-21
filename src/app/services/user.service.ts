@@ -233,7 +233,7 @@ getRoles(userId:string, isCongress:boolean):Observable<any>{
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/user-legis-Roles.json';   
   }else{
-    serviceUrl = this.getUserService() +"/legisv1/congress/roles/"+userId;
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
   }
 
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -250,7 +250,7 @@ getOffices(userId:string, isCongress:boolean):Observable<any>{
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/user-legis-Offices.json';   
   }else{ 
-    serviceUrl = this.getUserService() +"/legisv1/congress/offices/"+userId;
+    serviceUrl = this.getUserService() +"/legis/offices/"+userId;
   }
 
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON

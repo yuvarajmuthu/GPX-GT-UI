@@ -76,7 +76,7 @@
 
                     <li class="list-group-item pointer" (click)="isProfileCollapsed=false; isActivityCollapsed=true;"
                         (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
-                        <span class="pointer">Profile</span>
+                        <span class="pointer">Profile</span> 
                     </li>
                 </ul>
 
@@ -141,7 +141,7 @@
                                                                              aria-labelledby="dropdownAddSection">
                                                                             <button class="dropdown-item"
                                                                                     *ngFor="let profileTemplate of profilesTemplates"
-                                                                                    (click)="loadTemplate(profileTemplate.profileTemplateId)">
+                                                                                    (click)="addTemplate(profileTemplate.profileTemplateId)">
                                                                                 {{profileTemplate.name}}
                                                                             </button>
                                                                         </div>

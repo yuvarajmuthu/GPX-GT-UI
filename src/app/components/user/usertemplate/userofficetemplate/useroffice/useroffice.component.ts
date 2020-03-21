@@ -14,10 +14,12 @@ import {ComponentcommunicationService} from '../../../../../services/componentco
   styleUrls: ['./useroffice.component.css']
 })
 export class UserofficeComponent extends AbstractTemplateComponent implements OnInit {
-  @Input() office: {}; 
-  @Input() displayProperties: [];
   id = 'upOffice';
 
+  @Input() officeObj:{}; 
+  @Input() displayProperties: [];
+
+  office: {};
   closeResult: string;
   officeForm: FormGroup;
   data = {};
@@ -44,6 +46,7 @@ export class UserofficeComponent extends AbstractTemplateComponent implements On
   }
 
   ngOnInit() {
+    this.office = this.officeObj['data'];
     this.createFormGroup();
     this.inEditMode = this.dataShareService2.isProfileEditable();
 
@@ -101,8 +104,8 @@ export class UserofficeComponent extends AbstractTemplateComponent implements On
 
 
 saveProfile(){
-    if(this.office && this.office['id']){
-        this.data["id"] = this.office['id']; //primary key
+    if(this.officeObj && this.officeObj['id']){
+        this.data["id"] = this.officeObj['id']; //primary key
     }
     this.data["profileTemplateId"] = this.id; //unique key
     this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?

@@ -28,7 +28,7 @@
                         <input type="file" class="uploadFile img" value="Upload Photo"
                                      style="width: 0px;height: 0px;overflow: hidden;">
                     </label>
-                </div><!-- col-2 -->
+                </div><!-- col-2  -->
             </div><!-- row -->
         </div><!-- container -->
     </div>
@@ -42,20 +42,30 @@
             <div class="text-center user-profile-2" style="margin-top:120px">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <h4>
-                            <b>
-                                {{biodata.full_name}}
-                            </b>
-                        </h4>
-                        <h5>
-                            <a [routerLink]="['/party', biodata.party]">
-                                {{biodata.party}}
-                            </a>
-                        </h5>
-                        <h5>
-                            <a [routerLink]="['/district', biodata.district]">{{biodata.district}}</a>,
-                            <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>,
-                            <a [routerLink]="['/state', biodata.state]">{{biodata.state}}</a></h5>
+                        <div *ngIf="externalUser">
+                            <h4>
+                                <b>
+                                    {{biodata.full_name}}
+                                </b>
+                            </h4>
+                            <h5>
+                                <a [routerLink]="['/party', biodata.party]">
+                                    {{biodata.party}}
+                                </a>
+                            </h5>
+                            <h5>
+                                <a [routerLink]="['/district', biodata.district]">{{biodata.district}}</a>,
+                                <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>,
+                                <a [routerLink]="['/state', biodata.state]">{{biodata.state}}</a>
+                            </h5>
+                        </div>    
+                        <div *ngIf="!externalUser">
+                            <h4>
+                                <b>
+                                    {{biodata.first_name}} {{biodata.last_name}}
+                                </b>
+                            </h4>
+                        </div>                            
                     </li>
                     <li class="list-group-item pointer" (click)="Followers()"
                         [ngClass]="{ 'active': folowers, 'in-active': !folowers}">
@@ -69,12 +79,12 @@
                                             <span class="">Following</span>
                                         </li>
                                         -->
-                    <li class="list-group-item pointer" (click)="isProfileCollapsed=true; isActivityCollapsed=false;"
+                    <li class="list-group-item pointer"
                         (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
-                        <span class="pointer">Activities</span>
+                        <span class="pointer">My Posts</span> 
                     </li>
 
-                    <li class="list-group-item pointer" (click)="isProfileCollapsed=false; isActivityCollapsed=true;"
+                    <li class="list-group-item pointer"
                         (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
                         <span class="pointer">Profile</span> 
                     </li>
@@ -97,7 +107,7 @@
                                     <!-- Main stage area -->
                                     <div class="col-lg-12 cols-item2">
                                         <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
-                                            <app-post [type]="user" [userId]="admin1" [disableNewPost]=true></app-post>
+                                            <app-post [type]="user" [userId]="profileUserId" [disableNewPost]=true></app-post>
                                         </div>
                                         <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                              class="widget stick-widget">
@@ -140,10 +150,10 @@
                                                                         <div ngbDropdownMenu
                                                                              aria-labelledby="dropdownAddSection">
                                                                             <button class="dropdown-item"
-                                                                                    *ngFor="let profileTemplate of profilesTemplates"
+                                                                                    *ngFor="let profileTemplate of availableProfileTemplates"
                                                                                     (click)="addTemplate(profileTemplate.profileTemplateId)">
                                                                                 {{profileTemplate.name}}
-                                                                            </button>
+                                                                            </button> 
                                                                         </div>
                                                                     </div>
                                                                 </li>

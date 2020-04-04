@@ -46,7 +46,8 @@ export class UserofficeComponent extends AbstractTemplateComponent implements On
   }
 
   ngOnInit() {
-    this.office = this.officeObj['data'];
+    //this.office = this.officeObj['data'];
+    this.office = this.officeObj;
     this.createFormGroup();
     this.inEditMode = this.dataShareService2.isProfileEditable();
 

@@ -82,7 +82,51 @@ export class UserService extends AbstractService{
       catchError(this.handleError<any>(`Error in getUserData()`))
     );                         
   }
+/*
+  getUserInfo(userId:String, isLegislator:boolean, isCongress:boolean):Observable<any> { 
+    let url:string;
+    
+    if(userId === "CREATE"){ // invoked during page creation
+      	//get available Templates for an user
+    }
 
+    //bioguideId is of length 7 - sunfoundataion
+    //if(userId.length == 7){
+
+    //legis represent legislator     
+    
+    //DEV MODE
+    if(this.devMode){
+      if(external){  
+        url = '/assets/json/fromService/user-legis-LEGISLATOROPENSTATE.json';   
+      }else{
+        url = '/assets/json/fromService/user-public.json';
+      }
+    }else{
+    //PROD MODE
+      url = this.getUserService()+"/"+userId+"/";
+    }
+    
+
+
+    console.log("getUserInfo() " + url);
+
+    let userType:string = isLegislator ? 'LEGISLATOR' : 'PUBLICUSER';
+    let legislatorType:string = isCongress ? 'LEGISLATORCONGRESS' : 'OPENSTATE';
+    
+    let httpParam = new HttpParams();
+    httpParam.append('userType', userType);
+    httpParam.append('legislatorType', legislatorType);
+
+    return this.http.get(url, { responseType: 'json', params: httpParam })
+    .pipe(
+      tap(_ => this.log(`fetched getUserInfo`)),
+      catchError(this.handleError<any>(`Error in getUserInfo()`))
+    );
+
+    
+  }
+*/
   followDistrict(request:string):Observable<any>{
     let serviceUrl = this.serviceUrl+"/followDistrict";
     console.log("follow district user.service " + request + " this.serviceUrl " + serviceUrl);

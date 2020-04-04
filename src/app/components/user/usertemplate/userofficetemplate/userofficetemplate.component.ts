@@ -100,9 +100,9 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
           //this.office = JSON.parse(JSON.stringify(data[0]));
           //this.office['term'] = 'term';
           this.offices= data;
-          this.createFormGroup();
+          //this.createFormGroup();
 
-          //this.changeDetector.detectChanges();
+          this.changeDetector.detectChanges();
         }); 
           /*
           data.forEach(element => {

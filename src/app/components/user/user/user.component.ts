@@ -311,7 +311,7 @@ export class UserComponent implements OnInit {
             this.getFollowersCount(this.profileUserId);
             this.getFollowers(this.profileUserId);
 
-
+//this.viewingUser['external'] is required only for dev mode
             this.userService.getUserData(this.viewingUser['userId'], this.viewingUser['external']).subscribe(
                 data => { 
                     this.userData = data;
@@ -323,7 +323,8 @@ export class UserComponent implements OnInit {
 
                     //this.viewingUser['followers'] = this.userData['followers'];
 
-                    if (this.viewingUser['external']) { // and not persisted
+                    //if (this.viewingUser['external']) { // and not persisted
+                    if (this.userData['userType'] === 'LEGISLATOR') {
                         if (isDevMode()) {
                             this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
                         } else {
@@ -343,7 +344,7 @@ export class UserComponent implements OnInit {
                     this.viewingUser['profileTemplates'] = this.profilesTemplates;
 
                     let userType: string = this.viewingUser['isLegislator'] ? 'legislator' : 'public';
-                    this.profileService.getAvailableProfileTemplates(userType).subscribe(
+                    this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], userType).subscribe(
                         data => {
                             this.availableProfileTemplates = data;
                         });

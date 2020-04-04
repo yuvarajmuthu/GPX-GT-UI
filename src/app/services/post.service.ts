@@ -97,7 +97,7 @@ export class PostService  extends AbstractService{
     if(this.devMode){
       serviceUrl = '/assets/json/fromService/post.json'; 
     }else{
-      serviceUrl = this.serviceUrl + "/getAllPosts/" + requestJson['entityId'] + "/";
+      serviceUrl = this.serviceUrl + "/getMyPosts/" + requestJson['entityId'] + "/";
     }
     //serviceUrl = this.serviceUrl + "/getAllPosts/" + requestJson['entityId'] + "/"; //COMMENT BEFORE MOVING TO PRODUCTION
 

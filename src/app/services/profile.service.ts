@@ -40,6 +40,18 @@ export class ProfileService extends AbstractService{
         catchError(this.handleError<any>(`Error in getProfileTemplateData()`))
       );                            
   }
+  
+  getAvailableProfileTemplatesForEntity(entityId:string, userType:string):Observable<any> {    
+    let serviceUrl = this.serviceUrl + "/getAllProfileTemplates/" + entityId + "/";
+    console.log("getAvailableProfileTemplatesForEntity profile.service this.serviceUrl " + serviceUrl);
+    
+    return this.http.get(serviceUrl, { responseType: 'json', params: {
+      userType: userType
+    } }).pipe(
+      tap(_ => this.log(`fetched getAvailableProfileTemplatesForEntity`)),
+      catchError(this.handleError<any>(`Error in getAvailableProfileTemplatesForEntity()`))
+    );
+  }
 
   getAvailableProfileTemplates(userType:string):Observable<any> {    
     let serviceUrl = this.serviceUrl + "/getAllProfileTemplates";

@@ -300,7 +300,7 @@ export class UserComponent implements OnInit {
             //the user that is being viewed
             //this.dataShareService.setViewingUserId(this.profileUserId);
 
-            if (this.loggedUser && this.loggedUser.username) {
+            if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
                 this.getRelationStatus(this.loggedUser.username, this.profileUserId);
             } else {
                 this.followCntrlLabel = 'Join to Follow';

@@ -54,7 +54,7 @@
                                 </a>
                             </h5>
                             <h5>
-                                <a [routerLink]="['/district', biodata.district]">{{biodata.district}}</a>,
+                                <a [routerLink]="['../../group']">{{biodata.district}}</a>,
                                 <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>,
                                 <a [routerLink]="['/state', biodata.state]">{{biodata.state}}</a>
                             </h5>
@@ -67,9 +67,15 @@
                             </h4>
                         </div>                            
                     </li>
-                    <li class="list-group-item pointer" (click)="Followers()"
+                    <li class="list-group-item pointer" *ngIf="!isSelfProfile">
+                        <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()"> 
+                            {{followCntrlLabel}}
+                        </span>
+                    </li>
+                                        
+                    <li class="list-group-item pointer"
                         [ngClass]="{ 'active': folowers, 'in-active': !folowers}">
-            <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()">
+            <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
               {{followersCount}} Followers
             </span>
                     </li>

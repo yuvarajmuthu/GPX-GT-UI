@@ -46,8 +46,8 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
   }
 
   ngOnInit() {
-    //this.role = this.roleObj['data'];
-    this.role = this.roleObj;
+    this.role = this.roleObj['data'];
+    //this.role = this.roleObj;
     this.createFormGroup();
     this.inEditMode = this.dataShareService2.isProfileEditable();
 

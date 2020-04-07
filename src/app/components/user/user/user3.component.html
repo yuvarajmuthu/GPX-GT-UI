@@ -161,13 +161,17 @@
                                                                                 {{profileTemplate.name}}
                                                                             </button> 
                                                                         </div>
-                                                                    </div>
+                                                                    </div> 
                                                                 </li>
                                                                 <li *ngIf="isUserLogged()" class="nav-item">
                                                                     <div>
-                                                                        <button type="button" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                        <button type="button" *ngIf="!isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
                                                                             <!--{{editLabel}}-->
                                                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                        </button>
+                                                                        <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                            <!--{{Save}}-->
+                                                                            <i class="fa fa-save" aria-hidden="true"></i>
                                                                         </button>
                                                                         <button type="button"
                                                                                 *ngIf="isProfileEditable()"

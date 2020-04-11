@@ -22,6 +22,7 @@ export class NewpostComponent implements OnInit {
     name: any = [];
     icon: any = [];
     @Output() postEvent: EventEmitter<any> = new EventEmitter();
+    @Output() newpost: EventEmitter<any> = new EventEmitter();
 
     @Input() parentPost: Post;
     post: Post;
@@ -96,25 +97,41 @@ export class NewpostComponent implements OnInit {
         }
     }
 
-    submitPost() {
-        this.post.entityId = this.dataShareService.getLoggedinUsername();
-        this.post.postText = this.txtPost;
-        if (this.parentPost != null) {
-            console.log('parent post ' + this.parentPost.postText + ', post id ' + this.parentPost.id);
-            this.post.parentPostId = this.parentPost.id;
-        }
-        this.postFormData.append('post', JSON.stringify(this.post));
-        this.postService.postComment(this.postFormData)
-            .subscribe((result) => {
-                console.log('post message response ' + result);
-                this.resetForm();
-                if (this.parentPost != null) {
-                    this.postEvent.emit(null);
-                    this.hideInput = true;
-                } else {
-                    this.txtPost = '';
-                    this.stagingImage = null;
-                }
-            });
+//     submitPost() {
+//         this.post.entityId = this.dataShareService.getLoggedinUsername();
+//         this.post.postText = this.txtPost;
+//         if (this.parentPost != null) {
+//             console.log('parent post ' + this.parentPost.postText + ', post id ' + this.parentPost.id);
+//             this.post.parentPostId = this.parentPost.id;
+//         }
+//         this.postFormData.append('post', JSON.stringify(this.post));
+//         this.postService.postComment(this.postFormData)
+//             .subscribe((result) => {
+//                 console.log('post message response ' + result);
+//                 this.resetForm();
+//                 if (this.parentPost != null) {
+//                     this.postEvent.emit(null);
+//                     this.hideInput = true;
+//                 } else {
+//                     this.txtPost = '';
+//                     this.stagingImage = null;
+//                 }
+//             });
+//     }
+// }
+
+submitPost() {
+    this.post.entityId = this.dataShareService.getLoggedinUsername();
+    this.post.postText = this.txtPost;
+    if (this.parentPost != null) {
+        console.log('parent post ' + this.parentPost.postText + ', post id ' + this.parentPost.id);
+        this.post.parentPostId = this.parentPost.id;
+    }
+    this.postFormData.append('post', JSON.stringify(this.post));
+    this.postService.postNewPost(this.postFormData)
+        .subscribe((data:any) => {
+          this.resetForm();
+          this.newpost.emit(data);
+        });
     }
 }

@@ -124,6 +124,25 @@
                 {{post.postText}}
             </p>
         </div>
+        
+        <!-- comments section starts -->
+        <div class="padding-top2" *ngIf="post.comments && post.comments.length > 0">
+            <div class="text-muted h7 mb-2">
+                Comments :
+             </div>
+    
+             <div *ngFor="let comment of post.comments">
+                 <div class="commented-user">
+                    {{comment.entityId}}
+                 </div>
+                 <div>
+                    {{comment.postText}}
+                 </div>
+             </div>
+        </div>
+
+        <!-- comments section ends -->
+
     </div>
     <div class="card-footer">
         <div class="row post-card-footer">
@@ -147,6 +166,8 @@
             <!--</div>-->
         </div>
 
+
+
         <ng-container *ngIf="show">
             <div class="row">
                 <div class="card gedf-card">
@@ -159,6 +180,7 @@
                             </li>
                         </ul>
                     </div>-->
+
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -166,7 +188,7 @@
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
                                     <textarea class="form-control" id="message" rows="3"
-                                              placeholder=" Comment "></textarea>
+                                              placeholder="Comment" ([ngModel])="textComment"></textarea>
                                     <div class="attachments">
                                         <ul>
                                             <li>
@@ -196,7 +218,7 @@
                         </div>
                         <div class="btn-toolbar justify-content-between float-right">
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-xs btn-primary" (click)="submitPost()">Post
+                                <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
                                 </button>
                             </div>
                             <!--<div class="btn-group">

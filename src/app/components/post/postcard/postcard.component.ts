@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, isDevMode} from '@angular/core';
+import {Component, OnInit, Input, isDevMode, Output, EventEmitter} from '@angular/core';
 //import { formatDate } from "@angular/common";
 import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
@@ -13,6 +13,7 @@ import {Post} from '../../../models/post';
 
 export class PostcardComponent implements OnInit {
     @Input() post: Post;
+
     commentPost: boolean = false;
     devMode: boolean = true;
     savePost: boolean = false;
@@ -24,6 +25,10 @@ export class PostcardComponent implements OnInit {
     icon: any = '';
     public show:boolean = false;
     public buttonName:any = 'Show';
+
+    textComment:string;
+    postFormData: FormData;
+
 
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
@@ -121,8 +126,26 @@ export class PostcardComponent implements OnInit {
 
 
     postEvent(): void {
+        console.log("posting new message");
         this.commentPost = false;
     }
+
+
+    postComment() {
+      
+        // this.post.entityId = this.dataShareService.getLoggedinUsername();
+        // this.post.postText = this.textComment;
+        // this.postFormData = new FormData();
+      //  this.postFormData.append('post', JSON.stringify(this.post));
+     
+         this.postService.postComment()
+             .subscribe((data:any) => {
+                 console.log(data);
+                this.post.comments.unshift(data);
+        //         console.log("kkkkkkkkkkk");
+        //         this.post.comments.push(data);
+             });
+        }
 
     comment(): void {
         this.commentPost = true;

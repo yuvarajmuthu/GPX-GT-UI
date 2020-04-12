@@ -3,17 +3,34 @@
 	"parentPostId": "1",
 	"entityId": "user6@gmail.com",
 	"postType": "T",
-	"postText": "message 02092020 0153pm",
+	"postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 	"createdDate": "2020-02-09T18:54:02.524Z",
 	"lastModifiedDate": "2020-02-09T18:54:02.524Z",
+	"totalComments": 5,
 	"comments":[{
+		"commentId":"1",
 		"entityId": "user7@gmail.com",
 	     "postType": "T",
-	     "postText": "test comment 1",
+	     "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 	     "createdDate": "2020-02-09T18:54:02.524Z",
 	     "lastModifiedDate": "2020-02-09T18:54:02.524Z"
-	    }
-
+		},
+		{
+			"commentId":"2",
+			"entityId": "user7@gmail.com",
+			 "postType": "T",
+			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			 "createdDate": "2020-02-09T18:54:02.524Z",
+	    	 "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+		},
+		{
+			"commentId":"3",
+			"entityId": "user7@gmail.com",
+			 "postType": "T",
+			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			 "createdDate": "2020-02-09T18:54:02.524Z",
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+		}
 	]
 },
 {
@@ -24,6 +41,22 @@
 	"relatedFiles": ["5e4055ddf453cd5244441dee"],
 	"createdDate": "2020-02-09T18:56:29.445Z",
 	"lastModifiedDate": "2020-02-09T18:56:29.904Z",
-	"comments":[]
+	"comments":[{
+		"commentId":"1",
+		"entityId": "user7@gmail.com",
+	     "postType": "T",
+	     "postText": "test comment 1",
+	     "createdDate": "2020-02-09T18:54:02.524Z",
+	     "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+		},
+		{
+			"commentId":"2",
+			"entityId": "user7@gmail.com",
+			 "postType": "T",
+			 "postText": "test comment 2",
+			 "createdDate": "2020-02-09T18:54:02.524Z",
+	    	 "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+		}],
+	"totalComments": 2
 }
 ]

@@ -13,7 +13,8 @@ export class Post {
 		public likedByCurrentUser:boolean,
 		public postType:string, // OBSOLETE
 		public imageFile:File,
-		public comments: any
+		public comments: any,
+		public totalComments:number
 	){}
 }	
 

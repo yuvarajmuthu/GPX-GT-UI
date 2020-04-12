@@ -7,4 +7,6 @@ export class NewComment {
 	districtId: string;
     createdDate:string;
     lastModifiedDate:string;
+    comments:any;
+    commentId:string;
 }	

@@ -83,8 +83,6 @@ export class NewpostComponent implements OnInit {
             reader.readAsDataURL(event.target.files[0]);
             reader.onload = (event) => {
                 this.stagingImage = event.target['result'];
-
-
             };
         }
     }
@@ -124,7 +122,6 @@ submitPost() {
     this.post.entityId = this.dataShareService.getLoggedinUsername();
     this.post.postText = this.txtPost;
     if (this.parentPost != null) {
-        console.log('parent post ' + this.parentPost.postText + ', post id ' + this.parentPost.id);
         this.post.parentPostId = this.parentPost.id;
     }
     this.postFormData.append('post', JSON.stringify(this.post));

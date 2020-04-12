@@ -58,7 +58,7 @@
 </div>-->
 
 
-<div class="card gedf-card">
+<div class="card gedf-card"  *ngIf="comments==false">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
@@ -107,7 +107,7 @@
     <div class="card-body">
         <div class="text-muted h7 mb-2">
             <i class="fa fa-clock-o"></i>
-            published: {{post.createdDate | dateFormatPipe}}
+            published: {{todayDate | date:'medium'}}
         </div>
 
         <div *ngIf="post.containsImage" class="post-meta">
@@ -125,7 +125,7 @@
             </p>
         </div>
         
-        <!-- comments section starts -->
+        <!-- comments section starts
         <div class="padding-top2" *ngIf="post.comments && post.comments.length > 0">
             <div class="text-muted h7 mb-2">
                 Comments :
@@ -141,7 +141,7 @@
              </div>
         </div>
 
-        <!-- comments section ends -->
+        comments section ends -->
 
     </div>
     <div class="card-footer">
@@ -153,7 +153,7 @@
             </a>
             <!--</div>-->
             <!--<div class="col">-->
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggle()">
+            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
                 <i class="fa fa-comment custom-size"></i>
                 Comment
             </a>
@@ -168,7 +168,7 @@
 
 
 
-        <ng-container *ngIf="show">
+        <ng-container *ngIf="showCommentInput">
             <div class="row">
                 <div class="card gedf-card">
                     <!--<div class="card-header">
@@ -242,18 +242,148 @@
 
                             </div>-->
                         </div>
+
+
                     </div>
                 </div>
                 <br/>
             </div>
         </ng-container>
+        <app-postcard  *ngFor="let post of post.comments" [comments]="true" [post]="post">
+        </app-postcard>
+        <button *ngIf="post.totalComments>3" type="button" class="btn btn-xs load-more-comments" (click)="loadMoreComments(post.id)">Load more
+            comments
+        </button>
     </div>
 </div>
 <br/>
 
-<!--        </ng-container>
-    </cdk-virtual-scroll-viewport>
-</div>-->
+<div class="card gedf-card comments-card"  *ngIf="comments==true">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="mr-2">
+                    <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
+                </div>
+                <div class="ml-2">
+                    <div class="h5 m-0 commented-user">
+                        <a href="javascript:void(0);">
+                            {{post.entityId}}
+                        </a>
+                    </div>
+                    <div class="commented-date">
+                        {{todayDate | date:'medium'}}
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="dropdown">
+                    <div class="btn-group">
+                        <div ngbDropdown class="d-inline-block">
+                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false" id="postRightDropdown" ngbDropdownToggle>
+                                <i class="{{ icon }}"></i> {{ name }}
+                                <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <!-- <div *ngIf="post.containsImage" class="post-meta">
+            <img [src]="postImage" alt="">
+        </div> -->
+
+        <div *ngIf="post.containsVideo" class="post-meta">
+            <div class="we-video-info">
+
+            </div>
+        </div>
+        <div *ngIf="post.containsText" class="description">
+            <p class="card-text">
+                {{post.postText}}
+            </p>
+        </div>
+        
+
+
+    </div>
+    <div class="card-footer">
+        <div class="row post-card-footer">
+            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
+                <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
+                Like
+            </a>
+            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
+                <i class="fa fa-comment custom-size"></i>
+                Comment
+            </a>
+            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+                <i class="fa fa-mail-forward custom-size"></i>
+                Share
+            </a>
+        </div>
+
+
+
+        <ng-container *ngIf="showCommentInput">
+            <div class="row">
+                <div class="card gedf-card">
+                   <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                 aria-labelledby="posts-tab">
+                                <div class="form-group">
+                                    <label class="sr-only" for="message">post</label>
+                                    <textarea class="form-control" id="message" rows="3"
+                                              placeholder="Comment" ([ngModel])="textComment"></textarea>
+                                    <div class="attachments">
+                                        <ul>
+                                            <li>
+                                                <i class="fa fa-image"></i>
+                                                <label class="fileContainer">
+                                                    <input type="file" id="stageUploadedFile"
+                                                           (change)="onFileSelected($event)">
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-video-camera"></i>
+                                                <label class="fileContainer">
+                                                    <input type="file">
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                <label class="fileContainer">
+                                                    <input type="checkbox" class="location" id="location">
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="btn-toolbar justify-content-between float-right">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <br/>
+            </div>
+        </ng-container>
+        <app-postcard  *ngFor="let post of post.comments" [comments]="true" [post]="post">
+        </app-postcard>
+    </div>
+
+</div>
 
 
 

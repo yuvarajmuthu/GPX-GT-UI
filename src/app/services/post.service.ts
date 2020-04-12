@@ -1,13 +1,15 @@
 import { Injectable, isDevMode } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, from, throwError} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import {DatashareService} from '../services/datashare.service';
 import {AbstractService} from './abstract.service';
 
 import {Post} from '../models/post';
+import {NewPost} from '../models/newpost';
+import {NewComment} from '../models/newcomment';
 
 @Injectable({
   providedIn: 'root'
@@ -88,7 +90,7 @@ export class PostService  extends AbstractService{
   }
 
 
-  getActivities(requestData:string) {
+  getActivities(requestData:string):Observable<Post[]> {
     var postJson = {};
   	var posts:JSON[];
 	  var postsPromise : Post[] = [];
@@ -135,35 +137,49 @@ export class PostService  extends AbstractService{
     );                         
   }
 
-  //post the comment to the server
-  //postComment(post:Post):Observable<any>{
-  postComment(postFormData:FormData):Observable<any>{   
-    //console.log("postComment post.service " + JSON.stringify(post));
-  console.log("postComment post.service " + JSON.stringify(postFormData));  
-  //console.log("formData.get('file')", postFormData.get('file'));
-  //console.log("formData.get('post')", postFormData.get('post'));
- 	//let bodyString = JSON.stringify(post); // Stringify payload
-  //let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-  /*
-  let headers      = new Headers(
-    { 'Content-Type': 'multipart/form-data' 
-    }
-    );
-  */
-   const httpOptions = {
+  postNewPost(postFormData:FormData) {
+    const httpOptions = {
       headers: new HttpHeaders({ "Accept": "application/json" })
     }  
-//'authorization':'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbjEiLCJleHAiOjE1NTIzMzQwMjB9.oc3UvgnfGqVsy_sWdEcdAQrZjuv10p6IxPoDwp_Z9A0-d-ZRBRy8WcIOictG427B6D6DKOTf5MvrFPzKCr0rCA'  
-	console.log("postComment::post.service invoking service " + this.serviceUrl);
-  return this.http.post(this.serviceUrl, postFormData, httpOptions)
-  .pipe(
-    //map((response:Response) => response.json()),
-    tap(_ => this.log(`posted Comment`)),
-    catchError(this.handleError<any>(`Error in postComment()`))
-  );                 
+    let url = "";
 
+    if(this.devMode){
+      url = '/assets/json/fromService/newpost.json'; 
+    }else{
+      url = this.serviceUrl;
+    }
+    return this.http.get(url,httpOptions).
+        pipe(
+           map((data: NewPost[]) => {
+             return data;
+           }), catchError( error => {
+             return throwError( 'Something went wrong!' );
+           })
+        )
+    }
 
-  }
+  postComment() {
+    const httpOptions = {
+      headers: new HttpHeaders({ "Accept": "application/json" })
+    }  
+    let url = "";
+
+    if(this.devMode){
+      url = '/assets/json/fromService/newcomment.json'; 
+    }else{
+      url = this.serviceUrl;
+    }
+    return this.http.get(url,httpOptions).
+        pipe(
+           map((data: NewComment[]) => {
+             return data;
+           }), catchError( error => {
+             return throwError( 'Something went wrong!' );
+           })
+        )
+    }
+
+  //post the comment to the server
 
   getImage(imageId: string): Observable<Blob> {
     let serviceUrl = this.serviceUrl + "/downloadFile/" + imageId;

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, isDevMode} from '@angular/core';
+import {Component, OnInit, Input, isDevMode, Output, EventEmitter} from '@angular/core';
 //import { formatDate } from "@angular/common";
 import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
@@ -13,6 +13,8 @@ import {Post} from '../../../models/post';
 
 export class PostcardComponent implements OnInit {
     @Input() post: Post;
+    @Input() comments : boolean;
+
     commentPost: boolean = false;
     devMode: boolean = true;
     savePost: boolean = false;
@@ -22,8 +24,12 @@ export class PostcardComponent implements OnInit {
     liked: boolean = false;
     name: any = '';
     icon: any = '';
-    public show:boolean = false;
+    public showCommentInput:boolean = false;
     public buttonName:any = 'Show';
+
+    textComment:string;
+    postFormData: FormData;
+
 
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
@@ -31,6 +37,7 @@ export class PostcardComponent implements OnInit {
     isPostImageLoading: boolean = false;
     entityId: string;
     numbers: number[] = [];
+    todayDate : Date = new Date();
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
@@ -91,11 +98,11 @@ export class PostcardComponent implements OnInit {
             this.reportPost = false;*/
         }
     }
-    toggle() {
-        this.show = !this.show;
+    toggleCommentInput() {
+        this.showCommentInput = !this.showCommentInput;
 
         // CHANGE THE NAME OF THE BUTTON.
-        if(this.show)
+        if(this.showCommentInput)
             this.buttonName = "Hide";
         else
             this.buttonName = "Show";
@@ -121,8 +128,43 @@ export class PostcardComponent implements OnInit {
 
 
     postEvent(): void {
+        console.log("posting new message");
         this.commentPost = false;
     }
+
+
+    postComment() {
+      
+        // this.post.entityId = this.dataShareService.getLoggedinUsername();
+        // this.post.postText = this.textComment;
+        // this.postFormData = new FormData();
+      //  this.postFormData.append('post', JSON.stringify(this.post));
+      console.log(this.post);
+
+         this.postService.postComment()
+             .subscribe((data:any) => {
+                 console.log(data);
+                 this.toggleCommentInput();
+                 if(this.post.comments){
+                    this.post.comments.unshift(data);
+                 }
+                 else{
+                     console.log("else")
+                     this.post.comments = [];
+                     this.post.comments.push(data);
+                 }
+
+             });
+   }
+
+   loadMoreComments(id: string) {
+    this.postService.postComment()
+    .subscribe((data:any) => {
+        console.log(data);
+            this.post.comments.push(data);
+
+    });
+   }
 
     comment(): void {
         this.commentPost = true;
@@ -137,10 +179,7 @@ export class PostcardComponent implements OnInit {
         console.log('this.post.likedByCurrentUser ' + this.post.likedByCurrentUser);
     }
 
-    loadMoreComments(id: string) {
-        console.log('Loading More Post Comments for ', id);
-        return false;
-    }
+
 
     getProfileSmImage(userId: string) {
         this.isImageLoading = true;

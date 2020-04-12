@@ -154,3 +154,24 @@ form button {
     padding-left:3px;
   }
 }
+
+.commented-user{
+  margin-top: -5px !important;
+  font-size: 15px;
+}
+.commented-date{
+  font-size: 11px;
+  color: rgba(0,0,0,0.54);
+}
+.comments-card{
+  border: none !important;
+}
+.comments-card .card-header{
+  border: none !important;
+}
+.load-more-comments{
+  color:rgba(0,0,0,0.54);
+}
+.load-more-comments:hover{
+  background-color:rgba(0,0,0,0.13);
+}

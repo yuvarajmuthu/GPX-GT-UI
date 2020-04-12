@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 import {PostService} from '../../services/post.service';
+import { Observable, Subject } from 'rxjs';
 import {DatashareService} from '../../services/datashare.service';
 
 import {Post} from '../../models/post';
@@ -21,11 +22,19 @@ export class PostComponent implements OnInit {
     @Input() userId: string;
     @Input() type: string;
     @Input() disableNewPost: boolean = false;
-
+    
     posts: Post[] = [];
 
     constructor(private postService: PostService, private dataShareService: DatashareService) {
-        //console.log('constructor() post.component');
+    }
+
+    PostNewEvent(data:any) {
+        this.posts.unshift(data);
+    }
+    postNewComment(data:any){
+        console.log(data);
+        this.posts[0].comments.unshift(data);
+
     }
 
     ngOnInit(): void {
@@ -33,7 +42,6 @@ export class PostComponent implements OnInit {
         console.log('ngOnInit() post.component');
         let entityId: string;
         if (this.type == 'group' && this.groupId) {
-
             entityId = this.groupId;
         } else if (this.type == 'user') {
             entityId = this.dataShareService.getLoggedinUsername();

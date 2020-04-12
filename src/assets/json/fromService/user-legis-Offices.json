@@ -1,19 +1,19 @@
 [
-    {
+    {"data":{
        "isCurrent":true,
        "address":"290 Russell Senate Office Building Washington DC 20510",
        "phone":"202-224-5972",
        "start":"2015-01-06",
        "end":"2021-01-03",
        "term":"2015-01-06-2021-01-03",
-       "fax":"202-224-3808"
+       "fax":"202-224-3808"}
     },
-    {
+    {"data":{
        "address":"290 Russell Senate Office Building Washington DC 20510",
        "phone":"202-224-5972",
        "start":"2009-01-06",
        "end":"2015-01-03",
        "term":"2009-01-06-2015-01-03",
-       "fax":"202-224-3808"
+       "fax":"202-224-3808"}
     }
  ]

@@ -325,8 +325,8 @@ private getLatitudeLongitude(callback, address) {
 
     districtName = district['name'];  
 
-    let url = '/group/' + districtName;
-
+    //let url = '/group/' + districtName;
+    let url = '/group';
     if(district['externalId'] != undefined)
       this.router.navigate([url, {externalId:this.escapeForwardSlash(district['externalId'])}]);
     else

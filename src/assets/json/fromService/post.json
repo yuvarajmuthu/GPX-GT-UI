@@ -7,13 +7,17 @@
 	"createdDate": "2020-02-09T18:54:02.524Z",
 	"lastModifiedDate": "2020-02-09T18:54:02.524Z",
 	"totalComments": 5,
+	"likedBy":["u001","u002"],
+	"likedByCurrentUser":true,
 	"comments":[{
 		"commentId":"1",
 		"entityId": "user7@gmail.com",
 	     "postType": "T",
 	     "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 	     "createdDate": "2020-02-09T18:54:02.524Z",
-	     "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+		 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+		 "likedBy":["u001"],
+		 "likedByCurrentUser":true
 		},
 		{
 			"commentId":"2",
@@ -21,7 +25,9 @@
 			 "postType": "T",
 			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 			 "createdDate": "2020-02-09T18:54:02.524Z",
-	    	 "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+			 "likedBy":["u001"],
+			 "likedByCurrentUser":true
 		},
 		{
 			"commentId":"3",
@@ -29,7 +35,9 @@
 			 "postType": "T",
 			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 			 "createdDate": "2020-02-09T18:54:02.524Z",
-			 "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+			 "likedBy":["u001"],
+			 "likedByCurrentUser":true
 		}
 	]
 },
@@ -41,13 +49,17 @@
 	"relatedFiles": ["5e4055ddf453cd5244441dee"],
 	"createdDate": "2020-02-09T18:56:29.445Z",
 	"lastModifiedDate": "2020-02-09T18:56:29.904Z",
+	"likedBy":["u001"],
+	"likedByCurrentUser":true,
 	"comments":[{
 		"commentId":"1",
 		"entityId": "user7@gmail.com",
 	     "postType": "T",
 	     "postText": "test comment 1",
 	     "createdDate": "2020-02-09T18:54:02.524Z",
-	     "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+		 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+		 "likedBy":["u001"],
+		 "likedByCurrentUser":true
 		},
 		{
 			"commentId":"2",
@@ -55,7 +67,9 @@
 			 "postType": "T",
 			 "postText": "test comment 2",
 			 "createdDate": "2020-02-09T18:54:02.524Z",
-	    	 "lastModifiedDate": "2020-02-09T18:54:02.524Z"
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+			 "likedBy":["u001"],
+			 "likedByCurrentUser":true
 		}],
 	"totalComments": 2
 }

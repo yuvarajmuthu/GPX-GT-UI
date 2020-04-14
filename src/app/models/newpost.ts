@@ -7,5 +7,7 @@ export class NewPost {
 	districtId: string;
     createdDate:string;
     lastModifiedDate:string;
+    likedBy:any;
+    likedByCurrentUser: boolean;
     comments:any;
 }	

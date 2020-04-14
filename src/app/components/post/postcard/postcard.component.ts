@@ -82,22 +82,19 @@ export class PostcardComponent implements OnInit {
         this.icon = 'fa fa-floppy-o';
     }
 
-    like(event) {
-        let check = event.target.classList.contains('post-active');
-        if (check === true) {
-            event.target.classList.remove('post-active');
-            /*this.liked = false;
-            this.savePost = false;
-            this.hidePost = false;
-            this.reportPost = false;*/
-        } else {
-            event.target.classList.add('post-active');
-            /*this.liked = true;
-            this.savePost = false;
-            this.hidePost = false;
-            this.reportPost = false;*/
+    like(event:any) {
+        let entityId = this.dataShareService.getLoggedinUsername();
+        if(this.post.likedBy.indexOf(entityId) == -1){
+            let check = event.target.classList.contains('post-active');
+            this.postService.postLike(entityId)
+            .subscribe((data:any) => {
+                event.target.classList.add('post-active');
+                this.post.likedBy.push(entityId);
+            });
         }
+        
     }
+
     toggleCommentInput() {
         this.showCommentInput = !this.showCommentInput;
 

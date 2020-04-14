@@ -10,6 +10,7 @@ import {AbstractService} from './abstract.service';
 import {Post} from '../models/post';
 import {NewPost} from '../models/newpost';
 import {NewComment} from '../models/newcomment';
+import {NewLike} from '../models/newlike';
 
 @Injectable({
   providedIn: 'root'
@@ -178,6 +179,27 @@ export class PostService  extends AbstractService{
            })
         )
     }
+
+    postLike(entityId) {
+      const httpOptions = {
+        headers: new HttpHeaders({ "Accept": "application/json" })
+      }  
+      let url = "";
+  
+      if(this.devMode){
+        url = '/assets/json/fromService/newlike.json?entityId='+entityId; 
+      }else{
+        url = this.serviceUrl;
+      }
+      return this.http.get(url,httpOptions).
+          pipe(
+             map((data: NewLike[]) => {
+               return data;
+             }), catchError( error => {
+               return throwError( 'Something went wrong!' );
+             })
+          )
+      }
 
   //post the comment to the server
 

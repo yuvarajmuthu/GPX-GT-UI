@@ -78,7 +78,13 @@
 
             </div>
         </div>
-        <div class="btn-toolbar justify-content-between">
+        <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
+            <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+            <img [src]="stagingImage" height="200">
+            <!-- <img class="image-upload" [src]="stagingImage" id="stageUploadedImgFile" alt="" width="100%"> -->
+        </div>
+
+        <div class="btn-toolbar justify-content-between padding-top2">
             <div class="btn-group">
                 <button type="submit" class="btn btn-xs btn-primary" (click)="submitPost()">Post</button>
             </div>

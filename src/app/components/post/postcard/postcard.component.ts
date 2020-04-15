@@ -24,6 +24,7 @@ export class PostcardComponent implements OnInit {
     liked: boolean = false;
     name: any = '';
     icon: any = '';
+    stagingImage: any = null;
     public showCommentInput:boolean = false;
     public buttonName:any = 'Show';
 
@@ -93,6 +94,24 @@ export class PostcardComponent implements OnInit {
             });
         }
         
+    }
+
+    deleteAttachedFile(e) {
+        this.postFormData = new FormData();
+        this.stagingImage = '';
+    }
+
+    onFileSelected(event) {
+        console.log('file object ', event);
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+      
+            reader.readAsDataURL(event.target.files[0]); // read file as data url
+      
+            reader.onload = (event) => { // called once readAsDataURL is completed
+              this.stagingImage = event.target['result'];
+            }
+          }
     }
 
     toggleCommentInput() {

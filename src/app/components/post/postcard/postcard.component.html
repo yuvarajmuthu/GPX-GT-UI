@@ -210,6 +210,10 @@
 
                             </div>
                         </div>
+                        <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
+                            <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                            <img [src]="stagingImage" height="200">
+                        </div>
                         <div class="btn-toolbar justify-content-between float-right">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
@@ -359,6 +363,10 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
+                            <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                            <img [src]="stagingImage" height="200">
                         </div>
                         <div class="btn-toolbar justify-content-between float-right">
                             <div class="btn-group">

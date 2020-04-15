@@ -75,16 +75,31 @@ export class NewpostComponent implements OnInit {
         this.postFormData = new FormData();
     }
 
+    deleteAttachedFile(e) {
+        this.postFormData = new FormData();
+        this.stagingImage = '';
+    }
+
     onFileSelected(event) {
         console.log('file object ', event);
-        let reader = new FileReader();
+        //let reader = new FileReader();
+        // if (event.target.files && event.target.files[0]) {
+        //     this.postFormData.append('file', event.target.files[0]);
+        //     reader.readAsDataURL(event.target.files[0]);
+        //     reader.onload = (event) => {
+        //         this.stagingImage = event.target['result'];
+        //         console.log(this.stagingImage);
+        //     };
+        // }
         if (event.target.files && event.target.files[0]) {
-            this.postFormData.append('file', event.target.files[0]);
-            reader.readAsDataURL(event.target.files[0]);
-            reader.onload = (event) => {
-                this.stagingImage = event.target['result'];
-            };
-        }
+            let reader = new FileReader();
+      
+            reader.readAsDataURL(event.target.files[0]); // read file as data url
+      
+            reader.onload = (event) => { // called once readAsDataURL is completed
+              this.stagingImage = event.target['result'];
+            }
+          }
     }
 
     doTextareaValueChange(ev) {

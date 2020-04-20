@@ -1,4 +1,3 @@
-
 [{
 	"parentPostId": "1",
 	"entityId": "user6@gmail.com",
@@ -45,7 +44,7 @@
 	"parentPostId": "2",
 	"entityId": "user6@gmail.com",
 	"postType": "TI",
-	"postText": "messagewithimage 02092020 0156pm",
+	"postText": "Hi <span class='user'>@Jacob</span>,<br>how are you?<br><span class='user'>@Liam</span>, <span class='user'>@Mason</span>",
 	"relatedFiles": ["5e4055ddf453cd5244441dee"],
 	"createdDate": "2020-02-09T18:56:29.445Z",
 	"lastModifiedDate": "2020-02-09T18:56:29.904Z",

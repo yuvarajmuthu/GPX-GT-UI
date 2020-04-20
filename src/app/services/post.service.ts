@@ -11,6 +11,7 @@ import {Post} from '../models/post';
 import {NewPost} from '../models/newpost';
 import {NewComment} from '../models/newcomment';
 import {NewLike} from '../models/newlike';
+import { tagUser } from '../models/tagusers';
 
 @Injectable({
   providedIn: 'root'
@@ -202,6 +203,27 @@ export class PostService  extends AbstractService{
       }
 
   //post the comment to the server
+
+  getTagUsers() {
+    const httpOptions = {
+      headers: new HttpHeaders({ "Accept": "application/json" })
+    }  
+    let url = "";
+
+    if(this.devMode){
+      url = '/assets/json/fromService/tagusers.json'; 
+    }else{
+      url = this.serviceUrl;
+    }
+    return this.http.get(url,httpOptions).
+        pipe(
+           map((data: tagUser[]) => {
+             return data;
+           }), catchError( error => {
+             return throwError( 'Something went wrong!' );
+           })
+        )
+    }
 
   getImage(imageId: string): Observable<Blob> {
     let serviceUrl = this.serviceUrl + "/downloadFile/" + imageId;

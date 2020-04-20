@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { MentionModule } from 'angular-mentions';
+
+
 import { PostComponent } from './post.component';
 import { PostcardComponent } from './postcard/postcard.component';
 import { NewpostComponent } from './newpost/newpost.component';
@@ -18,6 +21,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     FormsModule,
     NgbModule,
     GpxUIComponentsModule,
+    MentionModule,
     ScrollingModule
   ],
   declarations: [

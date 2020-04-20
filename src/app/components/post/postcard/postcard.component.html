@@ -119,10 +119,9 @@
 
             </div>
         </div>
-        <div *ngIf="post.containsText" class="description">
-            <p class="card-text">
-                {{post.postText}}
-            </p>
+        <div *ngIf="post.containsText" class="description" [innerHTML]="post.postText">
+            <!-- <p class="card-text" >
+            </p> -->
         </div>
         
         <!-- comments section starts
@@ -299,10 +298,8 @@
 
             </div>
         </div>
-        <div *ngIf="post.containsText" class="description">
-            <p class="card-text">
-                {{post.postText}}
-            </p>
+        <div *ngIf="post.containsText" class="description" [innerHTML]="post.postText">
+
         </div>
         
 

@@ -1,0 +1,24 @@
+[{
+	"username": "noah",
+	"name": "Noah",
+	"img": "assets/images/avatars/avatar.png",
+	"type":"user"
+  },
+  {
+	"username": "liam",
+	"name": "Liam",
+	"img": "assets/images/avatars/avatar.png",
+	"type":"user"
+  },
+  {
+	"username": "mason",
+	"name": "Mason",
+	"img": "assets/images/avatars/avatar.png",
+	"type":"user"
+  },
+  {
+	"username": "jacob",
+	"name": "Jacob",
+	"img": "assets/images/avatars/avatar.png",
+	"type":"user"
+  }]

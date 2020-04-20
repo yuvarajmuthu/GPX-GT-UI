@@ -1,18 +1,30 @@
-import {Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation, ViewChild, ElementRef} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GpxFileuploadComponent} from '../../gpx-uicomponents/gpx-fileupload/gpx-fileupload.component';
 import {PostService} from '../../../services/post.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {Post} from '../../../models/post';
+//import { userInfo } from 'os';
 
 @Component({
     selector: 'app-newpost',
     templateUrl: './newpost.component.html',
-    styleUrls: ['./newpost.component.css']
+    styleUrls: ['./newpost.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class NewpostComponent implements OnInit {
-
+    @ViewChild('input') el: ElementRef;
     form: FormGroup;
+   // items: string[] = ["Noah", "Liam", "Mason", "Jacob"];
+    items: any;
+
+      mentionConfig:any;
+      onMentionSelect(item) {
+        // return '#' + selection.label;
+        return `@${item.username}`;
+      }
+      
+
 
     stagingImage: any = null;
     public isFileStagingAreaCollapsed: boolean = true;
@@ -36,6 +48,7 @@ export class NewpostComponent implements OnInit {
                 private changeDetector: ChangeDetectorRef
     ) {
     }
+
 
     Public(val) {
         console.log(val);
@@ -68,6 +81,7 @@ export class NewpostComponent implements OnInit {
         this.resetForm();
         this.name = 'Public';
         this.icon = 'fa fa-globe';
+        this.getUsers();
     }
 
     resetForm() {
@@ -82,15 +96,6 @@ export class NewpostComponent implements OnInit {
 
     onFileSelected(event) {
         console.log('file object ', event);
-        //let reader = new FileReader();
-        // if (event.target.files && event.target.files[0]) {
-        //     this.postFormData.append('file', event.target.files[0]);
-        //     reader.readAsDataURL(event.target.files[0]);
-        //     reader.onload = (event) => {
-        //         this.stagingImage = event.target['result'];
-        //         console.log(this.stagingImage);
-        //     };
-        // }
         if (event.target.files && event.target.files[0]) {
             let reader = new FileReader();
       
@@ -133,7 +138,65 @@ export class NewpostComponent implements OnInit {
 //     }
 // }
 
+makePostContent() {
+    let withatAll = this.txtPost.replace(/(\r\n|\n|\r)/gm, "").split(" ");
+    let replaceSpecial = [];
+    for (var val of withatAll) {
+        if(val.indexOf('@') >= 0){
+            let tmp = val.split(/[,;?.\-_]/);
+            for (var val1 of tmp) {
+                if(val1.indexOf('@') >= 0)
+                replaceSpecial.push(val1);
+            }
+            
+        }
+
+    }
+    console.log(this.txtPost);
+    let content = this.txtPost.replace(/\n/g, '<br>');
+    //content = content.replace('\r', '<br>');
+    console.log(content);
+    let replaceDone=[];
+    for (var tmpreplace of replaceSpecial) {
+        if(replaceDone.indexOf(tmpreplace) == -1){
+            var tmpVal= tmpreplace.split('@');
+            console.log(tmpVal[1]);
+            for(var i=0; i < this.items.length; i++) {
+                console.log(this.items[i].username);
+                if(this.items[i].username == tmpVal[1]) {
+                    console.log("=======inside");
+                    var tmphtml ="<span class='user' (click)='redirectTo("+this.items[i].type+")'>"+tmpreplace+'</span>';
+                    content=content.replace(tmpreplace, tmphtml);
+                    replaceDone.push(tmpreplace);
+                }
+            }
+            // var tmphtml ="<span class='user'>"+tmpreplace+'</span>';
+            // content=content.replace(tmpreplace, tmphtml);
+            // replaceDone.push(tmpreplace);
+        }
+
+    }
+
+    console.log(content);
+  //  .filter(t => t != "" && this.items.findIndex(u => u.name == t.trim()) > -1).map(name => this.items.find(s => s.name == name.trim()).id)
+
+//console.log(ids);
+
+}
+
+
+getUsers(){
+    this.postService.getTagUsers()
+    .subscribe((data:any) => {
+        this.items = data;
+        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:false};
+
+    });
+}
+
+
 submitPost() {
+    this.makePostContent();
     this.post.entityId = this.dataShareService.getLoggedinUsername();
     this.post.postText = this.txtPost;
     if (this.parentPost != null) {

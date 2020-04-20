@@ -1,14 +1,16 @@
-import {Component, OnInit, Input, isDevMode, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, isDevMode, Output, EventEmitter, ViewEncapsulation, ElementRef} from '@angular/core';
 //import { formatDate } from "@angular/common";
 import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {Post} from '../../../models/post';
 
+
 @Component({
     selector: 'app-postcard',
     templateUrl: './postcard.component.html',
-    styleUrls: ['./postcard.component.css']
+    styleUrls: ['./postcard.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class PostcardComponent implements OnInit {
@@ -40,13 +42,23 @@ export class PostcardComponent implements OnInit {
     numbers: number[] = [];
     todayDate : Date = new Date();
 
+    items: any;
+
+    mentionConfig:any;
+    onMentionSelect(item) {
+      // return '#' + selection.label;
+      return `@${item.username}`;
+    }
+
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
-                private userService: UserService) {
+                private userService: UserService,
+                private elementRef: ElementRef) {
         for (let index = 0; index < 10000; index++) {
             this.numbers.push(index);
         }
         this.devMode = isDevMode();
+
     }
 
     ngOnInit(): void {
@@ -72,6 +84,10 @@ export class PostcardComponent implements OnInit {
         if (!this.devMode) {
             this.getProfileSmImage(this.entityId);
         }
+    }
+
+    redirectTo(type){
+        console.log(type);
     }
 
     save(val) {
@@ -149,6 +165,54 @@ export class PostcardComponent implements OnInit {
     }
 
 
+    makePostContent() {
+        let withatAll = this.post.postText.replace(/(\r\n|\n|\r)/gm, "").split(" ");
+        let replaceSpecial = [];
+        for (var val of withatAll) {
+            if(val.indexOf('@') >= 0){
+                let tmp = val.split(/[,;?.\-_]/);
+                for (var val1 of tmp) {
+                    if(val1.indexOf('@') >= 0)
+                    replaceSpecial.push(val1);
+                }
+                
+            }
+    
+        }
+        console.log(this.post.postText);
+        let content = this.post.postText.replace(/\n/g, '<br>');
+        //content = content.replace('\r', '<br>');
+        console.log(content);
+        let replaceDone=[];
+        for (var tmpreplace of replaceSpecial) {
+            if(replaceDone.indexOf(tmpreplace) == -1){
+                var tmpVal= tmpreplace.split('@');
+                console.log(tmpVal[1]);
+                for(var i=0; i < this.items.length; i++) {
+                    console.log(this.items[i].username);
+                    if(this.items[i].username == tmpVal[1]) {
+                        console.log("=======inside");
+                        var tmphtml ="<span class='user' (click)='redirectTo("+this.items[i].type+")'>"+tmpreplace+'</span>';
+                        content=content.replace(tmpreplace, tmphtml);
+                        replaceDone.push(tmpreplace);
+                    }
+                }
+                // var tmphtml ="<span class='user'>"+tmpreplace+'</span>';
+                // content=content.replace(tmpreplace, tmphtml);
+                // replaceDone.push(tmpreplace);
+            }
+    
+        }
+    
+        console.log(content);
+      //  .filter(t => t != "" && this.items.findIndex(u => u.name == t.trim()) > -1).map(name => this.items.find(s => s.name == name.trim()).id)
+    
+    //console.log(ids);
+    
+    }
+    
+    
+
     postComment() {
       
         // this.post.entityId = this.dataShareService.getLoggedinUsername();
@@ -156,7 +220,7 @@ export class PostcardComponent implements OnInit {
         // this.postFormData = new FormData();
       //  this.postFormData.append('post', JSON.stringify(this.post));
       console.log(this.post);
-
+      this.makePostContent();
          this.postService.postComment()
              .subscribe((data:any) => {
                  console.log(data);

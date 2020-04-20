@@ -1,0 +1,4 @@
+[
+{"profileTemplateId":"upDefault1","type":"public","name":"Biodata1","profileIcon": "person","properties":[{"propId":"first_name","displayLabel":"First Name","type":"text"},{"propId":"last_name","displayLabel":"Last Name","type":"text"},{"propId":"username","displayLabel":"User Name","type":"text"},{"propId":"emailId","displayLabel":"Email Id","type":"text"},{"propId":"phone","displayLabel":"Phone number","type":"text"},{"propId":"address","displayLabel":"Address","type":"text"}]},
+{"profileTemplateId":"upDefault2","type":"public","name":"Biodata2","profileIcon": "person","properties":[{"propId":"first_name","displayLabel":"First Name","type":"text"},{"propId":"last_name","displayLabel":"Last Name","type":"text"},{"propId":"username","displayLabel":"User Name","type":"text"},{"propId":"emailId","displayLabel":"Email Id","type":"text"},{"propId":"phone","displayLabel":"Phone number","type":"text"},{"propId":"address","displayLabel":"Address","type":"text"}]}
+ ]

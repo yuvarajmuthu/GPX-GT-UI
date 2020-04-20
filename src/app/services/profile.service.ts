@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 import { Observable, of } from 'rxjs';
@@ -15,6 +15,7 @@ import {AbstractService} from './abstract.service';
 export class ProfileService extends AbstractService{
   result:any; 
   resultop:any;
+  devMode:boolean;
 
   serviceUrl:string;// = "http://127.0.0.1:8080/profile/template";
   private httpOptions = {
@@ -25,6 +26,8 @@ export class ProfileService extends AbstractService{
     super();
 
     this.serviceUrl = dataShareService.getServiceUrl() + "/profile/template";
+    this.devMode = isDevMode();
+
   }
   
 
@@ -44,13 +47,19 @@ export class ProfileService extends AbstractService{
   getAvailableProfileTemplatesForEntity(entityId:string, userType:string):Observable<any> {    
     let serviceUrl = this.serviceUrl + "/getAllProfileTemplates/" + entityId + "/";
     console.log("getAvailableProfileTemplatesForEntity profile.service this.serviceUrl " + serviceUrl);
-    
+    //DEV MODE
+    if(this.devMode){  
+      serviceUrl = '/assets/json/fromService/profileTemplates.json';   
+    }
+
     return this.http.get(serviceUrl, { responseType: 'json', params: {
       userType: userType
     } }).pipe(
       tap(_ => this.log(`fetched getAvailableProfileTemplatesForEntity`)),
       catchError(this.handleError<any>(`Error in getAvailableProfileTemplatesForEntity()`))
     );
+
+    
   }
 
   getAvailableProfileTemplates(userType:string):Observable<any> {    

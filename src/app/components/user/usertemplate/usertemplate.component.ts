@@ -67,6 +67,8 @@ export class UsertemplateComponent implements OnChanges {
   //all the user profile templates should be mapped here
   private mappings = {
     'upDefault': UserbannertemplateComponent,
+    'upDefault1': UserbannertemplateComponent,
+    'upDefault2': UserbannertemplateComponent,
     'upCongressLegislatorExternal': UserbiodatatemplateComponent,
     'upCongressLegislatorCommitteeExternal': UsercommitteetemplateComponent,
     'upRole': UserroletemplateComponent,

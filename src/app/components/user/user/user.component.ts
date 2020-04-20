@@ -41,7 +41,7 @@ export class UserComponent implements OnInit {
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
     public isPartiesCollapsed: boolean = false;
-    private isProfileEditMode: boolean = false;
+    //private isProfileEditMode: boolean = false;
     public electedPersonsOld = [];
     public electedPersons: Array<Legislator>;
     public contestedPersons = [];
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
     public isLegislator = false;
     operation: string = '';
     profileImage: string = '';
-    profileSmImage: any = 'assets/images/avatar1.png';
+    profileSmImage: any = 'assets/images/avatar1.png'; 
     bannerImage: any;
     isImageLoading: boolean = false;
     isProfileCollapsed: boolean = false;
@@ -125,6 +125,8 @@ export class UserComponent implements OnInit {
                 }
 
             });
+        
+
 
     }
 
@@ -152,7 +154,11 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.route.params.subscribe((params: Params) => {
+            //this.datashareService.editProfile(false);
+            this.communicationService.userProfileChanged(false);
+
             this.paramUsername = params['id'];
             console.log('from user.component route params changed ' + this.paramUsername);
             this.loadComponent(this.paramUsername);
@@ -237,11 +243,11 @@ export class UserComponent implements OnInit {
     }
 
     loadComponent(id: string) {
-        this.profileEditOption = this.getPermission();
+        //this.profileEditOption = this.getPermission();
         this.loggedUser = this.datashareService.getCurrentUser();
         //this.editProfile();
         //let id = this.route.snapshot.paramMap.get('id');
-        this.editLabel = 'Edit Profile';
+        //this.editLabel = 'Edit Profile';
 
         if (id) {
             if (id == 'CREATE') {
@@ -430,37 +436,47 @@ export class UserComponent implements OnInit {
         //loggedin? and edited?, then set edit as true
         //loggedin? and not edited?, then set edit as false
 
-        let edit: boolean = false;
+        //let edit: boolean = true;
+/*
         if (this.editLabel) {//Enabling to update the profile
             edit = true;
         } else {//Saving profile
             edit = false;
         }
+*/
+  //      this.datashareService.editProfile(edit);
+        this.communicationService.userProfileChanged(true);
 
-        this.datashareService.editProfile(edit);
-
+/*
         if (edit) {
             this.editLabel = 'Save';
         } else {
             this.editLabel = 'Edit Profile';
         }
-        this.communicationService.userProfileChanged(edit);
+        */
+        //this.communicationService.userProfileChanged(edit);
 
     }
 
     cancelEditProfile() {
 
-        this.editLabel = 'Edit Profile';
+ //       this.editLabel = 'Edit Profile';
 
-        this.datashareService.editProfile(false);
+   //     this.datashareService.editProfile(false);
         this.communicationService.userProfileChanged(false);
 
 
     }
 
     isProfileEditable() {
-        //return this.datashareService.isProfileEditable() && this.loggedUser;//and     //logged in?
-        return this.datashareService.isProfileEditable();
+        //return (this.datashareService.isProfileEditable() && (this.isSelfProfile || this.userData['status'] === 'PASSIVE'));
+        return (!this.isProfileInEditMode() && (this.isSelfProfile || this.userData['status'] === 'PASSIVE'));
+        //TODO
+        //if not logged in, clicking edit button should redirect to login        
+    }
+
+    isProfileInEditMode(){
+        return this.inEditMode;
     }
 
     isUserLogged() {
@@ -776,11 +792,6 @@ export class UserComponent implements OnInit {
         this.profileEditOption = data;
     }
 
-    isEditable() {
-        //should be logged in
-        //additional Role ?
-    }
-
     allowed(): boolean {
         let permission: boolean = this.datashareService.checkPermissions();
         //console.log("allowed() - " + permission);
@@ -798,8 +809,8 @@ export class UserComponent implements OnInit {
         console.log(this.templateType);
     }
 
-//add the template based on user selection
-    addTemplate(profileTemplateParam: any) {
+//add the Profile based on user selection
+    addProfileData(profileTemplateParam: any) {
         /*
             let profileTemplate = {
               "profileTemplateId":profileTemplateId,
@@ -808,7 +819,7 @@ export class UserComponent implements OnInit {
           */
         let position: number = -1;
         this.availableProfileTemplates.forEach((profileTemplate, index) => {
-            if (profileTemplateParam['profileTemplateId'] === profileTemplate['profileTemplateId']) {
+            if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
                 position = index;
             }
         });
@@ -818,5 +829,37 @@ export class UserComponent implements OnInit {
         }
 
         this.profilesTemplates.push(profileTemplateParam);
+
+        this.templateType.push(profileTemplateParam['profileTemplateId']);
+        
+
+    }
+
+    deleteProfileData(profileTemplateParam:any){
+        let position: number = -1;
+        this.templateType.forEach((profileTemplate, index) => {
+            if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
+                position = index;
+            }
+        });
+
+        if (position > -1) {
+            this.templateType.splice(position, 1);
+        }
+
+        position = -1;
+        this.profilesTemplates.forEach((profileTemplate, index) => {
+            if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
+                position = index;
+            }
+        });
+
+        if (position > -1) {
+            this.profilesTemplates.splice(position, 1);
+        }
+
+        //this.profilesTemplates.push(profileTemplate);
+
+        this.availableProfileTemplates.push(profileTemplateParam);
     }
 }

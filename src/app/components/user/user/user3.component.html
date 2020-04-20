@@ -134,18 +134,23 @@
                                                                 <li class="nav-item"
                                                                     *ngFor="let profileTemplate of profilesTemplates">
 
-
-                                                                    <a class="nav-link text-black-50" data-toggle="tab"
-                                                                       [routerLink]=""
-                                                                       (click)="loadTemplate(profileTemplate.profileTemplateId)"
-                                                                       *ngIf="profileTemplate.profileTemplateId">
-                                                                        <i class="material-icons">{{profileTemplate.profileIcon}}</i>
-                                                                        {{profileTemplate.name}}
-                                                                        <!--{{profileTemplate.profileTemplateId}}-->
-                                                                    </a>
-
+                                                                    <div class="row">
+                                                                        <div class="col-sm-10">    
+                                                                            <a class="nav-link text-black-50" data-toggle="tab"
+                                                                            [routerLink]=""
+                                                                            (click)="loadTemplate(profileTemplate.profileTemplateId)"
+                                                                            *ngIf="profileTemplate.profileTemplateId">
+                                                                                <i class="material-icons">{{profileTemplate.profileIcon}}</i>
+                                                                                {{profileTemplate.name}}
+                                                                                <!--{{profileTemplate.profileTemplateId}}-->
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="col-sm-2">
+                                                                            <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                        </div>
+                                                                    </div>
                                                                 </li>
-                                                                <li *ngIf="isProfileEditable()" class="nav-item">
+                                                                <li *ngIf="isProfileInEditMode()" class="nav-item">
                                                                     <div ngbDropdown class="d-inline-block">
                                                                         <button class="btn btn-outline-primary btn-xs"
                                                                                 id="dropdownAddSection"
@@ -157,7 +162,7 @@
                                                                              aria-labelledby="dropdownAddSection">
                                                                             <button class="dropdown-item"
                                                                                     *ngFor="let profileTemplate of availableProfileTemplates"
-                                                                                    (click)="addTemplate(profileTemplate.profileTemplateId)">
+                                                                                    (click)="addProfileData(profileTemplate)">
                                                                                 {{profileTemplate.name}}
                                                                             </button> 
                                                                         </div>
@@ -165,16 +170,16 @@
                                                                 </li>
                                                                 <li *ngIf="isUserLogged()" class="nav-item">
                                                                     <div>
-                                                                        <button type="button" *ngIf="!isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                        <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
                                                                             <!--{{editLabel}}-->
                                                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                                         </button>
-                                                                        <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                        <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
                                                                             <!--{{Save}}-->
                                                                             <i class="fa fa-save" aria-hidden="true"></i>
                                                                         </button>
                                                                         <button type="button"
-                                                                                *ngIf="isProfileEditable()"
+                                                                                *ngIf="isProfileInEditMode()"
                                                                                 class="btn btn-primary btn-danger"
                                                                                 (click)="cancelEditProfile()">
                                                                             <!--Cancel Edit-->

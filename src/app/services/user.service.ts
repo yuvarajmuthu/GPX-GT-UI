@@ -19,7 +19,7 @@ import { Connection } from '../models/connection';
 })
 export class UserService extends AbstractService{
   serviceUrl:string;// = "http://127.0.0.1:8080/api/social";
-  devMode:boolean = true;
+  devMode:boolean;
   result:any; 
   resultop:any;
 
@@ -242,6 +242,10 @@ getFollowers(entityId:string):Observable<any>{
 
 getConnectionRequests(entityId:string):Observable<any>{
   let serviceUrl = this.getSocialService()+"/getConnectionsByStatus"+"/"+entityId+"/";
+  
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/connections.json';   
+  }
 
   return this.http.get(serviceUrl, { responseType: 'json', params: {
     status: 'REQUESTED'

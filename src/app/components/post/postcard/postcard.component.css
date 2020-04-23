@@ -195,10 +195,10 @@ form button {
 .rounded-circle:hover{
   cursor: pointer;
 }
-.user{
+.tag-users{
   color:#007bff;
 }
-.user:hover{
+.tag-users:hover{
   cursor: pointer;
   text-decoration: underline;
 }

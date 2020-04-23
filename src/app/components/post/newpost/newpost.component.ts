@@ -81,7 +81,6 @@ export class NewpostComponent implements OnInit {
         this.resetForm();
         this.name = 'Public';
         this.icon = 'fa fa-globe';
-        this.getUsers();
     }
 
     resetForm() {
@@ -165,7 +164,7 @@ makePostContent() {
                 console.log(this.items[i].username);
                 if(this.items[i].username == tmpVal[1]) {
                     console.log("=======inside");
-                    var tmphtml ="<span class='user' (click)='redirectTo("+this.items[i].type+")'>"+tmpreplace+'</span>';
+                    var tmphtml ="<span class='tag-users' data-username='"+this.items[i].username+"' data-entityType='"+this.items[i].type+"'>"+tmpreplace+'</span>';
                     content=content.replace(tmpreplace, tmphtml);
                     replaceDone.push(tmpreplace);
                 }

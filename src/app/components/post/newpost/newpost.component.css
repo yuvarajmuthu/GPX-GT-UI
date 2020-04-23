@@ -148,6 +148,11 @@ form button {
   border-radius: 5px;
   width:152px;
 }
+.file-upload-error{
+  color: red;
+  font-size: 12px;
+  float: left;
+}
 .image-upload{
   padding: 0px 15px 15px 15px;
 }

@@ -33,6 +33,7 @@ export class NewpostComponent implements OnInit {
     onlyMe: boolean = false;
     name: any = [];
     icon: any = [];
+    isFileSizeError : boolean = false;
     @Output() postEvent: EventEmitter<any> = new EventEmitter();
     @Output() newpost: EventEmitter<any> = new EventEmitter();
 
@@ -96,12 +97,19 @@ export class NewpostComponent implements OnInit {
     onFileSelected(event) {
         console.log('file object ', event);
         if (event.target.files && event.target.files[0]) {
-            let reader = new FileReader();
-      
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
-      
-            reader.onload = (event) => { // called once readAsDataURL is completed
-              this.stagingImage = event.target['result'];
+            console.log(event.target.files[0].size/1024/1024);
+            let filesizeMB = event.target.files[0].size/1024/1024;
+            if(filesizeMB <= 2.0){
+                this.isFileSizeError = false;
+                let reader = new FileReader();
+                reader.readAsDataURL(event.target.files[0]); // read file as data url
+          
+                reader.onload = (event) => { // called once readAsDataURL is completed
+                  this.stagingImage = event.target['result'];                
+            }
+            }
+            else{
+                this.isFileSizeError = true;
             }
           }
     }

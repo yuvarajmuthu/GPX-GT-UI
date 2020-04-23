@@ -82,6 +82,7 @@ export class PostcardComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getUsers();
         ////Get entity image
         if (this.post.postType) {
             this.postText = this.sanitizer.bypassSecurityTrustHtml(this.post.postText);
@@ -107,6 +108,16 @@ export class PostcardComponent implements OnInit {
             this.getProfileSmImage(this.entityId);
         }
     }
+
+    
+getUsers(){
+    this.postService.getTagUsers()
+    .subscribe((data:any) => {
+        this.items = data;
+        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:false};
+
+    });
+}
 
     tagUsersRedirectTo(e){
         console.log(e.target.tagName);

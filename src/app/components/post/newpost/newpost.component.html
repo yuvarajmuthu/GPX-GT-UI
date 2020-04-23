@@ -59,19 +59,14 @@
                               [mentionListTemplate]="mentionListTemplate" (keypress)="getUsers($event)"
                             ></textarea>
 
-
-                            <!-- <div #input contenteditable 
-                            style="height: 85px; padding: 16px;"
-                            [mention]="mentions" [mentionConfig]="mentionConfig" [mentionListTemplate]="mentionListTemplate">   
-                            Use "@" to mention items ..
-                        </div> -->
-
                             <ng-template #mentionListTemplate let-item="item">
                                 <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
                                 &nbsp;
                                 <span>{{item.name}}</span>
                               </ng-template>
                               <div class="attachments">
+                                <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload File/image size with less than 2MB.</span>
+
                         <ul>
                             <li>
                                 <i class="fa fa-image"></i>

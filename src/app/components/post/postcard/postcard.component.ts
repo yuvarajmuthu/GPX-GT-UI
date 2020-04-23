@@ -1,10 +1,12 @@
 import {Component, OnInit, Input, isDevMode, Output, EventEmitter, ViewEncapsulation, ElementRef} from '@angular/core';
 //import { formatDate } from "@angular/common";
+import { Router } from "@angular/router";
 import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {Post} from '../../../models/post';
 
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-postcard',
@@ -41,7 +43,7 @@ export class PostcardComponent implements OnInit {
     entityId: string;
     numbers: number[] = [];
     todayDate : Date = new Date();
-
+    postText : any;
     items: any;
 
     mentionConfig:any;
@@ -53,17 +55,37 @@ export class PostcardComponent implements OnInit {
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
                 private userService: UserService,
-                private elementRef: ElementRef) {
+                private elementRef: ElementRef,
+                private sanitizer: DomSanitizer,
+                private router: Router) {
         for (let index = 0; index < 10000; index++) {
             this.numbers.push(index);
         }
         this.devMode = isDevMode();
+
+        // if(document.getElementsByClassName("user")){
+        //     const newLocal = "user";
+        //     document.getElementsByClassName("user")[0].addEventListener("click", function(){
+        //         console.log("test");
+        //       })
+        // }
+
+        var element = document.getElementById('user');
+        if(document.getElementById("user")){
+            element.onclick = function() {
+                console.log("test");
+            }
+        }
+
+
 
     }
 
     ngOnInit(): void {
         ////Get entity image
         if (this.post.postType) {
+            this.postText = this.sanitizer.bypassSecurityTrustHtml(this.post.postText);
+           // this.post.postText = postText;
             if (this.post.postType.indexOf('V') !== -1) {
                 this.post['containsVideo'] = true;
             }
@@ -86,8 +108,19 @@ export class PostcardComponent implements OnInit {
         }
     }
 
-    redirectTo(type){
-        console.log(type);
+    tagUsersRedirectTo(e){
+        console.log(e.target.tagName);
+        if(e.type == 'click' && e.target.tagName == 'SPAN'){
+            let entityType = e.target.getAttribute("data-entityType");
+            let routePath: string = '/'+entityType+'/';
+            if(entityType == 'legislator')
+                routePath= '/searchLegislator';
+            else if(entityType == 'district')
+                routePath= '/group';
+    
+            this.router.navigate([routePath]);
+        }
+
     }
 
     save(val) {
@@ -192,7 +225,7 @@ export class PostcardComponent implements OnInit {
                     console.log(this.items[i].username);
                     if(this.items[i].username == tmpVal[1]) {
                         console.log("=======inside");
-                        var tmphtml ="<span class='user' (click)='redirectTo("+this.items[i].type+")'>"+tmpreplace+'</span>';
+                        var tmphtml ="<span class='user' (click)='redirectTo('"+this.items[i].type+"')'>"+tmpreplace+'</span>';
                         content=content.replace(tmpreplace, tmphtml);
                         replaceDone.push(tmpreplace);
                     }

@@ -85,6 +85,8 @@ export class NewpostComponent implements OnInit {
     }
 
     resetForm() {
+        this.txtPost = '';
+        this.stagingImage = '';
         this.post = {} as Post;
         this.postFormData = new FormData();
     }
@@ -95,11 +97,10 @@ export class NewpostComponent implements OnInit {
     }
 
     onFileSelected(event) {
-        console.log('file object ', event);
         if (event.target.files && event.target.files[0]) {
-            console.log(event.target.files[0].size/1024/1024);
             let filesizeMB = event.target.files[0].size/1024/1024;
-            if(filesizeMB <= 2.0){
+            let fileType = event.target.files[0].type;
+            if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
                 this.isFileSizeError = false;
                 let reader = new FileReader();
                 reader.readAsDataURL(event.target.files[0]); // read file as data url
@@ -171,7 +172,6 @@ makePostContent() {
             for(var i=0; i < this.items.length; i++) {
                 console.log(this.items[i].username);
                 if(this.items[i].username == tmpVal[1]) {
-                    console.log("=======inside");
                     var tmphtml ="<span class='tag-users' data-username='"+this.items[i].username+"' data-entityType='"+this.items[i].type+"'>"+tmpreplace+'</span>';
                     content=content.replace(tmpreplace, tmphtml);
                     replaceDone.push(tmpreplace);
@@ -192,7 +192,7 @@ makePostContent() {
 }
 
 
-getUsers(){
+getUsers(e){
     this.postService.getTagUsers()
     .subscribe((data:any) => {
         this.items = data;

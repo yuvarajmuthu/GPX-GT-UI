@@ -65,13 +65,13 @@
                                 <span>{{item.name}}</span>
                               </ng-template>
                               <div class="attachments">
-                                <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload File/image size with less than 2MB.</span>
+                                <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
 
                         <ul>
                             <li>
                                 <i class="fa fa-image"></i>
                                 <label class="fileContainer">
-                                    <input type="file" id="stageUploadedFile" (change)="onFileSelected($event)">
+                                    <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png" (change)="onFileSelected($event)">
                                 </label>
                             </li>
                             <li>

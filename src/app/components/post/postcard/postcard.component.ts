@@ -34,7 +34,7 @@ export class PostcardComponent implements OnInit {
 
     textComment:string;
     postFormData: FormData;
-
+    isFileSizeError: boolean =false;
 
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
@@ -82,7 +82,7 @@ export class PostcardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getUsers();
+        //this.getUsers();
         ////Get entity image
         if (this.post.postType) {
             this.postText = this.sanitizer.bypassSecurityTrustHtml(this.post.postText);
@@ -114,7 +114,7 @@ getUsers(){
     this.postService.getTagUsers()
     .subscribe((data:any) => {
         this.items = data;
-        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:false};
+        this.mentionConfig={triggerChar:'@',items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:false};
 
     });
 }
@@ -162,14 +162,20 @@ getUsers(){
     }
 
     onFileSelected(event) {
-        console.log('file object ', event);
         if (event.target.files && event.target.files[0]) {
-            let reader = new FileReader();
-      
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
-      
-            reader.onload = (event) => { // called once readAsDataURL is completed
-              this.stagingImage = event.target['result'];
+            let filesizeMB = event.target.files[0].size/1024/1024;
+            let fileType = event.target.files[0].type;
+            if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
+                this.isFileSizeError = false;
+                let reader = new FileReader();
+                reader.readAsDataURL(event.target.files[0]); // read file as data url
+          
+                reader.onload = (event) => { // called once readAsDataURL is completed
+                  this.stagingImage = event.target['result'];                
+            }
+            }
+            else{
+                this.isFileSizeError = true;
             }
           }
     }
@@ -185,7 +191,6 @@ getUsers(){
     }
 
     hide(val) {
-        console.log(val);
         this.savePost = false;
         this.hidePost = true;
         this.reportPost = false;
@@ -194,7 +199,6 @@ getUsers(){
     }
 
     report(val) {
-        console.log(val);
         this.savePost = false;
         this.hidePost = false;
         this.reportPost = true;
@@ -223,19 +227,15 @@ getUsers(){
             }
     
         }
-        console.log(this.post.postText);
         let content = this.post.postText.replace(/\n/g, '<br>');
         //content = content.replace('\r', '<br>');
-        console.log(content);
         let replaceDone=[];
         for (var tmpreplace of replaceSpecial) {
             if(replaceDone.indexOf(tmpreplace) == -1){
                 var tmpVal= tmpreplace.split('@');
-                console.log(tmpVal[1]);
                 for(var i=0; i < this.items.length; i++) {
                     console.log(this.items[i].username);
                     if(this.items[i].username == tmpVal[1]) {
-                        console.log("=======inside");
                         var tmphtml ="<span class='user' (click)='redirectTo('"+this.items[i].type+"')'>"+tmpreplace+'</span>';
                         content=content.replace(tmpreplace, tmphtml);
                         replaceDone.push(tmpreplace);

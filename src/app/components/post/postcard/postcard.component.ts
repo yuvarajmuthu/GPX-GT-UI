@@ -17,6 +17,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 
 export class PostcardComponent implements OnInit {
     @Input() post: Post;
+    @Input() idx: string;
     @Input() comments : boolean;
 
     commentPost: boolean = false;
@@ -44,13 +45,9 @@ export class PostcardComponent implements OnInit {
     numbers: number[] = [];
     todayDate : Date = new Date();
     postText : any;
-    items: any;
 
+    items: any;
     mentionConfig:any;
-    onMentionSelect(item) {
-      // return '#' + selection.label;
-      return `@${item.username}`;
-    }
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
@@ -63,23 +60,46 @@ export class PostcardComponent implements OnInit {
         }
         this.devMode = isDevMode();
 
-        // if(document.getElementsByClassName("user")){
-        //     const newLocal = "user";
-        //     document.getElementsByClassName("user")[0].addEventListener("click", function(){
-        //         console.log("test");
-        //       })
-        // }
+        this.items =[];
+        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
 
-        var element = document.getElementById('user');
-        if(document.getElementById("user")){
-            element.onclick = function() {
-                console.log("test");
-            }
-        }
+
+        // var element = document.getElementById('user');
+        // if(document.getElementById("user")){
+        //     element.onclick = function() {
+        //         console.log("test");
+        //     }
+        // }
 
 
 
     }
+
+    onMentionSelect(item) {
+
+        let btn:HTMLElement;
+        btn = document.createElement("SPAN");   // Create a <button> element
+        let inputDiv = document.getElementById("commentContent"); 
+        let innertmlHtml = inputDiv.innerHTML;
+        var n = innertmlHtml.indexOf("@");
+        console.log(innertmlHtml);
+        var length = innertmlHtml.length;
+        var tmp = innertmlHtml.slice(0, n);
+        btn.innerHTML = item.username+"&nbsp;";       
+        inputDiv.innerHTML = tmp;
+        btn.setAttribute('class', 'tagged-users');   
+        btn.setAttribute('data-username', item.username);
+        btn.setAttribute('data-entityType', item.type);
+
+        var btn1 = document.createElement("SPAN");        // Insert text
+        btn1.innerHTML = '&nbsp;';    
+        inputDiv.appendChild(btn);
+        inputDiv.appendChild(btn1);
+        this.items = [];
+        console.log(btn);
+ //return btn;
+      }
+
 
     ngOnInit(): void {
         //this.getUsers();
@@ -110,13 +130,26 @@ export class PostcardComponent implements OnInit {
     }
 
     
-getUsers(){
+getUsers(e){
+
+    var input;
+    input = document.getElementById("commentContent");
+    console.log(input.innerText);
+    console.log(e);
+    let textUser= input.innerText;
+    if(textUser.indexOf("@") >= 0){
+        let tmpPos = textUser.split("@");
+        console.log(tmpPos);
+      
+        if(tmpPos[1].length >= 1){
+
+
     this.postService.getTagUsers()
     .subscribe((data:any) => {
         this.items = data;
-        this.mentionConfig={triggerChar:'@',items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:false};
-
+        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
     });
+}}
 }
 
     tagUsersRedirectTo(e){
@@ -213,50 +246,6 @@ getUsers(){
     }
 
 
-    makePostContent() {
-        let withatAll = this.post.postText.replace(/(\r\n|\n|\r)/gm, "").split(" ");
-        let replaceSpecial = [];
-        for (var val of withatAll) {
-            if(val.indexOf('@') >= 0){
-                let tmp = val.split(/[,;?.\-_]/);
-                for (var val1 of tmp) {
-                    if(val1.indexOf('@') >= 0)
-                    replaceSpecial.push(val1);
-                }
-                
-            }
-    
-        }
-        let content = this.post.postText.replace(/\n/g, '<br>');
-        //content = content.replace('\r', '<br>');
-        let replaceDone=[];
-        for (var tmpreplace of replaceSpecial) {
-            if(replaceDone.indexOf(tmpreplace) == -1){
-                var tmpVal= tmpreplace.split('@');
-                for(var i=0; i < this.items.length; i++) {
-                    console.log(this.items[i].username);
-                    if(this.items[i].username == tmpVal[1]) {
-                        var tmphtml ="<span class='user' (click)='redirectTo('"+this.items[i].type+"')'>"+tmpreplace+'</span>';
-                        content=content.replace(tmpreplace, tmphtml);
-                        replaceDone.push(tmpreplace);
-                    }
-                }
-                // var tmphtml ="<span class='user'>"+tmpreplace+'</span>';
-                // content=content.replace(tmpreplace, tmphtml);
-                // replaceDone.push(tmpreplace);
-            }
-    
-        }
-    
-        console.log(content);
-      //  .filter(t => t != "" && this.items.findIndex(u => u.name == t.trim()) > -1).map(name => this.items.find(s => s.name == name.trim()).id)
-    
-    //console.log(ids);
-    
-    }
-    
-    
-
     postComment() {
       
         // this.post.entityId = this.dataShareService.getLoggedinUsername();
@@ -264,7 +253,6 @@ getUsers(){
         // this.postFormData = new FormData();
       //  this.postFormData.append('post', JSON.stringify(this.post));
       console.log(this.post);
-      this.makePostContent();
          this.postService.postComment()
              .subscribe((data:any) => {
                  console.log(data);

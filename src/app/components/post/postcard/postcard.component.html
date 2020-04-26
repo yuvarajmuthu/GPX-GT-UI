@@ -180,14 +180,17 @@
                                  aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
-                                    <textarea (keypress)="getUsers($event)" class="form-control" id="message" rows="3"
-                                              placeholder="Comment" ([ngModel])="textComment" [mentionConfig]="mentionConfig" 
-                                              [mentionListTemplate]="mentionListTemplate"></textarea>
-                                              <ng-template #mentionListTemplate let-item="item">
-                                                <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
-                                                &nbsp;
-                                                <span>{{item.name}}</span>
-                                              </ng-template>              
+                                    <div id="commentContent" class="commentContent" contenteditable="true"
+                                    [mentionConfig]="mentionConfig" placeholder="What are you thinking?"
+                                    [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
+                                    </div>
+        
+                                    <ng-template #mentionListTemplate let-item="item">
+                                        <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
+                                        &nbsp;
+                                        <span>{{item.name}}</span>
+                                      </ng-template>
+                                                    
                                     <div class="attachments">
                                         <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
                                         <ul>
@@ -339,14 +342,16 @@
                                  aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="message" rows="3"
-                                              placeholder="Comment" [mentionConfig]="mentionConfig" 
-                                              [mentionListTemplate]="mentionListTemplate" ([ngModel])="textComment" (keypress)="getUsers($event)"></textarea>
-                                              <ng-template #mentionListTemplate let-item="item">
-                                                <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
-                                                &nbsp;
-                                                <span>{{item.name}}</span>
-                                              </ng-template>
+                                    <div id="commentContent" class="commentContent" contenteditable="true"
+                                    [mentionConfig]="mentionConfig" placeholder="What are you thinking?"
+                                    [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
+                                    </div>
+        
+                                    <ng-template #mentionListTemplate let-item="item">
+                                        <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
+                                        &nbsp;
+                                        <span>{{item.name}}</span>
+                                      </ng-template>
                                         <div class="attachments">
                                             <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
  

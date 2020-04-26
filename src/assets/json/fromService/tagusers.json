@@ -1,24 +1,24 @@
 [{
-	"username": "noah",
-	"name": "Noah",
+	"username": "noah raj",
+	"name": "Noah raj",
 	"img": "assets/images/avatars/avatar.png",
 	"type":"user"
   },
   {
-	"username": "liam",
-	"name": "Liam",
+	"username": "liam ram",
+	"name": "Liam ram",
 	"img": "assets/images/avatars/avatar.png",
 	"type":"user"
   },
   {
-	"username": "mason",
-	"name": "Mason",
+	"username": "mason john",
+	"name": "Mason john",
 	"img": "assets/images/avatars/avatar.png",
 	"type":"user"
   },
   {
-	"username": "jacob",
-	"name": "Jacob",
+	"username": "jacob pyush",
+	"name": "Jacob pyush",
 	"img": "assets/images/avatars/avatar.png",
 	"type":"user"
   }]

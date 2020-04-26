@@ -195,10 +195,21 @@ form button {
 .rounded-circle:hover{
   cursor: pointer;
 }
-.tag-users{
+.tagged-users{
   color:#007bff;
 }
-.tag-users:hover{
+.tagged-users:hover{
   cursor: pointer;
   text-decoration: underline;
+}
+
+.commentContent{
+  height: 100px;
+  border: 1px solid rgba(0,0,0,0.14);
+  border-radius: 5px;
+  overflow: auto;
+}
+.commentContent[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: #555; 
 }

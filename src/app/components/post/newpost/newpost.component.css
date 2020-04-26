@@ -156,3 +156,46 @@ form button {
 .image-upload{
   padding: 0px 15px 15px 15px;
 }
+
+
+/* Style the navigation menu inside the left column */
+#myMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 300px;
+  position: absolute;
+  z-index: 1;
+  background-color: aquamarine;
+}
+
+.tagged-users{
+  background-color: burlywood;
+}
+#postContent{
+  height: 100px;
+  border: 1px solid rgba(0,0,0,0.14);
+  border-radius: 5px;
+  overflow: auto;
+}
+#postContent[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: #555; 
+}
+/* 
+img {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+} */
+
+#myMenu li img {
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+}
+
+#myMenu li:hover {
+  background-color: #eee;
+}

@@ -74,9 +74,15 @@
                     </li>
                                         
                     <li class="list-group-item pointer"
-                        [ngClass]="{ 'active': folowers, 'in-active': !folowers}">
+                        [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
             <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
               {{followersCount}} Followers
+            </span>
+                    </li>
+                    <li class="list-group-item pointer"
+                        [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
+            <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
+              {{followingsCount}} Following
             </span>
                     </li>
                     <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
@@ -119,6 +125,14 @@
                                              class="widget stick-widget">
                                             <ul class="followers">
                                                 <li *ngFor="let followingUser of followers">
+                                                    <app-usercard1 [user]=followingUser></app-usercard1>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
+                                                class="widget stick-widget">
+                                            <ul class="followers">
+                                                <li *ngFor="let followingUser of followings">
                                                     <app-usercard1 [user]=followingUser></app-usercard1>
                                                 </li>
                                             </ul>

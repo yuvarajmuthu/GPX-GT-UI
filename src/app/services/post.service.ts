@@ -160,7 +160,7 @@ export class PostService  extends AbstractService{
         )
     }
 
-  postComment() {
+    postComment(postFormData:FormData):Observable<any>{
     const httpOptions = {
       headers: new HttpHeaders({ "Accept": "application/json" })
     }  
@@ -171,6 +171,7 @@ export class PostService  extends AbstractService{
     }else{
       url = this.serviceUrl;
     }
+    /*
     return this.http.get(url,httpOptions).
         pipe(
            map((data: NewComment[]) => {
@@ -178,7 +179,14 @@ export class PostService  extends AbstractService{
            }), catchError( error => {
              return throwError( 'Something went wrong!' );
            })
-        )
+        );
+        */
+    return this.http.post(this.serviceUrl, postFormData, httpOptions)
+    .pipe(
+      //map((response:Response) => response.json()),
+      tap(_ => this.log(`posted Comment`)),
+      catchError(this.handleError<any>(`Error in postComment()`))
+    );           
     }
 
     postLike(entityId) {

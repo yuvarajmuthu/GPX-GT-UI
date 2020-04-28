@@ -131,6 +131,7 @@ export class NewpostComponent implements OnInit {
             if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
                 this.isFileSizeError = false;
                 let reader = new FileReader();
+                this.postFormData.append('file', event.target.files[0]);
                 reader.readAsDataURL(event.target.files[0]); // read file as data url
           
                 reader.onload = (event) => { // called once readAsDataURL is completed
@@ -210,7 +211,7 @@ submitPost() {
         this.post.parentPostId = this.parentPost.id;
     }
     this.postFormData.append('post', JSON.stringify(this.post));
-    this.postService.postNewPost(this.postFormData)
+    this.postService.postComment(this.postFormData)
         .subscribe((data:any) => {
           this.resetForm();
           this.newpost.emit(data);

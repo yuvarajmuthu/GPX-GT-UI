@@ -18,7 +18,10 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class PostcardComponent implements OnInit {
     @Input() post: Post;
     @Input() idx: string;
-    @Input() comments : boolean;
+    @Input() isComment : boolean;
+    comment:Post = new Post();
+    comments: Post[];
+    txtPost: string = '';
 
     commentPost: boolean = false;
     devMode: boolean = true;
@@ -127,6 +130,8 @@ export class PostcardComponent implements OnInit {
         if (!this.devMode) {
             this.getProfileSmImage(this.entityId);
         }
+
+        this.resetForm();
     }
 
     
@@ -201,6 +206,7 @@ getUsers(e){
             if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
                 this.isFileSizeError = false;
                 let reader = new FileReader();
+                this.postFormData.append('file', event.target.files[0]);
                 reader.readAsDataURL(event.target.files[0]); // read file as data url
           
                 reader.onload = (event) => { // called once readAsDataURL is completed
@@ -239,21 +245,50 @@ getUsers(e){
         this.icon = 'fa fa-exclamation-triangle';
     }
 
+    resetForm() {
+        this.txtPost = '';
+        this.stagingImage = '';
+        this.comment = {} as Post;
+        this.postFormData = new FormData();
+    }
 
     postEvent(): void {
         console.log("posting new message");
         this.commentPost = false;
     }
 
+    getLoggedUsername():string{
+        let loggedUser:string= '';
 
+
+
+        if (this.dataShareService.getCurrentUser() && this.dataShareService.getCurrentUser().username) {
+            loggedUser = this.dataShareService.getCurrentUser().username;
+        }
+
+        return loggedUser;
+
+    }
     postComment() {
-      
-        // this.post.entityId = this.dataShareService.getLoggedinUsername();
-        // this.post.postText = this.textComment;
-        // this.postFormData = new FormData();
-      //  this.postFormData.append('post', JSON.stringify(this.post));
-      console.log(this.post);
-         this.postService.postComment()
+        let input = document.getElementById("commentContent");
+        this.txtPost = input.innerHTML.replace(/"/g, "'");
+
+        this.comment.entityId = this.dataShareService.getLoggedinUsername();
+        this.comment.postText = this.txtPost; 
+
+        console.log('Submitting Comment text ', this.txtPost);
+        this.comment.parentPostId = this.post.id;
+        this.postFormData.append('post', JSON.stringify(this.comment));
+        this.postService.postComment(this.postFormData)
+            .subscribe((data:any) => {
+              this.resetForm();
+              //this.newpost.emit(data);
+            });
+        
+
+
+/*
+         this.postService.postComment() 
              .subscribe((data:any) => {
                  console.log(data);
                  this.toggleCommentInput();
@@ -267,23 +302,28 @@ getUsers(e){
                  }
 
              });
+             */
+   }
+
+   getComments(){
+    this.comments = null; 
    }
 
    loadMoreComments(id: string) {
-    this.postService.postComment()
+    this.postService.postComment(this.postFormData)
     .subscribe((data:any) => {
         console.log(data);
             this.post.comments.push(data);
 
     });
    }
-
+/*
     comment(): void {
         this.commentPost = true;
         //child hideInput set to false
         console.log('this.commentPost ' + this.commentPost);
     }
-
+*/
     likePost(): void {
         console.log('Liked the post ' + this.post.id);
         console.log('userid ' + this.dataShareService.getCurrentUserId());

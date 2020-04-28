@@ -240,6 +240,42 @@ getFollowers(entityId:string):Observable<any>{
   
 }
 
+getFollowingsCount(entityId:string):Observable<string>{
+  let serviceUrl = "";
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/followersCount.json';   
+  }else{
+    serviceUrl = this.getSocialService()+"/getFollowingsCount";
+  }
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+
+  return this.http.get(serviceUrl, { responseType: 'text', params: {
+    entityId: entityId
+  } });
+
+}
+
+getFollowings(entityId:string):Observable<any>{
+  let serviceUrl = "";
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/followers.json';   
+  }else{
+    serviceUrl = this.getSocialService()+"/getFollowings";
+  }
+  let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+  let myParams = new HttpParams();
+  myParams.append('entityId', entityId);
+
+  return this.http.get(serviceUrl, { responseType: 'json', params: {
+    entityId: entityId
+  } }).pipe(
+    tap(_ => this.log(`fetched getFollowings`)),
+    catchError(this.handleError<any>(`Error in getFollowings()`))
+  );
+  
+}
+
 getConnectionRequests(entityId:string):Observable<any>{
   let serviceUrl = this.getSocialService()+"/getConnectionsByStatus"+"/"+entityId+"/";
   

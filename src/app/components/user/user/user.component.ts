@@ -65,6 +65,7 @@ export class UserComponent implements OnInit {
     isProfileCollapsed: boolean = false;
     isActivityCollapsed: boolean = true;
     isFollowersCollapsed: boolean = true;
+    isFollowingsCollapsed: boolean = true;
     externalUser:boolean;
     biodata={};
 
@@ -83,6 +84,8 @@ export class UserComponent implements OnInit {
     inEditMode:boolean = false;
     followersCount: string = null;
     followers: User[] = [];
+    followingsCount: string = null;
+    followings: User[] = [];
     selectedProfileSmImage: File;
     profileSmImageChanged: boolean = false;
     paramUsername: string = '';
@@ -93,7 +96,9 @@ export class UserComponent implements OnInit {
     tap: boolean = false;
     profileData: boolean = true;
     folow: boolean = false;
-    folowers: boolean = false;
+    followersActiveCss: boolean = false;
+    followingsActiveCss: boolean = false;
+
     navTabs: boolean = false;
 
     followCntrlLabel: string = '';
@@ -205,8 +210,8 @@ export class UserComponent implements OnInit {
         this.activitiesData = true;
         this.profileData = false;
         this.folow = false;
-        this.folowers = false;
-
+        this.followersActiveCss = false;
+        this.followingsActiveCss = false;
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = false;
@@ -216,27 +221,46 @@ export class UserComponent implements OnInit {
         this.activitiesData = false;
         this.profileData = true;
         this.folow = false;
-        this.folowers = false;
-
+        this.followersActiveCss = false;
+        this.followingsActiveCss = false;
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
     }
 
+    //OBSOLETE
+    /*
     FollowingCount() {
         this.activitiesData = false;
         this.profileData = false;
         this.folow = true;
-        this.folowers = false;
+        this.followersActiveCss = false;
     }
+    */
 
     Followers() {
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
-        this.folowers = true;
+        this.followersActiveCss = true;
+        this.followingsActiveCss = false;
         this.getFollowers(this.profileUserId);
         this.isFollowersCollapsed = false;
+        this.isFollowingsCollapsed = true;
+        this.isProfileCollapsed = true;
+        this.isActivityCollapsed = true;
+
+    }
+
+    Followings() {
+        this.activitiesData = false;
+        this.profileData = false;
+        this.folow = false;
+        this.followersActiveCss = false;
+        this.followingsActiveCss = true;
+        this.getFollowings(this.profileUserId);
+        this.isFollowersCollapsed = true;
+        this.isFollowingsCollapsed = false;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
 
@@ -317,6 +341,8 @@ export class UserComponent implements OnInit {
             this.getFollowersCount(this.profileUserId);
             this.getFollowers(this.profileUserId);
 
+            this.getFollowingsCount(this.profileUserId);
+            this.getFollowings(this.profileUserId);
 //this.viewingUser['external'] is required only for dev mode
             this.userService.getUserData(this.viewingUser['userId'], this.viewingUser['external']).subscribe(
                 data => { 
@@ -396,6 +422,9 @@ export class UserComponent implements OnInit {
     showProfile() {
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
+        this.isFollowersCollapsed = true;
+        this.isFollowingsCollapsed = true;
+
         this.profileTabSelected = true;
         this.activitiesTabSelected = false;
         return false;
@@ -404,6 +433,9 @@ export class UserComponent implements OnInit {
     showActivities() {
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = false;
+        this.isFollowersCollapsed = true;
+        this.isFollowingsCollapsed = true;
+
         this.profileTabSelected = false;
         this.activitiesTabSelected = true;
         return false;
@@ -721,12 +753,33 @@ export class UserComponent implements OnInit {
                     console.log('getFollowers response ' + result);
                     this.viewingUser['followers'] = this.followers = result;
                     console.log('getFollowers response ' + this.followers);
-                    if (this.followers) {
-                        this.followers.forEach(follower => {
-                            //get the profilesmimage
-                            //this.getProfileSmImage(follower.username);
-                        });
-                    }
+                },
+                (err) => {
+                    console.log('Error ', err);
+                });
+    }
+
+    getFollowingsCount(profileId: string) {
+        this.userService.getFollowingsCount(profileId)
+            .subscribe(
+                (result) => {
+                    console.log('getFollowingsCount response ' + result);
+                    this.followingsCount = result;
+
+                },
+                (err) => {
+                    console.log('Error ', err);
+                });
+    }
+
+    getFollowings(profileId: string) {
+        this.userService.getFollowings(profileId)
+            .subscribe(
+                (result) => {
+                    console.log('getFollowings response ' + result);
+                    this.viewingUser['followings'] = this.followings = result;
+                    console.log('getFollowings response ' + this.followings);
+
                 },
                 (err) => {
                     console.log('Error ', err);

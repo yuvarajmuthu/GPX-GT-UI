@@ -91,8 +91,49 @@ export class PostService  extends AbstractService{
   	return postsPromise;  
   }
 
-
   getActivities(requestData:string):Observable<Post[]> {
+    var postJson = {};
+  	var posts:JSON[];
+	  var postsPromise : Post[] = [];
+    var serviceUrl = "";
+    let requestJson = JSON.parse(requestData);
+    if(this.devMode){
+      serviceUrl = '/assets/json/fromService/post.json'; 
+    }else{
+      serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
+    }
+
+    console.log("gonna get posts");
+
+
+    return this.http.get(serviceUrl, { responseType: 'json', params: {
+      pageNumber: requestJson['pageNumber']
+    } })
+    .pipe(
+//      map((response:Response) => response.json()),
+      map((result) => {
+        let posts:any = result;//result["results"];  
+
+        //posts = data['results'];
+        console.log('from Post Service - parsed Post length ' + posts.length);
+
+        for (var i = 0; i < posts.length; i++) {
+            //var post : Post = {} as Post;
+            console.log('reading properties - ' + JSON.stringify(posts[i]));                        
+            //post = Post.decodePost(posts[i]);
+            //console.log('reading properties - ' + post.id);
+
+            postsPromise.push(posts[i]);
+        }
+
+            return postsPromise;      
+              }), 
+      tap(_ => this.log(`fetched getActivities`)),
+      catchError(this.handleError<any>(`Error in getActivities()`))
+    );                         
+  }
+
+  getMyActivities(requestData:string):Observable<Post[]> {
     var postJson = {};
   	var posts:JSON[];
 	  var postsPromise : Post[] = [];

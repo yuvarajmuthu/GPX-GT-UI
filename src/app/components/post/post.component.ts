@@ -24,6 +24,7 @@ export class PostComponent implements OnInit {
     @Input() disableNewPost: boolean = false;
     
     posts: Post[] = [];
+    pageNumber:Number = 0;
 
     constructor(private postService: PostService, private dataShareService: DatashareService) {
     }
@@ -55,14 +56,15 @@ export class PostComponent implements OnInit {
           (val) => { this.getPost(entityId);
         });
         */
-        this.getPost(entityId);
+        this.getPost(entityId, this.pageNumber);
 
     }
 
 
-    getPost(entityId: string): void {
+    getPost(entityId: string, pageNumber:Number): void {
         var getPostRequest = {};
         getPostRequest['entityId'] = entityId;
+        getPostRequest['pageNumber'] = this.pageNumber;
         //getPostRequest["entityType"] = entityType;
 
         this.postService.getActivities(JSON.stringify(getPostRequest)).subscribe((result) => {

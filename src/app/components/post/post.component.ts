@@ -24,7 +24,8 @@ export class PostComponent implements OnInit {
     @Input() disableNewPost: boolean = false;
     
     posts: Post[] = [];
-    pageNumber:Number = 0;
+    postsByPage : Post[]=[];
+    pageNumber: number = 1;
 
     constructor(private postService: PostService, private dataShareService: DatashareService) {
     }
@@ -38,9 +39,37 @@ export class PostComponent implements OnInit {
 
     }
 
+    onPostScroll(e){
+        const divViewHeight = e.target.offsetHeight;
+        const divScrollHeight = e.target.scrollHeight;
+        const scrollLocation = e.target.scrollTop;
+
+        const buffer = 200;
+        const limit = divScrollHeight - divViewHeight - buffer;
+        if(scrollLocation>limit){
+            console.log("test");
+            //const tmppost = this.posts;
+            this.pageNumber = this.pageNumber+1;
+            this.getPost(String(this.pageNumber));
+            //this.posts = this.posts.concat(tmppost)
+        }
+    }
+
     ngOnInit(): void {
         //this.imageName = '../../images/'+this.party.profileImage;
         console.log('ngOnInit() post.component');
+
+        /*
+        interval(5000).subscribe(
+          (val) => { this.getPost(entityId);
+        });
+        */
+        this.getPost('1');
+
+    }
+
+
+    getPost(pageNumber:string): void {
         let entityId: string;
         if (this.type == 'group' && this.groupId) {
             entityId = this.groupId;
@@ -51,24 +80,15 @@ export class PostComponent implements OnInit {
         }
 
         console.log('Activities for ' + entityId);
-        /*
-        interval(5000).subscribe(
-          (val) => { this.getPost(entityId);
-        });
-        */
-        this.getPost(entityId, this.pageNumber);
 
-    }
-
-
-    getPost(entityId: string, pageNumber:Number): void {
         var getPostRequest = {};
         getPostRequest['entityId'] = entityId;
-        getPostRequest['pageNumber'] = this.pageNumber;
+        getPostRequest['pageNumber'] = pageNumber;
         //getPostRequest["entityType"] = entityType;
 
         this.postService.getActivities(JSON.stringify(getPostRequest)).subscribe((result) => {
-            this.posts = result;
+            this.postsByPage = result;
+            this.posts = this.posts.concat(this.postsByPage);
             //this.reloadPost(entity, entityType);
         });
     }

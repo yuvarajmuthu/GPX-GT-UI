@@ -102,6 +102,7 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
     }
+    //serviceUrl = '/assets/json/fromService/post.json'; 
 
     console.log("gonna get posts");
 
@@ -179,7 +180,59 @@ export class PostService  extends AbstractService{
       catchError(this.handleError<any>(`Error in getActivities()`))
     );                         
   }
+  
+  getCommentsCount(postId:string):Observable<number> {
+    var serviceUrl = "";
 
+    if(this.devMode){
+      serviceUrl = '/assets/json/fromService/followersCount.json'; 
+    }else{
+      serviceUrl = this.serviceUrl + "/getCommentsCount?postId=" + postId;
+    }
+
+    console.log("in getCommentsCount - serviceUrl ", serviceUrl);
+
+    return this.http.get(serviceUrl, this.httpOptions).pipe(
+      tap(_ => this.log(`fetched getCommentsCount`)),
+      catchError(this.handleError<any>(`Error in getCommentsCount()`))
+    );                     
+  }
+
+  getLikedCount(postId:string):Observable<number> {
+    var serviceUrl = "";
+
+    if(this.devMode){
+      serviceUrl = '/assets/json/fromService/followersCount.json'; 
+    }else{
+      serviceUrl = this.serviceUrl + "/getLikedCount?postId=" + postId;
+    }
+
+    console.log("in getLikedCount - serviceUrl ", serviceUrl);
+
+    return this.http.get(serviceUrl, this.httpOptions).pipe(
+      tap(_ => this.log(`fetched getLikedCount`)),
+      catchError(this.handleError<any>(`Error in getLikedCount()`))
+    );                     
+  }
+
+  getLikeStatus(postId:string, entityId:string):Observable<boolean> {
+    var serviceUrl = "";
+
+    if(this.devMode){
+      serviceUrl = '/assets/json/fromService/postLikeStatus.json'; 
+    }else{
+      serviceUrl = this.serviceUrl + "/isLikedByEntity?postId=" + postId + "&entityId=" + entityId;
+    }
+
+    console.log("in getLikeStatus - serviceUrl ", serviceUrl);
+
+    return this.http.get(serviceUrl, this.httpOptions).pipe(
+      tap(_ => this.log(`fetched getLikeStatus`)),
+      catchError(this.handleError<any>(`Error in getLikeStatus()`))
+    );                     
+  }
+
+  //not used-obsolete
   postNewPost(postFormData:FormData) {
     const httpOptions = {
       headers: new HttpHeaders({ "Accept": "application/json" })
@@ -230,28 +283,22 @@ export class PostService  extends AbstractService{
     );           
     }
 
-    postLike(entityId) {
-      const httpOptions = {
-        headers: new HttpHeaders({ "Accept": "application/json" })
-      }  
-      let url = "";
-  
-      if(this.devMode){
-        url = '/assets/json/fromService/newlike.json?entityId='+entityId; 
-      }else{
-        url = this.serviceUrl;
-      }
-      return this.http.get(url,httpOptions).
-          pipe(
-             map((data: NewLike[]) => {
-               return data;
-             }), catchError( error => {
-               return throwError( 'Something went wrong!' );
-             })
-          )
-      }
+  postLike(postId:string, entityId:string):Observable<any> {
+    var serviceUrl = "";
 
-  //post the comment to the server
+    if(this.devMode){
+      serviceUrl = '/assets/json/fromService/newlike.json?entityId='+entityId; 
+    }else{
+      serviceUrl = this.serviceUrl + "/like/" + postId + "?entityId=" + entityId;
+    }
+
+    console.log("in postLike - serviceUrl ", serviceUrl);
+
+    return this.http.put(serviceUrl, this.httpOptions).pipe(
+      tap(_ => this.log(`updating postLike`)),
+      catchError(this.handleError<any>(`Error in postLike()`))
+    );                     
+  }
 
   getTagUsers() {
     const httpOptions = {

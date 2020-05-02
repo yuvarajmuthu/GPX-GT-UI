@@ -64,21 +64,15 @@ export class PostComponent implements OnInit {
           (val) => { this.getPost(entityId);
         });
         */
-        this.getPost('1');
+        this.getPost('0');
 
     }
 
 
     getPost(pageNumber:string): void {
         let entityId: string;
-        if (this.type == 'group' && this.groupId) {
-            entityId = this.groupId;
-        } else if (this.type == 'user') {
-            entityId = this.dataShareService.getLoggedinUsername();
-        } else {
-            entityId = this.dataShareService.getLoggedinUsername();
-        }
-
+        entityId = this.dataShareService.getLoggedinUsername();
+        
         console.log('Activities for ' + entityId);
 
         var getPostRequest = {};

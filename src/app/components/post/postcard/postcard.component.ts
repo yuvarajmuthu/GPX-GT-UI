@@ -30,6 +30,8 @@ export class PostcardComponent implements OnInit {
     hidePost: boolean = false;
     reportPost: boolean = false;
     liked: boolean = false;
+    likedCount:Number;
+    commentsCount:Number;
     name: any = '';
     icon: any = '';
     stagingImage: any = null;
@@ -131,6 +133,14 @@ export class PostcardComponent implements OnInit {
             this.getProfileSmImage(this.entityId);
         }
 
+        if(this.post.likedBy){
+            this.likedCount = this.post.likedBy.length
+        }else{
+            this.likedCount = 0;
+        }
+        
+        this.getCommentsCount();
+        
         this.resetForm();
     }
 
@@ -185,10 +195,11 @@ getUsers(e){
         let entityId = this.dataShareService.getLoggedinUsername();
         if(this.post.likedBy.indexOf(entityId) == -1){
             let check = event.target.classList.contains('post-active');
-            this.postService.postLike(entityId)
+            this.postService.postLike(this.post.id, entityId)
             .subscribe((data:any) => {
                 event.target.classList.add('post-active');
-                this.post.likedBy.push(entityId);
+                //this.post.likedBy.push(entityId);
+                this.post = data;
             });
         }
         
@@ -282,6 +293,7 @@ getUsers(e){
         this.postService.postComment(this.postFormData)
             .subscribe((data:any) => {
               this.resetForm();
+              //TODO - broadcast posted message
               //this.newpost.emit(data);
             });
         
@@ -305,9 +317,18 @@ getUsers(e){
              */
    }
 
-   getComments(){
+getComments(){
     this.comments = null; 
-   }
+}
+
+getCommentsCount() {
+    this.postService.getCommentsCount(this.post.id)
+    .subscribe((data:any) => {
+        this.commentsCount = data;
+        console.log(data);
+
+    });
+}
 
    loadMoreComments(id: string) {
     this.postService.postComment(this.postFormData)
@@ -317,6 +338,17 @@ getUsers(e){
 
     });
    }
+
+   //not used for now, post.likedBy.length is being used
+   getLikedCount() {
+    this.postService.getLikedCount(this.post.id)
+    .subscribe((data:any) => {
+        this.likedCount = data;
+        console.log(data);
+
+    });
+   }
+
 /*
     comment(): void {
         this.commentPost = true;
@@ -324,6 +356,7 @@ getUsers(e){
         console.log('this.commentPost ' + this.commentPost);
     }
 */
+//not used
     likePost(): void {
         console.log('Liked the post ' + this.post.id);
         console.log('userid ' + this.dataShareService.getCurrentUserId());

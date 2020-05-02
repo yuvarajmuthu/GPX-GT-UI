@@ -31,7 +31,7 @@ export class ProfileService extends AbstractService{
   }
   
 
-  getProfileTemplateData(profileTemplateId:String):Observable<any> {    
+  getProfileTemplateData(profileTemplateId:string):Observable<any> {    
       let serviceUrl = this.serviceUrl + "/getProfileTemplate/" + profileTemplateId;
       console.log("getProfileTemplateData profile.service this.serviceUrl " + serviceUrl);
       let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON

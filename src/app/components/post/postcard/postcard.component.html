@@ -147,11 +147,11 @@
         <div class="row post-card-footer">
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
                 <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
-                Like({{post.likedBy.length}})
+                Like({{likedCount}})
             </a>
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
                 <i class="fa fa-comment custom-size"></i>
-                Comment
+                Comment({{commentsCount}})
             </a>
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>
@@ -319,11 +319,11 @@
         <div class="row post-card-footer">
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
                 <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
-                Like({{post.likedBy.length}})
+                Like({{likedCount}})
             </a>
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
                 <i class="fa fa-comment custom-size"></i>
-                Comment
+                Comment({{commentsCount}})
             </a>
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>

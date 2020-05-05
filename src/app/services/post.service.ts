@@ -180,7 +180,43 @@ export class PostService  extends AbstractService{
       catchError(this.handleError<any>(`Error in getActivities()`))
     );                         
   }
-  
+
+  getPostComments(requestData:string):Observable<Post[]> {
+    var postJson = {};
+  	var posts:JSON[];
+	  var postsPromise : Post[] = [];
+    var serviceUrl = "";
+    let requestJson = JSON.parse(requestData);
+    if(this.devMode){
+      serviceUrl = '/assets/json/fromService/post.json'; 
+    }else{
+      serviceUrl = this.serviceUrl + "/getPostComments/" + requestJson['postId'] + "/";
+    }
+
+    console.log("In getPostComments");
+    return this.http.get(serviceUrl, { responseType: 'json', params: {
+      pageNumber: requestJson['pageNumber']
+    } })
+    .pipe(
+      map((result) => {
+        let posts:any = result;//result["results"];  
+
+
+        console.log('from Post Service - parsed Post length ' + posts.length);
+
+        for (var i = 0; i < posts.length; i++) {
+
+          console.log('reading properties - ' + JSON.stringify(posts[i]));                        
+          postsPromise.push(posts[i]);
+        }
+
+            return postsPromise;      
+              }), 
+      tap(_ => this.log(`fetched getPostComments`)),
+      catchError(this.handleError<any>(`Error in getPostComments()`))
+    );                         
+  }
+
   getCommentsCount(postId:string):Observable<number> {
     var serviceUrl = "";
 

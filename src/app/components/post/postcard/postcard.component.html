@@ -181,7 +181,7 @@
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
                                     <div id="commentContent" class="commentContent" contenteditable="true"
-                                    [mentionConfig]="mentionConfig" placeholder="What are you thinking?"
+                                    [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
                                     [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                                     </div>
         
@@ -256,9 +256,9 @@
                 <br/>
             </div>
         </ng-container>
-        <app-postcard  *ngFor="let post of post.comments" [isComment]="true" [post]="post">
-        </app-postcard>
-        <button *ngIf="post.totalComments>3" type="button" class="btn btn-xs load-more-comments" (click)="loadMoreComments(post.id)">Load more
+        <app-postcard  *ngFor="let post of comments" [isComment]="true" [post]="post">
+        </app-postcard> 
+        <button *ngIf="loadMore" type="button" class="btn btn-xs load-more-comments" (click)="loadMoreComments()">Load more
             comments
         </button>
     </div>

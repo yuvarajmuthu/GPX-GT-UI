@@ -20,7 +20,7 @@ export class PostcardComponent implements OnInit {
     @Input() idx: string;
     @Input() isComment : boolean;
     comment:Post = new Post();
-    comments: Post[];
+    comments: Post[]=[];
     txtPost: string = '';
 
     commentPost: boolean = false;
@@ -30,8 +30,10 @@ export class PostcardComponent implements OnInit {
     hidePost: boolean = false;
     reportPost: boolean = false;
     liked: boolean = false;
-    likedCount:Number;
-    commentsCount:Number;
+    loadMore:boolean = false;
+    likedCount:number;
+    commentsCount:number;
+    pageNumber:number = 0;
     name: any = '';
     icon: any = '';
     stagingImage: any = null;
@@ -234,8 +236,10 @@ getUsers(e){
         this.showCommentInput = !this.showCommentInput;
 
         // CHANGE THE NAME OF THE BUTTON.
-        if(this.showCommentInput)
+        if(this.showCommentInput){
             this.buttonName = "Hide";
+            this.getComments(this.post.id, this.pageNumber);
+        }
         else
             this.buttonName = "Show";
     }
@@ -280,6 +284,7 @@ getUsers(e){
         return loggedUser;
 
     }
+
     postComment() {
         let input = document.getElementById("commentContent");
         this.txtPost = input.innerHTML.replace(/"/g, "'");
@@ -293,32 +298,44 @@ getUsers(e){
         this.postService.postComment(this.postFormData)
             .subscribe((data:any) => {
               this.resetForm();
-              //TODO - broadcast posted message
-              //this.newpost.emit(data);
             });
-        
+}
 
+getComments(postId:string, pageNumber:number): void {
+    let entityId: string;
+    entityId = this.dataShareService.getLoggedinUsername();
 
-/*
-         this.postService.postComment() 
-             .subscribe((data:any) => {
-                 console.log(data);
-                 this.toggleCommentInput();
-                 if(this.post.comments){
-                    this.post.comments.unshift(data);
-                 }
-                 else{
-                     console.log("else")
-                     this.post.comments = [];
-                     this.post.comments.push(data);
-                 }
+    console.log('Activities for ' + entityId);
 
-             });
-             */
-   }
+    var getPostRequest = {};
+    getPostRequest['postId'] = postId;
+    getPostRequest['pageNumber'] = pageNumber;
 
-getComments(){
-    this.comments = null; 
+    
+    this.postService.getPostComments(JSON.stringify(getPostRequest))
+    .subscribe((result) => {
+        if(pageNumber == 0){
+            this.comments = result;
+        }else{
+            this.comments = this.comments.concat(result);
+        }
+
+        this.managePagination();
+    });
+}
+
+loadMoreComments() {
+    this.pageNumber++;
+    this.getComments(this.post.id, this.pageNumber);
+}
+
+managePagination(){
+    if(this.commentsCount > this.comments.length){
+        this.loadMore = true;
+    }else{
+        this.loadMore = false;
+    }
+
 }
 
 getCommentsCount() {
@@ -330,14 +347,7 @@ getCommentsCount() {
     });
 }
 
-   loadMoreComments(id: string) {
-    this.postService.postComment(this.postFormData)
-    .subscribe((data:any) => {
-        console.log(data);
-            this.post.comments.push(data);
 
-    });
-   }
 
    //not used for now, post.likedBy.length is being used
    getLikedCount() {
@@ -349,13 +359,7 @@ getCommentsCount() {
     });
    }
 
-/*
-    comment(): void {
-        this.commentPost = true;
-        //child hideInput set to false
-        console.log('this.commentPost ' + this.commentPost);
-    }
-*/
+
 //not used
     likePost(): void {
         console.log('Liked the post ' + this.post.id);

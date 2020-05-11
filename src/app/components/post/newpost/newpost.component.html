@@ -57,9 +57,9 @@
                             </div>
 
                             <ng-template #mentionListTemplate let-item="item">
-                                <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
+                                <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
                                 &nbsp;
-                                <span>{{item.name}}</span>
+                                <span>{{item.firstName}} {{item.lastName}}</span>
                               </ng-template>
 
                               <div class="attachments">

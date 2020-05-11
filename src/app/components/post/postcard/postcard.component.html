@@ -58,7 +58,7 @@
 </div>-->
 
 
-<div class="card gedf-card"  *ngIf="isComment==false">
+<div class="card gedf-card post-list"  *ngIf="isComment==false">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
@@ -180,7 +180,7 @@
                                  aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
-                                    <div id="commentContent" class="commentContent" contenteditable="true"
+                                    <!-- <div id="commentContent" class="commentContent" contenteditable="true"
                                     [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
                                     [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                                     </div>
@@ -189,7 +189,19 @@
                                         <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
                                         &nbsp;
                                         <span>{{item.name}}</span>
-                                      </ng-template>
+                                      </ng-template> -->
+
+                                      <div id="commentContent" class="commentContent" contenteditable="true"
+                                      [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
+                                      [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
+                                      </div>
+          
+                                      <ng-template #mentionListTemplate let-item="item">
+                                          <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
+                                          &nbsp;
+                                          <span>{{item.firstName}} {{item.lastName}}</span>
+                                        </ng-template>
+
                                                     
                                     <div class="attachments">
                                         <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
@@ -342,7 +354,7 @@
                                  aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
-                                    <div id="commentContent" class="commentContent" contenteditable="true"
+                                    <!-- <div id="commentContent" class="commentContent" contenteditable="true"
                                     [mentionConfig]="mentionConfig" placeholder="What are you thinking?"
                                     [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                                     </div>
@@ -351,7 +363,19 @@
                                         <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
                                         &nbsp;
                                         <span>{{item.name}}</span>
-                                      </ng-template>
+                                      </ng-template> -->
+
+                                      <div id="commentContent" class="commentContent" contenteditable="true"
+                                      [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
+                                      [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
+                                      </div>
+          
+                                      <ng-template #mentionListTemplate let-item="item">
+                                          <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
+                                          &nbsp;
+                                          <span>{{item.firstName}} {{item.lastName}}</span>
+                                        </ng-template>
+
                                         <div class="attachments">
                                             <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
  

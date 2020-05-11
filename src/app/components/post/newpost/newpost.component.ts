@@ -69,8 +69,6 @@ getCaretPosition() {
     sel, range;
   if (window.getSelection) {
     sel = window.getSelection();
-   // console.log(sel);
-    //console.log(editableDiv.childNodes);
     this.oldChildNodes = editableDiv.childNodes;
     if (sel.rangeCount) {
         let ranges = [];
@@ -80,12 +78,9 @@ getCaretPosition() {
             this.nxtNode = ranges[i].endContainer.parentNode;
          //   editableDiv.removeChild(ranges[i].endContainer.parentNode);
            }
-           console.log(this.oldChildNodes);
-           console.log(this.nxtNode)
            for(let j = 0; j <= this.oldChildNodes.length; j++) {
              //console.log(this.oldChildNodes[j]);
              if(this.oldChildNodes[j] == this.nxtNode){
-               console.log(j);
                this.deletedNodePos = j
                editableDiv.removeChild(this.nxtNode);
              }
@@ -107,135 +102,133 @@ getCaretPosition() {
   //     caretPos = tempRange.text.length;
   //   }
   // }
-console.log(caretPos);
   return caretPos;
 }
 
-    onMentionSelect(item) {
+onMentionSelect(item) {
+      let editableDiv = document.getElementById("postContent");
+      var caretPos = 0,
+        sel, range;
+      if (window.getSelection) {
+        sel = window.getSelection();
+        console.log(sel);
+        if (sel.rangeCount) {
+            let ranges = [];
+            // for(let i = 0; i < sel.rangeCount; i++) {
+            //     ranges[i] = sel.getRangeAt(i);
+            //     console.log(ranges[i].endContainer.parentNode);
+            //    // editableDiv.removeChild(ranges[i].endContainer.parentNode);
+            //    if(ranges[i].endContainer.parentNode == "SPAN"){
+            //        console.log("span deleted");
+            //    }
 
-        let editableDiv = document.getElementById("postContent");
-        var caretPos = 0,
-          sel, range;
-        if (window.getSelection) {
-          sel = window.getSelection();
-          console.log(sel);
-          if (sel.rangeCount) {
-              let ranges = [];
-              // for(let i = 0; i < sel.rangeCount; i++) {
-              //     ranges[i] = sel.getRangeAt(i);
-              //     console.log(ranges[i].endContainer.parentNode);
-              //    // editableDiv.removeChild(ranges[i].endContainer.parentNode);
-              //    if(ranges[i].endContainer.parentNode == "SPAN"){
-              //        console.log("span deleted");
-              //    }
 
+                let btn:HTMLElement;
+                btn = document.createElement("SPAN");   // Create a <button> element
+                let inputDiv = document.getElementById("postContent"); 
+                let innertmlHtml = inputDiv.innerHTML;
+                var n = innertmlHtml.indexOf("@");
+                console.log(innertmlHtml);
+                var length = innertmlHtml.length;
+                var tmp = innertmlHtml.slice(0, n);
+                btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
+                inputDiv.innerHTML = tmp;
+                btn.setAttribute('class', 'tagged-users');   
+                btn.setAttribute('data-username', item.username);
+                btn.setAttribute('data-entityType', item.userType);
+                btn.setAttribute('readonly', 'true');
+        
+                var btn1 = document.createElement("SPAN");        // Insert text
+                btn1.innerHTML = '&nbsp;';    
+                inputDiv.appendChild(btn);
+                inputDiv.appendChild(btn1);
+                this.items = [];
+                console.log(btn);
 
-                 let btn:HTMLElement;
-                 btn = document.createElement("SPAN");   // Create a <button> element
-                 let inputDiv = document.getElementById("postContent"); 
-                 let innertmlHtml = inputDiv.innerHTML;
-                 var n = innertmlHtml.indexOf("@");
-                 console.log(innertmlHtml);
-                 var length = innertmlHtml.length;
-                 var tmp = innertmlHtml.slice(0, n);
-                 btn.innerHTML = item.username+"&nbsp;";       
-                 inputDiv.innerHTML = tmp;
-                 btn.setAttribute('class', 'tagged-users');   
-                 btn.setAttribute('data-username', item.username);
-                 btn.setAttribute('data-entityType', item.type);
-                 btn.setAttribute('readonly', 'true');
-         
-                 var btn1 = document.createElement("SPAN");        // Insert text
-                 btn1.innerHTML = '&nbsp;';    
-                 inputDiv.appendChild(btn);
-                 inputDiv.appendChild(btn1);
-                 this.items = [];
-                 console.log(btn);
-
-              //   }
-            range = sel.getRangeAt(0);
-            if (range.commonAncestorContainer.parentNode == editableDiv) {
-              caretPos = range.endOffset;
-            }
+            //   }
+          range = sel.getRangeAt(0);
+          if (range.commonAncestorContainer.parentNode == editableDiv) {
+            caretPos = range.endOffset;
           }
         }
-    
-        // let btn:HTMLElement;
-        // btn = document.createElement("SPAN");   // Create a <button> element
-        // let inputDiv = document.getElementById("postContent"); 
-        // let innertmlHtml = inputDiv.innerHTML;
-        // var n = innertmlHtml.indexOf("@");
-        // console.log(innertmlHtml);
-        // var length = innertmlHtml.length;
-        // var tmp = innertmlHtml.slice(0, n);
-        // btn.innerHTML = item.username+"&nbsp;";       
-        // inputDiv.innerHTML = tmp;
-        // btn.setAttribute('class', 'tagged-users');   
-        // btn.setAttribute('data-username', item.username);
-        // btn.setAttribute('data-entityType', item.type);
-        // btn.setAttribute('readonly', 'true');
+      }
+  
+      // let btn:HTMLElement;
+      // btn = document.createElement("SPAN");   // Create a <button> element
+      // let inputDiv = document.getElementById("postContent"); 
+      // let innertmlHtml = inputDiv.innerHTML;
+      // var n = innertmlHtml.indexOf("@");
+      // console.log(innertmlHtml);
+      // var length = innertmlHtml.length;
+      // var tmp = innertmlHtml.slice(0, n);
+      // btn.innerHTML = item.username+"&nbsp;";       
+      // inputDiv.innerHTML = tmp;
+      // btn.setAttribute('class', 'tagged-users');   
+      // btn.setAttribute('data-username', item.username);
+      // btn.setAttribute('data-entityType', item.type);
+      // btn.setAttribute('readonly', 'true');
 
-        // var btn1 = document.createElement("SPAN");        // Insert text
-        // btn1.innerHTML = '&nbsp;';    
-        // inputDiv.appendChild(btn);
-        // inputDiv.appendChild(btn1);
-        // this.items = [];
-        // console.log(btn);
-
-
-        // var sel, range;
-        // if (window.getSelection) {
-        //     // IE9 and non-IE
-        //     sel = window.getSelection();
-        //     if (sel.getRangeAt && sel.rangeCount) {
-        //         range = sel.getRangeAt(0);
-        //         range.deleteContents();
-    
-        //         // Range.createContextualFragment() would be useful here but is
-        //         // non-standard and not supported in all browsers (IE9, for one)
-        //         var el = document.createElement("div");
-        //         var tagUser =  `<span class='tagged-users'>${item.username}</span><span>,&nbsp;</span>`;
-        //         el.innerHTML = tagUser;
-        //         var frag = document.createDocumentFragment(), node, lastNode;
-        //         console.log(frag);
-                
-        //         console.log(el.firstChild)
-        //         while ( (node = el.firstChild) ) {
-        //             console.log(node);
-        //             lastNode = frag.appendChild(node);
-        //         }
-        //         range.insertNode(frag);
-        //         console.log(lastNode);
-        //         // Preserve the selection
-        //         if (lastNode) {
-        //             range = range.cloneRange();
-        //             range.setStartAfter(lastNode);
-        //             range.collapse(true);
-        //             sel.removeAllRanges();
-        //             sel.addRange(range);
-        //         }
-        //     }
-        // }
-        // } else if (document.selection && document.selection.type != "Control") {
-        //     // IE < 9
-        //     document.selection.createRange().pasteHTML(html);
-        // }
-   // }
+      // var btn1 = document.createElement("SPAN");        // Insert text
+      // btn1.innerHTML = '&nbsp;';    
+      // inputDiv.appendChild(btn);
+      // inputDiv.appendChild(btn1);
+      // this.items = [];
+      // console.log(btn);
 
 
-//  return btn;
- var el = document.getElementById("postContent");
- console.log(el);
- var range1 = document.createRange();
- var sel1 = window.getSelection();
- console.log(el.childNodes.length);
- var tmpLength = Number(el.childNodes.length-1);
- range1.setStart(el.childNodes[tmpLength], 1);
- range1.collapse(true);
- sel.removeAllRanges();
- sel.addRange(range1);
- el.focus();
-     }
+      // var sel, range;
+      // if (window.getSelection) {
+      //     // IE9 and non-IE
+      //     sel = window.getSelection();
+      //     if (sel.getRangeAt && sel.rangeCount) {
+      //         range = sel.getRangeAt(0);
+      //         range.deleteContents();
+  
+      //         // Range.createContextualFragment() would be useful here but is
+      //         // non-standard and not supported in all browsers (IE9, for one)
+      //         var el = document.createElement("div");
+      //         var tagUser =  `<span class='tagged-users'>${item.username}</span><span>,&nbsp;</span>`;
+      //         el.innerHTML = tagUser;
+      //         var frag = document.createDocumentFragment(), node, lastNode;
+      //         console.log(frag);
+              
+      //         console.log(el.firstChild)
+      //         while ( (node = el.firstChild) ) {
+      //             console.log(node);
+      //             lastNode = frag.appendChild(node);
+      //         }
+      //         range.insertNode(frag);
+      //         console.log(lastNode);
+      //         // Preserve the selection
+      //         if (lastNode) {
+      //             range = range.cloneRange();
+      //             range.setStartAfter(lastNode);
+      //             range.collapse(true);
+      //             sel.removeAllRanges();
+      //             sel.addRange(range);
+      //         }
+      //     }
+      // }
+      // } else if (document.selection && document.selection.type != "Control") {
+      //     // IE < 9
+      //     document.selection.createRange().pasteHTML(html);
+      // }
+  // }
+
+
+    //  return btn;
+    var el = document.getElementById("postContent");
+    console.log(el);
+    var range1 = document.createRange();
+    var sel1 = window.getSelection();
+    console.log(el.childNodes.length);
+    var tmpLength = Number(el.childNodes.length-1);
+    range1.setStart(el.childNodes[tmpLength], 1);
+    range1.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range1);
+    el.focus();
+}
 
 
 
@@ -338,7 +331,6 @@ console.log(caretPos);
 
 
 getUsers(e){
-   // console.log(e.keyCode);
     if(e.keyCode == 8 && e.key == "Backspace") {
         let caretPos = this.getCaretPosition();
         var tmpinput = document.getElementById("postContent");
@@ -353,22 +345,17 @@ getUsers(e){
 
     var input;
     input = document.getElementById("postContent");
-   // console.log(input.innerText);
-   // console.log(e);
     let textUser= input.innerText;
     if(textUser.indexOf("@") >= 0){
         let tmpPos = textUser.split("@");
-      //  console.log(tmpPos);
-      
         if(tmpPos[1].length >= 1){
-
-
-    this.postService.getTagUsers()
-    .subscribe((data:any) => {
-        this.items = data;
-        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
-    });
-}}
+          this.postService.getTagUsers(tmpPos[1])
+          .subscribe((data:any) => {
+              this.items = data;
+              this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
+          });
+       }
+    }
 }
 
 

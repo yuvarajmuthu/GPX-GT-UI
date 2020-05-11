@@ -37,6 +37,7 @@ export class UserComponent implements OnInit {
 
     @Input() profileUserId: string = '';
     legisId: string = '';
+    activeTemplate: string="upOffices";
 
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
@@ -854,6 +855,7 @@ export class UserComponent implements OnInit {
 
 //load the template based on tab selection
     loadTemplate(type: string) {
+        this.activeTemplate = type;
         this.tap = true;
         let compTypes = [];
         compTypes.push(type);

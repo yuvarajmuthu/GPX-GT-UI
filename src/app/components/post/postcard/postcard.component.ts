@@ -22,6 +22,9 @@ export class PostcardComponent implements OnInit {
     comment:Post = new Post();
     comments: Post[]=[];
     txtPost: string = '';
+    nxtNode:any;
+    oldChildNodes: any;
+    deletedNodePos:number;
 
     commentPost: boolean = false;
     devMode: boolean = true;
@@ -70,42 +73,99 @@ export class PostcardComponent implements OnInit {
         this.items =[];
         this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
 
-
-        // var element = document.getElementById('user');
-        // if(document.getElementById("user")){
-        //     element.onclick = function() {
-        //         console.log("test");
-        //     }
-        // }
-
-
-
     }
 
-    onMentionSelect(item) {
-
-        let btn:HTMLElement;
-        btn = document.createElement("SPAN");   // Create a <button> element
-        let inputDiv = document.getElementById("commentContent"); 
-        let innertmlHtml = inputDiv.innerHTML;
-        var n = innertmlHtml.indexOf("@");
-        console.log(innertmlHtml);
-        var length = innertmlHtml.length;
-        var tmp = innertmlHtml.slice(0, n);
-        btn.innerHTML = item.username+"&nbsp;";       
-        inputDiv.innerHTML = tmp;
-        btn.setAttribute('class', 'tagged-users');   
-        btn.setAttribute('data-username', item.username);
-        btn.setAttribute('data-entityType', item.type);
-
-        var btn1 = document.createElement("SPAN");        // Insert text
-        btn1.innerHTML = '&nbsp;';    
-        inputDiv.appendChild(btn);
-        inputDiv.appendChild(btn1);
-        this.items = [];
-        console.log(btn);
- //return btn;
+    getCaretPosition() {
+        let editableDiv = document.getElementById("commentContent");
+      var caretPos = 0,
+        sel, range;
+      if (window.getSelection) {
+        sel = window.getSelection();
+        this.oldChildNodes = editableDiv.childNodes;
+        if (sel.rangeCount) {
+            let ranges = [];
+            for(let i = 0; i < sel.rangeCount; i++) {
+                ranges[i] = sel.getRangeAt(i);
+                this.nxtNode = ranges[i].endContainer.parentNode;
+             //   editableDiv.removeChild(ranges[i].endContainer.parentNode);
+               }
+               for(let j = 0; j <= this.oldChildNodes.length; j++) {
+                 //console.log(this.oldChildNodes[j]);
+                 if(this.oldChildNodes[j] == this.nxtNode){
+                   this.deletedNodePos = j
+                   editableDiv.removeChild(this.nxtNode);
+                 }
+               }
+          range = sel.getRangeAt(0);
+          if (range.commonAncestorContainer.parentNode == editableDiv) {
+            caretPos = range.endOffset;
+          }
+        }
       }
+      // else if (document.selection && document.selection.createRange) {
+      //   range = document.selection.createRange();
+      //   if (range.parentElement() == editableDiv) {
+      //     var tempEl = document.createElement("span");
+      //     editableDiv.insertBefore(tempEl, editableDiv.firstChild);
+      //     var tempRange = range.duplicate();
+      //     tempRange.moveToElementText(tempEl);
+      //     tempRange.setEndPoint("EndToEnd", range);
+      //     caretPos = tempRange.text.length;
+      //   }
+      // }
+      return caretPos;
+    }
+    
+    onMentionSelect(item) {
+          let editableDiv = document.getElementById("commentContent");
+          var caretPos = 0,
+            sel, range;
+          if (window.getSelection) {
+            sel = window.getSelection();
+            console.log(sel);
+            if (sel.rangeCount) {
+                let ranges = [];
+                    let btn:HTMLElement;
+                    btn = document.createElement("SPAN");   // Create a <button> element
+                    let inputDiv = document.getElementById("commentContent"); 
+                    let innertmlHtml = inputDiv.innerHTML;
+                    var n = innertmlHtml.indexOf("@");
+                    console.log(innertmlHtml);
+                    var length = innertmlHtml.length;
+                    var tmp = innertmlHtml.slice(0, n);
+                    btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
+                    inputDiv.innerHTML = tmp;
+                    btn.setAttribute('class', 'tagged-users');   
+                    btn.setAttribute('data-username', item.username);
+                    btn.setAttribute('data-entityType', item.userType);
+                    btn.setAttribute('readonly', 'true');
+            
+                    var btn1 = document.createElement("SPAN");        // Insert text
+                    btn1.innerHTML = '&nbsp;';    
+                    inputDiv.appendChild(btn);
+                    inputDiv.appendChild(btn1);
+                    this.items = [];
+                    console.log(btn);
+    
+                //   }
+              range = sel.getRangeAt(0);
+              if (range.commonAncestorContainer.parentNode == editableDiv) {
+                caretPos = range.endOffset;
+              }
+            }
+          }
+      
+        var el = document.getElementById("commentContent");
+        var range1 = document.createRange();
+        var sel1 = window.getSelection();
+        var tmpLength = Number(el.childNodes.length-1);
+        range1.setStart(el.childNodes[tmpLength], 1);
+        range1.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range1);
+        el.focus();
+    }
+    
 
 
     ngOnInit(): void {
@@ -147,27 +207,33 @@ export class PostcardComponent implements OnInit {
     }
 
     
-getUsers(e){
-
-    var input;
-    input = document.getElementById("commentContent");
-    console.log(input.innerText);
-    console.log(e);
-    let textUser= input.innerText;
-    if(textUser.indexOf("@") >= 0){
-        let tmpPos = textUser.split("@");
-        console.log(tmpPos);
-      
-        if(tmpPos[1].length >= 1){
-
-
-    this.postService.getTagUsers()
-    .subscribe((data:any) => {
-        this.items = data;
-        this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
-    });
-}}
-}
+    getUsers(e){
+        if(e.keyCode == 8 && e.key == "Backspace") {
+            let caretPos = this.getCaretPosition();
+            var tmpinput = document.getElementById("commentContent");
+            let test = tmpinput.innerText;
+            var range = window.getSelection().rangeCount;
+            var startNode = tmpinput.firstChild;
+           // if(tmpinput === range.commonAncestorContainer && range.endOffset === 0) {
+            var lastReadOnlyChild = document.querySelector('span[readonly]');
+            //tmpinput.removeChild(lastReadOnlyChild);
+           // }
+        }
+    
+        var input;
+        input = document.getElementById("commentContent");
+        let textUser= input.innerText;
+        if(textUser.indexOf("@") >= 0){
+            let tmpPos = textUser.split("@");
+            if(tmpPos[1].length >= 1){
+              this.postService.getTagUsers(tmpPos[1])
+              .subscribe((data:any) => {
+                  this.items = data;
+                  this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
+              });
+           }
+        }
+    }
 
     tagUsersRedirectTo(e){
         console.log(e.target.tagName);

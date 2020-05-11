@@ -37,7 +37,7 @@
 <div class="content">
 
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <!-- Begin user profile -->
             <div class="text-center user-profile-2" style="margin-top:120px">
                 <ul class="list-group">
@@ -106,7 +106,7 @@
             <!-- Begin user profile -->
         </div><!-- End div .col-sm-4 -->
 
-        <div class="col-sm-9">
+        <div class="col-sm-8">
             <div class="widget widget-tabbed">
                 <!-- Nav tab -->
 
@@ -144,16 +144,14 @@
                                                         <div class="nav-tabs-wrapper">
                                                             <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
                                                                 data-tabs="tabs">
-
                                                                 <li class="nav-item"
                                                                     *ngFor="let profileTemplate of profilesTemplates">
-
                                                                     <div class="row">
                                                                         <div class="col-sm-10">    
                                                                             <a class="nav-link text-black-50" data-toggle="tab"
                                                                             [routerLink]=""
                                                                             (click)="loadTemplate(profileTemplate.profileTemplateId)"
-                                                                            *ngIf="profileTemplate.profileTemplateId">
+                                                                            *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
                                                                                 <i class="material-icons">{{profileTemplate.profileIcon}}</i>
                                                                                 {{profileTemplate.name}}
                                                                                 <!--{{profileTemplate.profileTemplateId}}-->

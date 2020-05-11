@@ -1,24 +1,26 @@
 [{
-	"username": "noah raj",
-	"name": "Noah raj",
-	"img": "assets/images/avatars/avatar.png",
-	"type":"user"
-  },
-  {
-	"username": "liam ram",
-	"name": "Liam ram",
-	"img": "assets/images/avatars/avatar.png",
-	"type":"user"
-  },
-  {
-	"username": "mason john",
-	"name": "Mason john",
-	"img": "assets/images/avatars/avatar.png",
-	"type":"user"
-  },
-  {
-	"username": "jacob pyush",
-	"name": "Jacob pyush",
-	"img": "assets/images/avatars/avatar.png",
-	"type":"user"
-  }]
+
+	"id": "5e1e6275f453cd7570b8ee6a",
+	"username": "user5@gmail.com",
+    "userType": "PUBLICUSER",
+	"status": "active",
+	"sourceSystem": null,
+	"firstName": "user5",
+	"lastName": "five",
+	"photoUrl": null,
+	"profileAvatarImgFileId": "543543222332",
+	"profileBannerImgFileId": null
+},
+
+{
+	"id": "5e3da2b2f453cd7b78f3ce86",
+	"username": "user6@gmail.com",
+	"userType": "PUBLICUSER",
+	"status": "active",
+	"sourceSystem": null,
+	"firstName": "user6",
+	"lastName": "six",
+	"photoUrl": null,
+	"profileAvatarImgFileId": null,
+	"profileBannerImgFileId": null
+}]

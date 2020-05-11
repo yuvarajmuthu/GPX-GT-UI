@@ -247,3 +247,6 @@ input[type="file"] {
         top: 355px;
     }
 }
+.active-tab{
+    color: #007bff !important;
+}

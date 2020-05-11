@@ -213,3 +213,6 @@ form button {
   content: attr(placeholder);
   color: #555; 
 }
+.post-list{
+  background-color:#E6E6E6;
+}

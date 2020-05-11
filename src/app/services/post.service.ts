@@ -19,6 +19,7 @@ import { tagUser } from '../models/tagusers';
 export class PostService  extends AbstractService{
 
   serviceUrl:string;// = "http://127.0.0.1:8080/post";	
+  tagUsersserviceUrl:string;
   devMode:boolean = true;
   _timezone: any = null;
   _timeZoneAbbr: any
@@ -336,7 +337,7 @@ export class PostService  extends AbstractService{
     );                     
   }
 
-  getTagUsers() {
+  getTagUsers(searchText:string) {
     const httpOptions = {
       headers: new HttpHeaders({ "Accept": "application/json" })
     }  
@@ -345,7 +346,7 @@ export class PostService  extends AbstractService{
     if(this.devMode){
       url = '/assets/json/fromService/tagusers.json'; 
     }else{
-      url = this.serviceUrl;
+      url = this.dataShareService.serviceUrl+"/search/user?multiSearchText="+searchText;
     }
     return this.http.get(url,httpOptions).
         pipe(

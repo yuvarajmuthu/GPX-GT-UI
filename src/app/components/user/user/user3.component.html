@@ -26,7 +26,7 @@
                     <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
                         <i class="fa fa-camera-retro"></i>
                         <input type="file" class="uploadFile img" value="Upload Photo"
-                                     style="width: 0px;height: 0px;overflow: hidden;">
+                                     style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
                     </label>
                 </div><!-- col-2  -->
             </div><!-- row -->
@@ -186,7 +186,7 @@
                                                                             <!--{{editLabel}}-->
                                                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                                         </button>
-                                                                        <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                        <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
                                                                             <!--{{Save}}-->
                                                                             <i class="fa fa-save" aria-hidden="true"></i>
                                                                         </button>

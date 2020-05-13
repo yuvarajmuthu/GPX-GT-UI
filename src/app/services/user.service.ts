@@ -466,7 +466,8 @@ delete(id: number) {
 }
 
 getImage(userId: string): Observable<Blob> {
-  let serviceUrl = this.getPostService() + "/downloadFile/user/" + userId + "/";
+  //let serviceUrl = this.getPostService() + "/downloadFile/user/" + userId + "/";
+  let serviceUrl = this.getPostService() + "/downloadFile/entity/" + userId + "/";
   console.log("getImage user.service " + serviceUrl);
 
   return this.http.get(serviceUrl, { responseType: 'blob' });

@@ -126,9 +126,11 @@ export class UserComponent implements OnInit {
             editmode => {
                 console.log('Received edit-save Profile message ' + editmode);
                 this.inEditMode = editmode;
+               /*
                 if (!editmode) {
                     this.saveProfile();
                 }
+                */
 
             });
         
@@ -361,7 +363,7 @@ export class UserComponent implements OnInit {
                         if (isDevMode()) {
                             this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
                         } else {
-                            this.profileSmImage = this.userData['photo_url'];
+                            this.profileSmImage = this.userData['photoUrl'];
                         }
                     } else {
                         this.getProfileSmImage(this.viewingUser['userId']);

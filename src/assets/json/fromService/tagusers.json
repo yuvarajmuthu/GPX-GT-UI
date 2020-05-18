@@ -7,7 +7,7 @@
 	"sourceSystem": null,
 	"firstName": "user5",
 	"lastName": "five",
-	"photoUrl": null,
+	"photoUrl": "assets/images/avatar1.png",
 	"profileAvatarImgFileId": "543543222332",
 	"profileBannerImgFileId": null
 },
@@ -20,7 +20,7 @@
 	"sourceSystem": null,
 	"firstName": "user6",
 	"lastName": "six",
-	"photoUrl": null,
+	"photoUrl": "assets/images/avatar1.png",
 	"profileAvatarImgFileId": null,
 	"profileBannerImgFileId": null
 }]

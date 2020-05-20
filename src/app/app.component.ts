@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+
 //import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
 //import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
@@ -9,8 +10,12 @@ import {TypeaheadComponent} from './components/typeahead/typeahead.component';
 import {ComponentcommunicationService} from './services/componentcommunication.service';
 import {DatashareService} from './services/datashare.service';
 import {UserService} from './services/user.service';
+import {PostService} from './services/post.service';
 import {AlertService} from './services/alert.service';
 import {AuthenticationService} from './services/authentication.service';
+
+import {Observable, of} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 
 import {User} from '../app/models/user';
 
@@ -20,6 +25,7 @@ import {User} from '../app/models/user';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent implements OnInit {
     /*CKEDITOR 
     public editorData = '';
@@ -29,6 +35,36 @@ export class AppComponent implements OnInit {
     }
 
     END*/
+    keyword = 'firstName';
+    states: any =[];
+    
+    // states = [
+    //     {
+    //       name: 'Arkansas',
+    //       population: '2.978M',
+    //       flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
+    //     },
+    //     {
+    //       name: 'California',
+    //       population: '39.14M',
+    //       flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
+    //     },
+    //     {
+    //       name: 'Florida',
+    //       population: '20.27M',
+    //       flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
+    //     },
+    //     {
+    //       name: 'Texas',
+    //       population: '27.47M',
+    //       flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
+    //     }
+    //   ];
+
+    model: any;
+    searching = false;
+    searchFailed = false;
+
     navigateList = ['searchLegislator', 'news', 'group', 'request'];
     //public tabSet: NgbTabset;
 
@@ -43,6 +79,7 @@ export class AppComponent implements OnInit {
                 private dataShareService: DatashareService,
                 private userService: UserService,
                 private alertService: AlertService,
+                private postService:PostService,
                 private authenticationService: AuthenticationService) {
         missionService.getAlert().subscribe(
             mission => {
@@ -77,6 +114,52 @@ export class AppComponent implements OnInit {
         );
         */
     }
+
+    // search = (text$: Observable<string>) =>
+    // text$.pipe(
+    //   debounceTime(300),
+    //   distinctUntilChanged(),
+    //   tap(() => this.searching = true),
+    //   switchMap(term =>
+    //     this.postService.getTagUsers(term).pipe(
+    //       tap(() => this.searchFailed = false),
+    //       catchError(() => {
+    //         this.searchFailed = true;
+    //         return of([]);
+    //       }))
+    //   ),
+    //   tap(() => this.searching = false)
+    // )
+  
+    search = (text$: Observable<string>) => {
+        return text$.pipe(      
+            debounceTime(200), 
+            distinctUntilChanged(),
+            // switchMap allows returning an observable rather than maps array
+            switchMap( (searchText) =>  this.postService.getTagUsers(searchText) )
+            // catchError(new ErrorInfo().parseObservableResponseError)              
+        );                 
+      }
+
+      resultFormatBandListValue(value: any) {            
+        return value.firstName +' '+value.lastName;
+      } 
+
+      inputFormatBandListValue(value: any)   {
+        console.log(value);
+        if(value.firstName)
+          return value.firstName+' '+value.lastName
+        return value;
+      }
+
+      onChangeSearch(e){
+          console.log(e);
+          this.postService.getTagUsers(e)
+          .subscribe((data:any) => {
+              this.states = data;
+          });
+      }
+
 
     ngOnInit() {
         if (localStorage.getItem('currentUserToken')) {

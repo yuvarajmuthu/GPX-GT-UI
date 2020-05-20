@@ -24,6 +24,8 @@ import {UserModule} from './components/user/user.module';
 import {GpxUIComponentsModule} from './components/gpx-uicomponents/gpx-uicomponents.module';
 import {ConnectionModule} from './components/connection/connection.module';
 
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 import {AppComponent} from './app.component';
 //import { CKEditorModule } from 'ckeditor4-angular';
 
@@ -70,7 +72,7 @@ export function tokenGetter() {
         PositionComponent,
         PartyComponent,
         ProtectedComponent,
-        GAddressSearchComponent,
+        GAddressSearchComponent
         //dateFormatPipe
         //UserComponent
         //GpxInputComponent,
@@ -82,6 +84,7 @@ export function tokenGetter() {
         HttpClientJsonpModule,
         FormsModule,
         ScrollingModule,
+        AutocompleteLibModule,
         //CKEditorModule,
         //ReactiveFormsModule, // formGroup
         //NgbTabsetModule,

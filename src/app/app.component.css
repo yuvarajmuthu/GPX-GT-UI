@@ -15,6 +15,14 @@ body {
 a {
     cursor: pointer;
 }
+.search-field{
+    width: 40%;
+    margin-top: 1%;
+}
+
+.ng-autocomplete{
+    width: 550px;
+}
 
 .mylogo {
     height: 50px;

@@ -49,14 +49,135 @@
                                 </b>
                             </h4>
                             <h5>
-                                <a [routerLink]="['/party', biodata.party]">
-                                    {{biodata.party}}
-                                </a>
+                                <span *ngIf="isEditParty == false && biodata.party" class="profile-pills">
+                                    <a  class="padding-pills" [routerLink]="['/party', biodata.party]" (mouseenter)="changeParty=true" (mouseout)="changeParty=false">
+                                        {{biodata.party}}
+                                    </a>
+                                </span>
+
+                                <button type="button" class="edit-button" [ngClass]="{'displayNone':changeParty == false}"  (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
+                                <div *ngIf="isEditParty == true" class="ng-autocomplete party-search">
+                                    <ng-autocomplete
+                                      [(ngModel)]="editPartyInput"
+                                      [data]="searchUsers"
+                                      (inputChanged) = "onChangeSearch($event)"
+                                      [searchKeyword]="keywordParty"
+                                      [itemTemplate]="itemTemplate"
+                                      [notFoundTemplate]="notFoundTemplate">
+                                    </ng-autocomplete>
+                                    <button class="save-button" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+
+                                    <ng-template #itemTemplate let-item>
+                                      <div class="item">
+                                        <img src="{{item.photoUrl}}" height="25">
+                                        <span [innerHTML]="item.firstName"></span>
+                                        <small></small>
+                                      </div>
+                                    </ng-template>
+                                  
+                                    <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+                                  </div>
+
+
+
+
                             </h5>
                             <h5>
-                                <a [routerLink]="['../../group']">{{biodata.district}}</a>,
-                                <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>,
-                                <a [routerLink]="['/state', biodata.state]">{{biodata.state}}</a>
+                                <span *ngIf="isEditDistrict == false" class="profile-pills">
+                                    <a class="padding-pills" [routerLink]="['../../group']"  (mouseenter)="changeDistrict=true" (mouseout)="changeDistrict=false">{{biodata.district}}</a>
+                                </span>
+                                <button type="button" class="edit-button" [ngClass]="{'displayNone':changeDistrict == false}"  (click)="toggleEditDistrict()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
+                                <div *ngIf="isEditDistrict == true" class="ng-autocomplete party-search">
+                                    <ng-autocomplete
+                                      [(ngModel)]="editDistrictInput"
+                                      [data]="searchUsers"
+                                      (inputChanged) = "onChangeSearch($event)"
+                                      [searchKeyword]="keywordDistrict"
+                                      [itemTemplate]="itemTemplate"
+                                      [notFoundTemplate]="notFoundTemplate">
+                                    </ng-autocomplete>
+                                    <button class="save-button" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+
+                                    <ng-template #itemTemplate let-item>
+                                      <div class="item">
+                                        <img src="{{item.photoUrl}}" height="25">
+                                        <span [innerHTML]="item.firstName"></span>
+                                        <small></small>
+                                      </div>
+                                    </ng-template>
+                                  
+                                    <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+                                  </div>
+
+
+                                  <span *ngIf="isEditChamber == false" class="profile-pills margin-pills">
+                                        <a  class="padding-pills" [routerLink]="['/chamber', biodata.chamber]" (mouseenter)="changeChamber=true" (mouseout)="changeChamber=false">{{biodata.chamber}}</a>
+                                  </span>
+                                  <button type="button" class="edit-button" [ngClass]="{'displayNone':changeChamber == false}"  (click)="toggleEditChamber()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+
+                                  <div *ngIf="isEditChamber == true" class="ng-autocomplete party-search">
+                                    <ng-autocomplete
+                                      [(ngModel)]="editChamberInput"
+                                      [data]="searchUsers"
+                                      (inputChanged) = "onChangeSearch($event)"
+                                      [searchKeyword]="keywordChamber"
+                                      [itemTemplate]="itemTemplate"
+                                      [notFoundTemplate]="notFoundTemplate">
+                                    </ng-autocomplete>
+                                    <button class="save-button" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+
+                                    <ng-template #itemTemplate let-item>
+                                      <div class="item">
+                                        <img src="{{item.photoUrl}}" height="25">
+                                        <span [innerHTML]="item.firstName"></span>
+                                        <small></small>
+                                      </div>
+                                    </ng-template>
+                                  
+                                    <ng-template #notFoundTemplate let-notFound>
+                                      <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+                                  </div>
+
+                                  <span *ngIf="isEditState == false" class="profile-pills">
+                                     <a  class="padding-pills" [routerLink]="['/state', biodata.state]" (mouseenter)="changeState=true" (mouseout)="changeState=false">{{biodata.state}}</a>
+                                  </span>
+
+                                  <button type="button" class="edit-button" [ngClass]="{'displayNone':changeState == false}"  (click)="toggleEditState()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+
+                                  <div *ngIf="isEditState == true" class="ng-autocomplete party-search">
+                                    <ng-autocomplete
+                                      [(ngModel)]="editStateInput"
+                                      [data]="searchUsers"
+                                      (inputChanged) = "onChangeSearch($event)"
+                                      [searchKeyword]="keywordState"
+                                      [itemTemplate]="itemTemplate"
+                                      [notFoundTemplate]="notFoundTemplate">
+                                    </ng-autocomplete>
+                                    <button class="save-button" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+                                  <ng-template #itemTemplate let-item>
+                                    <div class="item">
+                                      <img src="{{item.photoUrl}}" height="25">
+                                      <span [innerHTML]="item.firstName"></span>
+                                      <small></small>
+                                    </div>
+                                  </ng-template>
+                                
+                                  <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                  </ng-template>
+                                </div>
+                                  
                             </h5>
                         </div>    
                         <div *ngIf="!externalUser">

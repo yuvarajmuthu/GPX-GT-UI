@@ -2,7 +2,7 @@
 
 
 <div class="card gedf-card post-list">
-    <cdk-virtual-scroll-viewport style="height: 550px" itemSize="90" (scroll)="onPostScroll($event)">
+    <cdk-virtual-scroll-viewport style="height: 550px" class="all-posts" itemSize="90" (scroll)="onPostScroll($event)">
         <app-postcard  *ngFor="let post of posts; let i = index" [post]="post" [isComment]="false" [idx]="i">
         </app-postcard>
     </cdk-virtual-scroll-viewport>

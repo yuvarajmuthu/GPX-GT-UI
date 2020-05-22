@@ -30,31 +30,14 @@
                 </li>
 
             </ul>
-            <!-- <form class="form-inline my-2 my-lg-0 col-md-5">
-                <input class="myform-control mr-sm-2" type="search" placeholder="Search GoPolitix" aria-label="Search">
-                <button class="btn btn-light"><i class="fa fa-search"></i></button>
-            </form> -->
-
-            <!-- <div class="form-group search-field">
-                <input id="userName" type="text"
-                       name="userName"
-                       placeholder="Search GoPolitix"
-                       class="form-control"                     
-                       [(ngModel)]="searched"
-                       [ngbTypeahead]="search"                     
-                       [resultFormatter]="resultFormatBandListValue"
-                       [inputFormatter]="inputFormatBandListValue"
-                       #instance="ngbTypeahead"                     
-                  />
-                  <!-- <button class="btn btn-light"><i class="fa fa-search"></i></button> 
-              </div> -->
+ 
               <div class="ng-autocomplete">
                 <ng-autocomplete
-                  [data]="states"
+                  [data]="searchUsers"
                   (inputChanged) = "onChangeSearch($event)"
                   [searchKeyword]="keyword"
                   placeHolder="Search GoPolitix"
-                  historyIdentifier="states"
+                  historyIdentifier="searchUsers"
                   [itemTemplate]="itemTemplate"
                   [notFoundTemplate]="notFoundTemplate">
                 </ng-autocomplete>

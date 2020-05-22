@@ -7,6 +7,7 @@ import { UserComponent } from './user/user.component';
 import { UsertemplateComponent } from './usertemplate/usertemplate.component';
 
 import {UserRoutingModule} from './user-routing.module';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -34,6 +35,7 @@ import { UserofficeComponent } from './usertemplate/userofficetemplate/useroffic
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
+    AutocompleteLibModule,
     UserRoutingModule,
     GpxUIComponentsModule,
     NgbModule,

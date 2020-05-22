@@ -10063,3 +10063,45 @@ aside.sidebar.full-style {
 .padding-top2{
     padding-top: 2%;
 }
+.displayNone{
+    display: none;
+}
+.party-search{
+    width: 100% !important;
+    display: flex;
+}
+.save-button{
+    cursor: pointer;
+    border: none !important;
+    color: #007bff;
+    position: absolute;
+    margin-left: 70% !important;
+    height: 40px;
+}
+.edit-button{
+    cursor: pointer;
+    border: none !important;
+    color: #007bff;
+    z-index: -1;
+    /* position: absolute;
+    margin-left: 70% !important; */
+    height: 35px;
+}
+
+.profile-pills{
+    background-color: rgba(0,0,0,0.07);
+    border: 0.5px solid rgba(0,0,0,0.07);
+    border-radius: 5px;
+  }
+
+  .padding-pills{
+      padding-right: 2px;
+      padding-left: 2px;
+  }
+  .margin-pills{
+    margin-right: 3px;
+    margin-left: 3px;
+   }
+   .all-posts{
+       background-color: white;
+   }

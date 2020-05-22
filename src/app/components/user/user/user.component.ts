@@ -21,6 +21,7 @@ import {UsertemplateComponent} from '../usertemplate/usertemplate.component';
 import {DatashareService} from '../../../services/datashare.service';
 import {UserService} from '../../../services/user.service';
 import {ProfileService} from '../../../services/profile.service';
+import {PostService} from '../../../services/post.service';
 
 import {LegislatorService} from '../../../services/legislator.service';
 import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
@@ -68,7 +69,7 @@ export class UserComponent implements OnInit {
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
     externalUser:boolean;
-    biodata={};
+    biodata:any;
 
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
@@ -108,9 +109,32 @@ export class UserComponent implements OnInit {
     uploadForm: FormGroup;
     compTypeTabs = [];
 
+
+    changeParty: boolean = false;
+    isEditParty:boolean = false;
+    searchUsers: any = [];
+    keywordParty = 'firstName';
+    editPartyInput : any;
+
+    changeDistrict: boolean = false;
+    isEditDistrict:boolean = false;
+    keywordDistrict = 'firstName';
+    editDistrictInput : any;
+
+    changeChamber: boolean = false;
+    isEditChamber:boolean = false;
+    keywordChamber = 'firstName';
+    editChamberInput : any;
+
+    changeState: boolean = false;
+    isEditState:boolean = false;
+    keywordState = 'firstName';
+    editStateInput : any;
+
     constructor(private  router: Router,
                 private route: ActivatedRoute,
                 private userService: UserService,
+                private postService: PostService,
                 private profileService: ProfileService,
                 private communicationService: ComponentcommunicationService,
                 //private elementRef:ElementRef,
@@ -138,6 +162,8 @@ export class UserComponent implements OnInit {
 
     }
 
+
+
     //MAY BE OBSOLETE
     //get invoked automatically before ngOnInit()
     //routerOnActivate(curr: RouteSegment): void {
@@ -159,6 +185,60 @@ export class UserComponent implements OnInit {
             }  */
         console.log('from user.component routerOnActivate()');
 
+    }
+    toggleEditParty(){
+        console.log(this.isEditParty);
+        console.log(this.editPartyInput)
+        if(!this.isEditParty && this.biodata){
+            this.editPartyInput = this.biodata.party;
+        }
+        else{
+            if(typeof(this.editPartyInput) == 'object')
+              this.biodata.party = this.editPartyInput.firstName;
+        }
+        this.isEditParty = !this.isEditParty;
+    }
+
+    toggleEditDistrict(){
+        if(!this.isEditDistrict && this.biodata){
+            this.editDistrictInput = this.biodata.district;
+        }
+        else{
+            if(typeof(this.editDistrictInput) == 'object')
+              this.biodata.district = this.editDistrictInput.firstName;
+        }
+        this.isEditDistrict = !this.isEditDistrict;
+    }
+
+    toggleEditChamber(){
+        if(!this.isEditChamber && this.biodata){
+            this.editChamberInput = this.biodata.chamber;
+        }
+        else{
+            if(typeof(this.editChamberInput) == 'object')
+               this.biodata.chamber = this.editChamberInput.firstName;
+        }
+        this.isEditChamber = !this.isEditChamber;
+    }
+
+    toggleEditState(){
+        if(!this.isEditState && this.biodata){
+            this.editStateInput = this.biodata.state;
+        }
+        else{
+            if(typeof(this.editStateInput) == 'object')
+               this.biodata.state = this.editStateInput.firstName;
+            else
+                this.biodata.state = this.editStateInput;
+        }
+        this.isEditState = !this.isEditState;
+    }
+
+    onChangeSearch(e){
+        this.postService.getTagUsers(e)
+        .subscribe((data:any) => {
+            this.searchUsers = data;
+        });
     }
 
     ngOnInit() {

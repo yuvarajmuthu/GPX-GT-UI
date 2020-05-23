@@ -10,6 +10,16 @@
 .post-card-footer a {
   color: #0000007d;
 }
+.row.post-card-footer{
+  background-color: #ECF0F1;
+  margin-right: -20px;
+  margin-left: -20px;
+  margin-top: -12px;
+  margin-bottom: -12px
+}
+.card-footer{
+  background-color: white;
+}
 .card{
   width: 100%;
 }
@@ -164,7 +174,14 @@ form button {
   color: rgba(0,0,0,0.54);
 }
 .comments-card{
-  border: none !important;
+  /* border: none !important; */
+  background-color: #FDFEFE;
+}
+.post-header{
+  background-color: #EAEDED;
+}
+.post-comment-section{
+  margin: 15px 0px 0px 0px;
 }
 .comments-card .card-header{
   border: none !important;
@@ -214,5 +231,5 @@ form button {
   color: #555; 
 }
 .post-list{
-  background-color:#E6E6E6;
+  background-color:#FBFCFC;
 }

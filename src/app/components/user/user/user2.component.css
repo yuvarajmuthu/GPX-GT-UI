@@ -234,10 +234,10 @@ input[type="file"] {
     left: 170px;
     top: 355px;
 }
-/*.profile-edit-btn-custom-position{
-    position: relative;
-    top: 5px;
-}*/
+.profile-edit-btn-custom-position{
+    float: right;
+    margin-top: 6px;
+}
 /*Profile Pic End*/
 @media only screen and (max-width: 600px) {
     .edit-photo{
@@ -249,4 +249,13 @@ input[type="file"] {
 }
 .active-tab{
     color: #007bff !important;
+}
+.personal-info{
+    overflow: auto;
+    height: 120px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,.125);
+}
+.widget-div{
+    padding-top: 10px;
 }

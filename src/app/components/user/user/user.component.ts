@@ -187,8 +187,7 @@ export class UserComponent implements OnInit {
 
     }
     toggleEditParty(){
-        console.log(this.isEditParty);
-        console.log(this.editPartyInput)
+        this.changeParty=false
         if(!this.isEditParty && this.biodata){
             this.editPartyInput = this.biodata.party;
         }
@@ -200,6 +199,7 @@ export class UserComponent implements OnInit {
     }
 
     toggleEditDistrict(){
+        this.changeDistrict=false;
         if(!this.isEditDistrict && this.biodata){
             this.editDistrictInput = this.biodata.district;
         }
@@ -211,6 +211,7 @@ export class UserComponent implements OnInit {
     }
 
     toggleEditChamber(){
+        this.changeChamber = false;
         if(!this.isEditChamber && this.biodata){
             this.editChamberInput = this.biodata.chamber;
         }
@@ -222,6 +223,7 @@ export class UserComponent implements OnInit {
     }
 
     toggleEditState(){
+        this.changeState = false;
         if(!this.isEditState && this.biodata){
             this.editStateInput = this.biodata.state;
         }

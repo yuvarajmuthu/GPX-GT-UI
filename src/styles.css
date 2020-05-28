@@ -10067,22 +10067,26 @@ aside.sidebar.full-style {
     display: none;
 }
 .party-search{
-    width: 100% !important;
+    width: 40% !important;
+    margin-left: 180px;
     display: flex;
 }
 .save-button{
     cursor: pointer;
     border: none !important;
     color: #007bff;
-    position: absolute;
-    margin-left: 70% !important;
+    z-index: 1;
+    /* position: absolute; */
+    margin-left: -14% !important;
     height: 40px;
+    background-color: white;
 }
 .edit-button{
     cursor: pointer;
     border: none !important;
     color: #007bff;
     z-index: -1;
+    background-color: white;
     /* position: absolute;
     margin-left: 70% !important; */
     height: 35px;
@@ -10108,6 +10112,14 @@ aside.sidebar.full-style {
  .reply-section{
     margin: 15px 0px 0px 0px;
   }
-.list-group-item.active{
-    background-color: none !important;
+
+
+.list-group-item.active {
+  background-color: white !important;
+  color: black !important;
+
+}
+
+.container-fluid{
+    padding: 0px !important;
 }

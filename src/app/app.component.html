@@ -35,6 +35,7 @@
                 <ng-autocomplete
                   [data]="searchUsers"
                   (inputChanged) = "onChangeSearch($event)"
+                  (selected)='selectEvent($event)'
                   [searchKeyword]="keyword"
                   placeHolder="Search GoPolitix"
                   historyIdentifier="searchUsers"

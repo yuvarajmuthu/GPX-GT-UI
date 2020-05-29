@@ -419,7 +419,7 @@ export class UserComponent implements OnInit {
                 this.getRelationStatus(this.loggedUser.username, this.profileUserId);
             } else {
                 this.followCntrlLabel = 'Join to Follow';
-                this.followCntrlCSS = 'btn btn-primary';
+                this.followCntrlCSS = 'btn btn-primary followers-button';
                 this.followStatusCSS = 'fa fa-plus-circle';
             }
 

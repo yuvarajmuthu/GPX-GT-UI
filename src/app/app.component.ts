@@ -137,6 +137,13 @@ export class AppComponent implements OnInit {
           });
       }
 
+      selectEvent(e){
+          console.log(e);
+       let routePath= '/searchLegislator';
+       this.router.navigate([routePath]);
+     }
+
+
 
     ngOnInit() {
         if (localStorage.getItem('currentUserToken')) {

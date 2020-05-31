@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
 
 //import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
     END*/
     keyword = 'firstName';
     searchUsers: any =[];
+    iscreateOptEnabled: boolean=false;
     
     model: any;
     searching = false;
@@ -50,6 +51,15 @@ export class AppComponent implements OnInit {
     isCollaped: boolean = true;
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
+    @HostListener('click', ['$event.target'])
+    onClick(evt) {
+      console.log(evt.id);
+      if(evt.id != 'dropdownMenuButton'){
+            var element = document.getElementById("createpagemenu");
+            element.classList.remove("createpage-option");
+            this.iscreateOptEnabled = false;
+      }
+   }
 
     constructor(private  router: Router,
                 private missionService: ComponentcommunicationService,
@@ -62,6 +72,15 @@ export class AppComponent implements OnInit {
             mission => {
                 console.log('Alert message received ' + mission);
             });
+
+        // window.addEventListener("click", function(e){
+        //     if( e.target && e.target.id && e.target.id != 'dropdownMenuButton'){
+        //       var element = document.getElementById("createpagemenu");
+        //       element.classList.remove("createpage-option");
+        //     }
+
+
+        // });
 
         dataShareService.getCurrentUserObservable().subscribe(
             data => {
@@ -138,8 +157,8 @@ export class AppComponent implements OnInit {
       }
 
       selectEvent(e){
-          console.log(e);
-       let routePath= '/searchLegislator';
+          console.log(e.username);
+       let routePath= '/user/'+e.username+"/";
        this.router.navigate([routePath]);
      }
 

@@ -38,46 +38,7 @@
 
     <div class="row">
         <div class="col-sm-4">
-            <!-- Begin user profile -->
-            <div class="text-center user-profile-2" style="margin-top:120px">
-                <ul class="list-group">
-                    <li class="list-group-item pointer" *ngIf="!isSelfProfile">
-                        <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()"> 
-                            {{followCntrlLabel}}
-                        </span>
-                    </li>
-                                        
-                    <li class="list-group-item pointer"
-                        [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
-            <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
-              {{followersCount}} Followers
-            </span>
-                    </li>
-                    <li class="list-group-item pointer"
-                        [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
-            <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
-              {{followingsCount}} Following
-            </span>
-                    </li>
-                    <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
-                                            [ngClass]="{ 'active': folow, 'in-active': !folow}">
-                                            <span class="badge">245</span>
-                                            <span class="">Following</span>
-                                        </li>
-                                        -->
-                    <li class="list-group-item pointer"
-                        (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
-                        <span class="pointer">My Posts</span> 
-                    </li>
 
-                    <li class="list-group-item pointer"
-                        (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
-                        <span class="pointer">Profile</span> 
-                    </li>
-                </ul>
-
-            </div><!-- End div .box-info -->
-            <!-- Begin user profile -->
         </div><!-- End div .col-sm-4 -->
 
         <div class="col-sm-8">
@@ -236,145 +197,192 @@
 
             </div>
 
-        <div class="widget-div">
-            <div class="widget widget-tabbed">
-                <!-- Nav tab -->
 
-                <div class="gap gray-bg">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row cols-reverse" id="page-contents">
-                                    <!-- sidebar -->
-                                    <!-- Main stage area -->
-                                    <div class="col-lg-12 cols-item2">
-                                        <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
-                                            <app-post [type]="user" [userId]="profileUserId" [disableNewPost]=true></app-post>
-                                        </div>
-                                        <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
-                                             class="widget stick-widget">
-                                            <ul class="followers">
-                                                <li *ngFor="let followingUser of followers">
-                                                    <app-usercard1 [user]=followingUser></app-usercard1>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
-                                                class="widget stick-widget">
-                                            <ul class="followers">
-                                                <li *ngFor="let followingUser of followings">
-                                                    <app-usercard1 [user]=followingUser></app-usercard1>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
-                                            <div class="card card-nav-tabs">
-                                                <div class="card-header-1 card-header-primary">
-                                                    <div class="nav-tabs-navigation">
-                                                        <div class="nav-tabs-wrapper">
-                                                            <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
-                                                                data-tabs="tabs">
-                                                                <li class="nav-item"
-                                                                    *ngFor="let profileTemplate of profilesTemplates">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-10">    
-                                                                            <a class="nav-link text-black-50" data-toggle="tab"
-                                                                            [routerLink]=""
-                                                                            (click)="loadTemplate(profileTemplate.profileTemplateId)"
-                                                                            *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
-                                                                                <i class="material-icons">{{profileTemplate.profileIcon}}</i>
-                                                                                {{profileTemplate.name}}
-                                                                                <!--{{profileTemplate.profileTemplateId}}-->
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="col-sm-2">
-                                                                            <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li *ngIf="isProfileInEditMode()" class="nav-item">
-                                                                    <div ngbDropdown class="d-inline-block">
-                                                                        <button class="btn btn-outline-primary btn-xs"
-                                                                                id="dropdownAddSection"
-                                                                                ngbDropdownToggle>
-                                                                            <!--Add Section-->
-                                                                            <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                        </button>
-                                                                        <div ngbDropdownMenu
-                                                                             aria-labelledby="dropdownAddSection">
-                                                                            <button class="dropdown-item"
-                                                                                    *ngFor="let profileTemplate of availableProfileTemplates"
-                                                                                    (click)="addProfileData(profileTemplate)">
-                                                                                {{profileTemplate.name}}
-                                                                            </button> 
-                                                                        </div>
-                                                                    </div> 
-                                                                </li>
-                                                                <li *ngIf="isUserLogged()" class="nav-item">
-                                                                    <div>
-                                                                        <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
-                                                                            <!--{{editLabel}}-->
-                                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                                        </button>
-                                                                        <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
-                                                                            <!--{{Save}}-->
-                                                                            <i class="fa fa-save" aria-hidden="true"></i>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                                *ngIf="isProfileInEditMode()"
-                                                                                class="btn btn-primary btn-danger"
-                                                                                (click)="cancelEditProfile()">
-                                                                            <!--Cancel Edit-->
-                                                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+    </div>
 
-                                                <div class="card-body ">
-                                                    <div class="tab-content text-center">
-                                                        <div class="tab-pane active" id="templateType">
-                                                            <app-usertemplate [type]="templateType"></app-usertemplate>
-                                                        </div>
-                                                    </div>
-                                                </div>
+    </div>
+    <div class="row">
+
+    <div class="col-sm-4">
+        <!-- Begin user profile -->
+        <div class="text-center user-profile-2">
+            <ul class="list-group">
+                <li class="list-group-item pointer" *ngIf="!isSelfProfile">
+                    <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()"> 
+                        {{followCntrlLabel}}
+                    </span>
+                </li>
+                                    
+                <li class="list-group-item pointer"
+                    [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
+        <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
+          {{followersCount}} Followers
+        </span>
+                </li>
+                <li class="list-group-item pointer"
+                    [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
+        <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
+          {{followingsCount}} Following
+        </span>
+                </li>
+                <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
+                                        [ngClass]="{ 'active': folow, 'in-active': !folow}">
+                                        <span class="badge">245</span>
+                                        <span class="">Following</span>
+                                    </li>
+                                    -->
+                <li class="list-group-item pointer"
+                    (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
+                    <span class="pointer">My Posts</span> 
+                </li>
+
+                <li class="list-group-item pointer"
+                    (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
+                    <span class="pointer">Profile</span> 
+                </li>
+            </ul>
+
+        </div><!-- End div .box-info -->
+        <!-- Begin user profile -->
+        </div>
+        <div class="col-sm-8">
+            <div class="widget-div">
+                <div class="widget widget-tabbed">
+                    <!-- Nav tab -->
+    
+                    <div class="gap gray-bg">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row cols-reverse" id="page-contents">
+                                        <!-- sidebar -->
+                                        <!-- Main stage area -->
+                                        <div class="col-lg-12 cols-item2">
+                                            <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
+                                                <app-post [type]="user" [userId]="profileUserId" [disableNewPost]=true></app-post>
                                             </div>
-                                            <!--HORIZONTAL ITEMS FOR PROFILES / ADD SECTION IN EDIT MODE-->
-                                        </div>
-                                    </div><!-- centerl meta -->
+                                            <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
+                                                 class="widget stick-widget">
+                                                <ul class="followers">
+                                                    <li *ngFor="let followingUser of followers">
+                                                        <app-usercard1 [user]=followingUser></app-usercard1>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
+                                                    class="widget stick-widget">
+                                                <ul class="followers">
+                                                    <li *ngFor="let followingUser of followings">
+                                                        <app-usercard1 [user]=followingUser></app-usercard1>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
+                                                <div class="card card-nav-tabs">
+                                                    <div class="card-header-1 card-header-primary">
+                                                        <div class="nav-tabs-navigation">
+                                                            <div class="nav-tabs-wrapper">
+                                                                <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
+                                                                    data-tabs="tabs">
+                                                                    <li class="nav-item"
+                                                                        *ngFor="let profileTemplate of profilesTemplates">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-10">    
+                                                                                <a class="nav-link text-black-50" data-toggle="tab"
+                                                                                [routerLink]=""
+                                                                                (click)="loadTemplate(profileTemplate.profileTemplateId)"
+                                                                                *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
+                                                                                    <i class="material-icons">{{profileTemplate.profileIcon}}</i>
+                                                                                    {{profileTemplate.name}}
+                                                                                    <!--{{profileTemplate.profileTemplateId}}-->
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li *ngIf="isProfileInEditMode()" class="nav-item">
+                                                                        <div ngbDropdown class="d-inline-block">
+                                                                            <button class="btn btn-outline-primary btn-xs"
+                                                                                    id="dropdownAddSection"
+                                                                                    ngbDropdownToggle>
+                                                                                <!--Add Section-->
+                                                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                            </button>
+                                                                            <div ngbDropdownMenu
+                                                                                 aria-labelledby="dropdownAddSection">
+                                                                                <button class="dropdown-item"
+                                                                                        *ngFor="let profileTemplate of availableProfileTemplates"
+                                                                                        (click)="addProfileData(profileTemplate)">
+                                                                                    {{profileTemplate.name}}
+                                                                                </button> 
+                                                                            </div>
+                                                                        </div> 
+                                                                    </li>
+                                                                    <li *ngIf="isUserLogged()" class="nav-item">
+                                                                        <div>
+                                                                            <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                                <!--{{editLabel}}-->
+                                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                            </button>
+                                                                            <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
+                                                                                <!--{{Save}}-->
+                                                                                <i class="fa fa-save" aria-hidden="true"></i>
+                                                                            </button>
+                                                                            <button type="button"
+                                                                                    *ngIf="isProfileInEditMode()"
+                                                                                    class="btn btn-primary btn-danger"
+                                                                                    (click)="cancelEditProfile()">
+                                                                                <!--Cancel Edit-->
+                                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="card-body ">
+                                                        <div class="tab-content text-center">
+                                                            <div class="tab-pane active" id="templateType">
+                                                                <app-usertemplate [type]="templateType"></app-usertemplate>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--HORIZONTAL ITEMS FOR PROFILES / ADD SECTION IN EDIT MODE-->
+                                            </div>
+                                        </div><!-- centerl meta -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- End nav tab -->
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-
-
-                    <!-- Tab timeline -->
-                    <div class="tab-pane animated active fadeInRight" id="my-timeline">
-                        <div class="user-profile-content">
-
-                            <!-- Begin timeline -->
-
-                            <!-- End timeline -->
-                        </div><!-- End div .user-profile-content -->
-                    </div><!-- End div .tab-pane -->
-                    <!-- End Tab timeline -->
-                    <!-- Tab about -->
-                    <!-- End Tab user messages -->
-                </div><!-- End div .tab-content -->
-            </div><!-- End div .box-info -->
+    
+                    <!-- End nav tab -->
+    
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+    
+    
+                        <!-- Tab timeline -->
+                        <div class="tab-pane animated active fadeInRight" id="my-timeline">
+                            <div class="user-profile-content">
+    
+                                <!-- Begin timeline -->
+    
+                                <!-- End timeline -->
+                            </div><!-- End div .user-profile-content -->
+                        </div><!-- End div .tab-pane -->
+                        <!-- End Tab timeline -->
+                        <!-- Tab about -->
+                        <!-- End Tab user messages -->
+                    </div><!-- End div .tab-content -->
+                </div><!-- End div .box-info -->
+            </div>
+        </div>
         </div>
 
-
-    </div>
-
-    </div>
 </div>

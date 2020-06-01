@@ -54,6 +54,45 @@
                   <div [innerHTML]="notFound"></div>
                 </ng-template>
               </div>
+
+           
+          <!-- <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn add dropdown-toggle">
+              <span class="glyphicon glyphicon-plus"></span>
+              Create Page
+            </button>
+
+            <ul dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('District')">Create District</a>
+              </li>
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('Legislator')">Create Legislator</a>
+              </li>                
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('User')">Create User</a>
+              </li>                              
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('Party')">Create Party</a>
+              </li>                                            
+            </ul>
+
+          </div>    -->
+          
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" (click)="iscreateOptEnabled =  !iscreateOptEnabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Create page
+            </button>
+            <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
+              <a class="dropdown-item" href="#">Create District</a>
+              <a class="dropdown-item" href="#">Create Legislator</a>
+              <a class="dropdown-item" href="#">Create User</a>
+              <a class="dropdown-item" href="#">Create Party</a>
+            </div>
+          </div>
             
             <ul class="navbar-nav ml-auto">
                 <!--<li>

@@ -19,6 +19,7 @@ const routes: Routes = [
   {path: "user", loadChildren:'./components/user/user.module#UserModule' },
   //{path: "user/:id", loadChildren:'./components/user/user.module#UserModule' },
   {path: "group", loadChildren:'./components/group/group.module#GroupModule' },
+  //{path: "group", loadChildren:'./components/user/user.module#UserModule' },
   //{path: "group/:id", loadChildren:'./components/group/group.module#GroupModule' },
   //{path: "user/legis/:id", component: UserModule }, 
   // { path: 'distrcit',      component: HeroDetailComponent }, 

@@ -27,7 +27,7 @@ export class PostcardComponent implements OnInit {
     deletedNodePos:number;
 
     commentPost: boolean = false;
-    devMode: boolean = true;
+    devMode: boolean = false;
     savePost: boolean = false;
     commandModeEnable: boolean = false;
     hidePost: boolean = false;
@@ -171,7 +171,7 @@ export class PostcardComponent implements OnInit {
     ngOnInit(): void {
         //this.getUsers();
         ////Get entity image
-        if (this.post.postType) {
+        if (this.post && this.post.postType) {
             this.postText = this.sanitizer.bypassSecurityTrustHtml(this.post.postText);
            // this.post.postText = postText;
             if (this.post.postType.indexOf('V') !== -1) {

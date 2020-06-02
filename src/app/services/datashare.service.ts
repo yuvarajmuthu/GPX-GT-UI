@@ -33,6 +33,7 @@ export class DatashareService {
 
   //serviceUrl:string = "http://Gpx-env.e2xj3uszee.us-east-2.elasticbeanstalk.com";
   serviceUrl:string = "http://localhost:5000";
+  searchServiceUrl:string = "http://localhost:8090";
 
   public getServiceUrl():string{ 
     return this.serviceUrl;

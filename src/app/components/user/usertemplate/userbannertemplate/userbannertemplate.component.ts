@@ -56,7 +56,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
   
       super(legislatorsService2, dataShareService2, missionService2);
   
-      console.log("constructor() userProfile.template");      
+      console.log("constructor() userbannertemplate");      
 
       //OBSOLETE?
       missionService2.missionAnnounced$.subscribe(
@@ -83,7 +83,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
 
     //called after the constructor
   ngOnInit(): void {
-    console.log("ngOnInit() userbiodatatemplate.component");
+    console.log("ngOnInit() userbannertemplate.component");
     if(this.viewingUser['external']){
       this.externalUser = true;  
     }
@@ -108,7 +108,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
     } 
   
     loadTemplateData(){
-      this.userService2.getBiodata(this.profileUserId, "internal")
+      this.userService2.getBiodata(this.profileUserId)
       .subscribe((response) => {
         this.biodata= response['data'];
         if(response['id']){

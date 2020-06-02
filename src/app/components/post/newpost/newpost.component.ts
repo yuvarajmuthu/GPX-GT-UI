@@ -362,11 +362,24 @@ getUsers(e){
 submitPost() {
     //this.makePostContent();
     this.post.entityId = this.dataShareService.getLoggedinUsername();
-    this.post.postText = this.txtPost;
     let input = document.getElementById("postContent");
     console.log(input.innerHTML);
     this.txtPost = input.innerHTML.replace(/"/g, "'");
     console.log(this.txtPost);
+    this.post.postText = this.txtPost;
+    
+    let postText= input.innerText;
+    if(postText.indexOf("@") >= 0){
+      this.post.taggedEntityId = [];
+      let taggedEntitiesRaw = postText.substring(postText.indexOf("@")).split("@");
+      //this.post.taggedEntityId = postText.match(/\@+/g);
+
+      for (let i = 0; i < taggedEntitiesRaw.length; i++) {
+        if(taggedEntitiesRaw[i].trim().length > 0)
+          this.post.taggedEntityId.push(taggedEntitiesRaw[i].split(" ")[0].trim());
+      }
+    }
+
     if (this.parentPost != null) {
         this.post.parentPostId = this.parentPost.id;
     }

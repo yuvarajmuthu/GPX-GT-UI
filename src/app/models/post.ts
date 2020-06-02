@@ -8,6 +8,7 @@ export class Post {
 	public imageUrl:string;
 	public videoUrl:string;
 	public districtId:string;
+	public taggedEntityId:string[];
 	public likedBy:string[];
 	public likedByCurrentUser:boolean;
 	public postType:string; // OBSOLETE

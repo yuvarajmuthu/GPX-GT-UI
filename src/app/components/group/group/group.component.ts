@@ -331,7 +331,7 @@ export class GroupComponent implements OnInit {
           this.getFollowingsCount(this.profileUserId);
           this.getFollowings(this.profileUserId);
 //this.viewingUser['external'] is required only for dev mode
-          this.userService.getUserData(this.viewingUser['userId'], this.viewingUser['external']).subscribe(
+          this.userService.getUserData(this.viewingUser['userId']).subscribe(
               data => { 
                   this.userData = data;
                   console.log('User data from service: ', this.userData);
@@ -500,7 +500,7 @@ export class GroupComponent implements OnInit {
   }
 
   loadProfileTemplates(operation: string) {
-      this.userService.getUserData(operation, false).subscribe(
+      this.userService.getUserData(operation).subscribe(
           data => {
               this.userData = data;
               console.log('loadTemplate()::userprofile.template - User data from service: ', this.userData);

@@ -28,10 +28,11 @@ export abstract class AbstractTemplateComponent {
       private missionService: ComponentcommunicationService) {
       this.viewingUser = this.dataShareService.getViewingUser();
       this.profileUserId = this.viewingUser['userId'];
-      
+     /* 
       if(this.viewingUser['isLegislator']){
         this.loadLegislator();
-      } 
+      }
+      */ 
     }
 
     getLegislator():Legislator{

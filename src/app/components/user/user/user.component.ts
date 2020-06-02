@@ -279,8 +279,8 @@ export class UserComponent implements OnInit {
     }
 
     loadBioData(){
-        let userType:string = this.externalUser?"external": "internal";
-        this.userService.getBiodata(this.profileUserId, userType)
+        //let userType:string = this.externalUser?"external": "internal";
+        this.userService.getBiodata(this.profileUserId)
         .subscribe((response) => {
           //this.profileDataId = response['id'];
           this.biodata= response['data'];
@@ -426,8 +426,8 @@ export class UserComponent implements OnInit {
             this.getFollowersCount(this.profileUserId);
             this.getFollowers(this.profileUserId);
 
-            this.getFollowingsCount(this.profileUserId);
-            this.getFollowings(this.profileUserId);
+            //this.getFollowingsCount(this.profileUserId);
+            //this.getFollowings(this.profileUserId);
 //this.viewingUser['external'] is required only for dev mode
             this.userService.getUserData(this.viewingUser['userId'], this.viewingUser['external']).subscribe(
                 data => { 
@@ -447,6 +447,8 @@ export class UserComponent implements OnInit {
                         } else {
                             this.profileSmImage = this.userData['photoUrl'];
                         }
+                        //this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
+
                     } else {
                         this.getProfileSmImage(this.viewingUser['userId']);
                     }

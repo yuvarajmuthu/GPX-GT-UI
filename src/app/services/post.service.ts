@@ -103,7 +103,7 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
     }
-    //serviceUrl = '/assets/json/fromService/post.json'; 
+    serviceUrl = '/assets/json/fromService/post.json'; 
 
     console.log("gonna get posts");
 
@@ -346,7 +346,7 @@ export class PostService  extends AbstractService{
     if(this.devMode){
       url = '/assets/json/fromService/tagusers.json'; 
     }else{
-      url = this.dataShareService.serviceUrl+"/search/user?multiSearchText="+searchText;
+      url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
     }
     return this.http.get(url,httpOptions).
         pipe(

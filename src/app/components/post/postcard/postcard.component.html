@@ -110,16 +110,16 @@
             published: {{todayDate | date:'medium'}}
         </div>
 
-        <div *ngIf="post.containsImage" class="post-meta">
+        <div *ngIf="post && post.containsImage" class="post-meta">
             <img [src]="postImage" alt="">
         </div>
 
-        <div *ngIf="post.containsVideo" class="post-meta">
+        <div *ngIf="post && post.containsVideo" class="post-meta">
             <div class="we-video-info">
 
             </div>
         </div>
-        <div *ngIf="post.containsText" (click)="tagUsersRedirectTo($event)" class="description" [innerHTML]="postText">
+        <div *ngIf="post && post.containsText" (click)="tagUsersRedirectTo($event)" class="description" [innerHTML]="postText">
             <!-- <p class="card-text" >
             </p> -->
         </div>

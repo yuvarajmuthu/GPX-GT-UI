@@ -1,19 +1,44 @@
 [
-    {"data":{
-       "isCurrent":true,
-       "address":"290 Russell Senate Office Building Washington DC 20510",
-       "phone":"202-224-5972",
-       "start":"2015-01-06",
-       "end":"2021-01-03",
-       "term":"2015-01-06-2021-01-03",
-       "fax":"202-224-3808"}
-    },
-    {"data":{
-       "address":"290 Russell Senate Office Building Washington DC 20510",
-       "phone":"202-224-5972",
-       "start":"2009-01-06",
-       "end":"2015-01-03",
-       "term":"2009-01-06-2015-01-03",
-       "fax":"202-224-3808"}
-    }
- ]
+   {
+      "createdDate":"2020-05-07 00:00:36",
+      "lastModifiedDate":"2020-05-07 00:00:36",
+      "id":"5eb34fa47e56cd728833c939",
+      "profileTemplateId":"upOffices",
+      "data":{
+         "fax":"412-343-2050",
+         "name":"District Office",
+         "phone":"412-343-3870",
+         "address":"650 Washington Road Suite 102 Mt. Lebanon, PA 15228",
+         "type":"district",
+         "email":null
+      },
+      "dataList":null,
+      "entityId":"PAL000515",
+      "entityType":"LEGISLATOROPENSTATE",
+      "current":false,
+      "jsondata":{
+         "empty":false
+      }
+   },
+   {
+      "createdDate":"2020-05-07 00:00:36",
+      "lastModifiedDate":"2020-05-07 00:00:36",
+      "id":"5eb34fa47e56cd728833c93a",
+      "profileTemplateId":"upOffices",
+      "data":{
+         "fax":"717-780-4756",
+         "name":"Capitol Office",
+         "phone":"717-783-1850",
+         "address":"116A East Wing PO Box 202042 Harrisburg, PA 17120-2042",
+         "type":"capitol",
+         "email":null
+      },
+      "dataList":null,
+      "entityId":"PAL000515",
+      "entityType":"LEGISLATOROPENSTATE",
+      "current":false,
+      "jsondata":{
+         "empty":false
+      }
+   }
+]

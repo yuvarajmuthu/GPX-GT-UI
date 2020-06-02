@@ -1,141 +1,231 @@
-<div class='row'>	
-	<!-- <div class="col-md-4">
-	  <h5>View Mode:</h5>
-	  <select [ngModel]="getPermission()" (ngModelChange)="setPermission($event)">
-	    <option>Editor</option>
-	    <option>Viewer</option>
-	  </select>
-	</div> -->
-	<div class="col">
-    <div ngbDropdown class="d-inline-block"> 
-      <button class="btn btn-outline-primary" id="dropdownProfileEditOption" ngbDropdownToggle>{{profileEditOption}}</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownProfileEditOption">
-				<button class="dropdown-item" (click)="setPermission('Editor')">Editor</button>
-        <button class="dropdown-item" (click)="setPermission('Viewer')">Viewer</button>				
-      </div>
-    </div>
-	</div>
-
-
-	<!-- <div class="btn-group" dropdown *ngIf="allowed()" class="col-md-4">
-	  <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-	    Add Sections <span class="caret"></span>
-	  </button>
-
-	  <ul dropdownMenu class="dropdown-menu" role="menu">
-	    <li role="menuitem" *ngFor="let profileTemplate of profilesTemplates">
-	    	<a class="dropdown-item" (click)="loadTemplate(profileTemplate.profileTemplateId)">{{profileTemplate.name}}</a>
-	    	
-	    </li>
-	  </ul>
-
+<div class="profile-banner" style="background-image: url('../../../../assets/images/user-banner1.jpg');">
+  <div class="col-sm-3 avatar-container">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-2 imgUp">
+                  <img [src]="profileSmImage" class="twPc-avatarImg img-circle profile-avatar" *ngIf="!isImageLoading" alt="User avatar">
+                  <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
+                      <i class="fa fa-camera-retro"></i>
+                      <input type="file" class="uploadFile img" value="Upload Photo"
+                                   style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
+                  </label>
+              </div><!-- col-2  -->
+          </div><!-- row -->
+      </div><!-- container -->
   </div>
-   -->
-	<div class="col">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownAddSection" ngbDropdownToggle>Add Section</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownAddSection">
-        <button class="dropdown-item" *ngFor="let profileTemplate of profilesTemplates" (click)="loadTemplate(profileTemplate.profileTemplateId)">{{profileTemplate.name}}</button>
-      </div>
-    </div>
-	</div>
-
-
-
-	<div *ngIf="allowed()" class="col">
-	     <button type="button" class="btn btn-primary" (click)="saveProfile()">Save Profile</button>
-	</div>    
-
-
-</div>            
-
-<!--Constitution Detail section - Begin-->
-<div class="col-xs-12">
-
-<!--Constitution Summary section - Begin-->
-  <div>
-  <main>
-    <div class="row">
-      <div class="left col-lg-10">
-        <div class="photo-left">
-           <div class="activePhoto"></div>
-        </div>
-        <h4 class="name">District: 
-                 <!-- <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'name'" [placeholder]="name" (onSave)="setValue($event)"></ndv-edit> -->
-
-        </h4>
-        <div class="stats row">
-          <div class="stat col-xs-6" style="padding-right: 50px;">
-            <p class="number-stat">{{followers}}</p>
-            <p class="desc-stat">Followers</p>
-          </div>
-          <div class="activityDiv stat col-xs-6" style="padding-left: 50px;" (click)="showActivities()">
-            <p class="number-stat">{{activities}}</p>
-            <p class="desc-stat">Activities</p>
-          </div>
-        </div>
-        <p class="desc">Description:                  
-        	<!-- <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'description'" [placeholder]="description" (onSave)="setValue($event)"></ndv-edit> -->
-        </p>
-        <p class="desc">Source Id:                  
-        	<!-- <ndv-edit [permission]="allowed()" [min]="2" [max]="50"  [title]="'sourceId'" [placeholder]="sourceId" (onSave)="setValue($event)"></ndv-edit> -->
-        </p>
-
-			</div>
-
-      <div class="right col-lg-2" *ngIf="!allowed()">
-
-       <button *ngIf="!connected" type="button" class="btn btn-primary" (click)="followDistrict()">Follow</button>
-       <button *ngIf="connected" type="button" class="btn btn-success glyphicon glyphicon-ok">Following</button>       
-        
-      </div>
-     </div> 
-  </main>
-
 </div>
-<!--Constitution Summary section - End-->
 
-<!--Constitution tab section - Begin-->
-	<div class="constitutionDetail">
+<div class="content">
 
-      <ngb-tabset type="pills" (tabChange)="tabclick($event)">
-          <ngb-tab id="legislatorTab" title="Legislators">
-          </ngb-tab>
-      </ngb-tabset>    
-              <!-- <tabset type="pills" #staticTabs>
-                <tab heading='Profile'>
-	   				<div>
-						<dynamic-content [type]="templateType"></dynamic-content>
-				    </div>
+  <div class="row">
+      <div class="col-sm-4">
+          <!-- Begin user profile -->
+          <div class="text-center user-profile-2" style="margin-top:120px">
+              <ul class="list-group">
+                  <li class="list-group-item">
+                      <div *ngIf="externalUser">
+                          <h4>
+                              <b>
+                                  {{biodata.full_name}}
+                              </b>
+                          </h4>
+                          <h5>
+                              <a [routerLink]="['/party', biodata.party]">
+                                  {{biodata.party}}
+                              </a>
+                          </h5>
+                          <h5>
+                              <a [routerLink]="['../../group']">{{biodata.district}}</a>,
+                              <a [routerLink]="['/chamber', biodata.chamber]">{{biodata.chamber}}</a>,
+                              <a [routerLink]="['/state', biodata.state]">{{biodata.state}}</a>
+                          </h5>
+                      </div>    
+                      <div *ngIf="!externalUser">
+                          <h4>
+                              <b>
+                                  {{biodata.first_name}} {{biodata.last_name}}
+                              </b>
+                          </h4>
+                      </div>                            
+                  </li>
+                  <li class="list-group-item pointer" *ngIf="!isSelfProfile">
+                      <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()"> 
+                          {{followCntrlLabel}}
+                      </span>
+                  </li>
+                                      
+                  <li class="list-group-item pointer"
+                      [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
+          <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
+            {{followersCount}} Followers
+          </span>
+                  </li>
+                  <li class="list-group-item pointer"
+                      [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
+          <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
+            {{followingsCount}} Following
+          </span>
+                  </li>
+                  <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
+                                          [ngClass]="{ 'active': folow, 'in-active': !folow}">
+                                          <span class="badge">245</span>
+                                          <span class="">Following</span>
+                                      </li>
+                                      -->
+                  <li class="list-group-item pointer"
+                      (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
+                      <span class="pointer">My Posts</span> 
+                  </li>
 
-                </tab>
-                <tab heading='Current Legislators'>
-										<div class="form-group">
-											Tag Legislators:
-											<typeahead-gpx></typeahead-gpx>
-											<button type="submit" class="btn btn-default glyphicon glyphicon-search" aria-hidden="true"></button>
-									</div>
+                  <li class="list-group-item pointer"
+                      (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
+                      <span class="pointer">Profile</span> 
+                  </li>
+              </ul>
 
-				    <ul style="list-style-type:none;padding-left:0;">
-						<li *ngFor="let electedPerson of electedPersons"
-						        [class.selected]="selectedPerson === electedPerson"
-						        class="legisBoundary">
+          </div><!-- End div .box-info -->
+          <!-- Begin user profile -->
+      </div><!-- End div .col-sm-4 -->
 
-					    	<legislator [legislator]=electedPerson></legislator>
+      <div class="col-sm-8">
+          <div class="widget widget-tabbed">
+              <!-- Nav tab -->
 
-					  </li>
-					</ul>
+              <div class="gap gray-bg">
+                  <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="row cols-reverse" id="page-contents">
+                                  <!-- sidebar -->
+                                  <!-- Main stage area -->
+                                  <div class="col-lg-12 cols-item2">
+                                      <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
+                                          <app-post [type]="user" [userId]="profileUserId" [disableNewPost]=true></app-post>
+                                      </div>
+                                      <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
+                                           class="widget stick-widget">
+                                          <ul class="followers">
+                                              <li *ngFor="let followingUser of followers">
+                                                <!--
+                                                  <app-usercard1 [user]=followingUser></app-usercard1>
+                                                  -->
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
+                                              class="widget stick-widget">
+                                          <ul class="followers">
+                                              <li *ngFor="let followingUser of followings">
+                                                <!--
+                                                  <app-usercard1 [user]=followingUser></app-usercard1>
+                                              -->
+                                                </li>
+                                          </ul>
+                                      </div>
+                                      <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
+                                          <div class="card card-nav-tabs">
+                                              <div class="card-header-1 card-header-primary">
+                                                  <div class="nav-tabs-navigation">
+                                                      <div class="nav-tabs-wrapper">
+                                                          <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
+                                                              data-tabs="tabs">
+                                                              <li class="nav-item"
+                                                                  *ngFor="let profileTemplate of profilesTemplates">
+                                                                  <div class="row">
+                                                                      <div class="col-sm-10">    
+                                                                          <a class="nav-link text-black-50" data-toggle="tab"
+                                                                          [routerLink]=""
+                                                                          (click)="loadTemplate(profileTemplate.profileTemplateId)"
+                                                                          *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
+                                                                              <i class="material-icons">{{profileTemplate.profileIcon}}</i>
+                                                                              {{profileTemplate.name}}
+                                                                              <!--{{profileTemplate.profileTemplateId}}-->
+                                                                          </a>
+                                                                      </div>
+                                                                      <div class="col-sm-2">
+                                                                          <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                      </div>
+                                                                  </div>
+                                                              </li>
+                                                              <li *ngIf="isProfileInEditMode()" class="nav-item">
+                                                                  <div ngbDropdown class="d-inline-block">
+                                                                      <button class="btn btn-outline-primary btn-xs"
+                                                                              id="dropdownAddSection"
+                                                                              ngbDropdownToggle>
+                                                                          <!--Add Section-->
+                                                                          <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                      </button>
+                                                                      <div ngbDropdownMenu
+                                                                           aria-labelledby="dropdownAddSection">
+                                                                          <button class="dropdown-item"
+                                                                                  *ngFor="let profileTemplate of availableProfileTemplates"
+                                                                                  (click)="addProfileData(profileTemplate)">
+                                                                              {{profileTemplate.name}}
+                                                                          </button> 
+                                                                      </div>
+                                                                  </div> 
+                                                              </li>
+                                                              <li *ngIf="isUserLogged()" class="nav-item">
+                                                                  <div>
+                                                                      <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                                                          <!--{{editLabel}}-->
+                                                                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                      </button>
+                                                                      <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
+                                                                          <!--{{Save}}-->
+                                                                          <i class="fa fa-save" aria-hidden="true"></i>
+                                                                      </button>
+                                                                      <button type="button"
+                                                                              *ngIf="isProfileInEditMode()"
+                                                                              class="btn btn-primary btn-danger"
+                                                                              (click)="cancelEditProfile()">
+                                                                          <!--Cancel Edit-->
+                                                                          <i class="fa fa-times" aria-hidden="true"></i>
+                                                                      </button>
+                                                                  </div>
+                                                              </li>
+                                                          </ul>
+                                                      </div>
+                                                  </div>
+                                              </div>
 
-                </tab>
-                <tab heading='Parties'>
-			    	<party-list></party-list>                	
-                </tab>                            
-                <tab heading='Activities'>
-					<post-gpx [type]="'group'" [groupId]=operation></post-gpx>
-                </tab>                                            
-              </tabset> -->
-	</div>              
-<!--Constitution tab section - End-->
+                                              <div class="card-body ">
+                                                  <div class="tab-content text-center">
+                                                      <div class="tab-pane active" id="templateType">
+                                                          <app-usertemplate [type]="templateType"></app-usertemplate>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <!--HORIZONTAL ITEMS FOR PROFILES / ADD SECTION IN EDIT MODE-->
+                                      </div>
+                                  </div><!-- centerl meta -->
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
+              <!-- End nav tab -->
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+
+
+                  <!-- Tab timeline -->
+                  <div class="tab-pane animated active fadeInRight" id="my-timeline">
+                      <div class="user-profile-content">
+
+                          <!-- Begin timeline -->
+
+                          <!-- End timeline -->
+                      </div><!-- End div .user-profile-content -->
+                  </div><!-- End div .tab-pane -->
+                  <!-- End Tab timeline -->
+                  <!-- Tab about -->
+                  <!-- End Tab user messages -->
+              </div><!-- End div .tab-content -->
+          </div><!-- End div .box-info -->
+      </div>
+  </div>
 </div>
-<!--Constitution Detail section - End-->

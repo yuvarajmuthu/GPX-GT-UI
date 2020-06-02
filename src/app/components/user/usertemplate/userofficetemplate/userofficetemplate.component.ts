@@ -45,6 +45,7 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
             this.changeDetector.detectChanges();
 
         });    
+        
   }
 
   ngOnInit() {

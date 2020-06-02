@@ -57,6 +57,22 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
 
     }
 
+    ngOnInit() {
+        console.log('ngOnInit() userroletemplate.component');
+        /*
+        this.userService2.getRoles(this.profileUserId).subscribe(
+          result => {
+            console.log(result.length);
+            this.roles = result;
+          });
+          */
+        this.loadDisplayProperties();
+
+        this.loadTemplateData();
+        this.inEditMode = this.dataShareService2.isProfileEditable();
+
+    }
+
     open(content, role) { 
         if(role === ''){
             role = null;
@@ -83,21 +99,6 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         }
     }
 
-    ngOnInit() {
-        console.log('ngOnInit() userroletemplate.component');
-        /*
-        this.userService2.getRoles(this.profileUserId).subscribe(
-          result => {
-            console.log(result.length);
-            this.roles = result;
-          });
-          */
-        this.loadDisplayProperties();
-
-        this.loadTemplateData();
-        this.inEditMode = this.dataShareService2.isProfileEditable();
-
-    }
 
     loadDisplayProperties() {
         //TODO
@@ -154,16 +155,14 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     }
 
     createFormGroup() {
-        //this.biodataTemplateForm = this.fbuilder.group({});
-        //let struct:string = "\"{";//"new FormGroup({";
         this.roleTemplateForm = this.fbuilder.group({});
-
+/*
         this.displayProperties.forEach((element, index) => {
             let value = this.legislator[element['propId']];
             console.log('element[propId] ', element['propId'], ' this.legislator[element[propId]] ', this.legislator[element['propId']]);
             this.roleTemplateForm.setControl(element['propId'], new FormControl(value));
-            //this.biodataTemplateForm.setControl(element['propId'], null);
         });
+        */
         this.changeDetector.detectChanges();
     }
 

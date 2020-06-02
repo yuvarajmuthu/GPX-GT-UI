@@ -260,7 +260,7 @@ input[type="file"] {
     overflow: auto;
     height: 120px;
     text-align: center;
-    border: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid #007bff;
 }
 .widget-div{
     padding-top: 10px;

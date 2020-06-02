@@ -41,6 +41,8 @@ export class Usercard1Component implements OnInit {
             } else {
                 this.getProfileSmImage(this.user.username);
             }
+            //this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
+
         }
 
         this.loggedUser = this.datashareService.getCurrentUser();

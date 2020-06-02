@@ -268,9 +268,9 @@ export class UserComponent implements OnInit {
             file: ['']
         });
 //////////Biodata
-        if(this.paramUsername && this.paramUsername == 'external'){
-            this.externalUser = true;  
-          }
+        //if(this.paramUsername && this.paramUsername == 'external'){
+        //    this.externalUser = true;  
+         // }
       
           //this.loadDisplayProperties();     
         
@@ -377,21 +377,18 @@ export class UserComponent implements OnInit {
 
 
         } else {
-            if (this.profileUserId == 'external') {
-                //TODO
-                //determine congress or state legislator
-                //get bioguide id
-                this.isLegislator = true; // may not be required
-                this.viewingUser['isLegislator'] = true;
-                //*** LEGISLATOR SELECTED FROM SEARCH SCREEN IS SET AS VIEWINGUSER - IN LEGISLATOR.COMPONENT ***/
-                this.viewingUser['externalData'] = this.datashareService.getViewingUser();
+            
+            //if (this.profileUserId == 'external') {
+                
+               //this.viewingUser['externalData'] = this.datashareService.getViewingUser();
 
-
+/*
                 if (!this.viewingUser['externalData']['leg_id']) { //CONGRESS
                     this.viewingUser['isCongress'] = true;
                     let photoUrl = this.viewingUser['externalData']['photo_url'];
                     let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
                     let bioguideId = fileName.substring(0, fileName.lastIndexOf('.'));
+
                     console.log('bioguideId ', bioguideId);
                     this.viewingUser['bioguideId'] = bioguideId;
                     this.profileUserId = bioguideId;
@@ -401,13 +398,14 @@ export class UserComponent implements OnInit {
                     this.viewingUser['isCongress'] = false;
                     this.profileUserId = this.viewingUser['externalData']['id'];
                 }
-                this.viewingUser['external'] = true;
-                //this.viewingUser['userId'] = this.profileUserId;
-            } else {
-                this.isLegislator = false; // may not be required
-                this.viewingUser['external'] = false;
-                this.viewingUser['isLegislator'] = false;
-            }
+                */
+               // this.viewingUser['external'] = true;
+           // } else {
+            //    this.isLegislator = false; // may not be required
+             //   this.viewingUser['external'] = false;
+              //  this.viewingUser['isLegislator'] = false;
+            //}
+            
             this.viewingUser['userId'] = this.profileUserId;
             //console.log("User isLegislator: ", this.viewingUser['isLegislator']);
 
@@ -426,28 +424,30 @@ export class UserComponent implements OnInit {
             this.getFollowersCount(this.profileUserId);
             this.getFollowers(this.profileUserId);
 
-            //this.getFollowingsCount(this.profileUserId);
-            //this.getFollowings(this.profileUserId);
-//this.viewingUser['external'] is required only for dev mode
-            this.userService.getUserData(this.viewingUser['userId'], this.viewingUser['external']).subscribe(
+            this.userService.getUserData(this.viewingUser['userId']).subscribe(
                 data => { 
                     this.userData = data;
                     console.log('User data from service: ', this.userData);
 
-                    //this may not be required as getRelationStatus() can be used
-                    //this.viewingUser['connections'] = this.userData['connections'];
-
-
-                    //this.viewingUser['followers'] = this.userData['followers'];
-
-                    //if (this.viewingUser['external']) { // and not persisted
                     if (this.userData['userType'] === 'LEGISLATOR') {
+                        this.viewingUser['external'] = true;
+                        this.viewingUser['isLegislator'] = true;
+                        if (this.userData['sourceSystem'] === 'OPENSTATE') {
+                            this.viewingUser['isCongress'] = false;
+                            this.externalUser = true;  
+
+                        }else if (this.userData['sourceSystem'] === 'GOVTRACK') {
+                            this.viewingUser['isCongress'] = true;
+                            this.externalUser = true;  
+
+                        }
+
                         if (isDevMode()) {
                             this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
                         } else {
                             this.profileSmImage = this.userData['photoUrl'];
                         }
-                        //this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
+                        this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
 
                     } else {
                         this.getProfileSmImage(this.viewingUser['userId']);
@@ -621,7 +621,7 @@ export class UserComponent implements OnInit {
     }
 
     loadProfileTemplates(operation: string) {
-        this.userService.getUserData(operation, false).subscribe(
+        this.userService.getUserData(operation).subscribe(
             data => {
                 this.userData = data;
                 console.log('loadTemplate()::userprofile.template - User data from service: ', this.userData);

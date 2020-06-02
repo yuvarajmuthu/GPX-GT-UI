@@ -115,9 +115,20 @@ export class LegislatorComponent implements OnInit {
   //called from UI on selection of a Legislator
   gotoLegislator(legislator: Legislator):void{
     console.log('selected legislator - ' +  legislator);
-    this.datashareService.setViewingUser(legislator);    
-    //this.router.navigate(['/user', legislator.leg_id]);
-    this.router.navigate(['/user', 'external']); 
+    let legisId:string=null;
+    this.datashareService.setViewingUser(legislator);
+    
+    if (legislator['leg_id']) {
+      legisId = legislator['leg_id'];
+    }else{ //CONGRESS
+      let photoUrl = this.legislator['photo_url'];
+      let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
+      legisId = fileName.substring(0, fileName.lastIndexOf('.'));    
+    }  
+
+    this.router.navigate(['/user', legisId]);
+    
+    //this.router.navigate(['/user', 'external']); 
     //this.router.navigate(['/user']);
   }
 

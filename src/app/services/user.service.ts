@@ -47,12 +47,9 @@ export class UserService extends AbstractService{
     return this.dataShareService.getServiceUrl() + "/api/social";
   }
 
-  getUserData(userId:String, external:boolean):Observable<any> { 
+  getUserData(userId:String):Observable<any> { 
     let url:string;
     
-    if(userId === "CREATE"){ // invoked during page creation
-      	//get available Templates for an user
-    }
 
     //bioguideId is of length 7 - sunfoundataion
     //if(userId.length == 7){
@@ -61,7 +58,7 @@ export class UserService extends AbstractService{
     
     //DEV MODE
     if(this.devMode){
-      if(external){  
+      if(true){  
         url = '/assets/json/fromService/user-legis-LEGISLATOROPENSTATE.json';   
       }else{
         url = '/assets/json/fromService/user-public.json';

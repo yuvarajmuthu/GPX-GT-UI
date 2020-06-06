@@ -31,19 +31,38 @@ export class ProfileService extends AbstractService{
   }
   
 
-  getProfileTemplateData(profileTemplateId:string):Observable<any> {    
+  getProfileTemplate(profileTemplateId:string):Observable<any> {    
       let serviceUrl = this.serviceUrl + "/getProfileTemplate/" + profileTemplateId;
-      console.log("getProfileTemplateData profile.service this.serviceUrl " + serviceUrl);
+      console.log("getProfileTemplate profile.service this.serviceUrl " + serviceUrl);
       let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 
       return this.http.get(serviceUrl, this.httpOptions)
       .pipe(
         //map((response:Response) => response.json()), 
-        tap(_ => this.log(`fetched getProfileTemplateData`)),
-        catchError(this.handleError<any>(`Error in getProfileTemplateData()`))
+        tap(_ => this.log(`fetched getProfileTemplate`)),
+        catchError(this.handleError<any>(`Error in getProfileTemplate()`))
       );                            
   }
-  
+
+  getProfileTemplateByType(profileTemplateId:string, type:string):Observable<any> {    
+    let serviceUrl = this.serviceUrl + "/getProfileTemplate/" + profileTemplateId;
+    console.log("getProfileTemplateByType profile.service this.serviceUrl " + serviceUrl);
+    //DEV MODE
+    if(this.devMode){  
+      serviceUrl = '/assets/json/fromService/profileTemplate.json';   
+    }
+    serviceUrl = '/assets/json/fromService/profileTemplate.json';   
+
+    return this.http.get(serviceUrl, { responseType: 'json', params: {
+      type: type
+    } }).pipe(
+      tap(_ => this.log(`fetched getProfileTemplateByType`)),
+      catchError(this.handleError<any>(`Error in getProfileTemplateByType()`))
+    );
+
+    
+  }
+
   getAvailableProfileTemplatesForEntity(entityId:string, userType:string):Observable<any> {    
     let serviceUrl = this.serviceUrl + "/getAllProfileTemplates/" + entityId + "/";
     console.log("getAvailableProfileTemplatesForEntity profile.service this.serviceUrl " + serviceUrl);

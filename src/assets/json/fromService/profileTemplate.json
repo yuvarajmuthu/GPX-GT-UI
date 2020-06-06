@@ -1,0 +1,51 @@
+{
+    "createdDate":"2020-03-21 17:36:07",
+    "lastModifiedDate":"2020-03-21 17:36:07",
+    "id":"5e765087f453cd50ac1a023b",
+    "profileTemplateId":"upCongressLegislatorExternal",
+    "type":"LEGISLATOR",
+    "name":"Biodata",
+    "profileIcon":"person",
+    "properties":[
+       {
+          "propId":"leg_id",
+          "displayLabel":"Legislator External ID",
+          "type":"text"
+       },
+       {
+          "propId":"full_name",
+          "displayLabel":"Full Name",
+          "type":"text"
+       },
+       {
+          "propId":"first_name",
+          "displayLabel":"First Name",
+          "type":"text"
+       },
+       {
+          "propId":"last_name",
+          "displayLabel":"Last Name",
+          "type":"text"
+       },
+       {
+          "propId":"district",
+          "displayLabel":"District",
+          "type":"text"
+       },
+       {
+          "propId":"party",
+          "displayLabel":"Party",
+          "type":"text"
+       },
+       {
+          "propId":"chamber",
+          "displayLabel":"Chamber",
+          "type":"text"
+       },
+       {
+          "propId":"state",
+          "displayLabel":"State",
+          "type":"entity"
+       }
+    ]
+ }

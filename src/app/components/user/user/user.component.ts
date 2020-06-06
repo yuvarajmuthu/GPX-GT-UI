@@ -69,8 +69,10 @@ export class UserComponent implements OnInit {
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
     externalUser:boolean;
-    biodata:any;
+    biodata:any=null;
+    biodataTemplate={};
 
+    entityType:string=null;
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
     profileEditOption: string;
@@ -109,6 +111,7 @@ export class UserComponent implements OnInit {
     uploadForm: FormGroup;
     compTypeTabs = [];
 
+    isEditDisplayname:boolean = false;
 
     changeParty: boolean = false;
     isEditParty:boolean = false;
@@ -137,11 +140,7 @@ export class UserComponent implements OnInit {
                 private postService: PostService,
                 private profileService: ProfileService,
                 private communicationService: ComponentcommunicationService,
-                //private elementRef:ElementRef,
-                //private renderer: Renderer,
                 private legislatorsService: LegislatorService,
-                //private peopleService: PeopleService,
-                //private partyService: PartyService,
                 private datashareService: DatashareService,
                 private formBuilder: FormBuilder) {
         this.currentUser = this.datashareService.getCurrentUser();
@@ -150,43 +149,18 @@ export class UserComponent implements OnInit {
             editmode => {
                 console.log('Received edit-save Profile message ' + editmode);
                 this.inEditMode = editmode;
-               /*
-                if (!editmode) {
-                    this.saveProfile();
-                }
-                */
-
             });
         
 
 
     }
 
-
-
-    //MAY BE OBSOLETE
-    //get invoked automatically before ngOnInit()
-    //routerOnActivate(curr: RouteSegment): void {
-    routerOnActivate(): void {
-        // if(curr.getParam("id")){
-        //   if(curr.getParam("id") == "CREATE"){
-        //     this.operation = curr.getParam("id");
-        //   }else{
-        //     this.profileUserId = curr.getParam("id");
-        //     //this.dataShareService.setSelectedLegislatorId(this.profileUserId);
-        //     console.log("from userProfile Param value - id " + this.profileUserId);
-        //   }
-        // }
-
-        /*    if(curr.getParam("legisId")){
-              this.legisId = curr.getParam("legisId");
-              this.profileUserId = this.legisId;
-              console.log("from userProfile Param value - legisId " + this.legisId);
-            }  */
-        console.log('from user.component routerOnActivate()');
-
+    toggleEditDisplayname(){
+        this.isEditDisplayname = !this.isEditDisplayname;
     }
+
     toggleEditParty(){
+        /*
         this.changeParty=false
         if(!this.isEditParty && this.biodata){
             this.editPartyInput = this.biodata.party;
@@ -195,10 +169,12 @@ export class UserComponent implements OnInit {
             if(typeof(this.editPartyInput) == 'object')
               this.biodata.party = this.editPartyInput.firstName;
         }
+        */
         this.isEditParty = !this.isEditParty;
     }
 
     toggleEditDistrict(){
+        /*
         this.changeDistrict=false;
         if(!this.isEditDistrict && this.biodata){
             this.editDistrictInput = this.biodata.district;
@@ -207,10 +183,12 @@ export class UserComponent implements OnInit {
             if(typeof(this.editDistrictInput) == 'object')
               this.biodata.district = this.editDistrictInput.firstName;
         }
+        */
         this.isEditDistrict = !this.isEditDistrict;
     }
 
     toggleEditChamber(){
+        /*
         this.changeChamber = false;
         if(!this.isEditChamber && this.biodata){
             this.editChamberInput = this.biodata.chamber;
@@ -219,10 +197,12 @@ export class UserComponent implements OnInit {
             if(typeof(this.editChamberInput) == 'object')
                this.biodata.chamber = this.editChamberInput.firstName;
         }
+        */
         this.isEditChamber = !this.isEditChamber;
     }
 
     toggleEditState(){
+        /*
         this.changeState = false;
         if(!this.isEditState && this.biodata){
             this.editStateInput = this.biodata.state;
@@ -233,7 +213,16 @@ export class UserComponent implements OnInit {
             else
                 this.biodata.state = this.editStateInput;
         }
+        */
         this.isEditState = !this.isEditState;
+    }
+    
+    mouseEnter(property:string){
+        this.changeParty = true;
+    }
+
+    mouseOut(property:string){
+        this.changeParty = false;
     }
 
     onChangeSearch(e){
@@ -279,10 +268,9 @@ export class UserComponent implements OnInit {
     }
 
     loadBioData(){
-        //let userType:string = this.externalUser?"external": "internal";
         this.userService.getBiodata(this.profileUserId)
         .subscribe((response) => {
-          //this.profileDataId = response['id'];
+          this.entityType = response['entityType']; 
           this.biodata= response['data'];
           
           console.log('biodata response data ', this.biodata);
@@ -290,7 +278,28 @@ export class UserComponent implements OnInit {
           //this.createFormGroup();
         });  
       }
-  
+
+      loadBioDataTemplate(type:string){
+        this.profileService.getProfileTemplateByType('upCongressLegislatorExternal', type)
+        .subscribe((response) => {
+            this.biodataTemplate = response;
+
+        });  
+      }
+
+      getPropertyDataType(propertyName:string){
+        let type:string=null;  
+        let properties:[] = this.biodataTemplate['properties'];
+        for (let property of properties) {
+            if(property['propId'] === propertyName){
+                type = property['type'];
+                break;
+            }
+        }
+
+        return type;
+      }
+
     Activities() {
         this.activitiesData = true;
         this.profileData = false;
@@ -483,20 +492,21 @@ export class UserComponent implements OnInit {
                             //this.profilesTemplates.push(profileData);
                         }
 
-                        if (profileData['profileTemplateId'] === 'upCongressLegislatorExternal' ||
-                            profileData['profileTemplateId'] === 'upDefault') {
+                        //if (profileData['profileTemplateId'] === 'upCongressLegislatorExternal' ||
+                        //    profileData['profileTemplateId'] === 'upDefault') {
                             //let profileItemData = profileData['data'][0];
-                            let profileItemData = profileData['data'];
-                            this.firstName = profileItemData['first_name'];
-                            this.lastName = profileItemData['last_name'];
+                            //let profileItemData = profileData['data'];
+                            //this.firstName = profileItemData['first_name'];
+                            //this.lastName = profileItemData['last_name'];
 
-                        }
+                        //}
                     }
 
                     if (compTypes.length > 0) {
                         this.templateType = compTypes;
                     }
 
+                    this.loadBioDataTemplate(this.userData['userType']);
                     //setting here so it can be accessed globally
                     this.datashareService.setViewingUser(this.viewingUser);
                     console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));

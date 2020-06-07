@@ -9,6 +9,7 @@ import {RegisterComponent} from './components/security/register/register.compone
 import {LoginComponent} from './components/security/login/login.component';
 import {PostComponent} from './components/post/post.component';
 import {ProtectedComponent} from './components/protected/protected.component';
+import {CreatepageComponent} from './components/security/createpage/createpage.component'
 //import {ConnectionrequestComponent} from './components/connection/connectionrequest/connectionrequest.component';
 
 import { AuthGuard } from '../app/auth/auth.guard';
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'secure', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },  
+  { path: 'createpage', component: CreatepageComponent },
   { path: 'request', loadChildren:'./components/connection/connection.module#ConnectionModule' },   
   { path: '',   redirectTo: '/searchLegislator', pathMatch: 'full' },
 

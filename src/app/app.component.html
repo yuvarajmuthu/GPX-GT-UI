@@ -87,10 +87,10 @@
               Create page
             </button>
             <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
-              <a class="dropdown-item" href="#">Create District</a>
-              <a class="dropdown-item" href="#">Create Legislator</a>
-              <a class="dropdown-item" href="#">Create User</a>
-              <a class="dropdown-item" href="#">Create Party</a>
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'entity')">Create District</a>
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'user')">Create Legislator</a>
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'user')">Create User</a>
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'entity')">Create Party</a>
             </div>
           </div>
             

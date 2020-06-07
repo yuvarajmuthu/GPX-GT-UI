@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-6">
+          <div class="card">
+              <header class="card-header">
+                  <h4 class="card-title mt-2">Create a page</h4>
+              </header>
+
+              <article class="card-body">
+                  <form *ngIf="isCreatepage4user==true" [formGroup]="createUserPageForm" (ngSubmit)="createUserpage()">
+                      <div class="form-row">
+                          <div class="col form-group">
+                              <label>First name </label>
+                              <input type="text" class="form-control" placeholder="First name" formControlName="firstName" required/>
+                            </div> 
+                          <div class="col form-group">
+                              <label>Last name</label>
+                              <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" required/>
+                            </div> 
+                      </div> 
+
+                      <div class="form-row">
+                        <div class="col form-group">
+                            <label>Party </label>
+                            <input type="text" class="form-control" placeholder="Party" formControlName="party"/>
+                          </div> 
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>District </label>
+                          <input type="text" class="form-control" placeholder="District" formControlName="district"/>
+                        </div> 
+                     </div>
+                     <div class="form-row">
+                      <div class="col form-group">
+                          <label>Chamber </label>
+                          <input type="text" class="form-control" placeholder="Chamber" formControlName="chamber"/>
+                        </div> 
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                        <label>State </label>
+                        <input type="text" class="form-control" placeholder="State" formControlName="state"/>
+                      </div> 
+                   </div>
+                       <div class="form-group">
+                          <button type="submit" [disabled]="!createUserPageForm.valid" class="btn btn-primary btn-block"> Continue  </button>
+                      </div>
+                  </form>
+                  <form *ngIf="isCreatepage4user==false" [formGroup]="createEntityPageForm" (ngSubmit)="createEntitypage()">
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Name </label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="entityName" required/>
+                          </div> 
+                    </div> 
+
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>Description </label>
+                          <textarea type="text" class="form-control" placeholder="Description" formControlName="entityDescr"></textarea>
+                        </div> 
+                  </div>
+
+                     <div class="form-group">
+                        <button type="submit" [disabled]="!createEntityPageForm.valid" class="btn btn-primary btn-block"> Continue  </button>
+                    </div>
+                </form>
+              </article>
+          </div>
+      </div>
+  </div>
+</div>
+

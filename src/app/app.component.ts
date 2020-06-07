@@ -53,7 +53,6 @@ export class AppComponent implements OnInit {
     isImageLoading: boolean = false;
     @HostListener('click', ['$event.target'])
     onClick(evt) {
-      console.log(evt.id);
       if(evt.id != 'dropdownMenuButton'){
             var element = document.getElementById("createpagemenu");
             element.classList.remove("createpage-option");
@@ -308,6 +307,12 @@ export class AppComponent implements OnInit {
         if (image) {
             reader.readAsDataURL(image);
         }
+    }
+
+    loadcreatepage(evt, opt){
+        evt.preventDefault();
+        this.router.navigate(['createpage'],{ queryParams: { 'opt': opt } });
+
     }
 
 }

@@ -7,23 +7,30 @@
               </header>
 
               <article class="card-body">
-                  <form *ngIf="isCreatepage4user==true" [formGroup]="createUserPageForm" (ngSubmit)="createUserpage()">
-                      <div class="form-row">
-                          <div class="col form-group">
-                              <label>First name </label>
-                              <input type="text" class="form-control" placeholder="First name" formControlName="firstName" required/>
-                            </div> 
-                          <div class="col form-group">
-                              <label>Last name</label>
-                              <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" required/>
-                            </div> 
-                      </div> 
+                  <form *ngIf="userType === 'LEGISLATOR'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>Display Name</label>
+                          <input type="text" class="form-control" placeholder="Display Name" formControlName="displayName"/>
+                        </div> 
+                  </div>
 
-                      <div class="form-row">
-                        <div class="col form-group">
-                            <label>Party </label>
-                            <input type="text" class="form-control" placeholder="Party" formControlName="party"/>
-                          </div> 
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>First name</label>
+                          <input type="text" class="form-control" placeholder="First name" formControlName="firstName" required/>
+                        </div> 
+                      <div class="col form-group">
+                          <label>Last name</label>
+                          <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" required/>
+                        </div> 
+                  </div> 
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                        <label>Party </label>
+                        <input type="text" class="form-control" placeholder="Party" formControlName="party"/>
+                      </div> 
                     </div>
 
                     <div class="form-row">
@@ -46,26 +53,27 @@
                       </div> 
                    </div>
                        <div class="form-group">
-                          <button type="submit" [disabled]="!createUserPageForm.valid" class="btn btn-primary btn-block"> Continue  </button>
+                          <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
                       </div>
                   </form>
-                  <form *ngIf="isCreatepage4user==false" [formGroup]="createEntityPageForm" (ngSubmit)="createEntitypage()">
+
+                  <form *ngIf="userType === 'LEGISLATIVE_DISTRICT' || userType === 'POLITICAL_PARTY'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Name </label>
-                            <input type="text" class="form-control" placeholder="Name" formControlName="entityName" required/>
+                            <input type="text" class="form-control" placeholder="Display Name" formControlName="displayName" required/>
                           </div> 
                     </div> 
 
                     <div class="form-row">
                       <div class="col form-group">
                           <label>Description </label>
-                          <textarea type="text" class="form-control" placeholder="Description" formControlName="entityDescr"></textarea>
+                          <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
                         </div> 
                   </div>
 
                      <div class="form-group">
-                        <button type="submit" [disabled]="!createEntityPageForm.valid" class="btn btn-primary btn-block"> Continue  </button>
+                        <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
                     </div>
                 </form>
               </article>

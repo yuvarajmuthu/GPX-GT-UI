@@ -102,6 +102,7 @@ export class UserComponent implements OnInit {
     folow: boolean = false;
     followersActiveCss: boolean = false;
     followingsActiveCss: boolean = false;
+    managedByActive:boolean = false;
 
     navTabs: boolean = false;
 
@@ -306,6 +307,7 @@ export class UserComponent implements OnInit {
         this.folow = false;
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
+        this.managedByActive = false;
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = false;
@@ -317,6 +319,7 @@ export class UserComponent implements OnInit {
         this.folow = false;
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
+        this.managedByActive = false;
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
@@ -338,6 +341,7 @@ export class UserComponent implements OnInit {
         this.folow = false;
         this.followersActiveCss = true;
         this.followingsActiveCss = false;
+        this.managedByActive = false;
         this.getFollowers(this.profileUserId);
         this.isFollowersCollapsed = false;
         this.isFollowingsCollapsed = true;
@@ -352,7 +356,22 @@ export class UserComponent implements OnInit {
         this.folow = false;
         this.followersActiveCss = false;
         this.followingsActiveCss = true;
+        this.managedByActive = false;
         this.getFollowings(this.profileUserId);
+        this.isFollowersCollapsed = true;
+        this.isFollowingsCollapsed = false;
+        this.isProfileCollapsed = true;
+        this.isActivityCollapsed = true;
+
+    }
+
+    managedBy() {
+        this.activitiesData = false;
+        this.profileData = false;
+        this.folow = false;
+        this.followersActiveCss = false;
+        this.followingsActiveCss = false;
+        this.managedByActive = true;
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = false;
         this.isProfileCollapsed = true;

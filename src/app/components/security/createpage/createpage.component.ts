@@ -23,6 +23,7 @@ export class CreatepageComponent implements OnInit {
     district: new FormControl('', Validators.required),
     chamber: new FormControl('', Validators.required),
     state: new FormControl('', Validators.required),
+    isPublic: new FormControl(true, ),
   });
 
   createDistrictPageForm = new FormGroup({

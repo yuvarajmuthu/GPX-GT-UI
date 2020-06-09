@@ -250,7 +250,7 @@ input[type="file"] {
         top: 355px;
     }
     .personal-info{
-        margin-top: 100px;
+        margin-top: 160px;
     }
 }
 .active-tab{
@@ -260,7 +260,8 @@ input[type="file"] {
     overflow: auto;
     height: 120px;
     text-align: center;
-    border-bottom: 1px solid #007bff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 5px;
 }
 .widget-div{
     padding-top: 10px;

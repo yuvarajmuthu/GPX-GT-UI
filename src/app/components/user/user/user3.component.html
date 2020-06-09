@@ -258,10 +258,17 @@
                 </li>
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
-        <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
-          {{followingsCount}} Following
-        </span>
+                       <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
+                        {{followingsCount}} Following
+                    </span>
                 </li>
+                <li class="list-group-item pointer"
+                    [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
+                       <span class="badge pointer" [class]="followCntrlCSS" (click)="managedBy()"> 
+                        Managed by
+                    </span>
+                </li>                
+                
                 <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
                                         [ngClass]="{ 'active': folow, 'in-active': !folow}">
                                         <span class="badge">245</span>

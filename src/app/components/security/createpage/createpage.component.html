@@ -52,6 +52,10 @@
                         <input type="text" class="form-control" placeholder="State" formControlName="state"/>
                       </div> 
                    </div>
+                   <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="isPublic">
+                    <label class="custom-control-label" for="customSwitch1">Public</label>
+                  </div>
                        <div class="form-group">
                           <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
                       </div>
@@ -70,7 +74,7 @@
                           <label>Description </label>
                           <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
                         </div> 
-                  </div>
+                   </div>
 
                      <div class="form-group">
                         <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>

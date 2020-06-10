@@ -10,68 +10,79 @@
                   <form *ngIf="userType === 'LEGISLATOR'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
                     <div class="form-row">
                       <div class="col form-group">
-                          <label>Display Name</label>
-                          <input type="text" class="form-control" placeholder="Display Name" formControlName="displayName"/>
+                          <label>User Name</label>
+                          <input type="text" class="form-control" placeholder="User Name" formControlName="username"/>
                         </div> 
-                  </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>Display Name</label>
+                          <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name"/>
+                        </div> 
+                    </div>
 
                     <div class="form-row">
                       <div class="col form-group">
                           <label>First name</label>
-                          <input type="text" class="form-control" placeholder="First name" formControlName="firstName" required/>
+                          <input type="text" class="form-control" placeholder="First name" formControlName="first_name" required/>
                         </div> 
                       <div class="col form-group">
                           <label>Last name</label>
-                          <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" required/>
+                          <input type="text" class="form-control" placeholder="Last name" formControlName="last_name" required/>
                         </div> 
                   </div> 
 
                   <div class="form-row">
                     <div class="col form-group">
-                        <label>Party </label>
+                        <label>Party</label>
                         <input type="text" class="form-control" placeholder="Party" formControlName="party"/>
                       </div> 
                     </div>
 
                     <div class="form-row">
                       <div class="col form-group">
-                          <label>District </label>
+                          <label>District</label>
                           <input type="text" class="form-control" placeholder="District" formControlName="district"/>
                         </div> 
                      </div>
                      <div class="form-row">
                       <div class="col form-group">
-                          <label>Chamber </label>
+                          <label>Chamber</label>
                           <input type="text" class="form-control" placeholder="Chamber" formControlName="chamber"/>
                         </div> 
                   </div>
 
                   <div class="form-row">
                     <div class="col form-group">
-                        <label>State </label>
+                        <label>State</label>
                         <input type="text" class="form-control" placeholder="State" formControlName="state"/>
                       </div> 
                    </div>
-                   <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="isPublic">
-                    <label class="custom-control-label" for="customSwitch1">Public</label>
-                  </div>
-                       <div class="form-group">
+           
+                   <div class="form-group">
                           <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
                       </div>
                   </form>
 
-                  <form *ngIf="userType === 'LEGISLATIVE_DISTRICT' || userType === 'POLITICAL_PARTY'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+                  <form *ngIf="userType === 'POLITICAL_PARTY'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>Party Name</label>
+                          <input type="text" class="form-control" placeholder="Party Name" formControlName="username"/>
+                        </div> 
+                    </div>
+
                     <div class="form-row">
                         <div class="col form-group">
-                            <label>Name </label>
-                            <input type="text" class="form-control" placeholder="Display Name" formControlName="displayName" required/>
+                            <label>Display Name</label>
+                            <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
                           </div> 
                     </div> 
 
                     <div class="form-row">
                       <div class="col form-group">
-                          <label>Description </label>
+                          <label>Description</label>
                           <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
                         </div> 
                    </div>
@@ -80,6 +91,69 @@
                         <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
                     </div>
                 </form>
+
+                <form *ngIf="userType === 'LEGISLATIVE_DISTRICT'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+                  <div class="form-row">
+                    <div class="col form-group">
+                        <label>District Id</label>
+                        <input type="text" class="form-control" placeholder="District Id" formControlName="username"/>
+                      </div> 
+                  </div>
+
+                  <div class="form-row">
+                      <div class="col form-group">
+                          <label>Display Name</label>
+                          <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
+                        </div> 
+                  </div> 
+
+                  <div class="form-row">
+                    <div class="col form-group">
+                        <label>Description</label>
+                        <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                      </div> 
+                </div>
+                <label>Access Restriction</label>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction">
+                  <label class="custom-control-label" for="customSwitch1">Public[OFF] / Private[ON]</label>
+                </div>
+
+                   <div class="form-group">
+                      <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
+                  </div>
+              </form>
+
+              <form *ngIf="userType === 'GROUP'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+                <div class="form-row">
+                  <div class="col form-group">
+                      <label>Group Id</label>
+                      <input type="text" class="form-control" placeholder="Group Id" formControlName="username"/>
+                    </div> 
+                </div>
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>Group Name</label>
+                        <input type="text" class="form-control" placeholder="Group Name" formControlName="full_name" required/>
+                      </div> 
+                </div> 
+
+                <div class="form-row">
+                  <div class="col form-group">
+                      <label>Description</label>
+                      <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                    </div> 
+              </div>
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction">
+                <label class="custom-control-label" for="customSwitch1">Private[OFF] / Public[ON]</label>
+              </div>
+
+                 <div class="form-group">
+                    <button type="submit" [disabled]="!userCreationForm.valid" class="btn btn-primary btn-block"> Continue  </button>
+                </div>
+            </form>
               </article>
           </div>
       </div>

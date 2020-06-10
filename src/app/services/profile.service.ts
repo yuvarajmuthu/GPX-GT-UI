@@ -51,7 +51,7 @@ export class ProfileService extends AbstractService{
     if(this.devMode){  
       serviceUrl = '/assets/json/fromService/profileTemplate.json';   
     }
-    serviceUrl = '/assets/json/fromService/profileTemplate.json';   
+    //serviceUrl = '/assets/json/fromService/profileTemplate.json';   
 
     return this.http.get(serviceUrl, { responseType: 'json', params: {
       type: type

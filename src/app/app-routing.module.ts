@@ -39,7 +39,7 @@ const routes: Routes = [
   { path: 'secure', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },  
-  { path: 'createpage', component: CreatepageComponent },
+  { path: 'createpage', component: CreatepageComponent, canActivate: [AuthGuard] },
   { path: 'request', loadChildren:'./components/connection/connection.module#ConnectionModule' },   
   { path: '',   redirectTo: '/searchLegislator', pathMatch: 'full' },
 

@@ -14,7 +14,7 @@
        },
        {
           "propId":"full_name",
-          "displayLabel":"Full Name",
+          "displayLabel":"Display Name",
           "type":"text"
        },
        {
@@ -30,17 +30,17 @@
        {
           "propId":"district",
           "displayLabel":"District",
-          "type":"text"
+          "type":"entity"
        },
        {
           "propId":"party",
           "displayLabel":"Party",
-          "type":"text"
+          "type":"entity"
        },
        {
           "propId":"chamber",
           "displayLabel":"Chamber",
-          "type":"text"
+          "type":"entity"
        },
        {
           "propId":"state",

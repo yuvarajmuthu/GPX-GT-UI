@@ -399,7 +399,7 @@ getById(id: number) {
   //return this.http.get('/api/users/' + id);
 }
 
-registerUser(user: User):Observable<any> {
+registerUser(user: any):Observable<any> {
 //        return this.http.post('/register', user);
 
     //console.log("registering user user.service");
@@ -411,7 +411,7 @@ registerUser(user: User):Observable<any> {
 
    return this.http.post(this.serviceUrl, user, this.httpOptions)
     .pipe(
-      map((response:Response) => response.json()),
+      //map((response:Response) => response.json()),
       tap(_ => this.log(`Successfully registered User`)),
       catchError(this.handleError<any>(`Error in registering User()`))
     );

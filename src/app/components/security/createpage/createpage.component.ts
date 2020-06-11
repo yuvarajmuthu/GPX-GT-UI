@@ -111,6 +111,7 @@ export class CreatepageComponent implements OnInit {
     this.user = this.userCreationForm.value;
     profileDatasList.push(this.biodataTemplateData);
     this.user['profileDatas'] = profileDatasList;
+    this.user['status'] = 'PASSIVE';
 
     loggedUser = this.datashareService.getCurrentUser();
     if (loggedUser && loggedUser.username) {
@@ -141,12 +142,16 @@ export class CreatepageComponent implements OnInit {
     let propId:string="";
     let properties:[] = this.biodataTemplate['properties'];
     for (let property of properties) {
+      if(this.userCreationForm.get(property['propId']) != null){
         console.log("userCreationForm " + property['propId'] + " ", this.userCreationForm.get(property['propId']).value);
         propId = property['propId'];
         data[propId] = this.userCreationForm.get(property['propId']).value;
+      }
     }
-    this.biodataTemplateData['username'] = this.userCreationForm.get('username').value;
+    this.biodataTemplateData['entityId'] = this.userCreationForm.get('username').value;
     this.biodataTemplateData['profileTemplateId'] = this.profileTemplateId;
+    this.biodataTemplateData['entityType'] = this.biodataTemplate['type'];
+
     this.biodataTemplateData['data'] = data;
 
   }

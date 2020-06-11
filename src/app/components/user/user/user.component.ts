@@ -281,7 +281,7 @@ export class UserComponent implements OnInit {
       }
 
       loadBioDataTemplate(type:string){
-        this.profileService.getProfileTemplateByType('upCongressLegislatorExternal', type)
+        this.profileService.getProfileTemplateByType('upDefault', type)
         .subscribe((response) => {
             this.biodataTemplate = response;
 

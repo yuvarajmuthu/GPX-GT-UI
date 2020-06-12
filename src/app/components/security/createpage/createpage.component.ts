@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {AppConstants} from '../../../app.constant.enum';
 
 import {UserService} from '../../../services/user.service';
+import {PostService} from '../../../services/post.service';
 import {AlertService} from '../../../services/alert.service';
 import {ProfileService} from '../../../services/profile.service';
 import {DatashareService} from '../../../services/datashare.service';
@@ -20,6 +21,8 @@ export class CreatepageComponent implements OnInit {
   biodataTemplate={};
   biodataTemplateData={};
   user = {};
+  searchUsers:any;
+  keyword = 'firstName';
   
   createLegislatorPageForm = new FormGroup({
     userType: new FormControl(this.constants.USERTYPE_LEGISLATOR),
@@ -68,6 +71,7 @@ export class CreatepageComponent implements OnInit {
     private datashareService: DatashareService,
     private userService: UserService,
     private alertService: AlertService,
+    private postService: PostService,
     private profileService: ProfileService) { }
    
   ngOnInit() {
@@ -102,6 +106,13 @@ export class CreatepageComponent implements OnInit {
 
     });
   }
+
+  onChangeSearch(e){
+    this.postService.getTagUsers(e)
+    .subscribe((data:any) => {
+        this.searchUsers = data;
+    });
+}
 
   createUser(){
     let profileDatasList:Array<Object> = [];

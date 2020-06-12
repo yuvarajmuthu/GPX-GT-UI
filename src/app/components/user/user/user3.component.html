@@ -52,8 +52,9 @@
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </div>
                         <div *ngIf="isEditDisplayname">
-                            <input [(ngModel)]="biodata.full_name" type="text" />
-                            <button class="save-button" type="button" (click)="toggleEditDisplayname()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            <input type="text" class="input-text-biodata form-control" [(ngModel)]="biodata.full_name" type="text" placeholder="Display Name">
+                            <!-- <input class="input-text-biodata formcontrol" [(ngModel)]="biodata.full_name" type="text" /> -->
+                            <button class="save-button-input" type="button" (click)="toggleEditDisplayname()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                         </div>
                     </h4>
                     <h5>
@@ -63,12 +64,12 @@
                             <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}}</a>
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
-
                         <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
-                        <div *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
+                        <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
                             <ng-autocomplete
                               [(ngModel)]="editPartyInput"
                               [data]="searchUsers"
+                              placeHolder="Party"
                               (inputChanged) = "onChangeSearch($event)"
                               [searchKeyword]="keywordParty"
                               [itemTemplate]="itemTemplate"
@@ -89,9 +90,9 @@
                               <div [innerHTML]="notFound"></div>
                             </ng-template>
                           </div>
-                          <div *ngIf="isEditParty && getPropertyDataType('party') === 'text'">
+                          <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
                             <input [(ngModel)]="biodata.party" type="text" />
-                            <button class="save-button" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                           </div>
                     <!-- PARTY-end -->
                     </h5>
@@ -107,6 +108,7 @@
                             <ng-autocomplete
                               [(ngModel)]="editDistrictInput"
                               [data]="searchUsers"
+                              placeHolder="District"
                               (inputChanged) = "onChangeSearch($event)"
                               [searchKeyword]="keywordDistrict"
                               [itemTemplate]="itemTemplate"
@@ -129,7 +131,7 @@
                           </div>
                           <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'text'">
                             <input [(ngModel)]="biodata.district" type="text" />
-                            <button class="save-button" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            <button class="save-button-input" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                           </div>
                         <!-- DISTRICT-end -->
 
@@ -144,6 +146,7 @@
                             <ng-autocomplete
                               [(ngModel)]="editChamberInput"
                               [data]="searchUsers"
+                              placeHolder="Chamber"
                               (inputChanged) = "onChangeSearch($event)"
                               [searchKeyword]="keywordChamber"
                               [itemTemplate]="itemTemplate"
@@ -166,7 +169,7 @@
                           </div>
                           <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'text'">
                             <input [(ngModel)]="biodata.chamber" type="text" />
-                            <button class="save-button" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                           </div>
                         <!-- CHAMBER-end -->
 
@@ -181,6 +184,7 @@
                             <ng-autocomplete
                               [(ngModel)]="editStateInput"
                               [data]="searchUsers"
+                              placeHolder="State"
                               (inputChanged) = "onChangeSearch($event)"
                               [searchKeyword]="keywordState"
                               [itemTemplate]="itemTemplate"
@@ -202,7 +206,7 @@
                         </div>
                         <div *ngIf="isEditState && getPropertyDataType('state') === 'text'">
                             <input [(ngModel)]="biodata.state" type="text" />
-                            <button class="save-button" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            <button class="save-button-input" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                         </div>
                         <!-- STATE-end -->
                     </h5>
@@ -264,7 +268,7 @@
                 </li>
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
-                       <span class="badge pointer" [class]="followCntrlCSS" (click)="managedBy()"> 
+                       <span class="badge pointer" [class]="followCntrlCSS" (click)="managedByUsers()"> 
                         Managed by
                     </span>
                 </li>                
@@ -321,6 +325,14 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                            <div id="managedByCollapse" [ngbCollapse]="isManagedByCollapsed"
+                                            class="widget stick-widget">
+                                           <ul class="followers">
+                                               <li *ngFor="let managed of managedBy">
+                                                   <app-usercard1 [user]=managed></app-usercard1>
+                                               </li>
+                                           </ul>
+                                           </div>
                                             <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
                                                 <div class="card card-nav-tabs">
                                                     <div class="card-header-1 card-header-primary">

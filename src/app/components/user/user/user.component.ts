@@ -68,6 +68,7 @@ export class UserComponent implements OnInit {
     isActivityCollapsed: boolean = true;
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
+    isManagedByCollapsed:boolean = true;
     externalUser:boolean;
     biodata:any=null;
     biodataTemplate={};
@@ -88,6 +89,7 @@ export class UserComponent implements OnInit {
     inEditMode:boolean = false;
     followersCount: string = null;
     followers: User[] = [];
+    managedBy: User[] = [];
     followingsCount: string = null;
     followings: User[] = [];
     selectedProfileSmImage: File;
@@ -162,7 +164,7 @@ export class UserComponent implements OnInit {
 
     toggleEditParty(){
         /*
-        this.changeParty=false
+        this.changeParty=false*/
         if(!this.isEditParty && this.biodata){
             this.editPartyInput = this.biodata.party;
         }
@@ -170,13 +172,13 @@ export class UserComponent implements OnInit {
             if(typeof(this.editPartyInput) == 'object')
               this.biodata.party = this.editPartyInput.firstName;
         }
-        */
+        
         this.isEditParty = !this.isEditParty;
     }
 
     toggleEditDistrict(){
         /*
-        this.changeDistrict=false;
+        this.changeDistrict=false;*/
         if(!this.isEditDistrict && this.biodata){
             this.editDistrictInput = this.biodata.district;
         }
@@ -184,13 +186,13 @@ export class UserComponent implements OnInit {
             if(typeof(this.editDistrictInput) == 'object')
               this.biodata.district = this.editDistrictInput.firstName;
         }
-        */
+        
         this.isEditDistrict = !this.isEditDistrict;
     }
 
     toggleEditChamber(){
         /*
-        this.changeChamber = false;
+        this.changeChamber = false;*/
         if(!this.isEditChamber && this.biodata){
             this.editChamberInput = this.biodata.chamber;
         }
@@ -198,13 +200,13 @@ export class UserComponent implements OnInit {
             if(typeof(this.editChamberInput) == 'object')
                this.biodata.chamber = this.editChamberInput.firstName;
         }
-        */
+        
         this.isEditChamber = !this.isEditChamber;
     }
 
     toggleEditState(){
         /*
-        this.changeState = false;
+        this.changeState = false;*/
         if(!this.isEditState && this.biodata){
             this.editStateInput = this.biodata.state;
         }
@@ -214,7 +216,6 @@ export class UserComponent implements OnInit {
             else
                 this.biodata.state = this.editStateInput;
         }
-        */
         this.isEditState = !this.isEditState;
     }
     
@@ -345,6 +346,7 @@ export class UserComponent implements OnInit {
         this.getFollowers(this.profileUserId);
         this.isFollowersCollapsed = false;
         this.isFollowingsCollapsed = true;
+        this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
 
@@ -360,20 +362,23 @@ export class UserComponent implements OnInit {
         this.getFollowings(this.profileUserId);
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = false;
+        this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
 
     }
 
-    managedBy() {
+    managedByUsers() {
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
         this.managedByActive = true;
+        this.getManagedBy(this.profileUserId);
         this.isFollowersCollapsed = true;
-        this.isFollowingsCollapsed = false;
+        this.isFollowingsCollapsed = true;
+        this.isManagedByCollapsed = false;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
 
@@ -540,6 +545,7 @@ export class UserComponent implements OnInit {
         this.isActivityCollapsed = true;
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
+        this.isManagedByCollapsed = true;
 
         this.profileTabSelected = true;
         this.activitiesTabSelected = false;
@@ -551,6 +557,7 @@ export class UserComponent implements OnInit {
         this.isActivityCollapsed = false;
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
+        this.isManagedByCollapsed = true;
 
         this.profileTabSelected = false;
         this.activitiesTabSelected = true;
@@ -869,6 +876,17 @@ export class UserComponent implements OnInit {
                     console.log('getFollowers response ' + result);
                     this.viewingUser['followers'] = this.followers = result;
                     console.log('getFollowers response ' + this.followers);
+                },
+                (err) => {
+                    console.log('Error ', err);
+                });
+    }
+
+    getManagedBy(profileId: string) {
+        this.userService.getManagedBy(profileId)
+            .subscribe(
+                (result) => {
+                    this.viewingUser['managedBy'] = this.managedBy = result;
                 },
                 (err) => {
                     console.log('Error ', err);

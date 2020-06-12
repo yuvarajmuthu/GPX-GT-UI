@@ -79,6 +79,8 @@ li {
 
 .profile-avatar {
     width: 200px;
+    height: 200px;
+    border-radius: 50%;
     position: relative;
     margin: 0px auto;
     margin-top: 196px;
@@ -250,7 +252,10 @@ input[type="file"] {
         top: 355px;
     }
     .personal-info{
-        margin-top: 160px;
+        margin-top: 100px;
+    }
+    .save-button{
+        left: -20% !important;
     }
 }
 .active-tab{
@@ -262,6 +267,27 @@ input[type="file"] {
     text-align: center;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 5px;
+}
+ng-autocomplete{
+    border: 1px solid #D6DBDF;
+}
+.save-button-input{
+    position: relative;
+    left: -8%;
+    top: 3px;
+    cursor: pointer;
+    border: none !important;
+    color: #007bff;
+    z-index: 1;
+    height: 33px;
+    background-color: white;
+}
+.input-text-biodata{
+    border: 1px solid #D6DBDF;
+    width: 60%;
+    height: 40px;
+    margin-left: 15%;
+    display: inline-block !important;
 }
 .widget-div{
     padding-top: 10px;

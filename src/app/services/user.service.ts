@@ -218,6 +218,28 @@ getFollowersCount(entityId:string):Observable<string>{
 
 }
 
+getManagedBy(entityId:string):Observable<any>{
+  let serviceUrl = "";
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/followers.json';   
+  }else{
+    serviceUrl = this.getSocialService()+"/getFollowers";
+  }
+  //serviceUrl = '/assets/json/fromService/followers.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+  let myParams = new HttpParams();
+  myParams.append('entityId', entityId);
+
+  return this.http.get(serviceUrl, { responseType: 'json', params: {
+    entityId: entityId
+  } }).pipe(
+    tap(_ => this.log(`fetched getFollowers`)),
+    catchError(this.handleError<any>(`Error in getFollowers()`))
+  );
+  
+}
+
 getFollowers(entityId:string):Observable<any>{
   let serviceUrl = "";
   if(this.devMode){

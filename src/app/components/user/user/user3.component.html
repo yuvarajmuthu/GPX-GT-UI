@@ -44,19 +44,34 @@
         <div class="col-sm-8">
             <div class="personal-info">
                 <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
-                    <h4>
-                        <div *ngIf="!isEditDisplayname">
-                            <b>
+                    <div>
+                        <div *ngIf="!isEditDisplayname" class="fullname-display">
+                            <b class="name-right">
                                 {{biodata.full_name}}
                             </b>
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </div>
-                        <div *ngIf="isEditDisplayname">
+                        <div *ngIf="isEditDisplayname" class="fullname-display">
                             <input type="text" class="input-text-biodata form-control" [(ngModel)]="biodata.full_name" type="text" placeholder="Display Name">
                             <!-- <input class="input-text-biodata formcontrol" [(ngModel)]="biodata.full_name" type="text" /> -->
                             <button class="save-button-input" type="button" (click)="toggleEditDisplayname()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                         </div>
-                    </h4>
+                        <div class="common-profile-edit">
+                            <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
+                                <i class="fa fa-save" aria-hidden="true"></i>
+                            </button>
+                            <button type="button"
+                                    *ngIf="isProfileInEditMode()"
+                                    class="btn btn-primary btn-danger profile-edit-cancel"
+                                    (click)="cancelEditProfile()">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
                     <h5>
                     <!-- PARTY-begin -->
 
@@ -376,25 +391,22 @@
                                                                             </div>
                                                                         </div> 
                                                                     </li>
-                                                                    <li *ngIf="isUserLogged()" class="nav-item">
+                                                                    <!-- <li *ngIf="isUserLogged()" class="nav-item">
                                                                         <div>
                                                                             <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
-                                                                                <!--{{editLabel}}-->
                                                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                                             </button>
                                                                             <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
-                                                                                <!--{{Save}}-->
                                                                                 <i class="fa fa-save" aria-hidden="true"></i>
                                                                             </button>
                                                                             <button type="button"
                                                                                     *ngIf="isProfileInEditMode()"
                                                                                     class="btn btn-primary btn-danger"
                                                                                     (click)="cancelEditProfile()">
-                                                                                <!--Cancel Edit-->
                                                                                 <i class="fa fa-times" aria-hidden="true"></i>
                                                                             </button>
                                                                         </div>
-                                                                    </li>
+                                                                    </li> -->
                                                                 </ul>
                                                             </div>
                                                         </div>

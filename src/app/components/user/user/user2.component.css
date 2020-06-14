@@ -257,7 +257,48 @@ input[type="file"] {
     .save-button{
         left: -20% !important;
     }
+    .fullname-display{
+        display: block;
+        
+    }
+    .profile-edit-btn-custom-position{
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        top: 60%;
+        right: 0%;
+        z-index: 1;
+    }
+    .profile-edit-cancel{
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        top: 55%;
+        right: 0%;
+        z-index: 1;
+    }
 }
+@media only screen and (min-width: 600px) {
+    .fullname-display{
+        width: 70%;
+        font-size: 26px;
+        display: inline-block;
+    }
+    .common-profile-edit{
+        width: 30%;
+        display: inline-block;
+    }
+    .name-right{
+        margin-left: 37%;
+    }
+    .profile-edit-cancel{
+        float: right;
+        margin-right: 5px;
+        margin-top: 6px;
+    }
+}
+
+
 .active-tab{
     color: #007bff !important;
 }
@@ -273,22 +314,26 @@ ng-autocomplete{
 }
 .save-button-input{
     position: relative;
-    left: -8%;
-    top: 3px;
+    left: -10%;
+    top: 7px;
     cursor: pointer;
     border: none !important;
     color: #007bff;
     z-index: 1;
-    height: 33px;
+    height: 20px;
     background-color: white;
 }
 .input-text-biodata{
     border: 1px solid #D6DBDF;
     width: 60%;
     height: 40px;
-    margin-left: 15%;
+    margin-left: 28%;
     display: inline-block !important;
 }
 .widget-div{
     padding-top: 10px;
 }
+.fa{
+    font-size: 20px;
+}
+

@@ -455,7 +455,8 @@ export class UserComponent implements OnInit {
             }
 
             this.getFollowersCount(this.profileUserId);
-            this.getFollowers(this.profileUserId);
+            this.getFollowingsCount(this.profileUserId);
+            //this.getFollowers(this.profileUserId);
 
             this.userService.getUserData(this.viewingUser['userId']).subscribe(
                 data => { 

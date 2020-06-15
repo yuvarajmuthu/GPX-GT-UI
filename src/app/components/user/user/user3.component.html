@@ -71,7 +71,9 @@
                             </button>
                         </div>
                     </div>
-
+                    <div>
+                        @{{paramUsername}}
+                    </div>
                     <h5>
                     <!-- PARTY-begin -->
 
@@ -228,26 +230,34 @@
                 </div>    
                 <div *ngIf="entityType === 'PUBLICUSER'">
                     <h4>
-                        <b>
-                            {{biodata.full_name}}
-                        </b>
+                        {{biodata.full_name}}
                     </h4>
+                    <div>
+                        @{{paramUsername}}
+                    </div>
                 </div>                            
                 <div *ngIf="entityType === 'POLITICAL_PARTY'">
                     <h4>
-                        <b>
-                            {{biodata.full_name}}
-                            {{biodata.description}}
-                        </b>
-                    </h4>
+                        {{biodata.full_name}}
+                    </h4>        
+                    <div>
+                        @{{paramUsername}}
+                    </div>
+                    <div>
+                        {{biodata.description}}
+                    </div>
+
                 </div>
                 <div *ngIf="entityType === 'LEGISLATIVE_DISTRICT'">
                     <h4>
-                        <b>
-                            {{biodata.full_name}}
-                            {{biodata.description}}
-                        </b>
-                    </h4>
+                        {{biodata.full_name}}
+                    </h4>        
+                    <div>
+                        @{{paramUsername}}
+                    </div>
+                    <div>
+                        {{biodata.description}}
+                    </div>
                 </div>
 
 
@@ -272,13 +282,13 @@
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
         <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
-          {{followersCount}} Followers
+          {{followersCount}} Follower(s)
         </span>
                 </li>
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
                        <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
-                        {{followingsCount}} Following
+                        {{followingsCount}} Following(s)
                     </span>
                 </li>
                 <li class="list-group-item pointer"

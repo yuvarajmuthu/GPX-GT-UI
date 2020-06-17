@@ -54,11 +54,14 @@ export class AppComponent implements OnInit {
     @HostListener('click', ['$event.target'])
     onClick(evt) {
       if(evt.id != 'dropdownMenuButton'){
-            var element = document.getElementById("createpagemenu");
+            let element = document.getElementById("createpagemenu");
             element.classList.remove("createpage-option");
             this.iscreateOptEnabled = false;
       }
+
    }
+
+
 
     constructor(private  router: Router,
                 private missionService: ComponentcommunicationService,
@@ -67,6 +70,8 @@ export class AppComponent implements OnInit {
                 private alertService: AlertService,
                 private postService:PostService,
                 private authenticationService: AuthenticationService) {
+
+
         missionService.getAlert().subscribe(
             mission => {
                 console.log('Alert message received ' + mission);

@@ -259,6 +259,13 @@
                         {{biodata.description}}
                     </div>
                 </div>
+                <div class="paddingTop10">
+                    <span class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span> |
+                    <span class="badge badge-pill badge-primary" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span> |
+
+                    <span class="badge badge-pill badge-primary" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
+
+                </div>
 
 
             </div>
@@ -269,33 +276,55 @@
     </div>
     <div class="row">
 
-    <div class="col-sm-4">
+        <div class="col-sm-4 col-xs-12 sidebar-Mobile">
+            <!-- Begin user profile -->
+            <div class="text-center user-profile-2 col-xs-12">
+
+                <!-- <ul class="list-group">
+                    <li class="list-group-item pointer" *ngIf="!isSelfProfile"> -->
+                            <!-- <span class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span> |
+                            <span class="badge badge-pill badge-primary" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span> |
+
+                            <span class="badge badge-pill badge-primary" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span> -->
+
+                    <!-- </li> -->
+                                        
+                    <!-- <li class="list-group-item pointer"
+                        [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}"> -->
+                    <!-- </li> -->
+                    <!-- <li class="list-group-item pointer"
+                        [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}"> -->
+                    <!-- </li> -->
+               <!-- </ul> -->
+            </div>
+            <div class="text-center user-profile-2 col-xs-12">
+                <span class="badge badge-pill badge-primary" (click)="managedByUsers()">Managed by</span> |
+                <span class="pointer">My Posts</span> |
+                <span class="pointer">Profile</span> 
+            </div>
+        </div>
+
+
+
+    <div class="col-sm-4 col-xs-12 sidebar-div-desktop">
         <!-- Begin user profile -->
         <div class="text-center user-profile-2">
             <ul class="list-group">
-                <li class="list-group-item pointer" *ngIf="!isSelfProfile">
-                    <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()"> 
-                        {{followCntrlLabel}}
-                    </span>
+                <!-- <li class="list-group-item pointer" *ngIf="!isSelfProfile">
+                    <span class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span>
                 </li>
                                     
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
-        <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
-          {{followersCount}} Follower(s)
-        </span>
+                    <span class="badge badge-pill badge-primary" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
                 </li>
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
-                       <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
-                        {{followingsCount}} Following(s)
-                    </span>
-                </li>
+                    <span class="badge badge-pill badge-primary" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
+                </li> -->
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
-                       <span class="badge pointer" [class]="followCntrlCSS" (click)="managedByUsers()"> 
-                        Managed by
-                    </span>
+                    <span class="pointer" (click)="managedByUsers()">Managed by</span>
                 </li>                
                 
                 <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
@@ -318,7 +347,7 @@
         </div><!-- End div .box-info -->
         <!-- Begin user profile -->
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-8 col-xs-12">
             <div class="widget-div">
                 <div class="widget widget-tabbed">
                     <!-- Nav tab -->
@@ -360,16 +389,16 @@
                                            </div>
                                             <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
                                                 <div class="card card-nav-tabs">
-                                                    <div class="card-header-1 card-header-primary">
+                                                    <div class="card-header-1 card-header-primary"  id="myHeader">
                                                         <div class="nav-tabs-navigation">
                                                             <div class="nav-tabs-wrapper">
                                                                 <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
                                                                     data-tabs="tabs">
                                                                     <li class="nav-item"
                                                                         *ngFor="let profileTemplate of profilesTemplates">
-                                                                        <div class="row">
-                                                                            <div class="col-sm-10">    
-                                                                                <a class="nav-link text-black-50" data-toggle="tab"
+                                                                        <div>
+                                                                            <span>    
+                                                                                <a class="nav-link template-tab text-black-50" data-toggle="tab"
                                                                                 [routerLink]=""
                                                                                 (click)="loadTemplate(profileTemplate.profileTemplateId)"
                                                                                 *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
@@ -377,10 +406,11 @@
                                                                                     {{profileTemplate.name}}
                                                                                     <!--{{profileTemplate.profileTemplateId}}-->
                                                                                 </a>
-                                                                            </div>
-                                                                            <div class="col-sm-2">
                                                                                 <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                                                                            </div>
+
+                                                                            </span>
+                                                                            <!-- <span>
+                                                                            </span> -->
                                                                         </div>
                                                                     </li>
                                                                     <li *ngIf="isProfileInEditMode()" class="nav-item">
@@ -422,7 +452,7 @@
                                                         </div>
                                                     </div>
     
-                                                    <div class="card-body ">
+                                                    <div class="card-body content">
                                                         <div class="tab-content text-center">
                                                             <div class="tab-pane active" id="templateType">
                                                                 <app-usertemplate [type]="templateType"></app-usertemplate>

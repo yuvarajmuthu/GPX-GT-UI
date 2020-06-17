@@ -277,6 +277,19 @@ input[type="file"] {
         right: 0%;
         z-index: 1;
     }
+    .sidebar-div-desktop{
+        display: none;
+    }
+    .sticky {
+        position: fixed;
+        top: 66px;
+        width: 94%;
+        background-color: white;
+      }
+      
+      .sticky + .content {
+        padding-top: 102px;
+      } 
 }
 @media only screen and (min-width: 600px) {
     .fullname-display{
@@ -296,15 +309,20 @@ input[type="file"] {
         margin-right: 5px;
         margin-top: 6px;
     }
+    .sidebar-Mobile{
+        display: none;
+    }
 }
 
-
+.template-tab{
+    display: inline-block;
+}
 .active-tab{
     color: #007bff !important;
 }
 .personal-info{
     overflow: auto;
-    height: 120px;
+    /* height: 120px; */
     text-align: center;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 5px;
@@ -335,5 +353,8 @@ ng-autocomplete{
 }
 .fa{
     font-size: 20px;
+}
+.paddingTop10{
+  padding-bottom: 10px;
 }
 

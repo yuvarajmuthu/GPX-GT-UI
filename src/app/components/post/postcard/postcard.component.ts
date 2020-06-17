@@ -47,9 +47,9 @@ export class PostcardComponent implements OnInit {
     postFormData: FormData;
     isFileSizeError: boolean =false;
 
-    profileSmImage: any = 'assets/images/avatar1.png';
+    profileSmImage: any = 'assets/images/temp/user-avatar.jpg';//'assets/images/avatar1.png';
     isImageLoading: boolean = false;
-    postImage: any = 'assets/images/avatar1.png';
+    postImage: any = 'assets/images/temp/user-avatar.jpg';//'assets/images/avatar1.png';
     isPostImageLoading: boolean = false;
     entityId: string;
     numbers: number[] = [];

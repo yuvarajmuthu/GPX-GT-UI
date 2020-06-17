@@ -18,9 +18,7 @@ import {interval} from 'rxjs';
     styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-    @Input() groupId: string;
     @Input() userId: string;
-    @Input() type: string;
     @Input() disableNewPost: boolean = false;
     
     posts: Post[] = [];
@@ -64,25 +62,30 @@ export class PostComponent implements OnInit {
           (val) => { this.getPost(entityId);
         });
         */
+        if(!this.userId){
+            this.userId = this.dataShareService.getLoggedinUsername();
+        }
         this.getPost('0');
 
     }
 
 
     getPost(pageNumber:string): void {
-        let entityId: string;
-        entityId = this.dataShareService.getLoggedinUsername();
+        //let entityId: string;
+        //entityId = this.dataShareService.getLoggedinUsername();
         
-        console.log('Activities for ' + entityId);
+        console.log('Fetching Activities for ' + this.userId + ' , Pagenumber ' + pageNumber);
 
         var getPostRequest = {};
-        getPostRequest['entityId'] = entityId;
+        getPostRequest['entityId'] = this.userId;//entityId;
         getPostRequest['pageNumber'] = pageNumber;
         //getPostRequest["entityType"] = entityType;
 
         this.postService.getActivities(JSON.stringify(getPostRequest)).subscribe((result) => {
-            this.postsByPage = result;
-            this.posts = this.posts.concat(this.postsByPage);
+            if(result){
+                this.postsByPage = result;
+                this.posts = this.posts.concat(this.postsByPage);
+            }
             //this.reloadPost(entity, entityType);
         });
     }

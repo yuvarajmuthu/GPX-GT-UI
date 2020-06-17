@@ -1,78 +1,17 @@
-<!--<div class="central-meta item">
-    <div class="user-post">
-        <div class="friend-info">
-            <figure>
-                <img [src]="profileSmImage" alt="">
-            </figure>
-            <div class="friend-name">
-                <ins><a href="#" title="">{{post.entityId}}</a></ins>
-                <span>published: {{post.createdDate | dateFormatPipe}}</span>
-            </div>
-            <div *ngIf="post.containsImage" class="post-meta">
-                <img [src]="postImage" alt="">
-            </div>
-            <div *ngIf="post.containsVideo" class="post-meta">
-                <div class="we-video-info">
-
-                </div>
-            </div>
-            <div *ngIf="post.containsText" class="description">
-                <p>
-                    {{post.postText}}
-                </p>
-            </div>
-            <div class="post-meta">
-                <div class="we-video-info">
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0);" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <div *ngIf="post.comments" class="coment-area">
-            <ul class="we-comet">
-                <li *ngFor="let comment of post.comments">
-                    <app-postcard [post]=comment></app-postcard>
-                </li>
-            </ul>
-            <div class="coment-area">
-                <ul class="we-comet">
-                    <li>
-                        <a href="#" title="" class="showmore underline" (click)="loadMoreComments(post.id)">more
-                            comments</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</div>-->
-
-
 <div class="card gedf-card post-list"  *ngIf="isComment==false">
     <div class="card-header post-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
+                <div class="mr-2" [routerLink]="['/user', post.entityId]">
                     <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
                 </div>
                 <div class="ml-2">
                     <div class="h5 m-0">
-                        <a href="javascript:void(0);">
-                            {{post.entityId}}
-                        </a>
+                        <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                     </div>
                 </div>
             </div>
+            <!--
             <div>
                 <div class="dropdown">
                     <div class="btn-group">
@@ -82,7 +21,7 @@
                                 <i class="{{ icon }}"></i> {{ name }}
                                 <i class="fa fa-ellipsis-h"></i>
                             </button>
-                            <!--<div ngbDropdownMenu aria-labelledby="postRightDropdown">
+                            <div ngbDropdownMenu aria-labelledby="postRightDropdown">
                                 <button class="btn btn-outline-success" ngbDropdownItem (click)="save('Saved')"
                                         [ngClass]="{ 'active': savePost, 'in-active': !savePost}"><i
                                         class="fa fa-floppy-o" aria-hidden="true"></i> Save
@@ -95,19 +34,19 @@
                                         [ngClass]="{ 'active': reportPost, 'in-active': !reportPost}"><i
                                         class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report
                                 </button>
-                            </div>-->
+                            </div>
                         </div>
 
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
 
     </div>
     <div class="card-body">
         <div class="text-muted h7 mb-2">
             <i class="fa fa-clock-o"></i>
-            published: {{todayDate | date:'medium'}}
+            {{todayDate | date:'medium'}}
         </div>
 
         <div *ngIf="post && post.containsImage" class="post-meta">
@@ -281,20 +220,19 @@
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
+                <div class="mr-2" [routerLink]="['/user', post.entityId]">
                     <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
                 </div>
                 <div class="ml-2">
                     <div class="h5 m-0 commented-user">
-                        <a href="javascript:void(0);">
-                            {{post.entityId}}
-                        </a>
+                        <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                     </div>
                     <div class="commented-date">
                         {{todayDate | date:'medium'}}
                     </div>
                 </div>
             </div>
+            <!--
             <div>
                 <div class="dropdown">
                     <div class="btn-group">
@@ -308,6 +246,7 @@
                 </div>
             </div>
         </div>
+    -->
 
     </div>
     <div class="card-body">

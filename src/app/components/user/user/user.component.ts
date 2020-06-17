@@ -8,6 +8,7 @@ import {
     ComponentRef,
     Input,
     OnInit,
+    HostListener,
     isDevMode
 } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
@@ -137,6 +138,23 @@ export class UserComponent implements OnInit {
     keywordState = 'firstName';
     editStateInput : any;
 
+    header:any;
+    sticky:any;
+    @HostListener('window:scroll', ['$event']) onScrollEvent($event){
+         console.log($event);
+                       
+    //    console.log(this.header);
+    //    this.sticky= this.header.offsetTop;
+        console.log(this.sticky);
+       console.log(window.pageYOffset);
+         if (window.pageYOffset >= 640) {
+         this.header.classList.add("sticky");
+     } else {
+         this.header.classList.remove("sticky");
+     }
+      
+   }
+
     constructor(private  router: Router,
                 private route: ActivatedRoute,
                 private userService: UserService,
@@ -235,7 +253,8 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.header = document.getElementById("myHeader");
+        this.sticky= document.getElementById("myHeader").offsetTop;
         this.route.params.subscribe((params: Params) => {
             //this.datashareService.editProfile(false);
             this.communicationService.userProfileChanged(false);

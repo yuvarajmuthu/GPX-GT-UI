@@ -20,7 +20,7 @@
                 </li>
                 -->
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-bell"></i> Connection Requests</a>
+                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i> Connections</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
@@ -39,7 +39,7 @@
                   (inputChanged) = "onChangeSearch($event)"
                   (selected)='selectEvent($event)'
                   [searchKeyword]="keyword"
-                  placeHolder="Search GoPolitix"
+                  placeHolder="Search Legislator, Person, District, Party..."
                   historyIdentifier="searchUsers"
                   [itemTemplate]="itemTemplate"
                   [notFoundTemplate]="notFoundTemplate">

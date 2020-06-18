@@ -260,10 +260,11 @@
                     </div>
                 </div>
                 <div class="paddingTop10">
-                    <span class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span> |
-                    <span class="badge badge-pill badge-primary" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span> |
-
-                    <span class="badge badge-pill badge-primary" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
+                    <span *ngIf="!isSelfProfile" class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span>
+                    <span *ngIf="!isSelfProfile" class="vseparator"></span>
+                    <span class="badge badge-pill badge-primary" (click)="Followers()">Follower(s) &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
+                    <span class="vseparator"></span>
+                    <span class="badge badge-pill badge-primary" (click)="Followings()">Following(s) &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
 
                 </div>
 

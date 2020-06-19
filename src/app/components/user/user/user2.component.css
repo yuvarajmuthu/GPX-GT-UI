@@ -10,10 +10,12 @@
     border-radius: 5px;
     width:152px;
   }
+
   .vseparator{
     margin: 5px;
     border-right: 2px solid gray;
   }
+  
 body {
     margin-top: 20px;
     background-color: #e9ebee;
@@ -293,6 +295,31 @@ input[type="file"] {
       .sticky + .content {
         padding-top: 102px;
       } 
+
+      .bottom-tabs{
+        position: -webkit-sticky;  
+        left: 0px;
+        position: sticky;
+        bottom: 0px;
+      }
+      .nav-tabs li{
+          width: 33.33%;
+      }
+      .nav-tabs li button{
+        background-color: white;
+        border: 3px solid rgba(0,0,0,.125);
+        height: 50px;
+        padding-bottom: 5px;
+        width: 100%;
+    }
+    .nav-tabs .active button{
+        background-color: white;
+        border: 3px solid rgba(0,0,0,.125);
+        height: 50px;
+        padding-bottom: 5px;
+        width: 100%;
+        color:#007bff;
+    }
 }
 @media only screen and (min-width: 600px) {
     .fullname-display{
@@ -315,8 +342,42 @@ input[type="file"] {
     .sidebar-Mobile{
         display: none;
     }
-}
+    .sticky {
+        position: fixed;
+        top: 120px;
+        width: 563px;
+        background-color: white;
+        margin-left:auto;
 
+      }
+      .sticky-name{
+        position: fixed;
+        top: 80px;
+        width: 563px;
+        z-index: 3;
+        background-color: white;
+        width: 42%;
+      }
+
+      .sticky-sidebar{
+        position: fixed;
+        top: 120px;
+        width: 23%;
+      }
+      .margin-left-auto{
+         margin-left: auto;
+      }
+      
+      .sticky + .content {
+        padding-top: 102px;
+      } 
+      .bottom-tabs{
+        display: none;
+      }
+}
+.display-none{
+    display: none;
+}
 .template-tab{
     display: inline-block;
 }

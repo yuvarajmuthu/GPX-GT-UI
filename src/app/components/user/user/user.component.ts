@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import {Legislator} from '../../../models/legislator';
 import {User} from '../../../models/user';
@@ -140,6 +141,7 @@ export class UserComponent implements OnInit {
 
     header:any;
     sticky:any;
+    deviceInfo = this.deviceService.getDeviceInfo();
     @HostListener('window:scroll', ['$event']) onScrollEvent($event){
          console.log($event);
                        
@@ -147,11 +149,44 @@ export class UserComponent implements OnInit {
     //    this.sticky= this.header.offsetTop;
         console.log(this.sticky);
        console.log(window.pageYOffset);
-         if (window.pageYOffset >= 640) {
-         this.header.classList.add("sticky");
-     } else {
-         this.header.classList.remove("sticky");
-     }
+       const isMobile = this.deviceService.isMobile();
+       console.log(isMobile);
+       let lockPosition:number;
+       let nameDiv = document.getElementById("name-for-lock");
+        if(isMobile == true){
+            lockPosition = 640;
+            if (window.pageYOffset >= lockPosition) {
+                this.header.classList.add("sticky");
+             } else {
+                this.header.classList.remove("sticky");
+              }
+        }
+        else{
+            lockPosition = 410;
+            let desksidebar = document.getElementById("sidebar-div-desktop");
+            let tapsEl = document.getElementById("template-tabs");
+            if(window.pageYOffset >= lockPosition) {
+                nameDiv.classList.add("sticky-name");
+                nameDiv.classList.remove("display-none");
+                
+             } else {
+               nameDiv.classList.remove("sticky-name");
+                if(!isMobile)
+                  nameDiv.classList.add("display-none");
+             }
+             if(window.pageYOffset >= 423) {
+                this.header.classList.add("sticky");
+                desksidebar.classList.add("sticky-sidebar");
+                tapsEl.classList.add("margin-left-auto");
+             }
+             else{
+                this.header.classList.remove("sticky");
+                desksidebar.classList.remove("sticky-sidebar");
+                tapsEl.classList.remove("margin-left-auto");
+             }
+        }
+
+
       
    }
 
@@ -163,6 +198,7 @@ export class UserComponent implements OnInit {
                 private communicationService: ComponentcommunicationService,
                 private legislatorsService: LegislatorService,
                 private datashareService: DatashareService,
+                private deviceService: DeviceDetectorService,
                 private formBuilder: FormBuilder) {
         this.currentUser = this.datashareService.getCurrentUser();
 
@@ -339,6 +375,7 @@ export class UserComponent implements OnInit {
         this.folow = false;
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
+        this.isManagedByCollapsed = true;
         this.managedByActive = false;
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = false;

@@ -260,11 +260,11 @@
                     </div>
                 </div>
                 <div class="paddingTop10">
-                    <span *ngIf="!isSelfProfile" class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span>
+                    <span *ngIf="!isSelfProfile" class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span> |
                     <span *ngIf="!isSelfProfile" class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary" (click)="Followers()">Follower(s) &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
+                    <span class="badge badge-pill badge-primary pointer" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span> |
                     <span class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary" (click)="Followings()">Following(s) &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
+                    <span class="badge badge-pill badge-primary pointer" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
 
                 </div>
 
@@ -272,42 +272,33 @@
             </div>
 
 
+            <div class="personal-info display-none" id="name-for-lock">
+                <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
+                    <div>
+                        <div *ngIf="!isEditDisplayname" class="fullname-display">
+                            <b>
+                                {{biodata.full_name}}
+                            </b>
+                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
     </div>
+    
+
+
+
+
+
+
 
     </div>
     <div class="row">
 
-        <div class="col-sm-4 col-xs-12 sidebar-Mobile">
-            <!-- Begin user profile -->
-            <div class="text-center user-profile-2 col-xs-12">
-
-                <!-- <ul class="list-group">
-                    <li class="list-group-item pointer" *ngIf="!isSelfProfile"> -->
-                            <!-- <span class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span> |
-                            <span class="badge badge-pill badge-primary" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span> |
-
-                            <span class="badge badge-pill badge-primary" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span> -->
-
-                    <!-- </li> -->
-                                        
-                    <!-- <li class="list-group-item pointer"
-                        [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}"> -->
-                    <!-- </li> -->
-                    <!-- <li class="list-group-item pointer"
-                        [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}"> -->
-                    <!-- </li> -->
-               <!-- </ul> -->
-            </div>
-            <div class="text-center user-profile-2 col-xs-12">
-                <span class="badge badge-pill badge-primary" (click)="managedByUsers()">Managed by</span> |
-                <span class="pointer">My Posts</span> |
-                <span class="pointer">Profile</span> 
-            </div>
-        </div>
-
-
-
-    <div class="col-sm-4 col-xs-12 sidebar-div-desktop">
+    <div class="col-sm-4 col-xs-12 sidebar-div-desktop" id="sidebar-div-desktop">
         <!-- Begin user profile -->
         <div class="text-center user-profile-2">
             <ul class="list-group">
@@ -348,7 +339,7 @@
         </div><!-- End div .box-info -->
         <!-- Begin user profile -->
         </div>
-        <div class="col-sm-8 col-xs-12">
+        <div class="col-sm-8 col-xs-12" id="template-tabs">
             <div class="widget-div">
                 <div class="widget widget-tabbed">
                     <!-- Nav tab -->
@@ -494,4 +485,11 @@
         </div>
         </div>
 
+</div>
+<div class="bottom-tabs">
+    <ul class="nav nav-tabs">
+        <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="Profiles()" type="button">Profile</button></li>
+        <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="Activities()">Posts</button></li>
+        <li [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="managedByUsers()">Managed By</button></li>
+      </ul>
 </div>

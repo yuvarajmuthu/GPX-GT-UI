@@ -287,7 +287,7 @@ input[type="file"] {
     }
     .sticky {
         position: fixed;
-        top: 66px;
+        top: 87px;
         width: 94%;
         background-color: white;
       }
@@ -320,6 +320,14 @@ input[type="file"] {
         width: 100%;
         color:#007bff;
     }
+    .sticky-name{
+        position: fixed;
+        top: -32px;
+        width: 563px;
+        z-index: 3;
+        background-color: white;
+        width: 100%;
+      }
 }
 @media only screen and (min-width: 600px) {
     .fullname-display{

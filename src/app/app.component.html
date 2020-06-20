@@ -6,6 +6,13 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <ul *ngIf="isMobile" class="navbar-nav">
+             <li class="avatar-profile d-sm-block " [ngbPopover]="popContent">
+                <a href="javascript:void(0)">
+                    <img src="assets/images/avatars/avatar.png" class="img-responsive"/>
+                </a>
+            </li>
+        </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -95,10 +102,7 @@
             </div>
           </div>
             
-            <ul class="navbar-nav ml-auto">
-                <!--<li>
-                    <a href="#" id="add-question" class="btn mybtn btn-success">Add Question</a>
-                </li>-->
+            <ul *ngIf="!isMobile" class="navbar-nav ml-auto">
                 <li class="avatar-profile d-none d-sm-block " [ngbPopover]="popContent">
                     <a href="javascript:void(0)"><img src="assets/images/avatars/avatar.png"
                                                       class="img-responsive"/></a>

@@ -154,11 +154,15 @@ export class UserComponent implements OnInit {
        let lockPosition:number;
        let nameDiv = document.getElementById("name-for-lock");
         if(isMobile == true){
-            lockPosition = 640;
+            lockPosition = 630;
             if (window.pageYOffset >= lockPosition) {
+                nameDiv.classList.add("sticky-name");
                 this.header.classList.add("sticky");
+                nameDiv.classList.remove("display-none");
              } else {
+                nameDiv.classList.remove("sticky-name");
                 this.header.classList.remove("sticky");
+                nameDiv.classList.add("display-none");
               }
         }
         else{

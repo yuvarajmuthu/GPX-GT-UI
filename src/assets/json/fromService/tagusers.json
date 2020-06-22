@@ -1,0 +1,26 @@
+[{
+
+	"id": "5e1e6275f453cd7570b8ee6a",
+	"username": "user5@gmail.com",
+    "userType": "PUBLICUSER",
+	"status": "active",
+	"sourceSystem": null,
+	"firstName": "user5",
+	"lastName": "five",
+	"photoUrl": "assets/images/avatar1.png",
+	"profileAvatarImgFileId": "543543222332",
+	"profileBannerImgFileId": null
+},
+
+{
+	"id": "5e3da2b2f453cd7b78f3ce86",
+	"username": "user6@gmail.com",
+	"userType": "PUBLICUSER",
+	"status": "active",
+	"sourceSystem": null,
+	"firstName": "user6",
+	"lastName": "six",
+	"photoUrl": "assets/images/avatar1.png",
+	"profileAvatarImgFileId": null,
+	"profileBannerImgFileId": null
+}]

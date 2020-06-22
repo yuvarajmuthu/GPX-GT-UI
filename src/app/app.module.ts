@@ -1,11 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 //import { ReactiveFormsModule }    from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 //import { HttpModule } from '@angular/http';
 import {HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import {AuthenticationService} from '../app/services/authentication.service';
 import {AuthGuard} from '../app/auth/auth.guard';
@@ -23,7 +25,10 @@ import {UserModule} from './components/user/user.module';
 import {GpxUIComponentsModule} from './components/gpx-uicomponents/gpx-uicomponents.module';
 import {ConnectionModule} from './components/connection/connection.module';
 
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 import {AppComponent} from './app.component';
+//import { CKEditorModule } from 'ckeditor4-angular';
 
 import {BannerComponent} from './components/banner/banner.component';
 import {TypeaheadComponent} from './components/typeahead/typeahead.component';
@@ -68,17 +73,21 @@ export function tokenGetter() {
         PositionComponent,
         PartyComponent,
         ProtectedComponent,
-        GAddressSearchComponent,
+        GAddressSearchComponent
         //dateFormatPipe
         //UserComponent
         //GpxInputComponent,
     ],
     imports: [
         BrowserModule,
+        DeviceDetectorModule,
         AppRoutingModule,
         HttpClientModule,
         HttpClientJsonpModule,
         FormsModule,
+        ScrollingModule,
+        AutocompleteLibModule,
+        //CKEditorModule,
         //ReactiveFormsModule, // formGroup
         //NgbTabsetModule,
         //NgbDropdownModule,
@@ -107,7 +116,7 @@ export function tokenGetter() {
         // )
     ],
     providers: [
-        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION */
+        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION*/   
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,

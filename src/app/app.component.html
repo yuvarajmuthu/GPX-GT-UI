@@ -6,19 +6,28 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <ul *ngIf="isMobile" class="navbar-nav">
+             <li class="avatar-profile d-sm-block " [ngbPopover]="popContent">
+                <a href="javascript:void(0)">
+                    <img src="assets/images/avatars/avatar.png" class="img-responsive"/>
+                </a>
+            </li>
+        </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" (click)="route('searchLegislator')"><i class="fa fa-home"></i> Legislator</a>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': searchLegislator}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-user"></i> Legislator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('news')"><i class="fa fa-edit"></i> News</a>
+                    <a class="nav-link" [ngClass]="{'active': news}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i> News</a>
                 </li>
+                <!--
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('group')"><i class="fa fa-bell"></i> District</a>
+                    <a class="nav-link" [ngClass]="{'active': group}"  routerLink="group" routerLinkActive="active"><i class="fa fa-map-marker"></i> District</a>
                 </li>
+                -->
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('request')"><i class="fa fa-bell"></i> Connection Requests</a>
+                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i> Connections</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
@@ -30,14 +39,70 @@
                 </li>
 
             </ul>
-            <form class="form-inline my-2 my-lg-0 col-md-5">
-                <input class="myform-control mr-sm-2" type="search" placeholder="Search GoPolitix" aria-label="Search">
-                <button class="btn btn-light"><i class="fa fa-search"></i></button>
-            </form>
-            <ul class="navbar-nav ml-auto">
-                <!--<li>
-                    <a href="#" id="add-question" class="btn mybtn btn-success">Add Question</a>
-                </li>-->
+ 
+              <div class="ng-autocomplete common-search">
+                <ng-autocomplete
+                  [data]="searchUsers"
+                  (inputChanged) = "onChangeSearch($event)"
+                  (selected)='selectEvent($event)'
+                  [searchKeyword]="keyword"
+                  placeHolder="Search Legislator, Person, District, Party..."
+                  historyIdentifier="searchUsers"
+                  [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate">
+                </ng-autocomplete>
+                <ng-template #itemTemplate let-item>
+                  <div class="item">
+                    <img src="{{item.photoUrl}}" height="25">
+                    <span [innerHTML]="item.firstName"></span>
+                    <small></small>
+                  </div>
+                </ng-template>
+              
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+              </div>
+
+           
+          <!-- <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn add dropdown-toggle">
+              <span class="glyphicon glyphicon-plus"></span>
+              Create Page
+            </button>
+
+            <ul dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('District')">Create District</a>
+              </li>
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('Legislator')">Create Legislator</a>
+              </li>                
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('User')">Create User</a>
+              </li>                              
+
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="createPage('Party')">Create Party</a>
+              </li>                                            
+            </ul>
+
+          </div>    -->
+          
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" (click)="iscreateOptEnabled =  !iscreateOptEnabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Create page
+            </button>
+            <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'district')">Create District</a>
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'legislator')">Create Legislator</a>
+              <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'party')">Create Party</a>
+            </div>
+          </div>
+            
+            <ul *ngIf="!isMobile" class="navbar-nav ml-auto">
                 <li class="avatar-profile d-none d-sm-block " [ngbPopover]="popContent">
                     <a href="javascript:void(0)"><img src="assets/images/avatars/avatar.png"
                                                       class="img-responsive"/></a>
@@ -67,27 +132,27 @@
     <div class="row">
 
         <div class="d-lg-none d-xl-none col-xs-12">
-            <a href="javascript:void(0)" class="mx-auto d-flex justify-content-center flex-wrap">
+            <!--<a href="javascript:void(0)" class="mx-auto d-flex justify-content-center flex-wrap">
                 <img src="assets/images/avatars/avatar.png" class="img-responsive text-center mx-auto d-flex justify-content-center flex-wrap"/>
-            </a>
+            </a>-->
         </div>
 
 
         <div class="col-lg-2 ">
-            <div class=" aff-right">
+            <!--<div class=" aff-right">
                 <div class="ui-block">
                     <h6 class="my-4">Recent</h6>
                     <hr>
                     <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist"
                          aria-orientation="vertical">
-                        <!--<a class="nav-link active" data-toggle="pill" href="javascript:void(0);"> Top Stories</a>
+                        &lt;!&ndash;<a class="nav-link active" data-toggle="pill" href="javascript:void(0);"> Top Stories</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">New Questions</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Bookmarked Answers</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Links</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Payment Gateways</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Education</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">E-commerce</a>
-                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Android Applications</a>-->
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Android Applications</a>&ndash;&gt;
                     </div>
                 </div>
             </div>
@@ -101,28 +166,31 @@
 
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <!-- /.col-lg-3 -->
-        <div class="col-lg-7">
+        <div class="col-lg-8">
 
             <router-outlet></router-outlet>
+<!--
+            <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
 
-
-        </div>
+            <p>{{editorData}}</p>
+-->
+        </div> 
         <!-- /.col-lg-6 -->
         <!--col-lg-3-->
-        <div class="col-lg-3 ">
-            <div class=" q-wid">
+        <div class="col-lg-2">
+            <!--<div class=" q-wid">
                 <div class="ui-block">
                     <h6 class="my-4">Today's News and Views</h6>
                     <hr>
                     <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
-                        <!--<a class="nav-link" data-toggle="pill" href="javascript:void(0);"> Upvote 5 more good
+                        &lt;!&ndash;<a class="nav-link" data-toggle="pill" href="javascript:void(0);"> Upvote 5 more good
                             answers</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Ask your first question</a>
                         <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Add 3 credentials</a>
-                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Answer a question</a>-->
+                        <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Answer a question</a>&ndash;&gt;
                     </div>
                 </div>
             </div>
@@ -135,7 +203,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <!-- /.col-lg-3 -->
     </div>

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 import { UserComponent } from './user/user.component';
 import { UsertemplateComponent } from './usertemplate/usertemplate.component';
 
 import {UserRoutingModule} from './user-routing.module';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -24,12 +26,16 @@ import {GpxUIComponentsModule} from '../../components/gpx-uicomponents/gpx-uicom
 
 import { UserstageComponent } from './userstage/userstage.component';
 import { Usercard2Component } from './usercard2/usercard2.component';
+import { UserroleComponent } from './usertemplate/userroletemplate/userrole/userrole.component';
+import { UserofficeComponent } from './usertemplate/userofficetemplate/useroffice/useroffice.component';
 
 @NgModule({
   imports: [
     CommonModule, 
     FormsModule,
     ReactiveFormsModule,
+    CKEditorModule,
+    AutocompleteLibModule,
     UserRoutingModule,
     GpxUIComponentsModule,
     NgbModule,
@@ -40,7 +46,7 @@ import { Usercard2Component } from './usercard2/usercard2.component';
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 
-    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component
+    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent
   ],
   entryComponents:[UserstageComponent,UserbannertemplateComponent, UsercommitteetemplateComponent, 
     UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent],

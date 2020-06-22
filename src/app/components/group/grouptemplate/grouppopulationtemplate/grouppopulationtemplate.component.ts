@@ -51,7 +51,7 @@ constructor(private profileService:ProfileService,
           console.log("loadTemplateData() for template: " +  id);
           //TODO
           //call profile service to get the template data
-    this.profileService.getProfileTemplateData(id)
+    this.profileService.getProfileTemplate(id)
     .subscribe((result) => {
       console.log("profile template response " + result[0]);
       this.templateProperties = result[0]['properties'];

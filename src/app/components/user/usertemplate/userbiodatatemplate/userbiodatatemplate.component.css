@@ -56,3 +56,6 @@ input:valid ~ label {
     -webkit-transition: 0.2s ease all !important;
   }
   
+.lg-fa{
+  font-size: 36px;
+} 

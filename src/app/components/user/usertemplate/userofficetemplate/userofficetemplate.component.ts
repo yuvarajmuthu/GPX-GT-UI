@@ -1,5 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
+import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
+import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
 import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService}     from '../../../../services/componentcommunication.service';
@@ -14,35 +18,52 @@ import { LegislatorService } from '../../../../services/legislator.service';
 export class UserofficetemplateComponent extends AbstractTemplateComponent  implements OnInit  {
   id = "upOffices"; 
   profileIcon = "business";
-  //roles:any = null;
+  //offices:any = null;
   offices:JSON[] = [];
   displayProperties = [];
-  //role = {};
+  inEditMode:boolean = false;
+  officeTemplateForm: FormGroup; 
+  closeResult: string;
+  office = {};
 
   constructor(private legislatorsService2:LegislatorService, 
     private userService2:UserService, 
     private dataShareService2:DatashareService, 
-    private missionService2: ComponentcommunicationService, 
-    private changeDetector : ChangeDetectorRef) {
+    private communicationService: ComponentcommunicationService, 
+    private changeDetector : ChangeDetectorRef,
+    private fbuilder: FormBuilder,
+    private modalService: NgbModal 
+    ) {
   
-      super(legislatorsService2, dataShareService2, missionService2);
+      super(legislatorsService2, dataShareService2, communicationService);
   
       console.log("constructor() userofficetemplate.component");
-      
+      communicationService.userProfileEditChanged$.subscribe(
+        editmode => {
+            console.log('Received edit-save Profile message ' + editmode);
+            this.inEditMode = editmode;
+            this.changeDetector.detectChanges();
+
+        });    
+        
   }
 
   ngOnInit() {
     console.log("ngOnInit() userofficetemplate.component");
     /*
-    this.userService2.getRoles(this.profileUserId).subscribe(
+    this.userService2.getoffices(this.profileUserId).subscribe(
       result => {
         console.log(result.length);
-        this.roles = result;
+        this.offices = result;
       });
       */
      this.loadDisplayProperties();     
 
       this.loadTemplateData();   
+      this.inEditMode = this.dataShareService2.isProfileEditable();
+      //this.changeDetector.detectChanges();
+      
+
   }
 
   loadDisplayProperties(){
@@ -58,17 +79,17 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
 
   loadTemplateData(){
   /*
-    this.userService2.getRoles(this.profileUserId).subscribe(
+    this.userService2.getoffices(this.profileUserId).subscribe(
       result => {
         console.log(result.length);
-        this.roles = result;
-        console.log(this.roles);
+        this.offices = result;
+        console.log(this.offices);
 
       });
       this.zone.run(() => {
-        this.userService2.getRoles(this.profileUserId).toPromise().then((data) => {
-            this.roles= data;
-            console.log(this.roles);
+        this.userService2.getoffices(this.profileUserId).toPromise().then((data) => {
+            this.offices= data;
+            console.log(this.offices);
         });
         })
 */
@@ -76,17 +97,19 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
 
         this.userService2.getOffices(this.profileUserId, this.viewingUser["isCongress"])
         .subscribe((data) => {
-          //console.log("roles count ", data.length);
-          //this.role = JSON.parse(JSON.stringify(data[0]));
-          //this.role['term'] = 'term';
+          //console.log("offices count ", data.length);
+          //this.office = JSON.parse(JSON.stringify(data[0]));
+          //this.office['term'] = 'term';
           this.offices= data;
+          //this.createFormGroup();
+
           this.changeDetector.detectChanges();
-        });
+        }); 
           /*
           data.forEach(element => {
-            this.roles.push(JSON.parse(JSON.stringify(element)));
-            console.log(this.roles);
-            this.role = JSON.parse(JSON.stringify(element));
+            this.offices.push(JSON.parse(JSON.stringify(element)));
+            console.log(this.offices);
+            this.office = JSON.parse(JSON.stringify(element));
               
           });
           */
@@ -94,7 +117,25 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
 
   //  });
   }
+  createFormGroup() { 
+    //this.biodataTemplateForm = this.fbuilder.group({});
+    //let struct:string = "\"{";//"new FormGroup({";
+    this.officeTemplateForm = this.fbuilder.group({});
 
+    this.displayProperties.forEach((element, index) => {
+        let value = this.legislator[element['propId']];
+        console.log('element[propId] ', element['propId'], ' this.legislator[element[propId]] ', this.legislator[element['propId']]);
+        this.officeTemplateForm.setControl(element['propId'], new FormControl(value));
+        //this.biodataTemplateForm.setControl(element['propId'], null);
+    });
+    this.changeDetector.detectChanges();
+}
+getFormData():any{
+  console.log("Object.assign({}, this.biodataTemplateForm.value) ", Object.assign({}, this.officeTemplateForm.value));
+  const result: {} = Object.assign({}, this.officeTemplateForm.value);
+  console.log("office form ", result);
+  return result;
+}
   getData():string{
  /*
     let data = {};
@@ -108,5 +149,31 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
     */
    return "";
   }
+
+  open(content, office) { 
+    if(office === ''){
+        office = null;
+    }
+    this.office = office;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+}
+
+public onChange(event: CKEditor4.EventInfo) {
+    console.log(event.editor.getData());
+}
+
+private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+    } else {
+        return  `with: ${reason}`;
+    }
+}
 
 }

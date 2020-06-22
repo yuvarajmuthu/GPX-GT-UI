@@ -10060,3 +10060,102 @@ aside.sidebar.full-style {
 }
 */
 
+.padding-top2{
+    padding-top: 2%;
+}
+.displayNone{
+    display: none;
+}
+.party-search{
+    width: 50% !important;
+    margin-left: 23%;
+    display: flex;
+}
+.save-button{
+    cursor: pointer;
+    border: none !important;
+    color: #007bff;
+    z-index: 1;
+    height: 33px;
+    background-color: white;
+    position: relative;
+    top: 1px;
+    left: -13%;
+}
+.edit-button{
+    cursor: pointer;
+    border: none !important;
+    color: #007bff;
+    z-index: -1;
+    background-color: white;
+    /* position: absolute;
+    margin-left: 70% !important; */
+    height: 35px;
+}
+
+.profile-pills{
+    background-color: #FBFCFC;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 5px;
+  }
+
+  .padding-pills{
+      padding-right: 2px;
+      padding-left: 2px;
+  }
+  .margin-pills{
+    margin-right: 3px;
+    margin-left: 3px;
+   }
+   .all-posts{
+       background-color: white;
+   }
+ .reply-section{
+    margin: 15px 0px 0px 0px;
+  }
+
+
+.list-group-item.active {
+  background-color: white !important;
+  color: black !important;
+
+}
+
+.container-fluid{
+    padding: 0px !important;
+}
+
+.ng-autocomplete.create-page {
+    width: 100% !important;
+}
+.ng-autocomplete.common-search {
+    width: 100% !important;
+}
+/* .create-page-label{
+    padding-left: 5px;
+} */
+input:focus {
+    color: #495057 !important;
+    background-color: #fff  !important;
+    border-color: #80bdff  !important;
+    outline: 0  !important;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25)  !important;
+}
+.autocomplete-container{
+    box-shadow: none !important;
+}
+input{
+    display: block;
+    /* width: 100% !important; */
+    height: calc(1.5em + .75rem + 2px) !important;
+    padding: .375rem .75rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem !important;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
+}

@@ -1,41 +1,33 @@
-<div class="usercard1">
-<figure (click)="loadUser()">
-      <img [src]="profileSmImage"
-      alt="Place image title"
-      *ngIf="!isImageLoading">
-    </figure> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 followers-list-start">
+            <ul class="list-group pmd-list pmd-card-list">
+                <li class="list-group-item d-flex">
+                    <figure (click)="loadUser()" class="customize-position-image">
+                        <img [src]="profileSmImage"
+                             alt="Place image title" width="40" height="40"
+                             *ngIf="!isImageLoading">
+                    </figure>
+                    <div class="media-body customize-position-image">
+                        <h6 class="pmd-list-title">
+                            <a [routerLink]="['/user', user.username]" title="">{{user.username}}</a>
+                        </h6>
+                        <!--<button *ngIf="loggedUser.username != user.username" type="button" [class]="followCntrlCSS"
+                                (click)="followEntity()">
+                            <span [class]="followStatusCSS"></span>{{followCntrlLabel}}
+                        </button>
+                        <p class="pmd-list-subtitle">
 
-    <span class="friend-meta">
-        <h4><a [routerLink]="['/user', user.username]" title="">{{user.username}}</a></h4>
-        <!--
-        <button class="btn" type="button" *ngIf="loggedUser.username != user.username" (click)="followEntity()">Follow</button>
-        -->
-        <button *ngIf="loggedUser.username != user.username" type="button" [class]="followCntrlCSS" (click)="followEntity()">
-          <span [class]="followStatusCSS"></span>{{followCntrlLabel}} 
-      </button> 
-      </span>
-  </div>
-    <!--
-	<section id="what-we-do">
-					<div class="card">
-						<div class="card-block">
-
-              <div class="col-lg-3">
-              <img [src]="profileSmImage"
-              alt="Place image title"
-              *ngIf="!isImageLoading">
-              </div>
-
-              <div class="col-lg-9">
-							<h3 class="card-title">
-                <a [routerLink]="['/user', user.username]" title="">{{user.username}}</a>
-              </h3>
-							<p class="card-text"></p>
-              <button class="btn" type="button" *ngIf="loggedUser.username != user.username" (click)="followEntity()">Follow</button>  
-            </div>
-
-
-          </div>
-          </div>
-  </section>
--->
+                        </p>-->
+                    </div>
+                    <!--<div class="custom-control custom-checkbox pmd-checkbox">
+                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck15" checked>
+                        <label class="custom-control-label" for="defaultCheck15">
+                        </label>
+                    </div>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br/>

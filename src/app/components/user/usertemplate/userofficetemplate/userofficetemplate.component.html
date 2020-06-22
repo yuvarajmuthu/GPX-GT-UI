@@ -1,18 +1,66 @@
-<div>
-  <div class="officeProfileCard col-xs-12" *ngFor="let office of offices">
+
+<form [formGroup]="officesTemplateForm">
+  <!-- Add new Office -->
+  <a *ngIf="inEditMode" href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, '')"> 
+      <i class="fa fa-plus"></i>
+  </a>
+  <ng-template #content let-modal>
+      <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Office</h4>
+          <!-- Close the Office modal-->
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="officeTemplateForm">  
+                <div class="form-group row" *ngFor="let displayProperty of displayProperties">
+                  <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
+                  <div *ngIf="displayProperty.type === 'text'" class="input-group">
+                      
+                      <input id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+
+                  </div>
+                  <div *ngIf="displayProperty.type === 'date'" class="input-group">
+                    <input type='date' id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+                  </div>
+                  
+                </div> 
+                <!--
+                <div>
+                  <label for="addtionalInfo">Additional Information:</label>
+                  <ckeditor id="addtionalInfo" class="form-control" [formControlName]="editorData"></ckeditor>
+                  <ckeditor id="addtionalInfo" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"></ckeditor>
+                  
+                  <p>{{editorData}}</p>
+                </div>
+              -->                  
+          </form>
+      </div>
+      <!-- Save office information -->
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline-success" (click)="saveProfile();modal.close('Save click')">Save</button>
+      </div>
+  </ng-template>
+  <div *ngFor="let office of offices">
+    <app-useroffice [officeObj]="office" [displayProperties]="displayProperties"></app-useroffice>
+    <!--  
     <table class="table">
-      <tbody class="box-shadow">
-      <tr>
-        <td colspan="2" class="text-center" *ngIf="office.isCurrent">
-          <span class="badge badge-pill badge-primary">Current:</span>
-        </td>
-      </tr>
-      <tr class="info" *ngFor="let displayProperty of displayProperties">
-        <td>{{displayProperty.displayLabel}}
-        </td>
-        <td>{{office[displayProperty.propId]}}</td>
-      </tr>
-      </tbody>
-    </table>
+          <tbody class="box-shadow">
+          <tr>
+              <td></td>
+              <td>
+                  <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, office)">
+                      <i class="fa fa-pencil-square-o"></i>
+                  </a>
+              </td>
+          </tr>
+          <tr class="info" *ngFor="let displayProperty of displayProperties">
+              <td>{{displayProperty.displayLabel}} </td>
+              <td>{{office[displayProperty.propId]}}</td>
+          </tr>
+          </tbody>
+      </table>
+    -->
   </div>
-</div>
+</form>

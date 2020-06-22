@@ -1,299 +1,252 @@
-.legisBoundary{
-    border: 1px solid lightblue;
-    border-radius: 5px;
-    margin: 10px;
-  }
-
-  .legisBoundary:hover{
-    border: 2px solid lightblue;
-  }
-
-
-  .constitutionTop{
-    padding: .1px 1.5em;
-    background: #f5f2f0;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-  }
-  
-  .constitutionTop{
-    padding-bottom: 5px;
-  }
-
-  .constitutionHeader,
-  .constitutionDescription{
-    border: 1px solid lightblue;
-    border-radius: 5px;
-  }
-
-  .constitutionProfile .banner{
-      max-width: 100%;
-      height: auto;
-      width:auto/9;
-  }
-
-  .selected {
-    background-color: #CFD8DC !important;
-    color: white;
-  }
-  .heroes {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-
-  }
-  .heroes li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    border-radius: 1px;
-  }
-  .heroes li.selected:hover {
-    background-color: #BBD8DC !important;
-    color: white;
-  }
-  .heroes li:hover {
-    color: #607D8B;
-    background-color: #DDD;
-    left: .1em;
-  }
-  .heroes .text {
-    position: relative;
-
-  }
-  .heroes .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-
-
-  .districtTemplate{
-    border: 2px solid lightblue;    
-    position: relative;
-    padding: 1em;
-    margin: 1em;
-  }
-
-html,body {
-  background: #efefef;
+.delete-image{
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
+  border: none !important;
+  background: none !important;
+}
+.image-upload-container{
+  border: 1px solid rgba(0,0,0,0.54);
+  border-radius: 5px;
+  width:152px;
 }
 
-.activityDiv{
-border: 2px solid lightblue;   
+body {
+  margin-top: 20px;
+  background-color: #e9ebee;
 }
 
-
-header {
-background: #eee;
-background-image: url("https://ballotpedia.s3.amazonaws.com/images/thumb/8/86/PA_18th_congressional_district.png/250px-PA_18th_congressional_district.png?AWSAccessKeyId=AKIAJYSMGSWZEGREQP4Q&Expires=1507362459&Signature=PaPu90WJJt%2FTYATkX6i8V%2FMXRR4%3D");
-background-repeat: no-repeat;
-background-position: center;
-background-size: cover;
-background-color: red;
-height: 250px;
+.profile-banner {
+  width: 100%;
+  height: 300px;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  background-color: #252932;
+  border-bottom: 4px solid #fff;
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.1);
+}
+.imagePreview {
+  width: 100%;
+  height: 180px;
+  background-position: center center;
+  background-color:#fff;
+  background-size: cover;
+  background-repeat:no-repeat;
+  display: inline-block;
+  box-shadow:0px -3px 6px 2px rgba(0,0,0,0.2);
 }
 
-header i {
-position: relative;
-cursor: pointer;
-right: -96%;
-top: 25px;
-font-size: 18px !important;
-color: #fff;
+.imgUp
+{
+  margin-bottom:15px;
+}
+.del
+{
+  position:absolute;
+  top:0px;
+  right:15px;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  background-color:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+.imgAdd
+{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background-color:#4bd7ef;
+  color:#fff;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  line-height:30px;
+  margin-top:0px;
+  cursor:pointer;
+  font-size:15px;
 }
 
-@media (max-width:800px) {
-header {
-  height: 150px;
-} 
-
-header i {
-  right: -90%;
-}
+li {
+  list-style: none;
 }
 
-main {
-    padding: 20px 20px 0px 20px;
-}
-
-.left {
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-}
-
-.photo {
-width: 200px;
-height: 200px;
-margin-top: -120px;
-border-radius: 100px;
-border: 4px solid #fff;
-}
-
-.activePhoto {
-width: 20px;
-height: 20px;
-border-radius: 20px;
-position: absolute;
-right: calc(50% - 70px);
-top: 75px;
-background-color: #FFC107;
-border: 3px solid #fff;
-}
-
-@media (max-width:990px) {
-.activePhoto {
-  right: calc(50% - 60px);
-  top: 50px;
-} 
-}
-
-.name {
-margin-top: 20px;
-font-family: "Open Sans";
-font-weight: 600;
-font-size: 18pt;
-color: #777;
-}
-
-.info {
-margin-top: -5px;
-margin-bottom: 5px;
-font-family: 'Montserrat', sans-serif;
-font-size: 11pt;
-color: #aaa;
-}
-
-.stats {
-margin-top: 25px;
-text-align: center;
-padding-bottom: 20px;
-border-bottom: 1px solid #ededed;
-font-family: 'Montserrat', sans-serif;
-}
-
-
-.number-stat {
-padding: 0px;
-font-size: 14pt;
-font-weight: bold;
-font-family: 'Montserrat', sans-serif;
-color: #aaa;
-}
-
-.desc-stat {
-margin-top: -15px;
-font-size: 10pt;
-color: #bbb;
-}
-
-.desc {
-text-align: center;
-margin-top: 25px;
-margin: 25px 40px;
-color: #999;
-font-size: 11pt;
-font-family: "Open Sans";
-padding-bottom: 25px;
-border-bottom: 1px solid #ededed;
-}
-
-.social {
-margin: 5px 0 12px 0;
-text-align: center;
-display: inline-block;
-font-size: 20pt;
-}
-
-.social i {
-cursor: pointer;
-margin: 0 15px;
-}
-
-.social i:nth-child(1)  { color: #4267b2; }
-.social i:nth-child(2)  { color: #1da1f2; }
-.social i:nth-child(3)  { color: #bd081c; }
-.social i:nth-child(4)  { color: #36465d; }
-
-.right {
-padding: 0 25px 0 25px !important;
-}
-
-.nav {
-display: inline-flex;
-}
-
-.nav li {
-margin: 40px 30px 0 10px;
-cursor: pointer;
-font-size: 13pt;
-text-transform: uppercase;
-font-family: 'Montserrat', sans-serif;
-font-weight: 500;
-color: #888;
-}
-
-.nav li:hover, .nav li:nth-child(1)  { 
-color: #999;
-border-bottom: 2px solid #999;
-}
-
-.follow {
-position: absolute;
-right: 8%;
-top: 35px;
-font-size: 11pt;
-background-color: #42b1fa;
-color: #fff;
-padding: 8px 15px;
-cursor: pointer;
-transition: all .4s;
-font-family: 'Montserrat', sans-serif;
-font-weight: 400;
-}
-
-.follow:hover {
-box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.2);
-}
-
-@media (max-width:990px) {
-.nav {
-  display: none;
-}
-
-.follow {
-  width: 50%;
-  margin-left: 25%;
-  display: block;
-  position: unset;
+.avatar-container {
+  height: 300px;
   text-align: center;
 }
-}
-.gallery  {
-margin-top: 35px;
+
+.profile-avatar {
+  width: 200px;
+  position: relative;
+  margin: 0px auto;
+  margin-top: 196px;
+  border: 4px solid #f3f3f3;
 }
 
-.gallery div {
-margin-bottom: 30px;
+.profile-actions {
+  position: absolute;
+  bottom: 20px;
 }
 
-.gallery img {
-box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
-width: auto; 
-height: auto;
-cursor: pointer;
-max-width: 100%;
-} 
+.user-profile-2 {
+  margin-top: 50px;
+}
 
+.user-profile-sidebar {
+  margin: 0 0 20px 0;
+}
+
+.user-profile-sidebar .user-identity {
+  margin: 20px 0 0 0;
+}
+
+.user-profile-sidebar img {
+  width: 90px;
+}
+
+.account-status-data {
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px dashed #ddd;
+  border-bottom: 1px dashed #ddd;
+  margin: 10px 0 20px 0;
+}
+
+.account-status-data h5 {
+  font-size: 11px;
+  line-height: 150%;
+  color: #909090;
+}
+
+.user-button {
+  margin: 15px 0;
+}
+
+.user-button .btn {
+  margin: 5px 0;
+}
+
+#social {
+  padding: 10px;
+  background: #E5E9EC;
+  text-align: center;
+}
+
+#social a:hover {
+  text-decoration: none;
+}
+
+.fa-circle.facebook {
+  color: #5471AE;
+}
+
+.fa-circle.twitter {
+  color: #4EC6F6;
+}
+
+.fa-circle.gplus {
+  color: #E24E3E;
+}
+
+.fa-circle.tumblr {
+  color: #4D77A3;
+}
+
+.fa-circle.linkedin {
+  color: #3097CE;
+}
+
+.user-profile-content {
+  margin: 30px 15px;
+}
+
+.tab-pane {
+  padding-top: 20px;
+}
+
+.user-message {
+  width: 50px;
+  height: 50px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+/*Profile Pic Start*/
+.picture-container{
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+.picture{
+  width: 106px;
+  height: 106px;
+  background-color: #999999;
+  border: 4px solid #CCCCCC;
+  color: #FFFFFF;
+  border-radius: 50%;
+  margin: 0px auto;
+  overflow: hidden;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+.picture:hover{
+  border-color: #2ca8ff;
+}
+.content.ct-wizard-green .picture:hover{
+  border-color: #05ae0e;
+}
+.content.ct-wizard-blue .picture:hover{
+  border-color: #3472f7;
+}
+.content.ct-wizard-orange .picture:hover{
+  border-color: #ff9500;
+}
+.content.ct-wizard-red .picture:hover{
+  border-color: #ff3b30;
+}
+.picture input[type="file"] {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.picture-src{
+  width: 100%;
+  
+}
+input[type="file"] {
+  display: none;
+}
+.edit-photo{
+  /*position: absolute;
+  left: -20px;
+  z-index: 100;*/
+  position: absolute;
+  z-index: 100;
+  left: 170px;
+  top: 355px;
+}
+/*.profile-edit-btn-custom-position{
+  position: relative;
+  top: 5px;
+}*/
+/*Profile Pic End*/
+@media only screen and (max-width: 600px) {
+  .edit-photo{
+      position: absolute;
+      z-index: 100;
+      left: 225px;
+      top: 355px;
+  }
+}
+.active-tab{
+  color: #007bff !important;
+}

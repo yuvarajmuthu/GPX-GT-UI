@@ -67,6 +67,8 @@ export class UsertemplateComponent implements OnChanges {
   //all the user profile templates should be mapped here
   private mappings = {
     'upDefault': UserbannertemplateComponent,
+    'upDefault1': UserbannertemplateComponent,//FOR TESTING
+    'upDefault2': UserbannertemplateComponent,//FOR TESTING
     'upCongressLegislatorExternal': UserbiodatatemplateComponent,
     'upCongressLegislatorCommitteeExternal': UsercommitteetemplateComponent,
     'upRole': UserroletemplateComponent,
@@ -84,7 +86,7 @@ constructor(
 
 //invoked whenever component type changes, adds the new component next to the existing components
 ngOnChanges(type: SimpleChanges){
-  console.log('userProfile.template.component ngOnChanges() ');
+  console.log('usertemplate.component ngOnChanges() ');
   this.loadComponentTemplate();
 }
 

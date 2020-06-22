@@ -9,6 +9,7 @@ import {RegisterComponent} from './components/security/register/register.compone
 import {LoginComponent} from './components/security/login/login.component';
 import {PostComponent} from './components/post/post.component';
 import {ProtectedComponent} from './components/protected/protected.component';
+import {CreatepageComponent} from './components/security/createpage/createpage.component'
 //import {ConnectionrequestComponent} from './components/connection/connectionrequest/connectionrequest.component';
 
 import { AuthGuard } from '../app/auth/auth.guard';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: "user", loadChildren:'./components/user/user.module#UserModule' },
   //{path: "user/:id", loadChildren:'./components/user/user.module#UserModule' },
   {path: "group", loadChildren:'./components/group/group.module#GroupModule' },
+  //{path: "group", loadChildren:'./components/user/user.module#UserModule' },
   //{path: "group/:id", loadChildren:'./components/group/group.module#GroupModule' },
   //{path: "user/legis/:id", component: UserModule }, 
   // { path: 'distrcit',      component: HeroDetailComponent }, 
@@ -37,6 +39,7 @@ const routes: Routes = [
   { path: 'secure', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },  
+  { path: 'createpage', component: CreatepageComponent, canActivate: [AuthGuard] },
   { path: 'request', loadChildren:'./components/connection/connection.module#ConnectionModule' },   
   { path: '',   redirectTo: '/searchLegislator', pathMatch: 'full' },
 

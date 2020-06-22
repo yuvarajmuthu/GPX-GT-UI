@@ -31,9 +31,10 @@
 </form>
 -->
 <form [formGroup]="biodataTemplateForm">
+  <!--
   <div class="row">
     <div class="col" *ngIf="!isProfileInEditMode">
-        <button class="btn btn-outline-warning btn-xs float-right" (click)="editProfile()">
+        <button class="btn btn-outline-warning btn-xs float-right" (click)="editProfile()"> 
             <i class="fa fa-pencil-square-o"></i>
         </button>
     </div>
@@ -53,32 +54,75 @@
     </button>
   </div>
 </div>
-  <div class="bioProfileCard" *ngIf="externalUser">
+-->
+<!--
+<div class="bioProfileCard" *ngIf="externalUser">
   <div class="group" *ngFor="let displayProperty of displayProperties">
     <input *ngIf="isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
     <input disabled *ngIf="!isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
-    <span class="highlight"></span>
+      <span class="highlight"></span>
     <span class="bar"></span>
     <label>
         <span class="span-input ">{{displayProperty.displayLabel}}</span>
     </label>
   </div>
 </div>
-
+-->
 <div *ngIf="!externalUser">
+  <div class="row">
+    <div class="col" *ngIf="isProfileInEditMode">
+        <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, biodata)">
+            <i class="fa fa-pencil-square-o"></i>
+        </a>
+    </div>
+  </div>    
     <div class="form-group row" *ngFor="let displayProperty of displayProperties">
 
         <label class="col-lg-3 col-form-label form-control-label">{{displayProperty.displayLabel}}</label>
 
         <div class="col-lg-9">
+          <label class="col-form-label form-control-label">{{biodata[displayProperty.propId]}}</label>
           <!--
             <input *ngIf="isProfileInEditMode" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
             <label *ngIf="!isProfileInEditMode" class="col-form-label form-control-label">{{biodata[displayProperty.propId]}}</label>
  -->
-          </div>
+          </div> 
 
     </div>
   </div>
-
+<!--
   <button class="btn btn-primary" (click)="getFormData()">Display</button>
+  -->
 </form>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Biodata</h4>
+      <!-- Close the Bio modal-->
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <form [formGroup]="bioEditForm"> 
+            <div class="form-group row" *ngFor="let displayProperty of displayProperties">
+              <label for="{{displayProperty.propId}}">{{displayProperty.displayLabel}}</label>
+              <div *ngIf="displayProperty.type === 'text'" class="input-group">
+                  <input *ngIf="biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{biodata[displayProperty.propId]}}">
+                  <input *ngIf="!biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+
+              </div>
+              <div *ngIf="displayProperty.type === 'date'" class="input-group">
+                <input type='date' *ngIf="biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{biodata[displayProperty.propId]}}">
+                <input type='date' *ngIf="!biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+              </div>
+              
+            </div> 
+      </form>
+  </div>
+  <!-- Save Bio information -->
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" (click)="saveProfile();modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

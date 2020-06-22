@@ -9,6 +9,7 @@ import { LegislatorService } from '../../../../services/legislator.service';
 import { IfStmt } from '@angular/compiler';
 import { Legislator } from 'src/app/models/legislator';
 
+
 @Component({
   selector: 'app-userbiodatatemplate',
   templateUrl: './userbiodatatemplate.component.html',
@@ -17,7 +18,6 @@ import { Legislator } from 'src/app/models/legislator';
 export class UserbiodatatemplateComponent extends AbstractTemplateComponent  implements OnInit{ 
   //userId = "u001";
   //legisId:string = "";
-  
   id = "upCongressLegislatorExternal";
   profileDataId:string = "";
   profileIcon = "person";
@@ -33,7 +33,7 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
   public profilesData = [];
   public profilesTemplates = [];
   isProfileInEditMode:boolean = false;
-  private templateProperties = [];
+  private templateProperties = []; 
   private templateData = [];
   group:FormGroup;
   biodataTemplateForm: FormGroup;
@@ -56,7 +56,7 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
   
       super(legislatorsService2, dataShareService2, missionService2);
   
-      console.log("constructor() userProfile.template");      
+      console.log("constructor() userbiodatatemplate");      
 
       //OBSOLETE?
       missionService2.missionAnnounced$.subscribe(
@@ -117,8 +117,8 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
     } 
   
     loadTemplateData(){
-      let userType:string = this.externalUser?"external": "internal";
-      this.userService2.getBiodata(this.profileUserId, userType)
+      //let userType:string = this.externalUser?"external": "internal";
+      this.userService2.getBiodata(this.profileUserId)
       .subscribe((response) => {
         this.profileDataId = response['id'];
         this.biodata= response['data'];
@@ -200,4 +200,3 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
     }
 
   }
-  

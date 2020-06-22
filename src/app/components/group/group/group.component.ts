@@ -1,12 +1,25 @@
-import { Component, OnInit, ComponentRef } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import {
+  Component,
+  ComponentRef,
+  Input,
+  OnInit,
+  isDevMode
+} from '@angular/core';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
+
+import {Legislator} from '../../../models/legislator';
+import {User} from '../../../models/user';
+
 
 import {DatashareService} from '../../../services/datashare.service';
 import {UserService} from '../../../services/user.service';
-import { LegislatorService } from '../../../services/legislator.service';
-import { ComponentcommunicationService }     from '../../../services/componentcommunication.service';
-import { AlertService } from '../../../services/alert.service';
-import {GroupService} from '../../../services/group.service'; 
+import {ProfileService} from '../../../services/profile.service';
+
+import {LegislatorService} from '../../../services/legislator.service';
+import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
+
+import { Usercard1Component } from '../../user/usercard1/usercard1.component';
 
 @Component({
   selector: 'app-group',
@@ -15,565 +28,860 @@ import {GroupService} from '../../../services/group.service';
 })
 export class GroupComponent implements OnInit {
 
-  profileEditOption:string;
+ 
+  @Input() profileUserId: string = '';
+  legisId: string = '';
+  activeTemplate: string="upOffices";
 
-  constructor(
-    private groupService:GroupService, 
-    //private elementRef:ElementRef, 
-    //private renderer: Renderer, 
-    //private peopleService: PeopleService, 
-    //private partyService: PartyService, 
-    
-    private route: ActivatedRoute, 
-    private userService:UserService, 
-    private missionService: ComponentcommunicationService, 
-    private legislatorsService:LegislatorService, 
-    private datashareService:DatashareService
-    
-    ) {  
-  //   console.log("constructor()::GroupComponent");
-  //   //listens for any templatepopulationcomponent addition
-  //   missionService.missionNewProfileTemplateAdded$.subscribe(
-  //   mission => {
-  //     console.log("Received templatepopulationcomponent init message");
-  //     this.populationComponent = mission;
-  // });      
-}
-
-ngOnInit(){
-  console.log("ngOnInit()::GroupComponent");
-  this.profileEditOption = this.getPermission(); 
-
-  let id = this.route.snapshot.paramMap.get('id');
-
-  if(id){
-    this.viewingDistrict['id'] = id;
-    this.operation = this.viewingDistrict['id'];
-    console.log("from ngOnInit()::constitutionProfile Param value - id " + this.operation);
-  }
-
-  let externalId = this.route.snapshot.paramMap.get('id');
-  if(externalId){
-    this.viewingDistrict['externalId'] = externalId;
-    //this.operation = this.viewingDistrict['externalId'];
-    console.log("from ngOnInit()::constitutionProfile Param value - externalId " + this.viewingDistrict['externalId']);
-
-  }
-
-
-  if(this.operation == "CREATE"){
-//      this.loadProfileTemplate();      
-    this.datashareService.setPermission("Editor");   
-
-    this.groupService.getGroupData(this.operation,'').subscribe(
-        data => {
-          this.groupData = data;
-          console.log("Group data from service: ", this.groupData);
-
-          //getting the available profile templates for this group type
-          this.viewingDistrict['profileTemplates'] = this.profilesTemplates = this.groupData['profile'];
-          console.log("profile templates: ", this.profilesTemplates);
-
-          this.datashareService.setViewingDistrict(this.viewingDistrict);
-
-
-          console.log("this.viewingDistrict['profileTemplates']" + this.viewingDistrict['profileTemplates']);
-          if(this.viewingDistrict['profileTemplates']){
-                for (let profileTemplate of this.viewingDistrict['profileTemplates']){
-                  console.log("reading profileTemplates properties: " + profileTemplate['profileTemplateId']);
-                  if("districtIntroTemplate" == profileTemplate['profileTemplateId']){
-                    let templateProperties = [];
-                    templateProperties = profileTemplate['properties'];
-
-                    for (let property of templateProperties){
-                      console.log("Template property " + property);
-                      this[property] = "Enter data here";
-                    }
-
-                    break;  
-                  }
-                }
-          }
-
-        }
-    );
-  }else{
-    this.loadData();
-  }
-
-}
-
-  //@ViewChild('staticTabs') staticTabs: TabsetComponent; 
-	public isCollapsed:boolean = true;
-	public isCMCollapsed:boolean = true;
-	public isPartiesCollapsed:boolean = true;
-
-	public electedPersonsOld=[];
-  public electedPersons:Array<any>=[];
-	public contestedPersons=[];
-	public parties=[];
+  public isCollapsed: boolean = false;
+  public isCMCollapsed: boolean = false;
+  public isPartiesCollapsed: boolean = false;
+  //private isProfileEditMode: boolean = false;
+  public electedPersonsOld = [];
+  public electedPersons: Array<Legislator>;
+  public contestedPersons = [];
+  public parties = [];
+  public connections = [];
   templateType = [];
   private componentRef: ComponentRef<{}>;
-  private groupData = {};
+  private userData = {};
+  private viewingUser = {};
+  private firstName;
+  private lastName;
   public profilesTemplates = [];
-  public profilesData = [];
-  private viewingDistrict={};  
-  public connected:boolean = false;
-  //posts:Post[] = [];
-  operation:string = "";
-  followers:number = 0;
-  activities:number = 0;
+  public availableProfileTemplates = [];
+  public profilesDatas = [];
+  public isLegislator = false;
+  operation: string = '';
+  profileImage: string = '';
+  profileSmImage: any = 'assets/images/avatar1.png'; 
+  bannerImage: any;
+  isImageLoading: boolean = false;
+  isProfileCollapsed: boolean = false;
+  isActivityCollapsed: boolean = true;
+  isFollowersCollapsed: boolean = true;
+  isFollowingsCollapsed: boolean = true;
+  externalUser:boolean;
+  biodata={};
 
-  // @ViewChild(TemplateIntroductionComponent) introductionComponent: TemplateIntroductionComponent;        
-  // @ViewChild(TemplatePopulationComponent) populationComponent: TemplatePopulationComponent;
-  // @ViewChild(TemplateBusinessComponent) businessComponent: TemplateBusinessComponent;  
-  // @ViewChild(DynamicContentComponent) dynamicComponent: DynamicContentComponent;
+  activities: number = 0;
+  //private populationComponent: TemplatePopulationComponent;
+  profileEditOption: string;
 
-  
+  following: boolean = false;
+  requestedToFollow: boolean = false;
+  followRequestRejected: boolean = false;
 
-  //get invoked automatically before ngOnInit()
-  routerOnActivate(): void {
-    // if(this.routeSegment.getParam("id")){
-    //   this.viewingDistrict['id'] = this.routeSegment.getParam("id");
-    //   this.operation = this.viewingDistrict['id'];
-    //   console.log("from routerOnActivate()::constitutionProfile Param value - id " + this.operation);
-    // }
+  currentUser: User = null;
+  loggedUser: User = null;
+  postFormData: FormData;
+  editLabel: string = null;
+  inEditMode:boolean = false;
+  followersCount: string = null;
+  followers: User[] = [];
+  followingsCount: string = null;
+  followings: User[] = [];
+  selectedProfileSmImage: File;
+  profileSmImageChanged: boolean = false;
+  paramUsername: string = '';
+  profileTabSelected: boolean = true;
+  activitiesTabSelected: boolean = false;
+  isSelfProfile: boolean = false;
+  activitiesData: boolean = false;
+  tap: boolean = false;
+  profileData: boolean = true;
+  folow: boolean = false;
+  followersActiveCss: boolean = false;
+  followingsActiveCss: boolean = false;
 
-    // if(this.routeSegment.getParam("externalId")){
-    //   this.viewingDistrict['externalId'] = this.routeSegment.getParam("externalId");
-    //   //this.operation = this.viewingDistrict['externalId'];
-    //   console.log("from routerOnActivate()::constitutionProfile Param value - externalId " + this.viewingDistrict['externalId']);
+  navTabs: boolean = false;
 
-    // }
+  followCntrlLabel: string = '';
+  followCntrlCSS: string = '';
+  followStatusCSS: string = '';
+  uploadForm: FormGroup;
+  compTypeTabs = [];
+
+  constructor(private  router: Router,
+              private route: ActivatedRoute,
+              private userService: UserService,
+              private profileService: ProfileService,
+              private communicationService: ComponentcommunicationService,
+              private legislatorsService: LegislatorService,
+              private datashareService: DatashareService,
+              private formBuilder: FormBuilder) {
+      this.currentUser = this.datashareService.getCurrentUser();
+
+      communicationService.userProfileEditChanged$.subscribe(
+          editmode => {
+              console.log('Received edit-save Profile message ' + editmode);
+              this.inEditMode = editmode;
+          });
+      
+
 
   }
-  
 
-  setValue(jsonData) {
-      console.log(' saved! the obj  - ' + JSON.stringify(jsonData));
-      for(var key in jsonData){
-        if(jsonData.hasOwnProperty(key)){
-          this[key] = jsonData[key];
-          console.log('New value  - ' + key + " - " + this[key]);
+  //MAY BE OBSOLETE
+  //get invoked automatically before ngOnInit()
+  //routerOnActivate(curr: RouteSegment): void {
+  routerOnActivate(): void {
+      // if(curr.getParam("id")){
+      //   if(curr.getParam("id") == "CREATE"){
+      //     this.operation = curr.getParam("id");
+      //   }else{
+      //     this.profileUserId = curr.getParam("id");
+      //     //this.dataShareService.setSelectedLegislatorId(this.profileUserId);
+      //     console.log("from userProfile Param value - id " + this.profileUserId);
+      //   }
+      // }
+
+      /*    if(curr.getParam("legisId")){
+            this.legisId = curr.getParam("legisId");
+            this.profileUserId = this.legisId;
+            console.log("from userProfile Param value - legisId " + this.legisId);
+          }  */
+      console.log('from user.component routerOnActivate()');
+
+  }
+
+  ngOnInit() {
+
+      this.route.params.subscribe((params: Params) => {
+          //this.datashareService.editProfile(false);
+          this.communicationService.userProfileChanged(false);
+
+          this.paramUsername = params['id'];
+          console.log('from user.component route params changed ' + this.paramUsername);
+          this.loadComponent(this.paramUsername);
+
+          this.loggedUser = this.datashareService.getCurrentUser();
+
+
+          if (this.loggedUser && this.paramUsername === this.loggedUser.username) {
+              this.isSelfProfile = true;
+          }
+
+      });
+
+      this.bannerImage = 'assets/images/user-banner1.jpg';
+
+      this.uploadForm = this.formBuilder.group({
+          file: ['']
+      });
+//////////Biodata
+      if(this.paramUsername && this.paramUsername == 'external'){
+          this.externalUser = true;  
         }
+    
+        //this.loadDisplayProperties();     
+      
+        this.loadBioData();
+
+  }
+
+  loadBioData(){
+      //let userType:string = this.externalUser?"external": "internal";
+      this.userService.getBiodata(this.profileUserId)
+      .subscribe((response) => {
+        //this.profileDataId = response['id'];
+        this.biodata= response['data'];
+        
+        console.log('biodata response data ', this.biodata);
+        
+        //this.createFormGroup();
+      });  
+    }
+
+  Activities() {
+      this.activitiesData = true;
+      this.profileData = false;
+      this.folow = false;
+      this.followersActiveCss = false;
+      this.followingsActiveCss = false;
+      this.isFollowersCollapsed = true;
+      this.isProfileCollapsed = true;
+      this.isActivityCollapsed = false;
+  }
+
+  Profiles() {
+      this.activitiesData = false;
+      this.profileData = true;
+      this.folow = false;
+      this.followersActiveCss = false;
+      this.followingsActiveCss = false;
+      this.isFollowersCollapsed = true;
+      this.isProfileCollapsed = false;
+      this.isActivityCollapsed = true;
+  }
+
+  //OBSOLETE
+  /*
+  FollowingCount() {
+      this.activitiesData = false;
+      this.profileData = false;
+      this.folow = true;
+      this.followersActiveCss = false;
+  }
+  */
+
+  Followers() {
+      this.activitiesData = false;
+      this.profileData = false;
+      this.folow = false;
+      this.followersActiveCss = true;
+      this.followingsActiveCss = false;
+      this.getFollowers(this.profileUserId);
+      this.isFollowersCollapsed = false;
+      this.isFollowingsCollapsed = true;
+      this.isProfileCollapsed = true;
+      this.isActivityCollapsed = true;
+
+  }
+
+  Followings() {
+      this.activitiesData = false;
+      this.profileData = false;
+      this.folow = false;
+      this.followersActiveCss = false;
+      this.followingsActiveCss = true;
+      this.getFollowings(this.profileUserId);
+      this.isFollowersCollapsed = true;
+      this.isFollowingsCollapsed = false;
+      this.isProfileCollapsed = true;
+      this.isActivityCollapsed = true;
+
+  }
+
+  loadComponent(id: string) {
+      //this.profileEditOption = this.getPermission();
+      this.loggedUser = this.datashareService.getCurrentUser();
+      //this.editProfile();
+      //let id = this.route.snapshot.paramMap.get('id');
+      //this.editLabel = 'Edit Profile';
+
+      if (id) {
+          if (id == 'CREATE') {
+              this.operation = id;
+          } else {
+              this.profileUserId = id;
+              //this.dataShareService.setSelectedLegislatorId(this.profileUserId);
+              console.log('from userProfile Param value - id ' + this.profileUserId);
+          }
+      }
+
+//    console.log("User type: ", this.userData['userType']);
+      if (this.operation == 'CREATE') {
+//      this.loadProfileTemplate();      
+          this.datashareService.setPermission('Editor');
+
+          this.loadProfileTemplates(this.operation);
+
+
+      } else {
+          if (this.profileUserId == 'external') {
+              //TODO
+              //determine congress or state legislator
+              //get bioguide id
+              this.isLegislator = true; // may not be required
+              this.viewingUser['isLegislator'] = true;
+              //*** LEGISLATOR SELECTED FROM SEARCH SCREEN IS SET AS VIEWINGUSER - IN LEGISLATOR.COMPONENT ***/
+              this.viewingUser['externalData'] = this.datashareService.getViewingUser();
+
+
+              if (!this.viewingUser['externalData']['leg_id']) { //CONGRESS
+                  this.viewingUser['isCongress'] = true;
+                  let photoUrl = this.viewingUser['externalData']['photo_url'];
+                  let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
+                  let bioguideId = fileName.substring(0, fileName.lastIndexOf('.'));
+                  console.log('bioguideId ', bioguideId);
+                  this.viewingUser['bioguideId'] = bioguideId;
+                  this.profileUserId = bioguideId;
+
+
+              } else {//OPENSTATE
+                  this.viewingUser['isCongress'] = false;
+                  this.profileUserId = this.viewingUser['externalData']['id'];
+              }
+              this.viewingUser['external'] = true;
+              //this.viewingUser['userId'] = this.profileUserId;
+          } else {
+              this.isLegislator = false; // may not be required
+              this.viewingUser['external'] = false;
+              this.viewingUser['isLegislator'] = false;
+          }
+          this.viewingUser['userId'] = this.profileUserId;
+          //console.log("User isLegislator: ", this.viewingUser['isLegislator']);
+
+
+          //the user that is being viewed
+          //this.dataShareService.setViewingUserId(this.profileUserId);
+
+          if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
+              this.getRelationStatus(this.loggedUser.username, this.profileUserId);
+          } else {
+              this.followCntrlLabel = 'Join to Follow';
+              this.followCntrlCSS = 'btn btn-primary';
+              this.followStatusCSS = 'fa fa-plus-circle';
+          }
+
+          this.getFollowersCount(this.profileUserId);
+          this.getFollowers(this.profileUserId);
+
+          this.getFollowingsCount(this.profileUserId);
+          this.getFollowings(this.profileUserId);
+//this.viewingUser['external'] is required only for dev mode
+          this.userService.getUserData(this.viewingUser['userId']).subscribe(
+              data => { 
+                  this.userData = data;
+                  console.log('User data from service: ', this.userData);
+
+                  //this may not be required as getRelationStatus() can be used
+                  //this.viewingUser['connections'] = this.userData['connections'];
+
+
+                  //this.viewingUser['followers'] = this.userData['followers'];
+
+                  //if (this.viewingUser['external']) { // and not persisted
+                  if (this.userData['userType'] === 'LEGISLATOR') {
+                      if (isDevMode()) {
+                          this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
+                      } else {
+                          //commenting for local development
+                          //this.profileSmImage = this.userData['photoUrl'];
+                          this.profileSmImage = 'assets/images/avatar1.png';
+                      }
+                  } else {
+                      this.getProfileSmImage(this.viewingUser['userId']);
+                  }
+
+                  //getting the available profile templates for this user type - publicUser
+                  //this.profilesTemplates = this.viewingUser['profileTemplates'] = data['profile'];
+                  // console.log("profile templates: ", this.profilesTemplates);
+
+                  //getting the data for this user profile
+                  //this.profilesData = this.viewingUser['profilesData'] = this.userData['profileData'];
+                  this.profilesTemplates = this.userData['profileTemplates'];
+                  this.viewingUser['profileTemplates'] = this.profilesTemplates;
+
+                  let userType: string = this.viewingUser['isLegislator'] ? 'legislator' : 'public';
+                  this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], userType).subscribe(
+                      data => {
+                          this.availableProfileTemplates = data;
+                      });
+
+                  this.profilesDatas = this.userData['profileDatas'];
+                  console.log('profile data: ', this.userData);
+
+                  //identifying the profile selected for this user profile, so those components shall be loaded
+                  let compTypes = [];
+                  for (let profileData of this.profilesDatas) {
+                      console.log('loading template component: ', profileData['profileTemplateId']);
+                      //this.templateType.push(profileData['profile_template_id']);
+                      if (compTypes.indexOf(profileData['profileTemplateId']) < 0) {
+                          compTypes.push(profileData['profileTemplateId']);
+
+                          //not required if profiletemplates is retrieved from user
+                          //this.profilesTemplates.push(profileData);
+                      }
+
+                      if (profileData['profileTemplateId'] === 'upCongressLegislatorExternal' ||
+                          profileData['profileTemplateId'] === 'upDefault') {
+                          //let profileItemData = profileData['data'][0];
+                          let profileItemData = profileData['data'];
+                          this.firstName = profileItemData['first_name'];
+                          this.lastName = profileItemData['last_name'];
+
+                      }
+                  }
+
+                  if (compTypes.length > 0) {
+                      this.templateType = compTypes;
+                  }
+
+                  //setting here so it can be accessed globally
+                  this.datashareService.setViewingUser(this.viewingUser);
+                  console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));
+              }
+          );
+      }
+
+  }
+
+  showProfile() {
+      this.isProfileCollapsed = false;
+      this.isActivityCollapsed = true;
+      this.isFollowersCollapsed = true;
+      this.isFollowingsCollapsed = true;
+
+      this.profileTabSelected = true;
+      this.activitiesTabSelected = false;
+      return false;
+  }
+
+  showActivities() {
+      this.isProfileCollapsed = true;
+      this.isActivityCollapsed = false;
+      this.isFollowersCollapsed = true;
+      this.isFollowingsCollapsed = true;
+
+      this.profileTabSelected = false;
+      this.activitiesTabSelected = true;
+      return false;
+  }
+
+  getProfileSmImage(userId: string) {
+      this.isImageLoading = true;
+      this.userService.getImage(userId).subscribe(data => {
+          this.createImageFromBlob(data);
+          this.isImageLoading = false;
+      }, error => {
+          this.isImageLoading = false;
+          console.log(error);
+      });
+  }
+
+  createImageFromBlob(image: Blob) {
+      let reader = new FileReader();
+      reader.addEventListener('load', () => {
+          this.profileSmImage = reader.result;
+      }, false);
+
+      if (image) {
+          reader.readAsDataURL(image);
       }
   }
 
-//called with district id
-  loadData(){
-      //this.parties = this.partyService.getPartiesByParam('');
-      //this.connected = this.userService.getRelation(this.dataShareService.getCurrentUserId(), this.dataShareService.getViewingDistrict()['id']);
-      //this.getRelation();
 
-      //GETTING PROFILE DATA
-      this.groupService.getGroupData(this.operation, this.viewingDistrict['externalId']).subscribe(
+  editProfile() {
+
+      this.communicationService.userProfileChanged(true);
+
+  }
+
+  cancelEditProfile() {
+ //     this.datashareService.editProfile(false);
+      this.communicationService.userProfileChanged(false);
+
+
+  }
+
+  isProfileEditable() {
+      //return (this.datashareService.isProfileEditable() && (this.isSelfProfile || this.userData['status'] === 'PASSIVE'));
+      return (!this.isProfileInEditMode() && (this.isSelfProfile || this.userData['status'] === 'PASSIVE'));
+      //TODO
+      //if not logged in, clicking edit button should redirect to login        
+  }
+
+  isProfileInEditMode(){
+      return this.inEditMode;
+  }
+
+  isUserLogged() {
+      return (this.loggedUser != null && this.loggedUser['token'] != null); // and token expired ?
+  }
+
+  onProfileSmImageSelected(event) {
+      console.log('file object ', event);
+      let reader = new FileReader();
+//      let formData = new FormData();  
+
+
+      if (event.target.files && event.target.files[0]) {
+          this.selectedProfileSmImage = event.target.files[0];
+          this.uploadForm.get('file').setValue(this.selectedProfileSmImage);
+
+          reader.readAsDataURL(this.selectedProfileSmImage);
+          reader.onload = (event) => {
+              this.profileSmImage = event.target['result'];
+          };
+          this.profileSmImageChanged = true;
+      }
+  }
+
+  loadProfileTemplates(operation: string) {
+      this.userService.getUserData(operation).subscribe(
           data => {
-            this.groupData = data;
-            console.log("Group data from service: ", this.groupData);
+              this.userData = data;
+              console.log('loadTemplate()::userprofile.template - User data from service: ', this.userData);
 
-          let profileStr = JSON.parse('[{"profileTemplateId":"districtIntroTemplate","name":"Introduction"},{"profileTemplateId":"districtPopulationTemplate","name":"Population"},{"profileTemplateId":"districtBusinessTemplate","name":"Popular Business"}]');
-          
-            //getting the available profile templates for this group type
-            this.viewingDistrict['profileTemplates'] = this.profilesTemplates = this.groupData['profile'];
-            this.viewingDistrict['profileTemplates'] = this.profilesTemplates = profileStr;           
-            console.log("profile templates: ", this.profilesTemplates);
 
-            //getting the data for this group profile
-            this.viewingDistrict['profilesData'] = this.profilesData = this.groupData['profileData'];
-            console.log("profile data: ", this.profilesData);
+              //getting the available profile templates for this user type
+              this.profilesTemplates = this.viewingUser['profileTemplates'] = this.userData['profile'];
+              console.log('loadTemplate()::userprofile.template - profile templates: ', this.profilesTemplates);
 
-            //getting the data for this group activities
-            //SHALL BE REFACTORED TO GET THIS DATA FROM POSTSERVICE
-            //this.posts = this.viewingDistrict['activities'] = this.groupData['activities'];
-            //console.log("profile activities: ", this.viewingDistrict['activities']);
+              //indicate the dynamic loaded to load th default template
+              let compTypes = [];
+              compTypes.push('upCongressLegislatorDefault');
 
-            //identifying the profile selected for this group profile, so those components shall be loaded
-            let compTypes = [];
-            for (let profileData of this.profilesData){
-              console.log("loading template component1: ", profileData['profileTemplateId']);
-              //this.templateType.push(profileData['profile_template_id']);
-              
-
-              //display the intro template data - districtIntroTemplate
-              console.log("profileData['profileTemplateId'] " + profileData['profileTemplateId']);
-
-              if("districtIntroTemplate" == profileData['profileTemplateId']){
-                for (let dataObj of profileData['data']){
-                  let keys = [];
-                  keys = Object.keys(dataObj);
-                  console.log("Template data keys " + keys[0] + ":" + dataObj[keys[0]]);
-                  this[keys[0]] = dataObj[keys[0]];
-                }
-              }else{
-                console.log("Adding dynamic Template");              
-                compTypes.push(profileData['profileTemplateId']);
+              if (compTypes.length > 0) {
+                  this.templateType = compTypes;
               }
 
-            }
+              this.viewingUser['operation'] = this.operation;
+              //setting here so it can be accessed globally
+              this.datashareService.setViewingUser(this.viewingUser);
 
-            if(compTypes.length > 0){
-              this.templateType = compTypes;
-            }
-
-            //setting here so it can be accessed globally
-            this.viewingDistrict['id'] = this.operation;//this.groupData['id'];
-            this.datashareService.setViewingDistrict(this.viewingDistrict);
-
-            this.getRelation();
-
-            //TODO: GET FOLLOWERS COUNT
 
           }
       );
+  }
 
-      //GETTING CURRENT REPRESENTATIVES DATA
-      this.getCurrentRepresentatives("byCongressDistrict");
+  saveProfile() {
+      console.log('Saving user.component Profile');
+      //if image got change, submit that image
+      if (this.profileSmImageChanged) {
+          const uploadFormData = new FormData();
+          let userData: any = {};
+          userData['username'] = this.viewingUser['userId'];
+          //WORKAROUND
+          //PROFILETEMPLATE SHOULD HAVE ONLY profileTemplateId AND NOT profile_template_id
+          if (this.viewingUser['profileTemplates'] && this.viewingUser['profileTemplates'][0]) {
+              let profileTemplate: any = {};
+              profileTemplate['profileTemplateId'] = this.viewingUser['profileTemplates'][0]['profile_template_id'];
+              this.viewingUser['profileTemplates'][0] = profileTemplate;
+              userData['profileTemplates'] = this.viewingUser['profileTemplates'];
+
+          }
+          //uploadFormData.append("file", this.selectedProfileSmImage, this.selectedProfileSmImage.name);
+          uploadFormData.append('file', this.uploadForm.get('file').value);
+          uploadFormData.append('post', JSON.stringify(userData));
+
+          this.userService.updateUserSmProfileImage(uploadFormData)
+              .subscribe(data => {
+                  console.log('User profile image got uploaded successfully, ', this.viewingUser);
+              });
+      }
+  }
+
+  getData(): string {
+      let data = {};
+      data['firstName'] = this.firstName;
+      data['lastName'] = this.lastName;
+
+
+      let dataString: string = JSON.stringify(data);
+      console.log('TemplateIntroductionComponent data ' + dataString);
+      return dataString;
+  }
+
+  followEntity() {
+      if (this.loggedUser == null || !this.loggedUser.username) {
+          //let routePath:string = "/secure";
+          let routePath: string = '/login';
+//      this.router.navigate([routePath]);
+          let returnUrl: string = '/user/' + this.profileUserId + '?follow';
+          this.router.navigate(['login'], {queryParams: {returnUrl: returnUrl}});
+
+          //this.router.navigate([routePath, {followEntityId:this.profileUserId, isLegislator:this.viewingUser['isLegislator']}]);
+
+      }
+
+      var followURequest = {};
+      var sourceEntity = {};
+      var targetEntity = {};
+
+      /*MAY NOT BE REQUIRED - BEGIN */
+      followURequest['userId'] = this.loggedUser ? this.loggedUser.username : '';// this.datashareService.getCurrentUserId();
+      followURequest['connectionUserId'] = this.profileUserId;
+      /*MAY NOT BE REQUIRED - END */
+
+      followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
+      //followURequest["sourceEntityType"] = "USER";
+      followURequest['targetEntityId'] = this.profileUserId;
+
+      if (this.viewingUser['isLegislator']) {
+          /*
+          if(this.viewingUser['isCongress']){
+
+          }else{
+          }
+          */
+          followURequest['targetEntityType'] = 'LEGISLATOR';
+
+      } else {
+          followURequest['targetEntityType'] = 'PUBLICUSER';
+      }
+      followURequest['status'] = 'REQUESTED';
+      console.log('Profile data ' + JSON.stringify(followURequest));
+
+      this.userService.followPerson(JSON.stringify(followURequest))
+          .subscribe(
+              (result) => {
+                  console.log('followDistrict response ' + result);
+
+                  if (result.status == 'REQUESTED') {
+                      this.requestedToFollow = true;
+                  } else if (result.status == 'FOLLOWING') {
+                      this.following = true;
+                  } else if (result.status == 'REJECTED') {
+                      this.followRequestRejected = true;
+                  }
+                  this.setFollowCntrlLabel();
+                  this.setFollowCntrlCSS();
+                  this.setFollowStatusCSS();
+
+              },
+              (err) => {
+                  console.log('Error ', err);
+              });
+  }
+
+  setFollowCntrlLabel() {
+
+      if (this.requestedToFollow) {
+          this.followCntrlLabel = 'Request Sent';
+      } else if (this.following) {
+          this.followCntrlLabel = 'Following';
+      } else if (this.followRequestRejected) {
+          this.followCntrlLabel = 'Request Rejected';
+      } else {
+          this.followCntrlLabel = 'Follow';
+      }
+
 
   }
 
-  loadProfileTemplate(){
-      //GETTING PROFILE DATA
-      this.groupService.getGroupData('','').subscribe(
-          data => {
-            this.groupData = data;
-            console.log("Group data from service: ", this.groupData);
+  setFollowStatusCSS() {
 
-            //getting the available profile templates for this group type
-            this.viewingDistrict['profileTemplates'] = this.profilesTemplates = this.groupData['profile'];
-            console.log("profile templates: ", this.profilesTemplates);
-
-            this.datashareService.setViewingDistrict(this.viewingDistrict);
-
-          }
-      );
+      if (this.requestedToFollow) {
+          this.followStatusCSS = 'fa fa-exclamation-circle';
+      } else if (this.following) {
+          this.followStatusCSS = 'fa fa-check-circle';
+      } else if (this.followRequestRejected) {
+          this.followStatusCSS = 'fa fa-thumbs-down';
+      } else {
+          this.followStatusCSS = 'fa fa-plus-circle';
+      }
 
 
   }
-/*
-  @ViewChild('district-population')
-  set populationComponent(content:TemplatePopulationComponent) {
-    console.log('setting viewchild ' + content);
-    //this.populationComponent = content;
- }
- */
 
+  setFollowCntrlCSS() {
 
-  
-
-/*
-      set populationTemplate(v: TemplatePopulationComponent) {
-        console.log("set populationTemplate() " + v);
-        setTimeout(() => { this.populationComponent = v }, 100);
+      if (this.requestedToFollow) {
+          this.followCntrlCSS = 'btn btn-outline-warning glyphicon glyphicon-ok';
+      } else if (this.following) {
+          this.followCntrlCSS = 'btn btn-outline-success glyphicon glyphicon-ok';
+      } else if (this.followRequestRejected) {
+          this.followCntrlCSS = 'btn btn-outline-danger glyphicon glyphicon-ok';
+      } else {
+          this.followCntrlCSS = 'btn btn-outline-primary';
       }
 
+  }
 
-  
-    ngOnChanges(){
-        console.log('constitutionProfile ngOnChanges() ');
-    }
-*/
-    showActivities(){
-      console.log("show activities ");  
-    }
+  test() {
+      console.log('Cancel Follow');
+  }
 
-/*getActivities(){
-  console.log('consitutionProfile getActivities()');
+  getRelationStatus(entity: string, profileId: string) {
 
-}
-*/
-getCurrentRepresentatives(type:string){
-  //let legislator = {};
+      this.userService.getRelationStatus(entity, profileId)
+          .subscribe(
+              (result) => {
+                  console.log('getRelationStatus response ' + result);
 
-  let searchParam:string = "ocd-division/country:us/state:pa/cd:6";
-    //this.legislators = [];
-    this.legislatorsService.getLegislature(searchParam, type)
-    //.map(result => this.resultop = result.results)
-    .subscribe((result) => {
-      console.log("result for type " + type + JSON.stringify(result));
-      if(type == 'byCongressDistrict'){
-        if(!result['error']){
-          let offices = [];
-          offices = result['offices'];
-          
-          let officials = [];
-          officials = result['officials'];
+                  if (result == 'REQUESTED') {
+                      this.requestedToFollow = true;
+                  } else if (result == 'FOLLOWING') {
+                      this.following = true;
+                  } else if (result == 'REJECTED') {
+                      this.followRequestRejected = true;
+                  }
+                  this.setFollowCntrlLabel();
+                  this.setFollowCntrlCSS();
+                  this.setFollowStatusCSS();
 
-         for(var i = 0;i<officials.length;i++) {
-           let legislator = {};
-           if(offices[i] && offices[i]['name'] && 
-             (offices[i]['name'].indexOf('United States Senate') != -1 || 
-               offices[i]['name'].indexOf('United States House of Representatives') != -1)){
-          // console.log("offices[i]['name'] " + offices[i]['name']);
-         //console.log("offices[i]['name'].indexOf('United States Senate') " + offices[i]['name'].indexOf('United States Senate'));
-         //console.log("offices[i]['name'].indexOf('United States House of Representatives') " + offices[i]['name'].indexOf('United States House of Representatives'));
-         //console.log("flag " + (offices[i]['name'] && 
-          //   (offices[i]['name'].indexOf('United States Senate') != -1 || offices[i]['name'].indexOf('United States House of Representatives') != -1)));
+              },
+              (err) => {
+                  console.log('Error ', err);
+              });
+  }
 
-           legislator['full_name'] = officials[i]['name'];
-           legislator['party'] = officials[i]['party'];
-           legislator['photo_url'] = officials[i]['photoUrl'];  
+  getFollowersCount(profileId: string) {
+      this.userService.getFollowersCount(profileId)
+          .subscribe(
+              (result) => {
+                  console.log('getFollowersCount response ' + result);
+                  this.followersCount = result;
 
-           if(offices[i]['name'])
-             legislator['role'] = offices[i]['name'];
+              },
+              (err) => {
+                  console.log('Error ', err);
+              });
+  }
 
-           //STATE
-           let division:string = offices[i]['divisionId'];
-           if(division.indexOf('state:') != -1){
-             legislator['state'] = division.substr(division.indexOf('state:')+6, 2).toUpperCase();
-           }
+  getFollowers(profileId: string) {
+      this.userService.getFollowers(profileId)
+          .subscribe(
+              (result) => {
+                  console.log('getFollowers response ' + result);
+                  this.viewingUser['followers'] = this.followers = result;
+                  console.log('getFollowers response ' + this.followers);
+              },
+              (err) => {
+                  console.log('Error ', err);
+              });
+  }
 
-           //CONGRESS DISTRICT
-          if(division.indexOf('cd:') != -1){
-             legislator['district'] = division.substr(division.indexOf('cd:')+3, 2);
-           }
+  getFollowingsCount(profileId: string) {
+      this.userService.getFollowingsCount(profileId)
+          .subscribe(
+              (result) => {
+                  console.log('getFollowingsCount response ' + result);
+                  this.followingsCount = result;
 
-          if(offices[i]['roles'] && offices[i]['roles'].length > 0){
-            legislator['chamber'] = offices[i]['roles'][0];
+              },
+              (err) => {
+                  console.log('Error ', err);
+              });
+  }
+
+  getFollowings(profileId: string) {
+      this.userService.getFollowings(profileId)
+          .subscribe(
+              (result) => {
+                  console.log('getFollowings response ' + result);
+                  this.viewingUser['followings'] = this.followings = result;
+                  console.log('getFollowings response ' + this.followings);
+
+              },
+              (err) => {
+                  console.log('Error ', err);
+              });
+  }
+
+  //NOT USED
+  getRelation(entity: string, profileId: string) {
+      this.requestedToFollow = false;
+      this.following = false;
+      this.followRequestRejected = false;
+      var isProfileRelated = false;
+
+      console.log('this.viewingUser[\'connections\'].length ', this.viewingUser['connections'].length);
+
+      this.viewingUser['connections'].forEach(connection => {
+          if ((entity === 'user' && connection['users']) ||
+              (entity === 'group' && connection['groups']) ||
+              (entity === 'position' && connection['positions'])) {
+
+              let connectedEntities = null;
+              if ((entity === 'user' && connection['users'])) {
+                  connectedEntities = connection['users'];
+              } else if ((entity === 'group' && connection['groups'])) {
+                  connectedEntities = connection['groups'];
+              } else if ((entity === 'position' && connection['positions'])) {
+                  connectedEntities = connection['positions'];
+              }
+
+              connectedEntities.forEach(connectedEntity => {
+                  if (connectedEntity['entityId'] === profileId) {
+                      isProfileRelated = true;
+
+                      if (connectedEntity['connectionStatus'] == 'REQUESTED') {
+                          this.requestedToFollow = true;
+                      } else if (connectedEntity['connectionStatus'] == 'FOLLOWING') {
+                          this.following = true;
+                      } else if (connectedEntity['connectionStatus'] == 'REJECTED') {
+                          this.followRequestRejected = true;
+                      }
+
+                  }
+
+                  if (isProfileRelated) {
+                      //exit the for loop
+                  }
+              });
+              //exit the for loop
           }
-
-          console.log("legislator " + legislator);
-          this.electedPersons.push(legislator);
-          console.log("this.electedPersons.length " + this.electedPersons.length);
-          //this.legislator = legislator;
-          }
-         }
-       }
-       else{
-         console.log('Error in getting');
-         //this.alertService.error('Error in getting data');
-       }
-      }
-
-           
-
-            },
-            (error)=>{
-              console.log('Error in getting data');
-            });
-
-  
-}
-
-saveProfile(){
-
-    if(this.operation == "CREATE"){
-      console.log("Creating Group Profile");
-      this.createProfile();
-    }else{
-      console.log("Saving Group Profile");
-      this.updateProfile(this.operation);
-    }
-
-
-}
-
-createProfile(){
-      var profileRequest = {};      
-      var profile = {};      
-      var profilesData = [];
-      var templateData = [];
-////
-      let property = {};
-      property["name"] = this["name"];
-      templateData.push(property);
-
-      property = {};
-      property["description"] = this["description"];
-      templateData.push(property);
-      
-      profile["profileTemplateId"] = "districtIntroTemplate";      
-      profile["data"] = templateData;
-
-      profilesData.push((profile));
-////
-      // if(this.populationComponent){
-      //   profilesData.push(JSON.parse(this.populationComponent.getData()));
-      // }
-
-///
-      profileRequest["groupName"] = this["name"];
-      profileRequest["groupLevel"] = "";
-      profileRequest["groupType"] = "";            
-      profileRequest["parentGroupId"] = "";
-      profileRequest["sourceSystem"] = "";
-      profileRequest["sourceId"] = "";            
-
-      profileRequest["profileData"] = profilesData;
-      console.log("Profile data " + JSON.stringify(profileRequest));      
-
-      this.groupService.createGroup(JSON.stringify(profileRequest))
-      .subscribe((result) => {
-        console.log("create group response " + result);
       });
+  }
 
-}
-
-updateProfile(groupId:string){
-      var profileRequest = {};      
-      var profile = {};      
-      var profilesData = [];
-      var templateData = [];
-////collecting data from districtIntroTemplate
-      let property = {};
-      property["name"] = this["name"];
-      templateData.push(property);
-
-      property = {};
-      property["description"] = this["description"];
-      templateData.push(property);
-      
-      profile["profileTemplateId"] = "districtIntroTemplate";      
-      profile["data"] = templateData;
-
-      profilesData.push((profile));
-////collecting data from populationTemplate
-      // if(this.populationComponent){
-      //   profilesData.push(JSON.parse(this.populationComponent.getData()));
-      // }
-
-///
-      profileRequest["groupName"] = this["name"];
-      profileRequest["groupLevel"] = "";
-      profileRequest["groupType"] = "";            
-      profileRequest["parentGroupId"] = "";
-      profileRequest["sourceSystem"] = "";
-      profileRequest["sourceId"] = "";            
-
-      profileRequest["profileData"] = profilesData;
-      console.log("Profile data " + JSON.stringify(profileRequest));      
-
-      this.groupService.updateGroup(groupId, JSON.stringify(profileRequest))
-      .subscribe((result) => {
-        console.log("update group response " + result);
-      });
-
-}
-
-followDistrict(){
-  console.log("followDistrict this.dataShareService.getCurrentUserId() " + this.datashareService.getCurrentUserId() + ", this.datashareService.getViewingDistrict()['id'] " + this.datashareService.getViewingDistrict()['id']);
-
-  var followDRequest = {};      
-  followDRequest["userId"] = this.datashareService.getCurrentUserId();
-  followDRequest["groupId"] = this.datashareService.getViewingDistrict()['id'];
-  followDRequest["status"] = "FOLLOWING";            
-  console.log("Profile data " + JSON.stringify(followDRequest));      
-
-  this.userService.followDistrict(JSON.stringify(followDRequest))
-  .subscribe((result) => {
-    console.log("followDistrict response " + result);
-    
-    if(result.status == "FOLLOWING")
-      this.connected = true;
-  });
-}
-
-getRelation(){
-  var getRelationRequest = {};      
-  getRelationRequest["userId"] = this.datashareService.getCurrentUserId();
-  getRelationRequest["groupId"] = this.datashareService.getViewingDistrict()['id'];
-
-  console.log("getRelationRequest " + JSON.stringify(getRelationRequest));      
-
-  this.userService.getRelation(this.datashareService.getCurrentUserId(), this.datashareService.getViewingDistrict()['id'])
-  .subscribe((result) => {
-    console.log("getRelation response " + result);
-    
-    this.connected = result;
-
-  });
-}
-
-ngAfterViewChecked(){
-  //console.log("constitutionProfile ngAfterViewChecked()");
-  //if(this.elementRef.nativeElement.querySelector('district-population')){
-    //console.log("District population template found ");
-/*
-        this.renderer.listenGlobal('district-population', 'onAdd', (event)=>{
-        console.log("onAdd event handled");
-    });
-    */
-
-   //console.log("adding handler " + (<TemplatePopulationComponent>(this.elementRef.nativeElement.querySelector('district-population'))).femaleCount);
-   //this.componentRef = (<TemplatePopulationComponent>(this.elementRef.nativeElement.querySelector('district-population'))).instance;
-    //this.elementRef.nativeElement.querySelector('district-population').addEventListener('ngAfterViewInit', this.onAddHandler.bind(this));
-  //}
-}
-
-onAdd(event){
-  //console.log("onAdd event handled");
-  //this.populationComponent = event;
-}
-
-ngAfterViewInit (){ //not called
-  console.log("constitutionProfile ngAfterViewInit ()");
-  //this.populationComponent.getData();
-  //this.dynamicComponent.allowed();
-}
-
-ngAfterContentInit (){ //not called
-  //console.log("constitutionProfile ngAfterContentInit ()");
-}
-
-  /*
-  name:string = 'Royapuram';
-  description:string = 'Royapuram is a legislative assembly constituency, that includes the locality, Royapuram. Royapuram assembly constituency is part of Chennai North Parliamentary constituency.';
-     
-  selected_permission = 'Editor';
-  checkPermissions() {
-      if(this.selected_permission == 'Editor') {
-        return true;
-      } 
-      else {
-        return false;
-      }
-    }
-
-        saveMethod(obj) {
-      console.log('trying to save'+ JSON.stringify(obj));
-    }
-*/ 
-
-
-
-
-      getPermission():string{
-                //console.log("calling getter");
-          let data = this.datashareService.getPermission();
+  getPermission(): string {
+      //console.log("calling getter");
+      let data = this.datashareService.getPermission();
       //console.log("getPermission() " + data);
       return data;
   }
 
-  setPermission(data:string){
+  setPermission(data: string) {
       //console.log("calling setter");
-      this.datashareService.setPermission(data);    
- 
+      this.datashareService.setPermission(data);
+      this.profileEditOption = data;
   }
 
-
-  allowed():boolean{
-      let permission:boolean = this.datashareService.checkPermissions();
+  allowed(): boolean {
+      let permission: boolean = this.datashareService.checkPermissions();
       //console.log("allowed() - " + permission);
 
       return permission;
   }
 
-  loadTemplate(type:string){
-    console.log("constitutionProfile Loading Template " + type);
-    let compTypes = [];
-    compTypes.push(type);
-    this.templateType = compTypes;
+//load the template based on tab selection
+  loadTemplate(type: string) {
+      this.activeTemplate = type;
+      this.tap = true;
+      let compTypes = [];
+      compTypes.push(type);
+      this.templateType = compTypes;
+      /*this.navTabs = true;*/
+      console.log(this.templateType);
   }
 
+//add the Profile based on user selection
+  addProfileData(profileTemplateParam: any) {
+      /*
+          let profileTemplate = {
+            "profileTemplateId":profileTemplateId,
+            "name":"Biodata"
+          };
+        */
+      let position: number = -1;
+      this.availableProfileTemplates.forEach((profileTemplate, index) => {
+          if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
+              position = index;
+          }
+      });
 
+      if (position > -1) {
+          this.availableProfileTemplates.splice(position, 1);
+      }
 
-	getElectedMembers(type:String){
-		//this.electedPersons = this.peopleService.getElectedMembers(type);
-		//return this.electedPersons;
-	}
+      this.profilesTemplates.push(profileTemplateParam);
 
-	saidHello($event){
-	  alert(`You said hello to ${$event}`)
-	}
+      this.templateType.push(profileTemplateParam['profileTemplateId']);
+      
+
+  }
+
+  deleteProfileData(profileTemplateParam:any){
+      let position: number = -1;
+      this.templateType.forEach((profileTemplate, index) => {
+          if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
+              position = index;
+          }
+      });
+
+      if (position > -1) {
+          this.templateType.splice(position, 1);
+      }
+
+      position = -1;
+      this.profilesTemplates.forEach((profileTemplate, index) => {
+          if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
+              position = index;
+          }
+      });
+
+      if (position > -1) {
+          this.profilesTemplates.splice(position, 1);
+      }
+
+      //this.profilesTemplates.push(profileTemplate);
+
+      this.availableProfileTemplates.push(profileTemplateParam);
+  }
 
 
   //START Ratings Component

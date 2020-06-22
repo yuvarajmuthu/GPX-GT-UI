@@ -2,7 +2,7 @@
     "userId":"5e0fa92ef453cd9f8cc72a3b",
     "username":"user6@gmail.com",
     "password":null,
-    "userType":null,
+    "userType":"PUBLICUSER",
     "status":"active",
     "sourceSystem":null,
     "sourceId":null,

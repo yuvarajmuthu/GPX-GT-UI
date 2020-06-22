@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
+//import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
 //import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,8 +11,12 @@ import {TypeaheadComponent} from './components/typeahead/typeahead.component';
 import {ComponentcommunicationService} from './services/componentcommunication.service';
 import {DatashareService} from './services/datashare.service';
 import {UserService} from './services/user.service';
+import {PostService} from './services/post.service';
 import {AlertService} from './services/alert.service';
 import {AuthenticationService} from './services/authentication.service';
+
+import {Observable, of} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 
 import {User} from '../app/models/user';
 
@@ -19,25 +26,68 @@ import {User} from '../app/models/user';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-    //public tabSet: NgbTabset;
 
+export class AppComponent implements OnInit {
+    /*CKEDITOR 
+    public editorData = '';
+    
+    public onChange(event: CKEditor4.EventInfo) {
+        console.log(event.editor.getData());
+    }
+
+    END*/
+    keyword = 'firstName';
+    searchUsers: any =[];
+    iscreateOptEnabled: boolean=false;
+    
+    model: any;
+    searching = false;
+    searchFailed = false;
+
+    navigateList = ['searchLegislator', 'news', 'group', 'request'];
+    //public tabSet: NgbTabset;
+    deviceInfo = this.deviceService.getDeviceInfo();
+    isMobile = this.deviceService.isMobile();
     title = 'gpx-ui';
     isUserLogged: boolean;
     isCollaped: boolean = true;
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
+    @HostListener('click', ['$event.target'])
+    onClick(evt) {
+      if(evt.id != 'dropdownMenuButton'){
+            let element = document.getElementById("createpagemenu");
+            element.classList.remove("createpage-option");
+            this.iscreateOptEnabled = false;
+      }
+
+   }
+
+
 
     constructor(private  router: Router,
                 private missionService: ComponentcommunicationService,
                 private dataShareService: DatashareService,
                 private userService: UserService,
                 private alertService: AlertService,
+                private postService:PostService,
+                private deviceService: DeviceDetectorService,
                 private authenticationService: AuthenticationService) {
+
+
         missionService.getAlert().subscribe(
             mission => {
                 console.log('Alert message received ' + mission);
             });
+
+        // window.addEventListener("click", function(e){
+        //     if( e.target && e.target.id && e.target.id != 'dropdownMenuButton'){
+        //       var element = document.getElementById("createpagemenu");
+        //       element.classList.remove("createpage-option");
+        //     }
+
+
+        // });
 
         dataShareService.getCurrentUserObservable().subscribe(
             data => {
@@ -67,6 +117,59 @@ export class AppComponent implements OnInit {
         );
         */
     }
+
+    // search = (text$: Observable<string>) =>
+    // text$.pipe(
+    //   debounceTime(300),
+    //   distinctUntilChanged(),
+    //   tap(() => this.searching = true),
+    //   switchMap(term =>
+    //     this.postService.getTagUsers(term).pipe(
+    //       tap(() => this.searchFailed = false),
+    //       catchError(() => {
+    //         this.searchFailed = true;
+    //         return of([]);
+    //       }))
+    //   ),
+    //   tap(() => this.searching = false)
+    // )
+  
+    search = (text$: Observable<string>) => {
+        return text$.pipe(      
+            debounceTime(200), 
+            distinctUntilChanged(),
+            // switchMap allows returning an observable rather than maps array
+            switchMap( (searchText) =>  this.postService.getTagUsers(searchText) )
+            // catchError(new ErrorInfo().parseObservableResponseError)              
+        );                 
+      }
+
+      resultFormatBandListValue(value: any) {            
+        return value.firstName +' '+value.lastName;
+      } 
+
+      inputFormatBandListValue(value: any)   {
+        console.log(value);
+        if(value.firstName)
+          return value.firstName+' '+value.lastName
+        return value;
+      }
+
+      onChangeSearch(e){
+          console.log(e);
+          this.postService.getTagUsers(e)
+          .subscribe((data:any) => {
+              this.searchUsers = data;
+          });
+      }
+
+      selectEvent(e){
+          console.log(e.username);
+       let routePath= '/user/'+e.username+"/";
+       this.router.navigate([routePath]);
+     }
+
+
 
     ngOnInit() {
         if (localStorage.getItem('currentUserToken')) {
@@ -212,6 +315,12 @@ export class AppComponent implements OnInit {
         if (image) {
             reader.readAsDataURL(image);
         }
+    }
+
+    loadcreatepage(evt, opt){
+        evt.preventDefault();
+        this.router.navigate(['createpage'],{ queryParams: { 'opt': opt } });
+
     }
 
 }

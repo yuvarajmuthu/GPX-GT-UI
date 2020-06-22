@@ -1,0 +1,13 @@
+{
+  "parentPostId": "1",
+  "entityId": "user6@gmail.com",
+  "postType": "TI",
+  "postText":"Hi <span class='tagged-users' data-username='jacob pyush' data-entitytype='user'>jacob pyush&nbsp;</span><span>&nbsp;</span><div><span>How are you?</span></div><div><span></span></div><span class='tagged-users' data-username='liam ram' data-entitytype='user'>liam ram&nbsp;</span><span>&nbsp;</span>",
+  "relatedFiles": ["5e4055ddf453cd5244441dee"],
+  "createdDate": "2020-02-09T18:56:29.445Z",
+  "lastModifiedDate": "2020-02-09T18:56:29.904Z",
+  "likedBy":[],
+	"likedByCurrentUser":false,
+  "comments":[]
+}
+

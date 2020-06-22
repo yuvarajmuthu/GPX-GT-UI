@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 import { Observable, of } from 'rxjs';
@@ -15,6 +15,7 @@ import {AbstractService} from './abstract.service';
 export class ProfileService extends AbstractService{
   result:any; 
   resultop:any;
+  devMode:boolean;
 
   serviceUrl:string;// = "http://127.0.0.1:8080/profile/template";
   private httpOptions = {
@@ -25,20 +26,60 @@ export class ProfileService extends AbstractService{
     super();
 
     this.serviceUrl = dataShareService.getServiceUrl() + "/profile/template";
+    this.devMode = isDevMode();
+
   }
   
 
-  getProfileTemplateData(profileTemplateId:String):Observable<any> {    
+  getProfileTemplate(profileTemplateId:string):Observable<any> {    
       let serviceUrl = this.serviceUrl + "/getProfileTemplate/" + profileTemplateId;
-      console.log("getProfileTemplateData profile.service this.serviceUrl " + serviceUrl);
+      console.log("getProfileTemplate profile.service this.serviceUrl " + serviceUrl);
       let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
 
       return this.http.get(serviceUrl, this.httpOptions)
       .pipe(
         //map((response:Response) => response.json()), 
-        tap(_ => this.log(`fetched getProfileTemplateData`)),
-        catchError(this.handleError<any>(`Error in getProfileTemplateData()`))
+        tap(_ => this.log(`fetched getProfileTemplate`)),
+        catchError(this.handleError<any>(`Error in getProfileTemplate()`))
       );                            
+  }
+
+  getProfileTemplateByType(profileTemplateId:string, type:string):Observable<any> {    
+    let serviceUrl = this.serviceUrl + "/getProfileTemplate/" + profileTemplateId;
+    console.log("getProfileTemplateByType profile.service this.serviceUrl " + serviceUrl);
+    //DEV MODE
+    if(this.devMode){  
+      serviceUrl = '/assets/json/fromService/profileTemplate.json';   
+    }
+    //serviceUrl = '/assets/json/fromService/profileTemplate.json';   
+
+    return this.http.get(serviceUrl, { responseType: 'json', params: {
+      type: type
+    } }).pipe(
+      tap(_ => this.log(`fetched getProfileTemplateByType`)),
+      catchError(this.handleError<any>(`Error in getProfileTemplateByType()`))
+    );
+
+    
+  }
+
+  getAvailableProfileTemplatesForEntity(entityId:string, userType:string):Observable<any> {    
+    let serviceUrl = this.serviceUrl + "/getAllProfileTemplates/" + entityId + "/";
+    console.log("getAvailableProfileTemplatesForEntity profile.service this.serviceUrl " + serviceUrl);
+    //DEV MODE
+    if(this.devMode){  
+      serviceUrl = '/assets/json/fromService/profileTemplates.json';   
+    }
+    //serviceUrl = '/assets/json/fromService/profileTemplates.json';   
+
+    return this.http.get(serviceUrl, { responseType: 'json', params: {
+      userType: userType
+    } }).pipe(
+      tap(_ => this.log(`fetched getAvailableProfileTemplatesForEntity`)),
+      catchError(this.handleError<any>(`Error in getAvailableProfileTemplatesForEntity()`))
+    );
+
+    
   }
 
   getAvailableProfileTemplates(userType:string):Observable<any> {    

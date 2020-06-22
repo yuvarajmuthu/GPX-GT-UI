@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, isDevMode } from '@angular/core';
 
 import {User} from '../../../models/user'; 
 import {Connection} from '../../../models/connection';
@@ -16,7 +16,7 @@ export class ConnectionrequestComponent implements OnInit {
   @Input() connection: Connection;
   loggedUser:User;
   connectionRequest:Connection[];
-  profileSmImage:any;
+  profileSmImage: any = 'assets/images/avatar1.png'; 
   isImageLoading:boolean = false;
 
   constructor(private userService:UserService, 
@@ -27,13 +27,14 @@ export class ConnectionrequestComponent implements OnInit {
 
     }
 
+  //sourceEntityId is the entity that sent the connection request  
   ngOnInit() {
     console.log("ngOnInit() connectionrequest.component");
 
     this.loggedUser = this.dataShareService.getCurrentUser();
     //this.loadConnectionRequests();
 
-    if(this.connection && this.connection.sourceEntityId){
+    if(!isDevMode() && this.connection && this.connection.sourceEntityId){
       this.getProfileSmImage(this.connection.sourceEntityId);
     }  
 

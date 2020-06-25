@@ -233,3 +233,10 @@ div#v-pills-tab a {
         float: left;
     }
 }
+.btn-custom-horizondal{
+    width: 120px;
+    height: 40px;
+}
+.create-page-button-custom-position1{
+    text-align: center;
+}

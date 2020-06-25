@@ -91,8 +91,8 @@
 
           </div>    -->
           
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" (click)="iscreateOptEnabled =  !iscreateOptEnabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown create-page-button-custom-position">
+            <button (click)="route('createpageoptions')" class="btn btn-md btn-secondary btn-custom-horizondal" type="button" (click)="iscreateOptEnabled =  !iscreateOptEnabled">
               Create page
             </button>
             <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">

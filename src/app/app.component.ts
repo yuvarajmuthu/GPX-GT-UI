@@ -1,6 +1,5 @@
 import {Component, OnInit, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 //import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
@@ -46,8 +45,7 @@ export class AppComponent implements OnInit {
 
     navigateList = ['searchLegislator', 'news', 'group', 'request'];
     //public tabSet: NgbTabset;
-    deviceInfo = this.deviceService.getDeviceInfo();
-    isMobile = this.deviceService.isMobile();
+
     title = 'gpx-ui';
     isUserLogged: boolean;
     isCollaped: boolean = true;
@@ -56,14 +54,11 @@ export class AppComponent implements OnInit {
     @HostListener('click', ['$event.target'])
     onClick(evt) {
       if(evt.id != 'dropdownMenuButton'){
-            let element = document.getElementById("createpagemenu");
+            var element = document.getElementById("createpagemenu");
             element.classList.remove("createpage-option");
             this.iscreateOptEnabled = false;
       }
-
    }
-
-
 
     constructor(private  router: Router,
                 private missionService: ComponentcommunicationService,
@@ -71,10 +66,7 @@ export class AppComponent implements OnInit {
                 private userService: UserService,
                 private alertService: AlertService,
                 private postService:PostService,
-                private deviceService: DeviceDetectorService,
                 private authenticationService: AuthenticationService) {
-
-
         missionService.getAlert().subscribe(
             mission => {
                 console.log('Alert message received ' + mission);

@@ -45,7 +45,7 @@ a {
 
 .mylogo {
     height: 50px;
-    width: 205px;
+    width: 220px;
     background-size: 200px 23px;
     background-image: url('../assets/images/logo.png');
     background-repeat: no-repeat;
@@ -232,4 +232,11 @@ div#v-pills-tab a {
         vertical-align: middle;
         float: left;
     }
+}
+.btn-custom-horizondal{
+    width: 120px;
+    height: 40px;
+}
+.create-page-button-custom-position{
+    text-align: center;
 }

@@ -259,64 +259,43 @@
                         {{biodata.description}}
                     </div>
                 </div>
-                <div class="paddingTop10">
-                    <span *ngIf="!isSelfProfile" class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span> |
-                    <span *ngIf="!isSelfProfile" class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary pointer" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span> |
-                    <span class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary pointer" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
-
-                </div>
 
 
-            </div>
-
-
-            <div class="personal-info display-none" id="name-for-lock">
-                <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
-                    <div>
-                        <div *ngIf="!isEditDisplayname" class="fullname-display">
-                            <b>
-                                {{biodata.full_name}}
-                            </b>
-                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
 
     </div>
-    
-
-
-
-
-
-
 
     </div>
     <div class="row">
 
-    <div class="col-sm-4 col-xs-12 sidebar-div-desktop" id="sidebar-div-desktop">
+    <div class="col-sm-4">
         <!-- Begin user profile -->
         <div class="text-center user-profile-2">
             <ul class="list-group">
-                <!-- <li class="list-group-item pointer" *ngIf="!isSelfProfile">
-                    <span class="badge badge-pill badge-primary"  (click)="followEntity()">{{followCntrlLabel}}</span>
+                <li class="list-group-item pointer" *ngIf="!isSelfProfile">
+                    <span class="badge pointer" [class]="followCntrlCSS" (click)="followEntity()"> 
+                        {{followCntrlLabel}}
+                    </span>
                 </li>
                                     
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followersActiveCss, 'in-active': !followersActiveCss}">
-                    <span class="badge badge-pill badge-primary" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
+        <span class="badge pointer" [class]="followCntrlCSS" (click)="Followers()"> 
+          {{followersCount}} Follower(s)
+        </span>
                 </li>
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': followingsActiveCss, 'in-active': !followingsActiveCss}">
-                    <span class="badge badge-pill badge-primary" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
-                </li> -->
+                       <span class="badge pointer" [class]="followCntrlCSS" (click)="Followings()"> 
+                        {{followingsCount}} Following(s)
+                    </span>
+                </li>
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
-                    <span class="pointer" (click)="managedByUsers()">Managed by</span>
+                       <span class="badge pointer" [class]="followCntrlCSS" (click)="managedByUsers()"> 
+                        Managed by
+                    </span>
                 </li>                
                 
                 <!--                    <li class="list-group-item pointer" (click)="FollowingCount()"
@@ -339,7 +318,7 @@
         </div><!-- End div .box-info -->
         <!-- Begin user profile -->
         </div>
-        <div class="col-sm-8 col-xs-12" id="template-tabs">
+        <div class="col-sm-8">
             <div class="widget-div">
                 <div class="widget widget-tabbed">
                     <!-- Nav tab -->
@@ -381,16 +360,16 @@
                                            </div>
                                             <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
                                                 <div class="card card-nav-tabs">
-                                                    <div class="card-header-1 card-header-primary"  id="myHeader">
+                                                    <div class="card-header-1 card-header-primary">
                                                         <div class="nav-tabs-navigation">
                                                             <div class="nav-tabs-wrapper">
                                                                 <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
                                                                     data-tabs="tabs">
                                                                     <li class="nav-item"
                                                                         *ngFor="let profileTemplate of profilesTemplates">
-                                                                        <div>
-                                                                            <span>    
-                                                                                <a class="nav-link template-tab text-black-50" data-toggle="tab"
+                                                                        <div class="row">
+                                                                            <div class="col-sm-10">    
+                                                                                <a class="nav-link text-black-50" data-toggle="tab"
                                                                                 [routerLink]=""
                                                                                 (click)="loadTemplate(profileTemplate.profileTemplateId)"
                                                                                 *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
@@ -398,11 +377,10 @@
                                                                                     {{profileTemplate.name}}
                                                                                     <!--{{profileTemplate.profileTemplateId}}-->
                                                                                 </a>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
                                                                                 <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-
-                                                                            </span>
-                                                                            <!-- <span>
-                                                                            </span> -->
+                                                                            </div>
                                                                         </div>
                                                                     </li>
                                                                     <li *ngIf="isProfileInEditMode()" class="nav-item">
@@ -444,7 +422,7 @@
                                                         </div>
                                                     </div>
     
-                                                    <div class="card-body content">
+                                                    <div class="card-body ">
                                                         <div class="tab-content text-center">
                                                             <div class="tab-pane active" id="templateType">
                                                                 <app-usertemplate [type]="templateType"></app-usertemplate>
@@ -485,11 +463,4 @@
         </div>
         </div>
 
-</div>
-<div class="bottom-tabs">
-    <ul class="nav nav-tabs">
-        <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="Profiles()" type="button">Profile</button></li>
-        <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="Activities()">Posts</button></li>
-        <li [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="managedByUsers()">Managed By</button></li>
-      </ul>
 </div>

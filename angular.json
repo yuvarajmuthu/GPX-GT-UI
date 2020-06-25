@@ -20,7 +20,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets" 
+              "src/assets"
             ],
             "styles": [
               "src/styles.css",
@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "gpx-ui"
+  "defaultProject": "gpx-ui",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -6,13 +6,6 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ul *ngIf="isMobile" class="navbar-nav">
-             <li class="avatar-profile d-sm-block " [ngbPopover]="popContent">
-                <a href="javascript:void(0)">
-                    <img src="assets/images/avatars/avatar.png" class="img-responsive"/>
-                </a>
-            </li>
-        </ul>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -27,7 +20,7 @@
                 </li>
                 -->
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i> Connections</a>
+                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-bell"></i> Connection Requests</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
@@ -39,14 +32,14 @@
                 </li>
 
             </ul>
- 
+
               <div class="ng-autocomplete common-search">
                 <ng-autocomplete
                   [data]="searchUsers"
                   (inputChanged) = "onChangeSearch($event)"
                   (selected)='selectEvent($event)'
                   [searchKeyword]="keyword"
-                  placeHolder="Search Legislator, Person, District, Party..."
+                  placeHolder="Search GoPolitix"
                   historyIdentifier="searchUsers"
                   [itemTemplate]="itemTemplate"
                   [notFoundTemplate]="notFoundTemplate">
@@ -58,13 +51,13 @@
                     <small></small>
                   </div>
                 </ng-template>
-              
+
                 <ng-template #notFoundTemplate let-notFound>
                   <div [innerHTML]="notFound"></div>
                 </ng-template>
               </div>
 
-           
+
           <!-- <div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn add dropdown-toggle">
               <span class="glyphicon glyphicon-plus"></span>
@@ -78,31 +71,39 @@
 
               <li role="menuitem">
                 <a class="dropdown-item" (click)="createPage('Legislator')">Create Legislator</a>
-              </li>                
+              </li>
 
               <li role="menuitem">
                 <a class="dropdown-item" (click)="createPage('User')">Create User</a>
-              </li>                              
+              </li>
 
               <li role="menuitem">
                 <a class="dropdown-item" (click)="createPage('Party')">Create Party</a>
-              </li>                                            
+              </li>
             </ul>
 
           </div>    -->
-          
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" (click)="iscreateOptEnabled =  !iscreateOptEnabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+          <div class="dropdown create-page-button-custom-position">
+            <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" (click)="iscreateOptEnabled =  !iscreateOptEnabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Create page
             </button>
             <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
               <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'district')">Create District</a>
               <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'legislator')">Create Legislator</a>
               <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'party')">Create Party</a>
-            </div>
+            </div>-->
+
+            <button (click)="route('create-page-selection')" class="btn btn-md btn-secondary btn-custom-horizondal" type="button" (click)="iscreateOptEnabled =  !iscreateOptEnabled">
+              Create page
+            </button>
+
           </div>
-            
-            <ul *ngIf="!isMobile" class="navbar-nav ml-auto">
+
+            <ul class="navbar-nav ml-auto">
+                <!--<li>
+                    <a href="#" id="add-question" class="btn mybtn btn-success">Add Question</a>
+                </li>-->
                 <li class="avatar-profile d-none d-sm-block " [ngbPopover]="popContent">
                     <a href="javascript:void(0)"><img src="assets/images/avatars/avatar.png"
                                                       class="img-responsive"/></a>
@@ -177,7 +178,7 @@
 
             <p>{{editorData}}</p>
 -->
-        </div> 
+        </div>
         <!-- /.col-lg-6 -->
         <!--col-lg-3-->
         <div class="col-lg-2">

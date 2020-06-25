@@ -8,6 +8,7 @@ import {PostService} from '../../../services/post.service';
 import {AlertService} from '../../../services/alert.service';
 import {ProfileService} from '../../../services/profile.service';
 import {DatashareService} from '../../../services/datashare.service';
+import {Route} from '@angular/router';
 
 import {User} from '../../../models/user';
 
@@ -23,7 +24,7 @@ export class CreatepageComponent implements OnInit {
   user = {};
   searchUsers:any;
   keyword = 'firstName';
-  
+
   createLegislatorPageForm = new FormGroup({
     userType: new FormControl(this.constants.USERTYPE_LEGISLATOR),
     username: new FormControl('', Validators.required),
@@ -40,10 +41,10 @@ export class CreatepageComponent implements OnInit {
     userType: new FormControl(this.constants.USERTYPE_LEGISLATIVE_DISTRICT),
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
-    description: new FormControl(''), 
+    description: new FormControl(''),
     accessRestriction: new FormControl('')
   });
-  
+
   createPartyPageForm = new FormGroup({
     userType: new FormControl(this.constants.USERTYPE_POLITICAL_PARTY),
     username: new FormControl('', Validators.required),
@@ -55,7 +56,7 @@ export class CreatepageComponent implements OnInit {
     userType: new FormControl(this.constants.USERTYPE_GROUP),
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
-    description: new FormControl(''), 
+    description: new FormControl(''),
     accessRestriction: new FormControl('')
   });
 
@@ -73,7 +74,7 @@ export class CreatepageComponent implements OnInit {
     private alertService: AlertService,
     private postService: PostService,
     private profileService: ProfileService) { }
-   
+
   ngOnInit() {
     this.route
     .queryParams
@@ -127,13 +128,13 @@ export class CreatepageComponent implements OnInit {
     loggedUser = this.datashareService.getCurrentUser();
     if (loggedUser && loggedUser.username) {
       profileManagedBy.push(loggedUser.username);
-      this.user['profileManagedBy'] = profileManagedBy; 
+      this.user['profileManagedBy'] = profileManagedBy;
     }
 
 
 
     console.log('Creating User with info ', this.user);
-    
+
     this.userService.registerUser(this.user)
     .subscribe(
         data => {
@@ -144,7 +145,7 @@ export class CreatepageComponent implements OnInit {
             this.alertService.error(error);
 
         });
-        
+
 
   }
 
@@ -172,8 +173,13 @@ export class CreatepageComponent implements OnInit {
     .subscribe((response) => {
         this.biodataTemplate = response;
 
-    });  
+    });
   }
 
+  loadcreatepage(evt, opt){
+    evt.preventDefault();
+    this.router.navigate(['createpage'],{ queryParams: { 'opt': opt } });
+
+  }
 
 }

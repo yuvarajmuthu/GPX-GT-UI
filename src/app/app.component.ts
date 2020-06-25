@@ -1,5 +1,6 @@
 import {Component, OnInit, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 //import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
@@ -45,7 +46,8 @@ export class AppComponent implements OnInit {
 
     navigateList = ['searchLegislator', 'news', 'group', 'request'];
     //public tabSet: NgbTabset;
-
+    deviceInfo = this.deviceService.getDeviceInfo();
+    isMobile = this.deviceService.isMobile();
     title = 'gpx-ui';
     isUserLogged: boolean;
     isCollaped: boolean = true;
@@ -66,6 +68,7 @@ export class AppComponent implements OnInit {
                 private userService: UserService,
                 private alertService: AlertService,
                 private postService:PostService,
+                private deviceService: DeviceDetectorService,
                 private authenticationService: AuthenticationService) {
         missionService.getAlert().subscribe(
             mission => {

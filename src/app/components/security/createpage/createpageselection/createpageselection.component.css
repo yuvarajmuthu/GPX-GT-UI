@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+
 .custom-control{
   padding-bottom: 10px;
 }
@@ -5,7 +7,6 @@
   margin-bottom: 60px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=PT+Sans);
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

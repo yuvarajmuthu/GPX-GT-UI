@@ -11,9 +11,9 @@ import {PostComponent} from './components/post/post.component';
 import {ProtectedComponent} from './components/protected/protected.component';
 import {CreatepageComponent} from './components/security/createpage/createpage.component';
 //import {ConnectionrequestComponent} from './components/connection/connectionrequest/connectionrequest.component';
+import {CreatepageselectionComponent} from './components/security/createpage/createpageselection/createpageselection.component';
 
 import {AuthGuard} from '../app/auth/auth.guard';
-import {CreatepageselectionComponent} from './security/createpage/createpageselection/createpageselection.component';
 
 const routes: Routes = [
 
@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'createpage', component: CreatepageComponent, canActivate: [AuthGuard]},
-  {path: 'create-page-selection', component: CreatepageselectionComponent, canActivate: [AuthGuard]},
+  {path: 'createpageoptions', component: CreatepageselectionComponent, canActivate: [AuthGuard]},
   {path: 'request', loadChildren: './components/connection/connection.module#ConnectionModule'},
   {path: '', redirectTo: '/searchLegislator', pathMatch: 'full'},
 

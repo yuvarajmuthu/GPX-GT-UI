@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {AppConstants} from '../../../app.constant.enum';
-import {DatashareService} from '../../../services/datashare.service';
-import {UserService} from '../../../services/user.service';
-import {AlertService} from '../../../services/alert.service';
+import {AppConstants} from '../../../../app.constant.enum';
+import {DatashareService} from '../../../../services/datashare.service';
+import {UserService} from '../../../../services/user.service';
+import {AlertService} from '../../../../services/alert.service';
 
 @Component({
   selector: 'app-createpageselection',

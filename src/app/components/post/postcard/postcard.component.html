@@ -9,6 +9,12 @@
                     <div class="h5 m-0">
                         <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                     </div>
+
+                    <div class="text-muted h7 mb-2">
+                        <i class="fa fa-clock-o"></i>
+                        {{todayDate | date:'medium'}}
+                    </div>
+                    
                 </div>
             </div>
             <!--
@@ -44,10 +50,7 @@
 
     </div>
     <div class="card-body">
-        <div class="text-muted h7 mb-2">
-            <i class="fa fa-clock-o"></i>
-            {{todayDate | date:'medium'}}
-        </div>
+
 
         <div *ngIf="post && post.containsImage" class="post-meta">
             <img [src]="postImage" alt="">
@@ -84,8 +87,8 @@
     </div>
     <div class="card-footer">
         <div class="row post-card-footer">
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
-                <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
+            <a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)">
+                <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i> 
                 Like({{likedCount}})
             </a>
             <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
@@ -158,12 +161,20 @@
                                                     <input type="file">
                                                 </label>
                                             </li>
+                                            <!--
                                             <li>
                                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                                 <label class="fileContainer">
                                                     <input type="checkbox" class="location" id="location">
                                                 </label>
                                             </li>
+                                        -->
+                                        <li>
+                                            <div class="btn-group">
+                                                <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
+                                                </button>
+                                            </div>
+                                        </li> 
                                         </ul>
                                     </div>
                                 </div>
@@ -174,12 +185,13 @@
                             <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                             <img [src]="stagingImage" height="200">
                         </div>
+                        <!--
                         <div class="btn-toolbar justify-content-between float-right">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
                                 </button>
                             </div>
-                            <!--<div class="btn-group">
+                            <div class="btn-group">
                                 <div ngbDropdown class="d-inline-block">
                                     <button class="btn btn-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>
                                         <i class="{{ icon }}"></i> {{ name }}
@@ -198,8 +210,8 @@
                                     </div>
                                 </div>
 
-                            </div>-->
-                        </div>
+                            </div>
+                        </div>-->
 
 
                     </div>
@@ -216,6 +228,7 @@
 </div>
 <br/>
 
+<!-- COMMENT / POST DESIGN CAN BE REUSED-->
 <div class="card gedf-card comments-card"  *ngIf="isComment==true">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
@@ -250,9 +263,9 @@
 
     </div>
     <div class="card-body">
-        <!-- <div *ngIf="post.containsImage" class="post-meta">
+        <div *ngIf="post.containsImage" class="post-meta">
             <img [src]="postImage" alt="">
-        </div> -->
+        </div>
 
         <div *ngIf="post.containsVideo" class="post-meta">
             <div class="we-video-info">
@@ -266,9 +279,11 @@
 
 
     </div>
+
+
     <div class="card-footer">
         <div class="row post-card-footer">
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="like($event)">
+            <a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)">
                 <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
                 Like({{likedCount}})
             </a>
@@ -309,7 +324,7 @@
                                       [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                                       </div>
           
-                                      <ng-template #mentionListTemplate let-item="item">
+                                        <ng-template #mentionListTemplate let-item="item">
                                           <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
                                           &nbsp;
                                           <span>{{item.firstName}} {{item.lastName}}</span>
@@ -318,27 +333,37 @@
                                         <div class="attachments">
                                             <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
  
-                                        <ul>
-                                            <li>
-                                                <i class="fa fa-image"></i>
-                                                <label class="fileContainer">
-                                                    <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png"
-                                                           (change)="onFileSelected($event)">
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-video-camera"></i>
-                                                <label class="fileContainer">
-                                                    <input type="file">
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                <label class="fileContainer">
-                                                    <input type="checkbox" class="location" id="location">
-                                                </label>
-                                            </li>
-                                        </ul>
+                                            <ul>
+                                                <li>
+                                                    <i class="fa fa-image"></i>
+                                                    <label class="fileContainer">
+                                                        <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png"
+                                                            (change)="onFileSelected($event)">
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-video-camera"></i>
+                                                    <label class="fileContainer">
+                                                        <input type="file">
+                                                    </label>
+                                                </li>
+                                                <!--
+                                                <li>
+                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                    <label class="fileContainer">
+                                                        <input type="checkbox" class="location" id="location">
+                                                    </label>
+                                                </li>
+                                                -->
+                                                <li>
+                                                    <div class="btn-group">
+                                                        <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
+                                                        </button>
+                                                    </div>
+                                                </li>   
+                                            </ul>
+
+                                       
                                     </div>
                                 </div>
 
@@ -348,13 +373,14 @@
                             <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                             <img [src]="stagingImage" height="200">
                         </div>
+                        <!--
                         <div class="btn-toolbar justify-content-between float-right">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
                                 </button>
                             </div>
                         </div>
-
+                    -->
 
                     </div>
                 </div>

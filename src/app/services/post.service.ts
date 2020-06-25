@@ -331,7 +331,7 @@ export class PostService  extends AbstractService{
 
     console.log("in postLike - serviceUrl ", serviceUrl);
 
-    return this.http.put(serviceUrl, this.httpOptions).pipe(
+    return this.http.post(serviceUrl, this.httpOptions).pipe(
       tap(_ => this.log(`updating postLike`)),
       catchError(this.handleError<any>(`Error in postLike()`))
     );                     
@@ -348,6 +348,9 @@ export class PostService  extends AbstractService{
     }else{
       url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
     }
+
+    url = '/assets/json/fromService/tagusers.json'; 
+    
     return this.http.get(url,httpOptions).
         pipe(
            map((data: tagUser[]) => {

@@ -7,6 +7,7 @@ import {RouterModule, Routes} from '@angular/router';
 //import { HttpModule } from '@angular/http';
 import {HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import {AuthenticationService} from '../app/services/authentication.service';
 import {AuthGuard} from '../app/auth/auth.guard';
@@ -39,7 +40,7 @@ import {ProtectedComponent} from './components/protected/protected.component';
 import {GAddressSearchComponent} from './components/g-address-search/g-address-search.component';
 
 import {dateFormatPipe} from './util/pipes/dateformat.pipe';
-import { CreatepageselectionComponent } from './security/createpage/createpageselection/createpageselection.component';
+import { CreatepageselectionComponent } from './components/security/createpage/createpageselection/createpageselection.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';
@@ -81,6 +82,7 @@ export function tokenGetter() {
     ],
     imports: [
         BrowserModule,
+        DeviceDetectorModule,
         AppRoutingModule,
         HttpClientModule,
         HttpClientJsonpModule,

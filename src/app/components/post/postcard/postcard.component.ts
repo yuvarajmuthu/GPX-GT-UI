@@ -33,15 +33,16 @@ export class PostcardComponent implements OnInit {
     hidePost: boolean = false;
     reportPost: boolean = false;
     liked: boolean = false;
+    likeButtonCss:string = "col card-link post-footer-btn text-center";
     loadMore:boolean = false;
-    likedCount:number;
-    commentsCount:number;
+    likedCount:number = 0;
+    commentsCount:number = 0;
     pageNumber:number = 0;
     name: any = '';
     icon: any = '';
     stagingImage: any = null;
     public showCommentInput:boolean = false;
-    public buttonName:any = 'Show';
+    //public buttonName:any = 'Show';
 
     textComment:string;
     postFormData: FormData;
@@ -169,38 +170,44 @@ export class PostcardComponent implements OnInit {
 
 
     ngOnInit(): void {
-        //this.getUsers();
-        ////Get entity image
+        this.entityId = this.dataShareService.getLoggedinUsername();
+
         if (this.post && this.post.postType) {
             this.postText = this.sanitizer.bypassSecurityTrustHtml(this.post.postText);
-           // this.post.postText = postText;
             if (this.post.postType.indexOf('V') !== -1) {
                 this.post['containsVideo'] = true;
             }
+
+            //Get image
             if (this.post.postType.indexOf('I') !== -1) {
                 this.post['containsImage'] = true;
-                if (!this.devMode) {
+                if (!this.devMode && this.post['relatedFiles']) {
                     this.getPostImage(this.post['relatedFiles'][0]);
                 }
-                //TODO
-                //Get image
+
             }
             if (this.post.postType.indexOf('T') !== -1) {
                 this.post['containsText'] = true;
             }
         }
-        this.entityId = this.dataShareService.getLoggedinUsername();
 
-        if (!this.devMode) {
-            this.getProfileSmImage(this.entityId);
+        //Get posted entity image
+        if (!this.devMode && this.post.entityId) {
+            this.getProfileSmImage(this.post.entityId);
         }
 
+        //LIKE count
         if(this.post.likedBy){
             this.likedCount = this.post.likedBy.length
-        }else{
-            this.likedCount = 0;
+        }
+
+        //check if logged in user LIKED the Post
+        if(this.entityId && this.post.likedBy.indexOf(this.entityId) != -1){
+            this.liked = true;    
+            this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
         }
         
+        //COMMENT count
         this.getCommentsCount();
         
         this.resetForm();
@@ -260,14 +267,18 @@ export class PostcardComponent implements OnInit {
     }
 
     like(event:any) {
-        let entityId = this.dataShareService.getLoggedinUsername();
-        if(this.post.likedBy.indexOf(entityId) == -1){
-            let check = event.target.classList.contains('post-active');
+        if(!this.liked){    
+            let entityId = this.dataShareService.getLoggedinUsername();
             this.postService.postLike(this.post.id, entityId)
             .subscribe((data:any) => {
-                event.target.classList.add('post-active');
-                //this.post.likedBy.push(entityId);
-                this.post = data;
+
+                let postResponse = data;
+                this.liked = true;
+                this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+                if(postResponse.likedBy){
+                    this.likedCount = postResponse.likedBy.length
+                }    
+
             });
         }
         
@@ -298,16 +309,17 @@ export class PostcardComponent implements OnInit {
           }
     }
 
+    //SHOW and LOAD/HIDE Comments
     toggleCommentInput() {
         this.showCommentInput = !this.showCommentInput;
 
         // CHANGE THE NAME OF THE BUTTON.
         if(this.showCommentInput){
-            this.buttonName = "Hide";
+            //this.buttonName = "Hide";
             this.getComments(this.post.id, this.pageNumber);
         }
-        else
-            this.buttonName = "Show";
+        //else
+            //this.buttonName = "Show";
     }
 
     hide(val) {
@@ -351,6 +363,7 @@ export class PostcardComponent implements OnInit {
 
     }
 
+    //Used to Submit both Post and Comment
     postComment() {
         let input = document.getElementById("commentContent");
         this.txtPost = input.innerHTML.replace(/"/g, "'");
@@ -368,10 +381,10 @@ export class PostcardComponent implements OnInit {
 }
 
 getComments(postId:string, pageNumber:number): void {
-    let entityId: string;
-    entityId = this.dataShareService.getLoggedinUsername();
+    //let entityId: string;
+    //entityId = this.dataShareService.getLoggedinUsername();
 
-    console.log('Activities for ' + entityId);
+    //console.log('Activities for ' + entityId);
 
     var getPostRequest = {};
     getPostRequest['postId'] = postId;
@@ -408,13 +421,13 @@ getCommentsCount() {
     this.postService.getCommentsCount(this.post.id)
     .subscribe((data:any) => {
         this.commentsCount = data;
-        console.log(data);
+        console.log("Comments count for " + this.post.id + ": " + data);
 
     });
 }
 
 
-
+    //OBSOLETE
    //not used for now, post.likedBy.length is being used
    getLikedCount() {
     this.postService.getLikedCount(this.post.id)

@@ -50,10 +50,16 @@
 
       <div class="searchTip">{{searchTip}}</div>
 
-      <div>
+      <!-- <div>
         <ul style="list-style-type:none">
           <li *ngFor="let legislator of legislators">
             <app-legislator [legislator]=legislator></app-legislator>
           </li>
         </ul>
-      </div>      
+      </div> -->
+
+      <div class="row">
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12" *ngFor="let legislator of legislators">
+          <app-legislator [legislator]=legislator></app-legislator>
+        </div>
+      </div>

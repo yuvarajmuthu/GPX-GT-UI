@@ -1,4 +1,4 @@
-<div *ngIf="legislator">
+<!-- <div *ngIf="legislator">
 
   <figure class="snip1344" (click)="gotoLegislator(legislator)">
     <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
@@ -12,4 +12,29 @@
     
     </figcaption>
   </figure>
-</div>
+</div> -->
+
+	<div class="card btn-3">
+		<div class="card-body text-center">
+			<p class="">
+        
+        <img class="img-fluid rounded rounded-circle img-custom-size-legislator" src="{{legislator.photo_url}}">
+        <!-- <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
+        <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
+      </p>
+				<h4 class="card-title">{{legislator.full_name}}</h4>
+              <p class="card-text">State: {{legislator.state}}
+                <br/>
+            District: {{legislator.district}}
+            <br/>
+          Chamber: {{legislator.chamber}}
+          <br/>
+        Party: {{legislator.party}}
+        <br/>
+        <br/>
+      <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" class="btn btn-primary btn-sm">
+        <!-- <i class="fa fa-eye"></i> -->
+        View profile
+      </a>
+    </div>
+  </div>

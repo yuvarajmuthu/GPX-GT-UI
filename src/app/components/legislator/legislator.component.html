@@ -1,4 +1,4 @@
-<div *ngIf="legislator">
+<!-- <div *ngIf="legislator">
 
   <figure class="snip1344" (click)="gotoLegislator(legislator)">
     <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
@@ -12,4 +12,29 @@
     
     </figcaption>
   </figure>
-</div>
+</div> -->
+
+	<div class="card btn-3">
+		<div class="card-body text-center">
+			<p class="">
+        
+        <img class="img-fluid rounded rounded-circle img-custom-size-legislator cursor-default" src="{{legislator.photo_url}}">
+        <!-- <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
+        <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
+      </p>
+				<h4 class="card-title">{{legislator.full_name}}</h4>
+              <p class="card-text">State: <a [routerLink]="['/user/',legislator.state]" href="javascript:void(0);"  class="hvr-underline-from-center" title="View this State">{{legislator.state}}</a>
+                <br/>
+            District: <a [routerLink]="['/user/',legislator.district]" href="javascript:void(0);" (click)="loadLocate($event,legislator.district)" class="hvr-underline-from-center" title="View this District">{{legislator.district}}</a>
+            <br/>
+          Chamber: <a [routerLink]="['/user/',legislator.chamber]" href="javascript:void(0);" (click)="loadLocate($event,legislator.chamber)"  class="hvr-underline-from-center" title="View this Chamber">{{legislator.chamber}}</a>
+          <br/>
+        Party: <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);" (click)="loadLocate($event,legislator.party)" class="hvr-underline-from-center" title="View this Party">{{legislator.party}}</a>
+        <br/>
+        <br/>
+      <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" title="View this Profile" class="btn btn-secondary btn-sm">
+        <!-- <i class="fa fa-eye"></i> -->
+        View profile
+      </a>
+    </div>
+  </div>

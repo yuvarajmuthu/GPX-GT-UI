@@ -131,5 +131,9 @@ export class LegislatorComponent implements OnInit {
     //this.router.navigate(['/user', 'external']); 
     //this.router.navigate(['/user']);
   }
+  loadLocate(evt, opt){
+    evt.preventDefault();
+    this.router.navigate(['location'],{ queryParams: { 'opt': opt } });
 
+  }
 }

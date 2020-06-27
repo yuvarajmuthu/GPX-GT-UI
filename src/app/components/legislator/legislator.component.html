@@ -23,16 +23,16 @@
         <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
       </p>
 				<h4 class="card-title">{{legislator.full_name}}</h4>
-              <p class="card-text">State: {{legislator.state}}
+              <p class="card-text">State: <a href="" class="hvr-underline-from-center" title="View this State">{{legislator.state}}</a>
                 <br/>
-            District: {{legislator.district}}
+            District: <a href="" class="hvr-underline-from-center" title="View this District">{{legislator.district}}</a>
             <br/>
-          Chamber: {{legislator.chamber}}
+          Chamber: <a href="" class="hvr-underline-from-center" title="View this Chamber">{{legislator.chamber}}</a>
           <br/>
-        Party: {{legislator.party}}
+        Party: <a href="" class="hvr-underline-from-center" title="View this Party">{{legislator.party}}</a>
         <br/>
         <br/>
-      <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" class="btn btn-primary btn-sm">
+      <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" title="View this Profile" class="btn btn-primary btn-sm">
         <!-- <i class="fa fa-eye"></i> -->
         View profile
       </a>

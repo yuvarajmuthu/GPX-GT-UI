@@ -114,47 +114,17 @@ onMentionSelect(item) {
         console.log(sel);
         if (sel.rangeCount) {
             let ranges = [];
-            // for(let i = 0; i < sel.rangeCount; i++) {
-            //     ranges[i] = sel.getRangeAt(i);
-            //     console.log(ranges[i].endContainer.parentNode);
-            //    // editableDiv.removeChild(ranges[i].endContainer.parentNode);
-            //    if(ranges[i].endContainer.parentNode == "SPAN"){
-            //        console.log("span deleted");
-            //    }
-
-
+ 
                 let btn:HTMLElement;
                 btn = document.createElement("SPAN");   // Create a <button> element
                 let inputDiv = document.getElementById("postContent"); 
                 let innertmlHtml = inputDiv.innerHTML;
                 var n = innertmlHtml.indexOf("@");
-                console.log(innertmlHtml);
 
-                // if(innertmlHtml.lastIndexOf('<span>') > 0){
-                //     let lastPos = innertmlHtml.lastIndexOf('@');
-                //     let spanArray = innertmlHtml.split('@');
-                //     console.log(lastPos);
-                //     console.log(innertmlHtml.length);
-                //     //let newArray = spanArray.splice(spanArray.length-2, 1, '');
-                //   //  let tmpJoined =newArray.join('');
-                //    // console.log(tmpJoined);
-                //    console.log(spanArray[0]);
-                //    var tmp = innertmlHtml.slice(lastPos, innertmlHtml.length);
-                //     console.log(tmp);
-                //     btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
-                //     inputDiv.innerHTML = innertmlHtml;
-                //     btn.setAttribute('class', 'tagged-users');   
-                //     btn.setAttribute('data-username', item.username);
-                //     btn.setAttribute('data-entityType', item.userType);
-                //     btn.setAttribute('readonly', 'true');
-                // }
-                // else{
                   var length = innertmlHtml.length;
                   var patt = new RegExp("/\s@\w*/i");
-                  console.log(patt.test(innertmlHtml))
                   innertmlHtml = innertmlHtml.replace('&nbsp;', ' ');
                   var tmp = innertmlHtml.replace(/\s@\w*/i, ' ');
-                  console.log(tmp);
                   btn.innerHTML = item.firstName+" "+item.lastName;       
                  // inputDiv.innerHTML = tmp;
                   btn.setAttribute('class', 'tagged-users');   
@@ -170,93 +140,19 @@ onMentionSelect(item) {
         
                 var btn1 = document.createElement("SPAN");        // Insert text
                 btn1.innerHTML = '&nbsp;';
-                console.log(tmp);
                 inputDiv.innerHTML = tmp;   
                 innertmlHtml = inputDiv.innerHTML;
-                console.log(innertmlHtml);
                 inputDiv.appendChild(btn);
                 innertmlHtml = inputDiv.innerHTML;
-                console.log(innertmlHtml);
-                //inputDiv.innerHTML = inputDiv.innerHTML+' ';
-               // innertmlHtml += '&nbsp;';
-              //  console.log(innertmlHtml);
-              ////  inputDiv.innerHTML += innertmlHtml;
                 inputDiv.appendChild(btn1);
                 this.items = [];
-              //  console.log(btn);
 
-            //   }
           range = sel.getRangeAt(0);
           if (range.commonAncestorContainer.parentNode == editableDiv) {
             caretPos = range.endOffset;
           }
         }
       }
-  
-      // let btn:HTMLElement;
-      // btn = document.createElement("SPAN");   // Create a <button> element
-      // let inputDiv = document.getElementById("postContent"); 
-      // let innertmlHtml = inputDiv.innerHTML;
-      // var n = innertmlHtml.indexOf("@");
-      // console.log(innertmlHtml);
-      // var length = innertmlHtml.length;
-      // var tmp = innertmlHtml.slice(0, n);
-      // btn.innerHTML = item.username+"&nbsp;";       
-      // inputDiv.innerHTML = tmp;
-      // btn.setAttribute('class', 'tagged-users');   
-      // btn.setAttribute('data-username', item.username);
-      // btn.setAttribute('data-entityType', item.type);
-      // btn.setAttribute('readonly', 'true');
-
-      // var btn1 = document.createElement("SPAN");        // Insert text
-      // btn1.innerHTML = '&nbsp;';    
-      // inputDiv.appendChild(btn);
-      // inputDiv.appendChild(btn1);
-      // this.items = [];
-      // console.log(btn);
-
-
-      // var sel, range;
-      // if (window.getSelection) {
-      //     // IE9 and non-IE
-      //     sel = window.getSelection();
-      //     if (sel.getRangeAt && sel.rangeCount) {
-      //         range = sel.getRangeAt(0);
-      //         range.deleteContents();
-  
-      //         // Range.createContextualFragment() would be useful here but is
-      //         // non-standard and not supported in all browsers (IE9, for one)
-      //         var el = document.createElement("div");
-      //         var tagUser =  `<span class='tagged-users'>${item.username}</span><span>,&nbsp;</span>`;
-      //         el.innerHTML = tagUser;
-      //         var frag = document.createDocumentFragment(), node, lastNode;
-      //         console.log(frag);
-              
-      //         console.log(el.firstChild)
-      //         while ( (node = el.firstChild) ) {
-      //             console.log(node);
-      //             lastNode = frag.appendChild(node);
-      //         }
-      //         range.insertNode(frag);
-      //         console.log(lastNode);
-      //         // Preserve the selection
-      //         if (lastNode) {
-      //             range = range.cloneRange();
-      //             range.setStartAfter(lastNode);
-      //             range.collapse(true);
-      //             sel.removeAllRanges();
-      //             sel.addRange(range);
-      //         }
-      //     }
-      // }
-      // } else if (document.selection && document.selection.type != "Control") {
-      //     // IE < 9
-      //     document.selection.createRange().pasteHTML(html);
-      // }
-  // }
-
-
-    //  return btn;
     var el = document.getElementById("postContent");
     console.log(el);
     var range1 = document.createRange();

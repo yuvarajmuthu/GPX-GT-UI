@@ -40,7 +40,7 @@
 
             </ul>
  
-              <div class="ng-autocomplete common-search">
+              <div class="ng-autocomplete common-search" *ngIf="!isMobile">
                 <ng-autocomplete
                   [data]="searchUsers"
                   (inputChanged) = "onChangeSearch($event)"
@@ -129,6 +129,29 @@
 </nav>
 <body>
 <div class="container-fluid">
+    <div class="ng-autocomplete common-search" *ngIf="isMobile">
+        <ng-autocomplete
+          [data]="searchUsers"
+          (inputChanged) = "onChangeSearch($event)"
+          (selected)='selectEvent($event)'
+          [searchKeyword]="keyword"
+          placeHolder="Search Legislator, Person, District, Party..."
+          historyIdentifier="searchUsers"
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+        <ng-template #itemTemplate let-item>
+          <div class="item">
+            <img src="{{item.photoUrl}}" height="25">
+            <span [innerHTML]="item.firstName"></span>
+            <small></small>
+          </div>
+        </ng-template>
+      
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
     <div class="row">
 
         <div class="d-lg-none d-xl-none col-xs-12">

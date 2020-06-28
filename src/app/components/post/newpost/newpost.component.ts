@@ -129,21 +129,61 @@ onMentionSelect(item) {
                 let innertmlHtml = inputDiv.innerHTML;
                 var n = innertmlHtml.indexOf("@");
                 console.log(innertmlHtml);
-                var length = innertmlHtml.length;
-                var tmp = innertmlHtml.slice(0, n);
-                btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
-                inputDiv.innerHTML = tmp;
-                btn.setAttribute('class', 'tagged-users');   
-                btn.setAttribute('data-username', item.username);
-                btn.setAttribute('data-entityType', item.userType);
-                btn.setAttribute('readonly', 'true');
+
+                // if(innertmlHtml.lastIndexOf('<span>') > 0){
+                //     let lastPos = innertmlHtml.lastIndexOf('@');
+                //     let spanArray = innertmlHtml.split('@');
+                //     console.log(lastPos);
+                //     console.log(innertmlHtml.length);
+                //     //let newArray = spanArray.splice(spanArray.length-2, 1, '');
+                //   //  let tmpJoined =newArray.join('');
+                //    // console.log(tmpJoined);
+                //    console.log(spanArray[0]);
+                //    var tmp = innertmlHtml.slice(lastPos, innertmlHtml.length);
+                //     console.log(tmp);
+                //     btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
+                //     inputDiv.innerHTML = innertmlHtml;
+                //     btn.setAttribute('class', 'tagged-users');   
+                //     btn.setAttribute('data-username', item.username);
+                //     btn.setAttribute('data-entityType', item.userType);
+                //     btn.setAttribute('readonly', 'true');
+                // }
+                // else{
+                  var length = innertmlHtml.length;
+                  var patt = new RegExp("/\s@\w*/i");
+                  console.log(patt.test(innertmlHtml))
+                  innertmlHtml = innertmlHtml.replace('&nbsp;', ' ');
+                  var tmp = innertmlHtml.replace(/\s@\w*/i, ' ');
+                  console.log(tmp);
+                  btn.innerHTML = item.firstName+" "+item.lastName;       
+                 // inputDiv.innerHTML = tmp;
+                  btn.setAttribute('class', 'tagged-users');   
+                  btn.setAttribute('data-username', item.username);
+                  btn.setAttribute('data-entityType', item.userType);
+                  btn.setAttribute('readonly', 'true');
+                  btn.setAttribute('contenteditable', 'false');
+                  btn.setAttribute('value', item.firstName+" "+item.lastName);
+             //   }
+
+
+
         
                 var btn1 = document.createElement("SPAN");        // Insert text
-                btn1.innerHTML = '&nbsp;';    
+                btn1.innerHTML = '&nbsp;';
+                console.log(tmp);
+                inputDiv.innerHTML = tmp;   
+                innertmlHtml = inputDiv.innerHTML;
+                console.log(innertmlHtml);
                 inputDiv.appendChild(btn);
+                innertmlHtml = inputDiv.innerHTML;
+                console.log(innertmlHtml);
+                //inputDiv.innerHTML = inputDiv.innerHTML+' ';
+               // innertmlHtml += '&nbsp;';
+              //  console.log(innertmlHtml);
+              ////  inputDiv.innerHTML += innertmlHtml;
                 inputDiv.appendChild(btn1);
                 this.items = [];
-                console.log(btn);
+              //  console.log(btn);
 
             //   }
           range = sel.getRangeAt(0);

@@ -10159,3 +10159,6 @@ input{
     border-radius: .25rem !important;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
 }
+#postContent div{
+    display: inline;
+}

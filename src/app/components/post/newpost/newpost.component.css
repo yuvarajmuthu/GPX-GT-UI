@@ -170,7 +170,9 @@ form button {
 }
 
 .tagged-users{
-  background-color: burlywood;
+  background-color: #D6DBDF;
+  border: 1px solid #868393;
+  border-radius: 5px;
 }
 #postContent{
   height: 100px;

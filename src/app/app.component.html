@@ -16,10 +16,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': searchLegislator}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-user"></i> Legislator</a>
+                    <a class="nav-link" [ngClass]="{'active': searchLegislator}"  routerLink="searchLegislator" routerLinkActive="active">
+                      <i class="fa fa-user"></i>
+                      <div>Circle</div>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': news}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i> News</a>
+                    <a class="nav-link" [ngClass]="{'active': news}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
                 </li>
                 <!--
                 <li class="nav-item">
@@ -27,15 +30,15 @@
                 </li>
                 -->
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i> Connections</a>
+                    <a class="nav-link" [ngClass]="{'active': request}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('login')"><i class="fa fa-sign-in"></i> Login</a>
+                    <a class="nav-link" (click)="route('login')"><i class="fa fa-sign-in"></i>Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" (click)="route('register')"><i class="fa fa-registered"></i> Register</a>
+                    <a class="nav-link" (click)="route('register')"><i class="fa fa-registered"></i>Register</a>
                 </li>
 
             </ul>
@@ -92,8 +95,8 @@
           </div>    -->
           
           <div class="dropdown create-page-button-custom-position">
-            <button (click)="route('createpageoptions')" class="btn btn-md btn-secondary btn-custom-horizondal" type="button" (click)="iscreateOptEnabled =  !iscreateOptEnabled">
-              Create page
+            <button (click)="route('createpageoptions')" class="btn btn-md btn-secondary btn-custom-horizondal fa fa-plus" type="button" (click)="iscreateOptEnabled =  !iscreateOptEnabled">
+              Create Page
             </button>
             <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
               <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'district')">Create District</a>

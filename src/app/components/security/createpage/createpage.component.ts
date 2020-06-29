@@ -101,6 +101,10 @@ export class CreatepageComponent implements OnInit {
         this.userType = this.constants.USERTYPE_POLITICAL_PARTY;
         this.userCreationForm = this.createPartyPageForm;
         this.profileTemplateId = 'upDefault';
+      }else if(page == 'group'){
+        this.userType = this.constants.USERTYPE_GROUP;
+        this.userCreationForm = this.createGroupPageForm;
+        this.profileTemplateId = 'upDefault';
       }
 
       this.loadBioDataTemplate(this.profileTemplateId, this.userType);

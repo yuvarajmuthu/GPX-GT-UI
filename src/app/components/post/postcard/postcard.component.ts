@@ -116,56 +116,118 @@ export class PostcardComponent implements OnInit {
       // }
       return caretPos;
     }
-    
+
     onMentionSelect(item) {
-          let editableDiv = document.getElementById("commentContent");
-          var caretPos = 0,
-            sel, range;
-          if (window.getSelection) {
-            sel = window.getSelection();
-            console.log(sel);
-            if (sel.rangeCount) {
-                let ranges = [];
-                    let btn:HTMLElement;
-                    btn = document.createElement("SPAN");   // Create a <button> element
-                    let inputDiv = document.getElementById("commentContent"); 
-                    let innertmlHtml = inputDiv.innerHTML;
-                    var n = innertmlHtml.indexOf("@");
-                    console.log(innertmlHtml);
+        let editableDiv = document.getElementById("commentContent");
+        var caretPos = 0,
+          sel, range;
+        if (window.getSelection) {
+          sel = window.getSelection();
+          console.log(sel);
+          if (sel.rangeCount) {
+              let ranges = [];
+   
+                  let btn:HTMLElement;
+                  btn = document.createElement("SPAN");   // Create a <button> element
+                  let inputDiv = document.getElementById("commentContent"); 
+                  let innertmlHtml = inputDiv.innerHTML;
+                  var n = innertmlHtml.indexOf("@");
+  
                     var length = innertmlHtml.length;
-                    var tmp = innertmlHtml.slice(0, n);
-                    btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
-                    inputDiv.innerHTML = tmp;
+                    var patt = new RegExp("/\s@\w*/i");
+                    innertmlHtml = innertmlHtml.replace('&nbsp;', ' ');
+                    var tmp = innertmlHtml.replace(/\s@\w*/i, ' ');
+                    btn.innerHTML = item.firstName+" "+item.lastName;       
+                   // inputDiv.innerHTML = tmp;
                     btn.setAttribute('class', 'tagged-users');   
                     btn.setAttribute('data-username', item.username);
                     btn.setAttribute('data-entityType', item.userType);
                     btn.setAttribute('readonly', 'true');
-            
-                    var btn1 = document.createElement("SPAN");        // Insert text
-                    btn1.innerHTML = '&nbsp;';    
-                    inputDiv.appendChild(btn);
-                    inputDiv.appendChild(btn1);
-                    this.items = [];
-                    console.log(btn);
-    
-                //   }
-              range = sel.getRangeAt(0);
-              if (range.commonAncestorContainer.parentNode == editableDiv) {
-                caretPos = range.endOffset;
-              }
+                    btn.setAttribute('contenteditable', 'false');
+                    btn.setAttribute('value', item.firstName+" "+item.lastName);
+               //   }
+  
+  
+  
+          
+                  var btn1 = document.createElement("SPAN");        // Insert text
+                  btn1.innerHTML = '&nbsp;';
+                  inputDiv.innerHTML = tmp;   
+                  innertmlHtml = inputDiv.innerHTML;
+                  inputDiv.appendChild(btn);
+                  innertmlHtml = inputDiv.innerHTML;
+                  inputDiv.appendChild(btn1);
+                  this.items = [];
+  
+            range = sel.getRangeAt(0);
+            if (range.commonAncestorContainer.parentNode == editableDiv) {
+              caretPos = range.endOffset;
             }
           }
+        }
+      var el = document.getElementById("commentContent");
+      console.log(el);
+      var range1 = document.createRange();
+      var sel1 = window.getSelection();
+      console.log(el.childNodes.length);
+      var tmpLength = Number(el.childNodes.length-1);
+      range1.setStart(el.childNodes[tmpLength], 1);
+      range1.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range1);
+      el.focus();
+  }
+  
+    
+    // onMentionSelect(item) {
+    //       let editableDiv = document.getElementById("commentContent");
+    //       var caretPos = 0,
+    //         sel, range;
+    //       if (window.getSelection) {
+    //         sel = window.getSelection();
+    //         console.log(sel);
+    //         if (sel.rangeCount) {
+    //             let ranges = [];
+    //                 let btn:HTMLElement;
+    //                 btn = document.createElement("SPAN");   // Create a <button> element
+    //                 let inputDiv = document.getElementById("commentContent"); 
+    //                 let innertmlHtml = inputDiv.innerHTML;
+    //                 var n = innertmlHtml.indexOf("@");
+    //                 console.log(innertmlHtml);
+    //                 var length = innertmlHtml.length;
+    //                 var tmp = innertmlHtml.slice(0, n);
+    //                 btn.innerHTML = item.firstName+" "+item.lastName+"&nbsp;";       
+    //                 inputDiv.innerHTML = tmp;
+    //                 btn.setAttribute('class', 'tagged-users');   
+    //                 btn.setAttribute('data-username', item.username);
+    //                 btn.setAttribute('data-entityType', item.userType);
+    //                 btn.setAttribute('readonly', 'true');
+            
+    //                 var btn1 = document.createElement("SPAN");        // Insert text
+    //                 btn1.innerHTML = '&nbsp;';    
+    //                 inputDiv.appendChild(btn);
+    //                 inputDiv.appendChild(btn1);
+    //                 this.items = [];
+    //                 console.log(btn);
+    
+    //             //   }
+    //           range = sel.getRangeAt(0);
+    //           if (range.commonAncestorContainer.parentNode == editableDiv) {
+    //             caretPos = range.endOffset;
+    //           }
+    //         }
+    //       }
       
-        var el = document.getElementById("commentContent");
-        var range1 = document.createRange();
-        var sel1 = window.getSelection();
-        var tmpLength = Number(el.childNodes.length-1);
-        range1.setStart(el.childNodes[tmpLength], 1);
-        range1.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range1);
-        el.focus();
-    }
+    //     var el = document.getElementById("commentContent");
+    //     var range1 = document.createRange();
+    //     var sel1 = window.getSelection();
+    //     var tmpLength = Number(el.childNodes.length-1);
+    //     range1.setStart(el.childNodes[tmpLength], 1);
+    //     range1.collapse(true);
+    //     sel.removeAllRanges();
+    //     sel.addRange(range1);
+    //     el.focus();
+    // }
     
 
 

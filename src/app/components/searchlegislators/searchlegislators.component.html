@@ -1,8 +1,10 @@
+<div>
+  Find Legislators:
+</div>  
+
 <div class="address">
   Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
-  <!-- <input [(ngModel)]="address" type="text" placeholder="Enter address here" />
-  -->
-  </div>
+</div>
 
 <div class="col-xs-12">
   <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>

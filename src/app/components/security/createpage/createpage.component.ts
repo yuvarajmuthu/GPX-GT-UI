@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {AppConstants} from '../../../app.constant.enum';
+import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
 import {UserService} from '../../../services/user.service';
 import {PostService} from '../../../services/post.service';
@@ -18,6 +19,13 @@ import {User} from '../../../models/user';
   styleUrls: ['./createpage.component.css']
 })
 export class CreatepageComponent implements OnInit {
+
+  public editorData = '';
+    
+  public onChange(event: CKEditor4.EventInfo) {
+      console.log(event.editor.getData());
+  }
+
   userCreationForm = new FormGroup({});
   biodataTemplate={};
   biodataTemplateData={};

@@ -19,9 +19,9 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
 
   id = 'upVote';
   profileIcon = 'group';
-  profileDatas: JSON[] = [];
+  roles: JSON[] = [];
   displayProperties = [];
-  displayObj = {};
+  role = {};
   data = {};
   viewingUser = {};
   editorData = '';
@@ -54,132 +54,6 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
   }
 
   ngOnInit() {
-    console.log('ngOnInit() uservotetemplate.component');
-
-    this.loadDisplayProperties();
-
-    this.loadTemplateData();
-    this.inEditMode = this.dataShareService2.isProfileEditable();
-
-}
-
-open(content, displayObj) { 
-    if(displayObj === ''){
-      displayObj = null;
-    }
-    this.displayObj = displayObj;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-}
-
-public onChange(event: CKEditor4.EventInfo) {
-    console.log(event.editor.getData());
-}
-
-private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-        return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-        return 'by clicking on a backdrop';
-    } else {
-        return  `with: ${reason}`;
-    }
-}
-
-
-loadDisplayProperties() {
-    //TODO
-    //profile template for this template shall also loaded instead of getting all the template properties
-    for (let profileTemplates of this.viewingUser['profileTemplates']) {
-        //console.log("reading template component properties: ", profileTemplates['profile_template_id']);
-        //this.templateType.push(profileData['profile_template_id']);
-        if (this.id == profileTemplates['profileTemplateId']) {
-            this.displayProperties = profileTemplates['properties'];
-            break;
-        }
-    }
-}
-
-loadTemplateData() {
-    /*
-      this.userService2.getRoles(this.profileUserId).subscribe(
-        result => {
-          console.log(result.length);
-          this.roles = result;
-          console.log(this.roles);
-
-        });
-        this.zone.run(() => {
-          this.userService2.getRoles(this.profileUserId).toPromise().then((data) => {
-              this.roles= data;
-              console.log(this.roles);
-          });
-          })
-  */
-//this.zone.run(() => {
-
-    this.userService2.getRoles(this.profileUserId, this.viewingUser['isCongress'])
-        .subscribe((data) => {
-            //console.log("roles count ", data.length);
-            //this.role = JSON.parse(JSON.stringify(data[0]));
-            //this.role['term'] = 'term';
-            this.profileDatas = data;
-            //this.changeDetector.detectChanges();
-            this.createFormGroup();
-
-        });
-    /*
-    data.forEach(element => {
-      this.roles.push(JSON.parse(JSON.stringify(element)));
-      console.log(this.roles);
-      this.role = JSON.parse(JSON.stringify(element));
-
-    });
-    */
-//      });
-
-    //  });
-}
-
-createFormGroup() {
-    this.roleTemplateForm = this.fbuilder.group({});
-/*
-    this.displayProperties.forEach((element, index) => {
-        let value = this.legislator[element['propId']];
-        console.log('element[propId] ', element['propId'], ' this.legislator[element[propId]] ', this.legislator[element['propId']]);
-        this.roleTemplateForm.setControl(element['propId'], new FormControl(value));
-    });
-    */
-    this.changeDetector.detectChanges();
-}
-
-getFormData():any{
-    console.log("Object.assign({}, this.biodataTemplateForm.value) ", Object.assign({}, this.roleTemplateForm.value));
-    const result: {} = Object.assign({}, this.roleTemplateForm.value);
-    console.log("Role form ", result);
-    return result;
-  }
-
-saveProfile(){
-    if(this.displayObj && this.displayObj['id']){
-        this.data["id"] = this.displayObj['id']; //primary key
-    }
-    this.data["profileTemplateId"] = this.id; //unique key
-    this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?
-    this.data["data"] = this.getFormData();
-    console.log("Data " + JSON.stringify(this.data));
-    this.userService2.updateProfileData(this.data).subscribe((response) => {
-      console.log('Profile updated sucessfully');
-      this.isProfileInEditMode = false;
-      this.displayObj = this.data["data"];
-      this.changeDetector.detectChanges();
-
-    } 
-    );
-
   }
 
 }

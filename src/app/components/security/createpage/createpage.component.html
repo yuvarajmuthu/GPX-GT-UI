@@ -14,7 +14,7 @@
                 <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name"/>
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="col form-group">
                 <label>User Name</label>
@@ -157,7 +157,7 @@
                 <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="col form-group">
                 <label>Party Id</label>
@@ -168,7 +168,8 @@
             <div class="form-row">
               <div class="col form-group">
                 <label>Description</label>
-                <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                <!-- <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea> -->
+                <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
               </div>
             </div>
 
@@ -195,7 +196,12 @@
             <div class="form-row">
               <div class="col form-group">
                 <label>Description</label>
-                <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                <!--<textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>-->
+
+                <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
+
+                
+
               </div>
             </div>
 
@@ -232,7 +238,8 @@
             <div class="form-row">
               <div class="col form-group">
                 <label>Description</label>
-                <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                <!-- <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea> -->
+                <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
               </div>
             </div>
 

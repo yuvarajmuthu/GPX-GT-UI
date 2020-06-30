@@ -8,7 +8,6 @@ import {CKEditor4} from 'ckeditor4-angular/ckeditor';
 import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService} from '../../../../services/componentcommunication.service';
 import {UserService} from '../../../../services/user.service';
-import {LegislatorService} from '../../../../services/legislator.service';
 
 @Component({
     selector: 'app-userroletemplate',
@@ -18,7 +17,7 @@ import {LegislatorService} from '../../../../services/legislator.service';
 
 })
 
-export class UserroletemplateComponent extends AbstractTemplateComponent implements OnInit {
+export class UserroletemplateComponent extends AbstractTemplateComponent implements OnInit { 
     id = 'upRole';
     profileIcon = 'group';
     //roles:any = null;
@@ -33,8 +32,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     roleTemplateForm: FormGroup; 
     closeResult: string;
 
-    constructor(private legislatorsService2: LegislatorService,
-                private userService2: UserService,
+    constructor(private userService2: UserService,
                 private dataShareService2: DatashareService,
                 private communicationService: ComponentcommunicationService,
                 private changeDetector: ChangeDetectorRef,
@@ -42,7 +40,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
                 private modalService: NgbModal 
     ) {
 
-        super(legislatorsService2, dataShareService2, communicationService);
+        super(dataShareService2, communicationService);
 
         console.log('constructor() userroletemplate.component');
         this.viewingUser = this.dataShareService2.getViewingUser();
@@ -172,17 +170,6 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         console.log("Role form ", result);
         return result;
       }
-  
-      //OBSOLETE, though part of AbstractTemplateComponent
-    getData(): string {
-        let data = {};
-  
-        this.displayProperties.forEach(element => {
-          data[element['propId']] = this.role[element['propId']];
-        });
-  
-        return JSON.stringify(data);
-    }
 
     saveProfile(){
         if(this.role && this.role['id']){

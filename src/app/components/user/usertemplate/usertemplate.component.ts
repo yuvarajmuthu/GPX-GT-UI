@@ -24,6 +24,9 @@ import {UsercommitteetemplateComponent} from './usercommitteetemplate/usercommit
 import { UserroletemplateComponent } from './userroletemplate/userroletemplate.component';
 import { UserofficetemplateComponent } from './userofficetemplate/userofficetemplate.component';
 
+import { UsereventtemplateComponent } from './usereventtemplate/usereventtemplate.component';
+import { UserbilltemplateComponent } from './userbilltemplate/userbilltemplate.component';
+import { UservotetemplateComponent } from './uservotetemplate/uservotetemplate.component';
 
 import {AbstractTemplateComponent} from '../abstractTemplateComponent';
 
@@ -37,7 +40,10 @@ import {AbstractTemplateComponent} from '../abstractTemplateComponent';
     UserbiodatatemplateComponent,
     UsercommitteetemplateComponent,
     UserroletemplateComponent,
-    UserofficetemplateComponent
+    UserofficetemplateComponent,
+    UsereventtemplateComponent,
+    UserbilltemplateComponent,
+    UservotetemplateComponent
   ],
   imports: [
     GpxUIComponentsModule,
@@ -66,13 +72,16 @@ export class UsertemplateComponent implements OnChanges {
   data:string;
   //all the user profile templates should be mapped here
   private mappings = {
-    'upDefault': UserbannertemplateComponent,
-    'upDefault1': UserbannertemplateComponent,//FOR TESTING
-    'upDefault2': UserbannertemplateComponent,//FOR TESTING
-    'upCongressLegislatorExternal': UserbiodatatemplateComponent,
-    'upCongressLegislatorCommitteeExternal': UsercommitteetemplateComponent,
-    'upRole': UserroletemplateComponent,
-    'upOffices': UserofficetemplateComponent 
+    'upDefault' : UserbannertemplateComponent,
+    'upDefault1' : UserbannertemplateComponent,//FOR TESTING
+    'upDefault2' : UserbannertemplateComponent,//FOR TESTING
+    'upCongressLegislatorExternal' : UserbiodatatemplateComponent,
+    'upCongressLegislatorCommitteeExternal' : UsercommitteetemplateComponent,
+    'upRole' : UserroletemplateComponent,
+    'upOffices' : UserofficetemplateComponent,
+    'upEvent' : UsereventtemplateComponent,
+    'upBill' : UserbilltemplateComponent,
+    'upVote' : UservotetemplateComponent 
 };
 
 private componentRef: ComponentRef<{}>;

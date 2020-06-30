@@ -10,15 +10,15 @@
           <form *ngIf="userType === 'LEGISLATOR'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
             <div class="form-row">
               <div class="col form-group">
-                <label>User Name</label>
-                <input type="text" class="form-control" placeholder="User Name" formControlName="username"/>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col form-group">
                 <label>Display Name</label>
                 <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name"/>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="col form-group">
+                <label>User Name</label>
+                <input type="text" class="form-control" placeholder="User Name" formControlName="username"/>
               </div>
             </div>
 
@@ -154,14 +154,14 @@
             <div class="form-row">
               <div class="col form-group">
                 <label>Party Name</label>
-                <input type="text" class="form-control" placeholder="Party Name" formControlName="username"/>
+                <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
               </div>
             </div>
-
+            
             <div class="form-row">
               <div class="col form-group">
-                <label>Display Name</label>
-                <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
+                <label>Party Id</label>
+                <input type="text" class="form-control" placeholder="Party Name" formControlName="username"/>
               </div>
             </div>
 
@@ -180,15 +180,15 @@
           <form *ngIf="userType === 'LEGISLATIVE_DISTRICT'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
             <div class="form-row">
               <div class="col form-group">
-                <label>District Id</label>
-                <input type="text" class="form-control" placeholder="District Id" formControlName="username"/>
+                <label>District Name</label>
+                <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="col form-group">
-                <label>Display Name</label>
-                <input type="text" class="form-control" placeholder="Display Name" formControlName="full_name" required/>
+                <label>District Id</label>
+                <input type="text" class="form-control" placeholder="District Id" formControlName="username"/>
               </div>
             </div>
 
@@ -217,15 +217,15 @@
           <form *ngIf="userType === 'GROUP'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
             <div class="form-row">
               <div class="col form-group">
-                <label>Group Id</label>
-                <input type="text" class="form-control" placeholder="Group Id" formControlName="username"/>
+                <label>Group Name</label>
+                <input type="text" class="form-control" placeholder="Group Name" formControlName="full_name" required/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="col form-group">
-                <label>Group Name</label>
-                <input type="text" class="form-control" placeholder="Group Name" formControlName="full_name" required/>
+                <label>Group Id</label>
+                <input type="text" class="form-control" placeholder="Group Id" formControlName="username"/>
               </div>
             </div>
 

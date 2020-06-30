@@ -8,7 +8,6 @@ import {CKEditor4} from 'ckeditor4-angular/ckeditor';
 import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService}     from '../../../../services/componentcommunication.service';
 import {UserService} from '../../../../services/user.service';
-import { LegislatorService } from '../../../../services/legislator.service';
 
 @Component({
   selector: 'app-userofficetemplate',
@@ -26,8 +25,7 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
   closeResult: string;
   office = {};
 
-  constructor(private legislatorsService2:LegislatorService, 
-    private userService2:UserService, 
+  constructor(private userService2:UserService, 
     private dataShareService2:DatashareService, 
     private communicationService: ComponentcommunicationService, 
     private changeDetector : ChangeDetectorRef,
@@ -35,7 +33,7 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
     private modalService: NgbModal 
     ) {
   
-      super(legislatorsService2, dataShareService2, communicationService);
+      super(dataShareService2, communicationService);
   
       console.log("constructor() userofficetemplate.component");
       communicationService.userProfileEditChanged$.subscribe(
@@ -136,19 +134,6 @@ getFormData():any{
   console.log("office form ", result);
   return result;
 }
-  getData():string{
- /*
-    let data = {};
-    data["firstName"] = this.firstName;
-    data["lastName"] = this.lastName;
-
-
-    let dataString:string = JSON.stringify(data);
-    console.log("TemplateIntroductionComponent data " + dataString);
-    return dataString;
-    */
-   return "";
-  }
 
   open(content, office) { 
     if(office === ''){

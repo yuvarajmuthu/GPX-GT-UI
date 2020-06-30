@@ -28,6 +28,9 @@ import { UserstageComponent } from './userstage/userstage.component';
 import { Usercard2Component } from './usercard2/usercard2.component';
 import { UserroleComponent } from './usertemplate/userroletemplate/userrole/userrole.component';
 import { UserofficeComponent } from './usertemplate/userofficetemplate/useroffice/useroffice.component';
+import { UsereventtemplateComponent } from './usertemplate/usereventtemplate/usereventtemplate.component';
+import { UservotetemplateComponent } from './usertemplate/uservotetemplate/uservotetemplate.component';
+import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userbilltemplate.component';
 
 @NgModule({
   imports: [
@@ -46,10 +49,10 @@ import { UserofficeComponent } from './usertemplate/userofficetemplate/useroffic
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 
-    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent
+    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent
   ],
   entryComponents:[UserstageComponent,UserbannertemplateComponent, UsercommitteetemplateComponent, 
-    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent],
+    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent],
   //exports:[UserstageComponent]
 })
 export class UserModule { }

@@ -7,7 +7,6 @@ import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
 import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService}     from '../../../../services/componentcommunication.service';
 import {UserService} from '../../../../services/user.service';
-import { LegislatorService } from '../../../../services/legislator.service';
 
 @Component({
   selector: 'app-userbannertemplate',
@@ -49,12 +48,11 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
   constructor(    private changeDetector : ChangeDetectorRef,
     private fbuilder: FormBuilder,
     private modalService: NgbModal,
-    private legislatorsService2:LegislatorService, 
     private userService2:UserService, 
     private dataShareService2:DatashareService, 
     private missionService2: ComponentcommunicationService) {
   
-      super(legislatorsService2, dataShareService2, missionService2);
+      super(dataShareService2, missionService2);
   
       console.log("constructor() userbannertemplate");      
 

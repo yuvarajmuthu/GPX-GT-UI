@@ -5,7 +5,6 @@ import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
 import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService}     from '../../../../services/componentcommunication.service';
 import {UserService} from '../../../../services/user.service';
-import { LegislatorService } from '../../../../services/legislator.service';
 import { IfStmt } from '@angular/compiler';
 import { Legislator } from 'src/app/models/legislator';
 
@@ -47,14 +46,13 @@ export class UserbiodatatemplateComponent extends AbstractTemplateComponent  imp
   
   
   //called before ngOnInit()
-  constructor(private legislatorsService2:LegislatorService, 
-    private userService2:UserService, 
+  constructor(private userService2:UserService, 
     private dataShareService2:DatashareService, 
     private missionService2: ComponentcommunicationService,
     private changeDetector : ChangeDetectorRef,
     private fbuilder: FormBuilder) { 
   
-      super(legislatorsService2, dataShareService2, missionService2);
+      super(dataShareService2, missionService2);
   
       console.log("constructor() userbiodatatemplate");      
 

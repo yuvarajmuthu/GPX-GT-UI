@@ -23,8 +23,7 @@ export abstract class AbstractTemplateComponent {
     public committeesLength:number = 0;
     public viewingUser={};
     
-    constructor(private legislatorsService:LegislatorService, 
-      private dataShareService:DatashareService, 
+    constructor(private dataShareService:DatashareService, 
       private missionService: ComponentcommunicationService) {
       this.viewingUser = this.dataShareService.getViewingUser();
       this.profileUserId = this.viewingUser['userId'];
@@ -44,7 +43,7 @@ export abstract class AbstractTemplateComponent {
       return this.keys;
     }
     
-    abstract getData():string;
+    //abstract getData():string;
     
       setValue(jsonData) {
           console.log(' saved! the obj  - ' + JSON.stringify(jsonData));

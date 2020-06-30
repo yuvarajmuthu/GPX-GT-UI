@@ -34,7 +34,7 @@ export class UserofficeComponent extends AbstractTemplateComponent implements On
     private userService: UserService,
     private communicationService: ComponentcommunicationService,
     ) { 
-      super(null, dataShareService2, null);
+      super(dataShareService2, null);
       communicationService.userProfileEditChanged$.subscribe(
         editmode => {
             console.log('Received edit-save Profile message ' + editmode);
@@ -88,12 +88,6 @@ export class UserofficeComponent extends AbstractTemplateComponent implements On
     } else {
         return  `with: ${reason}`;
     }
-  }
-
-  //OBSOLETE, though part of AbstractTemplateComponent
-  getData(): string {
-
-    return '';
   }
 
   getFormData():any{

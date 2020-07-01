@@ -1,7 +1,9 @@
 import {Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { UsereventformComponent } from './usereventform/usereventform.component';
+
 
 import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
@@ -29,6 +31,7 @@ export class UsereventtemplateComponent extends AbstractTemplateComponent implem
   inEditMode:boolean = false;
   roleTemplateForm: FormGroup; 
   closeResult: string;
+  events:any;
 
   constructor(private userService2: UserService,
               private dataShareService2: DatashareService,
@@ -53,7 +56,49 @@ export class UsereventtemplateComponent extends AbstractTemplateComponent implem
 
   }
 
+  open(event) {
+    const modalRef = this.modalService.open(UsereventformComponent);
+    modalRef.componentInstance.eventdetails = event;
+  }
+
+
   ngOnInit() {
+    let date = new Date();
+    this.events =[{
+      "full_name"	: "Lorem ipsum, or lipsum as it is",
+      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
+      "location_name":	"Thilagar thidal, chennai",
+      "address":	"#23,Anna nagar, chennai",
+      "time":	date
+    },
+    {
+      "full_name"	: "Lorem ipsum, or lipsum as it is",
+      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
+      "location_name":	"Thilagar thidal, chennai",
+      "address":	"#23,Anna nagar, chennai",
+      "time":	date
+    },
+    {
+      "full_name"	: "Lorem ipsum, or lipsum as it is",
+      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
+      "location_name":	"Thilagar thidal, chennai",
+      "address":	"#23,Anna nagar, chennai",
+      "time":	date
+    },
+    {
+      "full_name"	: "Lorem ipsum, or lipsum as it is",
+      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
+      "location_name":	"Thilagar thidal, chennai",
+      "address":	"#23,Anna nagar, chennai",
+      "time":	date
+    },
+    {
+      "full_name"	: "Lorem ipsum, or lipsum as it is",
+      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
+      "location_name":	"Thilagar thidal, chennai",
+      "address":	"#23,Anna nagar, chennai",
+      "time":	date
+    }]
   }
 
 }

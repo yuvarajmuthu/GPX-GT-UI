@@ -31,7 +31,8 @@ import { UserofficeComponent } from './usertemplate/userofficetemplate/useroffic
 import { UsereventtemplateComponent } from './usertemplate/usereventtemplate/usereventtemplate.component';
 import { UservotetemplateComponent } from './usertemplate/uservotetemplate/uservotetemplate.component';
 import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userbilltemplate.component';
-
+import { UsereventformComponent } from './usertemplate/usereventtemplate/usereventform/usereventform.component';
+import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
 @NgModule({
   imports: [
     CommonModule, 
@@ -44,15 +45,17 @@ import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userb
     NgbModule,
     PostModule
   ],
+  exports: [GAddressSearchComponent],
   declarations: [
     UserComponent, 
+    GAddressSearchComponent,
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 
-    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent
+    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent, UsereventformComponent
   ],
   entryComponents:[UserstageComponent,UserbannertemplateComponent, UsercommitteetemplateComponent, 
-    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent],
+    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent,UsereventformComponent],
   //exports:[UserstageComponent]
 })
 export class UserModule { }

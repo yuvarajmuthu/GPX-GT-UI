@@ -74,7 +74,7 @@ export function tokenGetter() {
         PositionComponent,
         PartyComponent,
         ProtectedComponent,
-        GAddressSearchComponent,
+        // GAddressSearchComponent,
         CreatepageselectionComponent
         //dateFormatPipe
         //UserComponent

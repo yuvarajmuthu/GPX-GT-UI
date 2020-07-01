@@ -1,0 +1,37 @@
+<!-- <ng-template #content let-c="close" let-d="dismiss"> -->
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close('Ok click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <ngForm> -->
+      <div class="form-group">
+        <label for="eventname">Event Name</label>
+        <input type="text" class="form-control" id="eventname" name="eventname" aria-describedby="eventname" placeholder="Event Name" [(ngModel)]="full_name">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" name="description" aria-describedby="Description" placeholder="Description" [(ngModel)]="description">
+      </div>
+      <div class="address col-xs-12">
+        Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" class="form-control" id="location" name="location" aria-describedby="Location" placeholder="Location"  [(ngModel)]="location">
+      </div>
+      <div>
+        <label for="date">Date</label>
+        <div class="input-group">
+          <input type='date' class="form-control"  [(ngModel)]="date">
+        </div>
+      </div>
+
+    <!-- </ngForm> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+<!-- </ng-template> -->

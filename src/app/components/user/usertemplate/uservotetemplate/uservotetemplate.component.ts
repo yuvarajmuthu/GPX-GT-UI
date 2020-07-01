@@ -20,8 +20,10 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
   id = 'upVote';
   profileIcon = 'group';
   profileDatas: JSON[] = [];
+  roles: JSON[] = [];
   displayProperties = [];
   displayObj = {};
+  role = {};
   data = {};
   viewingUser = {};
   editorData = '';
@@ -60,10 +62,8 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
 
     this.loadTemplateData();
     this.inEditMode = this.dataShareService2.isProfileEditable();
-
-}
-
-open(content, displayObj) { 
+  }
+  open(content, displayObj) { 
     if(displayObj === ''){
       displayObj = null;
     }
@@ -110,7 +110,6 @@ loadTemplateData() {
           console.log(result.length);
           this.roles = result;
           console.log(this.roles);
-
         });
         this.zone.run(() => {
           this.userService2.getRoles(this.profileUserId).toPromise().then((data) => {
@@ -136,7 +135,6 @@ loadTemplateData() {
       this.roles.push(JSON.parse(JSON.stringify(element)));
       console.log(this.roles);
       this.role = JSON.parse(JSON.stringify(element));
-
     });
     */
 //      });
@@ -181,5 +179,6 @@ saveProfile(){
     );
 
   }
+
 
 }

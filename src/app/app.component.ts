@@ -28,14 +28,14 @@ import {User} from '../app/models/user';
 })
 
 export class AppComponent implements OnInit {
-    /*CKEDITOR 
-    public editorData = '';
     
-    public onChange(event: CKEditor4.EventInfo) {
-        console.log(event.editor.getData());
-    }
+    // public editorData = '';
+    
+    // public onChange(event: CKEditor4.EventInfo) {
+    //     console.log(event.editor.getData());
+    // }
 
-    END*/
+    
     keyword = 'firstName';
     searchUsers: any =[];
     iscreateOptEnabled: boolean=false;

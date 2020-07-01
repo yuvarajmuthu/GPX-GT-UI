@@ -1,0 +1,18 @@
+[
+   {
+      "username":"event1",
+      "full_name":"Townhall Meeting",
+      "description":"Townhall Meeting for 46th Legislative District",
+      "location_name":"Canton Township Municipal Building",
+      "address":"1265 W Chestnut St, Washington, PA 15301",
+      "time":"2020-03-03 19:00"
+   },
+   {
+      "username":"event2",
+      "full_name":"E-Cycling Event",
+      "description":"Clearing electronic items",
+      "location_name":"Original Farmers Market",
+      "address":"1265 W Chestnut St, Washington, PA 15301",
+      "time":"2020-08-03 13:00"
+   } 
+]

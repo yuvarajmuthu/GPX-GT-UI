@@ -43,7 +43,9 @@ export abstract class AbstractTemplateComponent {
       return this.keys;
     }
     
-    //abstract getData():string;
+    //abstract loadTemplateData();
+    //abstract loadDisplayProperties();
+
     
       setValue(jsonData) {
           console.log(' saved! the obj  - ' + JSON.stringify(jsonData));

@@ -13,15 +13,15 @@
   <button *ngIf="request.status == 'REQUESTED'" class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="loadUser()">Later</button>
 </div>
 -->
-<div class=""> 
-  <div class="userMain">
+<div class="box5">
+  <div class="userMain card">
       <div class="">
           <div class="userBlock">
               <div class="backgrounImg">
                   <img src="https://preview.ibb.co/miQjb7/photography4.jpg">
               </div>
               <div class="userImg">
-                 <!-- 
+                 <!--
                    <img src="https://image.ibb.co/es4AG7/author4.jpg">
                   -->
                   <img [src]="profileSmImage"
@@ -29,29 +29,54 @@
                   *ngIf="!isImageLoading">
               </div>
               <div class="userDescription">
-                  <h5>{{connection.sourceEntityId}}</h5> <!--sourceEntityId IS ONE WHO SENT REQUEST-->
+                  <h5 class="text-center">{{connection.sourceEntityId}}</h5> <!--sourceEntityId IS ONE WHO SENT REQUEST-->
+                <div class="card-body">
+                <p>Connection Id : {{connection.connectionUserId}}</p>
+                <p>User Id : {{connection.userId}}</p>
+                <p>User Type : {{connection.targetEntityType}}</p>
+                </div>
+
                   <!--
                   <p>Postion xx</p>
-                 
-                  
+
+
                    <div class="followrs">
                       <span class="number">137</span>
                        <span>Followers</span>
                    </div>
                   -->
                    <div *ngIf="connection.status === 'REQUESTED'">
-                       <button class="btn btn-outline-primary" type="button" (click)="acceptRequest(connection)">Accept</button>
-                       <button class="btn btn-outline-danger" type="button" (click)="denyRequest(connection)">Later</button>                       
+                     <ul class="icon">
+                       <li><a href="#" (click)="acceptRequest(connection)" class="fa fa-check bg-primary" title="Accept"> Accept </a></li>
+                       <li><a href="#" (click)="denyRequest(connection)" class="fa fa-ban bg-danger" title="Not Interested"> Not Interested </a></li>
+                       <li><a href="#" (click)="acceptRequest(connection)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                     </ul>
+                     <!--<button class="btn btn-outline-primary" type="button" (click)="acceptRequest(connection)">Accept</button>
+                     <button class="btn btn-outline-danger" type="button" (click)="denyRequest(connection)">Not Interested</button>
+                     <button class="btn btn-outline-warning" type="button" (click)="denyRequest(connection)"> View Profile </button>-->
                    </div>
+                <div *ngIf="connection.status != 'REQUESTED'">
+                     <ul class="icon">
+                       <li><a href="#" (click)="acceptRequest(connection)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                     </ul>
+
+                     <!--<button class="btn btn-outline-warning" type="button" (click)="denyRequest(connection)"> View Profile </button>-->
+                   </div>
+
+                <div class="box-content">
+                  <h5 class="title">{{connection.sourceEntityId}}</h5>
+                  <!--<span class="post">View Profile</span>-->
+                </div>
+
                    <!--
                    <span class="separator"></span>
                    <a href="">
                     <button class="btn">Later</button>
-                </a>   
-                -->             
+                </a>
+                -->
               </div>
-             
+
           </div>
       </div>
     </div>
-  </div>    
+  </div>

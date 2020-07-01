@@ -2,7 +2,7 @@
 <div class="col-xs-12">
   Find Legislators:
 </div>
-</div>  
+</div>
 
 <div class="address col-xs-12">
   Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
@@ -13,14 +13,14 @@
   <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>
 </div>
 
-<!-- 
+<!--
 
 
-      <div>Your State: 
+      <div>Your State:
         <button type="button" class="btn btn-primary">{{state}}</button>
       </div>
-      
-      <div>{{districtLabel}} 
+
+      <div>{{districtLabel}}
         <button *ngFor="let congressDistrict of congressDistricts" type="button" class="btn btn-primary" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
       </div>
 -->
@@ -44,7 +44,7 @@
       <!--
       <div>
         <label>Find your legislators: </label>
-     
+
         <input type="text" class="searchLegisBox" [(ngModel)]="ipZipcode" placeholder="Zipcode" />
 
         <label class="btn btn-success" uncheckable (click)="getCongressLegislatorsByZip(ipZipcode)">Search</label>
@@ -63,7 +63,7 @@
       </div> -->
 
       <div class="row">
-        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12" *ngFor="let legislator of legislators">
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 custom-hover-legislator card-body legislator-box-shadow" *ngFor="let legislator of legislators">
           <app-legislator [legislator]=legislator></app-legislator>
         </div>
       </div>

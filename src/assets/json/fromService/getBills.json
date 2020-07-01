@@ -1,0 +1,46 @@
+[
+    {
+       "createdDate":null,
+       "lastModifiedDate":"2020-03-03 19:52:25",
+       "id":"",
+       "profileTemplateId":"upDefault",
+       "data":{
+          "username":"H.R.7120",
+          "full_name":"H.R.7120 - George Floyd Justice in Policing Act of 2020",
+          "description":"",
+          "sponsors":["PAL000515"],
+          "committee":"",
+          "status":"Passed House",
+          "introductiondate":"2020-03-03 19:52:25"
+       },
+       "dataList":null,
+       "entityId":"PAL000515",
+       "entityType":"BILL",
+       "current":false,
+       "jsondata":{
+          "empty":false
+       }
+    },
+    {
+        "createdDate":null,
+        "lastModifiedDate":"2020-03-03 19:52:25",
+        "id":"",
+        "profileTemplateId":"upDefault",
+        "data":{
+           "username":"H.R.7414",
+           "full_name":"H.R.7414 - To establish the Taiwan Fellowship Program, and for other purposes",
+           "description":"",
+           "sponsors":["PAL000515"],
+           "committee":"",
+           "status":"Introduced",
+           "introductiondate":"2020-03-03 19:52:25"
+        },
+        "dataList":null,
+        "entityId":"PAL000515",
+        "entityType":"BILL",
+        "current":false,
+        "jsondata":{
+           "empty":false
+        }
+     }
+]

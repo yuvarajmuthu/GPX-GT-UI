@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +16,8 @@ import {UserService} from '../../../../services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UservotetemplateComponent extends AbstractTemplateComponent implements OnInit {
+  //@Input() officeObj:{}; 
+  //@Input() displayProperties: [];
 
   id = 'upVote';
   profileIcon = 'group';
@@ -25,12 +27,12 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
   displayObj = {};
   role = {};
   data = {};
-  viewingUser = {};
+  //viewingUser = {};
   editorData = '';
   isProfileInEditMode:boolean = false;
   inEditMode:boolean = false;
   roleTemplateForm: FormGroup; 
-  closeResult: string;
+  closeResult: string; 
 
   constructor(private userService2: UserService,
               private dataShareService2: DatashareService,
@@ -43,7 +45,7 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
       super(dataShareService2, communicationService);
 
       console.log('constructor() uservotetemplate.component');
-      this.viewingUser = this.dataShareService2.getViewingUser();
+      //this.viewingUser = this.dataShareService2.getViewingUser();
 
       communicationService.userProfileEditChanged$.subscribe(
           editmode => {
@@ -104,42 +106,14 @@ loadDisplayProperties() {
 }
 
 loadTemplateData() {
-    /*
-      this.userService2.getRoles(this.profileUserId).subscribe(
-        result => {
-          console.log(result.length);
-          this.roles = result;
-          console.log(this.roles);
-        });
-        this.zone.run(() => {
-          this.userService2.getRoles(this.profileUserId).toPromise().then((data) => {
-              this.roles= data;
-              console.log(this.roles);
-          });
-          })
-  */
-//this.zone.run(() => {
-
-    this.userService2.getRoles(this.profileUserId, this.viewingUser['isCongress'])
+    this.userService2.getVotes(this.profileUserId)
         .subscribe((data) => {
-            //console.log("roles count ", data.length);
-            //this.role = JSON.parse(JSON.stringify(data[0]));
-            //this.role['term'] = 'term';
+
             this.profileDatas = data;
-            //this.changeDetector.detectChanges();
             this.createFormGroup();
 
         });
-    /*
-    data.forEach(element => {
-      this.roles.push(JSON.parse(JSON.stringify(element)));
-      console.log(this.roles);
-      this.role = JSON.parse(JSON.stringify(element));
-    });
-    */
-//      });
 
-    //  });
 }
 
 createFormGroup() {
@@ -159,7 +133,7 @@ getFormData():any{
     const result: {} = Object.assign({}, this.roleTemplateForm.value);
     console.log("Role form ", result);
     return result;
-  }
+}
 
 saveProfile(){
     if(this.displayObj && this.displayObj['id']){
@@ -178,7 +152,7 @@ saveProfile(){
     } 
     );
 
-  }
+}
 
 
 }

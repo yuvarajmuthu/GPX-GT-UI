@@ -337,6 +337,7 @@ getBiodata(userId:string):Observable<any>{
   );                
 }
 
+
 getRoles(userId:string, isCongress:boolean):Observable<any>{ 
   let serviceUrl:string = "";//    
   if(this.devMode){
@@ -344,12 +345,10 @@ getRoles(userId:string, isCongress:boolean):Observable<any>{
   }else{
     serviceUrl = this.getUserService() +"/legis/roles/"+userId;
   }
-  //serviceUrl = '/assets/json/fromService/user-legis-Roles.json';
 
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
   return this.http.get(serviceUrl, this.httpOptions)
   .pipe(
-//    map((response:Response) => response.json()),
     tap(_ => this.log(`fetched getRoles`)),
     catchError(this.handleError<any>(`Error in getRoles()`))
   );                
@@ -366,24 +365,30 @@ getOffices(userId:string, isCongress:boolean):Observable<any>{
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
   return this.http.get(serviceUrl, this.httpOptions)
   .pipe(
-//    map((response:Response) => response.json()),
     tap(_ => this.log(`fetched getOffices`)),
     catchError(this.handleError<any>(`Error in getOffices()`))
   );                
 }
 
-/*
-getProfileImage(userId:string):Observable<any>{ 
-  let serviceUrl = this.getUserService() +"/legisv1/roles/"+userId;
-  let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+//If userId is a Bill Id, then get all the Votes for that Bill
+//If userId is a Legislator Id, then get all the Votes of that Legislator
+getVotes(userId:string):Observable<any>{ 
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getVotes.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+  }
+  serviceUrl = '/assets/json/fromService/getVotes.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
   return this.http.get(serviceUrl, this.httpOptions)
   .pipe(
-    //map((response:Response) => response.json()),
-    tap(_ => this.log(`fetched getRoles`)),
-    catchError(this.handleError<any>(`Error in getRoles()`))
+    tap(_ => this.log(`fetched getVotes`)),
+    catchError(this.handleError<any>(`Error in getVotes()`))
   );                
 }
-*/
+
   /* OBSOLETED BY getRelationStatus()*/
   getRelation(userId:string, districtId:string):Observable<any>{ 
     let serviceUrl = this.serviceUrl+"/getRelation";

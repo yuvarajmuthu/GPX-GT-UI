@@ -1,7 +1,24 @@
-<p>
-  Get the Event list
+<div class="container">
+  
+  <div class="card-media"  *ngFor="let event of events">
+    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(event)"> 
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+  </a>
+    <!-- media container -->
+    <div class="card-media-object-container">
+      <span class="subtle date-time">{{event.time | date: 'EEE,MMM dd'}}</span>
+      <span class="subtle date-time">{{event.time | date: 'h:mm a'}}</span>
+      <span class="subtle">{{event.location_name}}</span>
+    </div>
+    <!-- body container -->
+    <div class="card-media-body">
+      <div class="card-media-body-heading">{{event.full_name}}</div>
+      <div class="card-media-body-supporting-bottom">
+        <div class="event-description">{{event.description}}</div>
+        <span class="card-media-body-supporting-bottom-text subtle"><i class="fa fa-map-marker" aria-hidden="true"></i>{{event.address}}</span>
+      </div>
+    </div>
+  </div>
 
-  For each Event, display a Event card
-
-  Ability to Create new Event, Edit Event
-</p>
+ 
+</div>

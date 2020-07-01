@@ -1,53 +1,62 @@
 .card {
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 34, 51, 0.1);
-    box-shadow: 2px 4px 10px 0 rgba(0, 34, 51, 0.05), 2px 4px 10px 0 rgba(0, 34, 51, 0.05);
-    border-radius: 0.15rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 34, 51, 0.1);
+  box-shadow: 2px 4px 10px 0 rgba(0, 34, 51, 0.05), 2px 4px 10px 0 rgba(0, 34, 51, 0.05);
+  border-radius: 0.15rem;
 }
 
 /* Tabs Card */
 
 .tab-card {
-  border:1px solid #eee;
+  border: 1px solid #eee;
 }
 
 .tab-card-header {
-  background:none;
+  background: none;
 }
+
 /* Default mode */
 .tab-card-header > .nav-tabs {
   border: none;
   margin: 0px;
 }
+
 .tab-card-header > .nav-tabs > li {
   margin-right: 2px;
 }
+
 .tab-card-header > .nav-tabs > li > a {
   border: 0;
-  border-bottom:2px solid transparent;
+  border-bottom: 2px solid transparent;
   margin-right: 0;
   color: #737373;
   padding: 10px 100px;
-  border: 1px solid rgba(0,0,0,.125);
+
   border-radius: 10px;
 }
 
-.tab-card-header > .nav-tabs > li > a.show {
-    border-bottom:2px solid #007bff;
-    color: #007bff;
+.custom-resize-card {
+  padding: 15px;
 }
+
+.tab-card-header > .nav-tabs > li > a.show {
+  border-bottom: 2px solid #007bff;
+  color: #007bff;
+}
+
 .tab-card-header > .nav-tabs > li > a:hover {
-    color: #007bff;
+  color: #007bff;
 }
 
 .tab-card-header > .nav-tabs > li > a:active {
-    border: 1px solid #028ece;
-    border-radius: 10px;
+  border: 1px solid #028ece;
+  border-radius: 10px;
 }
 
 .tab-card-header > .tab-content {
   padding-bottom: 0;
 }
-.li-justify-content-center{
-    justify-content: center;
+
+.li-justify-content-center {
+  justify-content: center;
 }

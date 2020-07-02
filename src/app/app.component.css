@@ -1,9 +1,11 @@
 .active {
     color: #028ece !important;
 }
-
+.custom-padding-top-overall{
+    padding-top: 50px;
+}
 body {
-    padding-top: 70px;
+    padding-top: 82px;
     /* background: #edf2f6 !important; */
     background: #fff !important;
 }

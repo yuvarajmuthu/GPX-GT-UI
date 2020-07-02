@@ -30,11 +30,22 @@
   border-bottom: 2px solid transparent;
   margin-right: 0;
   color: #737373;
-  padding: 10px 100px;
+  padding: 1px 90px;
 
   border-radius: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+  .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+    padding: 0px 20px 0px 20px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+    padding: 0px 20px 0px 20px;
+  }
+}
 .custom-resize-card {
   padding: 15px;
 }
@@ -48,7 +59,7 @@
   color: #007bff;
 }
 
-.tab-card-header > .nav-tabs > li > a:active {
+.tab-card-header > .nav-tabs > li > a:active, a:active {
   border: 1px solid #028ece;
   border-radius: 10px;
 }

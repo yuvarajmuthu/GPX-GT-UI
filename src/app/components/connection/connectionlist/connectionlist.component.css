@@ -59,7 +59,7 @@
   color: #007bff;
 }
 
-.tab-card-header > .nav-tabs > li > a:active {
+.tab-card-header > .nav-tabs > li > a:active, a:active {
   border: 1px solid #028ece;
   border-radius: 10px;
 }

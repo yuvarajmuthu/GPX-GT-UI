@@ -122,3 +122,14 @@
   border-radius: 10px;
   transition: 1s;
 }
+@media only screen and (max-width: 600px) {
+  .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+    padding: 20px 15px 20px 15px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+    padding: 20px 15px 20px 15px;
+  }
+}

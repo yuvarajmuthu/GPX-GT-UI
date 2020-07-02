@@ -654,11 +654,10 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #028ece;
+  background: rgba(2, 142, 206, 0.33);
   position: absolute;
   top: -80px;
   left: 15px;
-  opacity: 0;
   z-index: 1;
   transition: all .35s ease
 }

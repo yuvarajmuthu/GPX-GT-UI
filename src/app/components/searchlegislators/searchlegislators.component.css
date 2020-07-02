@@ -1,3 +1,15 @@
+.border-right{
+  border-right:2px solid black;
+}
+.search-legislator-navpills{
+  display: block;
+    padding: .5rem 3rem;
+}
+.search-legislator-navpills > .badge {
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .legisBoundary{
     border: 1px solid lightblue;
     border-radius: 5px;
@@ -109,4 +121,15 @@
   border: 1.5px solid #028ece;
   border-radius: 10px;
   transition: 1s;
+}
+@media only screen and (max-width: 600px) {
+  .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+    padding: 20px 15px 20px 15px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+    padding: 20px 15px 20px 15px;
+  }
 }

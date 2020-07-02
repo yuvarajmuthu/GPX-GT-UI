@@ -1,3 +1,15 @@
+.border-right{
+  border-right:2px solid black;
+}
+.search-legislator-navpills{
+  display: block;
+    padding: .5rem 3rem;
+}
+.search-legislator-navpills > .badge {
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .legisBoundary{
     border: 1px solid lightblue;
     border-radius: 5px;

@@ -169,7 +169,7 @@
               <div class="col form-group">
                 <label>Description</label>
                 <!-- <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea> -->
-                <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
+                <ckeditor [config]="{ removeButtons: 'Maximize' }" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
               </div>
             </div>
 
@@ -198,9 +198,9 @@
                 <label>Description</label>
                 <!--<textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>-->
 
-                <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
+                <ckeditor [config]="{ removeButtons: 'Maximize' }" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
 
-                
+
 
               </div>
             </div>
@@ -239,7 +239,7 @@
               <div class="col form-group">
                 <label>Description</label>
                 <!-- <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea> -->
-                <ckeditor (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
+                <ckeditor [config]="{ removeButtons: 'Maximize' }" (change)="onChange($event)" [ngModel]="editorData" (ngModelChange)="editorData= $event"  formControlName="description"></ckeditor>
               </div>
             </div>
 

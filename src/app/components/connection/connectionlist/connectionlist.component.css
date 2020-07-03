@@ -59,15 +59,23 @@
   color: #007bff;
 }
 
-.tab-card-header > .nav-tabs > li > a:active, a:active {
+/*.tab-card-header > .nav-tabs > li > a:active, a:active {
   border: 1px solid #028ece;
   border-radius: 10px;
-}
-
+}*/
 .tab-card-header > .tab-content {
   padding-bottom: 0;
 }
 
 .li-justify-content-center {
   justify-content: center;
+}
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: none !important;
+}
+/*For Badge Active Purpose*/
+.badge-active{
+  background-color: #007bff !important;
 }

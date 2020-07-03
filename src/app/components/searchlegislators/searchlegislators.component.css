@@ -1,3 +1,6 @@
+.active{
+  background-color: #007bff;
+}
 .border-right{
   border-right:2px solid black;
 }
@@ -132,4 +135,7 @@
   .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
     padding: 20px 15px 20px 15px;
   }
+}
+.cursor-hand{
+  cursor: pointer;
 }

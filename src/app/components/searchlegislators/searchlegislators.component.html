@@ -4,23 +4,24 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <ul class="nav">
         <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-primary">Legislators</span>
+          <!--<a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchLegislator')">-->
+          <a class="nav-link search-legislator-navpills cursor-hand" routerLink="/searchLegislator">
+            <span class="badge badge-secondary active">Legislators</span>
           </a>
         </li>
         <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-primary">District</span>
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchDistrict')">
+            <span class="badge badge-secondary">District</span>
           </a>
         </li>
         <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-primary">Township</span>
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchTownShip')">
+            <span class="badge badge-secondary">Township</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-primary">HOA</span>
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchHOA')">
+            <span class="badge badge-secondary">HOA</span>
           </a>
         </li>
       </ul>
@@ -47,11 +48,11 @@
 
 
       <div>Your State:
-        <button type="button" class="btn btn-primary">{{state}}</button>
+        <button type="button" class="btn btn-secondary">{{state}}</button>
       </div>
 
       <div>{{districtLabel}}
-        <button *ngFor="let congressDistrict of congressDistricts" type="button" class="btn btn-primary" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
+        <button *ngFor="let congressDistrict of congressDistricts" type="button" class="btn btn-secondary" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
       </div>
 -->
       <div class="col-xs-6">

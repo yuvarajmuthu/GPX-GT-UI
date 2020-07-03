@@ -33,6 +33,7 @@ import { UservotetemplateComponent } from './usertemplate/uservotetemplate/userv
 import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userbilltemplate.component';
 import { UsereventformComponent } from './usertemplate/usereventtemplate/usereventform/usereventform.component';
 import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
+import { UservoteformComponent } from './usertemplate/uservotetemplate/uservoteform/uservoteform.component';
 @NgModule({
   imports: [
     CommonModule, 
@@ -52,10 +53,10 @@ import {GAddressSearchComponent} from '../g-address-search/g-address-search.comp
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 
-    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent, UsereventformComponent
+    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent, UsereventformComponent, UservoteformComponent
   ],
   entryComponents:[UserstageComponent,UserbannertemplateComponent, UsercommitteetemplateComponent, 
-    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent,UsereventformComponent],
+    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent,UsereventformComponent, UservoteformComponent],
   //exports:[UserstageComponent]
 })
 export class UserModule { }

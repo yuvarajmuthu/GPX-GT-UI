@@ -1,0 +1,46 @@
+<!-- <ng-template #content let-c="close" let-d="dismiss"> -->
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Vote</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close('Ok click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <ngForm> -->
+      <div class="form-group">
+        <label for="billname">Bill Name</label>
+        <input type="text" class="form-control" id="billname" name="billname" aria-describedby="Bill name" placeholder="Bill name" [(ngModel)]="billname">
+      </div>
+      <div class="">
+        <label for="vote">Voted</label>
+        <div class="row">
+          <div class="col-8">
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="yesvote" checked="true" name="vote" class="custom-control-input">
+              <label class="custom-control-label" for="yesvote">Yes</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input type="radio" id="novote" checked="false" name="vote" class="custom-control-input">
+              <label class="custom-control-label" for="novote">No</label>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="form-group">
+        <label for="rollcall">Rollcall</label>
+        <input type="text" class="form-control" id="rollcall" name="rollcall" aria-describedby="Rollcall" placeholder="Rollcall" [(ngModel)]="rollcall">
+      </div>
+
+      <div>
+        <label for="date">Date</label>
+        <div class="input-group">
+          <input type='date' class="form-control"  [(ngModel)]="date">
+        </div>
+      </div>
+
+    <!-- </ngForm> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="save()">Save</button>
+  </div>
+<!-- </ng-template> -->

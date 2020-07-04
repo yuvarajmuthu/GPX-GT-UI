@@ -389,6 +389,22 @@ getVotes(userId:string):Observable<any>{
   );                
 }
 
+getEvents(userId:string):Observable<any>{ 
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getEvents.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+  }
+  serviceUrl = '/assets/json/fromService/getEvents.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`fetched getEvents`)),
+    catchError(this.handleError<any>(`Error in getEvents()`))
+  );                
+}
   /* OBSOLETED BY getRelationStatus()*/
   getRelation(userId:string, districtId:string):Observable<any>{ 
     let serviceUrl = this.serviceUrl+"/getRelation";

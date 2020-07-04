@@ -27,7 +27,7 @@ export class UsereventtemplateComponent extends AbstractTemplateComponent implem
   data = {};
   viewingUser = {};
   editorData = '';
-  isProfileInEditMode:boolean = false;
+  isProfileInEditMode:boolean = false; 
   inEditMode:boolean = false;
   roleTemplateForm: FormGroup; 
   closeResult: string;
@@ -63,42 +63,34 @@ export class UsereventtemplateComponent extends AbstractTemplateComponent implem
 
 
   ngOnInit() {
-    let date = new Date();
-    this.events =[{
-      "full_name"	: "Lorem ipsum, or lipsum as it is",
-      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
-      "location_name":	"Thilagar thidal, chennai",
-      "address":	"#23,Anna nagar, chennai",
-      "time":	date
-    },
-    {
-      "full_name"	: "Lorem ipsum, or lipsum as it is",
-      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
-      "location_name":	"Thilagar thidal, chennai",
-      "address":	"#23,Anna nagar, chennai",
-      "time":	date
-    },
-    {
-      "full_name"	: "Lorem ipsum, or lipsum as it is",
-      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
-      "location_name":	"Thilagar thidal, chennai",
-      "address":	"#23,Anna nagar, chennai",
-      "time":	date
-    },
-    {
-      "full_name"	: "Lorem ipsum, or lipsum as it is",
-      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
-      "location_name":	"Thilagar thidal, chennai",
-      "address":	"#23,Anna nagar, chennai",
-      "time":	date
-    },
-    {
-      "full_name"	: "Lorem ipsum, or lipsum as it is",
-      "description":	"Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.",
-      "location_name":	"Thilagar thidal, chennai",
-      "address":	"#23,Anna nagar, chennai",
-      "time":	date
-    }]
+    this.inEditMode = this.dataShareService2.isProfileEditable();
+    this.loadDisplayProperties();     
+
+    this.loadTemplateData();  
+    
   }
 
+  loadDisplayProperties(){
+    for (let profileTemplates of this.viewingUser['profileTemplates']){
+
+      if(this.id == profileTemplates['profileTemplateId']){
+        this.displayProperties = profileTemplates['properties'];
+        break;  
+      }
+    } 
+  }
+
+  loadTemplateData(){
+
+
+        this.userService2.getEvents(this.profileUserId)
+        .subscribe((data) => {
+
+          this.events= data;
+
+
+          this.changeDetector.detectChanges();
+        }); 
+
+  }
 }

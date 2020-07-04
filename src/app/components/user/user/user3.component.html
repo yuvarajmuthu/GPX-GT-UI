@@ -75,49 +75,50 @@
                         @{{paramUsername}}
                     </div>
                     <h5>
-                    <!-- PARTY-begin -->
+                    <!-- CHAMBER-begin -->
 
-                        <span *ngIf="!isEditParty">
-                            <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}}</a>
-                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                        <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
+                            <a class="padding-pills" [routerLink]="['/user', biodata.chamber]">{{biodata.chamber}}</a>                                
+                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
-                        <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
-                        <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
-                            <ng-autocomplete
-                              [(ngModel)]="editPartyInput"
-                              [data]="searchUsers"
-                              placeHolder="Party"
-                              (inputChanged) = "onChangeSearch($event)"
-                              [searchKeyword]="keywordParty"
-                              [itemTemplate]="itemTemplate"
-                              [notFoundTemplate]="notFoundTemplate">
-                            </ng-autocomplete>
-                            <button class="save-button" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+                      <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" class="ng-autocomplete party-search">
+                        <ng-autocomplete
+                          [(ngModel)]="editChamberInput"
+                          [data]="searchUsers"
+                          placeHolder="Chamber"
+                          (inputChanged) = "onChangeSearch($event)"
+                          [searchKeyword]="keywordChamber"
+                          [itemTemplate]="itemTemplate"
+                          [notFoundTemplate]="notFoundTemplate">
+                        </ng-autocomplete>
+                        <button class="save-button" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 
 
-                            <ng-template #itemTemplate let-item>
-                              <div class="item">
-                                <img src="{{item.photoUrl}}" height="25">
-                                <span [innerHTML]="item.firstName"></span>
-                                <small></small>
-                              </div>
-                            </ng-template>
-                          
-                            <ng-template #notFoundTemplate let-notFound>
-                              <div [innerHTML]="notFound"></div>
-                            </ng-template>
+                        <ng-template #itemTemplate let-item>
+                          <div class="item">
+                            <img src="{{item.photoUrl}}" height="25">
+                            <span [innerHTML]="item.firstName"></span>
+                            <small></small>
                           </div>
-                          <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
-                            <input [(ngModel)]="biodata.party" type="text" />
-                            <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                          </div>
-                    <!-- PARTY-end -->
+                        </ng-template>
+                      
+                        <ng-template #notFoundTemplate let-notFound>
+                          <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                      </div>
+                      <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'text'">
+                        <input [(ngModel)]="biodata.chamber" type="text" />
+                        <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                      </div>
+                    <!-- CHAMBER-end -->
                     </h5>
+                    
 
                     <h5>
                     <!-- DISTRICT-begin -->
                         <span *ngIf="!isEditDistrict" class="profile-pills">
-                            <a class="padding-pills" [routerLink]="['/user', biodata.district]">{{biodata.district}}</a>                                
+                            <a class="padding-pills" [routerLink]="['/user', biodata.district]">District {{biodata.district}}</a>                                
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
                         <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
@@ -152,47 +153,11 @@
                           </div>
                         <!-- DISTRICT-end -->
 
-                        <!-- CHAMBER-begin -->
-
-                          <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
-                                <a class="padding-pills" [routerLink]="['/user', biodata.chamber]">{{biodata.chamber}}</a>                                
-                                <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                            </span>
-
-                          <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" class="ng-autocomplete party-search">
-                            <ng-autocomplete
-                              [(ngModel)]="editChamberInput"
-                              [data]="searchUsers"
-                              placeHolder="Chamber"
-                              (inputChanged) = "onChangeSearch($event)"
-                              [searchKeyword]="keywordChamber"
-                              [itemTemplate]="itemTemplate"
-                              [notFoundTemplate]="notFoundTemplate">
-                            </ng-autocomplete>
-                            <button class="save-button" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-
-
-                            <ng-template #itemTemplate let-item>
-                              <div class="item">
-                                <img src="{{item.photoUrl}}" height="25">
-                                <span [innerHTML]="item.firstName"></span>
-                                <small></small>
-                              </div>
-                            </ng-template>
-                          
-                            <ng-template #notFoundTemplate let-notFound>
-                              <div [innerHTML]="notFound"></div>
-                            </ng-template>
-                          </div>
-                          <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'text'">
-                            <input [(ngModel)]="biodata.chamber" type="text" />
-                            <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                          </div>
-                        <!-- CHAMBER-end -->
+                        
 
                           <!-- STATE-begin -->
                           <span  *ngIf="!isEditState" class="profile-pills">
-                             <a class="padding-pills" [routerLink]="['/user', biodata.state]">{{biodata.state}}</a>
+                             <a class="padding-pills" [routerLink]="['/user', biodata.state]">{{biodata.state | uppercase}}</a>
                              <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </span>
 
@@ -227,6 +192,45 @@
                         </div>
                         <!-- STATE-end -->
                     </h5>
+                    <h5>
+                        <!-- PARTY-begin -->
+    
+                            <span *ngIf="!isEditParty">
+                                <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}} Party</a>
+                                <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            </span>
+                            <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
+                            <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
+                                <ng-autocomplete
+                                  [(ngModel)]="editPartyInput"
+                                  [data]="searchUsers"
+                                  placeHolder="Party"
+                                  (inputChanged) = "onChangeSearch($event)"
+                                  [searchKeyword]="keywordParty"
+                                  [itemTemplate]="itemTemplate"
+                                  [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
+                                <button class="save-button" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+    
+    
+                                <ng-template #itemTemplate let-item>
+                                  <div class="item">
+                                    <img src="{{item.photoUrl}}" height="25">
+                                    <span [innerHTML]="item.firstName"></span>
+                                    <small></small>
+                                  </div>
+                                </ng-template>
+                              
+                                <ng-template #notFoundTemplate let-notFound>
+                                  <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                              </div>
+                              <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
+                                <input [(ngModel)]="biodata.party" type="text" />
+                                <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                              </div>
+                        <!-- PARTY-end -->
+                        </h5>
                 </div>    
                 <div *ngIf="entityType === 'PUBLICUSER'">
                     <h4>
@@ -265,7 +269,8 @@
                     <span class="badge badge-pill badge-primary pointer" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
                     <span class="vseparator"></span>
                     <span class="badge badge-pill badge-primary pointer" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
-
+                    <span class="vseparator"></span>
+                    <span class="badge badge-pill badge-primary pointer" (click)="addToMyCircle()">Add to My Circle<i class="fa fa-star-o"></i></span>
                 </div>
 
 
@@ -396,7 +401,6 @@
                                                                                 *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
                                                                                     <i class="material-icons">{{profileTemplate.profileIcon}}</i>
                                                                                     {{profileTemplate.name}}
-                                                                                    <!--{{profileTemplate.profileTemplateId}}-->
                                                                                 </a>
                                                                                 <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
 

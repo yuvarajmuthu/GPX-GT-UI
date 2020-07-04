@@ -198,6 +198,7 @@
   } */
   
   .card-media-body-supporting-bottom-text {
+    margin:15px;
     display: inline-block;
   }
   

@@ -1,3 +1,28 @@
-<p>
-  uservotetemplate works!
-</p>
+<div class="container">
+  
+  <div class="card-media"  *ngFor="let vote of votes">
+    <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(vote)"> 
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+  </a>
+    <!-- media container -->
+    <!-- <div class="card-media-object-container">
+      <span class="subtle date-time">{{vote.votedate | date: 'EEE,MMM dd'}}</span>
+      <span class="subtle date-time" *ngIf="vote.voteoption == 'Yes'">Voted</span>
+      <span class="subtle date-time" *ngIf="vote.voteoption == 'No'">Not Voted</span>
+    </div> -->
+    <!-- body container -->
+    <div class="card-media-body">
+      <span class="subtle date-time">{{vote.votedate | date: 'EEE,MMM dd'}}</span>
+      <div class="card-media-body-heading">{{vote.billname}}</div>
+      <div class="card-media-body-supporting-bottom">
+        <span class="badge badge-pill badge-primary" *ngIf="vote.voteoption == 'Yes'">Voted</span>
+        <span class="badge badge-pill badge-primary" *ngIf="vote.voteoption == 'No'">No Voted</span>
+        <span class="badge badge-pill badge-primary roll-call-badge">Rollcall<span class="badge badge-light">{{vote.rollcall}}</span></span>
+
+        <!-- <div class="event-description">{{vote.rollcall}}</div> -->
+      </div>
+    </div>
+  </div>
+
+ 
+</div>

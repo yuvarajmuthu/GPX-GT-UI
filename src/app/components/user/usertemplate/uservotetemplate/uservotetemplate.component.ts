@@ -2,6 +2,7 @@ import {Component, OnInit, Input, ChangeDetectorRef, ChangeDetectionStrategy} fr
 import {FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { UservoteformComponent } from './uservoteform/uservoteform.component'
 
 import {CKEditor4} from 'ckeditor4-angular/ckeditor'; 
 
@@ -27,6 +28,7 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
   displayObj = {};
   role = {};
   data = {};
+  votes:any;
   //viewingUser = {};
   editorData = '';
   isProfileInEditMode:boolean = false;
@@ -64,18 +66,40 @@ export class UservotetemplateComponent extends AbstractTemplateComponent impleme
 
     this.loadTemplateData();
     this.inEditMode = this.dataShareService2.isProfileEditable();
+
+    let date = new Date();
+    this.votes =[{
+      "billname"	: "Lorem ipsum, or lipsum as it is",
+      "voteoption":	"Yes",
+      "rollcall":	"100",
+      "votedate":	date
+    },
+    {
+        "billname"	: "Lorem ipsum, or lipsum as it is",
+        "voteoption":	"No",
+        "rollcall":	"12",
+        "votedate":	date
+    }]
+
+
   }
-  open(content, displayObj) { 
-    if(displayObj === ''){
-      displayObj = null;
-    }
-    this.displayObj = displayObj;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-}
+
+  open(vote) {
+    const modalRef = this.modalService.open(UservoteformComponent);
+    modalRef.componentInstance.votedetails = vote;
+  }
+
+//   open(content, displayObj) { 
+//     if(displayObj === ''){
+//       displayObj = null;
+//     }
+//     this.displayObj = displayObj;
+//     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+//         this.closeResult = `Closed with: ${result}`;
+//     }, (reason) => {
+//         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+//     });
+// }
 
 public onChange(event: CKEditor4.EventInfo) {
     console.log(event.editor.getData());

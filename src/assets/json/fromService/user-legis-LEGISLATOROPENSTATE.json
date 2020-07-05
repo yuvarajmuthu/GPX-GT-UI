@@ -167,7 +167,35 @@
               "type":"date"
            }
         ]
-     }
+     },
+     {
+        "profileTemplateId": "upVote",
+        "type": "LEGISLATOR",
+        "name": "Vote",
+        "profileIcon": "call_split",
+        "properties": [
+          {
+            "propId": "billname",
+            "displayLabel": "Bill Name",
+            "type": "entity"
+          },
+          {
+            "propId": "voteoption",
+            "displayLabel": "Vote",
+            "type": "text"
+          },
+          {
+            "propId": "rollcall",
+            "displayLabel": "Rollcall",
+            "type": "text"
+          },
+          {
+            "propId": "votedate",
+            "displayLabel": "Date",
+            "type": "date"
+          }
+        ]
+      }
     ],
     "profileDatas":[
        {

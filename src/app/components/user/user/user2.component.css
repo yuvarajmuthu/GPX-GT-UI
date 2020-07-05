@@ -4,6 +4,10 @@
     margin-right: 5px;
     border: none !important;
     background: none !important;
+    position: relative;
+    top: -15px;
+    left: 25px;
+    font-size: 15px;;
   }
   .image-upload-container{
     border: 1px solid rgba(0,0,0,0.54);
@@ -240,7 +244,7 @@ input[type="file"] {
     left: -20px;
     z-index: 100;*/
     position: absolute;
-    z-index: 100;
+    /* z-index: 100; */
     left: 170px;
     top: 355px;
 }
@@ -252,7 +256,7 @@ input[type="file"] {
 @media only screen and (max-width: 600px) {
     .edit-photo{
         position: absolute;
-        z-index: 100;
+        /* z-index: 100; */
         left: 225px;
         top: 355px;
     }
@@ -282,6 +286,13 @@ input[type="file"] {
         right: 0%;
         z-index: 1;
     }
+    .dropdownAddSection{
+      position: fixed;
+      top: 66%;
+      right: 0px;
+      z-index: 2;
+      width: 40px;
+    }
     .sidebar-div-desktop{
         display: none;
     }
@@ -292,10 +303,9 @@ input[type="file"] {
         background-color: white;
       }
       
-      .sticky + .content {
+      /* .sticky + .content {
         padding-top: 102px;
-      } 
-
+      }  */
       .bottom-tabs{
         position: -webkit-sticky;  
         left: 0px;
@@ -328,8 +338,34 @@ input[type="file"] {
         background-color: white;
         width: 100%;
       }
+      .d-inline-block {
+        margin-top: 7px;
+        float: right;
+        position: fixed;
+        top: 66%;
+        right: 0%;
+        width: 40px;
+        z-index: 1;
+    }
+    #dropdownAddSection{
+        left:-30% !important;
+        z-index: 1000 !important;
+    }
 }
 @media only screen and (min-width: 600px) {
+    #dropdownAddSection{
+        left:-25px !important;
+    }
+    .d-inline-block {
+        margin-top: 7px;
+        float: right;
+        margin-right: 7px;
+    }
+    .dropdown{
+        margin-top: 7px;
+        float: right;
+        margin-right: 7px;
+    }
     .fullname-display{
         width: 70%;
         font-size: 26px;
@@ -424,9 +460,33 @@ ng-autocomplete{
     padding-top: 10px;
 }
 .fa{
-    font-size: 20px;
+    font-size: 13px;
 }
 .paddingTop10{
   padding-bottom: 10px;
 }
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 0 1.25rem;
+}
+
+.mobile-bottom-tabs li:nth-child(1) {
+    width: 25% !important;
+  }
+  .mobile-bottom-tabs li:nth-child(2) {
+    width: 25% !important;
+  } 
+  .mobile-bottom-tabs li:nth-child(3) {
+    width: 33% !important;
+  } 
+  .mobile-bottom-tabs li:nth-child(4) {
+    width: 17% !important;
+  }
+  .dropdown-templates-bottom{
+      display: block;
+  }
+  .dropup .dropdown-menu {
+    left: -100px;
+  }
 

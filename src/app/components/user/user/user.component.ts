@@ -14,6 +14,7 @@ import {
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 
 import {Legislator} from '../../../models/legislator';
 import {User} from '../../../models/user';
@@ -41,6 +42,9 @@ export class UserComponent implements OnInit {
     @Input() profileUserId: string = '';
     legisId: string = '';
     activeTemplate: string="upOffices";
+    activeTemplatName:string = "Office";
+    showDropDown : boolean = false;
+
 
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
@@ -139,6 +143,7 @@ export class UserComponent implements OnInit {
     keywordState = 'firstName';
     editStateInput : any;
 
+
     header:any;
     sticky:any;
     deviceInfo = this.deviceService.getDeviceInfo();
@@ -203,7 +208,9 @@ export class UserComponent implements OnInit {
                 private legislatorsService: LegislatorService,
                 private datashareService: DatashareService,
                 private deviceService: DeviceDetectorService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private config:NgbDropdownConfig) {
+                  //  config.placement = 'top-left';
         this.currentUser = this.datashareService.getCurrentUser();
 
         communicationService.userProfileEditChanged$.subscribe(
@@ -373,7 +380,8 @@ export class UserComponent implements OnInit {
         this.isActivityCollapsed = false;
     }
 
-    Profiles() {
+    Profiles(activeTemplatName) {
+        this.activeTemplatName =activeTemplatName;
         this.activitiesData = false;
         this.profileData = true;
         this.folow = false;
@@ -1111,4 +1119,10 @@ export class UserComponent implements OnInit {
 
         this.availableProfileTemplates.push(profileTemplateParam);
     }
+
+    toggleTemplateDropDown(){
+        this.showDropDown = !this.showDropDown;
+        
+    }
+
 }

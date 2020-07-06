@@ -10,7 +10,7 @@
     "divisions": {
      "ocd-division/country:us": {
       "name": "United States",
-      "officeIndices": [
+      "officeIndices": [ 
        0,
        1
       ]

@@ -23,6 +23,7 @@ import {GAddressSearchComponent} from '../../components/g-address-search/g-addre
 export class SearchlegislatorsComponent implements OnInit {
   legislators: Array<any> = [];
   legislator = {};
+  legislatorsData = {};//{'names':['U.S. Senator', 'U.S. Representative'], 'U.S. Senator':[{}],'U.S. Representative':[{}]}
   resultop: any;
   resultop1: any;
   ipZipcode: String = '';
@@ -229,22 +230,23 @@ export class SearchlegislatorsComponent implements OnInit {
               let officials = [];
               officials = result['officials'];
 
-              for (var i = 0; i < officials.length; i++) {
-                let legislator = {};
+              for (var i = 0; i < offices.length; i++) {
                 if (offices[i] && offices[i]['name'] &&
-                  (offices[i]['name'].indexOf('United States Senate') != -1 ||
-                    offices[i]['name'].indexOf('United States House of Representatives') != -1)) {
-                  // console.log("offices[i]['name'] " + offices[i]['name']);
-                  //console.log("offices[i]['name'].indexOf('United States Senate') " + offices[i]['name'].indexOf('United States Senate'));
-                  //console.log("offices[i]['name'].indexOf('United States House of Representatives') " + offices[i]['name'].indexOf('United States House of Representatives'));
-                  //console.log("flag " + (offices[i]['name'] &&
-                  //   (offices[i]['name'].indexOf('United States Senate') != -1 || offices[i]['name'].indexOf('United States House of Representatives') != -1)));
+                  //(offices[i]['name'].indexOf('United States Senate') != -1 ||
+                  //  offices[i]['name'].indexOf('United States House of Representatives') != -1)) {
+                  (offices[i]['name'].indexOf('U.S. Senator') != -1 ||
+                  offices[i]['name'].indexOf('U.S. Representative') != -1)) {
+                    let officialIndices = [];
+                    officialIndices = offices[i]['officialIndices'];
+                    for (var m = 0; m < officialIndices.length; m++) {
+                    /////B
+                    let k = officialIndices[m];
+                    let legislator = {};
 
-                  legislator['full_name'] = officials[i]['name'];
-                  legislator['party'] = officials[i]['party'];
-                  legislator['photo_url'] = officials[i]['photoUrl'];
+                  legislator['full_name'] = officials[k]['name'];
+                  legislator['party'] = officials[k]['party'];
+                  legislator['photo_url'] = officials[k]['photoUrl'];
 
-                  console.log('offices[i] ' + JSON.stringify(offices[i]));
 
                   if (offices[i]['name']) {
                     legislator['role'] = offices[i]['name'];
@@ -253,25 +255,14 @@ export class SearchlegislatorsComponent implements OnInit {
                   let division: string = offices[i]['divisionId'];
                   legislator['ocdId'] = division; //division id from google civic
                   if (division.indexOf('state:') != -1) {
-                    legislator['state'] = division.substr(division.indexOf('state:') + 6, 2).toUpperCase();
+                    legislator['state'] = division.substr(division.indexOf('state:') + 6, 2);
                   }
 
+                  //CD level data
                   if (division.indexOf('cd:') != -1) {
                     legislator['district'] = division.substr(division.indexOf('cd:') + 3, 2);
                   }
 
-                  //setting DUMMY id
-                  //legislator['district'] = "5a6ea6ce77b2ae4ae0099564";
-                  //legislator['district'] = "5afbaa41fdec9538d4c9ddf8"; // from aws
-                  //legislator['district'] = "5a6ea3c677b2ae4ae0099561";
-                  /*
-                             //DISPLAY DISTRICT
-                            let district:any = {};
-                            district['name'] = legislator['district'];
-                            district['state'] = legislator['state'];
-                            district['ocdId'] = division; //division id from google civic
-                            this.congressDistricts.push(district);
-                  */
 
                   if (offices[i]['roles'] && offices[i]['roles'].length > 0) {
                     legislator['chamber'] = offices[i]['roles'][0];
@@ -279,6 +270,7 @@ export class SearchlegislatorsComponent implements OnInit {
 
                   this.legislators.push(legislator);
                   this.legislator = legislator;
+                  }
                 }
               }
             } else {

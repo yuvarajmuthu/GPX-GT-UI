@@ -55,16 +55,16 @@
         <button *ngFor="let congressDistrict of congressDistricts" type="button" class="btn btn-secondary" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
       </div>
 -->
-      <div class="col-xs-6">
+      <div class="col-xs-6" *ngIf="state">
         <div class="input-group mb-3">
           <span class="input-group-text" id="lblState">State</span>
           <div class="input-group-append">
-            <button class="btn btn-info" type="button" id="btnState">{{state}}</button>
+            <button class="btn btn-info" type="button" id="btnState">{{state | uppercase}}</button>
           </div>
         </div>
       </div>
 
-      <div class="col-xs-6">
+      <div class="col-xs-6" *ngIf="districtLabel">
         <div class="input-group mb-3">
           <span class="input-group-text" id="lblDistrict">{{districtLabel}}</span>
           <div class="input-group-append" *ngFor="let congressDistrict of congressDistricts">
@@ -94,7 +94,8 @@
       </div> -->
 
       <div class="row">
-        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 custom-hover-legislator card-body legislator-box-shadow" *ngFor="let legislator of legislators">
+        <!--<div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 custom-hover-legislator card-body legislator-box-shadow" *ngFor="let legislator of legislators">-->
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let legislator of legislators">
           <app-legislator [legislator]=legislator></app-legislator>
         </div>
       </div>

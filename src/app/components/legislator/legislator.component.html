@@ -6,18 +6,25 @@
     <figcaption>
       <h3>{{legislator.full_name}}</h3>
       <p>State: {{legislator.state}}</p>
-      <p>District: {{legislator.district}}</p>          
+      <p>District: {{legislator.district}}</p>
       <p>Chamber: {{legislator.chamber}}</p>
-      <p>Party: {{legislator.party}}</p>          
-    
+      <p>Party: {{legislator.party}}</p>
+
     </figcaption>
   </figure>
 </div> -->
 
 	<div class="card btn-3">
-		<div class="card-body text-center">
+		<div class="card-body text-center hover-effects-in-search-legislator">
+
+      <fieldset class="rating">
+
+        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+
+      </fieldset>
+
 			<p class="">
-        
+
         <img class="img-fluid rounded rounded-circle img-custom-size-legislator cursor-default" src="{{legislator.photo_url}}">
         <!-- <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
         <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
@@ -33,7 +40,8 @@
       Party: <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);" class="hvr-underline-from-center" title="View this Party">{{legislator.party}}</a>
       <br/>
       <br/>
-      
+      </p>
+
       <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" title="View this Profile" class="btn btn-secondary btn-sm">
         <!-- <i class="fa fa-eye"></i> -->
         View profile

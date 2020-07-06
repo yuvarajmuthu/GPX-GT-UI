@@ -1,0 +1,987 @@
+{
+    "normalizedInput": {
+      "line1": "300 Chatham Park Drive",
+      "city": "Pittsburgh",
+      "state": "PA",
+      "zip": "15220"
+    },
+    "kind": "civicinfo#representativeInfoResponse",
+    "divisions": {
+      "ocd-division/country:us/state:pa": {
+        "name": "Pennsylvania",
+        "officeIndices": [
+          2,
+          4,
+          5,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "ocd-division/country:us/state:pa/sldu:42": {
+        "name": "Pennsylvania State Senate district 42",
+        "officeIndices": [
+          6
+        ]
+      },
+      "ocd-division/country:us": {
+        "name": "United States",
+        "officeIndices": [
+          0,
+          1
+        ]
+      },
+      "ocd-division/country:us/state:pa/sldl:42": {
+        "name": "Pennsylvania State House district 42",
+        "officeIndices": [
+          7
+        ]
+      },
+      "ocd-division/country:us/state:pa/county:allegheny/school_district:chartiers_valley_sd": {
+        "name": "chartiers valley sd"
+      },
+      "ocd-division/country:us/state:pa/cd:17": {
+        "name": "Pennsylvania's 17th congressional district",
+        "officeIndices": [
+          3
+        ]
+      },
+      "ocd-division/country:us/state:pa/county:allegheny": {
+        "name": "Allegheny County",
+        "officeIndices": [
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ]
+      },
+      "ocd-division/country:us/state:pa/county:allegheny/council_district:4": {
+        "name": "Allegheny County PA County Council District 4",
+        "officeIndices": [
+          19
+        ]
+      },
+      "ocd-division/country:us/state:pa/county:allegheny/place:scott": {
+        "name": "Scott township"
+      }
+    },
+    "offices": [
+      {
+        "name": "President of the United States",
+        "divisionId": "ocd-division/country:us",
+        "levels": [
+          "country"
+        ],
+        "roles": [
+          "headOfState",
+          "headOfGovernment"
+        ],
+        "officialIndices": [
+          0
+        ]
+      },
+      {
+        "name": "Vice President of the United States",
+        "divisionId": "ocd-division/country:us",
+        "levels": [
+          "country"
+        ],
+        "roles": [
+          "deputyHeadOfGovernment"
+        ],
+        "officialIndices": [ 
+          1
+        ]
+      },
+      {
+        "name": "U.S. Senator",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "country"
+        ],
+        "roles": [
+          "legislatorUpperBody"
+        ],
+        "officialIndices": [
+          2,
+          3
+        ]
+      },
+      {
+        "name": "U.S. Representative",
+        "divisionId": "ocd-division/country:us/state:pa/cd:17",
+        "levels": [
+          "country"
+        ],
+        "roles": [
+          "legislatorLowerBody"
+        ],
+        "officialIndices": [
+          4
+        ]
+      },
+      {
+        "name": "Governor of Pennsylvania",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "roles": [
+          "headOfGovernment"
+        ],
+        "officialIndices": [
+          5
+        ]
+      },
+      {
+        "name": "Lieutenant Governor of Pennsylvania",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "roles": [
+          "deputyHeadOfGovernment"
+        ],
+        "officialIndices": [
+          6
+        ]
+      },
+      {
+        "name": "PA State Senator",
+        "divisionId": "ocd-division/country:us/state:pa/sldu:42",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "roles": [
+          "legislatorUpperBody"
+        ],
+        "officialIndices": [
+          7
+        ]
+      },
+      {
+        "name": "PA State Representative",
+        "divisionId": "ocd-division/country:us/state:pa/sldl:42",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "roles": [
+          "legislatorLowerBody"
+        ],
+        "officialIndices": [
+          8
+        ]
+      },
+      {
+        "name": "PA Supreme Court Associate Justice",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "officialIndices": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ]
+      },
+      {
+        "name": "PA Attorney General",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "officialIndices": [
+          15
+        ]
+      },
+      {
+        "name": "PA Auditor General",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "officialIndices": [
+          16
+        ]
+      },
+      {
+        "name": "PA Supreme Court Chief Justice",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "officialIndices": [
+          17
+        ]
+      },
+      {
+        "name": "PA State Treasurer",
+        "divisionId": "ocd-division/country:us/state:pa",
+        "levels": [
+          "administrativeArea1"
+        ],
+        "officialIndices": [
+          18
+        ]
+      },
+      {
+        "name": "Allegheny County Council Member",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          19,
+          20
+        ]
+      },
+      {
+        "name": "Allegheny County Controller",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          21
+        ]
+      },
+      {
+        "name": "Allegheny County Treasurer",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          22
+        ]
+      },
+      {
+        "name": "Allegheny Sheriff",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          23
+        ]
+      },
+      {
+        "name": "Allegheny County District Attorney",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          24
+        ]
+      },
+      {
+        "name": "Allegheny County Executive",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          25
+        ]
+      },
+      {
+        "name": "Allegheny County Council Member",
+        "divisionId": "ocd-division/country:us/state:pa/county:allegheny/council_district:4",
+        "levels": [
+          "administrativeArea2"
+        ],
+        "officialIndices": [
+          26
+        ]
+      }
+    ],
+    "officials": [
+      {
+        "name": "Donald J. Trump",
+        "address": [
+          {
+            "line1": "1600 Pennsylvania Avenue Northwest",
+            "city": "Washington",
+            "state": "DC",
+            "zip": "20500"
+          }
+        ],
+        "party": "Republican Party",
+        "phones": [
+          "(202) 456-1111"
+        ],
+        "urls": [
+          "https://www.whitehouse.gov/"
+        ],
+        "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/PE%20Color.jpg",
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "DonaldTrump"
+          },
+          {
+            "type": "Twitter",
+            "id": "potus"
+          },
+          {
+            "type": "YouTube",
+            "id": "whitehouse"
+          }
+        ]
+      },
+      {
+        "name": "Mike Pence",
+        "address": [
+          {
+            "line1": "1600 Pennsylvania Avenue Northwest",
+            "city": "Washington",
+            "state": "DC",
+            "zip": "20500"
+          }
+        ],
+        "party": "Republican Party",
+        "phones": [
+          "(202) 456-1111"
+        ],
+        "urls": [
+          "https://www.whitehouse.gov/"
+        ],
+        "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "mikepence"
+          },
+          {
+            "type": "Twitter",
+            "id": "VP"
+          }
+        ]
+      },
+      {
+        "name": "Patrick J. Toomey",
+        "address": [
+          {
+            "line1": "248 Russell Senate Office Building",
+            "city": "Washington",
+            "state": "DC",
+            "zip": "20510"
+          }
+        ],
+        "party": "Republican Party",
+        "phones": [
+          "(202) 224-4254"
+        ],
+        "urls": [
+          "https://www.toomey.senate.gov/"
+        ],
+        "photoUrl": "http://bioguide.congress.gov/bioguide/photo/T/T000461.jpg",
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "senatortoomey"
+          },
+          {
+            "type": "Twitter",
+            "id": "SenToomey"
+          },
+          {
+            "type": "YouTube",
+            "id": "sentoomey"
+          }
+        ]
+      },
+      {
+        "name": "Robert P. Casey Jr.",
+        "address": [
+          {
+            "line1": "393 Russell Senate Office Building",
+            "city": "Washington",
+            "state": "DC",
+            "zip": "20510"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(202) 224-6324"
+        ],
+        "urls": [
+          "https://www.casey.senate.gov/"
+        ],
+        "photoUrl": "http://bioguide.congress.gov/bioguide/photo/C/C001070.jpg",
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "SenatorBobCasey"
+          },
+          {
+            "type": "Twitter",
+            "id": "SenBobCasey"
+          },
+          {
+            "type": "YouTube",
+            "id": "SenatorBobCasey"
+          }
+        ]
+      },
+      {
+        "name": "Conor Lamb",
+        "address": [
+          {
+            "line1": "1224 Longworth House Office Building",
+            "city": "Washington",
+            "state": "DC",
+            "zip": "20515"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(202) 225-2301"
+        ],
+        "urls": [
+          "https://lamb.house.gov/"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "RepConorLamb"
+          },
+          {
+            "type": "Twitter",
+            "id": "RepConorLamb"
+          }
+        ]
+      },
+      {
+        "name": "Tom Wolf",
+        "address": [
+          {
+            "line1": "508 Main Capitol Building",
+            "city": "Harrisburg",
+            "state": "PA",
+            "zip": "17120"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-2500"
+        ],
+        "urls": [
+          "https://www.governor.pa.gov/"
+        ],
+        "photoUrl": "https://www.governor.pa.gov/wp-content/uploads/2015/05/Governor_Tom_Wolf-e1437147843966.jpg",
+        "emails": [
+          "Governor@pa.gov"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "governorwolf"
+          },
+          {
+            "type": "Twitter",
+            "id": "governortomwolf"
+          },
+          {
+            "type": "YouTube",
+            "id": "UC8cXXCdLzcYoYGa_BqaPsgA"
+          }
+        ]
+      },
+      {
+        "name": "John Fetterman",
+        "address": [
+          {
+            "line1": "225 Main Capitol",
+            "city": "Harrisburg",
+            "state": "PA",
+            "zip": "17120"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-3300"
+        ],
+        "urls": [
+          "https://www.ltgov.pa.gov/Pages/Home.aspx"
+        ],
+        "emails": [
+          "LGoffice@pa.gov"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "JohnFettermanPA"
+          },
+          {
+            "type": "Twitter",
+            "id": "JohnFetterman"
+          }
+        ]
+      },
+      {
+        "name": "Wayne D. Fontana",
+        "address": [
+          {
+            "line1": "Room: 543 Main Capitol\nSenator Wayne Fontana",
+            "line2": "932 brookline boulevard",
+            "city": "pittsburgh",
+            "state": "PA",
+            "zip": "15226"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-5300"
+        ],
+        "urls": [
+          "http://www.legis.state.pa.us/cfdocs/legis/home/member_information/Senate_bio.cfm?id=1041"
+        ],
+        "photoUrl": "http://www.pasen.gov/members/districts/sd42/images/1041.jpg",
+        "emails": [
+          "fontana@pasenate.com"
+        ],
+        "channels": [
+          {
+            "type": "Twitter",
+            "id": "waynedfontana"
+          }
+        ]
+      },
+      {
+        "name": "Daniel L. \"Dan\" Miller",
+        "address": [
+          {
+            "line1": "217 IRVIS OFFCE BUILDING",
+            "city": "Harrisburg",
+            "state": "PA",
+            "zip": "17120"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 783-1850"
+        ],
+        "urls": [
+          "http://www.legis.state.pa.us/cfdocs/legis/home/member_information/House_bio.cfm?id=1679"
+        ],
+        "photoUrl": "http://www.legis.state.pa.us/images/members/200/1679.jpg",
+        "emails": [
+          "dmiller@pahouse.net"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "RepDanMiller"
+          },
+          {
+            "type": "Twitter",
+            "id": "RepDanMiller"
+          }
+        ]
+      },
+      {
+        "name": "Sallie Updyke Mundy",
+        "party": "Republican Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "David N. Wecht",
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "Christine Donohue",
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "Kevin M. Dougherty",
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "Max Baer",
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "Debra Todd",
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "Josh Shapiro",
+        "address": [
+          {
+            "line1": "320 Market Street",
+            "city": "Harrisburg",
+            "state": "PA",
+            "zip": "17101"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-3391"
+        ],
+        "urls": [
+          "https://www.attorneygeneral.gov/index.html"
+        ],
+        "emails": [
+          "info@attorneygeneral.gov"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "PaAttorneyGen"
+          },
+          {
+            "type": "Twitter",
+            "id": "PaAttorneyGen"
+          }
+        ]
+      },
+      {
+        "name": "Eugene DePasquale",
+        "address": [
+          {
+            "line1": "613 North Street",
+            "city": "Harrisburg",
+            "state": "PA",
+            "zip": "17120"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-2543"
+        ],
+        "urls": [
+          "https://www.paauditor.gov/"
+        ],
+        "emails": [
+          "auditorgen@PaAuditor.gov"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "PAAuditorGeneral"
+          },
+          {
+            "type": "Twitter",
+            "id": "PAAuditorGen"
+          }
+        ]
+      },
+      {
+        "name": "Thomas G. Saylor",
+        "party": "Republican Party",
+        "phones": [
+          "(717) 787-6181"
+        ],
+        "urls": [
+          "http://www.pacourts.us/courts/supreme-court/"
+        ]
+      },
+      {
+        "name": "Joe Torsella",
+        "address": [
+          {
+            "line1": "129 Finance Building",
+            "city": "Harrisburg",
+            "state": "PA",
+            "zip": "17120"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(717) 787-2465"
+        ],
+        "urls": [
+          "https://www.patreasury.gov/"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "PATreasurer"
+          },
+          {
+            "type": "Twitter",
+            "id": "PATreasurer"
+          }
+        ]
+      },
+      {
+        "name": "Bethany Hallam",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(412) 350-6490"
+        ],
+        "urls": [
+          "https://apps.alleghenycounty.us/website/councilatlg.asp?no=1"
+        ],
+        "emails": [
+          "bhallam@alleghenycounty.us"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "BethanyHallamACC"
+          },
+          {
+            "type": "Twitter",
+            "id": "AllCnty_Council"
+          }
+        ]
+      },
+      {
+        "name": "Samuel DeMarco, III",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Republican Party",
+        "phones": [
+          "(412) 350-6490"
+        ],
+        "urls": [
+          "https://apps.alleghenycounty.us/website/councilatlg.asp?no=2"
+        ],
+        "emails": [
+          "samuel.demarco@alleghenycounty.us"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "Allegheny-County-Council-741565122606296"
+          },
+          {
+            "type": "Twitter",
+            "id": "AllCnty_Council"
+          }
+        ]
+      },
+      {
+        "name": "Chelsa Wagner",
+        "address": [
+          {
+            "line1": "104 Courthouse",
+            "line2": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(412) 350-4660"
+        ],
+        "urls": [
+          "https://alleghenycontroller.com/home"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "alleghenycontroller"
+          },
+          {
+            "type": "Twitter",
+            "id": "AC_Controller"
+          }
+        ]
+      },
+      {
+        "name": "John Weinstein",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic/Republican",
+        "phones": [
+          "(412) 350-4100"
+        ],
+        "urls": [
+          "https://alleghenycountytreasurer.us/"
+        ]
+      },
+      {
+        "name": "Bill Mullen",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic/Republican",
+        "phones": [
+          "(412) 350-4700"
+        ],
+        "urls": [
+          "http://www.sheriffalleghenycounty.com/"
+        ],
+        "emails": [
+          "acso@alleghenycourts.us"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "alleghenycountysheriffsoffice"
+          },
+          {
+            "type": "Twitter",
+            "id": "alleghenybadge"
+          }
+        ]
+      },
+      {
+        "name": "Stephen A. Zappala, Jr.",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic/Republican",
+        "phones": [
+          "(412) 350-4401"
+        ],
+        "urls": [
+          "http://alleghenycountyda.us/"
+        ],
+        "emails": [
+          "info@stevezappala.com"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "AlleghenyCountyDA"
+          },
+          {
+            "type": "Twitter",
+            "id": "AlleghenyCoDA"
+          }
+        ]
+      },
+      {
+        "name": "Rich Fitzgerald",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(412) 350-6500"
+        ],
+        "urls": [
+          "https://www.alleghenycounty.us/county-executive/index.aspx"
+        ],
+        "photoUrl": "http://www.alleghenycounty.us/uploadedImages/Allegheny_Home/Dept_-_Content/County-Executive/rich-fitzgerald.jpg?targetTypeId=Desktop",
+        "emails": [
+          "executive@alleghenycounty.us"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "AlleghenyCoExec"
+          },
+          {
+            "type": "Twitter",
+            "id": "ACE_Fitzgerald"
+          }
+        ]
+      },
+      {
+        "name": "Patrick J. Catena",
+        "address": [
+          {
+            "line1": "436 Grant Street",
+            "city": "Pittsburgh",
+            "state": "PA",
+            "zip": "15219"
+          }
+        ],
+        "party": "Democratic Party",
+        "phones": [
+          "(412) 350-6490"
+        ],
+        "urls": [
+          "https://apps.alleghenycounty.us/website/councilrep.asp?dist=4"
+        ],
+        "photoUrl": "http://apps.alleghenycounty.us/website/council/photos/ph4.jpg",
+        "emails": [
+          "pcatena@alleghenycounty.us"
+        ],
+        "channels": [
+          {
+            "type": "Facebook",
+            "id": "Allegheny-County-Council-741565122606296"
+          },
+          {
+            "type": "Twitter",
+            "id": "AllCnty_Council"
+          }
+        ]
+      }
+    ]
+  }

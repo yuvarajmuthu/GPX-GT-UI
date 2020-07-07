@@ -44,8 +44,52 @@ fieldset, label {
   background-color: transparent;
 }
 .hover-effects-in-search-legislator > p > a{
-  color: #2f2ff1 !important;
 }
+
+/* Wobble Top */
+@keyframes wobble-top {
+  16.65% {
+    transform: skew(-12deg);
+  }
+  33.3% {
+    transform: skew(10deg);
+  }
+  49.95% {
+    transform: skew(-6deg);
+  }
+  66.6% {
+    transform: skew(4deg);
+  }
+  83.25% {
+    transform: skew(-2deg);
+  }
+  100% {
+    transform: skew(0);
+  }
+}
+.wobble-top {
+  display: inline-block;
+  transform-origin: 0 100%;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+}
+.wobble-top:hover {
+  animation-name: wobble-top;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+}
+.legislator-box-shadow:hover{
+  /*border: 1px solid green;*/
+  -webkit-box-shadow: -2px 2px 43px -11px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 2px 43px -11px rgba(0,0,0,0.75);
+  box-shadow: -2px 2px 43px -11px rgba(0,0,0,0.75);
+  border: 0.25px solid #028ece;
+  border-radius: 10px;
+  transition: 3s;
+}
+
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 .rating > input:checked ~ label,
@@ -61,7 +105,13 @@ fieldset, label {
 .rating > input:checked ~ label:hover ~ label {
   color: #028ece;
 }
-
+.star-css{
+  color:#6c757d;
+}
+.star-css:hover,.active{
+  transition: 0.5s;
+  color:#007bff;
+}
 .snip1344 {
   font-family: 'Open Sans', Arial, sans-serif;
   position: relative;
@@ -645,7 +695,7 @@ button {
   transition-timing-function: ease-out;
 }
 
-.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before {
+.hvr-underline-from-center:hover:before, .hvr-underline-from-center:focus:before, .hvr-underline-from-center:active:before, .hvr-underline-from-center:active {
   left: 0;
   right: 0;
 }

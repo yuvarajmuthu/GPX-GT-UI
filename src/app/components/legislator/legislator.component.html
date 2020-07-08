@@ -35,7 +35,10 @@
     </p>
 
     <h4 class="card-title">{{legislator.full_name}}</h4>
-    <p class="card-text">State: <a [routerLink]="['/user/',legislator.state]" href="javascript:void(0);"
+    
+    <p class="card-text">
+      <!--
+      State: <a [routerLink]="['/user/',legislator.state]" href="javascript:void(0);"
                                    class="hvr-underline-from-center wobble-top"
                                    title="View this State">{{legislator.state}}</a>
       <br/>
@@ -49,6 +52,17 @@
                 class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.party}}</a>
       <br/>
       <br/>
+    -->
+      <a [routerLink]="['/user/',legislator.divisionOffice]" href="javascript:void(0);"
+      class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.divisionOffice}}</a>
+      <br/>
+      <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);"
+                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.party}}</a>
+      <br/>
+      <a [routerLink]="['/user/',legislator.division]" href="javascript:void(0);"
+                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.division}}</a>
+
+
     </p>
 
     <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" title="View this Profile"

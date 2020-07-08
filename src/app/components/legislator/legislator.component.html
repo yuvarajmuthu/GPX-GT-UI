@@ -14,37 +14,62 @@
   </figure>
 </div> -->
 
-	<div class="card btn-3">
-		<div class="card-body text-center hover-effects-in-search-legislator">
+<div class="card btn-3">
+  <div class="card-body text-center legislator-box-shadow btn-6">
+    <fieldset class="rating text-right">
+      <a href="javascript:void(0);" title="Click to add to your circle" (click)="addBookMark()" [ngClass]="{ 'active': bookMark, '': !bookMark }" style="font-size:250%;" class="star-css">&#9733;</a>
+    </fieldset>
+    <!--<fieldset class="rating">
 
-      <fieldset class="rating">
+      <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
 
-        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+    </fieldset>-->
 
-      </fieldset>
 
-			<p class="">
+    <p class="">
 
-        <img class="img-fluid rounded rounded-circle img-custom-size-legislator cursor-default" src="{{legislator.photo_url}}">
-        <!-- <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
-        <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
-      </p>
+      <img class="img-fluid rounded rounded-circle img-custom-size-legislator cursor-default"
+           src="{{legislator.photo_url}}">
+      <!-- <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
+      <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
+    </p>
 
-      <h4 class="card-title">{{legislator.full_name}}</h4>
-      <p class="card-text">State: <a [routerLink]="['/user/',legislator.state]" href="javascript:void(0);"  class="hvr-underline-from-center" title="View this State">{{legislator.state}}</a>
+    <h4 class="card-title">{{legislator.full_name}}</h4>
+    
+    <p class="card-text">
+      <!--
+      State: <a [routerLink]="['/user/',legislator.state]" href="javascript:void(0);"
+                                   class="hvr-underline-from-center wobble-top"
+                                   title="View this State">{{legislator.state}}</a>
       <br/>
-      District: <a [routerLink]="['/user/',legislator.district]" href="javascript:void(0);" class="hvr-underline-from-center" title="View this District">{{legislator.district}}</a>
+      District: <a [routerLink]="['/user/',legislator.district]" href="javascript:void(0);"
+                   class="hvr-underline-from-center wobble-top" title="View this District">{{legislator.district}}</a>
       <br/>
-      Chamber: <a [routerLink]="['/user/',legislator.chamber]" href="javascript:void(0);" class="hvr-underline-from-center" title="View this Chamber">{{legislator.chamber}}</a>
+      Chamber: <a [routerLink]="['/user/',legislator.chamber]" href="javascript:void(0);"
+                  class="hvr-underline-from-center wobble-top" title="View this Chamber">{{legislator.chamber}}</a>
       <br/>
-      Party: <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);" class="hvr-underline-from-center" title="View this Party">{{legislator.party}}</a>
+      Party: <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);"
+                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.party}}</a>
       <br/>
       <br/>
-      </p>
+    -->
+      <a [routerLink]="['/user/',legislator.divisionOffice]" href="javascript:void(0);"
+      class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.divisionOffice}}</a>
+      <br/>
+      <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);"
+                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.party}}</a>
+      <br/>
+      <a [routerLink]="['/user/',legislator.division]" href="javascript:void(0);"
+                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.division}}</a>
 
-      <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" title="View this Profile" class="btn btn-secondary btn-sm">
-        <!-- <i class="fa fa-eye"></i> -->
-        View profile
-      </a>
-    </div>
+
+    </p>
+
+    <a href="javascript:void(0);" (click)="gotoLegislator(legislator)" title="View this Profile"
+       class="btn btn-secondary btn-sm">
+      <!-- <i class="fa fa-eye"></i> -->
+      View profile
+    </a>
   </div>
+
+</div>

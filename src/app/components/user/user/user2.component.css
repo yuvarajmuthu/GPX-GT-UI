@@ -1,3 +1,23 @@
+.private-profile-label{
+  position: absolute;
+  bottom: 2em;
+  right: 2.4em;
+  font-size: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .private-profile-label{
+    position: absolute;
+    bottom: -20em;
+    right: 12em;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .private-profile-label{
+    position: absolute;
+    bottom: -16.2em;
+    right: 8em;
+  }
+}
 .delete-image{
     float: right;
     margin-top: 5px;
@@ -19,7 +39,7 @@
     margin: 5px;
     border-right: 2px solid gray;
   }
-  
+
 body {
     margin-top: 20px;
     background-color: #e9ebee;
@@ -234,7 +254,7 @@ li {
 
 .picture-src{
     width: 100%;
-    
+
 }
 input[type="file"] {
     display: none;
@@ -268,7 +288,7 @@ input[type="file"] {
     }
     .fullname-display{
         display: block;
-        
+
     }
     .profile-edit-btn-custom-position{
         position: fixed;
@@ -302,12 +322,12 @@ input[type="file"] {
         width: 94%;
         background-color: white;
       }
-      
+
       /* .sticky + .content {
         padding-top: 102px;
       }  */
       .bottom-tabs{
-        position: -webkit-sticky;  
+        position: -webkit-sticky;
         left: 0px;
         position: sticky;
         bottom: 0px;
@@ -411,10 +431,10 @@ input[type="file"] {
       .margin-left-auto{
          margin-left: auto;
       }
-      
+
       .sticky + .content {
         padding-top: 102px;
-      } 
+      }
       .bottom-tabs{
         display: none;
       }
@@ -476,10 +496,10 @@ ng-autocomplete{
   }
   .mobile-bottom-tabs li:nth-child(2) {
     width: 25% !important;
-  } 
+  }
   .mobile-bottom-tabs li:nth-child(3) {
     width: 33% !important;
-  } 
+  }
   .mobile-bottom-tabs li:nth-child(4) {
     width: 17% !important;
   }

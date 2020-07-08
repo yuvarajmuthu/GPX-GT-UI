@@ -25,7 +25,50 @@
                         <div class="form-group">
                             <button type="submit" [disabled]="loading" class="btn btn-primary btn-block"> Login  </button>
                         </div> <!-- form-group// -->
-                        <img *ngIf="loading" class="pl-3"
+
+
+<div class="border-top card-body text-center">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="btn-group">
+        <button type="button" class="btn  btn-outline-primary" title="Sign in with Facebook">
+          Sign in with
+          <i class="fa fa-facebook"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="btn-group">
+        <button type="button" class="btn  btn-outline-danger" title="Sign in with Google">
+          Sign in with
+          <i class="fa fa-google-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="btn-group">
+        <button type="button" class="btn  btn-outline-info" title="Sign in with LinkedIn">
+          Sign in with
+          <i class="fa fa-linkedin"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="btn-group">
+        <button type="button" class="btn  btn-outline-primary" title="Sign in with Twitter">
+          Sign in with
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+                      <img *ngIf="loading" class="pl-3"
                              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                     </form>
                 </article> <!-- card-body end .// -->
@@ -38,3 +81,27 @@
 
 </div>
 <!--container end.//-->
+
+<!--<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+
+        <article class="card-body">
+
+
+          <div class="row">
+            <div class="col-xs-6 col-sm-3">
+              <a href="#" class="btn btn-lg btn-block onl_btn-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+                <i class="fa fa-facebook fa-2x"></i>
+                <span class="hidden-xs"></span>
+              </a>
+            </div>
+          </div>
+
+
+        </article>
+      </div>
+    </div>
+  </div>
+</div>-->

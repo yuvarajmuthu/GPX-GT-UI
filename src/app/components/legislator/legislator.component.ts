@@ -51,9 +51,9 @@ export class LegislatorComponent implements OnInit {
 
   addBookMark() {
 
-    if(this.bookMark){
+    if (this.bookMark) {
       this.bookMark = false;
-    }else{
+    } else {
       this.bookMark = true;
     }
 

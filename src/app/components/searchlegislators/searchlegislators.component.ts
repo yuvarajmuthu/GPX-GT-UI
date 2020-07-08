@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, isDevMode} from '@angular/core';
 import {Router} from '@angular/router';
 
 // import 'rxjs/add/operator/map';
@@ -22,6 +22,8 @@ import {GAddressSearchComponent} from '../../components/g-address-search/g-addre
 })
 export class SearchlegislatorsComponent implements OnInit {
   legislators: Array<any> = [];
+  legislatorsDisplay: Array<any> = [];
+
   legislator = {};
   legislatorsData = {};//{'names':['U.S. Senator', 'U.S. Representative'], 'U.S. Senator':[{}],'U.S. Representative':[{}]}
   resultop: any;
@@ -39,6 +41,11 @@ export class SearchlegislatorsComponent implements OnInit {
   districtLabel: string;
   stateData: boolean;
   congressData: boolean;
+  offices = [];
+  divisionOffices = [];
+  divisioncategory  = [];
+  divisions = [];
+
 
   @Output()
   success = new EventEmitter();
@@ -215,6 +222,7 @@ export class SearchlegislatorsComponent implements OnInit {
 
   getLegislators(searchParam: string, type: string) {
     this.legislators = [];
+    this.legislatorsDisplay = [];
     this.legislatorsService.getLegislature(searchParam, type)
     //.map(result => this.resultop = result.results)
       .subscribe((result) => {
@@ -223,7 +231,9 @@ export class SearchlegislatorsComponent implements OnInit {
             if (!result['error']) {
 
               //this.congressDistricts = [];
-
+this.processOCD(result);
+///
+/*
               let offices = [];
               offices = result['offices'];
 
@@ -272,7 +282,8 @@ export class SearchlegislatorsComponent implements OnInit {
                   this.legislator = legislator;
                   }
                 }
-              }
+              }*/
+              //
             } else {
               console.log('Error in getting');
               this.alertService.error('Error in getting data');
@@ -315,6 +326,101 @@ export class SearchlegislatorsComponent implements OnInit {
           this.alertService.error(error['_body']);
         });
 
+  }
+
+  processOCD(result:JSON){
+
+    let divisionsObj = {};
+    let divisionsKeys = [];
+
+
+    divisionsObj = result['divisions'];
+    divisionsKeys = Object.keys(divisionsObj);
+    console.log("division keys " + divisionsKeys); 
+    for (var i = 0; i < divisionsKeys.length; i++) {
+      let divisionsKey:string = divisionsKeys[i];
+      let divisionData:{} = divisionsObj[divisionsKey];
+      let divisionsKeySplited:string[] = divisionsKey.split('/');
+      let divisionsLastKeySplited:string[] = divisionsKeySplited[divisionsKeySplited.length-1].split(':');
+      this.divisioncategory.push(divisionsLastKeySplited[0]);
+      this.divisions.push(divisionData['name']);
+      let officevalues:string[] = [];
+      let officeObj = {};
+      if(divisionData['officeIndices']){
+        for (var j = 0; j < divisionData['officeIndices'].length; j++) {
+          let officeIndex:number =  divisionData['officeIndices'][j];
+          if(result['offices'] && result['offices'][officeIndex]){
+            let office:{} = result['offices'][officeIndex];
+            officevalues.push(office['name']);
+            if(office['officialIndices']){
+              for (var k = 0; k < office['officialIndices'].length; k++) {
+                let officialsIndex:number =  office['officialIndices'][k];
+                if(result['officials'] && result['officials'][officialsIndex]){
+                  let official:{} = result['officials'][officialsIndex];
+//
+                  let legislator = {};
+
+                  legislator['full_name'] = official['name'];
+                  legislator['party'] = official['party'];
+                  legislator['photo_url'] = official['photoUrl'];
+                  legislator['division'] = divisionData['name'];
+                  legislator['divisionOffice'] = office['name'];
+                  if (isDevMode()) {
+                    legislator['photo_url'] = 'assets/images/1679.jpg';
+                  }
+
+                  this.legislatorsDisplay.push(legislator);
+//
+                }
+              }
+            }
+
+          }
+        }
+
+      }
+      officeObj[divisionData['name']] = officevalues;
+      this.offices.push(officeObj);
+
+    }
+
+  }
+ 
+  selectDivision(division:string){
+    console.log('selected division ', division);
+
+    this.offices.forEach(element => {
+      
+      if(element[division]){
+        console.log('selected divisions office ', element[division]);
+        this.divisionOffices = element[division];
+        return;
+      }
+    });
+
+    this.legislators = [];
+
+
+    this.legislatorsDisplay.forEach(element => {
+      
+      if(element['division'] === division){
+        this.legislators.push(element);
+      }
+    });
+
+    
+
+  }
+
+  selectDivisionOffice(divisionOffice:string){
+    console.log('selected division office ', divisionOffice);
+    this.legislators = [];
+    this.legislatorsDisplay.forEach(element => {
+      
+      if(element['divisionOffice'] === divisionOffice){
+        this.legislators.push(element);
+      }
+    });
   }
 
   gotoDistrict(district: JSON) {

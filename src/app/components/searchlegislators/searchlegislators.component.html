@@ -27,34 +27,57 @@
       </ul>
     </div>
   </div>
+
+  
+<div class="row legisBoundary">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    Find Legislators:
+  </div>
+
+  <div class="address col-xs-12">
+    Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
+  </div>
+
+  <div class="col-xs-12">
+    <!--
+    <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>
+    <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>
+    -->
+    <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Find</button>
+  </div>
 </div>
 
-<div class="row">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  Find Legislators:
-</div>
-</div>
+  <div class="row legisBoundary">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <ul class="nav">
+        <li class="nav-item border-right" *ngFor="let division of divisions">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="selectDivision(division);return;"> 
+            <span class="badge badge-secondary active">{{division}}</span>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="row legisBoundary">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <ul class="nav">
+        <li class="nav-item border-right" *ngFor="let divisionOffice of divisionOffices">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="selectDivisionOffice(divisionOffice);return;"> 
+            <span class="badge badge-secondary active">{{divisionOffice}}</span>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
 
-<div class="address col-xs-12">
-  Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
-</div>
-
-<div class="col-xs-12">
-  <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>
-  <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>
 </div>
 
 <!--
+<div class="row">
 
-
-      <div>Your State:
-        <button type="button" class="btn btn-secondary">{{state}}</button>
-      </div>
-
-      <div>{{districtLabel}}
-        <button *ngFor="let congressDistrict of congressDistricts" type="button" class="btn btn-secondary" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
-      </div>
--->
       <div class="col-xs-6" *ngIf="state">
         <div class="input-group mb-3">
           <span class="input-group-text" id="lblState">State</span>
@@ -72,29 +95,13 @@
           </div>
         </div>
       </div>
-      <!--
-      <div>
-        <label>Find your legislators: </label>
-
-        <input type="text" class="searchLegisBox" [(ngModel)]="ipZipcode" placeholder="Zipcode" />
-
-        <label class="btn btn-success" uncheckable (click)="getCongressLegislatorsByZip(ipZipcode)">Search</label>
-      </div>
-        -->
+</div>
 
 
       <div class="searchTip">{{searchTip}}</div>
-
-      <!-- <div>
-        <ul style="list-style-type:none">
-          <li *ngFor="let legislator of legislators">
-            <app-legislator [legislator]=legislator></app-legislator>
-          </li>
-        </ul>
-      </div> -->
+-->
 
       <div class="row">
-        <!--<div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 custom-hover-legislator card-body legislator-box-shadow" *ngFor="let legislator of legislators">-->
         <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let legislator of legislators">
           <app-legislator [legislator]=legislator></app-legislator>
         </div>

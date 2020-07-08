@@ -22,7 +22,8 @@
 }
 
 .tab-card-header > .nav-tabs > li {
-  margin-right: 2px;
+  margin-right: 0px;
+  padding: 1px 34px;
 }
 
 .tab-card-header > .nav-tabs > li > a {
@@ -30,20 +31,26 @@
   border-bottom: 2px solid transparent;
   margin-right: 0;
   color: #737373;
-  padding: 1px 50px;
-
   border-radius: 10px;
 }
 
 @media only screen and (max-width: 600px) {
   .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
-    padding: 0px 20px 0px 20px;
+    padding: 0px 6px 0px 6px;
+  }
+  .tab-card-header > .nav-tabs > li {
+    margin-right: 0px;
+    padding: 0px 0px;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
-    padding: 0px 20px 0px 20px;
+    padding: 0px 6px 0px 6px;
+  }
+  .tab-card-header > .nav-tabs > li {
+    margin-right: 0px;
+    padding: 0px 0px;
   }
 }
 .custom-resize-card {

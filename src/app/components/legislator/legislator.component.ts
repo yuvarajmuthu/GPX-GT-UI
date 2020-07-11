@@ -57,9 +57,9 @@ export class LegislatorComponent implements OnInit {
       this.bookMark = true;
     }
 
-    this.getCongressLegislatorsByLatLong();
+    //this.getCongressLegislatorsByLatLong();
     //this.loadStateData()
-    this.districtLabel = 'Your State Legislative District(s):';
+    //this.districtLabel = 'Your State Legislative District(s):';
   }
 
   getLegislator(id: string) {
@@ -136,7 +136,7 @@ export class LegislatorComponent implements OnInit {
 
     if (legislator['leg_id']) {
       legisId = legislator['leg_id'];
-    } else { //CONGRESS
+    } else if(this.legislator['photo_url'] && this.legislator['photo_url'].indexOf('bioguide.congress.gov') != -1 ) { //CONGRESS
       let photoUrl = this.legislator['photo_url'];
       let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
       legisId = fileName.substring(0, fileName.lastIndexOf('.'));

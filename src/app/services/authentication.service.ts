@@ -91,7 +91,7 @@ export class AuthenticationService extends AbstractService{
           this.dataShareService.setCurrentUser(userObj);
 
           this.componentcommunicationService.loginChanged(true);
-          this.alertService.success('Login successful', true); 
+          //this.alertService.success('Login successful', true); 
           
           return true;
         })

@@ -335,11 +335,15 @@
             <ul class="list-group">
                 <li class="list-group-item pointer"
                     [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
-                    <span class="pointer" (click)="managedByUsers()">Managed by</span>
+                    <span class="pointer" (click)="managedByUsers()">
+                        <i class="material-icons">supervisor_account</i>Managed by
+                    </span>
                 </li>
                 <li class="list-group-item pointer"
                     (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
-                    <span class="pointer">My Posts</span>
+                    <span class="pointer">
+                        <i class="material-icons">rss_feed</i>My Posts
+                    </span>
                 </li>
 
                 <!-- <li class="list-group-item pointer"
@@ -350,6 +354,12 @@
                     <i class="material-icons">{{profileTemplate.profileIcon}}</i> {{profileTemplate.name}}
                     <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                 </li>
+                <li class="list-group-item pointer"
+                (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
+                <span class="pointer">
+                    <i class="material-icons">settings_applications</i>Settings
+                </span>
+            </li>
             </ul>
 
         </div><!-- End div .box-info -->

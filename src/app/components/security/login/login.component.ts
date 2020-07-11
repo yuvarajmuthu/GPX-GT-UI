@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
                     */
 
                     // this.componentcommunicationService.loginChanged(true);
-                    //this.alertService.success('Login successful', true);
+                    this.alertService.success('Login successful', true);
 
                     this.router.navigate([this.returnUrl]);
                 },

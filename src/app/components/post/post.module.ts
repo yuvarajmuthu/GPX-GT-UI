@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 import { MentionModule } from 'angular-mentions';
 //import {GpxUIComponentsModule} from '../gpx-uicomponents/gpx-uicomponents.module';
 
@@ -20,6 +21,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
+    NgxEmojiPickerModule,
     //GpxUIComponentsModule,
     MentionModule,
     ScrollingModule,

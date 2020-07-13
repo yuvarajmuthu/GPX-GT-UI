@@ -143,10 +143,20 @@ form button {
   border: none !important;
   background: none !important;
 }
+.char-icon{
+  font-size: 18px;
+  font-style: initial;
+  cursor: pointer;
+}
 .image-upload-container{
   border: 1px solid rgba(0,0,0,0.54);
   border-radius: 5px;
   width:152px;
+}
+.video-upload-container{
+  border: 1px solid rgba(0,0,0,0.54);
+  border-radius: 5px;
+  width:min-content;
 }
 .file-upload-error{
   color: red;

@@ -66,6 +66,13 @@
                                 <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
                          <ul>
                             <li>
+                                <i class='attachment char-icon'
+                                 (click)="toggled = !toggled"
+                                 [(emojiPickerIf)]="toggled"
+                                 [emojiPickerDirection]="'top'"
+                                 (emojiPickerSelect)="handleSelection($event)">😄</i>
+                          </li>
+                            <li>
                                 <i class="fa fa-image"></i>
                                 <label class="fileContainer">
                                     <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png" (change)="onFileSelected($event)">
@@ -74,7 +81,8 @@
                             <li>
                                 <i class="fa fa-video-camera"></i>
                                 <label class="fileContainer">
-                                    <input type="file">
+                                    <input type="file" id="stageUploadedFile1"
+                                    (change)="onvideoSelected($event)">
                                 </label>
                             </li>
                             <li>
@@ -93,6 +101,14 @@
             <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
             <img [src]="stagingImage" height="200">
             <!-- <img class="image-upload" [src]="stagingImage" id="stageUploadedImgFile" alt="" width="100%"> -->
+        </div>
+
+        <div class="video-upload-container" *ngIf="isvideoSelected==true">
+            <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+            <video width="400" controls >
+                <!-- <source src="mov_bbb.mp4" id="video_here">
+              Your browser does not support HTML5 video. -->
+            </video>
         </div>
 
         <div class="btn-toolbar justify-content-between padding-top2">

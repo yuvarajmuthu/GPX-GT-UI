@@ -23,9 +23,8 @@ export class NewpostComponent implements OnInit {
     deletedNodePos:number;
     
       
-
-
     stagingImage: any = null;
+    isvideoSelected : boolean = false;
     public isFileStagingAreaCollapsed: boolean = true;
     public: boolean = false;
     friends: boolean = false;
@@ -44,6 +43,9 @@ export class NewpostComponent implements OnInit {
     hideInput: boolean = false;
     cusrorX: any;
     cusrorY: any;
+
+    toggled: boolean = false;
+    message: string = '';
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
@@ -103,6 +105,14 @@ getCaretPosition() {
   //   }
   // }
   return caretPos;
+}
+
+handleSelection(event) {
+  console.log(event.char);
+  //this.message += event.char;
+  let inputDiv = document.getElementById("postContent"); 
+  let innertmlHtml = inputDiv.innerHTML+event.char;
+  inputDiv.innerHTML = innertmlHtml;
 }
 
 onMentionSelect(item) {
@@ -214,6 +224,12 @@ onMentionSelect(item) {
         this.stagingImage = '';
     }
 
+    deleteVideoFile(e) {
+      this.postFormData = new FormData();
+      //document.querySelector("video").src = '';
+      this.isvideoSelected = false;
+    }
+
     onFileSelected(event) {
         if (event.target.files && event.target.files[0]) {
             let filesizeMB = event.target.files[0].size/1024/1024;
@@ -232,6 +248,30 @@ onMentionSelect(item) {
                 this.isFileSizeError = true;
             }
           }
+    }
+
+    onvideoSelected(event) {
+      console.log(event.target.files);
+      //  if (event.target.files && event.target.files[0]) {
+            let filesizeMB = event.target.files[0].size/1024/1024;
+            let fileType = event.target.files[0].type;
+            //if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
+                this.isFileSizeError = false;
+                let reader = new FileReader();
+                this.postFormData.append('file', event.target.files[0]);
+                reader.readAsDataURL(event.target.files[0]); // read file as data url
+                this.isvideoSelected = true;
+                let blobURL = URL.createObjectURL(event.target.files[0]);
+                reader.onload = (event) => { // called once readAsDataURL is completed
+                //  this.isvideoSelected = true;
+                  document.querySelector("video").src = blobURL;              
+            }
+            // }
+            // else{
+            //     this.isFileSizeError = true;
+            //     this.isvideoSelected = false;
+            // }
+         // }
     }
 
     doTextareaValueChange(ev) {

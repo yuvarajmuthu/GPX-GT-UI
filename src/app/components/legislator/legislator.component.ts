@@ -13,6 +13,8 @@ import {catchError, map, tap, switchMap} from 'rxjs/operators';
 import {Legislator} from '../../models/legislator';
 
 import {LegislatorService} from '../../services/legislator.service';
+import {UserService} from '../../services/user.service';
+import {SearchService} from '../../services/search.service';
 import {DatashareService} from '../../services/datashare.service';
 
 import {BannerComponent} from '../banner/banner.component';
@@ -34,6 +36,8 @@ export class LegislatorComponent implements OnInit {
   constructor(private  router: Router,
               private route: ActivatedRoute,
               private legislatorsService: LegislatorService,
+              private userService: UserService,
+              private searchService: SearchService,
               private datashareService: DatashareService) {
   }
 
@@ -131,21 +135,45 @@ export class LegislatorComponent implements OnInit {
   //called from UI on selection of a Legislator
   gotoLegislator(legislator: Legislator): void {
     console.log('selected legislator - ' + legislator);
-    let legisId: string = null;
+    let userName: string = null;
+    let searchString:string = null;
     this.datashareService.setViewingUser(legislator);
 
+
+
     if (legislator['leg_id']) {
-      legisId = legislator['leg_id'];
+      userName = legislator['leg_id'];
+
+      this.router.navigate(['/user', userName]);
+
     } else if(this.legislator['photo_url'] && this.legislator['photo_url'].indexOf('bioguide.congress.gov') != -1 ) { //CONGRESS
       let photoUrl = this.legislator['photo_url'];
       let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
-      legisId = fileName.substring(0, fileName.lastIndexOf('.'));
+      userName = fileName.substring(0, fileName.lastIndexOf('.'));
+
+      this.router.navigate(['/user', userName]);
+
+
+    }else if (legislator['full_name']) {
+      searchString = legislator['full_name'].replace( /\".*?\"/, '' ).replace(/\s+/g,' ').trim();
+      this.searchService.getUsers(searchString)
+      .subscribe(
+        (result) => {
+          if(result.length > 0 && searchString === result[0]['full_name']){
+            userName = result[0]['username'];
+          }else{
+            userName = 'createnew';
+          }
+          this.router.navigate(['/user', userName]);
+
+        },
+        (err) => {
+            console.log('Error ', err);
+        }); 
+
     }
 
-    this.router.navigate(['/user', legisId]);
 
-    //this.router.navigate(['/user', 'external']);
-    //this.router.navigate(['/user']);
   }
 
 

@@ -935,7 +935,7 @@ export class UserComponent implements OnInit {
                 },
                 (err) => {
                     console.log('Error ', err);
-                });
+                }); 
     }
 
     getFollowers(profileId: string) {

@@ -3,7 +3,7 @@
 	"parentPostId": "",
 	"entityId": "user6@gmail.com",
 	"postType": "T",
-	"postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+	"postText": "hi <span class='tagged-users' data-username='user5@gmail.com' data-entitytype='PUBLICUSER' readonly='true' contenteditable='false' value='user5 five'>user5 five</span><span>&nbsp;</span>😃 fine",
 	"createdDate": "2020-02-09T18:54:02.524Z",
 	"lastModifiedDate": "2020-02-09T18:54:02.524Z",
 	"totalComments": 5,

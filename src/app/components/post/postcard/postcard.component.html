@@ -95,10 +95,28 @@
                 <i class="fa fa-comment custom-size"></i>
                 Comment({{commentsCount}})
             </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>
                 Share
-            </a>
+            </a> -->
+            <ng-template #popContent>
+                <tag-input [(ngModel)]="shareUsers"  placeholder="Share with" (input)="searchShareUser($event)" secondaryPlaceholder="Share with" >
+                    <tag-input-dropdown 
+                      [showDropdownIfEmpty]="true"
+                      [autocompleteObservable]="requestAutocompleteItems"
+                      [dynamicUpdate]="true"
+                      identifyBy="username" displayBy="username"
+                    >
+                    </tag-input-dropdown>
+                  </tag-input>
+                  <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
+            </ng-template>
+
+
+            <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
+        [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
+        Share
+</button>
         </div>
 
 
@@ -291,10 +309,26 @@
                 <i class="fa fa-comment custom-size"></i>
                 Comment({{commentsCount}})
             </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>
                 Share
-            </a>
+            </a> -->
+            <ng-template #popContent>
+                <tag-input [(ngModel)]="test" placeholder="test2" secondaryPlaceholder="new">
+                    <tag-input-dropdown
+                      [autocompleteItems]="itemtests"
+                      [showDropdownIfEmpty]="true"
+                      [dynamicUpdate]="true"
+                    >
+                    </tag-input-dropdown>
+                  </tag-input>
+            </ng-template>
+
+
+            <button type="button" class="btn btn-outline-secondary mr-2" placement="top"
+        [ngbPopover]="popContent">
+        Share
+</button>
         </div>
 
 

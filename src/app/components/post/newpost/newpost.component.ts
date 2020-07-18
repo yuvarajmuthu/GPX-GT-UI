@@ -258,7 +258,7 @@ onMentionSelect(item) {
             //if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
                 this.isFileSizeError = false;
                 let reader = new FileReader();
-                this.postFormData.append('file', event.target.files[0]);
+                this.postFormData.append('videofile', event.target.files[0]);
                 reader.readAsDataURL(event.target.files[0]); // read file as data url
                 this.isvideoSelected = true;
                 let blobURL = URL.createObjectURL(event.target.files[0]);

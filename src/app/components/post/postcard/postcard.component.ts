@@ -5,9 +5,18 @@ import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {Post} from '../../../models/post';
+import { Observable, of, from, throwError} from 'rxjs';
+
+
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import 'rxjs/Rx';
 
 import {DomSanitizer} from "@angular/platform-browser";
-
+import { tagUser } from 'src/app/models/tagusers';
+export interface AutoCompleteModel {
+    value: any;
+    display: string;
+ }
 @Component({
     selector: 'app-postcard',
     templateUrl: './postcard.component.html',
@@ -25,6 +34,15 @@ export class PostcardComponent implements OnInit {
     nxtNode:any;
     oldChildNodes: any;
     deletedNodePos:number;
+
+
+
+    shareUsers:any = [];
+    selectedUsers:any=[];
+    
+    public requestAutocompleteItems = (text: any): Observable<any> => {
+           return Observable.of(this.selectedUsers);
+      };
 
     commentPost: boolean = false;
     devMode: boolean = false;
@@ -65,12 +83,13 @@ export class PostcardComponent implements OnInit {
                 private userService: UserService,
                 private elementRef: ElementRef,
                 private sanitizer: DomSanitizer,
+                private http:HttpClient,
                 private router: Router) {
         for (let index = 0; index < 10000; index++) {
             this.numbers.push(index);
         }
         this.devMode = isDevMode();
-
+         const that =this;
         this.items =[];
         this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
 
@@ -303,7 +322,18 @@ export class PostcardComponent implements OnInit {
            }
         }
     }
+    searchShareUser(event){
+        this.postService.getTagUsers(event.target.value)
+        .subscribe((data:any) => {
+                this.selectedUsers = data;
+        });
+    }
 
+    shareToUsers(){
+      console.log(this.shareUsers)
+    }   
+    
+ 
     tagUsersRedirectTo(e){
         console.log(e.target.tagName);
         if(e.type == 'click' && e.target.tagName == 'SPAN'){

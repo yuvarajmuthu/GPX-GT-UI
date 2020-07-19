@@ -10,6 +10,9 @@ import {AuthenticationService} from '../../../services/authentication.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
 
+import { AuthService } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -22,6 +25,8 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
 
+    user: SocialUser;
+    loggedIn: boolean;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -29,7 +34,8 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
         private datashareService: DatashareService,
-        private componentcommunicationService: ComponentcommunicationService
+        private componentcommunicationService: ComponentcommunicationService,
+        private extAuthService: AuthService
     ) {
         // redirect to home if already logged in
         // if (this.authenticationService.currentUserValue) {
@@ -45,6 +51,18 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        this.extAuthService.authState.subscribe((user) => {
+            this.user = user;
+            this.loggedIn = (user != null);
+
+            if(this.loggedIn){
+                this.alertService.success('Login successful', true);
+                this.router.navigate([this.returnUrl]);
+
+
+            }
+          });
     }
 
 // convenience getter for easy access to form fields
@@ -88,6 +106,14 @@ export class LoginComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    loginG() {
+        this.authenticationService.signInWithGoogle();
+    }
+
+    loginFB() {
+        this.authenticationService.signInWithFB();
     }
 
     loadRegisterComponent() {

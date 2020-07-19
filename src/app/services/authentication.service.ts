@@ -12,6 +12,10 @@ import {DatashareService} from "./datashare.service";
 import { ComponentcommunicationService }     from './componentcommunication.service';
 import { AlertService } from './alert.service';
 
+import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+
+
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -33,7 +37,8 @@ export class AuthenticationService extends AbstractService{
     private dataShareService:DatashareService,
     private componentcommunicationService: ComponentcommunicationService,
     private alertService: AlertService,
-    private jwtHelper: JwtHelperService) {
+    private jwtHelper: JwtHelperService,
+    private extAuthService: AuthService) {
       super();
       this.serviceUrl = dataShareService.getServiceUrl();
 
@@ -56,8 +61,15 @@ export class AuthenticationService extends AbstractService{
   public get currentUserValue(): User {
       return this.currentUserSubject.value;
   }
-*/
 
+
+  ngOnInit() {
+    this.extAuthService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+  }
+*/
   login(user:User) {
 
       let bodyString = JSON.stringify(user); // Stringify payload
@@ -147,8 +159,17 @@ return this.http.post(loginServiceUrl, user, this.httpOptions)
  //   localStorage.setItem('id_token', authResult.idToken);
     //localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
 //}
+  signInWithGoogle(): void {
+    this.extAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
 
+  signInWithFB(): void {
+    this.extAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
   logout() {
+      this.extAuthService.signOut();
+
+
       // remove user from local storage to log user out
       localStorage.removeItem('currentUserToken');
       localStorage.removeItem('currentUserName');

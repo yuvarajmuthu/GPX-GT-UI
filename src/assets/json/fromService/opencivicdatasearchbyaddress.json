@@ -557,7 +557,7 @@
         ]
       },
       {
-        "name": "Daniel L. \"Dan\" Miller",
+        "name": "Daniel L. \"Dan\" Miller", 
         "address": [
           {
             "line1": "217 IRVIS OFFCE BUILDING",
@@ -915,7 +915,7 @@
           },
           {
             "type": "Twitter",
-            "id": "AlleghenyCoDA"
+            "id": "AlleghenyCoDA" 
           }
         ]
       },

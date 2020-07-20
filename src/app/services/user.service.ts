@@ -202,6 +202,21 @@ export class UserService extends AbstractService{
   //);                
 }
 
+getUserNameByFullName(fullNname:string):Observable<string>{
+  let serviceUrl = this.getSocialService()+"/getUserIdByFullName";
+
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getUsernameByFullname.json';   
+
+  }
+
+  return this.http.get(serviceUrl, { responseType: 'text', params: {
+    fullNname: fullNname
+  } });
+              
+}
+
+
 getFollowersCount(entityId:string):Observable<string>{
   let serviceUrl = "";
   if(this.devMode){

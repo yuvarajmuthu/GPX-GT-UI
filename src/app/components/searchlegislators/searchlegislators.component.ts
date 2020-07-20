@@ -359,8 +359,10 @@ this.processOCD(result);
                   let official:{} = result['officials'][officialsIndex];
 //
                   let legislator = {};
+                  let fullName:string = official['name'];
+                  if(fullName)
+                    legislator['full_name'] = fullName.replace(/,/g, "");
 
-                  legislator['full_name'] = official['name'];
                   legislator['party'] = official['party'];
                   legislator['photo_url'] = official['photoUrl'];
                   legislator['division'] = divisionData['name'];

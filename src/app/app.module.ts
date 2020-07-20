@@ -8,6 +8,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtModule} from '@auth0/angular-jwt';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 
 import {AuthenticationService} from '../app/services/authentication.service';
 import {AuthGuard} from '../app/auth/auth.guard';
@@ -64,6 +66,21 @@ export function tokenGetter() {
     return localStorage.getItem('currentUserToken');
 }
 
+let config = new AuthServiceConfig([
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider("624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com")
+    },
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider("561602290896109")
+    }
+  ]);
+  
+  export function provideConfig() {
+    return config;
+  }
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -89,6 +106,7 @@ export function tokenGetter() {
         FormsModule,
         ScrollingModule,
         AutocompleteLibModule,
+        SocialLoginModule,
         //CKEditorModule,
         //ReactiveFormsModule, // formGroup
         //NgbTabsetModule,
@@ -128,6 +146,10 @@ export function tokenGetter() {
         AuthGuard,
         //dateFormatPipe
         //MockHttpInterceptorService
+        {
+            provide: AuthServiceConfig,
+            useFactory: provideConfig
+          }
     ],
     bootstrap: [AppComponent]
 })

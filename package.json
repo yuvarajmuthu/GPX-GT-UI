@@ -28,6 +28,7 @@
     "angular-font-awesome": "^3.1.2",
     "angular-mentions": "1.1.6",
     "angular-ng-autocomplete": "^2.0.1",
+    "angularx-social-login": "^1.2.7",
     "bootstrap": "^4.2.1",
     "ckeditor4-angular": "^1.0.1",
     "core-js": "^2.5.4",

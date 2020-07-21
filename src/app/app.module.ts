@@ -69,7 +69,7 @@ export function tokenGetter() {
 let config = new AuthServiceConfig([
     {
       id: GoogleLoginProvider.PROVIDER_ID,
-      provider: new GoogleLoginProvider("624796833023-clhjgupm0pu6vgga7k5i5bsfp6qp6egh.apps.googleusercontent.com")
+      provider: new GoogleLoginProvider("300979965528-5oo12abv1dtekvh6ugtgmfvofm8h903p.apps.googleusercontent.com")
     },
     {
       id: FacebookLoginProvider.PROVIDER_ID,

@@ -3,11 +3,14 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpResponse} from '@angular/common/http';
 
+import { User } from '../../../models/user';
+
 import {first} from 'rxjs/operators';
 
 import {AlertService} from '../../../services/alert.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {DatashareService} from '../../../services/datashare.service';
+import {UserService} from '../../../services/user.service';
 import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
 
 import { AuthService } from "angularx-social-login";
@@ -25,14 +28,15 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
 
-    user: SocialUser;
-    loggedIn: boolean;
+    private user: SocialUser;
+    private loggedIn: boolean;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
         private alertService: AlertService,
+        private userService: UserService,
         private datashareService: DatashareService,
         private componentcommunicationService: ComponentcommunicationService,
         private extAuthService: AuthService
@@ -53,10 +57,39 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
         this.extAuthService.authState.subscribe((user) => {
-            this.user = user;
+            this.user = user;//SocialUser
             this.loggedIn = (user != null);
 
-            if(this.loggedIn){
+            if(this.loggedIn){          
+                let userObj = new User();
+
+                if(this.user['provider'] && this.user['provider'] === 'GOOGLE'){
+                    userObj.emailId = this.user['email'];
+                    userObj.firstName = this.user['firstName'];
+                    userObj.lastName = this.user['lastName'];
+                    userObj.displayName = this.user['name'];
+                    userObj.authToken = this.user['authToken'];
+                    userObj.googleId = this.user['id'];
+                    userObj.token = this.user['idToken'];
+                    userObj.photoUrl = this.user['photoUrl'];
+                    userObj.provider = this.user['provider'];
+
+                    userObj.username = this.user['email'];
+
+                    //localStorage.setItem('currentUser', JSON.stringify(userObj));    
+                    localStorage.setItem('currentUserToken', userObj.token);          
+                    localStorage.setItem('currentUserName', userObj.username);      
+
+                    this.userService.registerUser(userObj);//Register google user in the application
+
+                }
+     
+      
+                this.datashareService.setCurrentUser(userObj);
+      
+                this.componentcommunicationService.loginChanged(true);
+
+
                 this.alertService.success('Login successful', true);
                 this.router.navigate([this.returnUrl]);
 

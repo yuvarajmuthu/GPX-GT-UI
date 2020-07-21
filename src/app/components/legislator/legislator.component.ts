@@ -53,7 +53,7 @@ export class LegislatorComponent implements OnInit {
 
   }
 
-  addBookMark() {
+  add2Circle() {
 
     if (this.bookMark) {
       this.bookMark = false;
@@ -61,9 +61,16 @@ export class LegislatorComponent implements OnInit {
       this.bookMark = true;
     }
 
-    //this.getCongressLegislatorsByLatLong();
-    //this.loadStateData()
-    //this.districtLabel = 'Your State Legislative District(s):';
+  }
+  
+  removeFromCircle() {
+
+    if (this.bookMark) {
+      this.bookMark = false;
+    } else {
+      this.bookMark = true;
+    }
+
   }
 
   getLegislator(id: string) {

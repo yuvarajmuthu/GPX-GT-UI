@@ -169,6 +169,8 @@ return this.http.post(loginServiceUrl, user, this.httpOptions)
   logout() {
       this.extAuthService.signOut();
 
+      //GOOGLE
+      //localStorage.removeItem('currentUser');
 
       // remove user from local storage to log user out
       localStorage.removeItem('currentUserToken');

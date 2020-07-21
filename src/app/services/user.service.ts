@@ -404,6 +404,74 @@ getVotes(userId:string):Observable<any>{
   );                
 }
 
+getCircleCategories(userId:string):Observable<any>{
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getEvents.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+  }
+  serviceUrl = '/assets/json/fromService/getEvents.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`fetched getCircleCategories`)),
+    catchError(this.handleError<any>(`Error in getCircleCategories()`))
+  );  
+}
+
+getCircleUsers(userId:string, category:string):Observable<any>{
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getEvents.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+  }
+  serviceUrl = '/assets/json/fromService/getEvents.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`fetched getCircleUsers`)),
+    catchError(this.handleError<any>(`Error in getCircleUsers()`))
+  );  
+}
+
+removeFromCircle(userId:string):Observable<any>{
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getEvents.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+  }
+  serviceUrl = '/assets/json/fromService/getEvents.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`in removeFromCircle`)),
+    catchError(this.handleError<any>(`Error in removeFromCircle()`))
+  );  
+}
+
+checkCircleRelation(profileId:string, userId:string):Observable<any>{
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getEvents.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+  }
+  serviceUrl = '/assets/json/fromService/getEvents.json';   
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`in checkCircleRelation`)),
+    catchError(this.handleError<any>(`Error in checkCircleRelation()`))
+  );  
+}
+
 getEvents(userId:string):Observable<any>{ 
   let serviceUrl:string = "";//    
   if(this.devMode){

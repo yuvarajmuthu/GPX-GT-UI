@@ -8,6 +8,11 @@
   display: block;
     padding: .5rem 3rem;
 }
+.landscape-btn{
+  position: relative;
+  top: 7px;
+  padding: 5px 35px 5px 35px;
+}
 .search-legislator-navpills > .badge {
   border-radius: 10px;
   padding-top: 5px;

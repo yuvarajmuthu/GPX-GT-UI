@@ -75,6 +75,7 @@ export class UserComponent implements OnInit {
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
     isManagedByCollapsed:boolean = true;
+    isSettingsCollapsed:boolean = true;
     externalUser:boolean;
     biodata:any=null;
     biodataTemplate={};
@@ -108,6 +109,7 @@ export class UserComponent implements OnInit {
     profileTabSelected: boolean = true;
     activitiesTabSelected: boolean = false;
     activitiesData: boolean = false;
+    settings: boolean = false;
     tap: boolean = false;
     profileData: boolean = true;
     folow: boolean = false;
@@ -384,6 +386,24 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = false;
+        this.settings = false;
+    }
+
+    showSettings(){
+        this.settings = true;       
+        this.activitiesData = false;
+        this.profileData = false;
+        this.folow = false;
+        this.followersActiveCss = false;
+        this.followingsActiveCss = false;
+        this.managedByActive = false;
+
+        this.isFollowersCollapsed = true;
+        this.isFollowingsCollapsed = true;
+        this.isManagedByCollapsed = true;
+        this.isProfileCollapsed = true;
+        this.isActivityCollapsed = true;
+        this.isSettingsCollapsed = false;
     }
 
     Profiles(activeTemplatName) {
@@ -398,6 +418,10 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
+        this.isSettingsCollapsed = true;
+
+        this.settings = false;
+
     }
 
     //OBSOLETE
@@ -423,6 +447,10 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
+        this.isSettingsCollapsed = true;
+
+        this.settings = false;
+
 
     }
 
@@ -439,6 +467,10 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
+        this.isSettingsCollapsed = true;
+
+        this.settings = false;
+
 
     }
 
@@ -455,6 +487,10 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = false;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
+        this.isSettingsCollapsed = true;
+
+        this.settings = false;
+
 
     }
 
@@ -621,6 +657,7 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
         this.isManagedByCollapsed = true;
+        this.isSettingsCollapsed = true;
 
         this.profileTabSelected = true;
         this.activitiesTabSelected = false;
@@ -633,6 +670,7 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
         this.isManagedByCollapsed = true;
+        this.isSettingsCollapsed = true;
 
         this.profileTabSelected = false;
         this.activitiesTabSelected = true;

@@ -334,12 +334,7 @@
         <!-- Begin user profile -->
         <div class="text-center user-profile-2">
             <ul class="list-group">
-                <li class="list-group-item pointer"
-                    [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
-                    <span class="pointer" (click)="managedByUsers()">
-                        <i class="material-icons">supervisor_account</i>Managed by
-                    </span>
-                </li>
+
                 <li class="list-group-item pointer"
                     (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
                     <span class="pointer">
@@ -351,12 +346,18 @@
                     (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
                     <span class="pointer">Profile</span>
                 </li> -->
-                <li class="list-group-item pointer" *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive)}">
+                <li class="list-group-item pointer" *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings)}">
                     <i class="material-icons">{{profileTemplate.profileIcon}}</i> {{profileTemplate.name}}
                     <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                 </li>
                 <li class="list-group-item pointer"
-                (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
+                    [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
+                    <span class="pointer" (click)="managedByUsers()">
+                        <i class="material-icons">supervisor_account</i>Managed by
+                    </span>
+                </li>
+                <li class="list-group-item pointer"
+                (click)="showSettings()" [ngClass]="{ 'active': settings, 'in-active': !settings}">
                 <span class="pointer">
                     <i class="material-icons">settings_applications</i>Settings
                 </span>
@@ -406,6 +407,16 @@
                                                </li>
                                            </ul>
                                            </div>
+
+                                           <div id="managedByCollapse" [ngbCollapse]="isSettingsCollapsed"
+                                           class="widget stick-widget">
+                                                <ul class="followers">
+                                                    <li>
+                                                        Settings
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                             <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
                                                 <div class="card card-nav-tabs">
                                                     <div class="card-header-1 card-header-primary"  id="myHeader">

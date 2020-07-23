@@ -8,6 +8,7 @@ import {SearchlegislatorsComponent} from './components/searchlegislators/searchl
 import {RegisterComponent} from './components/security/register/register.component';
 import {LoginComponent} from './components/security/login/login.component';
 import {PostComponent} from './components/post/post.component';
+import {CircleComponent} from './components/circle/circle.component';
 import {ProtectedComponent} from './components/protected/protected.component';
 import {CreatepageComponent} from './components/security/createpage/createpage.component';
 //import {ConnectionrequestComponent} from './components/connection/connectionrequest/connectionrequest.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   // },
   // { path: '**', component: PageNotFoundComponent }
   {path: 'searchLegislator', component: SearchlegislatorsComponent},
+  {path: 'circle', component: CircleComponent, canActivate: [AuthGuard]},
   {path: 'news', component: PostComponent, canActivate: [AuthGuard]},
   {path: 'secure', component: ProtectedComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent},

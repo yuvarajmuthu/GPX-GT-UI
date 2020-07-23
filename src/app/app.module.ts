@@ -43,6 +43,7 @@ import {GAddressSearchComponent} from './components/g-address-search/g-address-s
 
 import {dateFormatPipe} from './util/pipes/dateformat.pipe';
 import { CreatepageselectionComponent } from './components/security/createpage/createpageselection/createpageselection.component';
+import { CircleComponent } from './components/circle/circle.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';
@@ -92,7 +93,8 @@ let config = new AuthServiceConfig([
         PartyComponent,
         ProtectedComponent,
         // GAddressSearchComponent,
-        CreatepageselectionComponent
+        CreatepageselectionComponent,
+        CircleComponent
         //dateFormatPipe
         //UserComponent
         //GpxInputComponent,

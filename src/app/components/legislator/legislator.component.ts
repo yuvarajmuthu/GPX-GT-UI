@@ -29,8 +29,10 @@ export class LegislatorComponent implements OnInit {
   imageName: string;
   @Input() legisId: string;
   resultop: any;
-  bookMark: boolean;
+  isInCircle: boolean;
   keys = [];
+  loggedUsername:string;
+  userName: string = null;
 
 
   constructor(private  router: Router,
@@ -44,6 +46,7 @@ export class LegislatorComponent implements OnInit {
   ngOnInit(): void {
 
     let id = this.route.snapshot.paramMap.get('id');
+    this.loggedUsername = this.datashareService.getLoggedinUsername();
 
     // this.route.paramMap.pipe(
     //   switchMap((params: ParamMap) => this.getLegislator(params.get('id')))
@@ -54,21 +57,28 @@ export class LegislatorComponent implements OnInit {
   }
 
   add2Circle() {
-
-    if (this.bookMark) {
-      this.bookMark = false;
-    } else {
-      this.bookMark = true;
+    if(!this.loggedUsername){
+      //let returnUrl: string = '/user/' + this.profileUserId + '?follow';
+      //this.router.navigate(['login'], {queryParams: {returnUrl: returnUrl}});
+      this.router.navigate(['login']);
+    }else{
+      this.userService.add2Circle(this.userName, this.loggedUsername).subscribe(
+        (result) => {
+          this.isInCircle = true; 
+        },
+        (err) => {
+            console.log('Error ', err);
+        }); 
     }
 
   }
   
   removeFromCircle() {
 
-    if (this.bookMark) {
-      this.bookMark = false;
+    if (this.isInCircle) {
+      this.isInCircle = false;
     } else {
-      this.bookMark = true;
+      this.isInCircle = true;
     }
 
   }
@@ -142,23 +152,22 @@ export class LegislatorComponent implements OnInit {
   //called from UI on selection of a Legislator
   gotoLegislator(legislator: Legislator): void {
     console.log('selected legislator - ' + legislator);
-    let userName: string = null;
     let searchString:string = null;
     this.datashareService.setViewingUser(legislator);
 
 
 
     if (legislator['leg_id']) {
-      userName = legislator['leg_id'];
+      this.userName = legislator['leg_id'];
 
-      this.router.navigate(['/user', userName]);
+      this.router.navigate(['/user', this.userName]);
 
     } else if(this.legislator['photo_url'] && this.legislator['photo_url'].indexOf('bioguide.congress.gov') != -1 ) { //CONGRESS
       let photoUrl = this.legislator['photo_url'];
       let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
-      userName = fileName.substring(0, fileName.lastIndexOf('.'));
+      this.userName = fileName.substring(0, fileName.lastIndexOf('.'));
 
-      this.router.navigate(['/user', userName]);
+      this.router.navigate(['/user', this.userName]);
 
 
     }else if (legislator['full_name']) {
@@ -167,11 +176,11 @@ export class LegislatorComponent implements OnInit {
       .subscribe(
         (result) => {
           if(result.length > 0 && searchString === result[0]['full_name']){
-            userName = result[0]['username'];
+            this.userName = result[0]['username'];
           }else{
-            userName = 'createnew';
+            this.userName = 'createnew';
           }
-          this.router.navigate(['/user', userName]);
+          this.router.navigate(['/user', this.userName]);
 
         },
         (err) => {

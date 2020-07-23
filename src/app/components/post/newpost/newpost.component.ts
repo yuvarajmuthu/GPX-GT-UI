@@ -108,8 +108,6 @@ getCaretPosition() {
 }
 
 handleSelection(event) {
-  console.log(event.char);
-  //this.message += event.char;
   let inputDiv = document.getElementById("postContent"); 
   let innertmlHtml = inputDiv.innerHTML+event.char;
   inputDiv.innerHTML = innertmlHtml;

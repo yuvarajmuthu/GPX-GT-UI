@@ -233,3 +233,14 @@ form button {
 .post-list{
   background-color:#FBFCFC;
 }
+.share-button-pop{
+  padding: 5px;
+  float: right;
+  margin: 5px 0px 5px 0px;
+}
+.share-toggle-btn{
+  width: 30%;
+  border: none;
+  margin: 0 !important;
+  border-radius: 0px;
+}

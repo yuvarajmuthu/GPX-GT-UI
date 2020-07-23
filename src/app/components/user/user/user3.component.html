@@ -296,7 +296,8 @@
                     <span class="vseparator"></span>
                     <span class="badge badge-pill badge-primary pointer" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
                     <span class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary pointer" (click)="addToMyCircle()">Add to My Circle<i class="fa fa-star-o"></i></span>
+                    <span *ngIf="!isInCircle" class="badge badge-pill badge-primary pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></span>
+                    <span *ngIf="isInCircle" class="badge badge-pill badge-primary pointer">In Circle<i class="fa fa-star-o"></i></span>                    
                 </div>
 
 

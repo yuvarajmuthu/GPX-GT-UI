@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
     activeTemplate: string="upOffices";
     activeTemplatName:string = "Office";
     showDropDown : boolean = false;
-
+    isInCircle: boolean;
 
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
@@ -90,6 +90,10 @@ export class UserComponent implements OnInit {
 
     currentUser: User = null;
     loggedUser: User = null;
+    loggedUsername: string = null;
+    isSelfProfile: boolean = false;
+
+
     postFormData: FormData;
     editLabel: string = null;
     inEditMode:boolean = false;
@@ -103,7 +107,6 @@ export class UserComponent implements OnInit {
     paramUsername: string = '';
     profileTabSelected: boolean = true;
     activitiesTabSelected: boolean = false;
-    isSelfProfile: boolean = false;
     activitiesData: boolean = false;
     tap: boolean = false;
     profileData: boolean = true;
@@ -303,7 +306,6 @@ export class UserComponent implements OnInit {
         this.header = document.getElementById("myHeader");
         this.sticky= document.getElementById("myHeader").offsetTop;
         this.route.params.subscribe((params: Params) => {
-            //this.datashareService.editProfile(false);
             this.communicationService.userProfileChanged(false);
 
             this.paramUsername = params['id'];
@@ -312,9 +314,13 @@ export class UserComponent implements OnInit {
 
             this.loggedUser = this.datashareService.getCurrentUser();
 
-
-            if (this.loggedUser && this.paramUsername === this.loggedUser.username) {
-                this.isSelfProfile = true;
+            if (this.loggedUser) {
+                this.loggedUsername = this.loggedUser.username;
+                if(this.paramUsername === this.loggedUser.username){
+                    this.isSelfProfile = true;
+                }else{
+                    this.check4CircleStatus();
+                }
             }
 
         });
@@ -897,8 +903,43 @@ export class UserComponent implements OnInit {
 
     }
 
-    test() {
-        console.log('Cancel Follow');
+    add2Circle() {
+        if(!this.loggedUsername){
+            //let returnUrl: string = '/user/' + this.profileUserId + '?follow';
+            //this.router.navigate(['login'], {queryParams: {returnUrl: returnUrl}});
+            this.router.navigate(['login']);
+        }else{
+            this.userService.add2Circle(this.paramUsername, this.loggedUsername).subscribe(
+            (result) => {
+                this.isInCircle = true; 
+            },
+            (err) => {
+                console.log('Error ', err);
+            }); 
+        }
+
+    }
+    
+    removeFromCircle() {
+        this.userService.removeFromCircle(this.paramUsername, this.loggedUsername).subscribe(
+            (result) => {
+                this.isInCircle = false; 
+            },
+            (err) => {
+                console.log('Error ', err);
+            }); 
+
+    }
+
+    check4CircleStatus() {
+        this.userService.isInCircle(this.paramUsername, this.loggedUsername).subscribe(
+            (result) => {
+                this.isInCircle = result; 
+            },
+            (err) => {
+                console.log('Error ', err);
+            }); 
+
     }
 
     getRelationStatus(entity: string, profileId: string) {

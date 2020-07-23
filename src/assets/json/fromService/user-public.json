@@ -14,7 +14,7 @@
     "tagName":null,
     "connections":null,
     "userProfile":null,
-    "circleCategories":[],
+    "circleCategories":["Legislators", "District", "Township", "HOA"],
     "circleUsers":[],
     "profileTemplates":[
        {

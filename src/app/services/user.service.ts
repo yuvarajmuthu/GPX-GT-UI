@@ -438,7 +438,11 @@ getCircleUsers(userId:string, category:string):Observable<any>{
   );  
 }
 
-removeFromCircle(userId:string):Observable<any>{
+add2Circle(profileId:string, userId:string):Observable<any> {
+  return null;
+}
+
+removeFromCircle(profileId:string, userId:string):Observable<any>{
   let serviceUrl:string = "";//    
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/getEvents.json';   
@@ -455,7 +459,7 @@ removeFromCircle(userId:string):Observable<any>{
   );  
 }
 
-checkCircleRelation(profileId:string, userId:string):Observable<any>{
+isInCircle(profileId:string, userId:string):Observable<any>{
   let serviceUrl:string = "";//    
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/getEvents.json';   

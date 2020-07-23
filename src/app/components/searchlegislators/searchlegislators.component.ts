@@ -41,6 +41,7 @@ export class SearchlegislatorsComponent implements OnInit {
   districtLabel: string;
   stateData: boolean;
   congressData: boolean;
+  findReps: boolean = false;
   offices = [];
   divisionOffices = [];
   divisioncategory  = [];
@@ -73,10 +74,14 @@ export class SearchlegislatorsComponent implements OnInit {
     //this.setCurrentPosition();
   }
 
-  loadSearch(evt, opt){
+  loadCircleUsers(evt, opt){
     evt.preventDefault();
     console.log(evt,opt);
-    this.router.navigate(['search'],{ queryParams: { 'opt': opt } });
+
+    this.findReps = false;
+
+
+    //this.router.navigate(['search'],{ queryParams: { 'opt': opt } });
 
   }
 
@@ -90,7 +95,12 @@ export class SearchlegislatorsComponent implements OnInit {
     this.districtLabel = 'Your State Legislative District(s):';
   }
 
-  //invoked from searchLegis.html
+  findRepresentatives(){
+    this.findReps = true;
+  }
+  
+
+
   loadCongressData() {
     this.stateData = false;
     this.congressData = true;

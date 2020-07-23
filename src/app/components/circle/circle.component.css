@@ -1,0 +1,103 @@
+.active{
+    background-color: #007bff;
+  }
+  .border-right{
+    border-right:2px solid black;
+  }
+  .search-legislator-navpills{
+    display: block;
+      padding: .5rem 3rem;
+  }
+  .landscape-btn{
+    position: relative;
+    top: 7px;
+    padding: 5px 35px 5px 35px;
+  }
+  .search-legislator-navpills > .badge {
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .legisBoundary{
+      border: 1px solid lightblue;
+      border-radius: 5px;
+      margin: 10px;
+    }
+  
+    .legisBoundary:hover{
+      border: 2px solid lightblue;
+    }
+  
+    .searchLegisBox{
+      width: 130px;
+      -webkit-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+    }
+  
+    .searchTip{
+  
+      position:relative;
+      padding: 1em;
+      margin: 1em;
+  
+    }
+  
+    .address{
+      padding: 0.5em;
+    }
+  
+    .address input{
+      width: 500px;
+    }
+  
+  
+  
+  /*----- button 1 -----*/
+  .btn-1::before, .btn-1::after{
+    transition-delay: 0.2s;
+  }
+  .btn-1 span::before, .btn-1 span::after{
+    transition-delay: 0s;
+  }
+  .btn-1::before{
+    right: 0;
+    top: 0;
+  }
+  .btn-1::after{
+    left: 0;
+    bottom: 0;
+  }
+  .btn-1 span::before{
+    left: 0;
+    top: 0;
+  }
+  .btn-1 span::after{
+    right: 0;
+    bottom: 0;
+  }
+  .btn-1:hover::before, .btn-1:hover::after{
+    transition-delay: 0s;
+  }
+  .btn-1:hover span::before, .btn-1:hover span::after{
+    transition-delay: 0.2s;
+  }
+  .custom-hover-legislator:hover{
+    border: 1.5px solid #028ece;
+    border-radius: 10px;
+    transition: 1s;
+  }
+  @media only screen and (max-width: 600px) {
+    .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+      padding: 20px 15px 20px 15px;
+    }
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
+      padding: 20px 15px 20px 15px;
+    }
+  }
+  .cursor-hand{
+    cursor: pointer;
+  }
+  

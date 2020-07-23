@@ -1,42 +1,39 @@
 
 <div class="container">
+  <!--
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <ul class="nav">
         <li class="nav-item border-right">
-          <!--<a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchLegislator')">-->
-          <a class="nav-link search-legislator-navpills cursor-hand" routerLink="/searchLegislator">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchDistrict')">
             <span class="badge badge-secondary active">Legislators</span>
           </a>
         </li>
         <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchDistrict')">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchDistrict')">
             <span class="badge badge-secondary">District</span>
           </a>
         </li>
         <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchTownShip')">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchTownShip')">
             <span class="badge badge-secondary">Township</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchHOA')">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchHOA')">
             <span class="badge badge-secondary">HOA</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <!--<a class="nav-link search-legislator-navpills cursor-hand" (click)="loadSearch($event,'searchHOA')">
-            <span class="badge badge-secondary">HOA</span>
-          </a>-->
-          <button type="button" class="btn btn-block btn-sm landscape-btn" (click)="loadCongressData()" [ngClass]="{ 'btn-outline-primary active': congressData, 'btn-outline-primary': !congressData  }"> Find <i class="fa fa-search" aria-hidden="true"></i> </button>
+          <button type="button" class="btn btn-block btn-sm landscape-btn" (click)="findRepresentatives()" [ngClass]="{ 'btn-outline-primary active': findReps, 'btn-outline-primary': !findReps  }"> Find Representatives <i class="fa fa-search" aria-hidden="true"></i> </button>
         </li>
       </ul>
     </div>
   </div>
+-->
 
-
-<div class="row legisBoundary" *ngIf="congressData">
+<div class="row legisBoundary">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     Find Representatives:
   </div>

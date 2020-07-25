@@ -95,10 +95,28 @@
                 <i class="fa fa-comment custom-size"></i>
                 Comment({{commentsCount}})
             </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>
                 Share
-            </a>
+            </a> -->
+            <ng-template #popContent>
+                <tag-input [(ngModel)]="shareUsers"  placeholder="Share with" (input)="searchShareUser($event)" secondaryPlaceholder="Share with" >
+                    <tag-input-dropdown 
+                      [showDropdownIfEmpty]="true"
+                      [autocompleteObservable]="requestAutocompleteItems"
+                      [dynamicUpdate]="true"
+                      identifyBy="username" displayBy="username"
+                    >
+                    </tag-input-dropdown>
+                  </tag-input>
+                  <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
+            </ng-template>
+
+
+            <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
+        [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
+        Share
+</button>
         </div>
 
 
@@ -149,6 +167,14 @@
                                         <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
                                         <ul>
                                             <li>
+                                                <i class='attachment char-icon'
+                                                 (click)="toggled = !toggled"
+                                                 [(emojiPickerIf)]="toggled"
+                                                 [emojiPickerDirection]="'top'"
+                                                 (emojiPickerSelect)="handleSelection($event)">😄</i>
+                                          </li>
+
+                                            <li>
                                                 <i class="fa fa-image"></i>
                                                 <label class="fileContainer">
                                                     <input type="file" accept="image/gif, image/jpg, image/jpeg, image/png" id="stageUploadedFile"
@@ -158,7 +184,8 @@
                                             <li>
                                                 <i class="fa fa-video-camera"></i>
                                                 <label class="fileContainer">
-                                                    <input type="file">
+                                                    <input type="file" id="stageUploadedFile1"
+                                                    (change)="onvideoSelected($event)">
                                                 </label>
                                             </li>
                                             <!--
@@ -184,6 +211,11 @@
                         <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
                             <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                             <img [src]="stagingImage" height="200">
+                        </div>
+                        <div class="video-upload-container" *ngIf="isvideoSelected==true">
+                            <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                            <video width="400" controls >
+                            </video>
                         </div>
                         <!--
                         <div class="btn-toolbar justify-content-between float-right">
@@ -291,10 +323,28 @@
                 <i class="fa fa-comment custom-size"></i>
                 Comment({{commentsCount}})
             </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
+            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>
                 Share
-            </a>
+            </a> -->
+            <ng-template #popContent>
+                <tag-input [(ngModel)]="shareUsers"  placeholder="Share with" (input)="searchShareUser($event)" secondaryPlaceholder="Share with" >
+                    <tag-input-dropdown 
+                      [showDropdownIfEmpty]="true"
+                      [autocompleteObservable]="requestAutocompleteItems"
+                      [dynamicUpdate]="true"
+                      identifyBy="username" displayBy="username"
+                    >
+                    </tag-input-dropdown>
+                  </tag-input>
+                  <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
+            </ng-template>
+
+
+            <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
+        [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
+        Share
+</button>
         </div>
 
 
@@ -335,6 +385,13 @@
  
                                             <ul>
                                                 <li>
+                                                    <i class='attachment char-icon'
+                                                     (click)="toggled = !toggled"
+                                                     [(emojiPickerIf)]="toggled"
+                                                     [emojiPickerDirection]="'top'"
+                                                     (emojiPickerSelect)="handleSelection($event)">😄</i>
+                                              </li>
+                                                <li>
                                                     <i class="fa fa-image"></i>
                                                     <label class="fileContainer">
                                                         <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png"
@@ -344,7 +401,8 @@
                                                 <li>
                                                     <i class="fa fa-video-camera"></i>
                                                     <label class="fileContainer">
-                                                        <input type="file">
+                                                        <input type="file" id="stageUploadedFile1"
+                                                        (change)="onvideoSelected($event)">
                                                     </label>
                                                 </li>
                                                 <!--
@@ -372,6 +430,11 @@
                         <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
                             <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                             <img [src]="stagingImage" height="200">
+                        </div>
+                        <div class="video-upload-container" *ngIf="isvideoSelected==true">
+                            <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                            <video width="400" controls >
+                            </video>
                         </div>
                         <!--
                         <div class="btn-toolbar justify-content-between float-right">

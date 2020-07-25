@@ -5,9 +5,18 @@ import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {Post} from '../../../models/post';
+import { Observable, of, from, throwError} from 'rxjs';
+
+
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import 'rxjs/Rx';
 
 import {DomSanitizer} from "@angular/platform-browser";
-
+import { tagUser } from 'src/app/models/tagusers';
+export interface AutoCompleteModel {
+    value: any;
+    display: string;
+ }
 @Component({
     selector: 'app-postcard',
     templateUrl: './postcard.component.html',
@@ -25,6 +34,16 @@ export class PostcardComponent implements OnInit {
     nxtNode:any;
     oldChildNodes: any;
     deletedNodePos:number;
+    isvideoSelected : boolean = false;
+
+
+
+    shareUsers:any = [];
+    selectedUsers:any=[];
+    
+    public requestAutocompleteItems = (text: any): Observable<any> => {
+           return Observable.of(this.selectedUsers);
+      };
 
     commentPost: boolean = false;
     devMode: boolean = false;
@@ -65,12 +84,13 @@ export class PostcardComponent implements OnInit {
                 private userService: UserService,
                 private elementRef: ElementRef,
                 private sanitizer: DomSanitizer,
+                private http:HttpClient,
                 private router: Router) {
         for (let index = 0; index < 10000; index++) {
             this.numbers.push(index);
         }
         this.devMode = isDevMode();
-
+         const that =this;
         this.items =[];
         this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
 
@@ -303,7 +323,18 @@ export class PostcardComponent implements OnInit {
            }
         }
     }
+    searchShareUser(event){
+        this.postService.getTagUsers(event.target.value)
+        .subscribe((data:any) => {
+                this.selectedUsers = data;
+        });
+    }
 
+    shareToUsers(){
+      console.log(this.shareUsers)
+    }   
+    
+ 
     tagUsersRedirectTo(e){
         console.log(e.target.tagName);
         if(e.type == 'click' && e.target.tagName == 'SPAN'){
@@ -318,6 +349,12 @@ export class PostcardComponent implements OnInit {
         }
 
     }
+
+    handleSelection(event) {
+        let inputDiv = document.getElementById("commentContent"); 
+        let innertmlHtml = inputDiv.innerHTML+event.char;
+        inputDiv.innerHTML = innertmlHtml;
+      }
 
     save(val) {
         console.log(val);
@@ -350,6 +387,36 @@ export class PostcardComponent implements OnInit {
         this.postFormData = new FormData();
         this.stagingImage = '';
     }
+    deleteVideoFile(e) {
+        this.postFormData = new FormData();
+        //document.querySelector("video").src = '';
+        this.isvideoSelected = false;
+      }
+
+    onvideoSelected(event) {
+        console.log(event.target.files);
+        //  if (event.target.files && event.target.files[0]) {
+              let filesizeMB = event.target.files[0].size/1024/1024;
+              let fileType = event.target.files[0].type;
+              //if(filesizeMB <= 2.0 && (fileType == 'image/gif' || fileType == 'image/jpeg' || fileType == 'image/jpg' || fileType == 'image/png')){
+                  this.isFileSizeError = false;
+                  let reader = new FileReader();
+                  this.postFormData.append('videofile', event.target.files[0]);
+                  reader.readAsDataURL(event.target.files[0]); // read file as data url
+                  this.isvideoSelected = true;
+                  let blobURL = URL.createObjectURL(event.target.files[0]);
+                  reader.onload = (event) => { // called once readAsDataURL is completed
+                  //  this.isvideoSelected = true;
+                    document.querySelector("video").src = blobURL;              
+              }
+              // }
+              // else{
+              //     this.isFileSizeError = true;
+              //     this.isvideoSelected = false;
+              // }
+           // }
+      }
+  
 
     onFileSelected(event) {
         if (event.target.files && event.target.files[0]) {

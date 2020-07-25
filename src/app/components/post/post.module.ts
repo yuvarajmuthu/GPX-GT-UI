@@ -14,14 +14,22 @@ import { NewpostComponent } from './newpost/newpost.component';
 //import {BannerComponent} from '../banner/banner.component';
 import {dateFormatPipe} from '../../util/pipes/dateformat.pipe';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { TagInputModule } from 'ngx-chips';
+
+//import { BrowserModule } from '@angular/platform-browser'; 
+//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   imports: [
+    //BrowserModule,
+    //BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
     NgxEmojiPickerModule,
+    TagInputModule,
     //GpxUIComponentsModule,
     MentionModule,
     ScrollingModule,

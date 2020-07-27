@@ -20,7 +20,7 @@
 	"properties" : ["firstName", "lastName", "imageUrl"]
 	},
 	{
-	"profile_template_id":"upCongressLegislatorExternal",
+	"profile_template_id":"upDefault",
 	"type":"legislator",
 	"properties" : [
          "bioguide_id",

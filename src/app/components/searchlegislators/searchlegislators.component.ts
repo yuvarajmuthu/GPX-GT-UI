@@ -47,7 +47,6 @@ export class SearchlegislatorsComponent implements OnInit {
   divisioncategory  = [];
   divisions = [];
 
-
   @Output()
   success = new EventEmitter();
 

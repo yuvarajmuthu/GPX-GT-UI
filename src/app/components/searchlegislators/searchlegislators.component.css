@@ -49,6 +49,15 @@
   .address input{
     width: 500px;
   }
+  .btn-secondary{
+    position: relative;
+    top: 12px;
+  }
+  .btn-legis-select{
+    position: relative;
+    top: 30px;
+  }
+    
 /* .custom-hover-legislator:before{
   position: absolute;
   content: "";

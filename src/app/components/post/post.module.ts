@@ -16,14 +16,14 @@ import {dateFormatPipe} from '../../util/pipes/dateformat.pipe';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TagInputModule } from 'ngx-chips';
 
-//import { BrowserModule } from '@angular/platform-browser'; 
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   imports: [
-    //BrowserModule,
-    //BrowserAnimationsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,

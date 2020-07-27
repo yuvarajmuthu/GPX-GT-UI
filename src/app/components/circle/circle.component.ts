@@ -8,18 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class CircleComponent implements OnInit {
 
   constructor() { }
- 
+
+
   ngOnInit() {
-  }
-
-  loadCircleUsers(evt, opt){
-    evt.preventDefault();
-    console.log(evt,opt);
-
-
-
-    //this.router.navigate(['search'],{ queryParams: { 'opt': opt } });
-
   }
 
 }

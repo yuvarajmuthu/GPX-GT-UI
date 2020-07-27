@@ -47,11 +47,11 @@
     <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>
     <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>
     -->
-    <button type="button" class=""  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Find</button>
+    <button type="button" class="find-button-custom-place"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Find</button>
   </div>
 </div>
 
-  <div class="row legisBoundary">
+  <div class="row" [ngClass]="{ 'row legisBoundary': congressData, 'row': !congressData  }">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <ul class="nav">
         <li class="nav-item border-right" *ngFor="let division of divisions">
@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <div class="row legisBoundary">
+  <div class="row" [ngClass]="{ 'row legisBoundary': secondChild, 'row': !secondChild  }">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <ul class="nav">
         <li class="nav-item border-right" *ngFor="let divisionOffice of divisionOffices">

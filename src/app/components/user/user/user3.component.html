@@ -37,13 +37,13 @@
 <div class="content">
 
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4" title="This is a private profile">
           <div class="private-profile-label">
           <span  class="badge badge-pill badge-primary" >
             <span  class="badge badge-pill badge-danger" >
             <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
             </span>
-            This is an Private profile
+            <!-- This is an Private profile -->
           </span>
           </div>
         </div><!-- End div .col-sm-4 -->
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div>
-                        {{paramUsername}}
+                        @{{paramUsername}}
                     </div>
                     <h5>
                     <!-- CHAMBER-begin -->
@@ -381,7 +381,7 @@
                                         <!-- Main stage area -->
                                         <div class="col-lg-12 cols-item2">
                                             <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
-                                               <app-post [userId]="profileUserId" [disableNewPost]=true></app-post>
+                                                <app-post [userId]="profileUserId" [disableNewPost]=true></app-post>
                                             </div>
                                             <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                  class="widget stick-widget">
@@ -412,7 +412,17 @@
                                            class="widget stick-widget">
                                                 <ul class="followers">
                                                     <li>
-                                                        Settings
+                                                        
+                                                        <div class="form-row">
+                                                            <div class="col form-group">
+                                                              <label>Access Restriction</label>
+                                                              <div class="custom-control custom-switch">
+                                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction">
+                                                                <label class="custom-control-label" for="customSwitch1">Public[OFF] / Private[ON]</label>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+
                                                     </li>
                                                 </ul>
                                             </div>

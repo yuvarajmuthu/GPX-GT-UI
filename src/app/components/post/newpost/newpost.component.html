@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <label class="sr-only" for="message">post</label>
 
-                            <div id="postContent" contenteditable="true"
+                            <div id="postContent" class="form-control" contenteditable="true"
                             [mentionConfig]="mentionConfig" placeholder="Please share your thoughts"
                             [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                             </div>
@@ -98,17 +98,22 @@
             </div>
         </div>
         <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
-            <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-            <img [src]="stagingImage" height="200">
+            <div class="file-container">
+            <!-- <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button> -->
+            <img [src]="stagingImage" height="200" class="image">
+            <div class="overlay"><button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+           </div>
             <!-- <img class="image-upload" [src]="stagingImage" id="stageUploadedImgFile" alt="" width="100%"> -->
         </div>
 
         <div class="video-upload-container" *ngIf="isvideoSelected==true">
-            <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-            <video width="400" controls >
-                <!-- <source src="mov_bbb.mp4" id="video_here">
-              Your browser does not support HTML5 video. -->
-            </video>
+            <div class="file-container">
+                <!-- <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button> -->
+                <video width="400" controls >
+                </video>
+                <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+            </div>
+
         </div>
 
         <div class="btn-toolbar justify-content-between padding-top2">

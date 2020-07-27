@@ -10162,3 +10162,14 @@ input{
 #postContent div{
     display: inline;
 }
+
+.image-upload-container{
+    border: 1px solid #C1B6F2;
+    border-radius: 5px;
+    width:min-content;
+  }
+  .video-upload-container{
+    border: 1px solid #C1B6F2;
+    border-radius: 5px;
+    width:min-content;
+  }  

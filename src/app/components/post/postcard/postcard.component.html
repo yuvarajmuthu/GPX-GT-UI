@@ -151,7 +151,7 @@
                                         <span>{{item.name}}</span>
                                       </ng-template> -->
 
-                                      <div id="commentContent" class="commentContent" contenteditable="true"
+                                      <div id="commentContent" class="commentContent form-control" contenteditable="true"
                                       [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
                                       [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                                       </div>
@@ -209,13 +209,17 @@
                             </div>
                         </div>
                         <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
-                            <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                            <img [src]="stagingImage" height="200">
+                            <div class="file-container">
+                                <img [src]="stagingImage" height="200" class="image">
+                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+                            </div>
                         </div>
                         <div class="video-upload-container" *ngIf="isvideoSelected==true">
-                            <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                            <video width="400" controls >
-                            </video>
+                            <div class="file-container">
+                                <video width="400" controls >
+                                </video>
+                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+                            </div>
                         </div>
                         <!--
                         <div class="btn-toolbar justify-content-between float-right">
@@ -369,7 +373,7 @@
                                         <span>{{item.name}}</span>
                                       </ng-template> -->
 
-                                      <div id="commentContent" class="commentContent" contenteditable="true"
+                                      <div id="commentContent" class="commentContent form-control" contenteditable="true"
                                       [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
                                       [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
                                       </div>
@@ -428,13 +432,17 @@
                             </div>
                         </div>
                         <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
-                            <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                            <img [src]="stagingImage" height="200">
+                            <div class="file-container">
+                                <img [src]="stagingImage" height="200" class="image">
+                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+                               </div>
                         </div>
                         <div class="video-upload-container" *ngIf="isvideoSelected==true">
-                            <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                            <video width="400" controls >
-                            </video>
+                            <div class="file-container">
+                                <video width="400" controls >
+                                </video>
+                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+                            </div>
                         </div>
                         <!--
                         <div class="btn-toolbar justify-content-between float-right">

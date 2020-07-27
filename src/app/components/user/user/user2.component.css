@@ -1,7 +1,7 @@
 .private-profile-label{
   position: absolute;
-  bottom: 2em;
-  right: 2.4em;
+  bottom: 7em;
+  right: 0.5em;
   font-size: 20px;
 }
 @media only screen and (max-width: 600px) {
@@ -14,14 +14,14 @@
 @media only screen and (max-width: 768px) {
   .private-profile-label{
     position: absolute;
-    bottom: -16.2em;
-    right: 8em;
+    top: 1.5em;
+    right: 3em;
   }
 }
 .delete-image{
-    float: right;
+    /* float: right;
     margin-top: 5px;
-    margin-right: 5px;
+    margin-right: 5px; */
     border: none !important;
     background: none !important;
     position: relative;
@@ -29,11 +29,11 @@
     left: 25px;
     font-size: 15px;;
   }
-  .image-upload-container{
+  /* .image-upload-container{
     border: 1px solid rgba(0,0,0,0.54);
     border-radius: 5px;
     width:152px;
-  }
+  } */
 
   .vseparator{
     margin: 5px;

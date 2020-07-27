@@ -1,21 +1,30 @@
 {
     "userId":"5e0fa92ef453cd9f8cc72a3b",
     "username":"user6@gmail.com",
+    "full_name":"user",
     "password":null,
+
     "userType":"PUBLICUSER",
     "status":"active",
+    "profileManagedBy":[],
+    "members":[],
+    "circleUsers":[],
+    "settings":{"accessRestriction":true, "blockedUsers":[]},
+    "photoUrl":"http://www.legis.state.pa.us/images/members/200/1679.jpg",
+    "profileAvatarImgFileId":null,
+    "profileBannerImgFileId":null,
+
+
     "sourceSystem":null,
     "sourceId":null,
-    "firstName":"user",
-    "lastName":"six",
     "emailId":null,
     "phone":null,
     "address":null,
     "tagName":null,
     "connections":null,
     "userProfile":null,
-    "circleCategories":["Legislators", "District", "Township", "HOA"],
-    "circleUsers":[],
+
+
     "profileTemplates":[
        {
           "id":"5e1bfaa1f453cdb5c8c54d54",

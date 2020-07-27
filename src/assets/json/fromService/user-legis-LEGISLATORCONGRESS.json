@@ -4,6 +4,10 @@
     "password":null,
     "userType":"LEGISLATOR",
     "status":"PASSIVE",
+    "profileManagedBy":[],
+    "members":[],
+    "circleUsers":[],
+    "settings":{"accessRestriction":false, "blockedUsers":[]},
     "sourceSystem":"GOVTRACK",
     "sourceId":"C000141",
     "firstName":null,
@@ -17,7 +21,7 @@
     "profileTemplates":[
        {
           "id":"5d90330969965152f0f9c173",
-          "profileTemplateId":"upCongressLegislatorExternal",
+          "profileTemplateId":"upDefault",
           "type":"legislator",
           "name":"Biodata",
           "profileIcon":"person",
@@ -150,7 +154,7 @@
     "profileDatas":[
        {
           "id":"5dbe4e52f453cd2e706df4fd",
-          "profileTemplateId":"upCongressLegislatorExternal",
+          "profileTemplateId":"upDefault",
           "data":{
              "full_name":"Benjamin L. Cardin",
              "leg_id":"C000141",

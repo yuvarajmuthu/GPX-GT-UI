@@ -1,4 +1,5 @@
 .btn-legis {
+    position: relative;
     display: inline-block;
     font-weight: 400;
     color: white;
@@ -13,7 +14,7 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-
+ 
 .btn-legis-outline-secondary {
     color: #5CB85C !important;
      border-color: #ced4da !important;

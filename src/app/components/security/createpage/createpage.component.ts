@@ -104,7 +104,7 @@ export class CreatepageComponent implements OnInit {
         this.userType = this.constants.USERTYPE_LEGISLATOR;
         this.userCreationForm = this.createLegislatorPageForm;
 
-        this.profileTemplateId = 'upCongressLegislatorExternal';//should be upDefault, once code is refactored
+        this.profileTemplateId = 'upDefault';//should be upDefault, once code is refactored
       }else if(page == 'party'){
         this.userType = this.constants.USERTYPE_POLITICAL_PARTY;
         this.userCreationForm = this.createPartyPageForm;

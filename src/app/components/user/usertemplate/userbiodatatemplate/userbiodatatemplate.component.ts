@@ -14,6 +14,7 @@ import { Legislator } from 'src/app/models/legislator';
   templateUrl: './userbiodatatemplate.component.html',
   styleUrls: ['./userbiodatatemplate.component.css']
 })
+//OBSOLETE?
 export class UserbiodatatemplateComponent extends AbstractTemplateComponent  implements OnInit{ 
   //userId = "u001";
   //legisId:string = "";

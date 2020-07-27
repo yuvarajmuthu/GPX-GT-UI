@@ -1,6 +1,6 @@
 {
     "id":"5daa409af453cd4348b00e67",
-    "profileTemplateId":"upCongressLegislatorExternal",
+    "profileTemplateId":"upDefault",
     "data":{ 
        "leg_id":"PAL000515",
        "full_name":"Dan L. Miller",

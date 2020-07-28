@@ -38,11 +38,11 @@
     Find Representatives:
   </div>
 
-  <div class="address col-xs-12">
-    Address: <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
+  <div class="address col-lg-9 col-md-9 col-sm-9 col-xs-9">
+    <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
   </div>
 
-  <div class="col-xs-12">
+  <div class="col-xs-3">
     <!--
     <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>
     <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>

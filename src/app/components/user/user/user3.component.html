@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div>
-                        @{{paramUsername}}
+                        {{paramUsername}}
                     </div>
                     <h5>
                     <!-- CHAMBER-begin -->
@@ -381,7 +381,7 @@
                                         <!-- Main stage area -->
                                         <div class="col-lg-12 cols-item2">
                                             <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
-                                                <app-post [userId]="profileUserId" [disableNewPost]=true></app-post>
+                                               <app-post [userId]="profileUserId" [disableNewPost]=true></app-post>
                                             </div>
                                             <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                  class="widget stick-widget">
@@ -412,7 +412,6 @@
                                            class="widget stick-widget">
                                                 <ul class="followers">
                                                     <li>
-                                                        
                                                         <div class="form-row">
                                                             <div class="col form-group">
                                                               <label>Access Restriction</label>

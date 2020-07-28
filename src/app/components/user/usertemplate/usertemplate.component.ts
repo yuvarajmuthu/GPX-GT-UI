@@ -23,7 +23,6 @@ import {UserbiodatatemplateComponent} from './userbiodatatemplate/userbiodatatem
 import {UsercommitteetemplateComponent} from './usercommitteetemplate/usercommitteetemplate.component';
 import { UserroletemplateComponent } from './userroletemplate/userroletemplate.component';
 import { UserofficetemplateComponent } from './userofficetemplate/userofficetemplate.component';
-
 import { UsereventtemplateComponent } from './usereventtemplate/usereventtemplate.component';
 import { UserbilltemplateComponent } from './userbilltemplate/userbilltemplate.component';
 import { UservotetemplateComponent } from './uservotetemplate/uservotetemplate.component';

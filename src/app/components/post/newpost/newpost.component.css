@@ -137,9 +137,11 @@ form button {
   }
 }
 .delete-image{
-  float: right;
+  /* float: right;
   margin-top: 5px;
-  margin-right: 5px;
+  margin-right: 5px; */
+  margin-top: 15%;
+  font-size: 35px;
   border: none !important;
   background: none !important;
 }
@@ -157,7 +159,7 @@ form button {
   border: 1px solid rgba(0,0,0,0.54);
   border-radius: 5px;
   width:min-content;
-}
+} */
 .file-upload-error{
   color: red;
   font-size: 12px;
@@ -211,3 +213,38 @@ img {
 #myMenu li:hover {
   background-color: #eee;
 }
+
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.file-container:hover .overlay {
+  opacity: 1;
+}
+
+.file-container {
+  position: relative;
+  width: 100%;
+  /* max-width: 300px; */
+}
+
+/* Make the image to responsive */
+/* .image {
+  display: block;
+  width: 100%;
+  height: auto;
+} */

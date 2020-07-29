@@ -55,8 +55,10 @@
                 </ng-autocomplete>
                 <ng-template #itemTemplate let-item>
                   <div class="item">
+                    <!--
                     <img src="{{item.photoUrl}}" height="25">
-                    <span [innerHTML]="item.firstName"></span>
+                    -->
+                    <span [innerHTML]="item.full_name"></span>
                     <small></small>
                   </div>
                 </ng-template>
@@ -144,8 +146,10 @@
         </ng-autocomplete>
         <ng-template #itemTemplate let-item>
           <div class="item">
+            <!--
             <img src="{{item.photoUrl}}" height="25">
-            <span [innerHTML]="item.firstName"></span>
+            -->
+            <span [innerHTML]="item.full_name"></span>
             <small></small>
           </div>
         </ng-template>

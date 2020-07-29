@@ -11,7 +11,7 @@ import {TypeaheadComponent} from './components/typeahead/typeahead.component';
 import {ComponentcommunicationService} from './services/componentcommunication.service';
 import {DatashareService} from './services/datashare.service';
 import {UserService} from './services/user.service';
-import {PostService} from './services/post.service';
+import {SearchService} from './services/search.service';
 import {AlertService} from './services/alert.service';
 import {AuthenticationService} from './services/authentication.service';
 
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
                 private dataShareService: DatashareService,
                 private userService: UserService,
                 private alertService: AlertService,
-                private postService:PostService,
+                private searchService:SearchService,
                 private deviceService: DeviceDetectorService,
                 private authenticationService: AuthenticationService) {
         missionService.getAlert().subscribe(
@@ -128,13 +128,13 @@ export class AppComponent implements OnInit {
     //   ),
     //   tap(() => this.searching = false)
     // )
-  
+  /*
     search = (text$: Observable<string>) => {
         return text$.pipe(      
             debounceTime(200), 
             distinctUntilChanged(),
             // switchMap allows returning an observable rather than maps array
-            switchMap( (searchText) =>  this.postService.getTagUsers(searchText) )
+            switchMap( (searchText) =>  this.searchService.getUsers(searchText) )
             // catchError(new ErrorInfo().parseObservableResponseError)              
         );                 
       }
@@ -149,10 +149,15 @@ export class AppComponent implements OnInit {
           return value.firstName+' '+value.lastName
         return value;
       }
-
+*/
       onChangeSearch(e){
           console.log(e);
-          this.postService.getTagUsers(e)
+          
+          if(e.length < 3){
+            return;
+          }
+
+          this.searchService.getUsers(e)
           .subscribe((data:any) => {
               this.searchUsers = data;
           });

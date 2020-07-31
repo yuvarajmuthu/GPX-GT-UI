@@ -223,6 +223,12 @@ div#v-pills-tab a {
     .container {
         max-width: 1201px !important;
     }
+    .notify-button{
+        border: none;
+        background: white;
+        font-size: larger;
+        margin-left: 10%;
+    }
 }
 
 @media screen and (max-width: 559px) {
@@ -234,7 +240,12 @@ div#v-pills-tab a {
         vertical-align: middle;
         float: left;
     }
+    .notify-button{
+        border: none;
+        background: white;
+    }
 }
+
 .btn-custom-horizondal{
     width: 120px;
     height: 40px;
@@ -242,3 +253,36 @@ div#v-pills-tab a {
 .create-page-button-custom-position1{
     text-align: center;
 }
+
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid red;
+    font-size: 10px;
+    color: #fff;
+    position: absolute;
+    text-align: center;
+    background: #dc3545;
+    margin-left: -8px;
+  }
+  #share-content a{
+     color: black;
+  }
+
+  .navbar-toggler {
+    padding: none !important;
+    font-size: 16px;
+  }
+  .mobile-avatar-button{
+    border: none;
+    background-color: white;
+}
+  .mobile-avatar-button img{
+      width: 25px;
+      height: 25px;
+  }
+  #navbar {
+      padding: 0px !important;
+  }

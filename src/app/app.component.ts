@@ -11,6 +11,7 @@ import {TypeaheadComponent} from './components/typeahead/typeahead.component';
 import {ComponentcommunicationService} from './services/componentcommunication.service';
 import {DatashareService} from './services/datashare.service';
 import {UserService} from './services/user.service';
+import {PostService} from './services/post.service';
 import {SearchService} from './services/search.service';
 import {AlertService} from './services/alert.service';
 import {AuthenticationService} from './services/authentication.service';
@@ -34,7 +35,8 @@ export class AppComponent implements OnInit {
     // public onChange(event: CKEditor4.EventInfo) {
     //     console.log(event.editor.getData());
     // }
-
+    
+    notifications:any;
     
     keyword = 'firstName';
     searchUsers: any =[];
@@ -67,6 +69,7 @@ export class AppComponent implements OnInit {
                 private dataShareService: DatashareService,
                 private userService: UserService,
                 private alertService: AlertService,
+                private postService:PostService,
                 private searchService:SearchService,
                 private deviceService: DeviceDetectorService,
                 private authenticationService: AuthenticationService) {
@@ -128,7 +131,7 @@ export class AppComponent implements OnInit {
     //   ),
     //   tap(() => this.searching = false)
     // )
-  /*
+  
     search = (text$: Observable<string>) => {
         return text$.pipe(      
             debounceTime(200), 
@@ -149,19 +152,21 @@ export class AppComponent implements OnInit {
           return value.firstName+' '+value.lastName
         return value;
       }
-*/
-      onChangeSearch(e){
-          console.log(e);
-          
-          if(e.length < 3){
-            return;
-          }
 
-          this.searchService.getUsers(e)
+      onChangeSearch(e){
+          this.postService.getTagUsers(e)
           .subscribe((data:any) => {
               this.searchUsers = data;
           });
       }
+
+      getNotifications(){
+        this.postService.getNotifications()
+        .subscribe((data:any) => {
+            this.notifications = data;
+            console.log(this.notifications);
+        });
+    }
 
       selectEvent(e){
           console.log(e.username);
@@ -179,7 +184,9 @@ export class AppComponent implements OnInit {
             this.dataShareService.setCurrentUser(user);
 
             this.getProfileSmImage(user.username);
+            this.getNotifications();
         }
+
     }
 
     updateUserNavBar() {

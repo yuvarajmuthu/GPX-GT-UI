@@ -337,7 +337,44 @@ export class PostService  extends AbstractService{
     );                     
   }
 
-  //OBSOLETE - MOVED TO SEARCH SEVICE
+  getNotifications(){
+    let url = "";
+    if(this.devMode){
+      url = '/assets/json/fromService/notify.json'; 
+    }else{
+      url = "";
+    }
+
+    return this.http.get(url).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+
+  }
+
+  getSharedPost(postId){
+    let url = "";
+    if(this.devMode){
+      url = '/assets/json/fromService/sharedPost.json'; 
+    }else{
+      url = "";
+    }
+
+    return this.http.get(url).
+    pipe(
+       map((data: any) => {
+         return data;
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       })
+    )
+
+  }
+
   getTagUsers(searchText:string) {
     const httpOptions = {
       headers: new HttpHeaders({ "Accept": "application/json" })
@@ -360,7 +397,7 @@ export class PostService  extends AbstractService{
              return throwError( 'Something went wrong!' );
            })
         )
-    } 
+    }
 
   getImage(imageId: string): Observable<Blob> {
     let serviceUrl = this.serviceUrl + "/downloadFile/" + imageId;

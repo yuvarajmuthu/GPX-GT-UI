@@ -1,4 +1,4 @@
-<app-newpost (newpost)="PostNewEvent($event)" *ngIf="!disableNewPost"></app-newpost>
+<app-newpost (newpost)="PostNewEvent($event)" *ngIf="!disableNewPost && isShowAllPosts"></app-newpost>
 
 
 <div class="card gedf-card post-list">

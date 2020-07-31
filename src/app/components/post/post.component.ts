@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import {PostService} from '../../services/post.service';
 import { Observable, Subject } from 'rxjs';
 import {DatashareService} from '../../services/datashare.service';
@@ -20,12 +20,16 @@ import {interval} from 'rxjs';
 export class PostComponent implements OnInit {
     @Input() userId: string;
     @Input() disableNewPost: boolean = false;
+
+    isShowAllPosts:boolean = false;
     
     posts: Post[] = [];
     postsByPage : Post[]=[];
     pageNumber: number = 1;
 
-    constructor(private postService: PostService, private dataShareService: DatashareService) {
+    constructor(private route: ActivatedRoute,
+        private postService: PostService,
+        private dataShareService: DatashareService) {
     }
 
     PostNewEvent(data:any) {
@@ -38,6 +42,9 @@ export class PostComponent implements OnInit {
     }
 
     onPostScroll(e){
+        if(!this.isShowAllPosts)
+          return;
+             
         const divViewHeight = e.target.offsetHeight;
         const divScrollHeight = e.target.scrollHeight;
         const scrollLocation = e.target.scrollTop;
@@ -54,6 +61,18 @@ export class PostComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.route
+        .queryParams
+        .subscribe(params => {
+            if(params && params.postId){
+                this.isShowAllPosts = false;
+                this.getSharedPost(params.postId);
+            }
+            else{
+                this.isShowAllPosts = true;
+                this.getPost('0');
+            }
+        });
         //this.imageName = '../../images/'+this.party.profileImage;
         console.log('ngOnInit() post.component');
 
@@ -65,9 +84,17 @@ export class PostComponent implements OnInit {
         if(!this.userId){
             this.userId = this.dataShareService.getLoggedinUsername();
         }
-        this.getPost('0');
+        
 
     }
+    getSharedPost(postId:number): void {
+        this.postService.getSharedPost(postId).subscribe((result) => {
+            if(result){
+                this.posts = result;
+            }
+        });
+    }
+    
 
 
     getPost(pageNumber:string): void {

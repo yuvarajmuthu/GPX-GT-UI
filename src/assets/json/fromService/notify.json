@@ -1,0 +1,12 @@
+[{
+"postId" : 1,
+"sharedBy":"Ram"
+},
+{
+  "postId" : 2,
+  "sharedBy":"Raj"
+},
+{
+  "postId" : 3,
+  "sharedBy":"Kannan"
+}]

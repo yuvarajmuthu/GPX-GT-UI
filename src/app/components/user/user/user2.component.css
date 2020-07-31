@@ -1,5 +1,7 @@
 .private-profile-label{
   position: absolute;
+  /* bottom: 2em;
+  right: 2.4em; */
   bottom: 7em;
   right: 0.5em;
   font-size: 20px;
@@ -14,6 +16,8 @@
 @media only screen and (max-width: 768px) {
   .private-profile-label{
     position: absolute;
+    /* bottom: -16.2em;
+    right: 8em; */
     top: 1.5em;
     right: 3em;
   }

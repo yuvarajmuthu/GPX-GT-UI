@@ -1,21 +1,28 @@
 .private-profile-label{
   position: absolute;
-  bottom: 7em;
-  right: 0.5em;
+  /* bottom: 2em;
+  right: 2.4em; */
+  /* bottom: 7em;
+  right: 0.5em; */
+
+  bottom: 6em;
+  right: -0.2em;
   font-size: 20px;
 }
 @media only screen and (max-width: 600px) {
-  .private-profile-label{
-    position: absolute;
-    bottom: -20em;
-    right: 12em;
-  }
+  
 }
 @media only screen and (max-width: 768px) {
   .private-profile-label{
     position: absolute;
+    /* bottom: -16.2em;
+    right: 8em; */
     top: 1.5em;
     right: 3em;
+  }
+  .profile-avatar{
+      position: relative !important;
+      left:-35px !important;
   }
 }
 .delete-image{
@@ -274,6 +281,15 @@ input[type="file"] {
 }
 /*Profile Pic End*/
 @media only screen and (max-width: 600px) {
+    .private-profile-label{
+    position: absolute;
+    bottom: -20em;
+    right: 12em;
+  }
+  .profile-avatar{
+    position: relative !important;
+    left:-35px !important;
+    }
     .edit-photo{
         position: absolute;
         /* z-index: 100; */
@@ -373,6 +389,10 @@ input[type="file"] {
     }
 }
 @media only screen and (min-width: 600px) {
+    .profile-avatar{
+        position: relative !important;
+        left:-30px !important;
+    }
     #dropdownAddSection{
         left:-25px !important;
     }

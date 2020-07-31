@@ -41,11 +41,13 @@ export class SearchlegislatorsComponent implements OnInit {
   districtLabel: string;
   stateData: boolean;
   congressData: boolean;
+  secondChild: boolean;
   findReps: boolean = false;
   offices = [];
   divisionOffices = [];
   divisioncategory  = [];
   divisions = [];
+
 
   @Output()
   success = new EventEmitter();
@@ -399,6 +401,9 @@ this.processOCD(result);
  
   selectDivision(division:string){
     console.log('selected division ', division);
+
+    this.secondChild = true;
+
 
     this.offices.forEach(element => {
       

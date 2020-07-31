@@ -49,6 +49,15 @@
   .address input{
     width: 500px;
   }
+  .btn-secondary{
+    position: relative;
+    top: 12px;
+  }
+  .btn-legis-select{
+    position: relative;
+    top: 30px;
+  }
+    
 /* .custom-hover-legislator:before{
   position: absolute;
   content: "";
@@ -94,11 +103,8 @@
   -moz-box-shadow: 0px 2px 14px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 2px 14px 0px rgba(0,0,0,0.75);
 }*/
-
-
-.btn-secondary1{
-  position: relative;
-  top: 12px;
+.legislator-box-shadow:hover{
+  /*border: 1px solid red;*/
 }
 
 

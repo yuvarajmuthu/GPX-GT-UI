@@ -10173,3 +10173,11 @@ input{
     border-radius: 5px;
     width:min-content;
   }  
+
+  .delete-image{
+    float: right;
+    font-size: 30px;
+    color: #B61508;
+    border: none !important;
+    background: none !important;
+  }

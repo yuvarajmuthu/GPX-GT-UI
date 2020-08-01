@@ -57,21 +57,11 @@ export class LegislatorComponent implements OnInit {
   }
 
   add2Circle() {
-    if(!this.loggedUsername){
-      //let returnUrl: string = '/user/' + this.profileUserId + '?follow';
-      //this.router.navigate(['login'], {queryParams: {returnUrl: returnUrl}});
-      this.router.navigate(['login']);
-    }else{
-      this.userService.add2Circle(this.userName, this.loggedUsername).subscribe(
-        (result) => {
-          this.isInCircle = true; 
-        },
-        (err) => {
-            console.log('Error ', err);
-        }); 
-    }
 
-  }
+    this.isInCircle = true;
+
+
+}
   
   removeFromCircle() {
 

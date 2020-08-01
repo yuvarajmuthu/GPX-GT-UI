@@ -404,31 +404,38 @@ getVotes(userId:string):Observable<any>{
   );                
 }
 
-getCircleCategories(userId:string):Observable<any>{
-  let serviceUrl:string = "";//    
-  if(this.devMode){
-    serviceUrl = '/assets/json/fromService/getEvents.json';   
-  }else{
-    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
-  }
-  serviceUrl = '/assets/json/fromService/getEvents.json';   
+add2Circle(request:string):Observable<any>{
+  let serviceUrl = this.getUserService() + "/addCircleUser";
+  console.log("add2Circle user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  let headers      = new Headers({ 'Content-Type': 'application/json' });
-  return this.http.get(serviceUrl, this.httpOptions)
+  return this.http.post(serviceUrl,  request )
   .pipe(
-    tap(_ => this.log(`fetched getCircleCategories`)),
-    catchError(this.handleError<any>(`Error in getCircleCategories()`))
-  );  
+    map((response:Response) => response.json()),
+    tap(_ => this.log(`add2Circle successful`)),
+    catchError(this.handleError<any>(`Error in add2Circle()`))
+  );
 }
 
-getCircleUsers(userId:string, category:string):Observable<any>{
+removeFromCircle(request:string):Observable<any>{
+  let serviceUrl = this.getUserService() + "/removeCircleUser";
+  console.log("removeFromCircle user.service " + request + " this.serviceUrl " + serviceUrl);
+
+  return this.http.post(serviceUrl,  request )
+  .pipe(
+    map((response:Response) => response.json()),
+    tap(_ => this.log(`removeCircleUser successful`)),
+    catchError(this.handleError<any>(`Error in removeCircleUser()`))
+  );
+}
+
+getCircleUsers(userId:string):Observable<any>{
   let serviceUrl:string = "";//    
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/getEvents.json';   
   }else{
-    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+    serviceUrl = this.getUserService() +"/getCircleUsers/"+userId+"/";
   }
-  serviceUrl = '/assets/json/fromService/getEvents.json';   
+  serviceUrl = '/assets/json/fromService/getEvents.json';    
 
   let headers      = new Headers({ 'Content-Type': 'application/json' });
   return this.http.get(serviceUrl, this.httpOptions)
@@ -438,25 +445,28 @@ getCircleUsers(userId:string, category:string):Observable<any>{
   );  
 }
 
-add2Circle(profileId:string, userId:string):Observable<any> {
-  return null;
+addMember(request:string):Observable<any>{
+  let serviceUrl = this.getUserService() + "/addCircleUser";
+  console.log("addMember user.service " + request + " this.serviceUrl " + serviceUrl);
+
+  return this.http.post(serviceUrl,  request )
+  .pipe(
+    map((response:Response) => response.json()),
+    tap(_ => this.log(`addMember successful`)),
+    catchError(this.handleError<any>(`Error in addMember()`))
+  );
 }
 
-removeFromCircle(profileId:string, userId:string):Observable<any>{
-  let serviceUrl:string = "";//    
-  if(this.devMode){
-    serviceUrl = '/assets/json/fromService/getEvents.json';   
-  }else{
-    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
-  }
-  serviceUrl = '/assets/json/fromService/getEvents.json';   
+removeMember(request:string):Observable<any>{
+  let serviceUrl = this.getUserService() + "/removeCircleUser";
+  console.log("removeMember user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  let headers      = new Headers({ 'Content-Type': 'application/json' });
-  return this.http.get(serviceUrl, this.httpOptions)
+  return this.http.post(serviceUrl,  request )
   .pipe(
-    tap(_ => this.log(`in removeFromCircle`)),
-    catchError(this.handleError<any>(`Error in removeFromCircle()`))
-  );  
+    map((response:Response) => response.json()),
+    tap(_ => this.log(`removeMember successful`)),
+    catchError(this.handleError<any>(`Error in removeMember()`))
+  );
 }
 
 isInCircle(profileId:string, userId:string):Observable<any>{
@@ -464,15 +474,32 @@ isInCircle(profileId:string, userId:string):Observable<any>{
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/getEvents.json';   
   }else{
-    serviceUrl = this.getUserService() +"/legis/roles/"+userId;
+    serviceUrl = this.getUserService() + "/" + profileId + "/" + userId + "/";
   }
   serviceUrl = '/assets/json/fromService/getEvents.json';   
 
   let headers      = new Headers({ 'Content-Type': 'application/json' });
   return this.http.get(serviceUrl, this.httpOptions)
   .pipe(
-    tap(_ => this.log(`in checkCircleRelation`)),
-    catchError(this.handleError<any>(`Error in checkCircleRelation()`))
+    tap(_ => this.log(`in isInCircle`)),
+    catchError(this.handleError<any>(`Error in isInCircle()`))
+  );  
+}
+
+getManagedByUsers(userId:string):Observable<any>{
+  let serviceUrl:string = "";//    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getEvents.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/getManagedByUsers/"+userId+"/";
+  }
+  serviceUrl = '/assets/json/fromService/getEvents.json';    
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`fetched getManagedByUsers`)),
+    catchError(this.handleError<any>(`Error in getManagedByUsers()`))
   );  
 }
 
@@ -525,9 +552,7 @@ getAll() {
   return this.http.get('/api/users');
 }
 
-getById(id: number) {
-  //return this.http.get('/api/users/' + id);
-}
+
 
 registerUser(user: any):Observable<any> {
 //        return this.http.post('/register', user);
@@ -591,13 +616,7 @@ updateProfileData(request:any):Observable<any>{
   );
 }
 
-update(user: User) {
-    //return this.http.put('/api/users/' + user.id, user);
-}
 
-delete(id: number) {
-    //return this.http.delete('/api/users/' + id);
-}
 
 getImage(userId: string): Observable<Blob> {
   //let serviceUrl = this.getPostService() + "/downloadFile/user/" + userId + "/";

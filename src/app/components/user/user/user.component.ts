@@ -105,7 +105,6 @@ export class UserComponent implements OnInit {
     followings: User[] = [];
     selectedProfileSmImage: File;
     profileSmImageChanged: boolean = false;
-    paramUsername: string = '';
     profileTabSelected: boolean = true;
     activitiesTabSelected: boolean = false;
     activitiesData: boolean = false;
@@ -310,15 +309,15 @@ export class UserComponent implements OnInit {
         this.route.params.subscribe((params: Params) => {
             this.communicationService.userProfileChanged(false);
 
-            this.paramUsername = params['id'];
-            console.log('from user.component route params changed ' + this.paramUsername);
-            this.loadComponent(this.paramUsername);
+            this.profileUserId = params['id'];
+            console.log('from user.component route params changed ' + this.profileUserId);
+            this.loadComponent(this.profileUserId);
 
             this.loggedUser = this.datashareService.getCurrentUser();
 
             if (this.loggedUser) {
                 this.loggedUsername = this.loggedUser.username;
-                if(this.paramUsername === this.loggedUser.username){
+                if(this.profileUserId === this.loggedUser.username){
                     this.isSelfProfile = true;
                 }else{
                     this.check4CircleStatus();
@@ -568,7 +567,7 @@ export class UserComponent implements OnInit {
             this.getFollowingsCount(this.profileUserId);
             //this.getFollowers(this.profileUserId);
 
-            this.userService.getUserData(this.viewingUser['userId']).subscribe(
+            this.userService.getUserData(this.profileUserId).subscribe(
                 data => { 
                     this.userData = data;
                     console.log('User data from service: ', this.userData);
@@ -942,12 +941,18 @@ export class UserComponent implements OnInit {
     }
 
     add2Circle() {
+
         if(!this.loggedUsername){
-            //let returnUrl: string = '/user/' + this.profileUserId + '?follow';
-            //this.router.navigate(['login'], {queryParams: {returnUrl: returnUrl}});
             this.router.navigate(['login']);
         }else{
-            this.userService.add2Circle(this.paramUsername, this.loggedUsername).subscribe(
+            var request = {};
+            request['username'] = this.loggedUsername;
+            request['modifiedBy'] = this.loggedUsername;
+            request['circlememberUsername'] = this.profileUserId;
+
+            console.log('add2Circle request ' + JSON.stringify(request));
+
+            this.userService.add2Circle(JSON.stringify(request)).subscribe(
             (result) => {
                 this.isInCircle = true; 
             },
@@ -959,18 +964,30 @@ export class UserComponent implements OnInit {
     }
     
     removeFromCircle() {
-        this.userService.removeFromCircle(this.paramUsername, this.loggedUsername).subscribe(
+        
+        if(!this.loggedUsername){
+            this.router.navigate(['login']);
+        }else{
+            var request = {};
+            request['username'] = this.loggedUsername;
+            request['modifiedBy'] = this.loggedUsername;
+            request['circlememberUsername'] = this.profileUserId;
+
+            console.log('removeFromCircle request ' + JSON.stringify(request));
+
+            this.userService.removeFromCircle(JSON.stringify(request)).subscribe(
             (result) => {
                 this.isInCircle = false; 
             },
             (err) => {
                 console.log('Error ', err);
             }); 
+        }
 
     }
 
     check4CircleStatus() {
-        this.userService.isInCircle(this.paramUsername, this.loggedUsername).subscribe(
+        this.userService.isInCircle(this.profileUserId, this.loggedUsername).subscribe(
             (result) => {
                 this.isInCircle = result; 
             },
@@ -978,6 +995,40 @@ export class UserComponent implements OnInit {
                 console.log('Error ', err);
             }); 
 
+    }
+
+    addMember(userId:string) {
+        var request = {};
+        request['memberUsername'] = userId;
+        request['modifiedBy'] = this.loggedUsername;
+        request['username'] = this.profileUserId;
+
+        console.log('addMember request ' + JSON.stringify(request));
+
+        this.userService.addMember(JSON.stringify(request)).subscribe(
+        (result) => {
+            this.managedBy = result; 
+        },
+        (err) => {
+            console.log('Error ', err);
+        }); 
+    }
+
+    removeMember(userId:string) {
+        var request = {};
+        request['memberUsername'] = userId;
+        request['modifiedBy'] = this.loggedUsername;
+        request['username'] = this.profileUserId;
+
+        console.log('removeMember request ' + JSON.stringify(request));
+
+        this.userService.removeMember(JSON.stringify(request)).subscribe(
+        (result) => {
+            this.managedBy = result; 
+        },
+        (err) => {
+            console.log('Error ', err);
+        }); 
     }
 
     getRelationStatus(entity: string, profileId: string) {

@@ -37,8 +37,8 @@ export class SearchService  extends AbstractService {
       url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
     }
 
-    //url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText; 
-          url = '/assets/json/fromService/tagusers.json'; 
+    url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText; 
+          //url = '/assets/json/fromService/tagusers.json'; 
 
     return this.http.get(url,httpOptions).
         pipe(

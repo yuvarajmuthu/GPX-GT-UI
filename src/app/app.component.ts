@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     
     notifications:any;
     
-    keyword = 'firstName';
+    keyword = 'full_name';
     searchUsers: any =[];
     iscreateOptEnabled: boolean=false;
     

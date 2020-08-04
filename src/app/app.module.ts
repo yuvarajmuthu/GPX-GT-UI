@@ -140,7 +140,7 @@ let config = new AuthServiceConfig([
         // )
     ],
     providers: [
-        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION*/   
+        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION   */
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,

@@ -986,7 +986,7 @@ export class UserComponent implements OnInit {
 
     }
 
-    check4CircleStatus() {
+    check4CircleStatus() { 
         this.userService.isInCircle(this.profileUserId, this.loggedUsername).subscribe(
             (result) => {
                 this.isInCircle = result; 

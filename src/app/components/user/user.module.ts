@@ -46,7 +46,7 @@ import { UservoteformComponent } from './usertemplate/uservotetemplate/uservotef
     NgbModule,
     PostModule
   ],
-  exports: [GAddressSearchComponent],
+  exports: [GAddressSearchComponent, Usercard2Component],
   declarations: [
     UserComponent, 
     GAddressSearchComponent,

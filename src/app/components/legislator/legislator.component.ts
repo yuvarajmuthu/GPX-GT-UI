@@ -48,31 +48,71 @@ export class LegislatorComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     this.loggedUsername = this.datashareService.getLoggedinUsername();
 
-    // this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) => this.getLegislator(params.get('id')))
-    // );
-    this.getLegislator(id);
-
+    if(id){
+      this.getLegislator(id);
+    }
+    this.getUsername(this.legislator);
 
   }
 
-  add2Circle() {
+  add2Circle() { 
+    if(!this.loggedUsername){
+      this.router.navigate(['login']);
+    }else{
+        var request = {};
+        request['username'] = this.loggedUsername;
+        request['modifiedBy'] = this.loggedUsername;
+        request['circlememberUsername'] = this.userName;
 
-    this.isInCircle = true;
+        console.log('add2Circle request ' + JSON.stringify(request));
 
-
-}
+        this.userService.add2Circle(JSON.stringify(request)).subscribe(
+        (result) => {
+            this.isInCircle = true; 
+        },
+        (err) => {
+            console.log('Error ', err);
+        }); 
+    }
+  }
   
   removeFromCircle() {
 
-    if (this.isInCircle) {
-      this.isInCircle = false;
-    } else {
-      this.isInCircle = true;
+    if(!this.loggedUsername){
+      this.router.navigate(['login']);
+    }else{
+        var request = {};
+        request['username'] = this.loggedUsername;
+        request['modifiedBy'] = this.loggedUsername;
+        request['circlememberUsername'] = this.userName;
+
+        console.log('removeFromCircle request ' + JSON.stringify(request));
+
+        this.userService.removeFromCircle(JSON.stringify(request)).subscribe(
+        (result) => {
+            this.isInCircle = false; 
+        },
+        (err) => {
+            console.log('Error ', err);
+        }); 
     }
 
   }
 
+  check4CircleStatus() {
+    if(!this.loggedUsername){
+      this.userService.isInCircle(this.userName, this.loggedUsername).subscribe(
+          (result) => {
+              this.isInCircle = result; 
+          },
+          (err) => {
+              console.log('Error ', err);
+          }); 
+    }
+
+  }
+
+  //OBSOLETE?
   getLegislator(id: string) {
     this.legisId = id;
     //this.imageName = '../../images/'+this.party.profileImage;
@@ -139,25 +179,16 @@ export class LegislatorComponent implements OnInit {
 
   }
 
-  //called from UI on selection of a Legislator
-  gotoLegislator(legislator: Legislator): void {
-    console.log('selected legislator - ' + legislator);
+  getUsername(legislator: Legislator): void{
     let searchString:string = null;
-    this.datashareService.setViewingUser(legislator);
-
-
 
     if (legislator['leg_id']) {
       this.userName = legislator['leg_id'];
-
-      this.router.navigate(['/user', this.userName]);
 
     } else if(this.legislator['photo_url'] && this.legislator['photo_url'].indexOf('bioguide.congress.gov') != -1 ) { //CONGRESS
       let photoUrl = this.legislator['photo_url'];
       let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
       this.userName = fileName.substring(0, fileName.lastIndexOf('.'));
-
-      this.router.navigate(['/user', this.userName]);
 
 
     }else if (legislator['full_name']) {
@@ -167,10 +198,10 @@ export class LegislatorComponent implements OnInit {
         (result) => {
           if(result.length > 0 && searchString === result[0]['full_name']){
             this.userName = result[0]['username'];
+            this.check4CircleStatus();
           }else{
             this.userName = 'createnew';
           }
-          this.router.navigate(['/user', this.userName]);
 
         },
         (err) => {
@@ -178,7 +209,12 @@ export class LegislatorComponent implements OnInit {
         }); 
 
     }
+  }
 
+  //called from UI on selection of a Legislator
+  gotoLegislator(legislator: Legislator): void {
+    console.log('selected legislator - ' + legislator);
+    this.router.navigate(['/user', this.userName]);
 
   }
 

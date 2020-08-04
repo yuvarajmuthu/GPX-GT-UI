@@ -34,8 +34,8 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let legislator of legislators">
-      <app-legislator [legislator]=legislator></app-legislator>
+    <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let circleUser of circleUsers">
+      <app-usercard2 [username]="circleUser"></app-usercard2>
     </div>
   </div>
 </div>  

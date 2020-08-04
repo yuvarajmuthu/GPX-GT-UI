@@ -3,29 +3,29 @@
 -->
 <div class="container">
   <div class="row userMain">
-      <div class="col-md-3 col-sm-4">
           <div class="userBlock">
               <div class="backgrounImg">
                   <img src="https://preview.ibb.co/miQjb7/photography4.jpg">
               </div>
               <div class="userImg">
-                  <img src="https://image.ibb.co/es4AG7/author4.jpg">
+                  <img src="user.photoUrl">
               </div>
               <div class="userDescription">
-                  <h5>Tom Smith</h5>
-                  <p>Newyork, USA</p>
+                  <h5>{{user.full_name}}</h5>
+                  <p>@{{user.username}}</p>
                  
                   
                    <div class="followrs">
-                      <span class="number">137</span>
+                      <span class="number">{{followersCount}}</span>
                        <span>Followers</span>
                    </div>
-                   <a href="">
-                       <button class="btn">Follow</button>
+                   
+                   <a [routerLink]="">
+                       <span class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span>
+
                    </a>
               </div>
              
           </div>
-      </div>
     </div>
   </div>  

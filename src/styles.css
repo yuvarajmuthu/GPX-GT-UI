@@ -10082,6 +10082,21 @@ aside.sidebar.full-style {
     top: 1px;
     left: -13%;
 }
+.add-managed-button{
+    cursor: pointer;
+     border: none !important; 
+    color: #007bff;
+    z-index: 1;
+    height: 33px;
+    background-color: white;
+    position: relative;
+    top: 1px;
+    left: 5%;
+
+}
+.add-managed-button .fa{
+    font-size: 23px !important;
+}
 .edit-button{
     cursor: pointer;
     border: none !important;

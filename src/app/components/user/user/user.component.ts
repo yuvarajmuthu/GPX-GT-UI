@@ -125,6 +125,9 @@ export class UserComponent implements OnInit {
     compTypeTabs = [];
 
     isEditDisplayname:boolean = false;
+    
+    keywordUser = 'full_name';
+    searchUserManagedBy:any;
 
     changeParty: boolean = false;
     isEditParty:boolean = false;
@@ -996,6 +999,7 @@ export class UserComponent implements OnInit {
             }); 
 
     }
+    
 
     addMember(userId:string) {
         var request = {};

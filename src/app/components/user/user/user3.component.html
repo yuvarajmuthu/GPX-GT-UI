@@ -400,6 +400,36 @@
                                             </div>
                                             <div id="managedByCollapse" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
+
+
+
+                                            <div class="ng-autocomplete managedby-search">
+                                                <ng-autocomplete
+                                                  [(ngModel)]="searchUserManagedBy"
+                                                  [data]="searchUsers"
+                                                  placeHolder="User Name"
+                                                  (inputChanged) = "onChangeSearch($event)"
+                                                  [searchKeyword]="keywordUser"
+                                                  [itemTemplate]="itemTemplate"
+                                                  [notFoundTemplate]="notFoundTemplate">
+                                                </ng-autocomplete>
+                                                <button class="add-managed-button" type="button" (click)="addMember(searchUserManagedBy.username)"><i class="fa fa-plus-square" aria-hidden="true"></i></button>
+
+                        
+                                                <ng-template #itemTemplate let-item>
+                                                  <div class="item">
+                                                    <img src="{{item.photoUrl}}" height="25">
+                                                    <span [innerHTML]="item.firstName"></span>
+                                                    <small></small>
+                                                  </div>
+                                                </ng-template>
+                        
+                                                <ng-template #notFoundTemplate let-notFound>
+                                                  <div [innerHTML]="notFound"></div>
+                                                </ng-template>
+                                              </div>
+
+                         
                                            <ul class="followers">
                                                <li *ngFor="let managed of managedBy">
                                                    <app-usercard1 [user]=managed></app-usercard1>
@@ -409,6 +439,12 @@
 
                                            <div id="managedByCollapse" [ngbCollapse]="isSettingsCollapsed"
                                            class="widget stick-widget">
+
+
+
+
+
+
                                                 <ul class="followers">
                                                     <li>
                                                         <div class="form-row">

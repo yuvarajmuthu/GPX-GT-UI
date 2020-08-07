@@ -492,5 +492,12 @@
     .dropup .dropdown-menu {
       left: -100px;
     }
+
+
+    .managedby-search {
+        width: 85% !important;
+        margin-left: 7%;
+        display: flex;
+    }
   
   

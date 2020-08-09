@@ -155,14 +155,8 @@ export class UserComponent implements OnInit {
     sticky:any;
     deviceInfo = this.deviceService.getDeviceInfo();
     @HostListener('window:scroll', ['$event']) onScrollEvent($event){
-         console.log($event);
-                       
-    //    console.log(this.header);
-    //    this.sticky= this.header.offsetTop;
-        console.log(this.sticky);
-       console.log(window.pageYOffset);
+
        const isMobile = this.deviceService.isMobile();
-       console.log(isMobile);
        let lockPosition:number;
        let nameDiv = document.getElementById("name-for-lock");
         if(isMobile == true){

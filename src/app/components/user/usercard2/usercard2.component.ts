@@ -12,7 +12,9 @@ import {User} from '../../../models/user';
   styleUrls: ['./usercard2.component.css']
 })
 export class Usercard2Component implements OnInit {
-  @Input() username: string;
+  @Input() username: any;
+  @Input() fromParent: string;
+  @Input() managedBy:any;
   private user = {};
   loggedUser: User = null;
   loggedUsername: string = null;
@@ -31,27 +33,34 @@ export class Usercard2Component implements OnInit {
     private datashareService: DatashareService) { }
 
   ngOnInit() {
-    this.loggedUser = this.datashareService.getCurrentUser();
+      if(this.fromParent == 'circle'){
+        this.loggedUser = this.datashareService.getCurrentUser();
 
-    if (this.loggedUser) {
-        this.loggedUsername = this.loggedUser.username;
-    }    
-    this.userService.getUserData(this.username).subscribe(
-      data => {
-        this.user = data;
+        if (this.loggedUser) {
+            this.loggedUsername = this.loggedUser.username;
+        }    
+        this.userService.getUserData(this.username).subscribe(
+          data => {
+            this.user = data;
+    
+           }
+          );
+    
+          if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
+            this.getRelationStatus(this.loggedUser.username, this.username);
+          } else {
+              this.followCntrlLabel = 'Join to Follow';
+              this.followCntrlCSS = 'btn btn-primary followers-button';
+              this.followStatusCSS = 'fa fa-plus-circle';
+          }
+    
+          this.getFollowersCount(this.username);
 
-       }
-      );
-
-      if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
-        this.getRelationStatus(this.loggedUser.username, this.username);
-      } else {
-          this.followCntrlLabel = 'Join to Follow';
-          this.followCntrlCSS = 'btn btn-primary followers-button';
-          this.followStatusCSS = 'fa fa-plus-circle';
+      }
+      else if(this.fromParent == 'managedBy'){
+        this.user = this.managedBy;
       }
 
-      this.getFollowersCount(this.username);
 
   }
 

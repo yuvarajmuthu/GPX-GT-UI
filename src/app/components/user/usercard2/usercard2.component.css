@@ -10,7 +10,7 @@
 
 }
 .userMain .userBlock .backgrounImg{
-    float: left;
+    /* float: left; */
     overflow: hidden;
     height: 77px;
 }

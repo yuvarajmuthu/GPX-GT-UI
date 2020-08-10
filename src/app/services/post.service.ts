@@ -387,8 +387,8 @@ export class PostService  extends AbstractService{
       url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
     }
 
-    url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
-    
+    //url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
+    url = '/assets/json/fromService/tagusers.json'; 
     return this.http.get(url,httpOptions).
         pipe(
            map((data: tagUser[]) => {

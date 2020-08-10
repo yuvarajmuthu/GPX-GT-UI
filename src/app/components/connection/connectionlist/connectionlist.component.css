@@ -86,3 +86,7 @@
 .badge-active{
   background-color: #007bff !important;
 }
+
+.cursor-hand{
+  cursor: pointer;
+}

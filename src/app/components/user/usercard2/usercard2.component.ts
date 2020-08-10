@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
+import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
 
 import {User} from '../../../models/user';
 
@@ -12,7 +13,8 @@ import {User} from '../../../models/user';
   styleUrls: ['./usercard2.component.css']
 })
 export class Usercard2Component implements OnInit {
-  @Input() username: string;
+  @Input() username: any;
+
   private user = {};
   loggedUser: User = null;
   loggedUsername: string = null;
@@ -28,33 +30,38 @@ export class Usercard2Component implements OnInit {
 
   constructor(private  router: Router,
     private userService: UserService, 
-    private datashareService: DatashareService) { }
+    private datashareService: DatashareService,
+    private communicationService: ComponentcommunicationService
+    ) { 
+
+    }
 
   ngOnInit() {
-    this.loggedUser = this.datashareService.getCurrentUser();
+        this.loggedUser = this.datashareService.getCurrentUser();
 
-    if (this.loggedUser) {
-        this.loggedUsername = this.loggedUser.username;
-    }    
-    this.userService.getUserData(this.username).subscribe(
-      data => {
-        this.user = data;
+        if (this.loggedUser) {
+            this.loggedUsername = this.loggedUser.username;
+        }    
+        this.userService.getUserData(this.username).subscribe(
+          data => {
+            this.user = data;
+    
+           }
+          );
+    
+          if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
+            this.getRelationStatus(this.loggedUser.username, this.username);
+          } else {
+              this.followCntrlLabel = 'Join to Follow';
+              this.followCntrlCSS = 'btn btn-primary followers-button';
+              this.followStatusCSS = 'fa fa-plus-circle';
+          }
+    
+          this.getFollowersCount(this.username);
 
-       }
-      );
-
-      if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
-        this.getRelationStatus(this.loggedUser.username, this.username);
-      } else {
-          this.followCntrlLabel = 'Join to Follow';
-          this.followCntrlCSS = 'btn btn-primary followers-button';
-          this.followStatusCSS = 'fa fa-plus-circle';
-      }
-
-      this.getFollowersCount(this.username);
-
-  }
-
+      
+      
+}
   getRelationStatus(entity: string, profileId: string) {
 
     this.userService.getRelationStatus(entity, profileId)
@@ -101,11 +108,7 @@ export class Usercard2Component implements OnInit {
 
 
     followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
-    //followURequest["sourceEntityType"] = "USER";
     followURequest['targetEntityId'] = this.username;
-
-    followURequest['targetEntityType'] = this.user['userType'];
-
     followURequest['status'] = 'REQUESTED';
     console.log('Profile data ' + JSON.stringify(followURequest));
 

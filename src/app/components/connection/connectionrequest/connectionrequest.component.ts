@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, Input, isDevMode } from '@angular/core';
+import {Router} from '@angular/router';
 
 import {User} from '../../../models/user'; 
 import {Connection} from '../../../models/connection';
@@ -13,62 +14,102 @@ import { AlertService } from '../../../services/alert.service';
   styleUrls: ['./connectionrequest.component.css']
 })
 export class ConnectionrequestComponent implements OnInit {
-  @Input() connection: Connection;
+  @Input() username: string;
+  @Input() relationStatus: string;
+
   loggedUser:User;
-  connectionRequest:Connection[];
+  loggedUsername: string = null;
+  private user = {};
+
   profileSmImage: any = 'assets/images/avatar1.png'; 
   isImageLoading:boolean = false;
+  followersCount: string = null;
 
-  constructor(private userService:UserService, 
-    private dataShareService:DatashareService,
+  constructor(private  router: Router,
+    private userService:UserService, 
+    private datashareService:DatashareService,
     private alertService: AlertService, 
     private changeDetector : ChangeDetectorRef) { 
       console.log("constructor() connectionrequest.component");
 
     }
 
-  //sourceEntityId is the entity that sent the connection request  
   ngOnInit() {
-    console.log("ngOnInit() connectionrequest.component");
+    this.loggedUser = this.datashareService.getCurrentUser();
 
-    this.loggedUser = this.dataShareService.getCurrentUser();
-    //this.loadConnectionRequests();
+    if (this.loggedUser) {
+        this.loggedUsername = this.loggedUser.username;
+    }    
+    this.userService.getUserData(this.username).subscribe(
+      data => {
+        this.user = data;
 
-    if(!isDevMode() && this.connection && this.connection.sourceEntityId){
-      this.getProfileSmImage(this.connection.sourceEntityId);
+       }
+      );
+
+      this.getFollowersCount(this.username);
+
+    if(!isDevMode()){
+      //this.getProfileSmImage(this.username);
     }  
 
   }
 
-  //NOT USED
-  loadConnectionRequests(){
-    this.userService.getConnectionRequests(this.loggedUser.username)
-    .subscribe((response) => {
-      this.connectionRequest= response;
-      console.log('ConnectionRequests response data ', this.connectionRequest);
-      //this.changeDetector.detectChanges();
-    });
+  getFollowersCount(username: string) {
+    this.userService.getFollowersCount(username)
+        .subscribe(
+            (result) => {
+                console.log('getFollowersCount response ' + result);
+                this.followersCount = result;
+
+            },
+            (err) => {
+                console.log('Error ', err);
+            }); 
   }
 
-  acceptRequest(request:Connection){
+  acceptRequest(){
+    let request = new Connection();
     console.log("Accepted connection ", request);
+    request.sourceEntityId = this.username;
+    request.targetEntityId = this.loggedUser.username;
+
     request.status = "FOLLOWING";
       this.userService.updateConnectionAction(request)
       .subscribe((response) => {
+        this.relationStatus = "FOLLOWING";
         //console.log('updated ConnectionRequests response data ', response);
-        this.connection = response;
         this.alertService.success('Connected !!!', true);
 
       });
   }
 
-  denyRequest(request:Connection){
+  denyRequest(){
+    let request = new Connection();
     console.log("Accepted connection ", request);
-    request.status = "DENIED";
+    request.sourceEntityId = this.username;
+    request.targetEntityId = this.loggedUser.username;
+    request.status = "REJECTED";
       this.userService.updateConnectionAction(request)
       .subscribe((response) => {
+        this.relationStatus = "REJECTED";
         //console.log('updated ConnectionRequests response data ', response);
-        this.connection = response;
+        this.alertService.success('Updated !!!', true);
+
+      });
+  }
+
+  cancelRequest(){
+    let request = new Connection();
+    console.log("Cancel connection request ", request);
+    request.sourceEntityId = this.loggedUser.username;
+    request.targetEntityId = this.username;
+    request.status = "CANCELLED";
+      this.userService.updateConnectionAction(request)
+      .subscribe((response) => {
+        this.relationStatus = "CANCELLED";
+
+        //console.log('updated ConnectionRequests response data ', response);
         this.alertService.success('Updated !!!', true);
 
       });
@@ -85,7 +126,7 @@ export class ConnectionrequestComponent implements OnInit {
     });
   } 
   
-  createImageFromBlob(image: Blob) {
+  createImageFromBlob(image: Blob) { 
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.profileSmImage = reader.result;
@@ -94,6 +135,12 @@ export class ConnectionrequestComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+
+  gotoUser(): void {
+
+    this.router.navigate(['/user', this.username]);
+
   }
 
 }

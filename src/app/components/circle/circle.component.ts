@@ -4,6 +4,7 @@ import {Usercard2Component} from '../user/usercard2/usercard2.component';
 
 import {UserService} from '../../services/user.service';
 import {DatashareService} from '../../services/datashare.service';
+import {ComponentcommunicationService} from '../../services/componentcommunication.service';
 
 import {User} from '../../models/user';
 
@@ -16,24 +17,55 @@ export class CircleComponent implements OnInit {
   loggedUser: User = null;
   loggedUsername: string = null;
   circleUsers:string[] = null;
+  circleUserCategories:string[] = null;
+  circleUsersInfo:[] = null;
 
   constructor(private userService: UserService,
     private datashareService: DatashareService,
+    private communicationService: ComponentcommunicationService
     ) { 
-
+      /*
+      communicationService.circleCategoryChanged$.subscribe(
+        data => {
+            console.log('Received data from communicationService.circleCategoryChanged$.subscribe ', data);
+            if(this.circleUserCategories.indexOf(data) < 0){
+              this.circleUserCategories.push(data);
+            }
+        });
+        */
   }
  
   ngOnInit() {
     this.loggedUser = this.datashareService.getCurrentUser();
-
+    this.circleUserCategories = [];
     if (this.loggedUser) {
         this.loggedUsername = this.loggedUser.username;
-        this.loadCircleUsers(this.loggedUsername);
+        //this.loadCircleUsers(this.loggedUsername);
+        this.loadCircleUsersInfo(this.loggedUsername);
     }
   } 
+  
+  loadCircleUsersInfo(username: string){
+    console.log('loadCircleUsersCategory by ', username);
+    this.userService.getCircleUsersCategory(username)
+    .subscribe((response) => {
+      this.circleUsersInfo = response;
+      console.log('loadCircleUsersInfo response data ', this.circleUsersInfo);
+      for(let i = 0; i < this.circleUsersInfo.length; i++){
+        let obj={};
+        obj = this.circleUsersInfo[i];
+        let keys = Object.keys(obj);
+        this.circleUserCategories.push(keys[0]);
+      }
+      
+    }); 
 
-  loadCircleUsers(entityId: string){
-    this.userService.getCircleUsers(entityId)
+  }
+
+  //OBSOLETE
+  loadCircleUsers(username: string){
+    console.log('circleUser by ', username);
+    this.userService.getCircleUsers(username)
     .subscribe((response) => {
       this.circleUsers = response;
       console.log('loadCircleUsers response data ', this.circleUsers);
@@ -42,4 +74,26 @@ export class CircleComponent implements OnInit {
 
   }
 
+  loadCircleUsersByCategory(circleUserCategory: string){
+    console.log('circleUserCategory ', circleUserCategory);
+
+    for(let i = 0; i < this.circleUsersInfo.length; i++){
+      let obj={};
+      obj = this.circleUsersInfo[i];
+      let keys = Object.keys(obj);
+      if(keys[0] === circleUserCategory){
+        this.circleUsers = obj[circleUserCategory];
+      }
+    }
+
+/*
+    this.userService.getCircleUsers(circleUserCategory)
+    .subscribe((response) => {
+      this.circleUsers = response;
+      console.log('loadCircleUsers response data ', this.circleUsers);
+      
+    }); 
+    */
+
+  }
 }

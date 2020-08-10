@@ -16,7 +16,8 @@ export class ComponentcommunicationService {
   //private newProfileTemplateAddedPopulation = new Subject<TemplatePopulationComponent>();
   private loginAlertSource = new Subject<boolean>();
   private userProfileEditSource = new Subject<boolean>();
-
+  private connectionAcceptSource = new Subject<string>();
+  private connectionRequestCancelSource = new Subject<string>();
   // Observable string streams
   missionAnnounced$ = this.missionAnnouncedSource.asObservable();
   missionProfileTemplateRemoved$ = this.missionConfirmedSource.asObservable();
@@ -24,8 +25,10 @@ export class ComponentcommunicationService {
   //missionNewProfileTemplateAdded$ = this.newProfileTemplateAddedPopulation.asObservable();
   loginChanged$ = this.loginAlertSource.asObservable();
   userProfileEditChanged$ = this.userProfileEditSource.asObservable();
+  connectionAcceptChanged$ = this.connectionAcceptSource.asObservable();
+  connectionRequestCancelChanged$ = this.connectionRequestCancelSource.asObservable(); 
   
-  // Service message commands
+  // Service message broadcast
   announceMission(mission: string) {
     this.missionAnnouncedSource.next(mission);
   }
@@ -47,6 +50,12 @@ export class ComponentcommunicationService {
     return this.missionAlertSource.asObservable();
   }
 
+  connectionAcceptUpdate(value: string) {
+    this.connectionAcceptSource.next(value);
+  }
+  connectionRequestCancelUpdate(value: string) {
+    this.connectionRequestCancelSource.next(value);
+  }
 //for group profile template - TemplatePopulationComponent
   // newProfileTemplateAddedMission(populationComponent: TemplatePopulationComponent) {
   //   this.newProfileTemplateAddedPopulation.next(populationComponent);

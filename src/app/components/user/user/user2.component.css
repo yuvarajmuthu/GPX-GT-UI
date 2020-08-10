@@ -492,5 +492,51 @@
     .dropup .dropdown-menu {
       left: -100px;
     }
+
+
+    .managedby-search {
+         width: 100%;
+        /*margin-left: 7%; */
+        display: flex;
+    }
   
+    /* The overlay effect - lays on top of the container and over the image */
+.overlay {
+    position: absolute;
+    top: 65%;
+    left: -5%;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    height: 0px;
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 20px;
+    /* padding: 20px; */
+    text-align: center;
+  }
+  
+  /* When you mouse over the container, fade in the overlay title */
+  .managedby-user-list:hover .overlay {
+    opacity: 1;
+  }
+  .managedby-user-list{
+      padding-top: 10px;
+  }
+  .delete-managedby-user .fa{
+      font-size: 20px;
+  }
+  .delete-managedby-user{
+    z-index: 1;
+    top: 10%;
+    right: 3%;
+    position: absolute;
+    float: right;
+    font-size: 30px;
+    color: #B61508;
+    border: none !important;
+    background: none !important;
+  }
   

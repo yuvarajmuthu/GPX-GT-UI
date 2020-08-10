@@ -125,6 +125,9 @@ export class UserComponent implements OnInit {
     compTypeTabs = [];
 
     isEditDisplayname:boolean = false;
+    
+    keywordUser = 'full_name';
+    searchUserManagedBy:any;
 
     changeParty: boolean = false;
     isEditParty:boolean = false;
@@ -152,14 +155,8 @@ export class UserComponent implements OnInit {
     sticky:any;
     deviceInfo = this.deviceService.getDeviceInfo();
     @HostListener('window:scroll', ['$event']) onScrollEvent($event){
-         console.log($event);
-                       
-    //    console.log(this.header);
-    //    this.sticky= this.header.offsetTop;
-        console.log(this.sticky);
-       console.log(window.pageYOffset);
+
        const isMobile = this.deviceService.isMobile();
-       console.log(isMobile);
        let lockPosition:number;
        let nameDiv = document.getElementById("name-for-lock");
         if(isMobile == true){
@@ -850,28 +847,12 @@ export class UserComponent implements OnInit {
         var sourceEntity = {};
         var targetEntity = {};
 
-        /*MAY NOT BE REQUIRED - BEGIN */
-        followURequest['userId'] = this.loggedUser ? this.loggedUser.username : '';// this.datashareService.getCurrentUserId();
-        followURequest['connectionUserId'] = this.profileUserId;
-        /*MAY NOT BE REQUIRED - END */
+
 
         followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
-        //followURequest["sourceEntityType"] = "USER";
         followURequest['targetEntityId'] = this.profileUserId;
-
-        if (this.viewingUser['isLegislator']) {
-            /*
-            if(this.viewingUser['isCongress']){
-
-            }else{
-            }
-            */
-            followURequest['targetEntityType'] = 'LEGISLATOR';
-
-        } else {
-            followURequest['targetEntityType'] = 'PUBLICUSER';
-        }
         followURequest['status'] = 'REQUESTED';
+        
         console.log('Profile data ' + JSON.stringify(followURequest));
 
         this.userService.followPerson(JSON.stringify(followURequest))
@@ -996,6 +977,7 @@ export class UserComponent implements OnInit {
             }); 
 
     }
+    
 
     addMember(userId:string) {
         var request = {};
@@ -1094,7 +1076,7 @@ export class UserComponent implements OnInit {
 
     getFollowingsCount(profileId: string) {
         this.userService.getFollowingsCount(profileId)
-            .subscribe(
+            .subscribe( 
                 (result) => {
                     console.log('getFollowingsCount response ' + result);
                     this.followingsCount = result;

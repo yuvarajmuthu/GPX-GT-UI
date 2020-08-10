@@ -117,28 +117,9 @@ export class Usercard1Component implements OnInit {
         var sourceEntity = {};
         var targetEntity = {};
 
-        /*MAY NOT BE REQUIRED - BEGIN */
-        followURequest['userId'] = this.loggedUser.username;// this.datashareService.getCurrentUserId();
-        followURequest['connectionUserId'] = this.user.username;
-        /*MAY NOT BE REQUIRED - END */
 
         followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
-        //followURequest["sourceEntityType"] = "USER";
         followURequest['targetEntityId'] = this.user.username;
-        /*
-        if(this.datashareService.getViewingUser()['isLegislator']){
-          followURequest["targetEntityType"] = "LEGISLATOR";
-
-        }else{
-          followURequest["targetEntityType"] = "PUBLICUSER";
-        }*/
-        let userType: string = 'PUBLICUSER';
-        if (this.user && this.user['userType']) {
-            userType = this.user['userType'];
-        }
-
-        followURequest['targetEntityType'] = userType;
-
         followURequest['status'] = 'REQUESTED';
         console.log('Profile data ' + JSON.stringify(followURequest));
 

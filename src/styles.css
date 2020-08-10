@@ -10084,7 +10084,7 @@ aside.sidebar.full-style {
 }
 .add-managed-button{
     cursor: pointer;
-     border: none !important; 
+    border: none !important; 
     color: #007bff;
     z-index: 1;
     height: 33px;

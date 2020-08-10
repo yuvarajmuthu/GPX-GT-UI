@@ -8,19 +8,19 @@
                   <img src="https://preview.ibb.co/miQjb7/photography4.jpg">
               </div>
               <div class="userImg">
-                  <img src="user.photoUrl">
+                  <img [src]="user.photoUrl">
               </div>
               <div class="userDescription">
                   <h5>{{user.full_name}}</h5>
                   <p>@{{user.username}}</p>
                  
                   
-                   <div class="followrs">
+                   <div *ngIf="fromParent == 'circle'" class="followrs">
                       <span class="number">{{followersCount}}</span>
                        <span>Followers</span>
                    </div>
                    
-                   <a [routerLink]="">
+                   <a *ngIf="fromParent == 'circle'" [routerLink]="">
                        <span class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span>
 
                    </a>

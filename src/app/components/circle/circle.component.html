@@ -35,7 +35,7 @@
 
   <div class="row">
     <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let circleUser of circleUsers">
-      <app-usercard2 [username]="circleUser"></app-usercard2>
+      <app-usercard2 [fromParent]="circle" [username]="circleUser"></app-usercard2>
     </div>
   </div>
 </div>  

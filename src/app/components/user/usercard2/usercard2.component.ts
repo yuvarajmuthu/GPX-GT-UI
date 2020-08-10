@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
+import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
 
 import {User} from '../../../models/user';
 
@@ -13,8 +14,7 @@ import {User} from '../../../models/user';
 })
 export class Usercard2Component implements OnInit {
   @Input() username: any;
-  @Input() fromParent: string;
-  @Input() managedBy:any;
+
   private user = {};
   loggedUser: User = null;
   loggedUsername: string = null;
@@ -30,10 +30,13 @@ export class Usercard2Component implements OnInit {
 
   constructor(private  router: Router,
     private userService: UserService, 
-    private datashareService: DatashareService) { }
+    private datashareService: DatashareService,
+    private communicationService: ComponentcommunicationService
+    ) { 
+
+    }
 
   ngOnInit() {
-      if(this.fromParent == 'circle'){
         this.loggedUser = this.datashareService.getCurrentUser();
 
         if (this.loggedUser) {
@@ -56,14 +59,9 @@ export class Usercard2Component implements OnInit {
     
           this.getFollowersCount(this.username);
 
-      }
-      else if(this.fromParent == 'managedBy'){
-        this.user = this.managedBy;
-      }
-
-
-  }
-
+      
+      
+}
   getRelationStatus(entity: string, profileId: string) {
 
     this.userService.getRelationStatus(entity, profileId)
@@ -110,11 +108,7 @@ export class Usercard2Component implements OnInit {
 
 
     followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
-    //followURequest["sourceEntityType"] = "USER";
     followURequest['targetEntityId'] = this.username;
-
-    followURequest['targetEntityType'] = this.user['userType'];
-
     followURequest['status'] = 'REQUESTED';
     console.log('Profile data ' + JSON.stringify(followURequest));
 

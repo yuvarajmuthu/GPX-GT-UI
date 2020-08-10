@@ -847,28 +847,12 @@ export class UserComponent implements OnInit {
         var sourceEntity = {};
         var targetEntity = {};
 
-        /*MAY NOT BE REQUIRED - BEGIN */
-        followURequest['userId'] = this.loggedUser ? this.loggedUser.username : '';// this.datashareService.getCurrentUserId();
-        followURequest['connectionUserId'] = this.profileUserId;
-        /*MAY NOT BE REQUIRED - END */
+
 
         followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
-        //followURequest["sourceEntityType"] = "USER";
         followURequest['targetEntityId'] = this.profileUserId;
-
-        if (this.viewingUser['isLegislator']) {
-            /*
-            if(this.viewingUser['isCongress']){
-
-            }else{
-            }
-            */
-            followURequest['targetEntityType'] = 'LEGISLATOR';
-
-        } else {
-            followURequest['targetEntityType'] = 'PUBLICUSER';
-        }
         followURequest['status'] = 'REQUESTED';
+        
         console.log('Profile data ' + JSON.stringify(followURequest));
 
         this.userService.followPerson(JSON.stringify(followURequest))
@@ -1092,7 +1076,7 @@ export class UserComponent implements OnInit {
 
     getFollowingsCount(profileId: string) {
         this.userService.getFollowingsCount(profileId)
-            .subscribe(
+            .subscribe( 
                 (result) => {
                     console.log('getFollowingsCount response ' + result);
                     this.followingsCount = result;

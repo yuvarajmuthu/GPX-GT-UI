@@ -15,12 +15,12 @@
                   <p>@{{user.username}}</p>
                  
                   
-                   <div *ngIf="fromParent == 'circle'" class="followrs">
+                   <div class="followrs">
                       <span class="number">{{followersCount}}</span>
                        <span>Followers</span>
                    </div>
                    
-                   <a *ngIf="fromParent == 'circle'" [routerLink]="">
+                   <a [routerLink]="">
                        <span class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span>
 
                    </a>

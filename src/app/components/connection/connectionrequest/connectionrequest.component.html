@@ -1,18 +1,3 @@
-
-<!--
-<div class="mesg-meta" *ngFor="let request of connectionRequest">
-  <a class="nav-link p-0" [routerLink]="" (click)="loadUser()">
-    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0 gpx-avatar"
-      alt="avatar image">
-    Connection <span>{{request.status}}</span>
-  </a>
-  <div class="mesg-meta">
-    <h6>{{request.targetEntityId}}</h6>
-  </div>
-  <button *ngIf="request.status == 'REQUESTED'" class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="loadUser()">Interested</button>
-  <button *ngIf="request.status == 'REQUESTED'" class="btn btn-outline-warning my-2 my-sm-0" type="submit" (click)="loadUser()">Later</button>
-</div>
--->
 <div class="box5">
   <div class="userMain card">
       <div class="">
@@ -29,53 +14,27 @@
                   *ngIf="!isImageLoading">
               </div>
               <div class="userDescription">
-                  <h5 class="text-center">{{connection.sourceEntityId}}</h5> <!--sourceEntityId IS ONE WHO SENT REQUEST-->
+                <h5>{{user.full_name}}</h5>
+                <p>@{{user.username}}</p>
+               
                 <div class="card-body">
-                <p>Connection Id : {{connection.connectionUserId}}</p>
-                <p>User Id : {{connection.userId}}</p>
-                <p>User Type : {{connection.targetEntityType}}</p>
+                  <p>{{followersCount}} Followers</p>
                 </div>
 
-                  <!--
-                  <p>Postion xx</p>
-
-
-                   <div class="followrs">
-                      <span class="number">137</span>
-                       <span>Followers</span>
-                   </div>
-                  -->
-                   <div *ngIf="connection.status === 'REQUESTED'">
+                   <div *ngIf="relationStatus === 'approvalPending'">
                      <ul class="icon">
-                       <li><a href="#" (click)="acceptRequest(connection)" class="fa fa-check bg-primary" title="Accept"> Accept </a></li>
-                       <li><a href="#" (click)="denyRequest(connection)" class="fa fa-ban bg-danger" title="Not Interested"> Not Interested </a></li>
-                       <li><a href="#" (click)="acceptRequest(connection)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                       <li><a [routerLink]="" (click)="acceptRequest()" class="fa fa-check bg-primary" title="Accept"> Accept </a></li>
+                       <li><a [routerLink]="" (click)="denyRequest()" class="fa fa-ban bg-danger" title="Not Interested"> Not Interested </a></li>
+                       <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
                      </ul>
-                     <!--<button class="btn btn-outline-primary" type="button" (click)="acceptRequest(connection)">Accept</button>
-                     <button class="btn btn-outline-danger" type="button" (click)="denyRequest(connection)">Not Interested</button>
-                     <button class="btn btn-outline-warning" type="button" (click)="denyRequest(connection)"> View Profile </button>-->
                    </div>
-                <div *ngIf="connection.status != 'REQUESTED'">
+
+                   <div *ngIf="relationStatus != 'approvalPending'">
                      <ul class="icon">
-                       <li><a href="#" (click)="acceptRequest(connection)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                       <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
                      </ul>
-
-                     <!--<button class="btn btn-outline-warning" type="button" (click)="denyRequest(connection)"> View Profile </button>-->
                    </div>
-
-                <div class="box-content">
-                  <h5 class="title">{{connection.sourceEntityId}}</h5>
-                  <!--<span class="post">View Profile</span>-->
-                </div>
-
-                   <!--
-                   <span class="separator"></span>
-                   <a href="">
-                    <button class="btn">Later</button>
-                </a>
-                -->
               </div>
-
           </div>
       </div>
     </div>

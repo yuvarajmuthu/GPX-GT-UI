@@ -315,15 +315,15 @@ getFollowings(entityId:string):Observable<any>{
   
 }
 
-getConnectionRequests(entityId:string):Observable<any>{
-  let serviceUrl = this.getSocialService()+"/getConnectionsByStatus"+"/"+entityId+"/";
+getConnections(entityId:string, action:string):Observable<any>{
+  let serviceUrl = this.getSocialService()+"/getConnectionsEntityId"+"/"+entityId+"/";
   
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/connections.json';   
   }
 
   return this.http.get(serviceUrl, { responseType: 'json', params: {
-    status: 'REQUESTED'
+    action: action
   } }).pipe(
     tap(_ => this.log(`fetched getConnectionRequests`)),
     catchError(this.handleError<any>(`Error in getConnectionRequests()`))
@@ -440,6 +440,21 @@ getCircleUsers(userId:string):Observable<any>{
   .pipe(
     tap(_ => this.log(`fetched getCircleUsers`)),
     catchError(this.handleError<any>(`Error in getCircleUsers()`))
+  );  
+}
+
+getCircleUsersCategory(userId:string):Observable<any>{
+  let serviceUrl:string = "";    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/getCircleUsersCategory.json';   
+  }else{
+    serviceUrl = this.getUserService() +"/getCircleUsers/"+userId+"/";
+  }
+
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`fetched getCircleUsersCategory`)),
+    catchError(this.handleError<any>(`Error in getCircleUsersCategory()`))
   );  
 }
 

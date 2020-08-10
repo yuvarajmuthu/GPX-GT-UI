@@ -2,53 +2,37 @@
 
  <div class="card tab-card">
     <div class="card-header tab-card-header">
-      <!-- <ul class="nav nav-tabs card-header-tabs li-justify-content-center col-xs-3" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link" id="one-tab" data-toggle="tab" href="javascript:void(0);" role="tab" aria-controls="One" aria-selected="true">
-                Accepted
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="two-tab" data-toggle="tab" href="javascript:void(0);" role="tab" aria-controls="Two" aria-selected="false">
-                Pending
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="three-tab" data-toggle="tab" href="javascript:void(0);" role="tab" aria-controls="Three" aria-selected="false">
-                All
-            </a>
-        </li>
-      </ul> -->
+     
       <ul class="nav nav-tabs card-header-tabs li-justify-content-center">
         <li class="nav-item border-right col-xs-3">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-secondary badge-active">
-              Approval Pending
-              <span class="badge badge-light"> 10 </span>
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadConnections('approvalPending')">
+            <span [ngClass]="pillCSSAPVar">
+              Approval Pending 
+              <span class="badge badge-light"> {{approvalPendingCount}} </span>
             </span>
           </a>
         </li>
         <li class="nav-item border-right col-xs-3">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-secondary badge-active">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadConnections('requestSent')">
+            <span [ngClass]="pillCSSRSVar">
               Request Sent
-              <span class="badge badge-light"> 10 </span>
+              <span class="badge badge-light"> {{requestSentCount}} </span>
             </span>
           </a>
         </li>
         <li class="nav-item border-right col-xs-3">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-secondary">
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadConnections('followers')">
+            <span [ngClass]="pillCSSFollowersVar">
               Followers
-              <span class="badge badge-light"> 10 </span>
+              <span class="badge badge-light"> {{followersCount}} </span>
             </span>
           </a>
         </li>
         <li class="nav-item col-xs-3">
-          <a class="nav-link search-legislator-navpills" href="#">
-            <span class="badge badge-secondary">
-              Followings
-              <span class="badge badge-light"> 10 </span>
+          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadConnections('followings')">
+            <span [ngClass]="pillCSSFollowingsVar">
+              Followings 
+              <span class="badge badge-light"> {{followingsCount}} </span>
             </span>
           </a>
         </li>
@@ -57,27 +41,10 @@
 
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
-        <h5 class="card-title">Accepted Request's</h5>
-
         <div class="row">
-            <app-connectionrequest [connection]=conn *ngFor="let conn of connectionRequest" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 custom-resize-card"></app-connectionrequest>
-            </div>
-
+          <app-connectionrequest [username]=entityId [relationStatus]=action *ngFor="let entityId of connectionsEntityId" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 custom-resize-card"></app-connectionrequest>
+        </div>
       </div>
-      <div class="tab-pane fade p-3" id="two" role="tabpanel" aria-labelledby="two-tab">
-        <h5 class="card-title">Pending Request's</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
-      </div>
-      <div class="tab-pane fade p-3" id="three" role="tabpanel" aria-labelledby="three-tab">
-        <h5 class="card-title">All Request's</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-      </div>
-      <div class="tab-pane fade p-3" id="four" role="tabpanel" aria-labelledby="four-tab">
-        <h5 class="card-title">All Request's</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-      </div>
     </div>
   </div>

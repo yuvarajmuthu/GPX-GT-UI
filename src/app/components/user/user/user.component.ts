@@ -12,7 +12,7 @@ import {
     isDevMode
 } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 
@@ -149,7 +149,9 @@ export class UserComponent implements OnInit {
     isEditState:boolean = false;
     keywordState = 'firstName';
     editStateInput : any;
-
+    settingsForm = new FormGroup({
+        accessRestriction: new FormControl()
+      });
 
     header:any;
     sticky:any;
@@ -568,6 +570,10 @@ export class UserComponent implements OnInit {
                 data => { 
                     this.userData = data;
                     console.log('User data from service: ', this.userData);
+
+                    if(this.userData['settings'] && this.userData['settings']['accessRestriction']){
+                        this.settingsForm.setValue(this.userData['settings']);
+                    }
 
                     if (this.userData['userType'] === 'LEGISLATOR') {
                         this.viewingUser['external'] = true;

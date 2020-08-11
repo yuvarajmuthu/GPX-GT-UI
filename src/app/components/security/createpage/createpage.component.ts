@@ -46,7 +46,7 @@ export class CreatepageComponent implements OnInit {
   });
 
   createDistrictPageForm = new FormGroup({
-    userType: new FormControl(this.constants.USERTYPE_LEGISLATIVE_DISTRICT),
+    userType: new FormControl(this.constants.USERTYPE_LEGISLATIVE_DISTRICT), 
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
     description: new FormControl(''),

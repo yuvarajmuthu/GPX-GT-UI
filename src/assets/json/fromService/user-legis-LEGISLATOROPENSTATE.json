@@ -3,8 +3,8 @@
    "lastModifiedDate":"2020-07-28 18:28:29",
    "userId":"5f206e4df453cd8700f1d830",
    "username":"PAL000515",
-   "full_name":"Dan L. Miller",
-   "displayName":"Dan L. Miller",
+   "full_name":"Dan L. Miller1",
+   "displayName":"Dan L. Miller2",
    "password":null,
    "userType":"LEGISLATOR",
    "status":"PASSIVE",
@@ -12,9 +12,7 @@
    "members":null,
    "circleUsers":null,
    "settings":{
-      "map":{
          "accessRestriction":false
-      }
    },
    "modifiedBy":null,
    "firstName":null,

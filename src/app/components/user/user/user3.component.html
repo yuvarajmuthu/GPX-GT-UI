@@ -446,14 +446,9 @@
                                            </ul> -->
                                            </div>
 
-                                           <div id="managedByCollapse" [ngbCollapse]="isSettingsCollapsed"
+                                           <div id="setingsSection" [ngbCollapse]="isSettingsCollapsed"
                                            class="widget stick-widget">
-
-
-
-
-
-
+                                           <form [formGroup]="settingsForm">
                                                 <ul class="followers">
                                                     <li>
                                                         <div class="form-row">
@@ -467,6 +462,7 @@
                                                           </div>
                                                     </li>
                                                 </ul>
+                                            </form>    
                                             </div>
 
                                             <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">

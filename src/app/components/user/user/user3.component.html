@@ -107,7 +107,9 @@
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
 
-                      <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" class="ng-autocomplete party-search">
+                        <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" placeholder="Chamber" userType="chamber" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
+
+                      <!-- <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" class="ng-autocomplete party-search">
                         <ng-autocomplete
                           [(ngModel)]="editChamberInput"
                           [data]="searchUsers"
@@ -131,7 +133,7 @@
                         <ng-template #notFoundTemplate let-notFound>
                           <div [innerHTML]="notFound"></div>
                         </ng-template>
-                      </div>
+                      </div> -->
                       <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'text'">
                         <input [(ngModel)]="biodata.chamber" type="text" />
                         <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
@@ -146,8 +148,8 @@
                             <a class="padding-pills" [routerLink]="['/user', biodata.district]">District {{biodata.district}}</a>
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
-                        <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
-                        <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" class="ng-autocomplete party-search">
+                        <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="district" userType="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
+                        <!-- <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" class="ng-autocomplete party-search">
                             <ng-autocomplete
                               [(ngModel)]="editDistrictInput"
                               [data]="searchUsers"
@@ -171,7 +173,7 @@
                             <ng-template #notFoundTemplate let-notFound>
                               <div [innerHTML]="notFound"></div>
                             </ng-template>
-                          </div>
+                          </div> -->
                           <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'text'">
                             <input [(ngModel)]="biodata.district" type="text" />
                             <button class="save-button-input" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
@@ -186,8 +188,9 @@
                              <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </span>
 
+                            <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="state" userType="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
 
-                          <div *ngIf="isEditState && getPropertyDataType('state') === 'entity'" class="ng-autocomplete party-search">
+                          <!-- <div *ngIf="isEditState && getPropertyDataType('state') === 'entity'" class="ng-autocomplete party-search">
                             <ng-autocomplete
                               [(ngModel)]="editStateInput"
                               [data]="searchUsers"
@@ -210,7 +213,7 @@
                           <ng-template #notFoundTemplate let-notFound>
                             <div [innerHTML]="notFound"></div>
                           </ng-template>
-                        </div>
+                        </div> -->
                         <div *ngIf="isEditState && getPropertyDataType('state') === 'text'">
                             <input [(ngModel)]="biodata.state" type="text" />
                             <button class="save-button-input" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
@@ -224,8 +227,8 @@
                                 <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}} Party</a>
                                 <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </span>
-                            <!-- <input  *ngIf="isEditParty == true" [ngModel]="biodata.party" type="text" /> -->
-                            <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
+                            <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="party" userType="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
+                            <!-- <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
                                 <ng-autocomplete
                                   [(ngModel)]="editPartyInput"
                                   [data]="searchUsers"
@@ -249,7 +252,7 @@
                                 <ng-template #notFoundTemplate let-notFound>
                                   <div [innerHTML]="notFound"></div>
                                 </ng-template>
-                              </div>
+                              </div> -->
                               <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
                                 <input [(ngModel)]="biodata.party" type="text" />
                                 <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
@@ -401,9 +404,10 @@
                                             <div id="managedByCollapse" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
 
+                                            <app-gps-global-search placeholder="User Name" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
 
 
-                                            <div class="ng-autocomplete managedby-search">
+                                            <!-- <div class="ng-autocomplete managedby-search">
                                                 <ng-autocomplete
                                                   [(ngModel)]="searchUserManagedBy"
                                                   (selected)='addMember(searchUserManagedBy.username)'
@@ -414,7 +418,6 @@
                                                   [itemTemplate]="itemTemplate"
                                                   [notFoundTemplate]="notFoundTemplate">
                                                 </ng-autocomplete>
-                                                <!-- <button class="add-managed-button" type="button" (click)="addMember(searchUserManagedBy.username)"><i class="fa fa-plus-square" aria-hidden="true"></i></button> -->
 
                         
                                                 <ng-template #itemTemplate let-item>
@@ -428,7 +431,7 @@
                                                 <ng-template #notFoundTemplate let-notFound>
                                                   <div [innerHTML]="notFound"></div>
                                                 </ng-template>
-                                              </div>
+                                              </div> -->
 
                                               <div class="row">
                                                 <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managed of managedBy">

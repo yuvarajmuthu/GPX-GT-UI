@@ -1,0 +1,36 @@
+<div class="ng-autocomplete" [ngClass]="{'managedby-search':userType=='managedby', 'party-search':userType=='chamber' || userType=='district' || userType=='state' || userType=='party'}">
+  <ng-autocomplete
+    [(ngModel)]="selectedUser"
+    (selected)='valueChanged($event)'
+    [data]="searchUsers"
+    [placeHolder]="placeholder"
+    (inputChanged) = "onChangeSearch($event)"
+    [searchKeyword]="keywordUser"
+    [itemTemplate]="itemTemplate"
+    [notFoundTemplate]="notFoundTemplate">
+  </ng-autocomplete>
+  <button *ngIf="userType=='chamber' || userType=='district' || userType=='state' || userType=='party'" class="save-button" type="button" (click)="editProfile($event)"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+
+  <!-- <button class="add-managed-button" type="button" (click)="addMember(searchUserManagedBy.username)"><i class="fa fa-plus-square" aria-hidden="true"></i></button> -->
+
+
+  <ng-template #itemTemplate let-item>
+    <div class="item">
+      <img src="{{item.photoUrl}}" height="25">
+      <span [innerHTML]="item.full_name"></span>
+      <small></small>
+    </div>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+</div>
+
+<!-- <div class="row">
+  <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managed of managedBy">
+    <app-usercard2 fromParent="managedBy" [managedBy]="managed"></app-usercard2>
+    <div class="overlay"><button class="delete-managedby-user" type="button" (click)="removeMember(managed.username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+
+  </div>
+</div> -->

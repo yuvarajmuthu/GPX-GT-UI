@@ -230,7 +230,31 @@ export class UserComponent implements OnInit {
         this.isEditDisplayname = !this.isEditDisplayname;
     }
 
-    toggleEditParty(){
+    selectedUser(userDetails:any){
+        this.addMember(userDetails.username);
+     }
+ 
+     saveChamber(userDetails:any){
+         this.biodata.chamber = userDetails.full_name;
+         this.isEditChamber = !this.isEditChamber;
+      }
+ 
+      saveDistrict(userDetails:any){
+         this.biodata.district = userDetails.full_name;
+         this.isEditDistrict = !this.isEditDistrict;
+      }
+ 
+      saveState(userDetails:any){
+         this.biodata.state = userDetails.full_name;
+         this.isEditState = !this.isEditState;
+      }
+ 
+      saveParty(userDetails:any){
+         this.biodata.party = userDetails.full_name;
+         this.isEditParty = !this.isEditParty;
+      }
+
+      toggleEditParty(){
         /*
         this.changeParty=false*/
         if(!this.isEditParty && this.biodata){

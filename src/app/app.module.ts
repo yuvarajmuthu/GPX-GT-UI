@@ -45,6 +45,7 @@ import {GAddressSearchComponent} from './components/g-address-search/g-address-s
 import {dateFormatPipe} from './util/pipes/dateformat.pipe';
 import { CreatepageselectionComponent } from './components/security/createpage/createpageselection/createpageselection.component';
 import { CircleComponent } from './components/circle/circle.component';
+import { GpsGlobalSearchComponent } from './components/gps-global-search/gps-global-search.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';

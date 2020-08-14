@@ -34,6 +34,7 @@ import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userb
 import { UsereventformComponent } from './usertemplate/usereventtemplate/usereventform/usereventform.component';
 import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
 import { UservoteformComponent } from './usertemplate/uservotetemplate/uservoteform/uservoteform.component';
+import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
 @NgModule({
   imports: [
     CommonModule, 
@@ -50,6 +51,7 @@ import { UservoteformComponent } from './usertemplate/uservotetemplate/uservotef
   declarations: [
     UserComponent, 
     GAddressSearchComponent,
+    GpsGlobalSearchComponent,
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 

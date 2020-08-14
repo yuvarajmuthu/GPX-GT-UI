@@ -531,7 +531,7 @@ getSettings(userId:string):Observable<any>{
 }
 
 updateSettings(request:string):Observable<any>{
-  let serviceUrl = this.getUserService() + "/addCircleUser";
+  let serviceUrl = this.getUserService() + "/updateSettings";
   console.log("updateSettings user.service " + request + " this.serviceUrl " + serviceUrl);
 
   return this.http.post(serviceUrl,  request )

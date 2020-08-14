@@ -49,7 +49,7 @@ export class UserComponent implements OnInit {
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
     public isPartiesCollapsed: boolean = false;
-    //private isProfileEditMode: boolean = false;
+    private isProfilePrivate: boolean = false;
     public electedPersonsOld = [];
     public electedPersons: Array<Legislator>;
     public contestedPersons = [];
@@ -597,6 +597,7 @@ export class UserComponent implements OnInit {
 
                     if(this.userData['settings'] && this.userData['settings']['accessRestriction']){
                         this.settingsForm.setValue(this.userData['settings']);
+                        this.isProfilePrivate = this.userData['settings']['accessRestriction'];
                     }
 
                     if (this.userData['userType'] === 'LEGISLATOR') {
@@ -675,6 +676,25 @@ export class UserComponent implements OnInit {
             );
         }
 
+    }
+
+    accessChange(){
+        console.log('accessChange() ', this.settingsForm.value);
+
+        let request = {};
+        request['username'] = this.profileUserId;
+        request['settings'] = this.settingsForm.value;
+        request['modifiedBy'] = this.loggedUser.username;
+        
+        this.isProfilePrivate = this.settingsForm.value['accessRestriction'];
+
+        let requestString: string = JSON.stringify(request);
+
+        this.userService.updateSettings(requestString).subscribe(data => {
+
+        }, error => {
+
+        });
     }
 
     showProfile() {

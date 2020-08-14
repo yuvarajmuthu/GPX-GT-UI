@@ -38,7 +38,7 @@
 
     <div class="row">
         <div class="col-sm-4" title="This is a private profile">
-          <div class="private-profile-label">
+          <div *ngIf="isProfilePrivate" class="private-profile-label">
           <span  class="badge badge-pill badge-primary" >
             <span  class="badge badge-pill badge-danger" >
             <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
@@ -403,7 +403,7 @@
                                             </div>
                                             <div id="managedByCollapse" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
-
+                                            <h6>Add Members:</h6>
                                             <app-gps-global-search placeholder="User Name" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
 
 
@@ -458,7 +458,7 @@
                                                             <div class="col form-group">
                                                               <label>Access Restriction</label>
                                                               <div class="custom-control custom-switch">
-                                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction">
+                                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction" (change)="accessChange()">
                                                                 <label class="custom-control-label" for="customSwitch1">Public[OFF] / Private[ON]</label>
                                                               </div>
                                                             </div>

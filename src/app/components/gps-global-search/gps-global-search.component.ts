@@ -11,6 +11,7 @@ export class GpsGlobalSearchComponent implements OnInit {
   @Input() placeholder: string;
   @Input() userType:string;
   @Input() inputvalue:string;
+  @Input() from:string;
   @Output() valueChange = new EventEmitter();
   @Output() valueSave = new EventEmitter();
 

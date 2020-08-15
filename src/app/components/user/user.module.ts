@@ -35,10 +35,12 @@ import { UsereventformComponent } from './usertemplate/usereventtemplate/usereve
 import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
 import { UservoteformComponent } from './usertemplate/uservotetemplate/uservoteform/uservoteform.component';
 import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
+import {SecurityModule} from '../../components/security/security.module';
 @NgModule({
   imports: [
     CommonModule, 
     FormsModule,
+    SecurityModule,
     ReactiveFormsModule,
     CKEditorModule,
     AutocompleteLibModule,
@@ -51,7 +53,7 @@ import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search
   declarations: [
     UserComponent, 
     GAddressSearchComponent,
-    GpsGlobalSearchComponent,
+   // GpsGlobalSearchComponent,
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 

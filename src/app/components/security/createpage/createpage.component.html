@@ -36,7 +36,9 @@
             <div class="form-row">
               <div class="col form-group">
                 <label class="create-page-label">Party</label>
-                <div class="ng-autocomplete create-page">
+                <app-gps-global-search  placeholder="Party" from="ceatePage" userType="party" (valueChange)='selectedParty($event)' [inputvalue]=""></app-gps-global-search>
+
+                <!-- <div class="ng-autocomplete create-page">
                   <ng-autocomplete
                     [data]="searchUsers"
                     placeHolder="Party"
@@ -57,7 +59,7 @@
                   <ng-template #notFoundTemplate let-notFound>
                     <div [innerHTML]="notFound"></div>
                   </ng-template>
-                </div>
+                </div> -->
               </div>
 
             </div>
@@ -65,7 +67,9 @@
             <div class="form-row">
               <div class="col form-group">
                 <label class="create-page-label">District</label>
-                <div class="ng-autocomplete create-page">
+                <app-gps-global-search  placeholder="District" from="ceatePage" userType="district" (valueChange)='selectedDistrict($event)' [inputvalue]=""></app-gps-global-search>
+
+                <!-- <div class="ng-autocomplete create-page">
                   <ng-autocomplete
                     [data]="searchUsers"
                     placeHolder="District"
@@ -86,13 +90,15 @@
                   <ng-template #notFoundTemplate let-notFound>
                     <div [innerHTML]="notFound"></div>
                   </ng-template>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="form-row">
               <div class="col form-group">
                 <label class="create-page-label">Chamber</label>
-                <div class="ng-autocomplete create-page">
+                <app-gps-global-search  placeholder="Chamber" from="ceatePage" (valueChange)='selectedChamber($event)' userType="chamber" [inputvalue]=""></app-gps-global-search>
+              
+                <!-- <div class="ng-autocomplete create-page">
                   <ng-autocomplete
                     [data]="searchUsers"
                     placeHolder="Chamber"
@@ -113,14 +119,16 @@
                   <ng-template #notFoundTemplate let-notFound>
                     <div [innerHTML]="notFound"></div>
                   </ng-template>
-                </div>
+                </div> -->
               </div>
             </div>
 
             <div class="form-row">
               <div class="col form-group">
                 <label class="create-page-label">State</label>
-                <div class="ng-autocomplete create-page">
+                <app-gps-global-search  placeholder="State" from="ceatePage" (valueChange)='selectedState($event)' userType="state" [inputvalue]=""></app-gps-global-search>
+
+                <!-- <div class="ng-autocomplete create-page">
                   <ng-autocomplete
                     [data]="searchUsers"
                     placeHolder="State"
@@ -141,7 +149,7 @@
                   <ng-template #notFoundTemplate let-notFound>
                     <div [innerHTML]="notFound"></div>
                   </ng-template>
-                </div>
+                </div> -->
               </div>
             </div>
 

@@ -96,6 +96,7 @@ let config = new AuthServiceConfig([
         ProtectedComponent,
         // GAddressSearchComponent,
         CreatepageselectionComponent,
+      // GpsGlobalSearchComponent,
         CircleComponent
         //dateFormatPipe
         //UserComponent
@@ -140,6 +141,10 @@ let config = new AuthServiceConfig([
         //   { enableTracing: true } // <-- debugging purposes only
         // )
     ],
+    exports:[GpxUIComponentsModule,
+      SecurityModule,
+      PostModule,
+      UserModule],
     providers: [
         /* ENABLE IT FOR MOCKING - OFFLINE OPERATION   */
         {

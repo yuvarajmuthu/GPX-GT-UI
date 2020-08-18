@@ -7,7 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { CreatepageComponent } from './createpage/createpage.component';
+import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
+
 import { CKEditorModule } from 'ckeditor4-angular';
+//import {UserModule} from '../../components/user/user.module';
 
 @NgModule({
   imports: [
@@ -17,6 +20,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
     FormsModule,
     CKEditorModule
   ],
-  declarations: [RegisterComponent, LoginComponent, CreatepageComponent]
+  exports:[GpsGlobalSearchComponent],
+  declarations: [RegisterComponent, LoginComponent, CreatepageComponent, GpsGlobalSearchComponent]
 })
 export class SecurityModule {}

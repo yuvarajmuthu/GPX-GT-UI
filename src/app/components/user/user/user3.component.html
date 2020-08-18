@@ -107,7 +107,7 @@
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
 
-                        <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" placeholder="Chamber" userType="chamber" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
+                        <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" placeholder="Chamber" from="user" userType="chamber" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
 
                       <!-- <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" class="ng-autocomplete party-search">
                         <ng-autocomplete
@@ -148,7 +148,7 @@
                             <a class="padding-pills" [routerLink]="['/user', biodata.district]">District {{biodata.district}}</a>
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </span>
-                        <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="district" userType="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
+                        <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="District"  from="user" userType="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
                         <!-- <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" class="ng-autocomplete party-search">
                             <ng-autocomplete
                               [(ngModel)]="editDistrictInput"
@@ -188,7 +188,7 @@
                              <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </span>
 
-                            <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="state" userType="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
+                            <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" userType="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
 
                           <!-- <div *ngIf="isEditState && getPropertyDataType('state') === 'entity'" class="ng-autocomplete party-search">
                             <ng-autocomplete
@@ -227,7 +227,7 @@
                                 <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}} Party</a>
                                 <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                             </span>
-                            <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="party" userType="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
+                            <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="Party"  from="user" userType="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
                             <!-- <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
                                 <ng-autocomplete
                                   [(ngModel)]="editPartyInput"
@@ -404,7 +404,7 @@
                                             <div id="managedByCollapse" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
                                             <h6>Add Members:</h6>
-                                            <app-gps-global-search placeholder="User Name" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
+                                            <app-gps-global-search placeholder="User Name"  from="user" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
 
 
                                             <!-- <div class="ng-autocomplete managedby-search">

@@ -343,7 +343,7 @@ export class PostcardComponent implements OnInit {
             if(entityType == 'legislator')
                 routePath= '/searchLegislator';
             else if(entityType == 'district')
-                routePath= '/group';
+                //routePath= '/group';
     
             this.router.navigate([routePath]);
         }

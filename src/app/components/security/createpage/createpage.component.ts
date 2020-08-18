@@ -83,6 +83,19 @@ export class CreatepageComponent implements OnInit {
     private postService: PostService,
     private profileService: ProfileService) { }
 
+  selectedParty(userDetails:any){
+    console.log(userDetails);
+   }
+   selectedState(userDetails:any){
+    console.log(userDetails);
+   }
+   selectedDistrict(userDetails:any){
+    console.log(userDetails);
+   }
+   selectedChamber(userDetails:any){
+    console.log(userDetails);
+   }
+
   ngOnInit() {
     this.route
     .queryParams

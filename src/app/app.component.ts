@@ -253,7 +253,7 @@ export class AppComponent implements OnInit {
             if ('legislatorTab' === evt.nextId) {
                 this.router.navigate(['searchLegislator']);
             } else if ('constitutionTab' === evt.nextId) {
-                this.router.navigate(['group']);
+                //this.router.navigate(['group']);
             } else if ('socialTab' === evt.nextId) {
                 this.router.navigate(['news']);
             }

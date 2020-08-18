@@ -47,7 +47,9 @@
 
           </ul>
 -->
-            <div class="ng-autocomplete common-search" *ngIf="!isMobile">
+<app-gps-global-search  placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+
+            <!-- <div class="ng-autocomplete common-search" *ngIf="!isMobile">
               <ng-autocomplete
                 [data]="searchUsers"
                 (inputChanged) = "onChangeSearch($event)"
@@ -69,7 +71,7 @@
               <ng-template #notFoundTemplate let-notFound>
                 <div [innerHTML]="notFound"></div>
               </ng-template>
-            </div>
+            </div> -->
 
          
         <!-- <div class="btn-group" dropdown>

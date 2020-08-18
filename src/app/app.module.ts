@@ -26,7 +26,7 @@ import {SecurityModule} from './components/security/security.module';
 import {PostModule} from './components/post/post.module';
 import {UserModule} from './components/user/user.module';
 import {GpxUIComponentsModule} from './components/gpx-uicomponents/gpx-uicomponents.module';
-import {ConnectionModule} from './components/connection/connection.module';
+//import {ConnectionModule} from './components/connection/connection.module';
 
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
@@ -46,6 +46,7 @@ import {dateFormatPipe} from './util/pipes/dateformat.pipe';
 import { CreatepageselectionComponent } from './components/security/createpage/createpageselection/createpageselection.component';
 import { CircleComponent } from './components/circle/circle.component';
 import { GpsGlobalSearchComponent } from './components/gps-global-search/gps-global-search.component';
+import { HomeComponent } from './components/home/home.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';
@@ -96,8 +97,8 @@ let config = new AuthServiceConfig([
         ProtectedComponent,
         // GAddressSearchComponent,
         CreatepageselectionComponent,
-      // GpsGlobalSearchComponent,
-        CircleComponent
+        CircleComponent,
+        HomeComponent
         //dateFormatPipe
         //UserComponent
         //GpxInputComponent,
@@ -135,7 +136,7 @@ let config = new AuthServiceConfig([
         PostModule,
         UserModule,
         GpxUIComponentsModule,
-        ConnectionModule
+        //ConnectionModule
         // RouterModule.forRoot(
         //   appRoutes,
         //   { enableTracing: true } // <-- debugging purposes only
@@ -146,7 +147,7 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
-        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION   */
+        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION*/   
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,

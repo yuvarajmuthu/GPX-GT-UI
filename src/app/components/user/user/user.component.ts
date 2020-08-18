@@ -49,7 +49,7 @@ export class UserComponent implements OnInit {
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
     public isPartiesCollapsed: boolean = false;
-    private isProfilePrivate: boolean = false;
+    public isProfilePrivate: boolean = false;
     public electedPersonsOld = [];
     public electedPersons: Array<Legislator>;
     public contestedPersons = [];

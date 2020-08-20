@@ -63,6 +63,17 @@ export class AppComponent implements OnInit {
             this.iscreateOptEnabled = false;
       }
    }
+   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
+       let postConent = document.getElementById("postContent");
+       if(postConent){
+            if(window.pageYOffset >= 250){
+                document.getElementById("myBtn").style.display = "block";
+            }
+            else{
+                document.getElementById("myBtn").style.display = "none";
+            }
+       }
+   }
 
     constructor(private  router: Router,
                 private missionService: ComponentcommunicationService,

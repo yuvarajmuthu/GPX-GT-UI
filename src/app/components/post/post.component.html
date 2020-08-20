@@ -7,6 +7,7 @@
             <app-postcard  *ngFor="let post of posts; let i = index" [post]="post" [isComment]="false" [idx]="i">
             </app-postcard>
         </cdk-virtual-scroll-viewport>
+        <button (click)="topFunction()" id="myBtn" title="New Post"><i class='fa fa-paper-plane'></i></button>
     </div>
     <div *ngIf="posts.length < 1">
         No Post to show 

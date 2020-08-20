@@ -64,7 +64,7 @@
     </div>
   </div>
 
-  <div [ngClass]="{ 'row legisBoundary': divisionOffices.length > 0, 'row': divisionOffices < 1  }">
+  <div [ngClass]="{ 'row legisBoundary': divisionOffices.length > 0, 'row': divisionOffices.length < 1  }">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <ul class="nav">
         <li class="nav-item border-right" *ngFor="let divisionOffice of divisionOffices">

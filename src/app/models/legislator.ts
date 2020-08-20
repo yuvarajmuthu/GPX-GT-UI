@@ -67,7 +67,9 @@ public url: string,
 public created_at: Date,
 public chamber: string,
 public offices: string[],
-public suffixes: string
+public suffixes: string,
+public divisionOffice:string,
+public division:string
 
 /*
 public bioguide_id: string,

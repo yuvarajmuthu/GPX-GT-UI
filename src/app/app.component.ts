@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
     searchFailed = false;
 
     navigateList = ['searchLegislator', 'news', 'group', 'request'];
+    activeTab:string;
     //public tabSet: NgbTabset;
     deviceInfo = this.deviceService.getDeviceInfo();
     isMobile = this.deviceService.isMobile();
@@ -62,6 +63,17 @@ export class AppComponent implements OnInit {
             element.classList.remove("createpage-option");
             this.iscreateOptEnabled = false;
       }
+   }
+   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
+       let postConent = document.getElementById("postContent");
+       if(postConent){
+            if(window.pageYOffset >= 250){
+                document.getElementById("myBtn").style.display = "block";
+            }
+            else{
+                document.getElementById("myBtn").style.display = "none";
+            }
+       }
    }
 
     constructor(private  router: Router,
@@ -208,7 +220,8 @@ export class AppComponent implements OnInit {
         //return false;
     }
 
-    clickTab(event: String) {
+    clickTab(event: string) {
+        this.activeTab = event;
         console.log('tab button clicked - ' + event);
         //console.log("event.target.value " + event.target);
         if (event === 'District') {

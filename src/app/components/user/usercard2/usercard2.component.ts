@@ -15,7 +15,7 @@ import {User} from '../../../models/user';
 export class Usercard2Component implements OnInit {
   @Input() username: any;
 
-  private user = {};
+  public user:any;
   loggedUser: User = null;
   loggedUsername: string = null;
   followersCount: string = null;

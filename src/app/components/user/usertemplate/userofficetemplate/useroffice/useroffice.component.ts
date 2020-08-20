@@ -16,13 +16,13 @@ import {ComponentcommunicationService} from '../../../../../services/componentco
 export class UserofficeComponent extends AbstractTemplateComponent implements OnInit {
   id = 'upOffice';
 
-  @Input() officeObj:{}; 
-  @Input() displayProperties: [];
+  @Input() officeObj:any; 
+  @Input() displayProperties: any;
 
-  office: {};
+  office: any;
   closeResult: string;
   officeForm: FormGroup;
-  data = {};
+  data:any;
   isProfileInEditMode:boolean = false; 
   inEditMode:boolean = false;
 

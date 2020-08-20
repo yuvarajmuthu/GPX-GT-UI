@@ -32,6 +32,13 @@ export class PostComponent implements OnInit {
         private dataShareService: DatashareService) {
     }
 
+    topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        let postConent = document.getElementById("postContent");
+        postConent.focus();
+    }
+
     PostNewEvent(data:any) {
         this.posts.unshift(data);
     }

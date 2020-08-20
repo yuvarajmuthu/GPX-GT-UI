@@ -14,7 +14,7 @@ export class UservoteformComponent implements OnInit {
   voted:boolean;
   date:any;
 
-  constructor(private modal:NgbActiveModal) { }
+  constructor(public modal:NgbActiveModal) { }
 
   ngOnInit() {
     console.log(this.votedetails);

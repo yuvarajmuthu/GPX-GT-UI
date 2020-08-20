@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -14,8 +14,11 @@ export class UsereventformComponent implements OnInit {
   description:string;
   location:string;
   date:string;
+  location_name:string;
+  time:string;
+  address: string = '300 Chatham Park Drive,Pittsburgh, PA 15220';
 
-  constructor(private modal:NgbActiveModal) { }
+  constructor(public modal:NgbActiveModal, private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
     console.log(this.eventdetails);
@@ -23,6 +26,12 @@ export class UsereventformComponent implements OnInit {
     this.description = this.eventdetails.description;
     this.location = this.eventdetails.location_name;
     this.date = this.eventdetails.date;
+  }
+
+  getAddress(addressEvent: Event) {
+    console.log('Address - ' + addressEvent['formatted_address']);
+    this.address = addressEvent['formatted_address'];
+    this.changeDetector.detectChanges();
   }
 
 }

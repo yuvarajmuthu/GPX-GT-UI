@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
     searchFailed = false;
 
     navigateList = ['searchLegislator', 'news', 'group', 'request'];
+    activeTab:string;
     //public tabSet: NgbTabset;
     deviceInfo = this.deviceService.getDeviceInfo();
     isMobile = this.deviceService.isMobile();
@@ -219,7 +220,8 @@ export class AppComponent implements OnInit {
         //return false;
     }
 
-    clickTab(event: String) {
+    clickTab(event: string) {
+        this.activeTab = event;
         console.log('tab button clicked - ' + event);
         //console.log("event.target.value " + event.target);
         if (event === 'District') {

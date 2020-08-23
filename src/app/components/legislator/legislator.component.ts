@@ -34,6 +34,8 @@ export class LegislatorComponent implements OnInit {
   loggedUsername:string;
   userName: string = null;
 
+  bookMark:boolean;
+
 
   constructor(private  router: Router,
               private route: ActivatedRoute,

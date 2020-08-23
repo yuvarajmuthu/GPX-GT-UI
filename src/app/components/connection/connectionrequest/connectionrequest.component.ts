@@ -19,7 +19,7 @@ export class ConnectionrequestComponent implements OnInit {
 
   loggedUser:User;
   loggedUsername: string = null;
-  private user = {};
+  public user:any;
 
   profileSmImage: any = 'assets/images/avatar1.png'; 
   isImageLoading:boolean = false;

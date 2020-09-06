@@ -1,4 +1,4 @@
-<table class="table">
+<!-- <table class="table">
   <tbody class="box-shadow">
   <tr *ngIf="inEditMode">
       <td></td>
@@ -13,7 +13,21 @@
       <td>{{role[displayProperty.propId]}}</td>
   </tr>
   </tbody>
-</table>
+</table> -->
+
+<div class="container">
+    <div class="card-media" >
+    <div class="card-media-body">
+      <span  *ngFor="let displayProperty of displayProperties">
+        <span *ngIf="displayProperty.propId == 'start' && role[displayProperty.propId]" class="subtle">{{role[displayProperty.propId]}}</span>
+        <span *ngIf="displayProperty.propId == 'end' && role[displayProperty.propId]" class="subtle"> to {{role[displayProperty.propId]}}</span>
+        <span *ngIf="displayProperty.propId != 'start' && displayProperty.propId != 'end' && role[displayProperty.propId]" class="subtle date-time">{{role[displayProperty.propId]}}</span>
+      </span>
+      <div class="card-media-body-supporting-bottom">
+      </div>
+    </div>
+  </div>
+</div>
 
 <ng-template #content let-modal>
     <div class="modal-header">

@@ -1,4 +1,4 @@
-<table class="table">
+<!-- <table class="table">
   <tbody class="box-shadow">
   <tr *ngIf="office.isCurrent">
     <td colspan="2" class="text-center">
@@ -25,7 +25,23 @@
     <td>{{office[displayProperty.propId]}}</td>
   </tr> 
   </tbody>
-</table>
+</table> -->
+<div class="container">
+    <div class="card-media" >
+    <div class="card-media-body">
+      <span class="subtle date-time"  *ngFor="let displayProperty of displayProperties">
+        <span *ngIf="displayProperty.propId == 'fax' && office[displayProperty.propId]"><i class="fa fa-fax"></i></span>
+        <span *ngIf="displayProperty.propId == 'phone' && office[displayProperty.propId]"><i class="fa fa-phone"></i></span>
+        <span *ngIf="displayProperty.propId == 'address' && office[displayProperty.propId]"><i class="fa fa-address-card"></i></span>
+        <span *ngIf="displayProperty.propId == 'email' && office[displayProperty.propId]"><i class="fa fa-envelope"></i></span>
+            {{office[displayProperty.propId]}}
+      </span>
+      <div class="card-media-body-supporting-bottom">
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <ng-template #content let-modal>
   <div class="modal-header">

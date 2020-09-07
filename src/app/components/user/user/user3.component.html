@@ -340,7 +340,7 @@
                 <li class="list-group-item pointer"
                     (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
                     <span class="pointer">
-                        <i class="material-icons">rss_feed</i>My Posts
+                        <i class="material-icons">rss_feed</i>Activities
                     </span>
                 </li>
 
@@ -383,7 +383,7 @@
                                         <!-- Main stage area -->
                                         <div class="col-lg-12 cols-item2">
                                             <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
-                                               <app-post [userId]="profileUserId" [disableNewPost]=true></app-post>
+                                               <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true></app-post>
                                             </div>
                                             <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                  class="widget stick-widget">

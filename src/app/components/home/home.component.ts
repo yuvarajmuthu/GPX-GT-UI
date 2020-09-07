@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
+
+import {UserService} from '../../services/user.service';
+import {DatashareService} from '../../services/datashare.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private  router: Router,
+    private userService: UserService,
+    private datashareService: DatashareService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    if(this.datashareService.isUserLogged()){
+      this.router.navigate(['/news']); 
+    }
   }
 
+  getIn(){
+      this.router.navigate(['/login']); 
+  }
 }

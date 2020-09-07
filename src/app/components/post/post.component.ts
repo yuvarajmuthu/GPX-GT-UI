@@ -19,8 +19,9 @@ import {interval} from 'rxjs';
 })
 export class PostComponent implements OnInit {
     @Input() userId: string;
+    @Input() requestedBy: string;
     @Input() disableNewPost: boolean = false;
-
+    @Input() selfActivities: boolean = false;
     isShowAllPosts:boolean = false;
     
     posts: Post[] = [];
@@ -91,7 +92,9 @@ export class PostComponent implements OnInit {
         if(!this.userId){
             this.userId = this.dataShareService.getLoggedinUsername();
         }
-        
+        if(!this.requestedBy){
+            this.requestedBy = this.dataShareService.getLoggedinUsername();
+        }
 
     }
     getSharedPost(postId:number): void {
@@ -112,8 +115,9 @@ export class PostComponent implements OnInit {
 
         var getPostRequest = {};
         getPostRequest['entityId'] = this.userId;//entityId;
+        getPostRequest['requestedBy'] = this.requestedBy;
         getPostRequest['pageNumber'] = pageNumber;
-        //getPostRequest["entityType"] = entityType;
+        getPostRequest['selfActivities'] = this.selfActivities; 
 
         this.postService.getActivities(JSON.stringify(getPostRequest)).subscribe((result) => {
             if(result){

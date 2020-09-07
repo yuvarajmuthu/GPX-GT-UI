@@ -109,7 +109,7 @@ export class PostService  extends AbstractService{
 
 
     return this.http.get(serviceUrl, { responseType: 'json', params: {
-      pageNumber: requestJson['pageNumber']
+      pageNumber: requestJson['pageNumber'], selfActivities: requestJson['selfActivities'], requestedBy: requestJson['requestedBy']
     } })
     .pipe(
 //      map((response:Response) => response.json()),

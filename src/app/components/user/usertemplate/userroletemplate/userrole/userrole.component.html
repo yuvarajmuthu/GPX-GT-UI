@@ -18,6 +18,9 @@
 <div class="container">
     <div class="card-media" >
     <div class="card-media-body">
+      <a href="javascript:void(0);"  *ngIf="inEditMode" class="lg-fa float-right" (click)="open(content, role)">
+        <i class="fa fa-pencil-square-o"></i>
+    </a>
       <span  *ngFor="let displayProperty of displayProperties">
         <span *ngIf="displayProperty.propId == 'start' && role[displayProperty.propId]" class="subtle"><i class="fa fa-calendar"></i>{{role[displayProperty.propId]}}</span>
         <span *ngIf="displayProperty.propId == 'end' && role[displayProperty.propId]" class="subtle"> to {{role[displayProperty.propId]}}</span>

@@ -1,7 +1,7 @@
 <!--
   https://bootsnipp.com/snippets/7nV1l
 -->
-<div class="container">
+<div [ngClass]="{'box5': isCircle == '/circle'}">
   <div class="row userMain">
           <div class="userBlock">
               <div class="backgrounImg">
@@ -22,8 +22,12 @@
                    
                    <a [routerLink]="">
                        <span class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span>
-
                    </a>
+              </div>
+              <div>
+                <ul class="icon">
+                  <li><a [routerLink]="" (click)="gotoUser(user.username)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                </ul>
               </div>
              
           </div>

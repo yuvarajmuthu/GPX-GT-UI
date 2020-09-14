@@ -29,6 +29,9 @@
 <div class="container">
     <div class="card-media" >
     <div class="card-media-body">
+      <a *ngIf="inEditMode" href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, office)">
+        <i class="fa fa-pencil-square-o"></i>
+    </a>
       <span class="subtle date-time"  *ngFor="let displayProperty of displayProperties">
         <span *ngIf="displayProperty.propId == 'fax' && office[displayProperty.propId]"><i class="fa fa-fax"></i></span>
         <span *ngIf="displayProperty.propId == 'phone' && office[displayProperty.propId]"><i class="fa fa-phone"></i></span>

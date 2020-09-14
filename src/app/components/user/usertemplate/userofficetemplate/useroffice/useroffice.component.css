@@ -3,7 +3,10 @@
   text-align: left;
 }
 .lg-fa{
-  font-size: 36px;
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .box-shadow{
   transition: 10ms;

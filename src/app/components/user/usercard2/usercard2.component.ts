@@ -27,13 +27,15 @@ export class Usercard2Component implements OnInit {
   following: boolean = false;
   requestedToFollow: boolean = false;
   followRequestRejected: boolean = false;
+  isCircle:string;
 
   constructor(private  router: Router,
     private userService: UserService, 
     private datashareService: DatashareService,
     private communicationService: ComponentcommunicationService
     ) { 
-
+           this.isCircle = this.router.url;
+           console.log(this.isCircle);
     }
 
   ngOnInit() {
@@ -176,5 +178,9 @@ export class Usercard2Component implements OnInit {
           this.followCntrlCSS = 'btn btn-outline-primary';
       }
 
+  }
+
+  gotoUser(): void {
+    this.router.navigate(['/user', this.username]);
   }
 }

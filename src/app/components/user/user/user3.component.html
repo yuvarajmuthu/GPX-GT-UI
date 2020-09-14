@@ -338,7 +338,7 @@
             <ul class="list-group">
 
                 <li class="list-group-item pointer"
-                    (click)="Activities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
+                    (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
                     <span class="pointer">
                         <i class="material-icons">rss_feed</i>Activities
                     </span>
@@ -434,9 +434,9 @@
                                               </div> -->
 
                                               <div class="row">
-                                                <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managed of managedBy">
-                                                  <app-usercard2 [username]="managed.username"></app-usercard2>
-                                                  <div class="overlay"><button class="delete-managedby-user" type="button" (click)="removeMember(managed.username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+                                                <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let username of managedBy">
+                                                  <app-usercard2 [username]="username"></app-usercard2>
+                                                  <div class="overlay"><button class="delete-managedby-user" type="button" (click)="removeMember(username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
 
                                                 </div>
                                               </div>
@@ -558,7 +558,7 @@
 <div class="bottom-tabs">
     <ul class="nav nav-tabs mobile-bottom-tabs">
         <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="toggleTemplateDropDown();Profiles(activeTemplatName);loadTemplate(activeTemplate)" type="button">{{activeTemplatName}}</button></li>
-        <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();Activities()">Posts</button></li>
+        <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showActivities()">Posts</button></li>
         <li [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Managed By</button></li>
         <li [ngClass]="{'active':isProfileCollapsed==false}">
 

@@ -398,7 +398,7 @@ export class UserComponent implements OnInit {
         return type;
       }
 
-    Activities() {
+    showActivities() {
         this.activitiesData = true;
         this.profileData = false;
         this.folow = false;
@@ -407,6 +407,8 @@ export class UserComponent implements OnInit {
         this.managedByActive = false;
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
+        this.isManagedByCollapsed = true;
+        this.isSettingsCollapsed = true;
         this.isActivityCollapsed = false;
         this.settings = false;
     }
@@ -697,6 +699,7 @@ export class UserComponent implements OnInit {
         });
     }
 
+    //OBSOLETE?
     showProfile() {
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
@@ -709,8 +712,8 @@ export class UserComponent implements OnInit {
         this.activitiesTabSelected = false;
         return false;
     }
-
-    showActivities() {
+    //OBSOLETE?
+    showActivities_delete() {
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = false;
         this.isFollowersCollapsed = true;

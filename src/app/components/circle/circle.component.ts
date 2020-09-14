@@ -19,6 +19,7 @@ export class CircleComponent implements OnInit {
   circleUsers:string[] = null;
   circleUserCategories:string[] = null;
   circleUsersInfo:[] = null;
+  circleCatagoryActive:string;
 
   constructor(private userService: UserService,
     private datashareService: DatashareService,
@@ -76,7 +77,7 @@ export class CircleComponent implements OnInit {
 
   loadCircleUsersByCategory(circleUserCategory: string){
     console.log('circleUserCategory ', circleUserCategory);
-
+    this.circleCatagoryActive = circleUserCategory;
     for(let i = 0; i < this.circleUsersInfo.length; i++){
       let obj={};
       obj = this.circleUsersInfo[i];

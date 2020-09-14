@@ -5,7 +5,7 @@
       <ul class="nav">
         <li class="nav-item border-right" *ngFor="let circleUserCategory of circleUserCategories">
           <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsersByCategory(circleUserCategory)">
-            <span class="badge badge-secondary active">{{circleUserCategory}}</span>
+            <span class="badge badge-secondary" [ngClass]="{'active': circleCatagoryActive == circleUserCategory}">{{circleUserCategory}}</span>
           </a>
         </li>
 

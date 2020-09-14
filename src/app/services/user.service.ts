@@ -238,7 +238,7 @@ getManagedBy(entityId:string):Observable<any>{
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/followers.json';   
   }else{
-    serviceUrl = this.getSocialService()+"/getFollowers";
+    serviceUrl = this.getUserService() +"/getManagedByUsers/"+entityId+"/";
   }
   //serviceUrl = '/assets/json/fromService/followers.json';   
 
@@ -459,24 +459,24 @@ getCircleUsersCategory(userId:string):Observable<any>{
 }
 
 addMember(request:string):Observable<any>{
-  let serviceUrl = this.getUserService() + "/addCircleUser";
+  let serviceUrl = this.getUserService() + "/addMember";
   console.log("addMember user.service " + request + " this.serviceUrl " + serviceUrl);
 
   return this.http.post(serviceUrl,  request )
   .pipe(
-    map((response:Response) => response.json()),
+    //map((response:Response) => response.json()),
     tap(_ => this.log(`addMember successful`)),
     catchError(this.handleError<any>(`Error in addMember()`))
   );
 }
 
 removeMember(request:string):Observable<any>{
-  let serviceUrl = this.getUserService() + "/removeCircleUser";
+  let serviceUrl = this.getUserService() + "/removeMember";
   console.log("removeMember user.service " + request + " this.serviceUrl " + serviceUrl);
 
   return this.http.post(serviceUrl,  request )
   .pipe(
-    map((response:Response) => response.json()),
+    //map((response:Response) => response.json()),
     tap(_ => this.log(`removeMember successful`)),
     catchError(this.handleError<any>(`Error in removeMember()`))
   );

@@ -677,7 +677,6 @@ export class UserComponent implements OnInit {
                 }
             );
         }
-
     }
 
     accessChange(){
@@ -761,7 +760,7 @@ export class UserComponent implements OnInit {
             edit = false;
         }
 */
-  //      this.datashareService.editProfile(edit);
+        this.datashareService.editProfile(true);
         this.communicationService.userProfileChanged(true);
 
 /*
@@ -779,7 +778,7 @@ export class UserComponent implements OnInit {
 
  //       this.editLabel = 'Edit Profile';
 
-   //     this.datashareService.editProfile(false);
+        this.datashareService.editProfile(false);
         this.communicationService.userProfileChanged(false);
 
 
@@ -840,8 +839,6 @@ export class UserComponent implements OnInit {
                 this.viewingUser['operation'] = this.operation;
                 //setting here so it can be accessed globally
                 this.datashareService.setViewingUser(this.viewingUser);
-
-
             }
         );
     }
@@ -1222,6 +1219,7 @@ export class UserComponent implements OnInit {
 
 //load the template based on tab selection
     loadTemplate(type: string) {
+       // localStorage.setItem('editMode', String(this.inEditMode));
         this.activeTemplate = type;
         this.tap = true;
         let compTypes = [];

@@ -57,6 +57,8 @@ export class CircleComponent implements OnInit {
         obj = this.circleUsersInfo[i];
         let keys = Object.keys(obj);
         this.circleUserCategories.push(keys[0]);
+        if(i==0)
+          this.loadCircleUsersByCategory(keys[0]);
       }
       
     }); 

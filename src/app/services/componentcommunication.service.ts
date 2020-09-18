@@ -1,6 +1,6 @@
 import { Injectable, ViewContainerRef, EmbeddedViewRef, ViewRef } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 //import {TemplatePopulationComponent} from './../constitution.template.component';
 
@@ -16,6 +16,8 @@ export class ComponentcommunicationService {
   //private newProfileTemplateAddedPopulation = new Subject<TemplatePopulationComponent>();
   private loginAlertSource = new Subject<boolean>();
   private userProfileEditSource = new Subject<boolean>();
+  // private userProfileEditSource = new BehaviorSubject<boolean>(true);
+  
   private connectionAcceptSource = new Subject<string>();
   private connectionRequestCancelSource = new Subject<string>();
   // Observable string streams

@@ -99,7 +99,7 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
           //this.office = JSON.parse(JSON.stringify(data[0]));
           //this.office['term'] = 'term';
           this.offices= data;
-          //this.createFormGroup();
+          this.createFormGroup();
 
           this.changeDetector.detectChanges();
         }); 
@@ -119,11 +119,11 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
     //this.biodataTemplateForm = this.fbuilder.group({});
     //let struct:string = "\"{";//"new FormGroup({";
     this.officeTemplateForm = this.fbuilder.group({});
+    // console.log(this.displayProperties);
 
     this.displayProperties.forEach((element, index) => {
-        let value = this.legislator[element['propId']];
-        console.log('element[propId] ', element['propId'], ' this.legislator[element[propId]] ', this.legislator[element['propId']]);
-        this.officeTemplateForm.setControl(element['propId'], new FormControl(value));
+       // let value = this.legislator[element['propId']];
+        this.officeTemplateForm.setControl(element['propId'], new FormControl(''));
         //this.biodataTemplateForm.setControl(element['propId'], null);
     });
     this.changeDetector.detectChanges();

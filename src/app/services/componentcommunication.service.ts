@@ -17,6 +17,8 @@ export class ComponentcommunicationService {
   private loginAlertSource = new Subject<boolean>();
   private userProfileEditSource = new Subject<boolean>();
   // private userProfileEditSource = new BehaviorSubject<boolean>(true);
+
+  private manageUserRemove = new Subject<string>();
   
   private connectionAcceptSource = new Subject<string>();
   private connectionRequestCancelSource = new Subject<string>();
@@ -37,6 +39,11 @@ export class ComponentcommunicationService {
 
   loginChanged(value: boolean) {
     this.loginAlertSource.next(value); 
+  }
+
+  manageUserRemove$ = this.manageUserRemove.asObservable();
+  manageUserRemoved(value: string) {
+    this.manageUserRemove.next(value); 
   }
 
   userProfileChanged(value: boolean) {

@@ -63,6 +63,10 @@
     margin-right: 5px;
     margin-top: -1px;
 }
+.fa-eye{
+  cursor: pointer;
+  text-decoration: none;
+}
 
 .box1 img, .box1:after, .box1:before {
     width: 100%;

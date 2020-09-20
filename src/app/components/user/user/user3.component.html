@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div>
-                        {{paramUsername}}
+                        {{profileUserId}}
                     </div>
                     <h5>
                     <!-- CHAMBER-begin -->
@@ -265,7 +265,7 @@
                         {{biodata.full_name}}
                     </h4>
                     <div>
-                        @{{paramUsername}}
+                        @{{profileUserId}}
                     </div>
                 </div>
                 <div *ngIf="entityType === 'POLITICAL_PARTY'">
@@ -273,7 +273,7 @@
                         {{biodata.full_name}}
                     </h4>
                     <div>
-                        @{{paramUsername}}
+                        @{{profileUserId}}
                     </div>
                     <div>
                         {{biodata.description}}
@@ -285,7 +285,7 @@
                         {{biodata.full_name}}
                     </h4>
                     <div>
-                        @{{paramUsername}}
+                        @{{profileUserId}}
                     </div>
                     <div>
                         {{biodata.description}}
@@ -382,9 +382,12 @@
                                         <!-- sidebar -->
                                         <!-- Main stage area -->
                                         <div class="col-lg-12 cols-item2">
-                                            <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
+                                            <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
                                                <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true></app-post>
                                             </div>
+                                            <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
+                                                Please login to view the activies.
+                                             </div>
                                             <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                  class="widget stick-widget">
                                                 <ul class="followers">
@@ -401,10 +404,10 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div id="managedByCollapse" [ngbCollapse]="isManagedByCollapsed"
+                                            <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
-                                            <h6>Add Members:</h6>
-                                            <app-gps-global-search placeholder="User Name"  from="user" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
+                                                <h6>Add Members:</h6>
+                                                <app-gps-global-search placeholder="User Name"  from="user" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
 
 
                                             <!-- <div class="ng-autocomplete managedby-search">
@@ -448,9 +451,11 @@
                                                </li>
                                            </ul> -->
                                            </div>
+                                           <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
+                                               Please login to view the members.
+                                           </div>
 
-                                           <div id="setingsSection" [ngbCollapse]="isSettingsCollapsed"
-                                           class="widget stick-widget">
+                                           <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
                                            <form [formGroup]="settingsForm">
                                                 <ul class="followers">
                                                     <li>
@@ -466,6 +471,9 @@
                                                     </li>
                                                 </ul>
                                             </form>    
+                                            </div>
+                                            <div id="setingsSection" *ngIf="!isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
+                                                Please login to manage the settings.
                                             </div>
 
                                             <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">

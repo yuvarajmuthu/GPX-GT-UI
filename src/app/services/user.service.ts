@@ -58,11 +58,9 @@ export class UserService extends AbstractService{
     
     //DEV MODE
     if(this.devMode){
-      if(true){  
         url = '/assets/json/fromService/user-legis-LEGISLATOROPENSTATE.json';   
-      }else{
-        url = '/assets/json/fromService/user-public.json';
-      }
+        //url = '/assets/json/fromService/user-public.json';
+      
     }else{
     //PROD MODE
       url = this.getUserService()+"/"+userId+"/";
@@ -408,7 +406,7 @@ add2Circle(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/addCircleUser";
   console.log("add2Circle user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request )
+  return this.http.post(serviceUrl,  request, this.httpOptions )
   .pipe(
     map((response:Response) => response.json()),
     tap(_ => this.log(`add2Circle successful`)),
@@ -420,7 +418,7 @@ removeFromCircle(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/removeCircleUser";
   console.log("removeFromCircle user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request )
+  return this.http.post(serviceUrl,  request, this.httpOptions )
   .pipe(
     map((response:Response) => response.json()),
     tap(_ => this.log(`removeCircleUser successful`)),
@@ -462,7 +460,7 @@ addMember(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/addMember";
   console.log("addMember user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request )
+  return this.http.post(serviceUrl,  request, this.httpOptions )
   .pipe(
     //map((response:Response) => response.json()),
     tap(_ => this.log(`addMember successful`)),
@@ -474,7 +472,7 @@ removeMember(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/removeMember";
   console.log("removeMember user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request )
+  return this.http.post(serviceUrl,  request, this.httpOptions )
   .pipe(
     //map((response:Response) => response.json()),
     tap(_ => this.log(`removeMember successful`)),
@@ -534,9 +532,9 @@ updateSettings(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/updateSettings";
   console.log("updateSettings user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request )
+  return this.http.post(serviceUrl,  request, this.httpOptions )
   .pipe(
-    map((response:Response) => response.json()),
+    //map((response:Response) => response.json()),
     tap(_ => this.log(`updateSettings successful`)),
     catchError(this.handleError<any>(`Error in updateSettings()`))
   );

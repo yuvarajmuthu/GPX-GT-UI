@@ -44,8 +44,8 @@ export class AuthenticationService extends AbstractService{
 
       if(jwtHelper.isTokenExpired()){
         this.alertService.success('User session expired', true);
-        this.logout();
-        //redirect to login page ???
+        //this.logout();
+        
       }
 /*
       if(localStorage.getItem('currentUserToken')){
@@ -88,10 +88,10 @@ export class AuthenticationService extends AbstractService{
       return this.http.post<{token: string}>(loginServiceUrl, user, this.httpOptions)
       .pipe(
         map((res: HttpResponse<any>) => {
-          //console.log("res.headers.get('Authorization') ", res.headers.get('Authorization'));
+          console.log("login response ", res);
           if(res.headers.get('Authorization')){
             var tokenBearer = res.headers.get('Authorization').split(' ');
-            if(tokenBearer.length === 2){
+            if(tokenBearer.length === 2){ 
               localStorage.setItem('currentUserToken', tokenBearer[1]);          
             }
           }

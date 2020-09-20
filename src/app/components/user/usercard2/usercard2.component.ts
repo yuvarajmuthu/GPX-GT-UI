@@ -183,4 +183,8 @@ export class Usercard2Component implements OnInit {
   gotoUser(): void {
     this.router.navigate(['/user', this.username]);
   }
+
+  removMember(): void {
+        this.communicationService.manageUserRemoved(this.username);
+    }
 }

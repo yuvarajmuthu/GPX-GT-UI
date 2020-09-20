@@ -518,6 +518,7 @@
     text-align: center;
   }
   
+  
   /* When you mouse over the container, fade in the overlay title */
   .managedby-user-list:hover .overlay {
     opacity: 1;
@@ -531,6 +532,18 @@
   .delete-managedby-user{
     z-index: 1;
     top: 10%;
+    right: 3%;
+    position: absolute;
+    float: right;
+    font-size: 30px;
+    color: #B61508;
+    border: none !important;
+    background: none !important;
+  }
+
+  .view-managedby-user{
+    z-index: 1;
+    top: 60%;
     right: 3%;
     position: absolute;
     float: right;

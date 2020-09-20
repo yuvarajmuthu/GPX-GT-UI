@@ -1,7 +1,7 @@
 <!--
   https://bootsnipp.com/snippets/7nV1l
 -->
-<div [ngClass]="{'box5': isCircle == '/circle'}">
+<div class="box5">
   <div class="row userMain">
           <div class="userBlock">
               <div class="backgrounImg">
@@ -26,7 +26,8 @@
               </div>
               <div>
                 <ul class="icon">
-                  <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a [routerLink]="" (click)="gotoUser(user.username)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a *ngIf="isCircle != '/circle'" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
                 </ul>
               </div>
              

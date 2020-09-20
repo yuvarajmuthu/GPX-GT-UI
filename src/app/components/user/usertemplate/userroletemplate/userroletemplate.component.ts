@@ -135,8 +135,8 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
                 //this.role = JSON.parse(JSON.stringify(data[0]));
                 //this.role['term'] = 'term';
                 this.roles = data;
-                //this.changeDetector.detectChanges();
                 this.createFormGroup();
+                this.changeDetector.detectChanges();
 
             });
         /*
@@ -154,13 +154,11 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
 
     createFormGroup() {
         this.roleTemplateForm = this.fbuilder.group({});
-/*
         this.displayProperties.forEach((element, index) => {
-            let value = this.legislator[element['propId']];
-            console.log('element[propId] ', element['propId'], ' this.legislator[element[propId]] ', this.legislator[element['propId']]);
-            this.roleTemplateForm.setControl(element['propId'], new FormControl(value));
+            //let value = this.legislator[element['propId']];
+            this.roleTemplateForm.setControl(element['propId'], new FormControl(''));
         });
-        */
+        
         this.changeDetector.detectChanges();
     }
 

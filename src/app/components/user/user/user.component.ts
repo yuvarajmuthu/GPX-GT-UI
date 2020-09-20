@@ -222,7 +222,10 @@ export class UserComponent implements OnInit {
                 this.inEditMode = editmode;
             });
         
-
+        communicationService.manageUserRemove$.subscribe(
+            data => {
+                this.removeMember(data);
+        });
 
     }
 

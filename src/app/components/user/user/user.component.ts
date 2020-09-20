@@ -338,7 +338,7 @@ export class UserComponent implements OnInit {
 
             this.loggedUser = this.datashareService.getCurrentUser();
 
-            if (this.loggedUser) {
+            if (this.isUserLogged()) {
                 this.loggedUsername = this.loggedUser.username;
                 if(this.profileUserId === this.loggedUser.username){
                     this.isSelfProfile = true;
@@ -361,7 +361,8 @@ export class UserComponent implements OnInit {
       
           //this.loadDisplayProperties();     
         
-          this.loadBioData();
+        //this is allowed even for non-logged in user 
+        this.loadBioData();
 
     }
 
@@ -405,6 +406,7 @@ export class UserComponent implements OnInit {
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
         this.managedByActive = false;
+
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
         this.isManagedByCollapsed = true;
@@ -519,68 +521,11 @@ export class UserComponent implements OnInit {
     }
 
     loadComponent(id: string) {
-        //this.profileEditOption = this.getPermission();
         this.loggedUser = this.datashareService.getCurrentUser();
-        //this.editProfile();
-        //let id = this.route.snapshot.paramMap.get('id');
-        //this.editLabel = 'Edit Profile';
 
-        if (id) {
-            if (id == 'CREATE') {
-                this.operation = id;
-            } else {
-                this.profileUserId = id;
-                //this.dataShareService.setSelectedLegislatorId(this.profileUserId);
-                console.log('from userProfile Param value - id ' + this.profileUserId);
-            }
-        }
+        this.viewingUser['userId'] = this.profileUserId;
 
-//    console.log("User type: ", this.userData['userType']);
-        if (this.operation == 'CREATE') {
-//      this.loadProfileTemplate();      
-            this.datashareService.setPermission('Editor');
-
-            this.loadProfileTemplates(this.operation);
-
-
-        } else {
-            
-            //if (this.profileUserId == 'external') {
-                
-               //this.viewingUser['externalData'] = this.datashareService.getViewingUser();
-
-/*
-                if (!this.viewingUser['externalData']['leg_id']) { //CONGRESS
-                    this.viewingUser['isCongress'] = true;
-                    let photoUrl = this.viewingUser['externalData']['photo_url'];
-                    let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
-                    let bioguideId = fileName.substring(0, fileName.lastIndexOf('.'));
-
-                    console.log('bioguideId ', bioguideId);
-                    this.viewingUser['bioguideId'] = bioguideId;
-                    this.profileUserId = bioguideId;
-
-
-                } else {//OPENSTATE
-                    this.viewingUser['isCongress'] = false;
-                    this.profileUserId = this.viewingUser['externalData']['id'];
-                }
-                */
-               // this.viewingUser['external'] = true;
-           // } else {
-            //    this.isLegislator = false; // may not be required
-             //   this.viewingUser['external'] = false;
-              //  this.viewingUser['isLegislator'] = false;
-            //}
-            
-            this.viewingUser['userId'] = this.profileUserId;
-            //console.log("User isLegislator: ", this.viewingUser['isLegislator']);
-
-
-            //the user that is being viewed
-            //this.dataShareService.setViewingUserId(this.profileUserId);
-
-            if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
+            if (!isDevMode() && this.isUserLogged()) {
                 this.getRelationStatus(this.loggedUser.username, this.profileUserId);
             } else {
                 this.followCntrlLabel = 'Join to Follow';
@@ -592,6 +537,7 @@ export class UserComponent implements OnInit {
             this.getFollowingsCount(this.profileUserId);
             //this.getFollowers(this.profileUserId);
 
+        if(this.isUserLogged()){    
             this.userService.getUserData(this.profileUserId).subscribe(
                 data => { 
                     this.userData = data;
@@ -677,6 +623,7 @@ export class UserComponent implements OnInit {
                 }
             );
         }
+        
     }
 
     accessChange(){
@@ -694,7 +641,7 @@ export class UserComponent implements OnInit {
         this.userService.updateSettings(requestString).subscribe(data => {
 
         }, error => {
-
+            console.log('error in accessChange() ', error);
         });
     }
 
@@ -973,7 +920,7 @@ export class UserComponent implements OnInit {
 
     add2Circle() {
 
-        if(!this.loggedUsername){
+        if(!this.isUserLogged()){
             this.router.navigate(['login']);
         }else{
             var request = {};

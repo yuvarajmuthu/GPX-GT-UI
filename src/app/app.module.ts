@@ -77,7 +77,7 @@ let config = new AuthServiceConfig([
     },
     {
       id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider("561602290896109")
+      provider: new FacebookLoginProvider("1626630194177143")
     }
   ]);
   
@@ -147,7 +147,7 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
-        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION*/   
+        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION   */
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,

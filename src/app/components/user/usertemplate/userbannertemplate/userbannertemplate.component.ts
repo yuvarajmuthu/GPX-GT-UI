@@ -37,7 +37,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
   bioEditForm: FormGroup;
   closeResult: string;
 
-  externalUser:boolean;
+  //externalUser:boolean;
 
   //legislator: Legislator;
   //resultop:any;
@@ -82,14 +82,16 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
     //called after the constructor
   ngOnInit(): void {
     console.log("ngOnInit() userbannertemplate.component");
-    if(this.viewingUser['external']){
-      this.externalUser = true;  
-    }
+    //if(this.viewingUser['external']){
+    //  this.externalUser = true;  
+   // }
 
     this.loadDisplayProperties();     
   
     this.loadTemplateData();   
     this.biodataTemplateForm = this.fbuilder.group({});
+    this.isProfileInEditMode = this.dataShareService2.isProfileEditable();
+
 
   }
     
@@ -99,6 +101,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
         //this.templateType.push(profileData['profile_template_id']);
         if(this.id == profileTemplates['profileTemplateId']){
           this.displayProperties = profileTemplates['properties'];
+          console.log('UserbannertemplateComponent - this.displayProperties ', this.displayProperties);
           break;  
         }
       } 
@@ -236,9 +239,11 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
       this.data["data"] = this.getFormData();
       console.log("Data " + JSON.stringify(this.data));
       this.userService2.updateProfileData(this.data).subscribe((response) => {
-        console.log('Profile updated sucessfully');
+        console.log('Biodata updated sucessfully');
         this.isProfileInEditMode = false;
         this.biodata = this.data["data"];
+        //fire an event to top biodata section can listen to that event
+        this.missionService2.biodataChanged(this.biodata);
         this.changeDetector.detectChanges();
 
       } 

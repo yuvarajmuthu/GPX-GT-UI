@@ -93,7 +93,8 @@ export class UserComponent implements OnInit {
     loggedUser: User = null;
     loggedUsername: string = null;
     isSelfProfile: boolean = false;
-
+    isProfileManaged: boolean = false;
+    isEditable: boolean = false;
 
     postFormData: FormData;
     editLabel: string = null;
@@ -102,13 +103,14 @@ export class UserComponent implements OnInit {
     followers: User[] = [];
     managedBy: User[] = [];
     followingsCount: string = null;
-    followings: User[] = [];
+    followings = [];
     selectedProfileSmImage: File;
     profileSmImageChanged: boolean = false;
     profileTabSelected: boolean = true;
     activitiesTabSelected: boolean = false;
     activitiesData: boolean = false;
     settings: boolean = false;
+    isShowSettings: boolean = false;
     tap: boolean = false;
     profileData: boolean = true;
     folow: boolean = false;
@@ -226,6 +228,11 @@ export class UserComponent implements OnInit {
             data => {
                 this.removeMember(data);
         });
+        
+        communicationService.biodataChanged$.subscribe(
+            data => {
+                this.biodata = data;
+        });
 
     }
 
@@ -330,43 +337,27 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.header = document.getElementById("myHeader");
-        this.sticky= document.getElementById("myHeader").offsetTop;
-        this.route.params.subscribe((params: Params) => {
-            this.communicationService.userProfileChanged(false);
-
-            this.profileUserId = params['id'];
-            console.log('from user.component route params changed ' + this.profileUserId);
-            this.loadComponent(this.profileUserId);
-
-            this.loggedUser = this.datashareService.getCurrentUser();
-
-            if (this.isUserLogged()) {
-                this.loggedUsername = this.loggedUser.username;
-                if(this.profileUserId === this.loggedUser.username){
-                    this.isSelfProfile = true;
-                }else{
-                    this.check4CircleStatus();
-                }
-            }
-
-        });
-
+        this.loggedUsername = this.datashareService.getLoggedinUsername();
         this.bannerImage = 'assets/images/user-banner1.jpg';
 
         this.uploadForm = this.formBuilder.group({
             file: ['']
         });
-//////////Biodata
-        //if(this.paramUsername && this.paramUsername == 'external'){
-        //    this.externalUser = true;  
-         // }
-      
-          //this.loadDisplayProperties();     
-        
-        //this is allowed even for non-logged in user 
-        this.loadBioData();
 
+        this.header = document.getElementById("myHeader");
+        this.sticky= document.getElementById("myHeader").offsetTop;
+
+        this.route.params.subscribe((params: Params) => {
+            this.communicationService.userProfileChanged(false);
+
+            this.profileUserId = params['id'];
+            console.log('from user.component route params changed ' + this.profileUserId);
+                    
+
+            this.loadComponent(this.profileUserId);
+
+
+        });
     }
 
     loadBioData(){
@@ -433,6 +424,10 @@ export class UserComponent implements OnInit {
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
         this.isSettingsCollapsed = false;
+    
+        //if(this.isUserLogged()){     
+        //    this.getSettings();
+        //}
     }
 
     Profiles(activeTemplatName) {
@@ -527,29 +522,38 @@ export class UserComponent implements OnInit {
         this.loggedUser = this.datashareService.getCurrentUser();
 
         this.viewingUser['userId'] = this.profileUserId;
+        //this is allowed even for non-logged in user 
+        this.loadBioData();
+        
+        if (!isDevMode() && this.isUserLogged()) {
+            this.getRelationStatus(this.loggedUser.username, this.profileUserId);
+        } else {
+            this.followCntrlLabel = 'Join to Follow';
+            this.followCntrlCSS = 'btn btn-primary followers-button';
+            this.followStatusCSS = 'fa fa-plus-circle';
+        }
 
-            if (!isDevMode() && this.isUserLogged()) {
-                this.getRelationStatus(this.loggedUser.username, this.profileUserId);
-            } else {
-                this.followCntrlLabel = 'Join to Follow';
-                this.followCntrlCSS = 'btn btn-primary followers-button';
-                this.followStatusCSS = 'fa fa-plus-circle';
-            }
+        this.getFollowersCount(this.profileUserId);
+        this.getFollowingsCount(this.profileUserId);
+        //this.getFollowers(this.profileUserId);
 
-            this.getFollowersCount(this.profileUserId);
-            this.getFollowingsCount(this.profileUserId);
-            //this.getFollowers(this.profileUserId);
+        if(this.isUserLogged()){
+            this.isProfileEditable();
 
-        if(this.isUserLogged()){    
-            this.userService.getUserData(this.profileUserId).subscribe(
+            this.userService.getUserData(this.profileUserId, this.loggedUsername).subscribe(
                 data => { 
                     this.userData = data;
                     console.log('User data from service: ', this.userData);
 
+                    this.isSelfProfile = this.userData['selfProfile'];
+                    this.isProfileManaged = this.userData['profileManaged'];
+                    //Settings
+                    this.isShowSettings = this.userData['showSettings'];
                     if(this.userData['settings'] && this.userData['settings']['accessRestriction']){
                         this.settingsForm.setValue(this.userData['settings']);
                         this.isProfilePrivate = this.userData['settings']['accessRestriction'];
                     }
+                    
 
                     if (this.userData['userType'] === 'LEGISLATOR') {
                         this.viewingUser['external'] = true;
@@ -605,14 +609,6 @@ export class UserComponent implements OnInit {
                             //this.profilesTemplates.push(profileData);
                         }
 
-                        //if (profileData['profileTemplateId'] === 'upCongressLegislatorExternal' ||
-                        //    profileData['profileTemplateId'] === 'upDefault') {
-                            //let profileItemData = profileData['data'][0];
-                            //let profileItemData = profileData['data'];
-                            //this.firstName = profileItemData['first_name'];
-                            //this.lastName = profileItemData['last_name'];
-
-                        //}
                     }
 
                     if (compTypes.length > 0) {
@@ -623,9 +619,16 @@ export class UserComponent implements OnInit {
                     //setting here so it can be accessed globally
                     this.datashareService.setViewingUser(this.viewingUser);
                     console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));
+                    
+                    if(!this.isSelfProfile){
+                        this.check4CircleStatus();
+                    }
                 }
             );
+
+
         }
+
         
     }
 
@@ -646,6 +649,15 @@ export class UserComponent implements OnInit {
         }, error => {
             console.log('error in accessChange() ', error);
         });
+    }
+
+    getSettings(){
+        this.userService.getSettings(this.profileUserId).subscribe(
+            data => {
+                this.isProfilePrivate = data['accessRestriction'];
+            }, error => {
+                console.log('error in getSettings() ', error);
+            });
     }
 
     //OBSOLETE?
@@ -735,10 +747,18 @@ export class UserComponent implements OnInit {
     }
 
     isProfileEditable() {
-        //return (this.datashareService.isProfileEditable() && (this.isSelfProfile || this.userData['status'] === 'PASSIVE'));
-        return (!this.isProfileInEditMode() && (this.isSelfProfile || this.userData['status'] === 'PASSIVE'));
-        //TODO
-        //if not logged in, clicking edit button should redirect to login        
+        if(this.isSelfProfile){
+            this.isEditable = true;
+        }else{
+            this.userService.isProfileEditable(this.profileUserId, this.loggedUsername).subscribe(
+                (result) => {
+                    this.isEditable = result; 
+                },
+                (err) => {
+                    console.log('Error ', err);
+                }); 
+    
+        }
     }
 
     isProfileInEditMode(){
@@ -767,8 +787,9 @@ export class UserComponent implements OnInit {
         }
     }
 
+    //OBSOLETE ?
     loadProfileTemplates(operation: string) {
-        this.userService.getUserData(operation).subscribe(
+        this.userService.getUserData(operation, this.loggedUsername).subscribe(
             data => {
                 this.userData = data;
                 console.log('loadTemplate()::userprofile.template - User data from service: ', this.userData);
@@ -1051,7 +1072,9 @@ export class UserComponent implements OnInit {
     }
 
     getFollowers(profileId: string) {
-        this.userService.getFollowers(profileId)
+        //this.userService.getFollowers(profileId)
+        this.userService.getConnections(profileId, 'followers')
+
             .subscribe(
                 (result) => {
                     console.log('getFollowers response ' + result);
@@ -1068,6 +1091,8 @@ export class UserComponent implements OnInit {
             .subscribe(
                 (result) => {
                     this.viewingUser['managedBy'] = this.managedBy = result;
+                    console.log('this.managedBy ', this.managedBy);
+
                 },
                 (err) => {
                     console.log('Error ', err);
@@ -1088,7 +1113,8 @@ export class UserComponent implements OnInit {
     }
 
     getFollowings(profileId: string) {
-        this.userService.getFollowings(profileId)
+        //this.userService.getFollowings(profileId)
+        this.userService.getConnections(profileId, 'followings')
             .subscribe(
                 (result) => {
                     console.log('getFollowings response ' + result);

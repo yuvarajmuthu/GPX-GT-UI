@@ -19,7 +19,7 @@ export class ComponentcommunicationService {
   // private userProfileEditSource = new BehaviorSubject<boolean>(true);
 
   private manageUserRemove = new Subject<string>();
-  
+  private biodataChange = new Subject<any>();
   private connectionAcceptSource = new Subject<string>();
   private connectionRequestCancelSource = new Subject<string>();
   // Observable string streams
@@ -31,7 +31,9 @@ export class ComponentcommunicationService {
   userProfileEditChanged$ = this.userProfileEditSource.asObservable();
   connectionAcceptChanged$ = this.connectionAcceptSource.asObservable();
   connectionRequestCancelChanged$ = this.connectionRequestCancelSource.asObservable(); 
-  
+  manageUserRemove$ = this.manageUserRemove.asObservable();
+  biodataChanged$ = this.biodataChange.asObservable();
+
   // Service message broadcast
   announceMission(mission: string) {
     this.missionAnnouncedSource.next(mission);
@@ -41,9 +43,12 @@ export class ComponentcommunicationService {
     this.loginAlertSource.next(value); 
   }
 
-  manageUserRemove$ = this.manageUserRemove.asObservable();
   manageUserRemoved(value: string) {
     this.manageUserRemove.next(value); 
+  }
+  
+  biodataChanged(value: any) {
+    this.biodataChange.next(value); 
   }
 
   userProfileChanged(value: boolean) {

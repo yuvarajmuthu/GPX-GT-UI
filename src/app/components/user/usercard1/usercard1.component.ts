@@ -34,12 +34,12 @@ export class Usercard1Component implements OnInit {
     }
 
     ngOnInit() {
-        if (this.user && this.user.username) {
+        if (this.username) {
             if (isDevMode()) {
                 /*this.profileSmImage = "assets/images/avatar-male.png";*/
                 this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
             } else {
-                this.getProfileSmImage(this.user.username);
+                this.getProfileSmImage(this.username);
             }
             //this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
 
@@ -48,7 +48,7 @@ export class Usercard1Component implements OnInit {
         this.loggedUser = this.datashareService.getCurrentUser();
 
         if (this.loggedUser && this.loggedUser.username) {
-            this.getRelationStatus(this.loggedUser.username, this.user.username);
+            this.getRelationStatus(this.loggedUser.username, this.username);
         } else {
             this.followCntrlLabel = 'Join to Follow';
             this.followCntrlCSS = 'btn btn-primary';
@@ -80,7 +80,7 @@ export class Usercard1Component implements OnInit {
     }
 
     loadUser() {
-        let url = '/user/' + this.user.username;
+        let url = '/user/' + this.username;
         this.router.navigate([url]);
         return false;
     }
@@ -119,7 +119,7 @@ export class Usercard1Component implements OnInit {
 
 
         followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
-        followURequest['targetEntityId'] = this.user.username;
+        followURequest['targetEntityId'] = this.username;
         followURequest['status'] = 'REQUESTED';
         console.log('Profile data ' + JSON.stringify(followURequest));
 

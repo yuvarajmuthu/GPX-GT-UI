@@ -49,13 +49,14 @@
 
         <div class="col-sm-8">
             <div class="personal-info">
-                <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
                     <div>
                         <div *ngIf="!isEditDisplayname" class="fullname-display">
                             <b class="name-right">
                                 {{biodata.full_name}}
                             </b>
-                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                          <!--  <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()">
+                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>-->
                         </div>
                         <div *ngIf="isEditDisplayname" class="fullname-display">
                             <input type="text" class="input-text-biodata form-control" [(ngModel)]="biodata.full_name" type="text" placeholder="Display Name">
@@ -63,7 +64,7 @@
                             <button class="save-button-input" type="button" (click)="toggleEditDisplayname()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                         </div>
                         <div class="common-profile-edit">
-                            <button type="button" *ngIf="isProfileEditable()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
+                            <button type="button" *ngIf="isEditable && !isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="editProfile()">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button>
                             <button type="button" *ngIf="isProfileInEditMode()" class="btn btn-primary btn-xs profile-edit-btn-custom-position" (click)="saveProfile()">
@@ -80,7 +81,7 @@
                                 <button class="btn btn-outline-primary btn-xs"
                                         id="dropdownAddSection"
                                         ngbDropdownToggle>
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add Section<i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                                 <div ngbDropdownMenu
                                      aria-labelledby="dropdownAddSection" id="dropdownAddSection">
@@ -99,12 +100,19 @@
                     <div>
                         {{profileUserId}}
                     </div>
+                    <div>
+                        {{biodata.description}}
+                    </div>
+                    <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
                     <h5>
                     <!-- CHAMBER-begin -->
 
                         <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
                             <a class="padding-pills" [routerLink]="['/user', biodata.chamber]">{{biodata.chamber}}</a>
-                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        -->
                         </span>
 
                         <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" placeholder="Chamber" from="user" userType="chamber" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
@@ -146,7 +154,10 @@
                     <!-- DISTRICT-begin -->
                         <span *ngIf="!isEditDistrict" class="profile-pills">
                             <a class="padding-pills" [routerLink]="['/user', biodata.district]">District {{biodata.district}}</a>
-                            <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+                        -->
                         </span>
                         <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="District"  from="user" userType="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
                         <!-- <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" class="ng-autocomplete party-search">
@@ -185,7 +196,10 @@
                           <!-- STATE-begin -->
                           <span  *ngIf="!isEditState" class="profile-pills">
                              <a class="padding-pills" [routerLink]="['/user', biodata.state]">{{biodata.state | uppercase}}</a>
-                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                             <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()">
+                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            -->
                             </span>
 
                             <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" userType="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
@@ -225,7 +239,10 @@
 
                             <span *ngIf="!isEditParty">
                                 <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}} Party</a>
-                                <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            -->
                             </span>
                             <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="Party"  from="user" userType="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
                             <!-- <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
@@ -259,7 +276,8 @@
                               </div>
                         <!-- PARTY-end -->
                         </h5>
-                </div>
+                    </div>
+                    <!--
                 <div *ngIf="entityType === 'PUBLICUSER'">
                     <h4>
                         {{biodata.full_name}}
@@ -291,15 +309,16 @@
                         {{biodata.description}}
                     </div>
                 </div>
+            -->
                 <div class="paddingTop10">
                     <span *ngIf="!isSelfProfile" class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span>
                     <span *ngIf="!isSelfProfile" class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary pointer" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
+                    <span class="badge badge-pill badge-success pointer" (click)="Followers()">Followers &nbsp;<span class="badge badge-light">{{followersCount}}</span></span>
                     <span class="vseparator"></span>
-                    <span class="badge badge-pill badge-primary pointer" (click)="Followings()">Following &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
+                    <span class="badge badge-pill badge-success pointer" (click)="Followings()">Followings &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
                     <span *ngIf="!isSelfProfile" class="vseparator"></span>
-                    <span *ngIf="!isSelfProfile && !isInCircle" class="badge badge-pill badge-primary pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></span>
-                    <span *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-primary pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></span>                    
+                    <span *ngIf="!isSelfProfile && !isInCircle" class="badge badge-pill badge-dark pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></span>
+                    <span *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></span>                    
                 </div>
 
 
@@ -352,13 +371,13 @@
                     <i class="material-icons">{{profileTemplate.profileIcon}}</i> {{profileTemplate.name}}
                     <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                 </li>
-                <li class="list-group-item pointer"
+                <li *ngIf="isProfileManaged" class="list-group-item pointer"
                     [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
                     <span class="pointer" (click)="managedByUsers()">
                         <i class="material-icons">supervisor_account</i>Managed by
                     </span>
                 </li>
-                <li class="list-group-item pointer"
+                <li *ngIf="isShowSettings" class="list-group-item pointer"
                 (click)="showSettings()" [ngClass]="{ 'active': settings, 'in-active': !settings}">
                 <span class="pointer">
                     <i class="material-icons">settings_applications</i>Settings
@@ -391,16 +410,16 @@
                                             <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                  class="widget stick-widget">
                                                 <ul class="followers">
-                                                    <li *ngFor="let followingUser of followers">
-                                                        <app-usercard1 [user]=followingUser></app-usercard1>
+                                                    <li *ngFor="let followerUsername of followers">
+                                                        <app-usercard1 [username]=followerUsername></app-usercard1>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
                                                     class="widget stick-widget">
                                                 <ul class="followers">
-                                                    <li *ngFor="let followingUser of followings">
-                                                        <app-usercard1 [user]=followingUser></app-usercard1>
+                                                    <li *ngFor="let followingUsername of followings">
+                                                        <app-usercard1 [username]=followingUsername></app-usercard1>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -437,8 +456,8 @@
                                               </div> -->
 
                                               <div class="row">
-                                                <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managed of managedBy">
-                                                  <app-usercard2 [username]="managed.username"></app-usercard2>
+                                                <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of managedBy">
+                                                  <app-usercard2 [username]="managedUsername"></app-usercard2>
                                                   <div class="overlay">
                                                       <!-- <button class="delete-managedby-user" type="button" (click)="removeMember(username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button> -->
                                                     </div>

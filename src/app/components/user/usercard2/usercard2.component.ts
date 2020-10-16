@@ -28,6 +28,8 @@ export class Usercard2Component implements OnInit {
   requestedToFollow: boolean = false;
   followRequestRejected: boolean = false;
   isCircle:string;
+  isSelfProfile: boolean = false;
+
 
   constructor(private  router: Router,
     private userService: UserService, 
@@ -39,31 +41,28 @@ export class Usercard2Component implements OnInit {
     }
 
   ngOnInit() {
-        this.loggedUser = this.datashareService.getCurrentUser();
+    this.loggedUsername = this.datashareService.getLoggedinUsername();
 
-        if (this.loggedUser) {
-            this.loggedUsername = this.loggedUser.username;
-        }    
-        this.userService.getUserData(this.username).subscribe(
-          data => {
-            this.user = data;
-    
-           }
-          );
-    
-          if (!isDevMode() && this.loggedUser && this.loggedUser.username) {
-            this.getRelationStatus(this.loggedUser.username, this.username);
-          } else {
-              this.followCntrlLabel = 'Join to Follow';
-              this.followCntrlCSS = 'btn btn-primary followers-button';
-              this.followStatusCSS = 'fa fa-plus-circle';
-          }
-    
-          this.getFollowersCount(this.username);
+    this.userService.getUserData(this.username, this.loggedUsername).subscribe(
+        data => {
+        this.user = data;
+        this.isSelfProfile = this.user['selfProfile'];
 
-      
-      
+        }
+        );
+
+        if (!isDevMode() && this.loggedUsername) {
+        this.getRelationStatus(this.loggedUsername, this.username);
+        } else {
+            this.followCntrlLabel = 'Join to Follow';
+            this.followCntrlCSS = 'btn btn-primary followers-button';
+            this.followStatusCSS = 'fa fa-plus-circle';
+        }
+
+        this.getFollowersCount(this.username);
+
 }
+
   getRelationStatus(entity: string, profileId: string) {
 
     this.userService.getRelationStatus(entity, profileId)
@@ -109,7 +108,7 @@ export class Usercard2Component implements OnInit {
     var targetEntity = {};
 
 
-    followURequest['sourceEntityId'] = this.loggedUser ? this.loggedUser.username : '';//this.datashareService.getCurrentUserId();
+    followURequest['sourceEntityId'] = this.loggedUsername;
     followURequest['targetEntityId'] = this.username;
     followURequest['status'] = 'REQUESTED';
     console.log('Profile data ' + JSON.stringify(followURequest));

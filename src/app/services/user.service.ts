@@ -9,6 +9,7 @@ import {AbstractService} from './abstract.service';
 
 import {User} from '../models/user';
 import { Connection } from '../models/connection';
+import { URLSearchParams } from 'url';
 
 // Import RxJs required methods:
 //import 'rxjs/add/operator/map';
@@ -47,7 +48,7 @@ export class UserService extends AbstractService{
     return this.dataShareService.getServiceUrl() + "/api/social";
   }
 
-  getUserData(userId:String):Observable<any> { 
+  getUserData(userId:string, requestorId:string):Observable<any> { 
     let url:string;
     
 
@@ -64,12 +65,26 @@ export class UserService extends AbstractService{
     }else{
     //PROD MODE
       url = this.getUserService()+"/"+userId+"/";
+      if(requestorId != null){
+        url = url + "?requestorId=" + requestorId;
+      }
     }
     //url = '/assets/json/fromService/user-legis-LEGISLATOROPENSTATE.json';   
     
-
-
     console.log("getUserData() " + url);
+    
+    let httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://localhost:4200'}),
+      params: new HttpParams({})
+    };
+    
+
+    let httpParam = new HttpParams();
+    httpParam.append('requestorId', requestorId);
+    
+    //let httpOptionsLocal = this.httpOptions;
+    //httpOptionsLocal.params = httpParam;
+    httpOptions.params = httpParam;
     
     return this.http.get(url, this.httpOptions)
     .pipe(
@@ -78,61 +93,11 @@ export class UserService extends AbstractService{
       catchError(this.handleError<any>(`Error in getUserData()`))
     );                         
   }
-/*
-  getUserInfo(userId:String, isLegislator:boolean, isCongress:boolean):Observable<any> { 
-    let url:string;
-    
-    if(userId === "CREATE"){ // invoked during page creation
-      	//get available Templates for an user
-    }
 
-    //bioguideId is of length 7 - sunfoundataion
-    //if(userId.length == 7){
-
-    //legis represent legislator     
-    
-    //DEV MODE
-    if(this.devMode){
-      if(external){  
-        url = '/assets/json/fromService/user-legis-LEGISLATOROPENSTATE.json';   
-      }else{
-        url = '/assets/json/fromService/user-public.json';
-      }
-    }else{
-    //PROD MODE
-      url = this.getUserService()+"/"+userId+"/";
-    }
-    
-
-
-    console.log("getUserInfo() " + url);
-
-    let userType:string = isLegislator ? 'LEGISLATOR' : 'PUBLICUSER';
-    let legislatorType:string = isCongress ? 'LEGISLATORCONGRESS' : 'OPENSTATE';
-    
-    let httpParam = new HttpParams();
-    httpParam.append('userType', userType);
-    httpParam.append('legislatorType', legislatorType);
-
-    return this.http.get(url, { responseType: 'json', params: httpParam })
-    .pipe(
-      tap(_ => this.log(`fetched getUserInfo`)),
-      catchError(this.handleError<any>(`Error in getUserInfo()`))
-    );
-
-    
-  }
-*/
   followDistrict(request:string):Observable<any>{
     let serviceUrl = this.serviceUrl+"/followDistrict";
     console.log("follow district user.service " + request + " this.serviceUrl " + serviceUrl);
-   //let bodyString = JSON.stringify(post); // Stringify payload
-    // let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-    // let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    // return this.http.post(serviceUrl, request, options) // ...using post request
-    //                  .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-    //                  .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     return this.http.post(serviceUrl, request, this.httpOptions)
     .pipe(
       map((response:Response) => response.json()),
@@ -145,13 +110,7 @@ export class UserService extends AbstractService{
     let serviceUrl = this.getSocialService();
     serviceUrl = serviceUrl + "/followPerson";
     console.log("follow User user.service " + request + " serviceUrl " + serviceUrl);
-   //let bodyString = JSON.stringify(post); // Stringify payload
-    // let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-    // let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-    // return this.http.post(serviceUrl, request, options) // ...using post request
-    //                  .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-    //                  .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     return this.http.post(serviceUrl, request, this.httpOptions)
     .pipe(
       //map((response:Response) => response.json()),
@@ -159,45 +118,20 @@ export class UserService extends AbstractService{
       catchError(this.handleError<any>(`Error in followPerson()`))
     );                 
   }
-/*
-  getRelation(userId:string, groupId:string):Observable<any>{
-    console.log("getRelation()::UserService " + userId + " , " + groupId);
-    let response = {};
-    response['data'] = true;
-    return response.json();
 
-  }
-  */
-
- getRelationStatus(userId:string, districtId:string):Observable<string>{
+  getRelationStatus(userId:string, districtId:string):Observable<string>{
   let serviceUrl = this.getSocialService()+"/getRelation";
-  //console.log("follow district user.service " + request + " this.serviceUrl " + serviceUrl);
- //let bodyString = JSON.stringify(post); // Stringify payload
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-  //let myParams = new URLSearchParams();
   let myParams = new HttpParams();
   myParams.append('sourceEntityId', userId);
   myParams.append('targetEntityId', districtId);
-  // let options       = new RequestOptions({ headers: headers, search:myParams }); // Create a request option
-
-  // return this.http.get() (serviceUrl, options) // ...using post request
-  //                  .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
-  //                  .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-                   
-  // this.httpOptions = {
-  //                   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  //                 };
 
   return this.http.get(serviceUrl, { responseType: 'text', params: {
     sourceEntityId: userId,
     targetEntityId: districtId
   } });
 
-  //.pipe(
-  //  map(data => this.data = data),
-   // tap(_ => this.log(`fetched getRelation`)),
-   // catchError(this.handleError<any>(`Error in getRelation()`))
-  //);                
+  
 }
 
 getUserNameByFullName(fullNname:string):Observable<string>{
@@ -297,7 +231,7 @@ getFollowings(entityId:string):Observable<any>{
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/followers.json';   
   }else{
-    serviceUrl = this.getSocialService()+"/getFollowings";
+    serviceUrl = this.getSocialService()+"/getFollowings"; 
   }
   //serviceUrl = '/assets/json/fromService/followers.json';  
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
@@ -315,7 +249,7 @@ getFollowings(entityId:string):Observable<any>{
 
 getConnections(entityId:string, action:string):Observable<any>{
   let serviceUrl = this.getSocialService()+"/getConnectionsEntityId"+"/"+entityId+"/";
-  
+
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/connections.json';   
   }
@@ -483,7 +417,7 @@ removeMember(request:string):Observable<any>{
 isInCircle(profileId:string, userId:string):Observable<any>{
   let serviceUrl:string = "";    
   if(this.devMode){
-    serviceUrl = '/assets/json/fromService/getEvents.json';   
+    serviceUrl = '/assets/json/fromService/postLikeStatus.json';   
   }else{
     serviceUrl = this.getUserService() + "/isInCircle/" + profileId + "/" + userId + "/";
   }
@@ -496,6 +430,23 @@ isInCircle(profileId:string, userId:string):Observable<any>{
   );  
 }
 
+isProfileEditable(profileId:string, userId:string):Observable<any>{
+  let serviceUrl:string = "";    
+  if(this.devMode){
+    serviceUrl = '/assets/json/fromService/postLikeStatus.json';   
+  }else{
+    serviceUrl = this.getUserService() + "/isProfileEditable/" + profileId + "/" + userId + "/";
+  }
+
+  let headers      = new Headers({ 'Content-Type': 'application/json' });
+  return this.http.get(serviceUrl, this.httpOptions)
+  .pipe(
+    tap(_ => this.log(`in isProfileEditable`)),
+    catchError(this.handleError<any>(`Error in isProfileEditable()`))
+  );  
+}
+
+//OBSOLETE?
 getManagedByUsers(userId:string):Observable<any>{
   let serviceUrl:string = "";    
   if(this.devMode){
@@ -515,7 +466,7 @@ getManagedByUsers(userId:string):Observable<any>{
 getSettings(userId:string):Observable<any>{
   let serviceUrl:string = "";    
   if(this.devMode){
-    serviceUrl = '/assets/json/fromService/getEvents.json';   
+    serviceUrl = '/assets/json/fromService/getSettings.json';   
   }else{
     serviceUrl = this.getUserService() +"/getSettings/"+userId+"/";
   }

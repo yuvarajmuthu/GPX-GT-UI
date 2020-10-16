@@ -79,6 +79,8 @@ export class RegisterComponent implements OnInit {
     register() {
         let profileDatasList:Array<Object> = [];
         let user = {};
+        let members:Array<string> = [];
+
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
@@ -89,6 +91,9 @@ export class RegisterComponent implements OnInit {
         profileDatasList.push(this.biodataTemplateData);
         user['profileDatas'] = profileDatasList;
         user['status'] = 'ACTIVE';
+        
+        members.push(user['username']);
+        user['members'] = members;
 
         this.submitted = true;
         this.loading = true;

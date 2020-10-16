@@ -11,6 +11,9 @@
    "profileManagedBy":null,
    "members":null,
    "circleUsers":null,
+   "selfProfile":true,
+   "showSettings":true,
+   "profileManaged":true,
    "settings":{
          "accessRestriction":false
    },

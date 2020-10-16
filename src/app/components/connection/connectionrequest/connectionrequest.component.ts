@@ -17,7 +17,6 @@ export class ConnectionrequestComponent implements OnInit {
   @Input() username: string;
   @Input() relationStatus: string;
 
-  loggedUser:User;
   loggedUsername: string = null;
   public user:any;
 
@@ -35,12 +34,9 @@ export class ConnectionrequestComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.loggedUser = this.datashareService.getCurrentUser();
-
-    if (this.loggedUser) {
-        this.loggedUsername = this.loggedUser.username;
-    }    
-    this.userService.getUserData(this.username).subscribe(
+    this.loggedUsername = this.datashareService.getLoggedinUsername();
+    
+    this.userService.getUserData(this.username, this.loggedUsername).subscribe(
       data => {
         this.user = data;
 
@@ -72,7 +68,7 @@ export class ConnectionrequestComponent implements OnInit {
     let request = new Connection();
     console.log("Accepted connection ", request);
     request.sourceEntityId = this.username;
-    request.targetEntityId = this.loggedUser.username;
+    request.targetEntityId = this.loggedUsername;
 
     request.status = "FOLLOWING";
       this.userService.updateConnectionAction(request)
@@ -88,7 +84,7 @@ export class ConnectionrequestComponent implements OnInit {
     let request = new Connection();
     console.log("Accepted connection ", request);
     request.sourceEntityId = this.username;
-    request.targetEntityId = this.loggedUser.username;
+    request.targetEntityId = this.loggedUsername;
     request.status = "REJECTED";
       this.userService.updateConnectionAction(request)
       .subscribe((response) => {
@@ -102,7 +98,7 @@ export class ConnectionrequestComponent implements OnInit {
   cancelRequest(){
     let request = new Connection();
     console.log("Cancel connection request ", request);
-    request.sourceEntityId = this.loggedUser.username;
+    request.sourceEntityId = this.loggedUsername;
     request.targetEntityId = this.username;
     request.status = "CANCELLED";
       this.userService.updateConnectionAction(request)

@@ -85,12 +85,9 @@ export class DatashareService {
   }
 
   getLoggedinUsername():string{
-    let loggedUser:User = null;
     let loggedUserName:string=null;
-    loggedUser = this.getCurrentUser();
-    
-
-    if(loggedUser && loggedUser.username){
+    if(this.isUserLogged()){
+      let loggedUser = this.getCurrentUser();
       loggedUserName = loggedUser.username;
     }
  

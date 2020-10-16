@@ -20,14 +20,14 @@
                        <span>Followers</span>
                    </div>
                    
-                   <a [routerLink]="">
+                   <a *ngIf="!isSelfProfile" [routerLink]="">
                        <span class="badge badge-pill badge-primary pointer"  (click)="followEntity()">{{followCntrlLabel}}</span>
                    </a>
               </div>
-              <div>
+              <div *ngIf="!isSelfProfile" >
                 <ul class="icon">
-                  <li><a [routerLink]="" (click)="gotoUser(user.username)" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
-                  <li><a *ngIf="isCircle != '/circle'" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a *ngIf="isCircle != '/circle' && !isSelfProfile" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
                 </ul>
               </div>
              

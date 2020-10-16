@@ -142,18 +142,16 @@ export class CreatepageComponent implements OnInit {
 
   createUser(){
     let profileDatasList:Array<Object> = [];
-    let profileManagedBy:Array<string> = [];
-    let loggedUser: User = null;
+    let members:Array<string> = [];
     this.generateBioProfileTemplateData();
     this.user = this.userCreationForm.value;
     profileDatasList.push(this.biodataTemplateData);
     this.user['profileDatas'] = profileDatasList;
     this.user['status'] = 'PASSIVE';
 
-    loggedUser = this.datashareService.getCurrentUser();
-    if (loggedUser && loggedUser.username) {
-      profileManagedBy.push(loggedUser.username);
-      this.user['profileManagedBy'] = profileManagedBy;
+    if (this.datashareService.isUserLogged()) {
+      members.push(this.datashareService.getLoggedinUsername());
+      this.user['members'] = members;
     }
 
 

@@ -1,13 +1,13 @@
-<app-newpost (newpost)="PostNewEvent($event)" *ngIf="!disableNewPost && isShowAllPosts"></app-newpost>
+<app-newpost (newpost)="PostNewEvent($event)" *ngIf="!disableNewPost && isShowAllPosts" [selfActivities]="selfActivities"></app-newpost>
 
 
 <div class="card gedf-card post-list">
     <div *ngIf="posts.length > 0">
         <cdk-virtual-scroll-viewport style="height: 550px" class="all-posts" itemSize="90" (scroll)="onPostScroll($event)">
-            <app-postcard  *ngFor="let post of posts; let i = index" [post]="post" [isComment]="false" [idx]="i">
+            <app-postcard  *ngFor="let post of posts; let i = index" [post]="post" [isComment]="false" [idx]="i" [selfActivities]="selfActivities" (openNewPostEvent)="openNewPost($event)">
             </app-postcard>
         </cdk-virtual-scroll-viewport>
-        <button (click)="topFunction()" id="myBtn" title="New Post"><i class='fa fa-paper-plane'></i></button>
+        <button *ngIf="!selfActivities" (click)="topFunction()" id="myBtn" title="New Post"><i class='fa fa-flag'></i></button>
     </div>
     <div *ngIf="posts.length < 1">
         No Post to show 

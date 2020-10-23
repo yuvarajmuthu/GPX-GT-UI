@@ -147,16 +147,15 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
-        /* ENABLE IT FOR MOCKING - OFFLINE OPERATION   
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
-        },*/
+        },
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe
-        //MockHttpInterceptorService
+        //MockHttpInterceptorService,
         {
             provide: AuthServiceConfig,
             useFactory: provideConfig

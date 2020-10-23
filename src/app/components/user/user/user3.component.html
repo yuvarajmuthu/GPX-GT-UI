@@ -402,7 +402,7 @@
                                         <!-- Main stage area -->
                                         <div class="col-lg-12 cols-item2">
                                             <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
-                                               <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true></app-post>
+                                               <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
                                             </div>
                                             <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
                                                 Please login to view the activies.

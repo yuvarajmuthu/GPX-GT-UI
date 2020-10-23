@@ -14,6 +14,7 @@ import {Post} from '../../../models/post';
 })
 export class NewpostComponent implements OnInit {
     @ViewChild('input') el: ElementRef;
+    @Input() selfActivities:boolean;
     form: FormGroup;
    // items: string[] = ["Noah", "Liam", "Mason", "Jacob"];
     items: any;
@@ -337,12 +338,38 @@ submitPost() {
     //this.makePostContent();
     this.post.entityId = this.dataShareService.getLoggedinUsername();
     let input = document.getElementById("postContent");
+    if(this.selfActivities){
+      let tmpBtn:HTMLElement;
+      tmpBtn = document.createElement("SPAN"); 
+
+      tmpBtn.innerHTML = this.post.entityId;       
+      // inputDiv.innerHTML = tmp;
+      tmpBtn.setAttribute('class', 'tagged-users');   
+      tmpBtn.setAttribute('data-username', this.post.entityId);
+       //tmpBtn.setAttribute('data-entityType', item.userType);
+       tmpBtn.setAttribute('readonly', 'true');
+       tmpBtn.setAttribute('contenteditable', 'false');
+       tmpBtn.setAttribute('value', this.post.entityId);
+
+       var tmpBtn1 = document.createElement("SPAN");        // Insert text
+       tmpBtn1.innerHTML = '&nbsp;';
+      // input.innerHTML = tmp;   
+      // innertmlHtml = input.innerHTML;
+      input.insertBefore(tmpBtn1, input.childNodes[0] || null);
+      input.insertBefore(tmpBtn, input.childNodes[0] || null);
+      console.log(input.innerHTML);
+
+    }
+
+
+   
     console.log(input.innerHTML);
     this.txtPost = input.innerHTML.replace(/"/g, "'");
     console.log(this.txtPost);
     this.post.postText = this.txtPost;
     
     let postText= input.innerText;
+    console.log(postText);
     if(postText.indexOf("@") >= 0){
       this.post.taggedEntityId = [];
       let taggedEntitiesRaw = postText.substring(postText.indexOf("@")).split("@");

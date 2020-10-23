@@ -231,4 +231,12 @@ form button {
   margin: 0 !important;
   border-radius: 0px;
 }
+.open-post{
+  background: none;
+  border: none;
+}
+.open-post:focus{
+  background: none;
+  border: none;
+}
 

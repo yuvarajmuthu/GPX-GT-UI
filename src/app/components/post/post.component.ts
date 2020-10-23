@@ -48,6 +48,10 @@ export class PostComponent implements OnInit {
         this.posts[0].comments.unshift(data);
 
     }
+    openNewPost(evt){
+       console.log("post event");
+       this.disableNewPost = !this.disableNewPost;
+    }
 
     onPostScroll(e){
         if(!this.isShowAllPosts)

@@ -28,6 +28,8 @@ export class PostcardComponent implements OnInit {
     @Input() post: Post;
     @Input() idx: string;
     @Input() isComment : boolean;
+    @Input() selfActivities:boolean;
+    @Output() openNewPostEvent = new EventEmitter<string>();
     comment:Post = new Post();
     comments: Post[]=[];
     txtPost: string = '';
@@ -94,6 +96,10 @@ export class PostcardComponent implements OnInit {
         this.items =[];
         this.mentionConfig={items:this.items, labelKey:'username',mentionSelect: this.onMentionSelect, insertHTML:true, disableSearch: false};
 
+    }
+
+    toggleNewPost(){
+       this.openNewPostEvent.emit();
     }
 
     getCaretPosition() {

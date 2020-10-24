@@ -20,20 +20,20 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
+              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
             </li>
 
               <li class="nav-item">
-                  <a class="nav-link" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
+                  <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
                     <i class="fa fa-user"></i>
                     <div>Circle</div>
                   </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
+                <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
+                  <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
               </li>
           </ul>
           <!--
@@ -111,7 +111,7 @@
           </div>
         </div>
 
-        <div>
+        <div *ngIf="!isMobile && isUserLogged">
           <button type="button"  *ngIf="isUserLogged" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button>
         </div>
 

@@ -20,6 +20,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 
 import {User} from '../app/models/user';
+import { IfStmt } from '@angular/compiler';
 
 
 @Component({
@@ -218,6 +219,12 @@ export class AppComponent implements OnInit {
         let routePath: string = '/user/' + user.username;
         this.router.navigate([routePath]);
         //return false;
+    }
+
+    clickedNav(){
+        if(this.isMobile){
+            this.isCollaped = !this.isCollaped;
+        }
     }
 
     clickTab(event: string) {

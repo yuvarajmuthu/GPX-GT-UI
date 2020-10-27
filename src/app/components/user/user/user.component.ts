@@ -163,14 +163,17 @@ export class UserComponent implements OnInit {
        const isMobile = this.deviceService.isMobile();
        let lockPosition:number;
        let nameDiv = document.getElementById("name-for-lock");
-        if(isMobile == true){
+       let newPost = document.getElementById("newpost-on-selfactivites");
+        if(isMobile){
             lockPosition = 630;
             if (window.pageYOffset >= lockPosition) {
                 nameDiv.classList.add("sticky-name");
+                newPost.classList.add("sticky-new-post");
                 this.header.classList.add("sticky");
                 nameDiv.classList.remove("display-none");
              } else {
                 nameDiv.classList.remove("sticky-name");
+                newPost.classList.remove("sticky-new-post");
                 this.header.classList.remove("sticky");
                 nameDiv.classList.add("display-none");
               }
@@ -179,11 +182,17 @@ export class UserComponent implements OnInit {
             lockPosition = 410;
             let desksidebar = document.getElementById("sidebar-div-desktop");
             let tapsEl = document.getElementById("template-tabs");
+            console.log(window.pageYOffset);
             if(window.pageYOffset >= lockPosition) {
                 nameDiv.classList.add("sticky-name");
                 nameDiv.classList.remove("display-none");
+                if(window.pageYOffset >= 450)
+                  newPost.classList.add("sticky-new-post");
+                else
+                newPost.classList.remove("sticky-new-post");
                 
              } else {
+                newPost.classList.remove("sticky-new-post");
                nameDiv.classList.remove("sticky-name");
                 if(!isMobile)
                   nameDiv.classList.add("display-none");

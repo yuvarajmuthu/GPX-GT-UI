@@ -234,7 +234,11 @@ form button {
 .open-post{
   background: none;
   border: none;
+  float: right;
 }
+
+
+
 .open-post:focus{
   background: none;
   border: none;

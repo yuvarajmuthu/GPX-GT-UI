@@ -399,7 +399,7 @@
         }
         .sticky-name{
           position: fixed;
-          top: 80px;
+          top: 65px;
           width: 563px;
           z-index: 3;
           background-color: white;

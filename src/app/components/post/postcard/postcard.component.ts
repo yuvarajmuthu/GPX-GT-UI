@@ -29,7 +29,6 @@ export class PostcardComponent implements OnInit {
     @Input() idx: string;
     @Input() isComment : boolean;
     @Input() selfActivities:boolean;
-    @Output() openNewPostEvent = new EventEmitter<string>();
     comment:Post = new Post();
     comments: Post[]=[];
     txtPost: string = '';
@@ -98,9 +97,6 @@ export class PostcardComponent implements OnInit {
 
     }
 
-    toggleNewPost(){
-       this.openNewPostEvent.emit();
-    }
 
     getCaretPosition() {
         let editableDiv = document.getElementById("commentContent");

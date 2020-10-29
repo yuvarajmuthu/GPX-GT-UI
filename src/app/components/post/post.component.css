@@ -1,3 +1,25 @@
 .post-list{
     background-color:#FBFCFC;
 }
+.open-post{
+    background: none;
+    border: none;
+    float: right;
+  }
+  .sticky-new-post{
+    position: fixed;
+    top: 75px;
+    float: right;
+    width: 42%;
+    z-index: 3;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .sticky-new-post{
+        position: fixed;
+        top: 48px;
+        float: right;
+        width: 98%;
+        z-index: 3;
+      }
+  }

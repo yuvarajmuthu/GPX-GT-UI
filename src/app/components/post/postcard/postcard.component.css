@@ -232,15 +232,18 @@ form button {
   border-radius: 0px;
 }
 .open-post{
-  background: none;
+  background-color: black;
   border: none;
+  color: white;
   float: right;
 }
 
 
 
 .open-post:focus{
-  background: none;
+  background-color: black;
   border: none;
+  color: white;
+  float: right;
 }
 

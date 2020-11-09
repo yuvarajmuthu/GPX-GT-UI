@@ -13,6 +13,9 @@
   height: 250px;
 }
 
+.userDescription{
+  text-align: center;
+}
 .userMain .userBlock .backgrounImg {
   float: left;
   overflow: hidden;

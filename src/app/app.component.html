@@ -135,16 +135,16 @@
 
       <form class="form-inline my-2 my-lg-0">
           <ng-template #popContent>
-              <button *ngIf="!isUserLogged" class="btn btn-outline-warning my-2 my-sm-0" type="submit"
+              <button *ngIf="!isUserLogged" class="btn btn-outline-warning my-2 my-sm-0" type="button"
                       (click)="route('register')">Register
               </button>
-              <button *ngIf="!isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+              <button *ngIf="!isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="button"
                       (click)="route('login')">Login
               </button>
-              <button *ngIf="isUserLogged" class="btn btn-outline-warning   my-2 my-sm-0 <!--list-group-item-->" type="submit"
+              <button *ngIf="isUserLogged" class="btn btn-outline-warning   my-2 my-sm-0" type="button"
                       (click)="loadUser()">View Profile
               </button>
-              <button *ngIf="isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+              <button *ngIf="isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="button"
                       (click)="logout()">Logout
               </button>
           </ng-template>

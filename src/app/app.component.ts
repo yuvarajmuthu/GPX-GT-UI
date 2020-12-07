@@ -192,6 +192,7 @@ export class AppComponent implements OnInit {
 
       selectEvent(e){
           console.log(e.username);
+      this.isCollaped = !this.isCollaped;
        let routePath= '/user/'+e.username+"/";
        this.router.navigate([routePath]);
      }

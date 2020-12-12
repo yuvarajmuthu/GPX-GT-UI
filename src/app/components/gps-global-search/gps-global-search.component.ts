@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {PostService} from '../../services/post.service';
+import {SearchService} from '../../services/search.service';
 
 @Component({
   selector: 'app-gps-global-search',
@@ -20,14 +20,14 @@ export class GpsGlobalSearchComponent implements OnInit {
   selectedDetails:any;
   searchUsers:any;
 
-  constructor(private postService:PostService) { }
+  constructor(private searchService:SearchService) { }
 
   ngOnInit() {
     this.selectedUser = this.inputvalue;
   }
 
   onChangeSearch(e){
-    this.postService.getTagUsers(e)
+    this.searchService.getUsers(e)
     .subscribe((data:any) => {
         this.searchUsers = data;
     });

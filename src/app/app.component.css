@@ -250,6 +250,29 @@ div#v-pills-tab a {
         border: none;
         background: white;
     }
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        align-items: flex-start;
+        /* margin-bottom: 0; */
+        list-style: none;
+    }
+    .nav-link {
+        display: inline-flex;
+        padding: .5rem 1rem;
+    }
+    .fa {
+        padding: 5px;
+    }
+    .create-page-button-custom-position{
+        position: absolute;
+        width: 90%;
+        bottom: 10%;
+    }
+    .create-page-button-custom-position button{
+        width: 100%;
+    }
 }
 
 .btn-custom-horizondal{

@@ -57,6 +57,9 @@ export class AppComponent implements OnInit {
     isCollaped: boolean = true;
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
+    screenHeight:any;
+
+
     @HostListener('click', ['$event.target'])
     onClick(evt) {
       if(evt.id != 'dropdownMenuButton'){
@@ -86,6 +89,12 @@ export class AppComponent implements OnInit {
                 private searchService:SearchService,
                 private deviceService: DeviceDetectorService,
                 private authenticationService: AuthenticationService) {
+
+            if(this.isMobile){
+                this.screenHeight = window.innerHeight;
+               // document.getElementById("navbarSupportedContent").style("height",this.screenHeight);
+            }
+
         missionService.getAlert().subscribe(
             mission => {
                 console.log('Alert message received ' + mission);
@@ -183,6 +192,7 @@ export class AppComponent implements OnInit {
 
       selectEvent(e){
           console.log(e.username);
+      this.isCollaped = !this.isCollaped;
        let routePath= '/user/'+e.username+"/";
        this.router.navigate([routePath]);
      }
@@ -282,6 +292,7 @@ export class AppComponent implements OnInit {
 
     route(name: string) {
         let routePath: string = '/' + name;
+        this.isCollaped = !this.isCollaped;
         this.router.navigate([routePath]);
     }
 

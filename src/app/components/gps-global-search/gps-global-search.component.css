@@ -2,3 +2,10 @@
     width: 100%;
     display: flex;
 }
+
+
+@media screen and (max-width: 559px) {
+    .ng-autocomplete {
+        width: 375px !important;
+    }
+}

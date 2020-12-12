@@ -34,12 +34,11 @@ export class SearchService  extends AbstractService {
     if(this.devMode){
       url = '/assets/json/fromService/tagusers.json'; 
     }else{
-      url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText;
+      url = this.dataShareService.getSearchServiceUrl()+"/search/user?multiSearchText="+searchText;
     }
+    url = this.dataShareService.getSearchServiceUrl()+"/search/user?multiSearchText="+searchText;
 
-    url = this.dataShareService.searchServiceUrl+"/search/user?multiSearchText="+searchText; 
-          //url = '/assets/json/fromService/tagusers.json'; 
-
+    console.log('search service ', url);
     return this.http.get(url,httpOptions).
         pipe(
            map((data: tagUser[]) => {

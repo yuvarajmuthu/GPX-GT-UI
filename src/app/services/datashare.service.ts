@@ -1,5 +1,6 @@
 import { Injectable, OnChanges, ViewRef } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 import { User } from './../models/user';
 
@@ -36,7 +37,11 @@ export class DatashareService {
   searchServiceUrl:string = "http://localhost:8090";
 
   public getServiceUrl():string{ 
-    return this.serviceUrl;
+    return environment.serviceUrl;// this.serviceUrl;
+  }
+  
+  public getSearchServiceUrl():string{ 
+    return environment.searchServiceUrl;// this.searchServiceUrl;
   }
 
   public setDistrictViews(comp:any, vRef:ViewRef){

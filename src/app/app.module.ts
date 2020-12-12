@@ -149,12 +149,12 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
-      /*
+
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
-        },*/
+        },
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe

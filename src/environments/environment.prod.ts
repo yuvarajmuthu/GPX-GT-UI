@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  serviceUrl:'https://gpxservice.us-east-1.elasticbeanstalk.com',
+  serviceUrl:'https://www.gpxservice.xyz',
   searchServiceUrl:'http://localhost:8090'
 };

@@ -128,9 +128,9 @@ let config = new AuthServiceConfig([
                 //throwNoTokenError: true,
                 tokenGetter: tokenGetter,
                 //Authenticated requests should only be sent to whitelistedDomains
-                whitelistedDomains: ['localhost','gpxservice.us-east-1.elasticbeanstalk.com'],
+                whitelistedDomains: ['localhost','gpxservice.xyz'],
                 //specific routes that shouldn’t receive the JWT even if they are on a whitelisted domain
-                blacklistedRoutes: ['localhost:5000/login','https://gpxservice.us-east-1.elasticbeanstalk.com/login']
+                blacklistedRoutes: ['localhost:5000/login','https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
             }
         }),
         AngularFontAwesomeModule, //OBSOLETE
@@ -149,7 +149,7 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
-
+      
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,

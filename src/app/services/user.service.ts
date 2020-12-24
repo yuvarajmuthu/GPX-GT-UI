@@ -1,5 +1,5 @@
 import { Injectable, isDevMode } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -25,7 +25,8 @@ export class UserService extends AbstractService{
   resultop:any;
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://localhost:4200'})
+    //headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'http://localhost:4200'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   };
 
   constructor (private http: HttpClient, 
@@ -563,6 +564,92 @@ registerUser(user: any):Observable<any> {
   //                   .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
   //                   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
 }
+
+gTokenVerify(token: string):Observable<any> {
+  //        return this.http.post('/register', user);
+  console.log("token ", token);
+  
+      //console.log("registering user user.service");
+    //let bodyString = JSON.stringify(user); // Stringify payload
+     //let headers      = new HttpHeaders({ 'X-ID-TOKEN': token }); // ... Set content type to JSON
+     //const headers = new HttpHeaders().set('X-ID-TOKEN', token);
+     //this.httpOptions.headers = headers;
+     //let options       = new RequestOptions({ headers: headers }); // Create a request option
+     const headers = { 'X-ID-TOKEN': token };
+    const body = {  };
+
+     //let headers = new Headers();
+     //headers.append('X-ID-TOKEN', token);
+
+     let serviceUrl = this.getUserService() + "/gTokenVerify";
+
+     console.log("headers X-ID-TOKEN" + headers["X-ID-TOKEN"]);
+     console.log("gTokenVerify::user.service invoking service " + serviceUrl);
+     console.log("headers " + headers);
+  
+     return this.http.post(serviceUrl, body, {headers, responseType: 'text', observe: 'response'})
+      .pipe(
+        //map((response:Response) => response.json()),
+        map(res => {
+          console.log("gTokenVerify response ", res);
+          if(res.headers.get('Authorization')){
+            var tokenBearer = res.headers.get('Authorization').split(' ');
+            if(tokenBearer.length === 2){ 
+              localStorage.setItem('currentUserToken', tokenBearer[1]);          
+            }
+          }
+        }),
+        tap(_ => this.log(`response from gTokenVerify`)),
+        catchError(this.handleError<any>(`Error in gTokenVerify`))
+      );
+  
+    //  return this.http.post(this.serviceUrl, bodyString, options) // ...using post request
+    //                   .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+    //                   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  tokenVerify(token: string, provider: string):Observable<any> {
+    //        return this.http.post('/register', user);
+    console.log("token ", token, " ,provider ", provider);
+    
+        //console.log("registering user user.service");
+      //let bodyString = JSON.stringify(user); // Stringify payload
+       //let headers      = new HttpHeaders({ 'X-ID-TOKEN': token }); // ... Set content type to JSON
+       //const headers = new HttpHeaders().set('X-ID-TOKEN', token);
+       //this.httpOptions.headers = headers;
+       //let options       = new RequestOptions({ headers: headers }); // Create a request option
+       const headers = { 'X-ID-TOKEN': token, 'PROVIDER': provider };
+      const body = {  };
+  
+       //let headers = new Headers();
+       //headers.append('X-ID-TOKEN', token);
+  
+       let serviceUrl = this.getUserService() + "/tokenVerify";
+  
+       console.log("headers X-ID-TOKEN" + headers["X-ID-TOKEN"]);
+       console.log("tokenVerify::user.service invoking service " + serviceUrl);
+       console.log("headers " + headers);
+    
+       return this.http.post(serviceUrl, body, {headers, responseType: 'text', observe: 'response'})
+        .pipe(
+          //map((response:Response) => response.json()),
+          map(res => {
+            console.log("gTokenVerify response ", res);
+            if(res.headers.get('Authorization')){
+              var tokenBearer = res.headers.get('Authorization').split(' ');
+              if(tokenBearer.length === 2){ 
+                localStorage.setItem('currentUserToken', tokenBearer[1]);          
+              }
+            }
+          }),
+          tap(_ => this.log(`response from gTokenVerify`)),
+          catchError(this.handleError<any>(`Error in gTokenVerify`))
+        );
+    
+      //  return this.http.post(this.serviceUrl, bodyString, options) // ...using post request
+      //                   .map((res:Response) => res.json()) // ...and calling .json() on the response to return data
+      //                   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    }
 
 updateUserSmProfileImage(request:FormData):Observable<any>{
   let serviceUrl = this.getUserService() + "/uploadUserSmProfileImage";

@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
+        //SUBSCRIBING TO OPENID SUCH AS GOOGLE, FACEBOOK LOGIN EVENTS
         this.extAuthService.authState.subscribe((user) => {
             this.user = user;//SocialUser
             this.loggedIn = (user != null);
@@ -63,35 +64,41 @@ export class LoginComponent implements OnInit {
             if(this.loggedIn){          
                 let userObj = new User();
 
-                if(this.user['provider'] && this.user['provider'] === 'GOOGLE'){
-                    userObj.emailId = this.user['email'];
-                    userObj.firstName = this.user['firstName'];
-                    userObj.lastName = this.user['lastName'];
-                    userObj.displayName = this.user['name'];
-                    userObj.authToken = this.user['authToken'];
-                    userObj.googleId = this.user['id'];
-                    userObj.token = this.user['idToken'];
-                    userObj.photoUrl = this.user['photoUrl'];
-                    userObj.provider = this.user['provider'];
+                if(this.user['provider']){
+                    let token:string = '';
+                    if(this.user['provider'] === 'GOOGLE'){
+                        token = this.user['idToken'];
+                    }else if(this.user['provider'] === 'FACEBOOK'){
+                        token = this.user['authToken'];
+                    }
+                    //send the token to /gTokenVerify using x-id-token headername
+                    //response header will have authorization: Bearer token
+                    console.log('response from ' , this.user['provider'], ' with token', token);
 
-                    userObj.username = this.user['email'];
+                    this.userService.tokenVerify(token, this.user['provider'])
+                    .subscribe(response => {
 
-                    //localStorage.setItem('currentUser', JSON.stringify(userObj));    
-                    localStorage.setItem('currentUserToken', userObj.token);          
-                    localStorage.setItem('currentUserName', userObj.username);      
 
-                    this.userService.registerUser(userObj);//Register google user in the application
+                        userObj.emailId = this.user['email'];
+                        userObj.firstName = this.user['firstName'];
+                        userObj.lastName = this.user['lastName'];
+                        userObj.photoUrl = this.user['photoUrl'];
+                        userObj.provider = this.user['provider'];
+                        userObj.username = this.user['email'];
+    
+                        this.datashareService.setCurrentUser(userObj);
+      
+                        this.componentcommunicationService.loginChanged(true);
+        
+        
+                        this.alertService.success('Login successful', true);
+                        this.router.navigate([this.returnUrl]);
+        
+                    });
 
                 }
      
       
-                this.datashareService.setCurrentUser(userObj);
-      
-                this.componentcommunicationService.loginChanged(true);
-
-
-                this.alertService.success('Login successful', true);
-                this.router.navigate([this.returnUrl]);
 
 
             }

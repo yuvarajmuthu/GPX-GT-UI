@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   serviceUrl:'https://www.gpxservice.xyz',
-  searchServiceUrl:'http://localhost:8090'
+  searchServiceUrl:'https://www.gpxservice.xyz/search'
 };

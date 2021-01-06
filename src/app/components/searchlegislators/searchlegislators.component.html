@@ -1,38 +1,5 @@
 
 <div class="container">
-  <!--
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <ul class="nav">
-        <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchDistrict')">
-            <span class="badge badge-secondary active">Legislators</span>
-          </a>
-        </li>
-        <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchDistrict')">
-            <span class="badge badge-secondary">District</span>
-          </a>
-        </li>
-        <li class="nav-item border-right">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchTownShip')">
-            <span class="badge badge-secondary">Township</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsers($event,'searchHOA')">
-            <span class="badge badge-secondary">HOA</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <button type="button" class="btn btn-block btn-sm landscape-btn" (click)="findRepresentatives()" [ngClass]="{ 'btn-outline-primary active': findReps, 'btn-outline-primary': !findReps  }"> Find Representatives <i class="fa fa-search" aria-hidden="true"></i> </button>
-        </li>
-      </ul>
-    </div>
-  </div>
--->
-
 <div class="row legisBoundary">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     Find Representatives:
@@ -43,10 +10,6 @@
   </div>
 
   <div class="col-xs-3">
-    <!--
-    <button type="button" (click)="loadStateData()" [ngClass]="{ 'btn-legis btn-legis-select': stateData, 'btn-legis btn-secondary': !stateData }">State</button>
-    <button type="button"  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Congress</button>
-    -->
     <button type="button" class=""  (click)="loadCongressData()" [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Find</button>
   </div>
 </div>
@@ -79,31 +42,6 @@
 
 </div>
 
-<!--
-<div class="row">
-
-      <div class="col-xs-6" *ngIf="state">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="lblState">State</span>
-          <div class="input-group-append">
-            <button class="btn btn-info" type="button" id="btnState">{{state | uppercase}}</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-6" *ngIf="districtLabel">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="lblDistrict">{{districtLabel}}</span>
-          <div class="input-group-append" *ngFor="let congressDistrict of congressDistricts">
-            <button class="btn btn-info" type="button" id="btnDistrict" (click)="gotoDistrict(congressDistrict)">{{congressDistrict.name}}</button>
-          </div>
-        </div>
-      </div>
-</div>
-
-
-      <div class="searchTip">{{searchTip}}</div>
--->
 
       <div class="row">
         <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let legislator of legislators">

@@ -49,52 +49,6 @@
   .address input{
     width: 500px;
   }
-/* .custom-hover-legislator:before{
-  position: absolute;
-  content: "";
-  width: 0px;
-  height: 0px;
-  left: 0;
-  bottom: 0;
-  border: 3px solid transparant;
-  box-sizing: border-box;
-}
-.custom-hover-legislator:hover:before{
-  width: calc(240px / 2);
-  height: 100%;
-  border: 1px solid #028ece;
-  border-right: none;
-  border-bottom: none;
-  transition: height 0.3s linear,
-  width 0.3s linear 0.3s;
-
-}
-.custom-hover-legislator:after{
-  position: absolute;
-  content: "";
-  width: 0px;
-  height: 0px;
-  top: 0;
-  right: 0;
-  border: 3px solid transparant;
-  box-sizing: border-box;
-}
-.custom-hover-legislator:hover:after{
-  width: calc(240px / 2);
-  height: 100%;
-  border: 1px solid #028ece;
-  border-left: none;
-  border-top: none;
-  transition: height 0.3s linear,
-  width 0.3s linear 0.3s;
-
-} */
-/*.legislator-box-shadow{
-  -webkit-box-shadow: 0px 2px 14px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 2px 14px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 2px 14px 0px rgba(0,0,0,0.75);
-}*/
-
 
 .btn-secondary1{
   position: relative;
@@ -102,7 +56,6 @@
 }
 
 
-/*----- button 1 -----*/
 .btn-1::before, .btn-1::after{
   transition-delay: 0.2s;
 }

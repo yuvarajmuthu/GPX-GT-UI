@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpResponse} from '@angular/common/http';
+import {HttpResponse, HttpErrorResponse} from '@angular/common/http';
 
 import { User } from '../../../models/user';
 
-import {first} from 'rxjs/operators';
+import {first, catchError} from 'rxjs/operators';
 
 import {AlertService} from '../../../services/alert.service';
 import {AuthenticationService} from '../../../services/authentication.service';
@@ -142,9 +142,9 @@ export class LoginComponent implements OnInit {
 
                     this.router.navigate([this.returnUrl]);
                 },
-                error => {
+                (error:HttpErrorResponse) => {
                     console.log("login error ", error);
-                    this.alertService.error(error);
+                    this.alertService.error('Problem with Login : ' + error.status);
                     this.loading = false;
                 });
     }

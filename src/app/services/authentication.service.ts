@@ -70,7 +70,7 @@ export class AuthenticationService extends AbstractService{
     });
   }
 */
-  login(user:User) {
+  login(user:User):Observable<any> {
 
       let bodyString = JSON.stringify(user); // Stringify payload
 
@@ -85,7 +85,7 @@ export class AuthenticationService extends AbstractService{
       //return this.http.post<{token: string}>(loginServiceUrl, user, this.httpOptions);
 
 
-      return this.http.post<{token: string}>(loginServiceUrl, user, this.httpOptions)
+      return this.http.post<{token: string}>(loginServiceUrl, bodyString, this.httpOptions)
       .pipe(
         map((res: HttpResponse<any>) => {
           console.log("login response ", res);
@@ -106,7 +106,12 @@ export class AuthenticationService extends AbstractService{
           //this.alertService.success('Login successful', true); 
           
           return true;
+        }),
+        tap(_ => {
+          this.log(`response from login`)
         })
+        //,
+        //catchError(this.handleError<any>(`Error in login`))
       );
 /*
 return this.http.post(loginServiceUrl, user, this.httpOptions)

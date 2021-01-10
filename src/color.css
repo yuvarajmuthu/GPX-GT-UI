@@ -128,7 +128,7 @@ footer .widget-title h4::before,
 .help-list > a:hover,
 .open-position::before,
 .info > a,
-.category-box:hover, .category-box.selected,
+/* .category-box:hover, .category-box.selected, */
 a.main-btn,
 .section-heading::before,
 .getquot-baner,

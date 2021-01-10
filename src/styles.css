@@ -53,7 +53,8 @@ Last change:  4/september/18
 ***General Styling 
 ===============*/
 html, body {
-    font-family: "Muli", "Segoe Ui";
+    /* font-family: "Muli", "Segoe Ui"; */
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 
 /*
@@ -10218,3 +10219,147 @@ input{
   #myBtn:hover {
     background-color: #555; /* Add a dark-grey background on hover */
   }
+
+
+  /* body{
+    height: auto;
+    background-image: url(assets/img/simple-banner.jpg);
+  } */
+
+  .banner-caption {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    margin-top: 120px;
+}
+.search-btn-div .form-group{
+    float: left;
+}
+
+.banner-text {
+    text-align: center;
+}
+.banner{
+    background-image: url(assets/img/simple-banner.jpg);
+    height: 784px;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    height: auto;
+   
+    /* margin-right: auto;
+    margin-left: auto; */
+}
+
+.main-heading {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2em;
+}
+.main-heading h2>span {
+    color: #018ece;
+}
+
+.category-box {
+    position: relative;
+    height: 210px;
+    background: #fff;
+    box-shadow: 0 5px 25px 0 rgba(41, 128, 185, 0.15);
+    -webkit-box-shadow: 0 5px 25px 0 rgba(41, 128, 185, 0.15);
+    border-radius: 5px;
+    text-align: center;
+    /* padding: 50px 12px 30px; */
+    box-sizing: border-box;
+    margin-top: 30px;
+    overflow: hidden;
+    transition: .6s linear;
+}
+
+.category-box .category-desc {
+    z-index: 2;
+}
+.category-box .category-desc .category-icon {
+    font-size: 40px;
+    color: #ff7c39;
+    margin-bottom: 10px;
+    transition: .6s cubic-bezier(0.45, 0.01, 0.1, 1.49);
+}
+
+/* .category-box .category-desc i {
+    color: #018ece;
+} */
+
+.category-box .category-desc i.abs-icon {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    opacity: 0;
+    transition: all ease-in .4s;
+    color: #eff1f3;
+}
+
+.category-box:hover i.abs-icon {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    opacity: 1;
+    color: #000000;
+}
+
+.category-box .category-desc .category-detail p {
+    margin-bottom: 5px;
+}
+
+.main-heading h2 {
+    color: #252d40;
+    position: relative;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.news-div{
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 70%;
+}
+@media only screen and (min-width: 1024px){
+    section {
+        padding: 80px 0;
+    }
+}
+
+
+@media only screen and (min-width: 768px){
+    h3 {
+        font-size: 40px !important;
+        line-height: 36px;
+    }
+    h2 {
+        font-size: 36px;
+        line-height: 48px;
+    }
+    .banner-caption {
+        text-align: left;
+        display: inline-block;
+        width: 100%;
+        margin-left: 13%;
+        margin-top: 210px;
+    }
+    .banner-caption h1 {
+        color: #000;
+        text-shadow: none;
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: 3px;
+        font-size: 94px;
+        margin-bottom: .5em;
+    }
+    .banner-caption h1 span {
+        color: #018ece !important;
+    }
+
+}
+

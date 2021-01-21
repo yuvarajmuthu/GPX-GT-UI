@@ -10345,8 +10345,8 @@ input{
         text-align: left;
         display: inline-block;
         width: 100%;
-        margin-left: 13%;
-        margin-top: 210px;
+        /* margin-left: 13%; */
+        margin-top: 30%;
     }
     .banner-caption h1 {
         color: #000;
@@ -10361,5 +10361,18 @@ input{
         color: #018ece !important;
     }
 
+}
+
+.full-search-2.hero-search-radius {
+    background: #00000061;
+    padding: 20px 27px;
+    border-radius: 4px;
+    padding-bottom: 7px;
+    -webkit-box-shadow: 0 0 0 8px rgba(255, 255, 255, .2);
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, .2);
+}
+
+.category-icon .fa{
+    color: #018ece;
 }
 

@@ -94,8 +94,8 @@ getLegislature(searchParam:string, type:string):Observable<any>{
         url='/assets/json/stateLegislatorsByGeoLocation.json';
       }
     } else if(type == 'congress'){ // get Congress legislators by Address
-      //https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyBShZOVB_EtWokgbL0e6ZWHpAHpwVY5vZY&address=300%20Chatham%20Park%20Drive%2CPittsburgh%2C%20PA%2015220
-      url = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyBShZOVB_EtWokgbL0e6ZWHpAHpwVY5vZY&address=" + encodeURIComponent(searchParam);
+      //https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDXsOINi9dGvwK0wQiC1LPK6SEA5JO3R3M&address=300%20Chatham%20Park%20Drive%2CPittsburgh%2C%20PA%2015220
+      url = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDXsOINi9dGvwK0wQiC1LPK6SEA5JO3R3M&address=" + encodeURIComponent(searchParam);
       //this.getDistrictInfoFromGoogle(url);
       if(this.devMode){
         //url='/assets/json/congressLegislatorsByGeoLocation.json';

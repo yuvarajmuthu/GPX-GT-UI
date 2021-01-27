@@ -26,8 +26,8 @@ export class MockHttpInterceptorService implements HttpInterceptor {
         }
     }
     function login() {
-      const { username, password } = body;
-      const user = users.find(x => x.username === username && x.password === password);
+      let userData = JSON.parse(body);
+      const user = users.find(x => x.username === userData.username && x.password === userData.password);
       if (!user) return error('Username or password is incorrect');
       let headers1:HttpHeaders = new HttpHeaders({
         Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJHUFgiLCJpYXQiOjE1ODA1MDU4MzAsImV4cCI6MTYxMjA0MTgzMCwiYXVkIjoiZ3B4Iiwic3ViIjoidXNlcjZAZ21haWwuY29tIiwiR2l2ZW5OYW1lIjoiVXNlciIsIlN1cm5hbWUiOiJTaXgiLCJFbWFpbCI6InVzZXI2QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNlcjZAZ21haWwuY29tIn0.AS-6KhZYKsbw1oh5pYXcsf4m1YR89EdDROMvC-DFrGk'

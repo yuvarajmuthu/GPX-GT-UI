@@ -269,7 +269,7 @@ div#v-pills-tab a {
     .create-page-button-custom-position{
         position: absolute;
         width: 90%;
-        bottom: 10%;
+        bottom: 50%;
     }
     .create-page-button-custom-position button{
         width: 100%;

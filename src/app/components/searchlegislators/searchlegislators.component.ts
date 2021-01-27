@@ -46,9 +46,12 @@ export class SearchlegislatorsComponent implements OnInit {
   divisionOffices = [];
   divisioncategory  = [];
   divisions = [];
+  searchBtnLabel:string;
 
   @Output()
   success = new EventEmitter();
+
+  @Input() registration: boolean = false;
 
   constructor(private  router: Router,
               private legislatorsService: LegislatorService,
@@ -69,8 +72,11 @@ export class SearchlegislatorsComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("ngOnInit - finding current position");
-    //this.setCurrentPosition();
+    if(this.registration){
+      this.searchBtnLabel = 'Try';
+    }else{
+      this.searchBtnLabel = 'Search';
+    }
   }
 
   loadCircleUsers(evt, opt){
@@ -101,6 +107,12 @@ export class SearchlegislatorsComponent implements OnInit {
 
 
   loadCongressData() {
+
+    if(this.registration){
+      
+    }else{
+
+    }
     this.stateData = false;
     this.congressData = true;
 

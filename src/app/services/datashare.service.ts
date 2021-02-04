@@ -91,6 +91,8 @@ export class DatashareService {
 
   getLoggedinUsername():string{
     let loggedUserName:string=null;
+    console.log('this.isUserLogged() ', this.isUserLogged());
+
     if(this.isUserLogged()){
       let loggedUser = this.getCurrentUser();
       loggedUserName = loggedUser.username;
@@ -101,6 +103,7 @@ export class DatashareService {
   
   isUserLogged() {
     let loggedUser = this.getCurrentUser();
+    console.log('loggedUser ', loggedUser);
     return (loggedUser != null && loggedUser['token'] != null);
   }
 

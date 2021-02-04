@@ -1,5 +1,11 @@
+This is a place to quickly access your favourite profile.
+You can add somebody here by selecting 'Add to Circle' from their profile.
 
-<div class="container">
+<div *ngIf="circleUsersInfo === null">
+No members got added in your Circle.
+</div>
+
+<div *ngIf="circleUsersInfo != null" class="container">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <ul class="nav">

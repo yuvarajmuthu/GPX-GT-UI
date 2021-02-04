@@ -155,6 +155,7 @@ let config = new AuthServiceConfig([
             useClass: MockHttpInterceptorService,
             multi: true
         },
+        
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe

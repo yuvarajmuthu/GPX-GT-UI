@@ -99,10 +99,10 @@ export class UserComponent implements OnInit {
     postFormData: FormData;
     editLabel: string = null;
     inEditMode:boolean = false;
-    followersCount: string = null;
+    followersCount:number = 0;
     followers: User[] = [];
     managedBy: User[] = [];
-    followingsCount: string = null;
+    followingsCount:number = 0;
     followings = [];
     selectedProfileSmImage: File;
     profileSmImageChanged: boolean = false;
@@ -577,15 +577,18 @@ export class UserComponent implements OnInit {
 
                         }
 
-                        if (isDevMode()) {
-                            this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
-                        } else {
-                            this.profileSmImage = this.userData['photoUrl'];
-                        }
-                        this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
 
-                    } else {
-                        this.getProfileSmImage(this.viewingUser['userId']);
+                    } 
+                    
+                    //load profile small image
+                    if (isDevMode()) {
+                        this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
+                    }else {
+                        if(this.userData['photoUrl'] != null){
+                            this.profileSmImage = this.userData['photoUrl'];
+                        }else{
+                            this.getProfileSmImage(this.viewingUser['userId']);
+                        }
                     }
 
                     //getting the available profile templates for this user type - publicUser
@@ -597,7 +600,7 @@ export class UserComponent implements OnInit {
                     this.profilesTemplates = this.userData['profileTemplates'];
                     this.viewingUser['profileTemplates'] = this.profilesTemplates;
 
-                    let userType: string = this.viewingUser['isLegislator'] ? 'legislator' : 'public';
+                    let userType: string = this.viewingUser['isLegislator'] ? 'LEGISLATOR' : 'PUBLICUSER';
                     this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], userType).subscribe(
                         data => {
                             this.availableProfileTemplates = data;
@@ -1072,7 +1075,7 @@ export class UserComponent implements OnInit {
             .subscribe(
                 (result) => {
                     console.log('getFollowersCount response ' + result);
-                    this.followersCount = result;
+                    this.followersCount =  Number(result);
 
                 },
                 (err) => {
@@ -1113,7 +1116,7 @@ export class UserComponent implements OnInit {
             .subscribe( 
                 (result) => {
                     console.log('getFollowingsCount response ' + result);
-                    this.followingsCount = result;
+                    this.followingsCount = Number(result);
 
                 },
                 (err) => {

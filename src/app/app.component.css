@@ -66,9 +66,11 @@ a {
     /* margin: 0 auto; */
 }
 @media only screen and (max-width: 600px) {
-    .container-fluid {
+    .routlet .container-fluid {
     width: 90%;
     margin: 0 auto;
+    margin-top: 30%;
+
     }
 }
 
@@ -229,6 +231,12 @@ div#v-pills-tab a {
 @media only screen and (min-width: 1200px) {
     .container {
         max-width: 1201px !important;
+    }
+    .routlet .container-fluid {
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 5%;
+    
     }
     .notify-button{
         border: none;

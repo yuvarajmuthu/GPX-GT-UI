@@ -17,8 +17,8 @@
 <div class="card btn-3">
   <div class="card-body text-center legislator-box-shadow btn-6">
     <fieldset class="rating text-right">
-      <a href="javascript:void(0);" *ngIf="bookMark"  title="Select to remove from your circle" (click)="removeFromCircle()" [ngClass]="{ 'active': bookMark, '': !bookMark }" style="font-size:250%;" class="star-css">&#9733;</a>
-      <a href="javascript:void(0);" *ngIf="!bookMark"  title="Select to add to your circle" (click)="add2Circle()" [ngClass]="{ 'active': bookMark, '': !bookMark }" style="font-size:250%;" class="star-css">&#9733;</a>
+      <a href="javascript:void(0);" *ngIf="bookMark"  title="Remove from your circle" (click)="removeFromCircle()" [ngClass]="{ 'active': bookMark, '': !bookMark }" style="font-size:250%;" class="star-css">&#9733;</a>
+      <a href="javascript:void(0);" *ngIf="!bookMark"  title="Add to Circle" (click)="add2Circle()" [ngClass]="{ 'active': bookMark, '': !bookMark }" style="font-size:250%;" class="star-css">&#9733;</a>
     </fieldset>
     <!--<fieldset class="rating">
 

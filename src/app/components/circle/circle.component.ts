@@ -7,6 +7,7 @@ import {DatashareService} from '../../services/datashare.service';
 import {ComponentcommunicationService} from '../../services/componentcommunication.service';
 
 import {User} from '../../models/user';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-circle',
@@ -41,7 +42,6 @@ export class CircleComponent implements OnInit {
     this.circleUserCategories = [];
     if (this.loggedUser) {
         this.loggedUsername = this.loggedUser.username;
-        //this.loadCircleUsers(this.loggedUsername);
         this.loadCircleUsersInfo(this.loggedUsername);
     }
   } 
@@ -52,13 +52,15 @@ export class CircleComponent implements OnInit {
     .subscribe((response) => {
       this.circleUsersInfo = response;
       console.log('loadCircleUsersInfo response data ', this.circleUsersInfo);
-      for(let i = 0; i < this.circleUsersInfo.length; i++){
-        let obj={};
-        obj = this.circleUsersInfo[i];
-        let keys = Object.keys(obj);
-        this.circleUserCategories.push(keys[0]);
-        if(i==0)
-          this.loadCircleUsersByCategory(keys[0]);
+      if(this.circleUsersInfo != null){
+        for(let i = 0; i < this.circleUsersInfo.length; i++){
+          let obj={};
+          obj = this.circleUsersInfo[i];
+          let keys = Object.keys(obj);
+          this.circleUserCategories.push(keys[0]);
+          if(i==0)
+            this.loadCircleUsersByCategory(keys[0]);
+        }
       }
       
     }); 

@@ -14,6 +14,7 @@ import {Legislator} from '../../models/legislator';
 import {LegislatorComponent} from '../../components/legislator/legislator.component';
 
 import {GAddressSearchComponent} from '../../components/g-address-search/g-address-search.component';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-searchlegislators',
@@ -23,7 +24,7 @@ import {GAddressSearchComponent} from '../../components/g-address-search/g-addre
 export class SearchlegislatorsComponent implements OnInit {
   legislators: Array<any> = [];
   legislatorsDisplay: Array<any> = [];
-
+  screenWidth: number;
   legislator = {};
   legislatorsData = {};//{'names':['U.S. Senator', 'U.S. Representative'], 'U.S. Senator':[{}],'U.S. Representative':[{}]}
   resultop: any;
@@ -58,7 +59,7 @@ export class SearchlegislatorsComponent implements OnInit {
               private missionService: ComponentcommunicationService,
               private alertService: AlertService,
               private changeDetector: ChangeDetectorRef) {
-
+                this.getScreenSize();
     if (this.stateData) {
       //this.getCongressLegislatorsByLatLong();
       //this.loadStateData();
@@ -70,7 +71,18 @@ export class SearchlegislatorsComponent implements OnInit {
             console.log("Alert message received " + mission);
           });*/
   }
-
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+        this.screenWidth = window.innerWidth;
+        console.log(this.screenWidth);
+  }
+  getScreenStyle() {
+    if (this.screenWidth && this.screenWidth < 1200) {
+      return 'mobile-device';
+    } else {
+      return '';
+    }
+  }
   ngOnInit() {
     if(this.registration){
       this.searchBtnLabel = 'Try';

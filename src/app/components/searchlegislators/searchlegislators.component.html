@@ -1,5 +1,38 @@
 <div class="container">
-  <div class="row legisBoundary" style="margin-top: 20px;">
+  <div class="col-md-12 col-sm-12 banner-text">
+    <div class="location-search">
+      <div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 banner-text" style="font-size: 22px;font-family: monospace;color:gainsboro;">
+            Find Representatives</div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-11">
+            <div class="form-group">
+              <div class="input-with-icon">
+                <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode"></app-g-address-search>
+                <i class="ti-location-pin"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-1 small-padd">
+            <div class="form-group">
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" (click)="loadCongressData()"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row legisBoundary" style="margin-top: 20px;">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       Find Representatives:
     </div>
@@ -12,7 +45,7 @@
       <button type="button" class="" (click)="loadCongressData()"
         [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Find</button>
     </div>
-  </div>
+  </div> -->
 
   <div style="margin-top:5px" *ngIf="divisions && divisions.length > 0">
     <div class="sub-title sub-title-size">

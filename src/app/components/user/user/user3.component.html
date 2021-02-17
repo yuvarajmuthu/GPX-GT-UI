@@ -52,7 +52,7 @@
                     <div>
                         <div *ngIf="!isEditDisplayname" class="fullname-display">
                             <b class="name-right">
-                                {{biodata.full_name}}
+                                {{displayName}}
                             </b>
                           <!--  <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -330,7 +330,7 @@
                     <div>
                         <div *ngIf="!isEditDisplayname" class="fullname-display">
                             <b>
-                                {{biodata.full_name}}
+                                {{displayName}}
                             </b>
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </div>
@@ -588,7 +588,7 @@
     <ul class="nav nav-tabs mobile-bottom-tabs">
         <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="toggleTemplateDropDown();Profiles(activeTemplatName);loadTemplate(activeTemplate)" type="button">{{activeTemplatName}}</button></li>
         <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showActivities()">Posts</button></li>
-        <li [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Managed By</button></li>
+        <li *ngIf="isProfileManaged" [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Managed By</button></li>
         <li [ngClass]="{'active':isProfileCollapsed==false}">
 
             <div class="btn-group dropup">

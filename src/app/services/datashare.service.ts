@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 
 import { User } from './../models/user';
 
+import {Legislator} from './../models/legislator';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +29,7 @@ export class DatashareService {
   
   public currentDistrictId:string = 'g0010';
   public selectedLegislatorId:string = 'g0010';
+  legislator: Legislator;
 
   //private userLogged:boolean = false;
 
@@ -87,6 +90,14 @@ export class DatashareService {
   setCurrentUser(user:User){
    //this.currentUser = user;
    this.currentUserSubject.next(user);
+  }
+  
+  setLegislator(legislator: Legislator){
+    this.legislator = legislator;
+  }
+
+  getLegislator():Legislator{
+    return this.legislator;
   }
 
   getLoggedinUsername():string{

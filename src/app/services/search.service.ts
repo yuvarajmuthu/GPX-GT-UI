@@ -36,7 +36,6 @@ export class SearchService  extends AbstractService {
     }else{
       url = this.dataShareService.getSearchServiceUrl()+"/user?multiSearchText="+searchText;
     }
-    url = this.dataShareService.getSearchServiceUrl()+"/user?multiSearchText="+searchText;
 
     console.log('search service ', url);
     return this.http.get(url,httpOptions).

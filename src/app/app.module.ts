@@ -128,9 +128,9 @@ let config = new AuthServiceConfig([
                 //throwNoTokenError: true,
                 tokenGetter: tokenGetter,
                 //Authenticated requests should only be sent to whitelistedDomains
-                whitelistedDomains: ['localhost','gpxservice.xyz'],
+                whitelistedDomains: ['gpxservice.xyz'],
                 //specific routes that shouldn’t receive the JWT even if they are on a whitelisted domain
-                blacklistedRoutes: ['localhost:5000/login','https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
+                blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
             }
         }),
         AngularFontAwesomeModule, //OBSOLETE

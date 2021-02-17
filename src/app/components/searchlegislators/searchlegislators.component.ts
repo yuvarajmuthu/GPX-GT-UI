@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, isDevMode} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 // import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/catch';
@@ -24,7 +24,7 @@ import { HostListener } from "@angular/core";
 export class SearchlegislatorsComponent implements OnInit {
   legislators: Array<any> = [];
   legislatorsDisplay: Array<any> = [];
-  screenWidth: number;
+  //screenWidth: number;
   legislator = {};
   legislatorsData = {};//{'names':['U.S. Senator', 'U.S. Representative'], 'U.S. Senator':[{}],'U.S. Representative':[{}]}
   resultop: any;
@@ -48,6 +48,8 @@ export class SearchlegislatorsComponent implements OnInit {
   divisioncategory  = [];
   divisions = [];
   searchBtnLabel:string;
+  selectedDivision:string;
+  selectedDivisionOffice:string;
 
   @Output()
   success = new EventEmitter();
@@ -55,11 +57,12 @@ export class SearchlegislatorsComponent implements OnInit {
   @Input() registration: boolean = false;
 
   constructor(private  router: Router,
+              private route: ActivatedRoute,
               private legislatorsService: LegislatorService,
               private missionService: ComponentcommunicationService,
               private alertService: AlertService,
               private changeDetector: ChangeDetectorRef) {
-                this.getScreenSize();
+                //this.getScreenSize();
     if (this.stateData) {
       //this.getCongressLegislatorsByLatLong();
       //this.loadStateData();
@@ -71,6 +74,7 @@ export class SearchlegislatorsComponent implements OnInit {
             console.log("Alert message received " + mission);
           });*/
   }
+  /*
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
         this.screenWidth = window.innerWidth;
@@ -78,16 +82,25 @@ export class SearchlegislatorsComponent implements OnInit {
   }
   getScreenStyle() {
     if (this.screenWidth && this.screenWidth < 1200) {
-      return 'mobile-device';
+      return 'filterPill';
     } else {
       return '';
     }
   }
+  */
   ngOnInit() {
     if(this.registration){
       this.searchBtnLabel = 'Try';
     }else{
       this.searchBtnLabel = 'Search';
+
+      let address = this.route.snapshot.queryParamMap.get('address');
+      console.log('searchlegislators ngOnInit() address ', address);
+      if(address != null){
+        this.address = address;
+        this.loadCongressData();  
+      }
+
     }
   }
 
@@ -121,12 +134,14 @@ export class SearchlegislatorsComponent implements OnInit {
   loadCongressData() {
 
     if(this.registration){
-      
-    }else{
+      console.log('redirecting to searchLegislator for address ' + this.address);
+      this.router.navigate(['searchLegislator'],{ queryParams: { 'address': this.address } });
+      return;
 
     }
-    this.stateData = false;
-    this.congressData = true;
+    
+    //this.stateData = false;
+    //this.congressData = true;
 
     if (!this.address) {
       //this.missionService.announceAlertMission("{'alertType':'danger', 'alertMessage':'Please provide address to search for Congress data.'}");
@@ -139,7 +154,7 @@ export class SearchlegislatorsComponent implements OnInit {
 
     this.getLegislators(this.address, 'congress');
 
-    this.districtLabel = 'Your Congressional District(s):';
+    //this.districtLabel = 'Your Congressional District(s):';
   }
 
   private getCongressLegislatorsByLatLong() {
@@ -365,6 +380,7 @@ this.processOCD(result);
 
     let divisionsObj = {};
     let divisionsKeys = [];
+    this.divisions = [];
 
 
     divisionsObj = result['divisions'];
@@ -401,7 +417,7 @@ this.processOCD(result);
                   legislator['division'] = divisionData['name'];
                   legislator['divisionOffice'] = office['name'];
                   if (isDevMode()) {
-                    legislator['photo_url'] = 'assets/images/1679.jpg';
+                    legislator['photo_url'] = 'assets/images/avatar-male.png';
                   }
 
                   this.legislatorsDisplay.push(legislator);
@@ -423,7 +439,7 @@ this.processOCD(result);
  
   selectDivision(division:string){
     console.log('selected division ', division);
-
+    this.selectedDivision = division;
     this.offices.forEach(element => {
       
       if(element[division]){
@@ -449,6 +465,8 @@ this.processOCD(result);
 
   selectDivisionOffice(divisionOffice:string){
     console.log('selected division office ', divisionOffice);
+    this.selectedDivisionOffice = divisionOffice;
+
     this.legislators = [];
     this.legislatorsDisplay.forEach(element => {
       

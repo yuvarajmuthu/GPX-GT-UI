@@ -1,5 +1,9 @@
-This is a place to quickly access your favourite profile.
-You can add somebody here by selecting 'Add to Circle' from their profile.
+<p>
+  <ngb-alert type="primary" [dismissible]="false">
+    Favourite profiles can be quickly accessed from here.
+    They can be added here by selecting 'Add to Circle' from their profile.
+  </ngb-alert>
+</p>
 
 <div *ngIf="circleUsersInfo === null">
 No members got added in your Circle.
@@ -7,16 +11,11 @@ No members got added in your Circle.
 
 <div *ngIf="circleUsersInfo != null" class="container">
   <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <ul class="nav">
-        <li class="nav-item border-right" *ngFor="let circleUserCategory of circleUserCategories">
-          <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadCircleUsersByCategory(circleUserCategory)">
-            <span class="badge badge-secondary" [ngClass]="{'active': circleCatagoryActive == circleUserCategory}">{{circleUserCategory}}</span>
-          </a>
-        </li>
 
-      </ul>
-    </div>
+      <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': circleCatagoryActive == circleUserCategory}" (click)="loadCircleUsersByCategory(circleUserCategory)"
+        *ngFor="let circleUserCategory of circleUserCategories">
+        {{circleUserCategory}}
+      </button></span>
   </div>
 
   <div class="row">

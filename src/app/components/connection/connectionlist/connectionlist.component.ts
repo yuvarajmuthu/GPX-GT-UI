@@ -20,10 +20,6 @@ export class ConnectionlistComponent implements OnInit {
   connectionRequest:Connection[]; 
   connectionsEntityId:[] = null;
   action:string = 'approvalPending';
-  pillCSSAPVar:string;
-  pillCSSRSVar:string;
-  pillCSSFollowersVar:string;
-  pillCSSFollowingsVar:string;
   approvalPendingCount: String;
   requestSentCount: String;
   followersCount: string;
@@ -59,10 +55,6 @@ export class ConnectionlistComponent implements OnInit {
 
   loadConnections(action:string){
    this.action = action;
-   this.pillCSSAPVar = this.action === 'approvalPending' ? 'badge badge-secondary badge-active' : 'badge badge-secondary';
-   this.pillCSSRSVar = this.action === 'requestSent' ? 'badge badge-secondary badge-active' : 'badge badge-secondary';
-   this.pillCSSFollowersVar = this.action === 'followers' ? 'badge badge-secondary badge-active' : 'badge badge-secondary';
-   this.pillCSSFollowingsVar = this.action === 'followings' ? 'badge badge-secondary badge-active' : 'badge badge-secondary';
 
     this.userService.getConnections(this.loggedUser.username, action)
     .subscribe((response) => {

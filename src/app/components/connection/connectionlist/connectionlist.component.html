@@ -1,8 +1,37 @@
 
-<div class="news-div">
+
  <div class="card tab-card">
     <div class="card-header tab-card-header">
-     
+
+      <div style="margin-top:5px">
+        <div class="row" style="margin-left:1px">
+          <span class="filterPill">
+            <button class="btn button-color" [ngClass]="{'active': action == 'approvalPending'}" (click)="loadConnections('approvalPending')"> 
+            Approval Pending 
+            <span class="badge badge-light"> {{approvalPendingCount}} </span>
+            </button>
+
+            <button class="btn button-color" [ngClass]="{'active': action == 'requestSent'}" (click)="loadConnections('requestSent')">
+            Request Sent 
+            <span class="badge badge-light"> {{requestSentCount}} </span>
+            </button>
+
+            <button class="btn button-color" [ngClass]="{'active': action == 'followers'}" (click)="loadConnections('followers')">
+            Followers
+            <span class="badge badge-light"> {{followersCount}} </span>
+            </button>
+
+            <button class="btn button-color" [ngClass]="{'active': action == 'followings'}" (click)="loadConnections('followings')">
+            Followings 
+            <span class="badge badge-light"> {{followingsCount}} </span>
+            </button>
+
+          </span>
+          
+        </div>
+      </div>
+
+<!--     
       <ul class="nav nav-tabs card-header-tabs li-justify-content-center">
         <li class="nav-item border-right col-xs-3">
           <a class="nav-link search-legislator-navpills cursor-hand" (click)="loadConnections('approvalPending')">
@@ -37,6 +66,7 @@
           </a>
         </li>
         </ul>
+      -->
     </div>
 
     <div class="tab-content" id="myTabContent">
@@ -48,4 +78,3 @@
 
     </div>
   </div>
-</div>

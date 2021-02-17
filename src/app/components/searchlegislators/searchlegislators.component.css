@@ -1,6 +1,3 @@
-.active{
-  background-color: #007bff;
-}
 .border-right{
   border-right:2px solid black;
 }
@@ -103,10 +100,6 @@
 .cursor-hand{
   cursor: pointer;
 }
-.mobile-device{
-  white-space:nowrap; 
-  overflow-x:scroll;
-}
 
 .sub-title {
   margin: 0px;
@@ -116,18 +109,6 @@
 }
 .sub-title-size {
   padding-right: 30px;
-}
-
-.button-color {
-  color: rgb(0 0 0 / 64%);
-  border: 1px solid #ebebeb;
-  margin-bottom: 12px;
-  background-color: rgba(0,0,0,0.08) !important;
-  font-weight: 600;
-  font-size: 17px;
-  border-radius: 28px;
-  padding: 8px 20px;
-  margin-right: 16px;
 }
 
 .banner-text {

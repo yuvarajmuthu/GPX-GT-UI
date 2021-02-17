@@ -79,6 +79,7 @@ export class UserComponent implements OnInit {
     externalUser:boolean;
     biodata:any=null;
     biodataTemplate={};
+    displayName:string='';
 
     entityType:string=null;
     activities: number = 0;
@@ -375,6 +376,12 @@ export class UserComponent implements OnInit {
           this.entityType = response['entityType']; 
           this.biodata= response['data'];
           
+          if(this.biodata['full_name'] != null){
+            this.displayName = this.biodata['full_name'];
+          }else if (this.biodata['first_name'] != null || this.biodata['last_name'] != null){
+            this.displayName = this.biodata['first_name'] + ' ' + this.biodata['last_name'];
+          }
+
           console.log('biodata response data ', this.biodata);
           
           //this.createFormGroup();
@@ -547,7 +554,7 @@ export class UserComponent implements OnInit {
         //this.getFollowers(this.profileUserId);
 
         if(this.isUserLogged()){
-            this.isProfileEditable();
+            //this.isProfileEditable();
 
             this.userService.getUserData(this.profileUserId, this.loggedUsername).subscribe(
                 data => { 
@@ -556,6 +563,9 @@ export class UserComponent implements OnInit {
 
                     this.isSelfProfile = this.userData['selfProfile'];
                     this.isProfileManaged = this.userData['profileManaged'];
+                    
+                    this.isProfileEditable();
+
                     //Settings
                     this.isShowSettings = this.userData['showSettings'];
                     if(this.userData['settings'] && this.userData['settings']['accessRestriction']){

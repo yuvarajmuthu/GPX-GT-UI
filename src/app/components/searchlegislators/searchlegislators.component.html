@@ -49,10 +49,10 @@
 
   <div style="margin-top:5px" *ngIf="divisions && divisions.length > 0">
     <div class="sub-title sub-title-size">
-      <h4>CATEGORY</h4>
+      <h4>LEVELS:</h4>
     </div>
     <div class="row" style="margin-left:1px">
-      <span [ngClass]="getScreenStyle()"><button class="btn btn-light button-color" (click)="selectDivision(division);"
+      <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': selectedDivision == division}" (click)="selectDivision(division);"
           *ngFor="let division of divisions">
           {{ division }}
         </button></span>
@@ -61,10 +61,10 @@
   </div>
   <div style="margin-top:5px" *ngIf="divisionOffices && divisionOffices.length > 0">
     <div class="sub-title sub-title-size">
-      <h4>SUB CATEGORY</h4>
+      <h4>ROLES:</h4>
     </div>
     <div class="row" style="margin-left:1px">
-      <span [ngClass]="getScreenStyle()"><button class="btn btn-light button-color"
+      <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': selectedDivisionOffice == divisionOffice}"
           (click)="selectDivisionOffice(divisionOffice);" *ngFor="let divisionOffice of divisionOffices">
           {{ divisionOffice }}
         </button></span>

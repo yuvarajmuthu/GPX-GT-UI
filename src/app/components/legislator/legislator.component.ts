@@ -32,7 +32,7 @@ export class LegislatorComponent implements OnInit {
   isInCircle: boolean;
   keys = [];
   loggedUsername:string;
-  userName: string = null;
+  userName: string = 'createnew';
 
   bookMark:boolean;
 
@@ -43,6 +43,17 @@ export class LegislatorComponent implements OnInit {
               private userService: UserService,
               private searchService: SearchService,
               private datashareService: DatashareService) {
+  }
+
+  //get invoked automatically before ngOnInit()
+  routerOnActivate(): void {
+
+
+    //this.legisId = curr.getParam("id");
+    //console.log("Param value - id " + this.legisId);
+    console.log('routerOnActivate()::legislator.component invoked');
+
+
   }
 
   ngOnInit(): void {
@@ -170,30 +181,22 @@ export class LegislatorComponent implements OnInit {
 
   }
 
-  //get invoked automatically before ngOnInit()
-  routerOnActivate(): void {
-
-
-    //this.legisId = curr.getParam("id");
-    //console.log("Param value - id " + this.legisId);
-    console.log('routerOnActivate()::searchlegislators.component invoked');
-
-
-  }
-
   getUsername(legislator: Legislator): void{
     let searchString:string = null;
 
     if (legislator['leg_id']) {
+      console.log('legislator[leg_id] ', legislator['leg_id']);
       this.userName = legislator['leg_id'];
 
     } else if(this.legislator['photo_url'] && this.legislator['photo_url'].indexOf('bioguide.congress.gov') != -1 ) { //CONGRESS
+      console.log('this.legislator[photo_url] ', this.legislator['photo_url']);
       let photoUrl = this.legislator['photo_url'];
       let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
       this.userName = fileName.substring(0, fileName.lastIndexOf('.'));
 
 
     }else if (legislator['full_name']) {
+      console.log('legislator[full_name] ', legislator['full_name']);
       searchString = legislator['full_name'].replace( /\".*?\"/, '' ).replace(/\s+/g,' ').trim();
       this.searchService.getUsers(searchString)
       .subscribe(
@@ -202,12 +205,12 @@ export class LegislatorComponent implements OnInit {
             this.userName = result[0]['username'];
             this.check4CircleStatus();
           }else{
-            this.userName = 'createnew';
+            //create user with legislator data ?
           }
-
         },
         (err) => {
             console.log('Error ', err);
+            //create user with legislator data ?
         }); 
 
     }
@@ -215,9 +218,13 @@ export class LegislatorComponent implements OnInit {
 
   //called from UI on selection of a Legislator
   gotoLegislator(legislator: Legislator): void {
-    console.log('selected legislator - ' + legislator);
-    this.router.navigate(['/user', this.userName]);
-
+    console.log('selected legislator - this.userName' + this.userName);
+    if(this.userName === 'createnew'){
+      this.datashareService.setLegislator(legislator);
+      this.router.navigate(['/user', {'userObj':legislator}]);
+    }else{
+      this.router.navigate(['/user', this.userName]);
+    }
   }
 
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 import { Observable, of } from 'rxjs';
@@ -63,7 +63,6 @@ constructor (private http: HttpClient) {
 
 private google_geocode_api_prefix = 'https://maps.google.com/maps/api/geocode/json?address=';
 private google_geocode_api_suffix = '&key=AIzaSyBShZOVB_EtWokgbL0e6ZWHpAHpwVY5vZY';
-private devMode:boolean = true;
 private httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -90,14 +89,14 @@ getLegislature(searchParam:string, type:string):Observable<any>{
       //url = this.legislature_service_url_prefix + '/locate?latitude=' + locationArr[0] + '&longitude=' + locationArr[1] + this.legislature_service_url_suffix;
       //https://openstates.org/api/v1/legislators/geo/?lat=40.402777&long=-80.058544&apikey=c7ba0e13-03f6-4477-b9f1-8e8832169ee5
       url = 'https://openstates.org/api/v1/legislators/geo/?lat='+ locationArr[0] + '&long=' + locationArr[1] + '&apikey=c7ba0e13-03f6-4477-b9f1-8e8832169ee5';
-      if(this.devMode){
-        url='/assets/json/stateLegislatorsByGeoLocation.json';
+      if(isDevMode()){
+          url='/assets/json/stateLegislatorsByGeoLocation.json';
       }
     } else if(type == 'congress'){ // get Congress legislators by Address
       //https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDXsOINi9dGvwK0wQiC1LPK6SEA5JO3R3M&address=300%20Chatham%20Park%20Drive%2CPittsburgh%2C%20PA%2015220
       url = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyDXsOINi9dGvwK0wQiC1LPK6SEA5JO3R3M&address=" + encodeURIComponent(searchParam);
       //this.getDistrictInfoFromGoogle(url);
-      if(this.devMode){
+      if(isDevMode()){
         //url='/assets/json/congressLegislatorsByGeoLocation.json';
         url='/assets/json/fromService/opencivicdatasearchbyaddress.json';
       }
@@ -108,39 +107,26 @@ getLegislature(searchParam:string, type:string):Observable<any>{
       //find District
       //https://www.googleapis.com/civicinfo/v2/divisions?query="ocd-division/country:us/state:pa/cd:6"&key=AIzaSyBShZOVB_EtWokgbL0e6ZWHpAHpwVY5vZY
       //https://www.googleapis.com/civicinfo/v2/divisions?query="gettysburg montessori charter school"&key=AIzaSyBShZOVB_EtWokgbL0e6ZWHpAHpwVY5vZY
-      if(this.devMode){
+      if(isDevMode()){
         url='/assets/json/congressLegislatorsByDivisionId.json';
       }
     }
 
 
     console.log('getLegislature API - ' + url);
-    if(!this.devMode){  
-    // return this.jsonp.get(url, { search: params })
-    //               .map((response:Response) => response.json());
-      return this.http.get(url, this.httpOptions)
-      .pipe(
-        tap(_ => this.log(`fetched Legislator`)),
-        catchError(this.handleError<any>(`Error in getLegislature()`))
-      );
-    }else{
-    // return this.http.get(url) 
-    // .map((response:Response) => response.json());
     return this.http.get(url, this.httpOptions)
-      .pipe(
-        tap(_ => this.log(`fetched Legislator`)),
-        catchError(this.handleError<any>(`Error in getLegislature()`))
-      );
-
-    }
-                  
+    .pipe(
+      tap(_ => this.log(`fetched Legislator`)),
+      catchError(this.handleError<any>(`Error in getLegislature()`))
+    );
+                
 } 
 
 getLocation(term: string):Observable<any> {
   let geocodeApi:string = this.google_geocode_api_prefix + term + this.google_geocode_api_suffix;
   //return this.http.get(geocodeApi)
   let url:string;
-  if(this.devMode){
+  if(isDevMode()){
     url = '/assets/json/geoCode.json';
   }else{
     url = geocodeApi;

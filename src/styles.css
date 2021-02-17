@@ -10230,7 +10230,6 @@ input{
     text-align: left;
     display: inline-block;
     width: 100%;
-    margin-top: 120px;
 }
 .search-btn-div .form-group{
     float: left;
@@ -10241,7 +10240,7 @@ input{
 }
 .banner{
     background-image: url(assets/images/network6.png);
-    height: 600px;
+
 }
 
 .container {
@@ -10329,6 +10328,10 @@ input{
     section {
         padding: 80px 0;
     }
+
+    .banner-caption {
+        margin-top: 120px;
+    }
 }
 
 
@@ -10361,6 +10364,39 @@ input{
         color: #018ece !important;
     }
 
+}
+
+@media only screen and (max-width: 1200px) {
+    .filterPill{
+      white-space:nowrap; 
+      overflow-x:scroll;
+    }
+}
+
+.filterPill .button-color {
+    color: rgb(0 0 0 / 64%);
+   /* border: 1px solid #ebebeb;*/
+    margin-bottom: 12px;
+    background-color: rgba(0,0,0,0.08);
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 28px;
+    padding: 8px 20px;
+    margin-right: 16px;
+}
+
+.filterPill button:hover{
+    background-color: #00000061;
+  
+}
+/*
+.filterPill .button .selected{
+    background-color: #00000061;
+  
+}
+*/
+.filterPill .active{
+    background-color: #00000061;
 }
 
 .full-search-2.hero-search-radius {

@@ -6,6 +6,6 @@
 
 @media screen and (max-width: 559px) {
     .ng-autocomplete {
-        width: 375px !important;
+        width: 260px !important;
     }
 }

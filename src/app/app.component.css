@@ -69,8 +69,8 @@ a {
 }*/
 
 .simplelogo {
-    height: 48px;
-    width: 60px;
+    height: 50px;
+    width: 45px;
     background-size: 50px 43px;
     background-image: url('../assets/images/gpx-brand-v1.png');
     background-repeat: no-repeat;

@@ -103,6 +103,8 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
     }
+    serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
+
     //serviceUrl = '/assets/json/fromService/post.json'; 
 
     console.log("gonna get posts");
@@ -112,24 +114,20 @@ export class PostService  extends AbstractService{
       pageNumber: requestJson['pageNumber'], selfActivities: requestJson['selfActivities'], requestedBy: requestJson['requestedBy']
     } })
     .pipe(
-//      map((response:Response) => response.json()),
+      /*
       map((result) => {
         let posts:any = result;//result["results"];  
 
-        //posts = data['results'];
         console.log('from Post Service - parsed Post length ' + posts.length);
 
         for (var i = 0; i < posts.length; i++) {
-            //var post : Post = {} as Post;
             console.log('reading properties - ' + JSON.stringify(posts[i]));                        
-            //post = Post.decodePost(posts[i]);
-            //console.log('reading properties - ' + post.id);
-
             postsPromise.push(posts[i]);
         }
 
             return postsPromise;      
               }), 
+              */
       tap(_ => this.log(`fetched getActivities`)),
       catchError(this.handleError<any>(`Error in getActivities()`))
     );                         
@@ -193,6 +191,7 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getPostComments/" + requestJson['postId'] + "/";
     }
+    serviceUrl = this.serviceUrl + "/getPostComments/" + requestJson['postId'] + "/";
 
     console.log("In getPostComments");
     return this.http.get(serviceUrl, { responseType: 'json', params: {
@@ -226,6 +225,7 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getCommentsCount?postId=" + postId;
     }
+    serviceUrl = this.serviceUrl + "/getCommentsCount?postId=" + postId;
 
     console.log("in getCommentsCount - serviceUrl ", serviceUrl);
 
@@ -296,12 +296,16 @@ export class PostService  extends AbstractService{
       headers: new HttpHeaders({ "Accept": "application/json" })
     }  
     let url = "";
+    this.serviceUrl = this.dataShareService.getServiceUrl() + "/post";
+
 
     if(this.devMode){
       url = '/assets/json/fromService/newcomment.json'; 
     }else{
       url = this.serviceUrl;
     }
+    url = this.serviceUrl;
+
     /*
     return this.http.get(url,httpOptions).
         pipe(

@@ -73,6 +73,13 @@ export class PostComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        if(!this.userId){
+            this.userId = this.dataShareService.getLoggedinUsername();
+        }
+        if(!this.requestedBy){
+            this.requestedBy = this.dataShareService.getLoggedinUsername();
+        }
+        
         this.route
         .queryParams
         .subscribe(params => {
@@ -93,12 +100,7 @@ export class PostComponent implements OnInit {
           (val) => { this.getPost(entityId);
         });
         */
-        if(!this.userId){
-            this.userId = this.dataShareService.getLoggedinUsername();
-        }
-        if(!this.requestedBy){
-            this.requestedBy = this.dataShareService.getLoggedinUsername();
-        }
+
 
     }
     getSharedPost(postId:number): void {

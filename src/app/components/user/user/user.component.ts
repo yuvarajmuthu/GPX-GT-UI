@@ -88,6 +88,7 @@ export class UserComponent implements OnInit {
 
     following: boolean = false;
     requestedToFollow: boolean = false;
+    requestAwaiting: boolean = false;
     followRequestRejected: boolean = false;
 
     currentUser: User = null;
@@ -373,7 +374,8 @@ export class UserComponent implements OnInit {
     loadBioData(){
         this.userService.getBiodata(this.profileUserId)
         .subscribe((response) => {
-          this.entityType = response['entityType']; 
+          console.log('loadBioData response ', response);  
+          //this.entityType = response['entityType']; 
           this.biodata= response['data'];
           
           if(this.biodata['full_name'] != null){
@@ -563,7 +565,7 @@ export class UserComponent implements OnInit {
 
                     this.isSelfProfile = this.userData['selfProfile'];
                     this.isProfileManaged = this.userData['profileManaged'];
-                    
+                    this.entityType =  this.userData['userType'];
                     this.isProfileEditable();
 
                     //Settings
@@ -642,7 +644,7 @@ export class UserComponent implements OnInit {
                     this.datashareService.setViewingUser(this.viewingUser);
                     console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));
                     
-                    if(!this.isSelfProfile){
+                    if(this.isUserLogged() && !this.isSelfProfile){
                         this.check4CircleStatus();
                     }
                 }
@@ -876,14 +878,9 @@ export class UserComponent implements OnInit {
 
     followEntity() {
         if (this.loggedUser == null || !this.loggedUser.username) {
-            //let routePath:string = "/secure";
             let routePath: string = '/login';
-//      this.router.navigate([routePath]);
             let returnUrl: string = '/user/' + this.profileUserId + '?follow';
             this.router.navigate(['login'], {queryParams: {returnUrl: returnUrl}});
-
-            //this.router.navigate([routePath, {followEntityId:this.profileUserId, isLegislator:this.viewingUser['isLegislator']}]);
-
         }
 
         var followURequest = {};
@@ -924,6 +921,8 @@ export class UserComponent implements OnInit {
 
         if (this.requestedToFollow) {
             this.followCntrlLabel = 'Request Sent';
+        } else if (this.requestAwaiting) {
+            this.followCntrlLabel = 'Approval Pending';
         } else if (this.following) {
             this.followCntrlLabel = 'Following';
         } else if (this.followRequestRejected) {
@@ -1065,6 +1064,8 @@ export class UserComponent implements OnInit {
 
                     if (result == 'REQUESTED') {
                         this.requestedToFollow = true;
+                    } else if (result == 'AWAITING') {
+                        this.requestAwaiting = true;
                     } else if (result == 'FOLLOWING') {
                         this.following = true;
                     } else if (result == 'REJECTED') {

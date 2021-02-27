@@ -416,6 +416,7 @@ this.processOCD(result);
                   legislator['photo_url'] = official['photoUrl'];
                   legislator['division'] = divisionData['name'];
                   legislator['divisionOffice'] = office['name'];
+                  legislator['source'] = 'GOOGLE';
                   if (isDevMode()) {
                     legislator['photo_url'] = 'assets/images/avatar-male.png';
                   }

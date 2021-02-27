@@ -128,7 +128,7 @@ let config = new AuthServiceConfig([
                 //throwNoTokenError: true,
                 tokenGetter: tokenGetter,
                 //Authenticated requests should only be sent to whitelistedDomains
-                whitelistedDomains: ['gpxservice.xyz'],
+                whitelistedDomains: ['localhost:5000','gpxservice.xyz'],
                 //specific routes that shouldn’t receive the JWT even if they are on a whitelisted domain
                 blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
             }
@@ -149,13 +149,13 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
-      
+      /*
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
         },
-        
+        */
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe

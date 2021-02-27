@@ -10348,11 +10348,7 @@ input{
     margin-top: 0;
     margin-bottom: 10px;
 }
-.news-div{
-    margin-top: 5%;
-    margin-left: 15%;
-    width: 70%;
-}
+
 @media only screen and (min-width: 1024px){
     section {
         padding: 80px 0;
@@ -10360,6 +10356,12 @@ input{
 
     .banner-caption {
         margin-top: 120px;
+    }
+
+    .news-div{
+        margin-top: 5%;
+        margin-left: 15%;
+        width: 70%;
     }
 }
 

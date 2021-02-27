@@ -70,8 +70,11 @@ export class UserService extends AbstractService{
         url = url + "?requestorId=" + requestorId;
       }
     }
-    //url = '/assets/json/fromService/user-legis-LEGISLATOROPENSTATE.json';   
-    
+    url = this.getUserService()+"/"+userId+"/";
+    if(requestorId != null){
+      url = url + "?requestorId=" + requestorId;
+    }
+        
     console.log("getUserData() " + url);
     
     let httpOptions = {
@@ -341,24 +344,14 @@ add2Circle(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/addCircleUser";
   console.log("add2Circle user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request, this.httpOptions )
-  .pipe(
-    map((response:Response) => response.json()),
-    tap(_ => this.log(`add2Circle successful`)),
-    catchError(this.handleError<any>(`Error in add2Circle()`))
-  );
+  return this.http.post(serviceUrl,  request, this.httpOptions );
 }
 
 removeFromCircle(request:string):Observable<any>{
   let serviceUrl = this.getUserService() + "/removeCircleUser";
   console.log("removeFromCircle user.service " + request + " this.serviceUrl " + serviceUrl);
 
-  return this.http.post(serviceUrl,  request, this.httpOptions )
-  .pipe(
-    map((response:Response) => response.json()),
-    tap(_ => this.log(`removeCircleUser successful`)),
-    catchError(this.handleError<any>(`Error in removeCircleUser()`))
-  );
+  return this.http.post(serviceUrl,  request, this.httpOptions );
 }
 
 getCircleUsers(userId:string):Observable<any>{
@@ -383,7 +376,7 @@ getCircleUsersCategory(userId:string):Observable<any>{
   }else{
     serviceUrl = this.getUserService() +"/getCircleUsers/"+userId+"/";
   }
-
+  serviceUrl = this.getUserService() +"/getCircleUsers/"+userId+"/";
   return this.http.get(serviceUrl, this.httpOptions)
   .pipe(
     tap(_ => this.log(`fetched getCircleUsersCategory`)),
@@ -422,13 +415,9 @@ isInCircle(profileId:string, userId:string):Observable<any>{
   }else{
     serviceUrl = this.getUserService() + "/isInCircle/" + profileId + "/" + userId + "/";
   }
-
+  serviceUrl = this.getUserService() + "/isInCircle/" + profileId + "/" + userId + "/";
   let headers      = new Headers({ 'Content-Type': 'application/json' });
-  return this.http.get(serviceUrl, this.httpOptions)
-  .pipe(
-    tap(_ => this.log(`in isInCircle`)),
-    catchError(this.handleError<any>(`Error in isInCircle()`))
-  );  
+  return this.http.get(serviceUrl, this.httpOptions);  
 }
 
 isProfileEditable(profileId:string, userId:string):Observable<any>{
@@ -541,8 +530,6 @@ getAll() {
   return this.http.get('/api/users');
 }
 
-
-
 registerUser(user: any):Observable<any> {
 //        return this.http.post('/register', user);
 
@@ -551,13 +538,14 @@ registerUser(user: any):Observable<any> {
    let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
    //let options       = new RequestOptions({ headers: headers }); // Create a request option
 
-   console.log("registerUser::user.service invoking service " + this.serviceUrl);
+   console.log("registerUser::user.service invoking service " + this.serviceUrl, bodyString);
 
    return this.http.post(this.serviceUrl, user, this.httpOptions)
     .pipe(
       //map((response:Response) => response.json()),
-      tap(_ => this.log(`Successfully registered User`)),
-      catchError(this.handleError<any>(`Error in registering User()`))
+      tap(_ => this.log(`Successfully registered User`))
+      //,
+      //catchError(this.handleError<any>(`Error in registering User()`))
     );
 
   //  return this.http.post(this.serviceUrl, bodyString, options) // ...using post request

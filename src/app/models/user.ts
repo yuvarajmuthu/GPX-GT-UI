@@ -21,4 +21,6 @@ export class User {
     token?: string;//GOOGLE-idToken
     authToken:string;//GOOGLE
     provider:string;//GOOGLE
+    sourceSystem: string;
+    sourceId: string;
 }

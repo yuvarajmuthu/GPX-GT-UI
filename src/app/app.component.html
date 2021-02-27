@@ -1,6 +1,23 @@
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container-fluid">
-      <a class="navbar-brand mylogo" routerLink="/"></a>
+      <a [ngClass]="{'navbar-brand mylogo':!isMobile , 'navbar-brand simplelogo':isMobile}" routerLink="/"></a>
+
+      <!-- 
+        For Expand search bar
+        <div class="input-group searchbtnGroup mobileSearch" *ngIf="isMobile">
+        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]="" id="searchExapnd"></app-gps-global-search>
+            <span class="input-group-append">
+              <span class="searchIcon">
+                  <i class="fa fa-search"></i>
+              </span>
+            </span>
+      </div> -->
+
+      <div *ngIf="isMobile">
+        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+      </div>
+      
+      
       <button class="navbar-toggler" type="button" (click)="isCollaped = !isCollaped"
               [attr.aria-expanded]="!isCollaped" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +65,7 @@
           </ul>
 -->
 
-<app-gps-global-search  placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+<app-gps-global-search *ngIf="!isMobile" placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
 
             <!-- <div class="ng-autocomplete common-search" *ngIf="!isMobile">
               <ng-autocomplete

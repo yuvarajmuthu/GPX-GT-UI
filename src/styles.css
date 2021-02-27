@@ -10061,6 +10061,35 @@ aside.sidebar.full-style {
 }
 */
 
+/* 
+Search Expand CSS changes
+#searchExapnd .autocomplete-container .input-container {
+    position: relative;
+}
+#searchExapnd .autocomplete-container .input-container input:focus {
+    width: 100% !important;
+    background-position: left top;
+    transition: width .4s !important;
+}
+.mobileSearch #searchExapnd .autocomplete-container .input-container input:focus {
+    width: 100% !important;
+    background-position: left top;
+    transition: width .4s !important;
+}
+#searchExapnd .autocomplete-container .input-container input {
+    width: 40% !important;
+    position: absolute;
+    right: 0;
+}
+.mobileSearch #searchExapnd .autocomplete-container .input-container input {
+    width: 65% !important;
+    position: absolute;
+    right: 0;
+}
+#searchExapnd .autocomplete-container .input-container input {
+    width: 50%;
+} */
+
 .padding-top2{
     padding-top: 2%;
 }

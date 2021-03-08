@@ -10443,3 +10443,6 @@ input{
     color: #018ece;
 }
 
+.autocomplete-container .suggestions-container {
+    position: fixed !important;
+}

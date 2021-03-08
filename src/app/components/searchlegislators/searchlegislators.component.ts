@@ -30,7 +30,7 @@ export class SearchlegislatorsComponent implements OnInit {
   resultop: any;
   resultop1: any;
   ipZipcode: String = '';
-  address: string = '300 Chatham Park Drive,Pittsburgh, PA 15220';
+  address: string;// = '300 Chatham Park Drive,Pittsburgh, PA 15220';
   currentLocationZip = '19406';
   public selectedlegislator: Legislator;
   latitude: any;
@@ -47,7 +47,7 @@ export class SearchlegislatorsComponent implements OnInit {
   divisionOffices = [];
   divisioncategory  = [];
   divisions = [];
-  searchBtnLabel:string;
+  //searchBtnLabel:string;
   selectedDivision:string;
   selectedDivisionOffice:string;
 
@@ -89,11 +89,7 @@ export class SearchlegislatorsComponent implements OnInit {
   }
   */
   ngOnInit() {
-    if(this.registration){
-      this.searchBtnLabel = 'Try';
-    }else{
-      this.searchBtnLabel = 'Search';
-
+    if(!this.registration){
       let address = this.route.snapshot.queryParamMap.get('address');
       console.log('searchlegislators ngOnInit() address ', address);
       if(address != null){
@@ -140,13 +136,10 @@ export class SearchlegislatorsComponent implements OnInit {
 
     }
     
-    //this.stateData = false;
-    //this.congressData = true;
-
-    if (!this.address) {
+    if (!this.address && !isDevMode()) {
       //this.missionService.announceAlertMission("{'alertType':'danger', 'alertMessage':'Please provide address to search for Congress data.'}");
 
-      this.alertService.error('Please provide address to search for Congress data.');
+      this.alertService.error('Please provide an address to find the Representatives.');
 
       return;
     }
@@ -381,7 +374,7 @@ this.processOCD(result);
     let divisionsObj = {};
     let divisionsKeys = [];
     this.divisions = [];
-
+    this.divisionOffices = [];
 
     divisionsObj = result['divisions'];
     divisionsKeys = Object.keys(divisionsObj);

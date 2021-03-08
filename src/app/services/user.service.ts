@@ -70,10 +70,6 @@ export class UserService extends AbstractService{
         url = url + "?requestorId=" + requestorId;
       }
     }
-    url = this.getUserService()+"/"+userId+"/";
-    if(requestorId != null){
-      url = url + "?requestorId=" + requestorId;
-    }
         
     console.log("getUserData() " + url);
     
@@ -614,9 +610,9 @@ gTokenVerify(token: string):Observable<any> {
   
        let serviceUrl = this.getUserService() + "/tokenVerify";
   
-       console.log("headers X-ID-TOKEN" + headers["X-ID-TOKEN"]);
-       console.log("tokenVerify::user.service invoking service " + serviceUrl);
-       console.log("headers " + headers);
+       //console.log("headers X-ID-TOKEN" + headers["X-ID-TOKEN"]);
+       //console.log("tokenVerify::user.service invoking service " + serviceUrl);
+       //console.log("headers " + headers);
     
        return this.http.post(serviceUrl, body, {headers, responseType: 'text', observe: 'response'})
         .pipe(
@@ -679,8 +675,7 @@ updateProfileData(request:any):Observable<any>{
   );
 }
 
-
-
+//USED FOR ENTITY'S PROFILE SMALL IMAGE DOWNLOAD
 getImage(userId: string): Observable<Blob> {
   //let serviceUrl = this.getPostService() + "/downloadFile/user/" + userId + "/";
   let serviceUrl = this.getPostService() + "/downloadFile/entity/" + userId + "/";

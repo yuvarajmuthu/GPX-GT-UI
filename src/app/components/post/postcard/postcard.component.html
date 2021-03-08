@@ -18,7 +18,7 @@
 
                     <div class="text-muted h7 mb-2">
                         <i class="fa fa-clock-o"></i>
-                        {{todayDate | date:'medium'}}
+                        {{post.lastModifiedDate | dateFormatPipe}}
                     </div>
                     
                 </div>
@@ -118,11 +118,12 @@
                   <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
             </ng-template>
 
-
+<!--
             <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
         [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
         Share
 </button>
+-->
         </div>
 
 
@@ -283,7 +284,7 @@
                         <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                     </div>
                     <div class="commented-date">
-                        {{todayDate | date:'medium'}}
+                        {{todayDate | dateFormatPipe}}
                     </div>
                 </div>
             </div>
@@ -350,11 +351,12 @@
                   <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
             </ng-template>
 
-
+<!--
             <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
         [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
         Share
-</button>
+            </button>
+        -->
         </div>
 
 

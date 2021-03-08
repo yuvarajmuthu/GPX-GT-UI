@@ -100,6 +100,7 @@ getLegislature(searchParam:string, type:string):Observable<any>{
         //url='/assets/json/congressLegislatorsByGeoLocation.json';
         url='/assets/json/fromService/opencivicdatasearchbyaddress.json';
       }
+      //url='/assets/json/fromService/opencivicdatasearchbyaddress.json';
     } else if(type == 'byCongressDistrict'){ // get Congress legislators by Division id
       url = "https://www.googleapis.com/civicinfo/v2/representatives/ocdId?ocdId="+ searchParam +"&key=AIzaSyBShZOVB_EtWokgbL0e6ZWHpAHpwVY5vZY";
       //this.getDistrictInfoFromGoogle(url);

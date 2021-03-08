@@ -54,6 +54,30 @@ a {
     background-position: center center;
 }
 
+/*.searchbtnGroup {
+    width: unset;
+}
+.searchIcon {
+    padding: 6px 16px 13px 10px;
+    border: 1px solid #ddd;
+    height: 38px;
+    border-radius: 0px 5px 5px 0px;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    border-left: 0;
+}*/
+
+.simplelogo {
+    height: 50px;
+    width: 45px;
+    background-size: 50px 43px;
+    background-image: url('../assets/images/gpx-brand-v1.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-right: 0px;
+}
+
 .navbar-expand-lg {
     border-bottom: 1px solid #ccc;
     background: #fff !important;

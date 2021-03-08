@@ -1,13 +1,30 @@
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container-fluid">
-      <a class="navbar-brand mylogo" routerLink="/"></a>
+      <a [ngClass]="{'navbar-brand mylogo':!isMobile , 'navbar-brand simplelogo':isMobile}" routerLink="/"></a>
+
+      <!-- 
+        For Expand search bar
+        <div class="input-group searchbtnGroup mobileSearch" *ngIf="isMobile">
+        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]="" id="searchExapnd"></app-gps-global-search>
+            <span class="input-group-append">
+              <span class="searchIcon">
+                  <i class="fa fa-search"></i>
+              </span>
+            </span>
+      </div> -->
+
+      <div *ngIf="isMobile">
+        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+      </div>
+      
+      <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button>
+      <button *ngIf="isMobile" type="button" [ngbPopover]="popContent"  #p="ngbPopover"  class="mobile-avatar-button"> <img src="assets/images/avatars/avatar.png" class="img-responsive"/></button>
+      
       <button class="navbar-toggler" type="button" (click)="isCollaped = !isCollaped"
               [attr.aria-expanded]="!isCollaped" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
-      <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button>
-      <button *ngIf="isMobile" type="button" [ngbPopover]="popContent"  #p="ngbPopover"  class="mobile-avatar-button"> <img src="assets/images/avatars/avatar.png" class="img-responsive"/></button>
 
       <!-- <ul *ngIf="isMobile" class="navbar-nav">
            <li class="avatar-profile d-sm-block " [ngbPopover]="popContent">
@@ -36,70 +53,10 @@
                   <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
               </li>
           </ul>
-          <!--
-          <ul class="navbar-nav mr-auto d-lg-none d-xl-none">
-              <li class="nav-item">
-                  <a class="nav-link" (click)="route('login')"><i class="fa fa-sign-in"></i>Login</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="route('register')"><i class="fa fa-registered"></i>Register</a>
-              </li>
 
-          </ul>
--->
 
-<app-gps-global-search  placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+<app-gps-global-search *ngIf="!isMobile" placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
 
-            <!-- <div class="ng-autocomplete common-search" *ngIf="!isMobile">
-              <ng-autocomplete
-                [data]="searchUsers"
-                (inputChanged) = "onChangeSearch($event)"
-                (selected)='selectEvent($event)'
-                [searchKeyword]="keyword"
-                placeHolder="Search Legislator, Person, District, Party..."
-                historyIdentifier="searchUsers" 
-                [itemTemplate]="itemTemplate"
-                [notFoundTemplate]="notFoundTemplate">
-              </ng-autocomplete>
-              <ng-template #itemTemplate let-item>
-                <div class="item">
-                  <img src="{{item.photoUrl}}" height="25">
-                  <span [innerHTML]="item.full_name"></span>
-                  <small></small>
-                </div>
-              </ng-template>
-            
-              <ng-template #notFoundTemplate let-notFound>
-                <div [innerHTML]="notFound"></div>
-              </ng-template>
-            </div> -->
-
-         
-        <!-- <div class="btn-group" dropdown>
-          <button dropdownToggle type="button" class="btn add dropdown-toggle">
-            <span class="glyphicon glyphicon-plus"></span>
-            Create Page
-          </button>
-
-          <ul dropdownMenu class="dropdown-menu" role="menu">
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="createPage('District')">Create District</a>
-            </li>
-
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="createPage('Legislator')">Create Legislator</a>
-            </li>                
-
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="createPage('User')">Create User</a>
-            </li>                              
-
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="createPage('Party')">Create Party</a>
-            </li>                                            
-          </ul>
-
-        </div>    -->
         
         <div class="dropdown create-page-button-custom-position">
           <button (click)="route('createpageoptions')" class="btn btn-md btn-secondary btn-custom-horizondal fa fa-plus" type="button" (click)="iscreateOptEnabled =  !iscreateOptEnabled">

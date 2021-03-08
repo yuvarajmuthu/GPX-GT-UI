@@ -1,12 +1,10 @@
 import {Component, OnInit, Input, isDevMode, Output, EventEmitter, ViewEncapsulation, ElementRef} from '@angular/core';
-//import { formatDate } from "@angular/common";
 import { Router } from "@angular/router";
 import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {Post} from '../../../models/post';
 import { Observable, of, from, throwError} from 'rxjs';
-
 
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import 'rxjs/Rx';
@@ -286,7 +284,7 @@ export class PostcardComponent implements OnInit {
         }
 
         //check if logged in user LIKED the Post
-        if(this.entityId && this.post.likedBy.indexOf(this.entityId) != -1){
+        if(this.entityId && this.post.likedBy && this.post.likedBy.indexOf(this.entityId) != -1){
             this.liked = true;    
             this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
         }
@@ -502,11 +500,17 @@ export class PostcardComponent implements OnInit {
         this.comment.entityId = this.dataShareService.getLoggedinUsername();
         this.comment.postText = this.txtPost; 
 
-        console.log('Submitting Comment text ', this.txtPost);
         this.comment.parentPostId = this.post.id;
+        console.log('Submitting Comment ', this.comment, JSON.stringify(this.comment));
+
+        if(!this.postFormData){
+            this.postFormData = new FormData();
+        }
+
         this.postFormData.append('post', JSON.stringify(this.comment));
         this.postService.postComment(this.postFormData)
             .subscribe((data:any) => {
+              console.log('Response from Post ', data);
               this.resetForm();
             });
 }

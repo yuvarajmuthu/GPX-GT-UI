@@ -153,7 +153,7 @@
                     <h5>
                     <!-- DISTRICT-begin -->
                         <span *ngIf="!isEditDistrict" class="profile-pills">
-                            <a class="padding-pills" [routerLink]="['/user', biodata.district]">District {{biodata.district}}</a>
+                            <a class="padding-pills" [routerLink]="['/user', biodata.district]">District: {{biodata.district}}</a>
                             <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button>
@@ -238,7 +238,7 @@
                         <!-- PARTY-begin -->
 
                             <span *ngIf="!isEditParty">
-                                <a class="padding-pills" [routerLink]="['/user', biodata.party]">{{biodata.party}} Party</a>
+                                <a class="padding-pills" [routerLink]="['/user', biodata.party]">Party: {{biodata.party}}</a>
                                 <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>

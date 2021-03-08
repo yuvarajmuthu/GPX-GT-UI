@@ -18,6 +18,7 @@ import {SearchService} from '../../services/search.service';
 import {DatashareService} from '../../services/datashare.service';
 
 import {BannerComponent} from '../banner/banner.component';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-legislator',
@@ -32,9 +33,8 @@ export class LegislatorComponent implements OnInit {
   isInCircle: boolean;
   keys = [];
   loggedUsername:string;
-  userName: string = 'createnew';
+  userName: string = null;
 
-  bookMark:boolean;
 
 
   constructor(private  router: Router,
@@ -113,7 +113,9 @@ export class LegislatorComponent implements OnInit {
   }
 
   check4CircleStatus() {
-    if(!this.loggedUsername){
+    this.isInCircle = false;
+
+    if(this.loggedUsername && this.userName){
       this.userService.isInCircle(this.userName, this.loggedUsername).subscribe(
           (result) => {
               this.isInCircle = result; 
@@ -187,12 +189,14 @@ export class LegislatorComponent implements OnInit {
     if (legislator['leg_id']) {
       console.log('legislator[leg_id] ', legislator['leg_id']);
       this.userName = legislator['leg_id'];
+      this.check4CircleStatus();
 
     } else if(this.legislator['photo_url'] && this.legislator['photo_url'].indexOf('bioguide.congress.gov') != -1 ) { //CONGRESS
       console.log('this.legislator[photo_url] ', this.legislator['photo_url']);
       let photoUrl = this.legislator['photo_url'];
       let fileName = photoUrl.substring(photoUrl.lastIndexOf('/') + 1);
       this.userName = fileName.substring(0, fileName.lastIndexOf('.'));
+      this.check4CircleStatus();
 
 
     }else if (legislator['full_name']) {
@@ -206,6 +210,23 @@ export class LegislatorComponent implements OnInit {
             this.check4CircleStatus();
           }else{
             //create user with legislator data ?
+
+            let user:User = this.generateUserData(legislator);
+
+            this.userService.registerUser(user).subscribe(
+              data => {
+                  console.log('Response from registering the user ', data);
+                  if(data != null){
+                    this.userName = data['username'];
+
+                  }
+              },
+              error => {
+                  //this.alertService.error(error);
+                  console.log('Error while registering the user ', legislator.full_name, error);
+              });
+              this.check4CircleStatus();
+
           }
         },
         (err) => {
@@ -216,14 +237,45 @@ export class LegislatorComponent implements OnInit {
     }
   }
 
+  generateUserData(legislator: Legislator):User{
+    let data={};
+    let biodataTemplateData={};
+    let user:User = new User();
+    let profileDatasList:Array<Object> = [];
+    let members:Array<string> = [];
+
+    data['full_name'] = legislator['full_name'];
+    biodataTemplateData['entityId'] = legislator['full_name'] + '-GPX';
+    biodataTemplateData['profileTemplateId'] = 'upCongressLegislatorExternal';
+    data['party'] = legislator['party'];
+    data['chamber'] = legislator['divisionOffice'];
+    data['district'] = legislator['division'];
+    biodataTemplateData['data'] = data;
+
+    profileDatasList.push(biodataTemplateData);
+    user['profileDatas'] = profileDatasList;
+    user.displayName = legislator['full_name'];
+    user.photoUrl = legislator['photo_url'];
+    user.sourceSystem = legislator['source'];
+    user.userType = 'LEGISLATOR';
+    this.userName = user.username = biodataTemplateData['entityId'];
+
+    user['status'] = 'PASSIVE';
+    
+    //members.push(user['username']);
+    //user['members'] = members;
+    return user;
+
+  }
+
   //called from UI on selection of a Legislator
   gotoLegislator(legislator: Legislator): void {
     console.log('selected legislator - this.userName' + this.userName);
-    if(this.userName === 'createnew'){
-      this.datashareService.setLegislator(legislator);
-      this.router.navigate(['/user', {'userObj':legislator}]);
-    }else{
+    if(this.userName != null){
       this.router.navigate(['/user', this.userName]);
+    }else{
+      this.datashareService.setLegislator(legislator);
+      this.router.navigate(['/user']);
     }
   }
 

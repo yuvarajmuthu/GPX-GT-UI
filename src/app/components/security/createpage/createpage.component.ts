@@ -165,7 +165,8 @@ export class CreatepageComponent implements OnInit {
             this.router.navigate(['/user', data['username']]);
         },
         error => {
-            this.alertService.error(error);
+            console.log("Error during registration process ", error);
+            this.alertService.error(error['error'], true); 
 
         });
 

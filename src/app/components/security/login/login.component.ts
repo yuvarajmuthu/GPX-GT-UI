@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
                     }
                     //send the token to /gTokenVerify using x-id-token headername
                     //response header will have authorization: Bearer token
-                    console.log('response from ' , this.user['provider'], ' with token', token);
+                   // console.log('response from ' , this.user['provider'], ' with token', token);
 
                     this.userService.tokenVerify(token, this.user['provider'])
                     .subscribe(response => {
@@ -85,7 +85,8 @@ export class LoginComponent implements OnInit {
                         userObj.photoUrl = this.user['photoUrl'];
                         userObj.provider = this.user['provider'];
                         userObj.username = this.user['email'];
-    
+                        console.log('response from login ', userObj);
+
                         this.datashareService.setCurrentUser(userObj);
       
                         this.componentcommunicationService.loginChanged(true);
@@ -144,7 +145,7 @@ export class LoginComponent implements OnInit {
                 },
                 (error:HttpErrorResponse) => {
                     console.log("login error ", error);
-                    this.alertService.error('Problem with Login : ' + error.status);
+                    this.alertService.error('Problem with Login : ' + error.message);
                     this.loading = false;
                 });
     }

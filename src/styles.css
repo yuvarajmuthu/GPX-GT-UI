@@ -10061,6 +10061,35 @@ aside.sidebar.full-style {
 }
 */
 
+/* 
+Search Expand CSS changes
+#searchExapnd .autocomplete-container .input-container {
+    position: relative;
+}
+#searchExapnd .autocomplete-container .input-container input:focus {
+    width: 100% !important;
+    background-position: left top;
+    transition: width .4s !important;
+}
+.mobileSearch #searchExapnd .autocomplete-container .input-container input:focus {
+    width: 100% !important;
+    background-position: left top;
+    transition: width .4s !important;
+}
+#searchExapnd .autocomplete-container .input-container input {
+    width: 40% !important;
+    position: absolute;
+    right: 0;
+}
+.mobileSearch #searchExapnd .autocomplete-container .input-container input {
+    width: 65% !important;
+    position: absolute;
+    right: 0;
+}
+#searchExapnd .autocomplete-container .input-container input {
+    width: 50%;
+} */
+
 .padding-top2{
     padding-top: 2%;
 }
@@ -10319,11 +10348,7 @@ input{
     margin-top: 0;
     margin-bottom: 10px;
 }
-.news-div{
-    margin-top: 5%;
-    margin-left: 15%;
-    width: 70%;
-}
+
 @media only screen and (min-width: 1024px){
     section {
         padding: 80px 0;
@@ -10331,6 +10356,12 @@ input{
 
     .banner-caption {
         margin-top: 120px;
+    }
+
+    .news-div{
+        margin-top: 5%;
+        margin-left: 15%;
+        width: 70%;
     }
 }
 
@@ -10412,3 +10443,6 @@ input{
     color: #018ece;
 }
 
+.autocomplete-container .suggestions-container {
+    position: fixed !important;
+}

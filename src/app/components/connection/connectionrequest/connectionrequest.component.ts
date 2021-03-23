@@ -46,7 +46,7 @@ export class ConnectionrequestComponent implements OnInit {
       this.getFollowersCount(this.username);
 
     if(!isDevMode()){
-      //this.getProfileSmImage(this.username);
+      this.getProfileSmImage(this.username);
     }  
 
   }

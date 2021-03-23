@@ -55,8 +55,13 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
-        //SUBSCRIBING TO OPENID SUCH AS GOOGLE, FACEBOOK LOGIN EVENTS
+        /*
+        this.route.queryParams.subscribe(       retUrl => {         
+            this.returnUrl = retUrl.returnUrl;       
+        }     );
+        */
+        //SUBSCRIBING TO OPENID SUCH AS GOOGLE, FACEBOOK LOGIN EVENTS - authState::SocialUser
+        
         this.extAuthService.authState.subscribe((user) => {
             this.user = user;//SocialUser
             this.loggedIn = (user != null);
@@ -102,8 +107,14 @@ export class LoginComponent implements OnInit {
       
 
 
+            }else if(localStorage.getItem('currentUserToken') != null){
+                this.alertService.success('Login successful', true);
+                this.router.navigate([this.returnUrl]);
             }
+
           });
+          
+
     }
 
 // convenience getter for easy access to form fields
@@ -111,6 +122,7 @@ export class LoginComponent implements OnInit {
         return this.loginForm.controls;
     }
 
+    //inhouse login
     login() {
         this.submitted = true;
 
@@ -121,33 +133,22 @@ export class LoginComponent implements OnInit {
         /*console.log(this.loginForm.value);*/
         this.loading = true;
         this.authenticationService.login(this.loginForm.value)
-            .pipe(first())
+            //.pipe(first())
             .subscribe(
-                () => {
+                (response) => {
 
-                    //console.log("res.headers.get('Authorization') ", res.headers.get('Authorization'));
-                    //localStorage.setItem('currentUserToken', res.headers.get('Authorization'));
-                    /*
-                            let main_headers = {};
-                            const keys = res.headers.keys();
-                            let headers = keys.map(key => {
-                              `${key}: ${res.headers.get(key)}`
-                                main_headers[key] = res.headers.get(key)
-                               }
-                              );
-                              console.log("JSON.stringify(main_headers) ", JSON.stringify(main_headers));
-                    */
-
-                    // this.componentcommunicationService.loginChanged(true);
                     this.alertService.success('Login successful', true);
-
+                    
+                    this.loading = false;
                     this.router.navigate([this.returnUrl]);
+
                 },
                 (error:HttpErrorResponse) => {
                     console.log("login error ", error);
-                    this.alertService.error('Problem with Login : ' + error.message);
+                    this.alertService.error('Problem with Login : ' + error.error.message);
                     this.loading = false;
                 });
+                
     }
 
     loginG() {

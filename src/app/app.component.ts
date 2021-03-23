@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener} from '@angular/core';
+import {Component, OnInit, HostListener, isDevMode} from '@angular/core';
 import {Router} from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -205,15 +205,16 @@ export class AppComponent implements OnInit {
             user.token = localStorage.getItem('currentUserToken');
             user.username = localStorage.getItem('currentUserName');
             this.dataShareService.setCurrentUser(user);
-
-            this.getProfileSmImage(user.username);
+            if(!isDevMode()){
+                this.getProfileSmImage(user.username);
+            }
             this.getNotifications();
         }
 
     }
 
     updateUserNavBar() {
-        if (this.isUserLogged) {
+        if (!isDevMode() && this.isUserLogged) {
             let user: User = this.dataShareService.getCurrentUser();
             this.getProfileSmImage(user.username);
         } else {

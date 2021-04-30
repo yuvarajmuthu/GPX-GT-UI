@@ -68,7 +68,7 @@ export class PostcardComponent implements OnInit {
 
     profileSmImage: any = 'assets/images/temp/user-avatar.jpg';//'assets/images/avatar1.png';
     isImageLoading: boolean = false;
-    postImage: any = 'assets/images/temp/user-avatar.jpg';//'assets/images/avatar1.png';
+    postImage: any = 'assets/images/user-banner2.jpg';//'assets/images/avatar1.png';
     isPostImageLoading: boolean = false;
     entityId: string;
     numbers: number[] = [];

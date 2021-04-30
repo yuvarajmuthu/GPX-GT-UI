@@ -49,7 +49,7 @@ a {
     height: 50px;
     width: 205px;
     background-size: 200px 23px;
-    background-image: url('../assets/images/logo.png');
+    background-image: url('../assets/images/gpx-logo-default-lg.png');
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -70,9 +70,9 @@ a {
 
 .simplelogo {
     height: 50px;
-    width: 45px;
+    width: 55px;
     background-size: 50px 43px;
-    background-image: url('../assets/images/gpx-brand-v1.png');
+    background-image: url('../assets/images/gpx-logo-default-sm.png');
     background-repeat: no-repeat;
     background-position: center center;
     margin-right: 0px;

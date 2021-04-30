@@ -3,22 +3,21 @@
 
 </div> -->
 
-<div class="card gedf-card post-list"  *ngIf="isComment==false">
-    <div class="card-header post-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2" [routerLink]="['/user', post.entityId]">
-                    <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
+<div class="cardbox shadow-lg bg-white">
+    <div class="cardbox-heading post-header">
+            <div class="media m-0">
+                <div class="mr-3" [routerLink]="['/user', post.entityId]">
+                    <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
                 </div>
-                <div class="ml-2">
-                    <div class="h5 m-0">
+                <div class="media-body">
+                    <div class="h6 m-0">
                         <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                         
                    </div>
 
                     <div class="text-muted h7 mb-2">
                         <i class="fa fa-clock-o"></i>
-                        {{post.lastModifiedDate | dateFormatPipe}}
+                        {{post['lastModifiedDate'] | dateFormatPipe}}
                     </div>
                     
                 </div>
@@ -52,22 +51,21 @@
                     </div>
                 </div>
             </div>-->
-        </div>
        
     </div>
-    <div class="card-body">
+    <div class="cardbox shadow-lg bg-white">
 
 
-        <div *ngIf="post && post.containsImage" class="post-meta">
-            <img [src]="postImage" alt="">
+        <div *ngIf="post && post['containsImage']" class="cardbox-item">
+            <img class="img-fluid" [src]="postImage" alt="">
         </div>
 
-        <div *ngIf="post && post.containsVideo" class="post-meta">
+        <div *ngIf="post && post['containsVideo']" class="cardbox-item">
             <div class="we-video-info">
 
             </div>
         </div>
-        <div *ngIf="post && post.containsText" (click)="tagUsersRedirectTo($event)" class="description" [innerHTML]="postText">
+        <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
             <!-- <p class="card-text" >
             </p> -->
         </div>
@@ -262,60 +260,51 @@
                 <br/>
             </div>
         </ng-container>
-        <app-postcard  *ngFor="let post of comments" [isComment]="true" [post]="post">
+
+        <!--LIST IF COMMENTS FOR THE POST-->
+        <app-postcard *ngFor="let post of comments" [isComment]="true" [post]="post">
         </app-postcard> 
+
         <button *ngIf="loadMore" type="button" class="btn btn-xs load-more-comments" (click)="loadMoreComments()">Load more
             comments
         </button>
     </div>
 </div>
-<br/>
+
 
 <!-- COMMENT / POST DESIGN CAN BE REUSED-->
-<div class="card gedf-card comments-card"  *ngIf="isComment==true">
-    <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2" [routerLink]="['/user', post.entityId]">
-                    <img class="rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
+
+<!--
+    <br/>
+<div class="cardbox shadow-lg bg-white"  *ngIf="isComment">
+    <div class="cardbox-heading comment-header">
+            <div class="media m-0">
+                <div class="mr-3" [routerLink]="['/user', post.entityId]">
+                    <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
                 </div>
-                <div class="ml-2">
-                    <div class="h5 m-0 commented-user">
+                <div class="media-body">
+                    <div class="h6 m-0">
                         <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                     </div>
-                    <div class="commented-date">
-                        {{todayDate | dateFormatPipe}}
+                    <div class="text-muted h7 mb-2">
+                        <i class="fa fa-clock-o"></i>
+                        {{post.lastModifiedDate | dateFormatPipe}}
                     </div>
                 </div>
             </div>
-            <!--
-            <div>
-                <div class="dropdown">
-                    <div class="btn-group">
-                        <div ngbDropdown class="d-inline-block">
-                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" id="postRightDropdown" ngbDropdownToggle>
-                                <i class="{{ icon }}"></i> {{ name }}
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    -->
 
     </div>
-    <div class="card-body">
-        <div *ngIf="post.containsImage" class="post-meta">
-            <img [src]="postImage" alt="">
+    <div class="cardbox shadow-lg bg-white">
+        <div *ngIf="post && post.containsImage" class="cardbox-item">
+            <img class="img-fluid" [src]="postImage" alt="">
         </div>
 
-        <div *ngIf="post.containsVideo" class="post-meta">
+        <div *ngIf="post && post.containsVideo" class="cardbox-item">
             <div class="we-video-info">
 
             </div>
         </div>
-        <div *ngIf="post.containsText" (click)="tagUsersRedirectTo($event)" class="description" [innerHTML]="postText">
+        <div *ngIf="post && post.containsText" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
 
         </div>
         
@@ -334,10 +323,7 @@
                 <i class="fa fa-comment custom-size"></i>
                 Comment({{commentsCount}})
             </a>
-            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
-                <i class="fa fa-mail-forward custom-size"></i>
-                Share
-            </a> -->
+
             <ng-template #popContent>
                 <tag-input [(ngModel)]="shareUsers"  placeholder="Share with" (input)="searchShareUser($event)" secondaryPlaceholder="Share with" >
                     <tag-input-dropdown 
@@ -351,12 +337,7 @@
                   <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
             </ng-template>
 
-<!--
-            <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
-        [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
-        Share
-            </button>
-        -->
+
         </div>
 
 
@@ -370,16 +351,7 @@
                                  aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
-                                    <!-- <div id="commentContent" class="commentContent" contenteditable="true"
-                                    [mentionConfig]="mentionConfig" placeholder="What are you thinking?"
-                                    [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
-                                    </div>
-        
-                                    <ng-template #mentionListTemplate let-item="item">
-                                        <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
-                                        &nbsp;
-                                        <span>{{item.name}}</span>
-                                      </ng-template> -->
+     
 
                                       <div id="commentContent" class="commentContent form-control" contenteditable="true"
                                       [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
@@ -417,14 +389,7 @@
                                                         (change)="onvideoSelected($event)">
                                                     </label>
                                                 </li>
-                                                <!--
-                                                <li>
-                                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                    <label class="fileContainer">
-                                                        <input type="checkbox" class="location" id="location">
-                                                    </label>
-                                                </li>
-                                                -->
+              
                                                 <li>
                                                     <div class="btn-group">
                                                         <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
@@ -452,14 +417,7 @@
                                 <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
                             </div>
                         </div>
-                        <!--
-                        <div class="btn-toolbar justify-content-between float-right">
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
-                                </button>
-                            </div>
-                        </div>
-                    -->
+      
 
                     </div>
                 </div>
@@ -472,5 +430,5 @@
 
 </div>
 
-
+-->
 

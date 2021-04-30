@@ -29,6 +29,8 @@ export class Usercard2Component implements OnInit {
   followRequestRejected: boolean = false;
   isCircle:string;
   isSelfProfile: boolean = false;
+  profileSmImage: any; 
+  isImageLoading: boolean = false;
 
 
   constructor(private  router: Router,
@@ -61,9 +63,42 @@ export class Usercard2Component implements OnInit {
 
         this.getFollowersCount(this.username);
 
-}
 
-  getRelationStatus(entity: string, profileId: string) {
+        this.profileSmImage = 'assets/images/avatar1.png'; 
+
+        if (!isDevMode()){
+            if(this.user != null && this.user['photoUrl'] != null){
+                this.profileSmImage = this.user['photoUrl'];
+            }else{
+                this.getProfileSmImage(this.username);
+            }
+        }
+
+    }
+
+    getProfileSmImage(userId: string) {
+        this.isImageLoading = true;
+        this.userService.getImage(userId).subscribe(data => {
+            this.createImageFromBlob(data);
+            this.isImageLoading = false;
+        }, error => {
+            this.isImageLoading = false;
+            console.log(error);
+        });
+    }
+
+    createImageFromBlob(image: Blob) {
+        let reader = new FileReader();
+        reader.addEventListener('load', () => {
+            this.profileSmImage = reader.result;
+        }, false);
+
+        if (image) {
+            reader.readAsDataURL(image);
+        }
+    }
+
+    getRelationStatus(entity: string, profileId: string) {
 
     this.userService.getRelationStatus(entity, profileId)
         .subscribe(

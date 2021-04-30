@@ -1,5 +1,5 @@
 <!--if inEditMode==true, show add/edit image option -->
-<div class="profile-banner" style="background-image: url('../../../../assets/images/user-banner1.jpg');">
+<div class="profile-banner" style="background-image: url('../../../../assets/images/user-banner2.jpg');">
     <div class="col-sm-3 avatar-container">
         <!--<img [src]="profileSmImage" class="twPc-avatarImg img-circle profile-avatar"-->
         <!--*ngIf="!isImageLoading" alt="User avatar">-->
@@ -589,8 +589,8 @@
         <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="toggleTemplateDropDown();Profiles(activeTemplatName);loadTemplate(activeTemplate)" type="button">{{activeTemplatName}}</button></li>
         <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showActivities()">Posts</button></li>
         <li *ngIf="isProfileManaged" [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Managed By</button></li>
+        
         <li [ngClass]="{'active':isProfileCollapsed==false}">
-
             <div class="btn-group dropup">
               <button type="button" class="btn btn-secondary dropdown-toggle" (click)="toggleTemplateDropDown()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
@@ -604,10 +604,64 @@
 
               </div>
             </div>
-
-
-
       </li>
 
     </ul>
 </div>
+<!--
+<div class="navbar-more-overlay"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top animate">
+    <div class="container">
+        <div class="navbar-header hidden-xs">
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right mobile-bar">
+            <li>
+                <a href="#">
+                    <span class="menu-icon fa fa-home"></span>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="menu-icon fa fa-info"></span>
+                    <span class="hidden-xs">About the Boat</span>
+                    <span class="visible-xs">About</span>
+                </a>
+            </li>
+            <li class="hidden-xs">
+                <a href="#">
+                    <span class="menu-icon fa fa-picture-o"></span>
+                    Photos
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="menu-icon fa fa-ship"></span>
+                    Cruises
+                </a>
+            </li>
+            <li class="hidden-xs">
+                <a href="#">
+                    <span class="menu-icon fa fa-bell-o"></span>
+                    Reservations
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="menu-icon fa fa-phone"></span>						
+                    <span class="hidden-xs">Contact Us</span>
+                    <span class="visible-xs">Contact</span>
+                </a>
+            </li>
+            <li class="visible-xs">
+                <a href="#navbar-more-show">
+                    <span class="menu-icon fa fa-bars"></span>
+                    More
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+-->

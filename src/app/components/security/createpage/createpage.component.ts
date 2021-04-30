@@ -39,6 +39,7 @@ export class CreatepageComponent implements OnInit {
     full_name: new FormControl('', Validators.required),
     first_name: new FormControl(''),
     last_name: new FormControl(''),
+    description: new FormControl(''),
     party: new FormControl(''),
     district: new FormControl(''),
     chamber: new FormControl(''),

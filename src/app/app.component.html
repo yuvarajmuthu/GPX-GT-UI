@@ -37,21 +37,21 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped" [style.height.px]="screenHeight">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
+              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
+                <i class="fa fa-user"></i>
+                <div>Circle</div>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
+          </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
-                    <i class="fa fa-user"></i>
-                    <div>Circle</div>
-                  </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
-              </li>
+          <li class="nav-item">
+              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
+          </li>
           </ul>
 
 

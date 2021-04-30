@@ -103,7 +103,7 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
     }
-    serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
+    //serviceUrl = this.serviceUrl + "/getPosts/" + requestJson['entityId'] + "/";
 
     //serviceUrl = '/assets/json/fromService/post.json'; 
 
@@ -191,7 +191,6 @@ export class PostService  extends AbstractService{
     }else{
       serviceUrl = this.serviceUrl + "/getPostComments/" + requestJson['postId'] + "/";
     }
-    serviceUrl = this.serviceUrl + "/getPostComments/" + requestJson['postId'] + "/";
 
     console.log("In getPostComments");
     return this.http.get(serviceUrl, { responseType: 'json', params: {

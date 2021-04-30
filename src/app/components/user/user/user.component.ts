@@ -67,7 +67,7 @@ export class UserComponent implements OnInit {
     public isLegislator = false;
     operation: string = '';
     profileImage: string = '';
-    profileSmImage: any = 'assets/images/avatar1.png'; 
+    profileSmImage: any; 
     bannerImage: any;
     isImageLoading: boolean = false;
     isProfileCollapsed: boolean = false;
@@ -348,8 +348,14 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loggedUsername = this.datashareService.getLoggedinUsername();
+        //reset
+        this.userData = {};
         this.bannerImage = 'assets/images/user-banner1.jpg';
+        this.profileSmImage = 'assets/images/avatar1.png'; 
+        this.displayName = '';
+        this.biodata = {};
+
+
 
         this.uploadForm = this.formBuilder.group({
             file: ['']
@@ -357,6 +363,8 @@ export class UserComponent implements OnInit {
 
         this.header = document.getElementById("myHeader");
         this.sticky= document.getElementById("myHeader").offsetTop;
+
+        this.loggedUsername = this.datashareService.getLoggedinUsername();
 
         this.route.params.subscribe((params: Params) => {
             this.communicationService.userProfileChanged(false);
@@ -593,10 +601,11 @@ export class UserComponent implements OnInit {
                     } 
                     
                     //load profile small image
-                    if (isDevMode()) {
-                        this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
-                    }else {
-                        if(this.userData['photoUrl'] != null){
+
+                    this.profileSmImage = 'assets/images/avatar1.png'; 
+
+                    if (!isDevMode()){
+                        if(this.userData != null && this.userData['photoUrl'] != null){
                             this.profileSmImage = this.userData['photoUrl'];
                         }else{
                             this.getProfileSmImage(this.viewingUser['userId']);

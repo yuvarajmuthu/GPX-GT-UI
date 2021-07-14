@@ -153,6 +153,7 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
+      //enable the interceptor only for DEV mode
       /*
         {
             provide: HTTP_INTERCEPTORS,
@@ -160,6 +161,7 @@ let config = new AuthServiceConfig([
             multi: true
         },
         */
+        
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe

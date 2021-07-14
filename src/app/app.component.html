@@ -1,6 +1,6 @@
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container-fluid">
-      <a [ngClass]="{'navbar-brand mylogo':!isMobile , 'navbar-brand simplelogo':isMobile}" routerLink="/"></a>
+      <a [ngClass]="{'navbar-brand mylogo':!isMobile , 'navbar-brand simplelogo':isMobile}" (click)="hideNav()" routerLink="/"></a>
 
       <!-- 
         For Expand search bar
@@ -14,14 +14,14 @@
       </div> -->
 
       <div *ngIf="isMobile">
-        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
       </div>
       
-      <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button>
+     <!-- <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button> -->
       <button *ngIf="isMobile" type="button" [ngbPopover]="popContent"  #p="ngbPopover"  class="mobile-avatar-button"> <img src="assets/images/avatars/avatar.png" class="img-responsive"/></button>
       
       <button class="navbar-toggler" type="button" (click)="isCollaped = !isCollaped"
-              [attr.aria-expanded]="!isCollaped" data-toggle="collapse" data-target="#navbarSupportedContent"
+              data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
@@ -37,42 +37,44 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped" [style.height.px]="screenHeight">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
+              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
+              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
                 <i class="fa fa-user"></i>
                 <div>Circle</div>
               </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
+            <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
           </li>
 
           <li class="nav-item">
-              <a class="nav-link" (click)="clickedNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
+              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
           </li>
           </ul>
 
 
-<app-gps-global-search *ngIf="!isMobile" placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]=""></app-gps-global-search>
+        <app-gps-global-search *ngIf="!isMobile" placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
 
         
         <div class="dropdown create-page-button-custom-position">
-          <button (click)="route('createpageoptions')" class="btn btn-md btn-secondary btn-custom-horizondal fa fa-plus" type="button" (click)="iscreateOptEnabled =  !iscreateOptEnabled">
+          <button (click)="hideNav();route('createpageoptions');" class="btn btn-md btn-secondary btn-custom-horizondal fa fa-plus" type="button">
             Create Page
           </button>
+          <!--
           <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
             <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'district')">Create District</a>
             <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'legislator')">Create Legislator</a>
             <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'party')">Create Party</a>
           </div>
+          -->
         </div>
-
+<!--
         <div *ngIf="!isMobile && isUserLogged">
           <button type="button"  *ngIf="isUserLogged" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button>
         </div>
-
+-->
         <ng-template #shareContent>
           <div id="share-content">
             <div *ngFor="let notify of notifications">
@@ -82,11 +84,11 @@
             <!-- <div><a href="#" [routerLink]="['news']" [queryParams]="{postId: '12'}"><b>Raj</b> Shared a message</a></div> -->
           </div>
        </ng-template>
-
+      
         <ul *ngIf="!isMobile" class="navbar-nav ml-auto">
               <li class="avatar-profile d-none d-sm-block " [ngbPopover]="popContent">
                   <a href="javascript:void(0)"><img src="assets/images/avatars/avatar.png"
-                                                    class="img-responsive"/></a>
+                                                    class="img-responsive" /></a>
               </li>
           </ul>
       </div>
@@ -94,16 +96,16 @@
       <form class="form-inline my-2 my-lg-0">
           <ng-template #popContent>
               <button *ngIf="!isUserLogged" class="btn btn-outline-warning my-2 my-sm-0" type="button"
-                      (click)="route('register')">Register
+                      (click)="hideNav();route('register')">Register
               </button>
               <button *ngIf="!isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="button"
-                      (click)="route('login')">Login
+                      (click)="hideNav();route('login')">Login
               </button>
               <button *ngIf="isUserLogged" class="btn btn-outline-warning   my-2 my-sm-0" type="button"
-                      (click)="loadUser()">View Profile
+                      (click)="hideNav();loadUser()">View Profile
               </button>
               <button *ngIf="isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="button"
-                      (click)="logout()">Logout
+                      (click)="hideNav();logout()">Logout
               </button>
           </ng-template>
       </form>

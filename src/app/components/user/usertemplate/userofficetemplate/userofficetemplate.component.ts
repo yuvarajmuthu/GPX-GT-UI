@@ -93,7 +93,7 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
 */
 //this.zone.run(() => {
 
-        this.userService2.getOffices(this.profileUserId, this.viewingUser["isCongress"])
+        this.userService2.getOffices(this.profileUserId)
         .subscribe((data) => {
           //console.log("offices count ", data.length);
           //this.office = JSON.parse(JSON.stringify(data[0]));

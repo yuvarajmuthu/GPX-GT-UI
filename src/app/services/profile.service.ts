@@ -44,9 +44,9 @@ export class ProfileService extends AbstractService{
       );                            
   }
 
-  getProfileTemplateByType(profileTemplateId:string, type:string):Observable<any> {    
+  getProfileTemplateByCategory(profileTemplateId:string, category:string):Observable<any> {    
     let serviceUrl = this.serviceUrl + "/getProfileTemplate/" + profileTemplateId;
-    console.log("getProfileTemplateByType profile.service this.serviceUrl " + serviceUrl);
+    console.log("getProfileTemplateByCategory profile.service this.serviceUrl " + serviceUrl, " , category ", category);
     //DEV MODE
     if(this.devMode){  
       serviceUrl = '/assets/json/fromService/profileTemplate.json';   
@@ -54,16 +54,17 @@ export class ProfileService extends AbstractService{
     //serviceUrl = '/assets/json/fromService/profileTemplate.json';   
 
     return this.http.get(serviceUrl, { responseType: 'json', params: {
-      type: type
+      category: category
     } }).pipe(
-      tap(_ => this.log(`fetched getProfileTemplateByType`)),
-      catchError(this.handleError<any>(`Error in getProfileTemplateByType()`))
+      tap(_ => this.log(`fetched getProfileTemplateByCategory`)),
+      catchError(this.handleError<any>(`Error in getProfileTemplateByCategory()`))
     );
 
     
   }
 
-  getAvailableProfileTemplatesForEntity(entityId:string, userType:string):Observable<any> {    
+  //list the templates that are available to use, ignores the one that are already used
+  getAvailableProfileTemplatesForEntity(entityId:string, category:string):Observable<any> {    
     let serviceUrl = this.serviceUrl + "/getAllProfileTemplates/" + entityId + "/";
     console.log("getAvailableProfileTemplatesForEntity profile.service this.serviceUrl " + serviceUrl);
     //DEV MODE
@@ -73,7 +74,7 @@ export class ProfileService extends AbstractService{
     //serviceUrl = '/assets/json/fromService/profileTemplates.json';   
 
     return this.http.get(serviceUrl, { responseType: 'json', params: {
-      userType: userType
+      category: category
     } }).pipe(
       tap(_ => this.log(`fetched getAvailableProfileTemplatesForEntity`)),
       catchError(this.handleError<any>(`Error in getAvailableProfileTemplatesForEntity()`))
@@ -82,12 +83,12 @@ export class ProfileService extends AbstractService{
     
   }
 
-  getAvailableProfileTemplates(userType:string):Observable<any> {    
+  getAvailableProfileTemplates(category:string):Observable<any> {    
     let serviceUrl = this.serviceUrl + "/getAllProfileTemplates";
     console.log("getAvailableProfileTemplates profile.service this.serviceUrl " + serviceUrl);
     
     return this.http.get(serviceUrl, { responseType: 'json', params: {
-      userType: userType
+      category: category
     } }).pipe(
       tap(_ => this.log(`fetched getAvailableProfileTemplates`)),
       catchError(this.handleError<any>(`Error in getAvailableProfileTemplates()`))

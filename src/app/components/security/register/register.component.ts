@@ -20,7 +20,8 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
     biodataTemplateData = {};
-    userType:string = null;
+    //userType:string = null;
+    category:string = null;
     profileTemplateId:string = null;
 
     constructor(
@@ -34,15 +35,15 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            userType: ['PUBLICUSER'],
+            category: [this.constants.USERCATEGRORY_USER],
             full_name: ['', [Validators.required, Validators.minLength(2)]],
-            first_ame: [''],
-            last_name: [''],
-            username: ['',  [Validators.required, Validators.minLength(3)]],
+            firstNme: [''],
+            lastName: [''],
+            username:  [null, Validators.compose([Validators.required, Validators.pattern(/^(\d{10}|\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3}))$/)])],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
 
-        this.userType = this.constants.USERTYPE_PUBLICUSER;
+        this.category = this.constants.USERCATEGRORY_USER;
 
         this.profileTemplateId = 'upDefault';
 
@@ -59,6 +60,7 @@ export class RegisterComponent implements OnInit {
         if(this.registerForm.get('full_name') && this.registerForm.get('full_name').value)
             data['full_name'] = this.registerForm.get('full_name').value;
 
+        //following 3 properties may not be available    
         if(this.registerForm.get('emailId') && this.registerForm.get('emailId').value)            
             data['emailId'] = this.registerForm.get('emailId').value;
         
@@ -70,7 +72,7 @@ export class RegisterComponent implements OnInit {
         
         this.biodataTemplateData['entityId'] = this.registerForm.get('username').value;
         this.biodataTemplateData['profileTemplateId'] = this.profileTemplateId;
-        this.biodataTemplateData['entityType'] = this.userType;
+        //this.biodataTemplateData['category'] = this.category;
     
         this.biodataTemplateData['data'] = data;
     
@@ -97,7 +99,6 @@ export class RegisterComponent implements OnInit {
 
         this.submitted = true;
         this.loading = true;
-        //console.log(this.registerForm.value);
         this.userService.registerUser(user)
             .subscribe(
                 data => {
@@ -105,9 +106,10 @@ export class RegisterComponent implements OnInit {
                     this.router.navigate(['/login']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error(error.error);
                     this.loading = false;
                 });
+                
 
     }
 

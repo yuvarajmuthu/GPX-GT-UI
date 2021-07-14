@@ -52,14 +52,14 @@
                     <div>
                         <div *ngIf="!isEditDisplayname" class="fullname-display">
                             <b class="name-right">
-                                {{displayName}}
+                                {{userData.displayName}}
                             </b>
                           <!--  <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </button>-->
                         </div>
                         <div *ngIf="isEditDisplayname" class="fullname-display">
-                            <input type="text" class="input-text-biodata form-control" [(ngModel)]="biodata.full_name" type="text" placeholder="Display Name">
+                            <input type="text" class="input-text-biodata form-control" [(ngModel)]="userData.displayName" type="text" placeholder="Display Name">
                             <!-- <input class="input-text-biodata formcontrol" [(ngModel)]="biodata.full_name" type="text" /> -->
                             <button class="save-button-input" type="button" (click)="toggleEditDisplayname()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                         </div>
@@ -97,112 +97,92 @@
 
                         </div>
                     </div>
+                   <!--
                     <div>
-                        {{profileUserId}}
+                        <small><i class="fa fa-at"></i>{{profileUserId}}</small>
                     </div>
+                -->
                     <div>
-                        {{biodata.description}}
+                        {{userData.description}}
                     </div>
-                    <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
-                    <h5>
-                    <!-- CHAMBER-begin -->
+                    <div *ngIf="category === 'LEGISLATURE' || category === 'EXECUTIVE'  || category === 'executive' || category === 'municipalities'">
+                    
+                        <!-- Role-Begin -->
+                        <span *ngIf="userData.role && userData.role.type">
 
-                        <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
-                            <a class="padding-pills" [routerLink]="['/user', biodata.chamber]">{{biodata.chamber}}</a>
-                            <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditChamber()">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                        -->
+
+                            <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
+                                <a class="padding-pills" [routerLink]="['/user', userData.role.type]">{{userData.role.type}}</a>
+    
+                            </span>
+
+                            <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('type') === 'entity'" placeholder="Chamber" from="user" category="type" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
+
+                    
+                            <div *ngIf="isEditChamber && getPropertyDataType('type') === 'text'">
+                                <input [(ngModel)]="userData.role.type" type="text" />
+                                <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            </div>
                         </span>
-
-                        <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" placeholder="Chamber" from="user" userType="chamber" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
-
-                      <!-- <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'entity'" class="ng-autocomplete party-search">
-                        <ng-autocomplete
-                          [(ngModel)]="editChamberInput"
-                          [data]="searchUsers"
-                          placeHolder="Chamber"
-                          (inputChanged) = "onChangeSearch($event)"
-                          [searchKeyword]="keywordChamber"
-                          [itemTemplate]="itemTemplate"
-                          [notFoundTemplate]="notFoundTemplate">
-                        </ng-autocomplete>
-                        <button class="save-button" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        <!-- Role-end -->
+                
 
 
-                        <ng-template #itemTemplate let-item>
-                          <div class="item">
-                            <img src="{{item.photoUrl}}" height="25">
-                            <span [innerHTML]="item.firstName"></span>
-                            <small></small>
-                          </div>
-                        </ng-template>
-
-                        <ng-template #notFoundTemplate let-notFound>
-                          <div [innerHTML]="notFound"></div>
-                        </ng-template>
-                      </div> -->
-                      <div *ngIf="isEditChamber && getPropertyDataType('chamber') === 'text'">
-                        <input [(ngModel)]="biodata.chamber" type="text" />
-                        <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                      </div>
-                    <!-- CHAMBER-end -->
-                    </h5>
-
-
-                    <h5>
-                    <!-- DISTRICT-begin -->
-                        <span *ngIf="!isEditDistrict" class="profile-pills">
-                            <a class="padding-pills" [routerLink]="['/user', biodata.district]">District: {{biodata.district}}</a>
-                            <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-                        -->
-                        </span>
-                        <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="District"  from="user" userType="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
-                        <!-- <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" class="ng-autocomplete party-search">
-                            <ng-autocomplete
-                              [(ngModel)]="editDistrictInput"
-                              [data]="searchUsers"
-                              placeHolder="District"
-                              (inputChanged) = "onChangeSearch($event)"
-                              [searchKeyword]="keywordDistrict"
-                              [itemTemplate]="itemTemplate"
-                              [notFoundTemplate]="notFoundTemplate">
-                            </ng-autocomplete>
-                            <button class="save-button" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        <!-- DISTRICT-begin -->
+                        <span *ngIf="userData.role && userData.role.district">
+                            <span *ngIf="!isEditDistrict" class="profile-pills margin-pills">
+                                <a class="padding-pills" [routerLink]="['/user', userData.role.district]">{{userData.role.district}}</a>
+                                <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDistrict()">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            -->
+                            </span>
+                            <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="District"  from="user" category="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
+                            <!-- <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" class="ng-autocomplete party-search">
+                                <ng-autocomplete
+                                [(ngModel)]="editDistrictInput"
+                                [data]="searchUsers"
+                                placeHolder="District"
+                                (inputChanged) = "onChangeSearch($event)"
+                                [searchKeyword]="keywordDistrict"
+                                [itemTemplate]="itemTemplate"
+                                [notFoundTemplate]="notFoundTemplate">
+                                </ng-autocomplete>
+                                <button class="save-button" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 
 
-                            <ng-template #itemTemplate let-item>
-                              <div class="item">
-                                <img src="{{item.photoUrl}}" height="25">
-                                <span [innerHTML]="item.firstName"></span>
-                                <small></small>
-                              </div>
-                            </ng-template>
+                                <ng-template #itemTemplate let-item>
+                                <div class="item">
+                                    <img src="{{item.photoUrl}}" height="25">
+                                    <span [innerHTML]="item.firstName"></span>
+                                    <small></small>
+                                </div>
+                                </ng-template>
 
-                            <ng-template #notFoundTemplate let-notFound>
-                              <div [innerHTML]="notFound"></div>
-                            </ng-template>
-                          </div> -->
-                          <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'text'">
-                            <input [(ngModel)]="biodata.district" type="text" />
-                            <button class="save-button-input" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                          </div>
+                                <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </div> -->
+                            <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'text'">
+                                <input [(ngModel)]="userData.role.district" type="text" />
+                                <button class="save-button-input" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            </div>
+                        </span>  
                         <!-- DISTRICT-end -->
 
 
 
                           <!-- STATE-begin -->
-                          <span  *ngIf="!isEditState" class="profile-pills">
-                             <a class="padding-pills" [routerLink]="['/user', biodata.state]">{{biodata.state | uppercase}}</a>
+                        <span *ngIf="userData.role && userData.role.state">  
+                          <span  *ngIf="!isEditState" class="profile-pills margin-pills">
+                             <a class="padding-pills" [routerLink]="['/user', userData.role.state]">{{userData.role.state | uppercase}}</a>
                              <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()">
                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                             -->
                             </span>
 
-                            <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" userType="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
+                            <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" category="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
 
                           <!-- <div *ngIf="isEditState && getPropertyDataType('state') === 'entity'" class="ng-autocomplete party-search">
                             <ng-autocomplete
@@ -228,23 +208,23 @@
                             <div [innerHTML]="notFound"></div>
                           </ng-template>
                         </div> -->
-                        <div *ngIf="isEditState && getPropertyDataType('state') === 'text'">
-                            <input [(ngModel)]="biodata.state" type="text" />
-                            <button class="save-button-input" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
-                        </div>
+                            <div *ngIf="isEditState && getPropertyDataType('state') === 'text'">
+                                <input [(ngModel)]="userData.role.state" type="text" />
+                                <button class="save-button-input" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                            </div>
+                        </span>    
                         <!-- STATE-end -->
-                    </h5>
-                    <h5>
-                        <!-- PARTY-begin -->
 
-                            <span *ngIf="!isEditParty">
-                                <a class="padding-pills" [routerLink]="['/user', biodata.party]">Party: {{biodata.party}}</a>
+                        <!-- PARTY-begin -->
+                        <span *ngIf="userData.role && userData.role.party">  
+                            <span *ngIf="!isEditParty" class="profile-pills margin-pills">
+                                <a class="padding-pills" [routerLink]="['/user', userData.role.party]">{{userData.role.party}}</a>
                                 <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditParty()">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                             -->
                             </span>
-                            <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="Party"  from="user" userType="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
+                            <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="Party"  from="user" category="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
                             <!-- <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'entity'" class="ng-autocomplete party-search">
                                 <ng-autocomplete
                                   [(ngModel)]="editPartyInput"
@@ -271,14 +251,14 @@
                                 </ng-template>
                               </div> -->
                               <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
-                                <input [(ngModel)]="biodata.party" type="text" />
+                                <input [(ngModel)]="userData.role.party" type="text" />
                                 <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                               </div>
+                        </span>  
                         <!-- PARTY-end -->
-                        </h5>
                     </div>
                     <!--
-                <div *ngIf="entityType === 'PUBLICUSER'">
+                <div *ngIf="category === 'USER'">
                     <h4>
                         {{biodata.full_name}}
                     </h4>
@@ -286,7 +266,7 @@
                         @{{profileUserId}}
                     </div>
                 </div>
-                <div *ngIf="entityType === 'POLITICAL_PARTY'">
+                <div *ngIf="category === 'POLITICAL PARTY'">
                     <h4>
                         {{biodata.full_name}}
                     </h4>
@@ -298,7 +278,7 @@
                     </div>
 
                 </div>
-                <div *ngIf="entityType === 'LEGISLATIVE_DISTRICT'">
+                <div *ngIf="category === 'LEGISLATIVE DISTRICT'">
                     <h4>
                         {{biodata.full_name}}
                     </h4>
@@ -324,13 +304,13 @@
 
             </div>
 
-
+<!-- is this block required? -->
             <div class="personal-info display-none" id="name-for-lock">
-                <div *ngIf="entityType === 'LEGISLATOR' || entityType === 'LEGISLATORCONGRESS' || entityType === 'LEGISLATOROPENSTATE'">
+                <div *ngIf="category === 'LEGISLATURE'">
                     <div>
                         <div *ngIf="!isEditDisplayname" class="fullname-display">
                             <b>
-                                {{displayName}}
+                                {{userData.displayName}}
                             </b>
                             <button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditDisplayname()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                         </div>
@@ -340,53 +320,45 @@
 
 
     </div>
-
-
-
-
-
-
-
-
     </div>
+
     <div class="row">
+        <div class="col-sm-4 col-xs-12 sidebar-div-desktop" id="sidebar-div-desktop">
+            <!-- Begin user profile -->
+            <div class="text-center user-profile-2">
+                <ul class="list-group">
 
-    <div class="col-sm-4 col-xs-12 sidebar-div-desktop" id="sidebar-div-desktop">
-        <!-- Begin user profile -->
-        <div class="text-center user-profile-2">
-            <ul class="list-group">
+                    <li class="list-group-item pointer"
+                        (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
+                        <span class="pointer">
+                            <i class="material-icons">rss_feed</i>Activities
+                        </span>
+                    </li>
 
-                <li class="list-group-item pointer"
-                    (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}">
-                    <span class="pointer">
-                        <i class="material-icons">rss_feed</i>Activities
-                    </span>
-                </li>
+                    <li class="list-group-item pointer" *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings)}">
+                        <i class="material-icons">{{profileTemplate.profileIcon}}</i> {{profileTemplate.name}}
+                        <!--Profile data deletion while in edit mode
+                        <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+                        -->
+                    </li>
 
-                <!-- <li class="list-group-item pointer"
-                    (click)="Profiles()" [ngClass]="{ 'active': profileData, 'in-active': !profileData}">
-                    <span class="pointer">Profile</span>
-                </li> -->
-                <li class="list-group-item pointer" *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings)}">
-                    <i class="material-icons">{{profileTemplate.profileIcon}}</i> {{profileTemplate.name}}
-                    <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-                </li>
-                <li *ngIf="isProfileManaged" class="list-group-item pointer"
-                    [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
-                    <span class="pointer" (click)="managedByUsers()">
-                        <i class="material-icons">supervisor_account</i>Managed by
-                    </span>
-                </li>
-                <li *ngIf="isShowSettings" class="list-group-item pointer"
-                (click)="showSettings()" [ngClass]="{ 'active': settings, 'in-active': !settings}">
-                <span class="pointer">
-                    <i class="material-icons">settings_applications</i>Settings
-                </span>
-            </li>
-            </ul>
+                    <li *ngIf="isProfileManaged" class="list-group-item pointer"
+                        [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
+                        <span class="pointer" (click)="managedByUsers()">
+                            <i class="material-icons">supervisor_account</i>Managed by
+                        </span>
+                    </li>
 
-        </div><!-- End div .box-info -->
-        <!-- Begin user profile -->
+                    <li *ngIf="isShowSettings" class="list-group-item pointer"
+                    (click)="showSettings()" [ngClass]="{ 'active': settings, 'in-active': !settings}">
+                        <span class="pointer">
+                            <i class="material-icons">settings_applications</i>Settings
+                        </span>
+                    </li>
+                </ul>
+
+            </div><!-- End div .box-info -->
+            <!-- Begin user profile -->
         </div>
         <div class="col-sm-8 col-xs-12" id="template-tabs">
             <div class="widget-div">
@@ -426,7 +398,7 @@
                                             <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
                                                 <h6>Add Members:</h6>
-                                                <app-gps-global-search placeholder="User Name"  from="user" userType="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
+                                                <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
 
 
                                             <!-- <div class="ng-autocomplete managedby-search">
@@ -586,8 +558,9 @@
 </div>
 <div class="bottom-tabs">
     <ul class="nav nav-tabs mobile-bottom-tabs">
+        <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showActivities()">Activities</button></li>
+
         <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="toggleTemplateDropDown();Profiles(activeTemplatName);loadTemplate(activeTemplate)" type="button">{{activeTemplatName}}</button></li>
-        <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showActivities()">Posts</button></li>
         <li *ngIf="isProfileManaged" [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Managed By</button></li>
         
         <li [ngClass]="{'active':isProfileCollapsed==false}">

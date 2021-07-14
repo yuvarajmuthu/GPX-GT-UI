@@ -1,7 +1,7 @@
 /// <reference types="@types/googlemaps" />
 
 import { Component, ViewChild, EventEmitter, Output, OnInit, AfterViewInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl  } from '@angular/forms';
 //import { } from '@types/googlemaps';
 //import { } from 'googlemaps';
 //declare var google: any;
@@ -15,8 +15,9 @@ export class GAddressSearchComponent implements OnInit, AfterViewInit {
   @Input() adressType: string;
   @Output() setAddress: EventEmitter<any> = new EventEmitter();
   @ViewChild('addresstext') addresstext: any;
-
+  @Input()
   autocompleteInput: string;
+  //@Input() control: FormControl;
   queryWait: boolean;
   constructor() { }
 

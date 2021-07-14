@@ -129,7 +129,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
       */
 //this.zone.run(() => {
 
-        this.userService2.getRoles(this.profileUserId, this.viewingUser['isCongress'])
+        this.userService2.getRoles(this.profileUserId)
             .subscribe((data) => {
                 //console.log("roles count ", data.length);
                 //this.role = JSON.parse(JSON.stringify(data[0]));
@@ -167,7 +167,7 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         const result: {} = Object.assign({}, this.roleTemplateForm.value);
         console.log("Role form ", result);
         return result;
-      }
+    }
 
     saveProfile(){
         if(this.role && this.role['id']){

@@ -13,11 +13,11 @@
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>First name </label>
-                                <input type="text" class="form-control" placeholder="First name" formControlName="first_name" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+                                <input type="text" class="form-control" placeholder="First name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
                             </div> 
                             <div class="col form-group">
                                 <label>Last name</label>
-                                <input type="text" class="form-control" placeholder="Last name" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
+                                <input type="text" class="form-control" placeholder="Last name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
                             </div> 
                         </div> -->
                         <div class="form-row">
@@ -28,8 +28,14 @@
                         </div>    
                         <div class="form-group">
                             <label>Username - Email address (or) Phone number</label>
+                            <!--
                             <input type="text" class="form-control" placeholder="Email address (or) Phone number" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
-                            <!--<small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+
+                            -->
+                            <input type="text" class="form-control" formControlName="username">
+                            <span class="text-danger" *ngIf="registerForm.controls['username'].hasError('required') && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">This field is required</span>
+                            <span class="text-danger" *ngIf="registerForm.controls['username'].hasError('pattern') && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">Please enter valid email address or phone number</span>
+
                         </div> <!-- form-group end.// -->
 
                         <div class="form-group">

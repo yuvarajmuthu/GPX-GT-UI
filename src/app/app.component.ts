@@ -192,7 +192,8 @@ export class AppComponent implements OnInit {
 
       selectEvent(e){
           console.log(e.username);
-      this.isCollaped = !this.isCollaped;
+      //this.isCollaped = !this.isCollaped;
+       this.hideNav();
        let routePath= '/user/'+e.username+"/";
        this.router.navigate([routePath]);
      }
@@ -232,10 +233,8 @@ export class AppComponent implements OnInit {
         //return false;
     }
 
-    clickedNav(){
-        if(this.isMobile){
-            this.isCollaped = !this.isCollaped;
-        }
+    hideNav(){
+        this.isCollaped = true;
     }
 
     clickTab(event: string) {
@@ -293,7 +292,7 @@ export class AppComponent implements OnInit {
 
     route(name: string) {
         let routePath: string = '/' + name;
-        this.isCollaped = !this.isCollaped;
+        //this.isCollaped = !this.isCollaped;
         this.router.navigate([routePath]);
     }
 

@@ -57,7 +57,7 @@ export class UserComponent implements OnInit {
     public connections = [];
     templateType = [];
     private componentRef: ComponentRef<{}>;
-    private userData = {};
+    public userData:User = new User();
     private viewingUser = {};
     private firstName;
     private lastName;
@@ -79,9 +79,10 @@ export class UserComponent implements OnInit {
     externalUser:boolean;
     biodata:any=null;
     biodataTemplate={};
-    displayName:string='';
+    //displayName:string='';
 
     entityType:string=null;
+    category:string=null;
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
     profileEditOption: string;
@@ -349,10 +350,10 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         //reset
-        this.userData = {};
+        this.userData = new User();
         this.bannerImage = 'assets/images/user-banner1.jpg';
         this.profileSmImage = 'assets/images/avatar1.png'; 
-        this.displayName = '';
+        //this.displayName = '';
         this.biodata = {};
 
 
@@ -379,45 +380,47 @@ export class UserComponent implements OnInit {
         });
     }
 
+    //OBSOLETE
     loadBioData(){
         this.userService.getBiodata(this.profileUserId)
         .subscribe((response) => {
           console.log('loadBioData response ', response);  
           //this.entityType = response['entityType']; 
           this.biodata= response['data'];
-          
-          if(this.biodata['full_name'] != null){
-            this.displayName = this.biodata['full_name'];
-          }else if (this.biodata['first_name'] != null || this.biodata['last_name'] != null){
-            this.displayName = this.biodata['first_name'] + ' ' + this.biodata['last_name'];
+          /*
+          if(this.userData['displayName'] != null){
+            this.displayName = this.userData['displayName'];
+          }else if (this.biodata['firstName'] != null || this.biodata['lastName'] != null){
+            this.displayName = this.biodata['firstName'] + ' ' + this.biodata['lastName'];
           }
-
+*/
           console.log('biodata response data ', this.biodata);
           
           //this.createFormGroup();
         });  
       }
 
-      loadBioDataTemplate(type:string){
-        this.profileService.getProfileTemplateByType('upDefault', type)
-        .subscribe((response) => {
-            this.biodataTemplate = response;
+    //OBSOLETE
+    loadBioDataTemplate(category:string){
+    this.profileService.getProfileTemplateByCategory('upDefault', category)
+    .subscribe((response) => {
+        this.biodataTemplate = response;
 
-        });  
-      }
+    });  
+    }
 
-      getPropertyDataType(propertyName:string){
-        let type:string=null;  
-        let properties:[] = this.biodataTemplate['properties'];
-        for (let property of properties) {
-            if(property['propId'] === propertyName){
-                type = property['type'];
-                break;
-            }
+    getPropertyDataType(propertyName:string){
+    let type:string=null;  
+    let properties:[] = this.biodataTemplate['properties'];
+    for (let property of properties) {
+        if(property['propId'] === propertyName){
+            type = property['type'];
+            break;
         }
+    }
 
-        return type;
-      }
+    return type;
+    }
 
     showActivities() {
         this.activitiesData = true;
@@ -549,7 +552,7 @@ export class UserComponent implements OnInit {
 
         this.viewingUser['userId'] = this.profileUserId;
         //this is allowed even for non-logged in user 
-        this.loadBioData();
+        //this.loadBioData();
         
         if (!isDevMode() && this.isUserLogged()) {
             this.getRelationStatus(this.loggedUser.username, this.profileUserId);
@@ -563,42 +566,43 @@ export class UserComponent implements OnInit {
         this.getFollowingsCount(this.profileUserId);
         //this.getFollowers(this.profileUserId);
 
-        if(this.isUserLogged()){
+        //if(this.isUserLogged()){
             //this.isProfileEditable();
 
             this.userService.getUserData(this.profileUserId, this.loggedUsername).subscribe(
                 data => { 
                     this.userData = data;
+
+                    //this.userData.description = 'Tst desc';
                     console.log('User data from service: ', this.userData);
 
                     this.isSelfProfile = this.userData['selfProfile'];
                     this.isProfileManaged = this.userData['profileManaged'];
                     this.entityType =  this.userData['userType'];
+                    this.category = this.userData['category'];
                     this.isProfileEditable();
 
                     //Settings
                     this.isShowSettings = this.userData['showSettings'];
-                    if(this.userData['settings'] && this.userData['settings']['accessRestriction']){
-                        this.settingsForm.setValue(this.userData['settings']);
-                        this.isProfilePrivate = this.userData['settings']['accessRestriction'];
+                    if(this.userData['settings'] && this.userData.settings['accessRestriction']){
+                        this.settingsForm.setValue(this.userData.settings);
+                        this.isProfilePrivate = this.userData.settings['accessRestriction'];
                     }
                     
 
-                    if (this.userData['userType'] === 'LEGISLATOR') {
+                    if (this.userData['sourceSystem'] === 'GOVTRACK') {
                         this.viewingUser['external'] = true;
                         this.viewingUser['isLegislator'] = true;
-                        if (this.userData['sourceSystem'] === 'OPENSTATE') {
-                            this.viewingUser['isCongress'] = false;
-                            this.externalUser = true;  
+                        this.viewingUser['isCongress'] = true;
+                        this.externalUser = true;
 
-                        }else if (this.userData['sourceSystem'] === 'GOVTRACK') {
-                            this.viewingUser['isCongress'] = true;
-                            this.externalUser = true;  
+                    } else if (this.userData['sourceSystem'] === 'OPENSTATE') {
+                        this.viewingUser['external'] = true;
+                        this.viewingUser['isLegislator'] = true;
+                        this.viewingUser['isCongress'] = false;
+                        this.externalUser = true;
 
-                        }
-
-
-                    } 
+                    }
                     
                     //load profile small image
 
@@ -621,8 +625,8 @@ export class UserComponent implements OnInit {
                     this.profilesTemplates = this.userData['profileTemplates'];
                     this.viewingUser['profileTemplates'] = this.profilesTemplates;
 
-                    let userType: string = this.viewingUser['isLegislator'] ? 'LEGISLATOR' : 'PUBLICUSER';
-                    this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], userType).subscribe(
+                    //list the templates that are available to use, ignores the one that are already used
+                    this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], this.category).subscribe(
                         data => {
                             this.availableProfileTemplates = data;
                         });
@@ -648,7 +652,7 @@ export class UserComponent implements OnInit {
                         this.templateType = compTypes;
                     }
 
-                    this.loadBioDataTemplate(this.userData['userType']);
+                    //this.loadBioDataTemplate(this.category);
                     //setting here so it can be accessed globally
                     this.datashareService.setViewingUser(this.viewingUser);
                     console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));
@@ -660,7 +664,7 @@ export class UserComponent implements OnInit {
             );
 
 
-        }
+        //}
 
         
     }

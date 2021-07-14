@@ -44,7 +44,7 @@ export class SearchlegislatorsComponent implements OnInit {
   congressData: boolean;
   findReps: boolean = false;
   offices = [];
-  divisionOffices = [];
+  divisionOffices = null;
   divisioncategory  = [];
   divisions = [];
   //searchBtnLabel:string;
@@ -372,28 +372,61 @@ this.processOCD(result);
   processOCD(result:JSON){
 
     let divisionsObj = {};
+    let roleObj = {};
+    let otherContactsObj = {};
     let divisionsKeys = [];
+    let divisionUnit:string[] = [];
     this.divisions = [];
-    this.divisionOffices = [];
+    //this.divisionOffices = [];
+    let roleProperty = '';
 
     divisionsObj = result['divisions'];
     divisionsKeys = Object.keys(divisionsObj);
     console.log("division keys " + divisionsKeys); 
-    for (var i = 0; i < divisionsKeys.length; i++) {
+    for (var i = 0; i < divisionsKeys.length; i++) {//"ocd-division/country:us/state:pa/cd:18"
+roleObj = {};
       let divisionsKey:string = divisionsKeys[i];
+      console.log('Processing division ', divisionsKey);
       let divisionData:{} = divisionsObj[divisionsKey];
       let divisionsKeySplited:string[] = divisionsKey.split('/');
-      let divisionsLastKeySplited:string[] = divisionsKeySplited[divisionsKeySplited.length-1].split(':');
-      this.divisioncategory.push(divisionsLastKeySplited[0]);
+      for (var b = 0; b < divisionsKeySplited.length; b++) {//["ocd-division", "country:us", "state:pa", "cd:18"]
+        if(divisionsKeySplited[b] !== 'ocd-division'){
+          divisionUnit = divisionsKeySplited[b].split(':'); 
+          
+          if(divisionUnit[0] === 'cd'){
+            roleProperty = 'Congressional district';
+          }else if(divisionUnit[0] === 'sldl'){//state legislative district - lower
+            roleProperty = 'State House district';
+          }else if(divisionUnit[0] === 'sldu'){//state legislative district - upper
+            roleProperty = 'State Senate district';
+          }else{
+            roleProperty = divisionUnit[0].replace('_', ' ');
+          }
+
+          if(b === divisionsKeySplited.length-1){ //last item
+            this.divisioncategory.push(divisionUnit[0]);//cd
+            roleObj[roleProperty] = divisionData['name']; //"Pennsylvania's 18th congressional district"
+          }else{
+            roleObj[roleProperty] = divisionUnit[1].replace('_', ' ');
+          }
+        }
+      }
+
       this.divisions.push(divisionData['name']);
+
       let officevalues:string[] = [];
       let officeObj = {};
       if(divisionData['officeIndices']){
         for (var j = 0; j < divisionData['officeIndices'].length; j++) {
           let officeIndex:number =  divisionData['officeIndices'][j];
           if(result['offices'] && result['offices'][officeIndex]){
-            let office:{} = result['offices'][officeIndex];
-            officevalues.push(office['name']);
+            let office:{} = result['offices'][officeIndex];//OFFICE level data
+            let officeName:string = office['name'];
+            console.log("officeName ", officeName); 
+
+            officevalues.push(officeName);
+            //roleObj['type'] = office['name'];//"United States House of Representatives PA-18"
+
             if(office['officialIndices']){
               for (var k = 0; k < office['officialIndices'].length; k++) {
                 let officialsIndex:number =  office['officialIndices'][k];
@@ -401,21 +434,74 @@ this.processOCD(result);
                   let official:{} = result['officials'][officialsIndex];
 //
                   let legislator = {};
+                  let legisRoleObj = {};
+                  //legisRoleObj = roleObj;
+                  legisRoleObj = JSON.parse(JSON.stringify(roleObj));
+                  legisRoleObj['type'] = officeName;//"United States House of Representatives PA-18"
                   let fullName:string = official['name'];
+                  console.log("Official index " + officialsIndex, ", ", fullName); 
                   if(fullName)
-                    legislator['full_name'] = fullName.replace(/,/g, "");
+                    legislator['full_name'] = fullName.replace( /\".*?\"/, '' ).replace(/\s+/g,' ').trim();
 
-                  legislator['party'] = official['party'];
-                  legislator['photo_url'] = official['photoUrl'];
+                  //party data  
+                  legisRoleObj['party'] = official['party'];
                   legislator['division'] = divisionData['name'];
-                  legislator['divisionOffice'] = office['name'];
-                  legislator['source'] = 'GOOGLE';
-                  if (isDevMode()) {
-                    legislator['photo_url'] = 'assets/images/avatar-male.png';
+                  //legislator['divisionOffice'] = office['name'];
+                  //retrieving address
+                  if(official['address'] && official['address'].length > 0){
+                    let addressObj = official['address'][0];
+                    let address:string = '';
+                    if(addressObj['line1']){
+                      address = address + addressObj['line1'];
+                    }
+                    if(addressObj['line2']){
+                      address = address + ", " + addressObj['line2'];
+                    }
+                    if(addressObj['city']){
+                      address = address + ", "  + addressObj['city'];
+                    }
+                    if(addressObj['state']){
+                      address = address + ", "  + addressObj['state'];
+                    }
+                    if(addressObj['zip']){
+                      address = address + ", "  + addressObj['zip'];
+                    }
+                    legisRoleObj['address'] = address;
+
+                  } 
+
+                  //phone data
+                  if(official['phones'] && official['phones'].length > 0){
+                    legisRoleObj['phone'] = official['phones'][0];
+                  }
+
+                  //url data
+                  if(official['urls'] && official['urls'].length > 0){
+                    legisRoleObj['url'] = official['urls'][0];
+                  }
+                  legislator['role'] = legisRoleObj;
+
+                  //retrieving other contacts
+                  if(official['channels'] && official['channels'].length > 0){
+                    otherContactsObj = {};
+                    for (var c = 0; c < official['channels'].length; c++) {
+                      let channelObj = official['channels'][c];
+                      otherContactsObj[channelObj['type']] = channelObj['id'];
+ 
+                    }
+
+                    legislator['otherContacts'] = otherContactsObj;
+                  } 
+
+                  legislator['sourceSystem'] = 'GOOGLE';
+                  if (isDevMode() || official['photoUrl'] === null) {
+                    legislator['photoUrl'] = 'assets/images/avatar1.png';
+                  }else{
+                    legislator['photoUrl'] = official['photoUrl'];
                   }
 
                   this.legislatorsDisplay.push(legislator);
-//
+                  console.log('legislator data ', legislator);
                 }
               }
             }
@@ -433,12 +519,13 @@ this.processOCD(result);
  
   selectDivision(division:string){
     console.log('selected division ', division);
+    this.divisionOffices = [];
     this.selectedDivision = division;
     this.offices.forEach(element => {
       
       if(element[division]){
         console.log('selected divisions office ', element[division]);
-        this.divisionOffices = element[division];
+        this.divisionOffices = element[division]; //Offices for the selected Division
         return;
       }
     });
@@ -464,7 +551,8 @@ this.processOCD(result);
     this.legislators = [];
     this.legislatorsDisplay.forEach(element => {
       
-      if(element['divisionOffice'] === divisionOffice){
+      //if(element['divisionOffice'] === divisionOffice){
+      if(element['role']['type'] === divisionOffice){
         this.legislators.push(element);
       }
     });

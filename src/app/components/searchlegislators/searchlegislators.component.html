@@ -49,7 +49,7 @@
 
   <div style="margin-top:5px" *ngIf="divisions && divisions.length > 0">
     <div class="sub-title sub-title-size">
-      <h4>LEVELS:</h4>
+      <h6>LEVELS:</h6>
     </div>
     <div class="row" style="margin-left:1px">
       <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': selectedDivision == division}" (click)="selectDivision(division);"
@@ -61,7 +61,7 @@
   </div>
   <div style="margin-top:5px" *ngIf="divisionOffices && divisionOffices.length > 0">
     <div class="sub-title sub-title-size">
-      <h4>ROLES:</h4>
+      <h6>ROLES:</h6>
     </div>
     <div class="row" style="margin-left:1px">
       <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': selectedDivisionOffice == divisionOffice}"
@@ -75,6 +75,9 @@
     <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow"
       *ngFor="let legislator of legislators">
       <app-legislator [legislator]=legislator></app-legislator>
+    </div>
+    <div *ngIf="divisionOffices && divisionOffices.length === 0">
+      Relevant data not available.
     </div>
   </div>
 

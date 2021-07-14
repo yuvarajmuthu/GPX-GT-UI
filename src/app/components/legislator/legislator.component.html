@@ -30,7 +30,7 @@
     <p class="">
 
       <img class="img-fluid rounded rounded-circle img-custom-size-legislator cursor-default"
-           src="{{legislator.photo_url}}">
+           src="{{legislator['photoUrl']}}">
       <!-- <img src="{{legislator.photo_url}}" alt="profile-sample1" class="background"/>
       <img src="{{legislator.photo_url}}" alt="profile-sample1" class="profile"/> -->
     </p>
@@ -54,14 +54,21 @@
       <br/>
       <br/>
     -->
-      <a [routerLink]="['/user/',legislator.divisionOffice]" href="javascript:void(0);"
-      class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.divisionOffice}}</a>
-      <br/>
-      <a [routerLink]="['/user/',legislator.party]" href="javascript:void(0);"
-                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.party}}</a>
-      <br/>
-      <a [routerLink]="['/user/',legislator.division]" href="javascript:void(0);"
-                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.division}}</a>
+    <a [routerLink]="['/user/',legislator['role']['type']]" href="javascript:void(0);"
+      class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator['role']['type']}}
+    </a>    
+    <br/>
+
+    <a [routerLink]="['/user/',legislator.division]" href="javascript:void(0);"
+      class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator.division}}
+    </a>
+    <br/>
+    
+    <a [routerLink]="['/user/',legislator['role']['party']]" href="javascript:void(0);"
+                class="hvr-underline-from-center wobble-top" title="View this Party">{{legislator['role']['party']}}
+    </a>
+
+
 
 
     </p>

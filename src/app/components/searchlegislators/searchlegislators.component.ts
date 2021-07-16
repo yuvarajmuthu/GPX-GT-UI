@@ -528,10 +528,11 @@ roleObj = {};
                   } 
 
                   legislator['sourceSystem'] = 'GOOGLE';
-                  if (isDevMode() || official['photoUrl'] === null) {
-                    legislator['photoUrl'] = 'assets/images/avatar1.png';
+
+                  if (official['photoUrl'] && !isDevMode()) {
+                    legislator['photoUrl'] = official['photoUrl'];                    
                   }else{
-                    legislator['photoUrl'] = official['photoUrl'];
+                    legislator['photoUrl'] = 'assets/images/avatar1.png';
                   }
 
                   this.legislatorsDisplay.push(legislator);

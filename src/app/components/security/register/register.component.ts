@@ -10,6 +10,8 @@ import {UserService} from '../../../services/user.service';
 
 import {AppConstants} from '../../../app.constant.enum';
 
+import {GAddressSearchComponent} from '../../../components/g-address-search/g-address-search.component';
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -23,6 +25,7 @@ export class RegisterComponent implements OnInit {
     //userType:string = null;
     category:string = null;
     profileTemplateId:string = null;
+    address: string;// = '300 Chatham Park Drive,Pittsburgh, PA 15220';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -52,6 +55,12 @@ export class RegisterComponent implements OnInit {
     get f() {
         return this.registerForm.controls;
     }
+    
+    getAddress(addressEvent: Event) {
+        console.log('Address - ' + addressEvent['formatted_address']);
+        this.address = addressEvent['formatted_address'];
+        //this.changeDetector.detectChanges();
+    }
 
     generateBioProfileTemplateData(){
         let data={};
@@ -67,9 +76,11 @@ export class RegisterComponent implements OnInit {
         if(this.registerForm.get('phone') && this.registerForm.get('phone').value)
             data['phone'] = this.registerForm.get('phone').value;
 
-        if(this.registerForm.get('address') && this.registerForm.get('address').value)
-            data['address'] = this.registerForm.get('address').value;
-        
+        //if(this.registerForm.get('address') && this.registerForm.get('address').value)
+        //    data['address'] = this.registerForm.get('address').value;
+        if(this.address)
+            data['address'] = this.address;
+
         this.biodataTemplateData['entityId'] = this.registerForm.get('username').value;
         this.biodataTemplateData['profileTemplateId'] = this.profileTemplateId;
         //this.biodataTemplateData['category'] = this.category;

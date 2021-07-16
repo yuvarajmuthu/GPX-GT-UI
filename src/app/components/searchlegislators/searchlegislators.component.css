@@ -103,12 +103,16 @@
 
 .sub-title {
   margin: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   clear: left;
-  padding-top: 35px;
+  padding-top: 5px;
 }
 .sub-title-size {
   padding-right: 30px;
+}
+
+.locationText{
+  padding-top: 10px;  
 }
 
 .banner-text {

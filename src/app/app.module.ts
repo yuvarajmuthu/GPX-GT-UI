@@ -40,7 +40,7 @@ import {LegislatorComponent} from './components/legislator/legislator.component'
 import {PositionComponent} from './components/position/position.component';
 import {PartyComponent} from './components/party/party.component';
 import {ProtectedComponent} from './components/protected/protected.component';
-import {GAddressSearchComponent} from './components/g-address-search/g-address-search.component';
+//import {GAddressSearchComponent} from './components/g-address-search/g-address-search.component';
 
 import {dateFormatPipe} from './util/pipes/dateformat.pipe';
 import { CreatepageselectionComponent } from './components/security/createpage/createpageselection/createpageselection.component';

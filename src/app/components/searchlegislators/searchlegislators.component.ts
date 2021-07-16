@@ -8,8 +8,11 @@ import {catchError, map, tap, switchMap} from 'rxjs/operators';
 import {LegislatorService} from '../../services/legislator.service';
 import {ComponentcommunicationService} from '../../services/componentcommunication.service';
 import {AlertService} from '../../services/alert.service';
+import {DatashareService} from '../../services/datashare.service';
+import {UserService} from '../../services/user.service';
 
 import {Legislator} from '../../models/legislator';
+import {User} from '../../models/user';
 
 import {LegislatorComponent} from '../../components/legislator/legislator.component';
 
@@ -50,6 +53,9 @@ export class SearchlegislatorsComponent implements OnInit {
   //searchBtnLabel:string;
   selectedDivision:string;
   selectedDivisionOffice:string;
+  loggedUser: User = null;
+  loggedUsername: string = null;
+  biodata:any=null;
 
   @Output()
   success = new EventEmitter();
@@ -58,9 +64,11 @@ export class SearchlegislatorsComponent implements OnInit {
 
   constructor(private  router: Router,
               private route: ActivatedRoute,
+              private userService: UserService,
               private legislatorsService: LegislatorService,
               private missionService: ComponentcommunicationService,
               private alertService: AlertService,
+              private datashareService: DatashareService,
               private changeDetector: ChangeDetectorRef) {
                 //this.getScreenSize();
     if (this.stateData) {
@@ -89,15 +97,41 @@ export class SearchlegislatorsComponent implements OnInit {
   }
   */
   ngOnInit() {
-    if(!this.registration){
+    if (isDevMode()) {
+      this.address = '300 Chatham Park Drive,Pittsburgh, PA 15220';
+    }
+
+    if(!this.registration){ // Component being in NON-Home page
+
       let address = this.route.snapshot.queryParamMap.get('address');
       console.log('searchlegislators ngOnInit() address ', address);
-      if(address != null){
+      if(address != null){//having address and forwarded from another page
         this.address = address;
         this.loadCongressData();  
+      }else{//get data based on User's address
+        this.loggedUser = this.datashareService.getCurrentUser();
+        if(this.loggedUser && this.loggedUser.username)
+          this.loadBioData(this.loggedUser.username);
+  
       }
 
     }
+  }
+
+  loadBioData(username:string){
+    this.userService.getBiodata(username)
+    .subscribe((response) => {
+      console.log('loadBioData response ', response);  
+      this.biodata= response['data'];
+
+      console.log('biodata response data ', this.biodata);
+
+      if(this.biodata && this.biodata['address']){
+        this.address = this.biodata['address'];
+        this.loadCongressData(); 
+      }
+      
+    });  
   }
 
   loadCircleUsers(evt, opt){

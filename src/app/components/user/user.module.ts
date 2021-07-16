@@ -32,7 +32,7 @@ import { UsereventtemplateComponent } from './usertemplate/usereventtemplate/use
 import { UservotetemplateComponent } from './usertemplate/uservotetemplate/uservotetemplate.component';
 import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userbilltemplate.component';
 import { UsereventformComponent } from './usertemplate/usereventtemplate/usereventform/usereventform.component';
-import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
+//import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
 import { UservoteformComponent } from './usertemplate/uservotetemplate/uservoteform/uservoteform.component';
 import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
 import {SecurityModule} from '../../components/security/security.module';
@@ -49,11 +49,12 @@ import {SecurityModule} from '../../components/security/security.module';
     NgbModule,
     PostModule
   ],
-  exports: [GAddressSearchComponent, Usercard2Component],
+  exports: [
+    //GAddressSearchComponent, 
+    Usercard2Component],
   declarations: [
     UserComponent, 
-    GAddressSearchComponent,
-   // GpsGlobalSearchComponent,
+    //GAddressSearchComponent,
     UsertemplateComponent, 
     //BannerComponent, 
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 

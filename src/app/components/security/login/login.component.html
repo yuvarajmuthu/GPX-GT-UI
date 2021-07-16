@@ -48,6 +48,9 @@
                   </div>
                 -->
                 </div>
+                <div class="loginOptionDivide">
+                  <small>(OR)</small>
+                </div>
                 <article class="border-top card-body">
                     <form [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="form-row">
@@ -64,7 +67,7 @@
                         </div> <!-- form-row end.// -->
 
                         <div class="form-group">
-                            <button type="submit" [disabled]="loading" class="btn btn-primary btn-block"> Login  </button>
+                            <button type="submit" [disabled]="loading" class="btn btn-primary btn-block">Sign in</button>
                         </div> <!-- form-group// -->
 
 

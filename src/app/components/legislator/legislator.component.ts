@@ -263,7 +263,7 @@ export class LegislatorComponent implements OnInit {
 
     user['profileDatas'] = profileDatasList;
     user.displayName = legislator['full_name'];
-    user.photoUrl = legislator['photo_url'];
+    user.photoUrl = legislator['photoUrl']; 
     user.sourceSystem = legislator['sourceSystem'];
     user.category = this.constants.USERCATEGRORY_LEGISLATURE;
     user.userType = legislator['role']['type'];

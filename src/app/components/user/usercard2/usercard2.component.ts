@@ -1,6 +1,8 @@
 import {Component, OnInit, Input, isDevMode} from '@angular/core';
 import {Router} from '@angular/router';
 
+import { environment } from '../../../../environments/environment';
+
 import {UserService} from '../../../services/user.service';
 import {DatashareService} from '../../../services/datashare.service';
 import {ComponentcommunicationService} from '../../../services/componentcommunication.service';
@@ -14,6 +16,7 @@ import {User} from '../../../models/user';
 })
 export class Usercard2Component implements OnInit {
   @Input() username: any;
+  @Input() manageMembers:boolean = false;
 
   public user:any;
   loggedUser: User = null;
@@ -31,7 +34,7 @@ export class Usercard2Component implements OnInit {
   isSelfProfile: boolean = false;
   profileSmImage: any; 
   isImageLoading: boolean = false;
-
+  members = [];
 
   constructor(private  router: Router,
     private userService: UserService, 
@@ -47,14 +50,25 @@ export class Usercard2Component implements OnInit {
 
     this.userService.getUserData(this.username, this.loggedUsername).subscribe(
         data => {
-        this.user = data;
-        this.isSelfProfile = this.user['selfProfile'];
+            this.user = data;
+            this.isSelfProfile = this.user['selfProfile'];
 
+            this.members = this.user['members'];
+
+            //profile image
+            this.profileSmImage = 'assets/images/avatar1.png'; 
+            if (!isDevMode()){
+                if(this.user != null && this.user['photoUrl'] != null){
+                    this.profileSmImage = this.user['photoUrl'];
+                }else{
+                    this.getProfileSmImage(this.username);
+                }
+            }
         }
         );
 
         if (!isDevMode() && this.loggedUsername) {
-        this.getRelationStatus(this.loggedUsername, this.username);
+            this.getRelationStatus(this.loggedUsername, this.username);
         } else {
             this.followCntrlLabel = 'Join to Follow';
             this.followCntrlCSS = 'btn btn-primary followers-button';
@@ -64,15 +78,6 @@ export class Usercard2Component implements OnInit {
         this.getFollowersCount(this.username);
 
 
-        this.profileSmImage = 'assets/images/avatar1.png'; 
-
-        if (!isDevMode()){
-            if(this.user != null && this.user['photoUrl'] != null){
-                this.profileSmImage = this.user['photoUrl'];
-            }else{
-                this.getProfileSmImage(this.username);
-            }
-        }
 
     }
 

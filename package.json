@@ -1,6 +1,6 @@
 {
   "name": "gpx-ui",
-  "version": "1.0.0.07152021",
+  "version": "1.0.0.07302021",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

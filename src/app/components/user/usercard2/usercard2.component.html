@@ -29,7 +29,7 @@
               <div *ngIf="!isSelfProfile" >
                 <ul class="icon">
                   <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
-                  <li><a *ngIf="isCircle != '/circle' && !isSelfProfile" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a *ngIf="manageMembers" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
                 </ul>
               </div>
              

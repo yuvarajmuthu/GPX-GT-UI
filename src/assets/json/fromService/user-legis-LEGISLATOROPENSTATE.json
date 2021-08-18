@@ -3,13 +3,15 @@
    "lastModifiedDate":"2020-07-28 18:28:29",
    "userId":"5f206e4df453cd8700f1d830",
    "username":"PAL000515",
+   "category":"LEGISLATURE",
    "full_name":"Dan L. Miller1",
-   "displayName":"Dan L. Miller2",
+   "displayName":"Dan L. Miller3",
+   "description":"description",
    "password":null,
    "userType":"LEGISLATOR",
    "status":"PASSIVE",
    "profileManagedBy":null,
-   "members":null,
+   "members":["user6@gmail.com"],
    "circleUsers":null,
    "selfProfile":true,
    "showSettings":true,
@@ -31,6 +33,16 @@
    "tagName":null,
    "connections":null,
    "userProfile":null,
+   "role":{
+      "start_date":"2017-01-20",      
+      "end_date":"2021-01-20",
+      "district":"42",
+      "chamber":"lower",
+      "state":"pa",
+      "party":"Democratic",
+      "type":"member"
+
+   },
    "profileTemplates":[
       {
          "createdDate":"2020-06-09 20:56:11",
@@ -39,7 +51,7 @@
          "profileTemplateId":"upRole",
          "type":"LEGISLATOR",
          "name":"Role",
-         "profileIcon":"group",
+         "profileIcon":"fa fa-briefcase",
          "properties":[
             {
                "propId":"start",
@@ -100,7 +112,7 @@
          "profileTemplateId":"upOffices",
          "type":"LEGISLATOR",
          "name":"Office",
-         "profileIcon":"business",
+         "profileIcon":"fa fa-building",
          "properties":[
             {
                "propId":"name",
@@ -360,6 +372,17 @@
          "jsondata":{
             "empty":false
          }
+      },
+      {
+         "createdDate":"2020-07-28 18:28:29",
+         "lastModifiedDate":"2020-07-28 18:28:29",
+         "id":"5f206e4df453cd8700f1d832",
+         "profileTemplateId":"upOtherContacts",
+         "data":{
+            "Twitter":"RepDanMiller",
+            "Facebook":"RepDanMiller"
+         },
+         "entityId":"PAL000515"
       }
    ]
 }

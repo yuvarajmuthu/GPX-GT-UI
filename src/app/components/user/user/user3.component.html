@@ -105,7 +105,7 @@
                     <div>
                         {{userData.description}}
                     </div>
-                    <div *ngIf="category === 'LEGISLATURE' || category === 'EXECUTIVE'  || category === 'executive' || category === 'municipalities'">
+                    <div *ngIf="category === 'LEGISLATURE' || category === 'legislature' || category === 'EXECUTIVE'  || category === 'executive' || category === 'municipalities'">
                     
                         <!-- Role-Begin -->
                         <span *ngIf="userData.role && userData.role.type">
@@ -174,13 +174,13 @@
 
                           <!-- STATE-begin -->
                         <span *ngIf="userData.role && userData.role.state">  
-                          <span  *ngIf="!isEditState" class="profile-pills margin-pills">
+                          <div  *ngIf="!isEditState" class="profile-pills margin-pills">
                              <a class="padding-pills" [routerLink]="['/user', userData.role.state]">{{userData.role.state | uppercase}}</a>
                              <!--<button *ngIf="isProfileInEditMode()" type="button" class="edit-button" (click)="toggleEditState()">
                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                             -->
-                            </span>
+                        </div>
 
                             <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" category="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
 
@@ -298,7 +298,9 @@
                     <span class="badge badge-pill badge-success pointer" (click)="Followings()">Followings &nbsp;<span class="badge badge-light">{{followingsCount}}</span></span>
                     <span *ngIf="!isSelfProfile" class="vseparator"></span>
                     <span *ngIf="!isSelfProfile && !isInCircle" class="badge badge-pill badge-dark pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></span>
-                    <span *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></span>                    
+                    <span *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></span>           
+                    <span *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></span>
+                    <span *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="badge badge-pill badge-success pointer" (click)="managedByUsers()">Members &nbsp;<span class="badge badge-light">{{managedBy.length}}</span></span>         
                 </div>
 
 
@@ -335,20 +337,27 @@
                         </span>
                     </li>
 
-                    <li class="list-group-item pointer" *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings)}">
+                    <li class="list-group-item pointer"
+                        (click)="showTwitterActivities()" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}">
+                        <span class="pointer">
+                            <i class="material-icons">rss_feed</i>Twitter Activities
+                        </span>
+                    </li>
+
+                    <li class="list-group-item pointer" *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
                         <i class="material-icons">{{profileTemplate.profileIcon}}</i> {{profileTemplate.name}}
                         <!--Profile data deletion while in edit mode
                         <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
                         -->
                     </li>
-
+<!--
                     <li *ngIf="isProfileManaged" class="list-group-item pointer"
                         [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}">
                         <span class="pointer" (click)="managedByUsers()">
-                            <i class="material-icons">supervisor_account</i>Managed by
+                            <i class="material-icons">supervisor_account</i>Members
                         </span>
                     </li>
-
+-->
                     <li *ngIf="isShowSettings" class="list-group-item pointer"
                     (click)="showSettings()" [ngClass]="{ 'active': settings, 'in-active': !settings}">
                         <span class="pointer">
@@ -374,11 +383,20 @@
                                         <!-- Main stage area -->
                                         <div class="col-lg-12 cols-item2">
                                             <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
-                                               <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
+                                                <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
                                             </div>
                                             <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
                                                 Please login to view the activies.
                                              </div>
+
+                                             <!--Twitter feed-->
+                                             <div id="TwitterCollapse" *ngIf="twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
+                                                <a class="twitter-timeline" href="{{twitterHandle}}">Tweets From Twitter</a>
+                                             </div>
+                                             <div id="TwitterCollapse" *ngIf="!twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
+                                                <small>Twitter feed not available.</small>
+                                             </div>
+
                                             <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                  class="widget stick-widget">
                                                 <ul class="followers">
@@ -397,9 +415,10 @@
                                             </div>
                                             <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
                                             class="widget stick-widget">
-                                                <h6>Add Members:</h6>
-                                                <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueChange)='selectedUser($event)'></app-gps-global-search>
-
+                                                <div *ngIf="isEditable">
+                                                    <h6>Add Members:</h6>
+                                                    <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueSelect)='selectedUser($event)'></app-gps-global-search>
+                                                </div>    
 
                                             <!-- <div class="ng-autocomplete managedby-search">
                                                 <ng-autocomplete
@@ -429,7 +448,7 @@
 
                                               <div class="row">
                                                 <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of managedBy">
-                                                  <app-usercard2 [username]="managedUsername"></app-usercard2>
+                                                  <app-usercard2 [username]="managedUsername" [manageMembers]="isEditable"></app-usercard2>
                                                   <div class="overlay">
                                                       <!-- <button class="delete-managedby-user" type="button" (click)="removeMember(username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button> -->
                                                     </div>
@@ -559,10 +578,12 @@
 <div class="bottom-tabs">
     <ul class="nav nav-tabs mobile-bottom-tabs">
         <li [ngClass]="{'active':isActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showActivities()">Activities</button></li>
+        <li [ngClass]="{'active':isTwitterActivityCollapsed==false}"><button type="button" (click)="toggleTemplateDropDown();showTwitterActivities()">Twitter Activities</button></li>
 
         <li [ngClass]="{'active':isProfileCollapsed==false}"><button (click)="toggleTemplateDropDown();Profiles(activeTemplatName);loadTemplate(activeTemplate)" type="button">{{activeTemplatName}}</button></li>
-        <li *ngIf="isProfileManaged" [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Managed By</button></li>
-        
+        <!--
+        <li *ngIf="isProfileManaged" [ngClass]="{'active':isManagedByCollapsed==false}"><button type="button"  (click)="toggleTemplateDropDown();managedByUsers()">Members</button></li>
+        -->
         <li [ngClass]="{'active':isProfileCollapsed==false}">
             <div class="btn-group dropup">
               <button type="button" class="btn btn-secondary dropdown-toggle" (click)="toggleTemplateDropDown()" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -16,7 +16,7 @@ export class User {
     profileBannerImgFileId: string;
     settings: {};
     circleUsersInfo: string;
-    members: string;
+    members: [];
     emailId: string;//GOOGLE-email
     phone: string;
     address: string;

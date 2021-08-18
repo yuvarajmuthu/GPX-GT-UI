@@ -1,33 +1,207 @@
-<div class='row'> 
-	<div class="col">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownProfileEditOption" ngbDropdownToggle>{{profileEditOption}}</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownProfileEditOption">
-				<button class="dropdown-item" (click)="setPermission('Editor')">Editor</button>
-        <button class="dropdown-item" (click)="setPermission('Viewer')">Viewer</button>				
-      </div>
+<div class="avatar-bg">
+    <div class="container-fluid">
+        <div class="dashboard-avatar">
+         <div class="col-md-12">	
+            <div class="text-right vedit-profile">
+                <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
+            </div>	
+            <div class="profile-details">
+              <div class="profile-width">
+                <div class="dashboard-avatar-thumb">
+                    <img [src]="profileSmImage" class="img-avater" *ngIf="!isImageLoading" alt="User avatar">
+                    <a class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
+                    <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
+                        <i class="fa fa-camera-retro"></i>
+                        <input type="file" class="uploadFile img" value="Upload Photo"
+                                      style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
+                    </label>
+                </div>
+                <div class="profile-name">
+                    <h4>{{userData.displayName}}</h4> 
+                    <span  class="badge badge-pill badge-danger" >
+                      <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
+                      </span>
+                    <div>{{userData.username}}</div>
+                    <div class="paid-candidate-box-extra">
+                        <ul>
+                            <li class="more-skill"><span>{{followersCount}}</span> Followers</li>
+                            <li class="more-skill"><span>{{followingsCount}}</span> Following</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div ngbDropdown  class="d-inline-block nav-item add-drop" *ngIf="isProfileInEditMode()">
+                  <button class="btn btn-outline-primary btn-xs"
+                          id="dropdownAddSection"
+                          ngbDropdownToggle>
+                      Add Section<i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                  <div ngbDropdownMenu
+                       aria-labelledby="dropdownAddSection" id="dropdownAddSection">
+                      <button class="dropdown-item"
+                              *ngFor="let profileTemplate of availableProfileTemplates"
+                              (click)="addProfileData(profileTemplate)">
+                          {{profileTemplate.name}}
+                      </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="dashboard-avatar-text col-md-6 col-md-offset-3">
+                <div class="bio-intro box">
+                    <a class="edit-bio-intro edit" href="#"><i class="ti-pencil"></i></a>
+                    <a class="edit-bio-intro save" href="#"><i class="ti-save-alt"></i></a>
+                    <p class="addReadMore showlesscontent text click-rmv">{{userData.description}}</p>
+                </div>
+            </div>
+          </div>
+        </div>
     </div>
-	</div>
-
-	<div class="col">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownAddSection" ngbDropdownToggle>Add Section</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownAddSection">
-        <button class="dropdown-item" *ngFor="let profileTemplate of profilesTemplates" (click)="loadTemplate(profileTemplate.profile_template_id)">{{profileTemplate.name}}</button>
-      </div>
     </div>
-	</div>
-	
-	<div *ngIf="allowed()" class="col">
-	     <button type="button" class="btn btn-primary" (click)="saveProfile()">Save Profile</button>
-	</div>    
+    <!-- General Detail Start -->
+        <section class="dashboard-wrap">
+            <div class="container-fluid">
+                <div class="row">
+                
+                    <!-- Sidebar Wrap -->
+                    <div class="col-lg-3 col-md-4">
+                        <div class="side-dashboard">
+                            <div class="dashboard-menu">
+                                <ul>
+                                    <li (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-rss"></i> <span class="link-text">Activities</span> </a></li>
+                                    <li (click)="showTwitterActivities()" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
+                                    <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
+                                        <a href="#" onclick="return false;">
+                                        <i class="{{profileTemplate.profileIcon}}"></i> <span class="link-text">{{profileTemplate.name}}</span></a>
+                                    </li>
+                                    <li *ngIf="managedBy" (click)="managedByUsers()" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Managed by</span></a></li>
+                                    <li *ngIf="isShowSettings" (click)="showSettings()" class="list-group-item pointer"
+                                      [ngClass]="{ 'active': settings, 'in-active': !settings}"><a href="#" onclick="return false;"><i class="fa fa-cog"></i> <span class="link-text">Settings </span></a>
+                                    </li>
 
-	<div *ngIf="!allowed()" class="col">
-	     <button type="button" class="btn btn-primary">Follow</button>
-	</div>    
-</div>            
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Wrap -->
+                    <div class="col-lg-9 col-md-8">
+                        <div class="dashboard-body">
+                            <div class="dashboard-caption">
 
-<hr>
-<div>
-	<app-usertemplate [type]="templateType"></app-usertemplate>
-</div>
+                                <div class="full-card">
+                        <div class="row row-bottom mrg-0">
+                            <div class="Profile-head">
+                              <h2 class="detail-title">Profile</h2>
+                              <a href="#"><i class="ti ti-plus"></i></a>
+                            </div>
+
+                            <ul class="job-detail-des">
+                                <li>
+                                <div class="list-image">
+                                   <img src="/assets/images/network7.png">
+                                </div>
+                                <div class="list-content">
+                                    <a href="#">
+                                    <h5>Programming &amp; Design , Product Designer</h5>
+                                    </a>
+                                    <a href="#"><p>IT-Software / Software Services</p></a>
+                                    <p>Full Time - $10,000 - $12,000 P.A.</p>
+                                </div>
+                                <a class="edit-list-detail" href="#" data-toggle="modal" data-target="#myModal"><i class="ti ti-pencil"></i></a>
+                                </li>
+          
+                            </ul>
+                            <!--edit-model-->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Profile Edit</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <form class="model-from">
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                <div class="input-with-icon">
+                                                    <!--<label>Designation</label>-->
+                                                    <input type="text" class="form-control" placeholder="Designation">
+                                                    <i class="ti ti-direction-alt"></i>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                <div class="input-with-icon">
+                                                    <!--<label>Company</label>-->
+                                                    <input type="text" class="form-control" placeholder="Company">
+                                                    <i class="ti ti-layout-accordion-merged"></i>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                <div class="input-with-icon">
+                                                    <!--<label>Duration</label>-->
+                                                    <select name="cars" id="cars" class="form-control">
+                                                      <option value="volvo">Part Time</option>
+                                                      <option value="saab">Full Time</option>
+                                                    </select>
+                                                    <i class="fa fa-usd"></i>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                              <div class="form-group">
+                                                <div class="input-with-icon">
+                                                    <!--<label>Net Worth</label>-->
+                                                    <input type="text" class="form-control" placeholder="Net Worth">
+                                                    <i class="fa fa-usd"></i>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                <div class="input-with-icon">
+                                                    <!--<label>Logo</label>-->
+                                                    <input type="file" class="form-control" placeholder="Paste Your Logo Here" style="padding-top: 10px;">
+                                                    <i class="ti ti-file"></i>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                <div class="input-with-icon">
+                                                    <!--<label>Desicription</label>-->
+                                                    <textarea class="form-control" row="4" placeholder="Description"></textarea>
+                                                    <i class="ti ti-comment-alt"></i>
+                                                </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <button type="button" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                  </div>
+                                  <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                                    
+                                  <!--</div>-->
+                                </div>
+                              </div>
+                            </div>
+                            <!--edit-model-->
+                        </div>
+                        
+                        
+                    </div>	
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </section>
+        <!-- General Detail End -->

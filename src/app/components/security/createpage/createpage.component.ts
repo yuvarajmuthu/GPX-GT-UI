@@ -180,7 +180,7 @@ export class CreatepageComponent implements OnInit {
     }
     this.user = this.userCreationForm.value;
     this.user['profileDatas'] = profileDatasList;
-    this.user['status'] = 'PASSIVE';
+    this.user['status'] = 'ACTIVE'; // since a User is creating a page, should the page be in ACTIVE status ?
 
     settings['accessRestriction'] = this.user['accessRestriction'];
     this.user['settings'] = settings;

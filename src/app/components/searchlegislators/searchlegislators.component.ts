@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectorRef, isDevMode} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
+import { environment } from '../../../environments/environment';
+
 // import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/catch';
 import {catchError, map, tap, switchMap} from 'rxjs/operators';
@@ -10,9 +12,11 @@ import {ComponentcommunicationService} from '../../services/componentcommunicati
 import {AlertService} from '../../services/alert.service';
 import {DatashareService} from '../../services/datashare.service';
 import {UserService} from '../../services/user.service';
+import {SearchService} from '../../services/search.service';
 
 import {Legislator} from '../../models/legislator';
 import {User} from '../../models/user';
+import { AppConstants } from 'src/app/app.constant.enum';
 
 import {LegislatorComponent} from '../../components/legislator/legislator.component';
 
@@ -33,7 +37,8 @@ export class SearchlegislatorsComponent implements OnInit {
   resultop: any;
   resultop1: any;
   ipZipcode: String = '';
-  address: string;// = '300 Chatham Park Drive,Pittsburgh, PA 15220';
+  address: string;
+  searchAddress: string;
   currentLocationZip = '19406';
   public selectedlegislator: Legislator;
   latitude: any;
@@ -65,11 +70,13 @@ export class SearchlegislatorsComponent implements OnInit {
   constructor(private  router: Router,
               private route: ActivatedRoute,
               private userService: UserService,
+              private searchService: SearchService,
               private legislatorsService: LegislatorService,
               private missionService: ComponentcommunicationService,
               private alertService: AlertService,
               private datashareService: DatashareService,
-              private changeDetector: ChangeDetectorRef) {
+              private changeDetector: ChangeDetectorRef,
+              private constants:AppConstants) {
                 //this.getScreenSize();
     if (this.stateData) {
       //this.getCongressLegislatorsByLatLong();
@@ -98,7 +105,7 @@ export class SearchlegislatorsComponent implements OnInit {
   */
   ngOnInit() {
     if (isDevMode()) {
-      this.address = '300 Chatham Park Drive,Pittsburgh, PA 15220';
+      this.address = environment.address;
     }
 
     if(!this.registration){ // Component being in NON-Home page
@@ -128,6 +135,7 @@ export class SearchlegislatorsComponent implements OnInit {
 
       if(this.biodata && this.biodata['address']){
         this.address = this.biodata['address'];
+        //load previously found/searched data for the address, if not available then data can be retrieved from GOOGLE
         this.loadCongressData(); 
       }
       
@@ -178,7 +186,7 @@ export class SearchlegislatorsComponent implements OnInit {
       return;
     }
 
-
+    this.searchAddress = this.address;
     this.getLegislators(this.address, 'congress');
 
     //this.districtLabel = 'Your Congressional District(s):';
@@ -423,6 +431,7 @@ roleObj = {};
       console.log('Processing division ', divisionsKey);
       let divisionData:{} = divisionsObj[divisionsKey];
       let divisionsKeySplited:string[] = divisionsKey.split('/');
+      let category = '';
       for (var b = 0; b < divisionsKeySplited.length; b++) {//["ocd-division", "country:us", "state:pa", "cd:18"]
         if(divisionsKeySplited[b] !== 'ocd-division'){
           divisionUnit = divisionsKeySplited[b].split(':'); 
@@ -439,6 +448,7 @@ roleObj = {};
 
           if(b === divisionsKeySplited.length-1){ //last item
             this.divisioncategory.push(divisionUnit[0]);//cd
+            category = roleProperty;
             roleObj[roleProperty] = divisionData['name']; //"Pennsylvania's 18th congressional district"
           }else{
             roleObj[roleProperty] = divisionUnit[1].replace('_', ' ');
@@ -447,6 +457,12 @@ roleObj = {};
       }
 
       this.divisions.push(divisionData['name']);
+      //check and register Division
+      let userDivision:User = new User();
+      userDivision.username = divisionData['name'];
+      userDivision.full_name = divisionData['name'];
+      userDivision.category = category;
+      this.searchAndRegister(userDivision);
 
       let officevalues:string[] = [];
       let officeObj = {};
@@ -479,6 +495,15 @@ roleObj = {};
 
                   //party data  
                   legisRoleObj['party'] = official['party'];
+                  //check and register Political Party
+                  if(official['party']){
+                    let userParty:User = new User();
+                    userParty.username = official['party'];
+                    userParty.full_name = official['party'];
+                    userParty.category = this.constants.USERCATEGRORY_POLITICAL_PARTY;
+                    this.searchAndRegister(userParty);
+                  }
+
                   legislator['division'] = divisionData['name'];
                   //legislator['divisionOffice'] = office['name'];
                   //retrieving address
@@ -550,6 +575,15 @@ roleObj = {};
 
     }
 
+    //selecting the default value
+    if(this.divisions && this.divisions.length > 0){
+      this.selectedDivision = this.divisions[0];
+      console.log("this.selectedDivision,  this.divisions[0] " + this.selectedDivision, this.divisions[0]);
+      this.selectDivision(this.selectedDivision);
+          
+    }
+
+
   }
  
   selectDivision(division:string){
@@ -575,6 +609,13 @@ roleObj = {};
       }
     });
 
+    //selecting the default value
+    if(this.divisionOffices && this.divisionOffices.length > 0){
+      this.selectedDivisionOffice = this.divisionOffices[0];
+      console.log("this.selectedDivisionOffice = this.divisionOffices[0] " + this.selectedDivisionOffice, this.divisionOffices[0]);
+      this.selectDivisionOffice(this.selectedDivisionOffice);
+    }
+
     
 
   }
@@ -591,6 +632,73 @@ roleObj = {};
         this.legislators.push(element);
       }
     });
+  }
+
+  searchAndRegister(user:User) {
+
+    this.searchService.getUsers(user.username)//search for user existence user elasticsearch
+    .subscribe(
+      (result) => {
+        if(result.length > 0 && user.username === result[0]['full_name']){
+          //user exist
+        }else{//register if user does not exist
+
+          this.userService.registerUser(user).subscribe(
+            data => {
+                console.log('Response from registering the user ', data);
+                //if(data != null){
+                //  this.userName = data['username'];
+
+                //}
+            },
+            error => {
+                //this.alertService.error(error);
+                console.log('Error while registering the user ', user.full_name, error);
+            });
+
+        }
+      },
+      (err) => {
+          console.log('Error ', err);
+          //create user with legislator data ?
+      }); 
+
+  }
+
+  generateUserData(legislator: Legislator):User{
+    let data={};
+    let profileData=null;
+    let user:User = new User();
+    let profileDatasList:Array<Object> = [];
+    let members:Array<string> = [];
+
+    profileData={};
+    profileData['entityId'] = legislator['full_name'];
+    profileData['profileTemplateId'] = 'upRole';
+    data = legislator['role'];
+    profileData['data'] = data;
+    profileDatasList.push(profileData);
+
+    profileData={};
+    profileData['entityId'] = legislator['full_name'];
+    profileData['profileTemplateId'] = 'upOtherContacts';
+    data = legislator['otherContacts'];
+    profileData['data'] = data;
+    profileDatasList.push(profileData);
+
+    user['profileDatas'] = profileDatasList;
+    user.displayName = legislator['full_name'];
+    user.photoUrl = legislator['photoUrl']; 
+    user.sourceSystem = legislator['sourceSystem'];
+    user.category = this.constants.USERCATEGRORY_LEGISLATURE;
+    user.userType = legislator['role']['type'];
+    user.username = legislator['full_name'];
+    user.status = 'PASSIVE';
+    
+    //members.push(user['username']);
+    //user['members'] = members;
+    return user;
+
   }
 
   gotoDistrict(district: JSON) {

@@ -13183,12 +13183,25 @@ background-repeat: no-repeat;
 .profile-name {
     float: left;
 }
-    }
-    @media(max-width: 513px){
+}
+
+@media(max-width: 513px){
         .profile-name{
             top: 0px;
         }
-    }
-    /*-------------------------------------------------*/
+}
+/*DESCRIPTION expand collapse----------------*/
+.expclpse {
+	font-size: 16px;
+	line-height: 16px;
+	height: 32px;
+	overflow: hidden;
+  }
+
+.show {
+	overflow: visible;
+	height: auto;
+  }
+/*-------------------------------------------------*/
 /*Media - Query*/
 /*----------------------------------------------*/

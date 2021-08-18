@@ -30,7 +30,7 @@
                     </div>
                 </div>
 
-                <div ngbDropdown  class="d-inline-block nav-item add-drop" *ngIf="isProfileInEditMode()">
+                <div ngbDropdown  class="d-inline-block nav-item add-drop">
                   <button class="btn btn-outline-primary btn-xs"
                           id="dropdownAddSection"
                           ngbDropdownToggle>
@@ -50,9 +50,10 @@
             </div>
             <div class="dashboard-avatar-text col-md-6 col-md-offset-3">
                 <div class="bio-intro box">
-                    <a class="edit-bio-intro edit" href="#"><i class="ti-pencil"></i></a>
-                    <a class="edit-bio-intro save" href="#"><i class="ti-save-alt"></i></a>
-                    <p class="addReadMore showlesscontent text click-rmv">{{userData.description}}</p>
+                    <a class="edit-bio-intro edit" href="#"><i class="ti ti-pencil"></i></a>
+                    <a class="edit-bio-intro save" href="#"><i class="ti ti-save-alt"></i></a>
+                    <p class="expclpse" [class.show]="show">{{userData.description}}</p>
+                    <button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>
                 </div>
             </div>
           </div>
@@ -86,120 +87,209 @@
                     </div>
                     
                     <!-- Content Wrap -->
-                    <div class="col-lg-9 col-md-8">
-                        <div class="dashboard-body">
-                            <div class="dashboard-caption">
-
-                                <div class="full-card">
-                        <div class="row row-bottom mrg-0">
-                            <div class="Profile-head">
-                              <h2 class="detail-title">Profile</h2>
-                              <a href="#"><i class="ti ti-plus"></i></a>
-                            </div>
-
-                            <ul class="job-detail-des">
-                                <li>
-                                <div class="list-image">
-                                   <img src="/assets/images/network7.png">
-                                </div>
-                                <div class="list-content">
-                                    <a href="#">
-                                    <h5>Programming &amp; Design , Product Designer</h5>
-                                    </a>
-                                    <a href="#"><p>IT-Software / Software Services</p></a>
-                                    <p>Full Time - $10,000 - $12,000 P.A.</p>
-                                </div>
-                                <a class="edit-list-detail" href="#" data-toggle="modal" data-target="#myModal"><i class="ti ti-pencil"></i></a>
-                                </li>
+                    <div class="col-lg-9 col-md-8" id="template-tabs">
+                      <div class="widget-div">
+                          <div class="widget widget-tabbed">
+                              <!-- Nav tab -->
           
-                            </ul>
-                            <!--edit-model-->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Profile Edit</h4>
-                                  </div>
-                                  <div class="modal-body">
-                                    <form class="model-from">
+                              <div class="gap gray-bg">
+                                  <div class="container-fluid">
                                       <div class="row">
-                                          <div class="col-md-12">
-                                              <div class="form-group">
-                                                <div class="input-with-icon">
-                                                    <!--<label>Designation</label>-->
-                                                    <input type="text" class="form-control" placeholder="Designation">
-                                                    <i class="ti ti-direction-alt"></i>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-12">
-                                              <div class="form-group">
-                                                <div class="input-with-icon">
-                                                    <!--<label>Company</label>-->
-                                                    <input type="text" class="form-control" placeholder="Company">
-                                                    <i class="ti ti-layout-accordion-merged"></i>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <div class="form-group">
-                                                <div class="input-with-icon">
-                                                    <!--<label>Duration</label>-->
-                                                    <select name="cars" id="cars" class="form-control">
-                                                      <option value="volvo">Part Time</option>
-                                                      <option value="saab">Full Time</option>
-                                                    </select>
-                                                    <i class="fa fa-usd"></i>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <div class="form-group">
-                                                <div class="input-with-icon">
-                                                    <!--<label>Net Worth</label>-->
-                                                    <input type="text" class="form-control" placeholder="Net Worth">
-                                                    <i class="fa fa-usd"></i>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-12">
-                                              <div class="form-group">
-                                                <div class="input-with-icon">
-                                                    <!--<label>Logo</label>-->
-                                                    <input type="file" class="form-control" placeholder="Paste Your Logo Here" style="padding-top: 10px;">
-                                                    <i class="ti ti-file"></i>
-                                                </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-12">
-                                              <div class="form-group">
-                                                <div class="input-with-icon">
-                                                    <!--<label>Desicription</label>-->
-                                                    <textarea class="form-control" row="4" placeholder="Description"></textarea>
-                                                    <i class="ti ti-comment-alt"></i>
-                                                </div>
-                                            </div>
+                                          <div class="col-lg-12">
+                                              <div class="row cols-reverse" id="page-contents">
+                                                  <!-- sidebar -->
+                                                  <!-- Main stage area -->
+                                                  <div class="col-lg-12 cols-item2">
+                                                      <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
+                                                          <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
+                                                      </div>
+                                                      <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
+                                                          Please login to view the activies.
+                                                       </div>
+          
+                                                       <!--Twitter feed-->
+                                                       <div id="TwitterCollapse" *ngIf="twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
+                                                          <a class="twitter-timeline" href="{{twitterHandle}}">Tweets From Twitter</a>
+                                                       </div>
+                                                       <div id="TwitterCollapse" *ngIf="!twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
+                                                          <small>Twitter feed not available.</small>
+                                                       </div>
+          
+                                                      <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
+                                                           class="widget stick-widget">
+                                                          <ul class="followers">
+                                                              <li *ngFor="let followerUsername of followers">
+                                                                  <app-usercard1 [username]=followerUsername></app-usercard1>
+                                                              </li>
+                                                          </ul>
+                                                      </div>
+                                                      <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
+                                                              class="widget stick-widget">
+                                                          <ul class="followers">
+                                                              <li *ngFor="let followingUsername of followings">
+                                                                  <app-usercard1 [username]=followingUsername></app-usercard1>
+                                                              </li>
+                                                          </ul>
+                                                      </div>
+                                                      <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
+                                                      class="widget stick-widget">
+                                                          <div *ngIf="isEditable">
+                                                              <h6>Add Members:</h6>
+                                                              <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueSelect)='selectedUser($event)'></app-gps-global-search>
+                                                          </div>    
+          
+                                                      <!-- <div class="ng-autocomplete managedby-search">
+                                                          <ng-autocomplete
+                                                            [(ngModel)]="searchUserManagedBy"
+                                                            (selected)='addMember(searchUserManagedBy.username)'
+                                                            [data]="searchUsers"
+                                                            placeHolder="User Name"
+                                                            (inputChanged) = "onChangeSearch($event)"
+                                                            [searchKeyword]="keywordUser"
+                                                            [itemTemplate]="itemTemplate"
+                                                            [notFoundTemplate]="notFoundTemplate">
+                                                          </ng-autocomplete>
+          
+                                  
+                                                          <ng-template #itemTemplate let-item>
+                                                            <div class="item">
+                                                              <img src="{{item.photoUrl}}" height="25">
+                                                              <span [innerHTML]="item.full_name"></span>
+                                                              <small></small>
+                                                            </div>
+                                                          </ng-template>
+                                  
+                                                          <ng-template #notFoundTemplate let-notFound>
+                                                            <div [innerHTML]="notFound"></div>
+                                                          </ng-template>
+                                                        </div> -->
+          
+                                                        <div class="row">
+                                                          <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of managedBy">
+                                                            <app-usercard2 [username]="managedUsername" [manageMembers]="isEditable"></app-usercard2>
+                                                            <div class="overlay">
+                                                                <!-- <button class="delete-managedby-user" type="button" (click)="removeMember(username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button> -->
+                                                              </div>
+          
+                                                          </div>
+                                                        </div>
+                                   
+                                                     <!-- <ul class="followers">
+                                                         <li *ngFor="let managed of managedBy" class="managedby-user-list">
+                                                          <button class="delete-managedby-user" type="button" (click)="removeMember(managed.username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                             <app-usercard1 [user]=managed></app-usercard1>
+                                                         </li>
+                                                     </ul> -->
+                                                     </div>
+                                                     <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
+                                                         Please login to view the members.
+                                                     </div>
+          
+                                                     <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
+                                                     <form [formGroup]="settingsForm">
+                                                          <ul class="followers">
+                                                              <li>
+                                                                  <div class="form-row">
+                                                                      <div class="col form-group">
+                                                                        <label>Access Restriction</label>
+                                                                        <div class="custom-control custom-switch">
+                                                                          <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction" (change)="accessChange()">
+                                                                          <label class="custom-control-label" for="customSwitch1">Public[OFF] / Private[ON]</label>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                              </li>
+                                                          </ul>
+                                                      </form>    
+                                                      </div>
+                                                      <div id="setingsSection" *ngIf="!isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
+                                                          Please login to manage the settings.
+                                                      </div>
+          
+                                                      <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
+                                                          <div class="card card-nav-tabs">
+                                                              <div class="card-header-1 card-header-primary"  id="myHeader">
+                                                                <!--   <div class="nav-tabs-navigation">
+                                                                      <div class="nav-tabs-wrapper">
+                                                                          <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
+                                                                              data-tabs="tabs">
+                                                                              <li class="nav-item"
+                                                                                  *ngFor="let profileTemplate of profilesTemplates">
+                                                                                  <div>
+                                                                                      <span>
+                                                                                          <a class="nav-link template-tab text-black-50" data-toggle="tab"
+                                                                                          [routerLink]=""
+                                                                                          (click)="loadTemplate(profileTemplate.profileTemplateId)"
+                                                                                          *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
+                                                                                              <i class="material-icons">{{profileTemplate.profileIcon}}</i>
+                                                                                              {{profileTemplate.name}}
+                                                                                          </a>
+                                                                                          <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
+          
+                                                                                      </span>
+                                                                                  </div>
+                                                                              </li>
+                                                                              <li *ngIf="isProfileInEditMode()" class="nav-item">
+                                                                                  <div ngbDropdown class="d-inline-block">
+                                                                                      <button class="btn btn-outline-primary btn-xs"
+                                                                                              id="dropdownAddSection"
+                                                                                              ngbDropdownToggle>
+                                                                                          <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                                      </button>
+                                                                                      <div ngbDropdownMenu
+                                                                                           aria-labelledby="dropdownAddSection">
+                                                                                          <button class="dropdown-item"
+                                                                                                  *ngFor="let profileTemplate of availableProfileTemplates"
+                                                                                                  (click)="addProfileData(profileTemplate)">
+                                                                                              {{profileTemplate.name}}
+                                                                                          </button>
+                                                                                      </div>
+                                                                                  </div>
+                                                                              </li>
+                                                                          </ul>
+                                                                      </div>
+                                                                  </div> -->
+                                                              </div>
+          
+                                                              <div class="card-body content">
+                                                                  <div class="tab-content text-center">
+                                                                      <div class="tab-pane active" id="templateType">
+                                                                          <app-usertemplate [type]="templateType"></app-usertemplate>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          <!--HORIZONTAL ITEMS FOR PROFILES / ADD SECTION IN EDIT MODE-->
+                                                      </div>
+                                                  </div><!-- centerl meta -->
+                                              </div>
                                           </div>
                                       </div>
-                                      <button type="button" class="btn btn-primary">Save changes</button>
-                                    </form>
                                   </div>
-                                  <!--<div class="modal-footer">-->
-                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                                    
-                                  <!--</div>-->
-                                </div>
                               </div>
-                            </div>
-                            <!--edit-model-->
-                        </div>
-                        
-                        
-                    </div>	
-                            </div>
-                        </div>
-                    </div>
+          
+                              <!-- End nav tab -->
+          
+                              <!-- Tab panes -->
+                              <div class="tab-content">
+          
+          
+                                  <!-- Tab timeline -->
+                                  <div class="tab-pane animated active fadeInRight" id="my-timeline">
+                                      <div class="user-profile-content">
+          
+                                          <!-- Begin timeline -->
+          
+                                          <!-- End timeline -->
+                                      </div><!-- End div .user-profile-content -->
+                                  </div><!-- End div .tab-pane -->
+                                  <!-- End Tab timeline -->
+                                  <!-- Tab about -->
+                                  <!-- End Tab user messages -->
+                              </div><!-- End div .tab-content -->
+                          </div><!-- End div .box-info -->
+                      </div>
+                  </div>
                 
                 </div>
             </div>

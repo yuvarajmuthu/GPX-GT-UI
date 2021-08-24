@@ -180,6 +180,9 @@ form button {
 .post-header{
   background-color: #D6EAF8;
 }
+.comment-header{
+  background-color: #0fc4b5;
+}
 .post-comment-section{
   margin: 15px 0px 0px 0px;
 }

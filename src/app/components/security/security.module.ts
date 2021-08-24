@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { CreatepageComponent } from './createpage/createpage.component';
 import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
+import {GAddressSearchComponent} from '../../components/g-address-search/g-address-search.component';
 
 import { CKEditorModule } from 'ckeditor4-angular';
 //import {UserModule} from '../../components/user/user.module';
@@ -20,7 +21,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
     FormsModule,
     CKEditorModule
   ],
-  exports:[GpsGlobalSearchComponent],
-  declarations: [RegisterComponent, LoginComponent, CreatepageComponent, GpsGlobalSearchComponent]
+  exports:[GpsGlobalSearchComponent, GAddressSearchComponent],
+  declarations: [RegisterComponent, LoginComponent, CreatepageComponent, GpsGlobalSearchComponent, GAddressSearchComponent]
 })
 export class SecurityModule {}

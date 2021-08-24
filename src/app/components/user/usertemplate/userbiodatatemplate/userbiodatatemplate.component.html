@@ -1,98 +1,37 @@
-<!--
-<div>Legislative Data:</div>
 
-<div class="biodata legisProfileData col-xs-12">
-  <table class="table">
-
-    <tbody>
-        <tr class="info" *ngFor="let displayProperty of displayProperties">
-          <td>{{displayProperty.displayLabel}}</td>
-          <td>{{legislator[displayProperty.propId]}}</td>
-
-        </tr>
-
-    </tbody>
-  </table>
-</div>
-{{profileInEditMode}} TEST
--->
-<!--
-<form role="form">
-  <div class="form-group row" *ngFor="let displayProperty of displayProperties">
-
-      <label class="col-lg-3 col-form-label form-control-label">{{displayProperty.displayLabel}}</label>
-
-      <div class="col-lg-9">
-          <input *ngIf="isProfileInEditMode" class="form-control" type="text" value="{{legislator[displayProperty.propId]}}">
-          <label *ngIf="!isProfileInEditMode" class="col-form-label form-control-label">{{legislator[displayProperty.propId]}}</label>
-        </div>
-
-  </div>
-</form>
--->
-<form [formGroup]="biodataTemplateForm">
-  <!--
-  <div class="row">
-    <div class="col" *ngIf="!isProfileInEditMode">
-        <button class="btn btn-outline-warning btn-xs float-right" (click)="editProfile()"> 
-            <i class="fa fa-pencil-square-o"></i>
-        </button>
-    </div>
-    <div class="col" *ngIf="isProfileInEditMode">
-      <button class="btn btn-outline-success btn-xs float-right" (click)="saveProfile()">
-          <i class="fa fa-save"></i>
-      </button>
-  </div>
-  <div class="col" *ngIf="isProfileInEditMode">
-    <button class="btn btn-outline-warning btn-xs float-right" (click)="cancelEditProfile()">
-        <i class="fa fa-close"></i>
-    </button>
-  </div>
-  <div class="col">
-    <button class="btn btn-outline-danger btn-xs float-right" (click)="deleteProfile()">
-      <i class="fa fa-trash"></i>
-    </button>
-  </div>
-</div>
--->
-<!--
-<div class="bioProfileCard" *ngIf="externalUser">
-  <div class="group" *ngFor="let displayProperty of displayProperties">
-    <input *ngIf="isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
-    <input disabled *ngIf="!isProfileInEditMode" [placeholder]="displayProperty.displayLabel" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
-      <span class="highlight"></span>
-    <span class="bar"></span>
-    <label>
-        <span class="span-input ">{{displayProperty.displayLabel}}</span>
-    </label>
-  </div>
-</div>
--->
-  <div class="row">
-    <div class="col" *ngIf="isProfileInEditMode">
-        <a href="javascript:void(0);" class="lg-fa float-right" (click)="open(content, biodata)">
+<div class="container">
+  <div class="card-media" >
+    <div class="card-media-body">
+        <a href="javascript:void(0);" *ngIf="isProfileInEditMode" class="lg-fa float-right" (click)="open(content, biodata)">
             <i class="fa fa-pencil-square-o"></i>
         </a>
+    
+        <span  *ngFor="let displayProperty of displayProperties">
+
+
+          <div class="subtle" *ngIf="displayProperty.propId !== 'gender' && displayProperty.propId !== 'firstName' && displayProperty.propId !== 'lastName'">
+            <i class="fa fa-envelope" *ngIf="displayProperty.propId == 'emailId' && biodata[displayProperty.propId]"></i>
+            <i class="fa fa-mobile" *ngIf="displayProperty.propId == 'phone' && biodata[displayProperty.propId]"></i>
+            <i class="fa fa-fax" *ngIf="displayProperty.propId == 'fax' && biodata[displayProperty.propId]"></i>
+            <i class="fa fa-calendar" *ngIf="displayProperty.propId == 'birthDate' && biodata[displayProperty.propId]"></i>
+            <i class="fa fa-map-pin" *ngIf="displayProperty.propId == 'address' && biodata[displayProperty.propId]"></i>
+
+             {{biodata[displayProperty.propId]}}
+          </div>
+
+          <span class="subtle" *ngIf="displayProperty.propId === 'firstName' || displayProperty.propId === 'lastName'">
+            <strong>{{biodata[displayProperty.propId]}} </strong>
+          </span>  
+        </span>
+        
+
+          <div class="card-media-body-supporting-bottom">
+          </div>
+
+        </div>
+      </div>
     </div>
-  </div>    
-    <div class="form-group row" *ngFor="let displayProperty of displayProperties">
-
-        <label class="col-lg-3 col-form-label form-control-label">{{displayProperty.displayLabel}}</label>
-
-        <div class="col-lg-9">
-          <label class="col-form-label form-control-label">{{biodata[displayProperty.propId]}}</label>
-          <!--
-            <input *ngIf="isProfileInEditMode" class="form-control" [formControlName]="displayProperty['propId']" type="text" value="{{biodata[displayProperty.propId]}}">
-            <label *ngIf="!isProfileInEditMode" class="col-form-label form-control-label">{{biodata[displayProperty.propId]}}</label>
- -->
-          </div> 
-
-    </div>
-<!--
-  <button class="btn btn-primary" (click)="getFormData()">Display</button>
-  -->
-</form>
-
+  
 
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -111,11 +50,22 @@
                   <input *ngIf="!biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
 
               </div>
+              
               <div *ngIf="displayProperty.type === 'date'" class="input-group">
                 <input type='date' *ngIf="biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{biodata[displayProperty.propId]}}">
                 <input type='date' *ngIf="!biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
               </div>
-              
+
+              <div *ngIf="displayProperty.type === 'address'" class="input-group">
+                
+                <app-g-address-search (setAddress)="getAddress($event)" adressType="geocode" [autocompleteInput]=biodata[displayProperty.propId] class="form-control"></app-g-address-search>
+                <!--
+                <i class="ti-location-pin"></i>
+                
+                <input *ngIf="biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control" placeholder="{{biodata[displayProperty.propId]}}">
+                <input *ngIf="!biodata" id="{{displayProperty.propId}}" [formControlName]="displayProperty['propId']" class="form-control">
+                -->
+              </div>  
             </div> 
       </form>
   </div>

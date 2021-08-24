@@ -9,10 +9,11 @@ import {SearchService} from '../../services/search.service';
 export class GpsGlobalSearchComponent implements OnInit {
 
   @Input() placeholder: string;
-  @Input() userType:string;
+  @Input() category:string;
   @Input() inputvalue:string;
   @Input() from:string;
   @Output() valueChange = new EventEmitter();
+  @Output() valueSelect = new EventEmitter();
   @Output() valueSave = new EventEmitter();
 
   keywordUser = 'full_name';
@@ -27,14 +28,19 @@ export class GpsGlobalSearchComponent implements OnInit {
   }
 
   onChangeSearch(e){
+    this.valueChanged(e);
     this.searchService.getUsers(e)
     .subscribe((data:any) => {
         this.searchUsers = data;
     });
    }
 
+   onValueSelect(selectedDetails:string){
+    this.selectedDetails = selectedDetails;
+    this.valueSelect.emit(selectedDetails);
+ }
+
    valueChanged(selectedDetails:string){
-      console.log(selectedDetails);
       this.selectedDetails = selectedDetails;
       this.valueChange.emit(selectedDetails);
    }

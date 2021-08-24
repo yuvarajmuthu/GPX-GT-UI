@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import {AbstractTemplateComponent} from '../../abstractTemplateComponent';
+import {GAddressSearchComponent} from '../../../../components/g-address-search/g-address-search.component';
 
 import {DatashareService} from '../../../../services/datashare.service';
 import {ComponentcommunicationService}     from '../../../../services/componentcommunication.service';
@@ -23,7 +24,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
   userName:string = "";
   emailId = "";
   imageUrl:string = "";
-  
+  address: string;
   data = {};
   biodata={};
   private userData = {};
@@ -112,6 +113,9 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
       this.userService2.getBiodata(this.profileUserId)
       .subscribe((response) => {
         this.biodata= response['data'];
+        //if(response['data'] && response['data']['address']){
+        //  this.address = response['data']['address'];
+        //}
         if(response['id']){
           this.bioObjId = response['id']; //primary key
         }
@@ -224,7 +228,7 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
     }
   
     getFormData():any{
-      console.log("Object.assign({}, this.officeForm.value) ", Object.assign({}, this.bioEditForm.value));
+      console.log("Object.assign({}, this.bioEditForm.value) ", Object.assign({}, this.bioEditForm.value));
       const result: {} = Object.assign({}, this.bioEditForm.value);
       console.log("office form ", result);
       return result;
@@ -237,6 +241,8 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
       this.data["profileTemplateId"] = this.id; //unique key
       this.data["entityId"] = this.profileUserId; // how about for user updating other passive profile ?
       this.data["data"] = this.getFormData();
+      if(this.address)
+        this.data["data"]["address"] = this.address;
       console.log("Data " + JSON.stringify(this.data));
       this.userService2.updateProfileData(this.data).subscribe((response) => {
         console.log('Biodata updated sucessfully');
@@ -249,5 +255,12 @@ export class UserbannertemplateComponent extends AbstractTemplateComponent imple
       } 
       );
     }
+
+    getAddress(addressEvent: Event) {
+      console.log('Address - ' + addressEvent);
+      console.log('Address - ' + addressEvent['formatted_address']);
+      this.address = addressEvent['formatted_address'];
+      this.changeDetector.detectChanges();
   
+    }
 }

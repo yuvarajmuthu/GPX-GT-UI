@@ -34,8 +34,8 @@ import {stringify} from 'querystring';
 
 @Component({
     selector: 'app-user',
-    templateUrl: './user3.component.html',
-    styleUrls: ['./user2.component.css']
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
 
@@ -45,6 +45,9 @@ export class UserComponent implements OnInit {
     activeTemplatName:string = "Office";
     showDropDown : boolean = false;
     isInCircle: boolean;
+    twitterHandle:string = null;
+    twitterHandleExist:boolean = false;
+    facebookHandle:string = '';
 
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
@@ -57,7 +60,7 @@ export class UserComponent implements OnInit {
     public connections = [];
     templateType = [];
     private componentRef: ComponentRef<{}>;
-    private userData = {};
+    public userData:User = new User();
     private viewingUser = {};
     private firstName;
     private lastName;
@@ -67,11 +70,12 @@ export class UserComponent implements OnInit {
     public isLegislator = false;
     operation: string = '';
     profileImage: string = '';
-    profileSmImage: any = 'assets/images/avatar1.png'; 
+    profileSmImage: any; 
     bannerImage: any;
     isImageLoading: boolean = false;
     isProfileCollapsed: boolean = false;
     isActivityCollapsed: boolean = true;
+    isTwitterActivityCollapsed: boolean = true;
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
     isManagedByCollapsed:boolean = true;
@@ -79,9 +83,11 @@ export class UserComponent implements OnInit {
     externalUser:boolean;
     biodata:any=null;
     biodataTemplate={};
-    displayName:string='';
+    contactsData = {};
+    //displayName:string='';
 
     entityType:string=null;
+    category:string=null;
     activities: number = 0;
     //private populationComponent: TemplatePopulationComponent;
     profileEditOption: string;
@@ -95,7 +101,7 @@ export class UserComponent implements OnInit {
     loggedUser: User = null;
     loggedUsername: string = null;
     isSelfProfile: boolean = false;
-    isProfileManaged: boolean = false;
+    //isProfileManaged: boolean = false;
     isEditable: boolean = false;
 
     postFormData: FormData;
@@ -103,7 +109,7 @@ export class UserComponent implements OnInit {
     inEditMode:boolean = false;
     followersCount:number = 0;
     followers: User[] = [];
-    managedBy: User[] = [];
+    managedBy = [];
     followingsCount:number = 0;
     followings = [];
     selectedProfileSmImage: File;
@@ -348,15 +354,23 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loggedUsername = this.datashareService.getLoggedinUsername();
+        //reset
+        this.userData = new User();
         this.bannerImage = 'assets/images/user-banner1.jpg';
+        this.profileSmImage = 'assets/images/avatar1.png'; 
+        //this.displayName = '';
+        this.biodata = {};
+
+
 
         this.uploadForm = this.formBuilder.group({
             file: ['']
         });
 
         this.header = document.getElementById("myHeader");
-        this.sticky= document.getElementById("myHeader").offsetTop;
+        //this.sticky= document.getElementById("myHeader").offsetTop;
+
+        this.loggedUsername = this.datashareService.getLoggedinUsername();
 
         this.route.params.subscribe((params: Params) => {
             this.communicationService.userProfileChanged(false);
@@ -367,49 +381,50 @@ export class UserComponent implements OnInit {
 
             this.loadComponent(this.profileUserId);
 
-
         });
     }
 
+    //OBSOLETE
     loadBioData(){
         this.userService.getBiodata(this.profileUserId)
         .subscribe((response) => {
           console.log('loadBioData response ', response);  
           //this.entityType = response['entityType']; 
           this.biodata= response['data'];
-          
-          if(this.biodata['full_name'] != null){
-            this.displayName = this.biodata['full_name'];
-          }else if (this.biodata['first_name'] != null || this.biodata['last_name'] != null){
-            this.displayName = this.biodata['first_name'] + ' ' + this.biodata['last_name'];
+          /*
+          if(this.userData['displayName'] != null){
+            this.displayName = this.userData['displayName'];
+          }else if (this.biodata['firstName'] != null || this.biodata['lastName'] != null){
+            this.displayName = this.biodata['firstName'] + ' ' + this.biodata['lastName'];
           }
-
+*/
           console.log('biodata response data ', this.biodata);
           
           //this.createFormGroup();
         });  
       }
 
-      loadBioDataTemplate(type:string){
-        this.profileService.getProfileTemplateByType('upDefault', type)
-        .subscribe((response) => {
-            this.biodataTemplate = response;
+    //OBSOLETE
+    loadBioDataTemplate(category:string){
+    this.profileService.getProfileTemplateByCategory('upDefault', category)
+    .subscribe((response) => {
+        this.biodataTemplate = response;
 
-        });  
-      }
+    });  
+    }
 
-      getPropertyDataType(propertyName:string){
-        let type:string=null;  
-        let properties:[] = this.biodataTemplate['properties'];
-        for (let property of properties) {
-            if(property['propId'] === propertyName){
-                type = property['type'];
-                break;
-            }
+    getPropertyDataType(propertyName:string){
+    let type:string=null;  
+    let properties:[] = this.biodataTemplate['properties'];
+    for (let property of properties) {
+        if(property['propId'] === propertyName){
+            type = property['type'];
+            break;
         }
+    }
 
-        return type;
-      }
+    return type;
+    }
 
     showActivities() {
         this.activitiesData = true;
@@ -423,7 +438,25 @@ export class UserComponent implements OnInit {
         this.isProfileCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isSettingsCollapsed = true;
+        this.isTwitterActivityCollapsed = true;
         this.isActivityCollapsed = false;
+        this.settings = false;
+    }
+    
+    showTwitterActivities() {
+        this.activitiesData = false;
+        this.profileData = false;
+        this.folow = false;
+        this.followersActiveCss = false;
+        this.followingsActiveCss = false;
+        this.managedByActive = false;
+
+        this.isFollowersCollapsed = true;
+        this.isProfileCollapsed = true;
+        this.isManagedByCollapsed = true;
+        this.isSettingsCollapsed = true;
+        this.isActivityCollapsed = true;
+        this.isTwitterActivityCollapsed = false;
         this.settings = false;
     }
 
@@ -441,6 +474,7 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
+        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = false;
     
         //if(this.isUserLogged()){     
@@ -460,6 +494,7 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
+        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = true;
 
         this.settings = false;
@@ -489,6 +524,7 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
+        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = true;
 
         this.settings = false;
@@ -523,12 +559,13 @@ export class UserComponent implements OnInit {
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
         this.managedByActive = true;
-        this.getManagedBy(this.profileUserId);
+        //this.getManagedBy(this.profileUserId);
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
         this.isManagedByCollapsed = false;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
+        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = true;
 
         this.settings = false;
@@ -541,7 +578,7 @@ export class UserComponent implements OnInit {
 
         this.viewingUser['userId'] = this.profileUserId;
         //this is allowed even for non-logged in user 
-        this.loadBioData();
+        //this.loadBioData();
         
         if (!isDevMode() && this.isUserLogged()) {
             this.getRelationStatus(this.loggedUser.username, this.profileUserId);
@@ -555,48 +592,51 @@ export class UserComponent implements OnInit {
         this.getFollowingsCount(this.profileUserId);
         //this.getFollowers(this.profileUserId);
 
-        if(this.isUserLogged()){
+        //if(this.isUserLogged()){
             //this.isProfileEditable();
 
             this.userService.getUserData(this.profileUserId, this.loggedUsername).subscribe(
                 data => { 
                     this.userData = data;
+
+                    //this.userData.description = 'Tst desc';
                     console.log('User data from service: ', this.userData);
 
                     this.isSelfProfile = this.userData['selfProfile'];
-                    this.isProfileManaged = this.userData['profileManaged'];
+                    //this.isProfileManaged = this.userData['profileManaged'];
                     this.entityType =  this.userData['userType'];
+                    this.category = this.userData['category'];
+                    this.managedBy = this.userData['members'];
                     this.isProfileEditable();
 
                     //Settings
                     this.isShowSettings = this.userData['showSettings'];
-                    if(this.userData['settings'] && this.userData['settings']['accessRestriction']){
-                        this.settingsForm.setValue(this.userData['settings']);
-                        this.isProfilePrivate = this.userData['settings']['accessRestriction'];
+                    if(this.userData['settings'] && this.userData.settings['accessRestriction']){
+                        this.settingsForm.setValue(this.userData.settings);
+                        this.isProfilePrivate = this.userData.settings['accessRestriction'];
                     }
                     
 
-                    if (this.userData['userType'] === 'LEGISLATOR') {
+                    if (this.userData['sourceSystem'] === 'GOVTRACK') {
                         this.viewingUser['external'] = true;
                         this.viewingUser['isLegislator'] = true;
-                        if (this.userData['sourceSystem'] === 'OPENSTATE') {
-                            this.viewingUser['isCongress'] = false;
-                            this.externalUser = true;  
+                        this.viewingUser['isCongress'] = true;
+                        this.externalUser = true;
 
-                        }else if (this.userData['sourceSystem'] === 'GOVTRACK') {
-                            this.viewingUser['isCongress'] = true;
-                            this.externalUser = true;  
+                    } else if (this.userData['sourceSystem'] === 'OPENSTATE') {
+                        this.viewingUser['external'] = true;
+                        this.viewingUser['isLegislator'] = true;
+                        this.viewingUser['isCongress'] = false;
+                        this.externalUser = true;
 
-                        }
-
-
-                    } 
+                    }
                     
                     //load profile small image
-                    if (isDevMode()) {
-                        this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
-                    }else {
-                        if(this.userData['photoUrl'] != null){
+
+                    this.profileSmImage = 'assets/images/avatar1.png'; 
+
+                    if (!isDevMode()){
+                        if(this.userData != null && this.userData['photoUrl'] != null){
                             this.profileSmImage = this.userData['photoUrl'];
                         }else{
                             this.getProfileSmImage(this.viewingUser['userId']);
@@ -612,8 +652,8 @@ export class UserComponent implements OnInit {
                     this.profilesTemplates = this.userData['profileTemplates'];
                     this.viewingUser['profileTemplates'] = this.profilesTemplates;
 
-                    let userType: string = this.viewingUser['isLegislator'] ? 'LEGISLATOR' : 'PUBLICUSER';
-                    this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], userType).subscribe(
+                    //list the templates that are available to use, ignores the one that are already used
+                    this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], this.category).subscribe(
                         data => {
                             this.availableProfileTemplates = data;
                         });
@@ -625,7 +665,7 @@ export class UserComponent implements OnInit {
                     let compTypes = [];
                     for (let profileData of this.profilesDatas) {
                         console.log('loading template component: ', profileData['profileTemplateId']);
-                        //this.templateType.push(profileData['profile_template_id']);
+                        //check if the template has been already added, add only if not exist
                         if (compTypes.indexOf(profileData['profileTemplateId']) < 0) {
                             compTypes.push(profileData['profileTemplateId']);
 
@@ -633,13 +673,32 @@ export class UserComponent implements OnInit {
                             //this.profilesTemplates.push(profileData);
                         }
 
+                        //retrieving contacts
+                        if(profileData['profileTemplateId'] === 'upOtherContacts'){
+                            this.contactsData = profileData['data'];
+                            if(this.contactsData && this.contactsData['Twitter']){
+                                this.twitterHandle = "https://twitter.com/" + this.contactsData['Twitter'] +"?ref_src=twsrc%5Etfw";
+
+                            }
+                            console.log('this.twitterHandle ', this.twitterHandle);
+
+                            if(this.contactsData && this.contactsData['Facebook']){
+                                this.facebookHandle = this.contactsData['Facebook'];
+                            }
+                            
+                        }
+
+                    }
+
+                    if(this.twitterHandle && this.twitterHandle.trim().length > 0){
+                        this.twitterHandleExist = true;
                     }
 
                     if (compTypes.length > 0) {
                         this.templateType = compTypes;
                     }
 
-                    this.loadBioDataTemplate(this.userData['userType']);
+                    //this.loadBioDataTemplate(this.category);
                     //setting here so it can be accessed globally
                     this.datashareService.setViewingUser(this.viewingUser);
                     console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));
@@ -651,7 +710,7 @@ export class UserComponent implements OnInit {
             );
 
 
-        }
+        //}
 
         
     }

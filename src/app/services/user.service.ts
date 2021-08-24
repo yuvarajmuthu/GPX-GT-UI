@@ -286,13 +286,14 @@ getBiodata(userId:string):Observable<any>{
 }
 
 
-getRoles(userId:string, isCongress:boolean):Observable<any>{ 
+getRoles(userId:string):Observable<any>{ 
   let serviceUrl:string = "";//    
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/user-legis-Roles.json';   
   }else{
     serviceUrl = this.getUserService() +"/legis/roles/"+userId;
   }
+  console.log("getRoles user.service this.serviceUrl " + serviceUrl);
 
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
   return this.http.get(serviceUrl, this.httpOptions)
@@ -302,14 +303,16 @@ getRoles(userId:string, isCongress:boolean):Observable<any>{
   );                
 }
 
-getOffices(userId:string, isCongress:boolean):Observable<any>{ 
+getOffices(userId:string):Observable<any>{ 
   let serviceUrl:string = "";//    
   if(this.devMode){
     serviceUrl = '/assets/json/fromService/user-legis-Offices.json';   
   }else{ 
     serviceUrl = this.getUserService() +"/legis/offices/"+userId;
   }
-  //serviceUrl = '/assets/json/fromService/user-legis-Offices.json';   
+
+  console.log("getOffices user.service this.serviceUrl " + serviceUrl);
+
   let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
   return this.http.get(serviceUrl, this.httpOptions)
   .pipe(
@@ -485,7 +488,7 @@ getEvents(userId:string):Observable<any>{
   }else{
     serviceUrl = this.getUserService() +"/legis/roles/"+userId;
   }
-  serviceUrl = '/assets/json/fromService/getEvents.json';   
+  //serviceUrl = '/assets/json/fromService/getEvents.json';   
 
   let headers      = new Headers({ 'Content-Type': 'application/json' });
   return this.http.get(serviceUrl, this.httpOptions)

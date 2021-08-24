@@ -1,7 +1,7 @@
-<div class="ng-autocomplete" [ngClass]="{'managedby-search':userType=='managedby', 'party-search': from=='user' && (userType=='chamber' || userType=='district' || userType=='state' || userType=='party'), 'create-page': from=='ceatePage' && (userType=='chamber' || userType=='district' || userType=='state' || userType=='party')}">
+<div class="ng-autocomplete" [ngClass]="{'managedby-search':category=='managedby', 'party-search': from=='user' && (category=='userType' || category=='district' || category=='state' || category=='party'), 'create-page': from=='createPage' && (category=='userType' || category=='district' || category=='state' || category=='party')}">
   <ng-autocomplete
     [(ngModel)]="selectedUser"
-    (selected)='valueChanged($event)'
+    (selected)='onValueSelect($event)'
     [data]="searchUsers"
     [placeHolder]="placeholder"
     (inputChanged) = "onChangeSearch($event)"
@@ -9,7 +9,7 @@
     [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">
   </ng-autocomplete>
-  <button *ngIf="from=='user' && (userType=='chamber' || userType=='district' || userType=='state' || userType=='party')" class="save-button" type="button" (click)="editProfile($event)"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+  <button *ngIf="from=='user' && (category=='userType' || category=='district' || category=='state' || category=='party')" class="save-button" type="button" (click)="editProfile($event)"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
 
   <!-- <button class="add-managed-button" type="button" (click)="addMember(searchUserManagedBy.username)"><i class="fa fa-plus-square" aria-hidden="true"></i></button> -->
 

@@ -19,6 +19,7 @@ import {DatashareService} from '../../services/datashare.service';
 
 import {BannerComponent} from '../banner/banner.component';
 import { User } from 'src/app/models/user';
+import { AppConstants } from 'src/app/app.constant.enum';
 
 @Component({
   selector: 'app-legislator',
@@ -39,6 +40,7 @@ export class LegislatorComponent implements OnInit {
 
   constructor(private  router: Router,
               private route: ActivatedRoute,
+              private constants:AppConstants,
               private legislatorsService: LegislatorService,
               private userService: UserService,
               private searchService: SearchService,
@@ -184,8 +186,7 @@ export class LegislatorComponent implements OnInit {
   }
 
   getUsername(legislator: Legislator): void{
-    let searchString:string = null;
-
+/*
     if (legislator['leg_id']) {
       console.log('legislator[leg_id] ', legislator['leg_id']);
       this.userName = legislator['leg_id'];
@@ -199,14 +200,16 @@ export class LegislatorComponent implements OnInit {
       this.check4CircleStatus();
 
 
-    }else if (legislator['full_name']) {
+    }else 
+    */
+    if (legislator['full_name']) {
       console.log('legislator[full_name] ', legislator['full_name']);
-      searchString = legislator['full_name'].replace( /\".*?\"/, '' ).replace(/\s+/g,' ').trim();
-      this.searchService.getUsers(searchString)
+      this.userName = legislator['full_name'];
+      this.searchService.getUsers(this.userName)//search for user existence user elasticsearch
       .subscribe(
         (result) => {
-          if(result.length > 0 && searchString === result[0]['full_name']){
-            this.userName = result[0]['username'];
+          if(result.length > 0 && this.userName === result[0]['full_name']){
+            //this.userName = result[0]['username'];
             this.check4CircleStatus();
           }else{
             //create user with legislator data ?
@@ -216,10 +219,10 @@ export class LegislatorComponent implements OnInit {
             this.userService.registerUser(user).subscribe(
               data => {
                   console.log('Response from registering the user ', data);
-                  if(data != null){
-                    this.userName = data['username'];
+                  //if(data != null){
+                  //  this.userName = data['username'];
 
-                  }
+                  //}
               },
               error => {
                   //this.alertService.error(error);
@@ -239,28 +242,33 @@ export class LegislatorComponent implements OnInit {
 
   generateUserData(legislator: Legislator):User{
     let data={};
-    let biodataTemplateData={};
+    let profileData=null;
     let user:User = new User();
     let profileDatasList:Array<Object> = [];
     let members:Array<string> = [];
 
-    data['full_name'] = legislator['full_name'];
-    biodataTemplateData['entityId'] = legislator['full_name'] + '-GPX';
-    biodataTemplateData['profileTemplateId'] = 'upCongressLegislatorExternal';
-    data['party'] = legislator['party'];
-    data['chamber'] = legislator['divisionOffice'];
-    data['district'] = legislator['division'];
-    biodataTemplateData['data'] = data;
+    profileData={};
+    profileData['entityId'] = legislator['full_name'];
+    profileData['profileTemplateId'] = 'upRole';
+    data = legislator['role'];
+    profileData['data'] = data;
+    profileDatasList.push(profileData);
 
-    profileDatasList.push(biodataTemplateData);
+    profileData={};
+    profileData['entityId'] = legislator['full_name'];
+    profileData['profileTemplateId'] = 'upOtherContacts';
+    data = legislator['otherContacts'];
+    profileData['data'] = data;
+    profileDatasList.push(profileData);
+
     user['profileDatas'] = profileDatasList;
     user.displayName = legislator['full_name'];
-    user.photoUrl = legislator['photo_url'];
-    user.sourceSystem = legislator['source'];
-    user.userType = 'LEGISLATOR';
-    this.userName = user.username = biodataTemplateData['entityId'];
-
-    user['status'] = 'PASSIVE';
+    user.photoUrl = legislator['photoUrl']; 
+    user.sourceSystem = legislator['sourceSystem'];
+    user.category = this.constants.USERCATEGRORY_LEGISLATURE;
+    user.userType = legislator['role']['type'];
+    user.username = legislator['full_name'];
+    user.status = 'PASSIVE';
     
     //members.push(user['username']);
     //user['members'] = members;

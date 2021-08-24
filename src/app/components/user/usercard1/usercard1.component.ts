@@ -15,7 +15,7 @@ import {User} from '../../../models/user';
 export class Usercard1Component implements OnInit {
     @Input() user: User;
     @Input() username: string;
-    profileSmImage: any;
+    profileSmImage: any; 
     isImageLoading: boolean = false;
     loggedUser: User = null;
 
@@ -34,15 +34,14 @@ export class Usercard1Component implements OnInit {
     }
 
     ngOnInit() {
-        if (this.username) {
-            if (isDevMode()) {
-                /*this.profileSmImage = "assets/images/avatar-male.png";*/
-                this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
-            } else {
+        this.profileSmImage = 'assets/images/avatar1.png'; 
+
+        if (!isDevMode()){
+            if(this.user != null && this.user['photoUrl'] != null){
+                this.profileSmImage = this.user['photoUrl'];
+            }else{
                 this.getProfileSmImage(this.username);
             }
-            //this.profileSmImage = 'assets/images/avatar1.png';//"assets/images/temp/user-avatar.jpg";
-
         }
 
         this.loggedUser = this.datashareService.getCurrentUser();

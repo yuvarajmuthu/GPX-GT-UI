@@ -8,11 +8,13 @@
                   <img src="https://preview.ibb.co/miQjb7/photography4.jpg">
               </div>
               <div class="userImg">
-                  <img [src]="user.photoUrl">
+                  <img [src]="profileSmImage"
+                  alt="Place image title" width="40" height="40"
+                  *ngIf="!isImageLoading">
               </div>
               <div class="userDescription">
                   <h5>{{user.full_name}}</h5>
-                  <p>@{{user.username}}</p>
+                  <p>{{user.username}}</p>
                  
                   
                    <div class="followrs">
@@ -27,7 +29,7 @@
               <div *ngIf="!isSelfProfile" >
                 <ul class="icon">
                   <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
-                  <li><a *ngIf="isCircle != '/circle' && !isSelfProfile" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a *ngIf="manageMembers" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
                 </ul>
               </div>
              

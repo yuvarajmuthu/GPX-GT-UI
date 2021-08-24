@@ -3,18 +3,20 @@ export class User {
     googleId: string;//GOOGLE-id
     username: string; //email/phone
     password: string;
+    category: string;
     userType: string;
     status: string;
     full_name: string;
     firstName: string;
     lastName: string;
     displayName: string;//GOOGLE-name
+    description: string;
     photoUrl: string;//GOOGLE
     profileAvatarImgFileId: string;
     profileBannerImgFileId: string;
-    settings: string;
+    settings: {};
     circleUsersInfo: string;
-    members: string;
+    members: [];
     emailId: string;//GOOGLE-email
     phone: string;
     address: string;

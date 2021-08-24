@@ -40,7 +40,7 @@ import {LegislatorComponent} from './components/legislator/legislator.component'
 import {PositionComponent} from './components/position/position.component';
 import {PartyComponent} from './components/party/party.component';
 import {ProtectedComponent} from './components/protected/protected.component';
-import {GAddressSearchComponent} from './components/g-address-search/g-address-search.component';
+//import {GAddressSearchComponent} from './components/g-address-search/g-address-search.component';
 
 import {dateFormatPipe} from './util/pipes/dateformat.pipe';
 import { CreatepageselectionComponent } from './components/security/createpage/createpageselection/createpageselection.component';
@@ -128,10 +128,13 @@ let config = new AuthServiceConfig([
                 //throwNoTokenError: true,
                 tokenGetter: tokenGetter,
                 //Authenticated requests should only be sent to whitelistedDomains
-                //whitelistedDomains: ['http://localhost:5000','gpxservice.xyz'],
-                whitelistedDomains: ['gpxservice.xyz'],
+                //DEV mode
+                whitelistedDomains: ['localhost:5000'],
+                //PROD mode
+                //whitelistedDomains: ['www.gpxservice.xyz'],
                 //specific routes that shouldn’t receive the JWT even if they are on a whitelisted domain
-                //blacklistedRoutes: ['http://localhost:5000/login','https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user','https://www.gpxservice.xyz/user/tokenVerify']
+                blacklistedRoutes: ['localhost:5000/login','localhost:5000/user/tokenVerify']
+                //blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
             }
         }),
         AngularFontAwesomeModule, //OBSOLETE
@@ -150,12 +153,14 @@ let config = new AuthServiceConfig([
       PostModule,
       UserModule],
     providers: [
+      //enable the interceptor only for DEV mode
       
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
         },
+        
         
         AuthenticationService,
         AuthGuard,

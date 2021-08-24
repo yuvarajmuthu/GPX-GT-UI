@@ -27,26 +27,42 @@ export class CreatepageComponent implements OnInit {
   }
 
   userCreationForm = new FormGroup({});
+  profileTemplate={};
+  profileTemplateData=null;
+
   biodataTemplate={};
-  biodataTemplateData={};
+  biodataTemplateData=null;
   user = {};
   searchUsers:any;
   keyword = 'firstName';
 
   createLegislatorPageForm = new FormGroup({
-    userType: new FormControl(this.constants.USERTYPE_LEGISLATOR),
+    category: new FormControl(this.constants.USERCATEGRORY_LEGISLATURE),
+    userType: new FormControl(''),
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
-    first_name: new FormControl(''),
-    last_name: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    description: new FormControl(''),
     party: new FormControl(''),
     district: new FormControl(''),
-    chamber: new FormControl(''),
-    state: new FormControl('')
+    type: new FormControl(''),//may not be required
+    state: new FormControl(''),
+    accessRestriction: new FormControl('')
+  });
+  
+  createPersonPageForm = new FormGroup({
+    category: new FormControl(this.constants.USERCATEGRORY_USER), 
+    username: new FormControl('', Validators.required),
+    full_name: new FormControl('', Validators.required),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),    
+    description: new FormControl(''),
+    accessRestriction: new FormControl('')
   });
 
   createDistrictPageForm = new FormGroup({
-    userType: new FormControl(this.constants.USERTYPE_LEGISLATIVE_DISTRICT), 
+    category: new FormControl(this.constants.USERCATEGRORY_LEGISLATIVE_DISTRICT), 
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
     description: new FormControl(''),
@@ -54,14 +70,15 @@ export class CreatepageComponent implements OnInit {
   });
 
   createPartyPageForm = new FormGroup({
-    userType: new FormControl(this.constants.USERTYPE_POLITICAL_PARTY),
+    category: new FormControl(this.constants.USERCATEGRORY_POLITICAL_PARTY),
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
-    description: new FormControl('')
+    description: new FormControl(''),
+    accessRestriction: new FormControl('')
   });
 
   createGroupPageForm = new FormGroup({
-    userType: new FormControl(this.constants.USERTYPE_GROUP),
+    category: new FormControl(this.constants.USERCATEGRORY_GROUP),
     username: new FormControl('', Validators.required),
     full_name: new FormControl('', Validators.required),
     description: new FormControl(''),
@@ -70,8 +87,10 @@ export class CreatepageComponent implements OnInit {
 
   //isCreatepage4user: boolean = true;
   page:string = 'user';
+  upRoleProfileTemplateId:string = 'upRole';
   userType:string=null;
-  profileTemplateId:string = null;
+  category:string=null;
+  profileTemplateIdDefault:string = null;
 
 
   constructor(private route: ActivatedRoute,
@@ -84,16 +103,23 @@ export class CreatepageComponent implements OnInit {
     private profileService: ProfileService) { }
 
   selectedParty(userDetails:any){
-    console.log(userDetails);
+    console.log('Party ', userDetails);
+    this.userCreationForm['party'] = userDetails;
    }
+
    selectedState(userDetails:any){
-    console.log(userDetails);
+    this.userCreationForm['state'] = userDetails;     
+    console.log('State ', userDetails);
    }
+
    selectedDistrict(userDetails:any){
-    console.log(userDetails);
+    this.userCreationForm['district'] = userDetails;     
+    console.log('District  ', userDetails);
    }
-   selectedChamber(userDetails:any){
-    console.log(userDetails);
+
+   selectedRole(userDetails:any){
+    this.userCreationForm['type'] = userDetails;     
+    console.log('Role ', userDetails);
    }
 
   ngOnInit() {
@@ -101,34 +127,36 @@ export class CreatepageComponent implements OnInit {
     .queryParams
     .subscribe(params => {
       let page = params['opt'];
-      //this.isCreatepage4user = true;
       if(page == 'district'){
-       this.userType = this.constants.USERTYPE_LEGISLATIVE_DISTRICT;
+       this.category = this.constants.USERCATEGRORY_LEGISLATIVE_DISTRICT;
        this.userCreationForm = this.createDistrictPageForm;
 
-       this.profileTemplateId = 'upDefault';
+       this.profileTemplateIdDefault = 'upEvent';
 
-      }else if(page == 'user'){
-        this.userType = this.constants.USERTYPE_PUBLICUSER;
-
-        this.profileTemplateId = 'upDefault';
-
+      }else if(page == 'person'){
+        this.category = this.constants.USERCATEGRORY_USER;
+        this.userCreationForm = this.createPersonPageForm;
+        this.profileTemplateIdDefault = 'upDefault';
       }else if(page == 'legislator'){
-        this.userType = this.constants.USERTYPE_LEGISLATOR;
+        this.category = this.constants.USERCATEGRORY_LEGISLATURE;
         this.userCreationForm = this.createLegislatorPageForm;
 
-        this.profileTemplateId = 'upDefault';//should be upDefault, once code is refactored
+        this.profileTemplateIdDefault = 'upDefault';//should be upDefault, once code is refactored
       }else if(page == 'party'){
-        this.userType = this.constants.USERTYPE_POLITICAL_PARTY;
+        this.category = this.constants.USERCATEGRORY_POLITICAL_PARTY;
         this.userCreationForm = this.createPartyPageForm;
-        this.profileTemplateId = 'upDefault';
+        this.profileTemplateIdDefault = 'upDefault';
       }else if(page == 'group'){
-        this.userType = this.constants.USERTYPE_GROUP;
+        this.category = this.constants.USERCATEGRORY_GROUP;
         this.userCreationForm = this.createGroupPageForm;
-        this.profileTemplateId = 'upDefault';
+        this.profileTemplateIdDefault = 'upDefault';
       }
 
-      this.loadBioDataTemplate(this.profileTemplateId, this.userType);
+      this.loadBioDataTemplate(this.profileTemplateIdDefault, this.category);
+      
+      if(this.category === this.constants.USERCATEGRORY_LEGISLATURE){
+        this.loadProfileTemplate(this.upRoleProfileTemplateId, this.category);
+      }
 
     });
   }
@@ -138,23 +166,37 @@ export class CreatepageComponent implements OnInit {
     .subscribe((data:any) => {
         this.searchUsers = data;
     });
-}
+  }
 
   createUser(){
     let profileDatasList:Array<Object> = [];
     let members:Array<string> = [];
-    this.generateBioProfileTemplateData();
+    let settings = {};
+    //generate template data for upDefault
+    this.generateBioProfileTemplateData(this.profileTemplateIdDefault);
+    //generate template data for upRole
+    if(this.category === this.constants.USERCATEGRORY_LEGISLATURE){
+      this.generateProfileTemplateData(this.upRoleProfileTemplateId);
+    }
     this.user = this.userCreationForm.value;
-    profileDatasList.push(this.biodataTemplateData);
     this.user['profileDatas'] = profileDatasList;
-    this.user['status'] = 'PASSIVE';
+    this.user['status'] = 'ACTIVE'; // since a User is creating a page, should the page be in ACTIVE status ?
+
+    settings['accessRestriction'] = this.user['accessRestriction'];
+    this.user['settings'] = settings;
 
     if (this.datashareService.isUserLogged()) {
       members.push(this.datashareService.getLoggedinUsername());
       this.user['members'] = members;
     }
 
+    if(this.biodataTemplateData){
+      profileDatasList.push(this.biodataTemplateData);
+    } 
 
+    if(this.profileTemplateData){
+      profileDatasList.push(this.profileTemplateData);
+    }  
 
     console.log('Creating User with info ', this.user);
 
@@ -173,29 +215,62 @@ export class CreatepageComponent implements OnInit {
 
   }
 
-  generateBioProfileTemplateData(){
-    let data={};
-    let propId:string="";
-    let properties:[] = this.biodataTemplate['properties'];
-    for (let property of properties) {
-      if(this.userCreationForm.get(property['propId']) != null){
-        console.log("userCreationForm " + property['propId'] + " ", this.userCreationForm.get(property['propId']).value);
-        propId = property['propId'];
-        data[propId] = this.userCreationForm.get(property['propId']).value;
+  generateBioProfileTemplateData(profileTemplateId:string){
+    if(this.biodataTemplate){
+      this.biodataTemplateData = {};
+      let data={};
+      let propId:string="";
+      let properties:[] = this.biodataTemplate['properties'];
+      for (let property of properties) {
+        if(this.userCreationForm.value[property['propId']]){
+          //console.log("userCreationForm " + property['propId'] + " ", this.userCreationForm.get(property['propId']).value);
+          console.log("userCreationForm " + property['propId'] + " ", this.userCreationForm.value[property['propId']]);
+          propId = property['propId'];
+          data[propId] = this.userCreationForm.value[property['propId']];
+        }
       }
+      this.biodataTemplateData['entityId'] = this.userCreationForm.get('username').value;
+      this.biodataTemplateData['profileTemplateId'] = profileTemplateId;
+      //this.biodataTemplateData['entityType'] = this.biodataTemplate['type'];
+
+      this.biodataTemplateData['data'] = data;
     }
-    this.biodataTemplateData['entityId'] = this.userCreationForm.get('username').value;
-    this.biodataTemplateData['profileTemplateId'] = this.profileTemplateId;
-    this.biodataTemplateData['entityType'] = this.biodataTemplate['type'];
-
-    this.biodataTemplateData['data'] = data;
-
   }
 
-  loadBioDataTemplate(profileTemplateId:string, type:string){
-    this.profileService.getProfileTemplateByType(profileTemplateId, type)
+  generateProfileTemplateData(profileTemplateId:string){
+    if(this.profileTemplate){
+      this.profileTemplateData = {};
+      let data={};
+      let propId:string="";
+      let properties:[] = this.profileTemplate['properties'];
+      console.log("Generating ProfileTemplateData...");
+      for (let property of properties) {
+        if(this.userCreationForm.value[property['propId']]){
+          console.log("userCreationForm " + property['propId'] + " ", this.userCreationForm.value[property['propId']]);
+          propId = property['propId'];
+          data[propId] = this.userCreationForm.value[property['propId']];
+        }
+      }
+      this.profileTemplateData['entityId'] = this.userCreationForm.get('username').value;
+      this.profileTemplateData['profileTemplateId'] = profileTemplateId;
+      //this.profileTemplateData['entityType'] = this.profileTemplate['type'];
+
+      this.profileTemplateData['data'] = data;
+    }
+  }
+
+  loadBioDataTemplate(profileTemplateId:string, category:string){
+    this.profileService.getProfileTemplateByCategory(profileTemplateId, category)
     .subscribe((response) => {
         this.biodataTemplate = response;
+
+    });
+  }
+  
+  loadProfileTemplate(profileTemplateId:string, category:string){
+    this.profileService.getProfileTemplateByCategory(profileTemplateId, category)
+    .subscribe((response) => {
+        this.profileTemplate = response;
 
     });
   }

@@ -9,7 +9,7 @@ if (environment.production) {
 
   //DISABLE CONSOLE LOG IN PRODUCTION
   if (window) {
-    window.console.log = function() {};
+    //window.console.log = function() {};
   }
 }
 

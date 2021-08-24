@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() { 
     if(this.datashareService.isUserLogged()){
-      this.router.navigate(['/news']); 
+      //this.router.navigate(['/news']);
+      this.router.navigate(['/searchLegislator']); 
     }
   }
 

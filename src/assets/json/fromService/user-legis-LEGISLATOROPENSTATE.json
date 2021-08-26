@@ -3,15 +3,13 @@
    "lastModifiedDate":"2020-07-28 18:28:29",
    "userId":"5f206e4df453cd8700f1d830",
    "username":"PAL000515",
-   "category":"LEGISLATURE",
    "full_name":"Dan L. Miller1",
-   "displayName":"Dan L. Miller3",
-   "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+   "displayName":"Dan L. Miller2",
    "password":null,
    "userType":"LEGISLATOR",
    "status":"PASSIVE",
    "profileManagedBy":null,
-   "members":["user6@gmail.com"],
+   "members":null,
    "circleUsers":null,
    "selfProfile":true,
    "showSettings":true,
@@ -33,16 +31,6 @@
    "tagName":null,
    "connections":null,
    "userProfile":null,
-   "role":{
-      "start_date":"2017-01-20",      
-      "end_date":"2021-01-20",
-      "district":"42",
-      "chamber":"lower",
-      "state":"pa",
-      "party":"Democratic",
-      "type":"member"
-
-   },
    "profileTemplates":[
       {
          "createdDate":"2020-06-09 20:56:11",
@@ -51,7 +39,7 @@
          "profileTemplateId":"upRole",
          "type":"LEGISLATOR",
          "name":"Role",
-         "profileIcon":"fa fa-briefcase",
+         "profileIcon":"group",
          "properties":[
             {
                "propId":"start",
@@ -112,7 +100,7 @@
          "profileTemplateId":"upOffices",
          "type":"LEGISLATOR",
          "name":"Office",
-         "profileIcon":"fa fa-building",
+         "profileIcon":"business",
          "properties":[
             {
                "propId":"name",
@@ -372,17 +360,6 @@
          "jsondata":{
             "empty":false
          }
-      },
-      {
-         "createdDate":"2020-07-28 18:28:29",
-         "lastModifiedDate":"2020-07-28 18:28:29",
-         "id":"5f206e4df453cd8700f1d832",
-         "profileTemplateId":"upOtherContacts",
-         "data":{
-            "Twitter":"RepDanMiller",
-            "Facebook":"RepDanMiller"
-         },
-         "entityId":"PAL000515"
       }
    ]
 }

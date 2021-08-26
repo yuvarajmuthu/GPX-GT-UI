@@ -1,9 +1,9 @@
 <div class="ng-autocomplete" [ngClass]="{'managedby-search':category=='managedby', 'party-search': from=='user' && (category=='userType' || category=='district' || category=='state' || category=='party'), 'create-page': from=='createPage' && (category=='userType' || category=='district' || category=='state' || category=='party')}">
   <ng-autocomplete
     [(ngModel)]="selectedUser"
+    placeholder="Search Legislator, Person, District, Party..." 
     (selected)='onValueSelect($event)'
     [data]="searchUsers"
-    [placeHolder]="placeholder"
     (inputChanged) = "onChangeSearch($event)"
     [searchKeyword]="keywordUser"
     [itemTemplate]="itemTemplate"

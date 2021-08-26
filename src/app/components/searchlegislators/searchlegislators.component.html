@@ -46,9 +46,9 @@
         [ngClass]="{ 'btn-legis btn-legis-select': congressData, 'btn-legis btn-secondary': !congressData  }">Find</button>
     </div>
   </div> -->
-  <div *ngIf="searchAddress && !registration">
+  <div *ngIf="address && !registration">
     <div class="locationText">
-      Data based on the location <strong>{{searchAddress}}</strong>
+      Data based on the location <strong>{{address}}</strong>
     </div>
   </div>
 

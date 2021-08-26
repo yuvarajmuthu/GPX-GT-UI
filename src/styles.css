@@ -10189,21 +10189,7 @@ input:focus {
 .autocomplete-container{
     box-shadow: none !important;
 }
-input{
-    display: block;
-    /* width: 100% !important; */
-    height: calc(1.5em + .75rem + 2px) !important;
-    padding: .375rem .75rem !important;
-    font-size: 1rem !important;
-    font-weight: 400 !important;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da !important;
-    border-radius: .25rem !important;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out !important;
-}
+
 #postContent div{
     display: inline;
 }

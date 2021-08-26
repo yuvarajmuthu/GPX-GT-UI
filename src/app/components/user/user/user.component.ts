@@ -34,8 +34,8 @@ import {stringify} from 'querystring';
 
 @Component({
     selector: 'app-user',
-    templateUrl: './user.component.html',
-    styleUrls: ['./user.component.css']
+    templateUrl: './user3.component.html',
+    styleUrls: ['./user2.component.css']
 })
 export class UserComponent implements OnInit {
 
@@ -45,9 +45,6 @@ export class UserComponent implements OnInit {
     activeTemplatName:string = "Office";
     showDropDown : boolean = false;
     isInCircle: boolean;
-    twitterHandle:string = null;
-    twitterHandleExist:boolean = false;
-    facebookHandle:string = '';
 
     public isCollapsed: boolean = false;
     public isCMCollapsed: boolean = false;
@@ -75,7 +72,6 @@ export class UserComponent implements OnInit {
     isImageLoading: boolean = false;
     isProfileCollapsed: boolean = false;
     isActivityCollapsed: boolean = true;
-    isTwitterActivityCollapsed: boolean = true;
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
     isManagedByCollapsed:boolean = true;
@@ -83,7 +79,6 @@ export class UserComponent implements OnInit {
     externalUser:boolean;
     biodata:any=null;
     biodataTemplate={};
-    contactsData = {};
     //displayName:string='';
 
     entityType:string=null;
@@ -101,7 +96,7 @@ export class UserComponent implements OnInit {
     loggedUser: User = null;
     loggedUsername: string = null;
     isSelfProfile: boolean = false;
-    //isProfileManaged: boolean = false;
+    isProfileManaged: boolean = false;
     isEditable: boolean = false;
 
     postFormData: FormData;
@@ -109,7 +104,7 @@ export class UserComponent implements OnInit {
     inEditMode:boolean = false;
     followersCount:number = 0;
     followers: User[] = [];
-    managedBy = [];
+    managedBy: User[] = [];
     followingsCount:number = 0;
     followings = [];
     selectedProfileSmImage: File;
@@ -367,8 +362,8 @@ export class UserComponent implements OnInit {
             file: ['']
         });
 
-        this.header = document.getElementById("myHeader");
-        //this.sticky= document.getElementById("myHeader").offsetTop;
+        // this.header = document.getElementById("myHeader");
+        // this.sticky= document.getElementById("myHeader").offsetTop;
 
         this.loggedUsername = this.datashareService.getLoggedinUsername();
 
@@ -380,6 +375,7 @@ export class UserComponent implements OnInit {
                     
 
             this.loadComponent(this.profileUserId);
+
 
         });
     }
@@ -438,25 +434,7 @@ export class UserComponent implements OnInit {
         this.isProfileCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isSettingsCollapsed = true;
-        this.isTwitterActivityCollapsed = true;
         this.isActivityCollapsed = false;
-        this.settings = false;
-    }
-    
-    showTwitterActivities() {
-        this.activitiesData = false;
-        this.profileData = false;
-        this.folow = false;
-        this.followersActiveCss = false;
-        this.followingsActiveCss = false;
-        this.managedByActive = false;
-
-        this.isFollowersCollapsed = true;
-        this.isProfileCollapsed = true;
-        this.isManagedByCollapsed = true;
-        this.isSettingsCollapsed = true;
-        this.isActivityCollapsed = true;
-        this.isTwitterActivityCollapsed = false;
         this.settings = false;
     }
 
@@ -474,7 +452,6 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
-        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = false;
     
         //if(this.isUserLogged()){     
@@ -494,7 +471,6 @@ export class UserComponent implements OnInit {
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = false;
         this.isActivityCollapsed = true;
-        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = true;
 
         this.settings = false;
@@ -524,7 +500,6 @@ export class UserComponent implements OnInit {
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
-        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = true;
 
         this.settings = false;
@@ -559,13 +534,12 @@ export class UserComponent implements OnInit {
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
         this.managedByActive = true;
-        //this.getManagedBy(this.profileUserId);
+        this.getManagedBy(this.profileUserId);
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
         this.isManagedByCollapsed = false;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
-        this.isTwitterActivityCollapsed = true;
         this.isSettingsCollapsed = true;
 
         this.settings = false;
@@ -603,10 +577,9 @@ export class UserComponent implements OnInit {
                     console.log('User data from service: ', this.userData);
 
                     this.isSelfProfile = this.userData['selfProfile'];
-                    //this.isProfileManaged = this.userData['profileManaged'];
+                    this.isProfileManaged = this.userData['profileManaged'];
                     this.entityType =  this.userData['userType'];
                     this.category = this.userData['category'];
-                    this.managedBy = this.userData['members'];
                     this.isProfileEditable();
 
                     //Settings
@@ -665,7 +638,7 @@ export class UserComponent implements OnInit {
                     let compTypes = [];
                     for (let profileData of this.profilesDatas) {
                         console.log('loading template component: ', profileData['profileTemplateId']);
-                        //check if the template has been already added, add only if not exist
+                        //this.templateType.push(profileData['profile_template_id']);
                         if (compTypes.indexOf(profileData['profileTemplateId']) < 0) {
                             compTypes.push(profileData['profileTemplateId']);
 
@@ -673,25 +646,6 @@ export class UserComponent implements OnInit {
                             //this.profilesTemplates.push(profileData);
                         }
 
-                        //retrieving contacts
-                        if(profileData['profileTemplateId'] === 'upOtherContacts'){
-                            this.contactsData = profileData['data'];
-                            if(this.contactsData && this.contactsData['Twitter']){
-                                this.twitterHandle = "https://twitter.com/" + this.contactsData['Twitter'] +"?ref_src=twsrc%5Etfw";
-
-                            }
-                            console.log('this.twitterHandle ', this.twitterHandle);
-
-                            if(this.contactsData && this.contactsData['Facebook']){
-                                this.facebookHandle = this.contactsData['Facebook'];
-                            }
-                            
-                        }
-
-                    }
-
-                    if(this.twitterHandle && this.twitterHandle.trim().length > 0){
-                        this.twitterHandleExist = true;
                     }
 
                     if (compTypes.length > 0) {

@@ -1,218 +1,88 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
-  <div class="container-fluid">
-      <a [ngClass]="{'navbar-brand mylogo':!isMobile , 'navbar-brand simplelogo':isMobile}" (click)="hideNav()" routerLink="/"></a>
-
-      <!-- 
-        For Expand search bar
-        <div class="input-group searchbtnGroup mobileSearch" *ngIf="isMobile">
-        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueChange)='selectEvent($event)' userType="all" [inputvalue]="" id="searchExapnd"></app-gps-global-search>
-            <span class="input-group-append">
-              <span class="searchIcon">
-                  <i class="fa fa-search"></i>
-              </span>
-            </span>
-      </div> -->
-
-      <div *ngIf="isMobile">
-        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
-      </div>
-      
-     <!-- <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button> -->
-      <button *ngIf="isMobile" type="button" [ngbPopover]="popContent"  #p="ngbPopover"  class="mobile-avatar-button"> <img src="assets/images/avatars/avatar.png" class="img-responsive"/></button>
-      
-      <button class="navbar-toggler" type="button" (click)="isCollaped = !isCollaped"
-              data-toggle="collapse" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- <ul *ngIf="isMobile" class="navbar-nav">
-           <li class="avatar-profile d-sm-block " [ngbPopover]="popContent">
-              <a href="javascript:void(0)">
-                  <img src="assets/images/avatars/avatar.png" class="img-responsive"/>
-              </a>
-          </li>
-          
-      </ul> -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped" [style.height.px]="screenHeight">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
-                <i class="fa fa-user"></i>
-                <div>Circle</div>
-              </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
-          </li>
-
-          <li class="nav-item">
-              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
-          </li>
-          </ul>
-
-
-        <app-gps-global-search *ngIf="!isMobile" placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
-
-        
-        <div class="dropdown create-page-button-custom-position">
-          <button (click)="hideNav();route('createpageoptions');" class="btn btn-md btn-secondary btn-custom-horizondal fa fa-plus" type="button">
-            Create Page
-          </button>
-          <!--
-          <div class="dropdown-menu" [ngClass]="{'createpage-option':iscreateOptEnabled==true}" aria-labelledby="dropdownMenuButton" id="createpagemenu">
-            <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'district')">Create District</a>
-            <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'legislator')">Create Legislator</a>
-            <a class="dropdown-item" href="#" (click)="loadcreatepage($event,'party')">Create Party</a>
-          </div>
-          -->
-        </div>
-<!--
-        <div *ngIf="!isMobile && isUserLogged">
-          <button type="button"  *ngIf="isUserLogged" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button>
-        </div>
--->
-        <ng-template #shareContent>
-          <div id="share-content">
-            <div *ngFor="let notify of notifications">
-              <a href="#" [routerLink]="['news']" [queryParams]="{postId: notify.postId}"><b>{{notify.sharedBy}}</b> Shared a message</a>
+<div class="wrapper">
+    <nav class="navbar navbar-default navbar-fixed navbar-light white bootsnav">
+        <div class="container-fluid">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu"><i class="fa fa-bars"></i></button>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" class="logo logo-scrolled" alt=""></a>
             </div>
-            <hr>
-            <!-- <div><a href="#" [routerLink]="['news']" [queryParams]="{postId: '12'}"><b>Raj</b> Shared a message</a></div> -->
-          </div>
-       </ng-template>
-      
-        <ul *ngIf="!isMobile" class="navbar-nav ml-auto">
-              <li class="avatar-profile d-none d-sm-block " [ngbPopover]="popContent">
-                  <a href="javascript:void(0)"><img src="assets/images/avatars/avatar.png"
-                                                    class="img-responsive" /></a>
-              </li>
-          </ul>
-      </div>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <ul class="nav navbar-nav navbar-left" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li><a href="#"><i class="fa fa-rss"></i> News</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i> Circle</a></li>
+                    <li><a href="#"><i class="fa fa-search"></i>Find Representatives</a></li>
+                    <li><a href="#"><i class="fa fa-link"></i>Connections</a></li>
+                    <li><a href="#"><i class="ti-power-off"></i>Logout</a></li>
+                    <li class="active">
+                        <!-- <input type="text" class="form-control" placeholder="Search Legislator, Person, District, Party..."> -->
+                        <app-gps-global-search   from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
 
-      <form class="form-inline my-2 my-lg-0">
-          <ng-template #popContent>
-              <button *ngIf="!isUserLogged" class="btn btn-outline-warning my-2 my-sm-0" type="button"
-                      (click)="hideNav();route('register')">Register
-              </button>
-              <button *ngIf="!isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="button"
-                      (click)="hideNav();route('login')">Login
-              </button>
-              <button *ngIf="isUserLogged" class="btn btn-outline-warning   my-2 my-sm-0" type="button"
-                      (click)="hideNav();loadUser()">View Profile
-              </button>
-              <button *ngIf="isUserLogged" class="btn btn-outline-success my-2 my-sm-0" type="button"
-                      (click)="hideNav();logout()">Logout
-              </button>
-          </ng-template>
-      </form>
-  </div>
-</nav>
-<!-- <body> -->
-<div class="routlet">  
-<div class="container-fluid">
-  <!-- <div class="ng-autocomplete common-search" *ngIf="isMobile">
-      <ng-autocomplete
-        [data]="searchUsers"
-        (inputChanged) = "onChangeSearch($event)"
-        (selected)='selectEvent($event)'
-        [searchKeyword]="keyword"
-        placeHolder="Search Legislator, Person, District, Party..."
-        historyIdentifier="searchUsers"
-        [itemTemplate]="itemTemplate"
-        [notFoundTemplate]="notFoundTemplate">
-      </ng-autocomplete>
-      <ng-template #itemTemplate let-item>
-        <div class="item">
-          <img src="{{item.photoUrl}}" height="25">
-          <span [innerHTML]="item.full_name"></span>
-          <small></small>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                    <li><a href="login.html"><i class="fa fa-plus"></i>Create Page</a></li>
+                    <li class="left-br"><a href="javascript:void(0)" data-toggle="modal" data-target="#signup" class="signin" (click)="hideNav();route('login')">Sign In</a></li>
+                </ul>
+            </div>
         </div>
-      </ng-template>
-    
-      <ng-template #notFoundTemplate let-notFound>
-        <div [innerHTML]="notFound"></div>
-      </ng-template>
-    </div> -->
-  <div class="row">
+    </nav>
 
-      <!-- <div class="d-lg-none d-xl-none col-xs-12"> -->
-          <!--<a href="javascript:void(0)" class="mx-auto d-flex justify-content-center flex-wrap">
-              <img src="assets/images/avatars/avatar.png" class="img-responsive text-center mx-auto d-flex justify-content-center flex-wrap"/>
-          </a>-->
-      <!-- </div> -->
+    <!-- <div class="avatar-bg">
+		<div class="container-fluid">
+			<div class="dashboard-avatar">
+			 <div class="col-md-12">	
+				<div class="text-right vedit-profile">
+				    <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
+				</div>	
+				<div class="profile-details">
+				    <div class="profile-width">
+				<div class="dashboard-avatar-thumb">
+					<img src="assets/img/can-2.png" class="img-avater" alt="" />
+					<a class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
+				</div>
+				<div class="profile-name">
+                    <h4>User 4A</h4>
+                    <span>user4a@gmail.com</span>
+                    <div class="paid-candidate-box-extra">
+						<ul>
+							<li class="more-skill"><span>129</span> Followers</li>
+							<li class="more-skill"><span>239</span> Following</li>
+						</ul>
+					</div>
+                </div>
+                <div class="dropdown add-drop">
+                              <a class="drop-add more-skill bg-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Add Section <i class="fa fa-angle-down"></i>
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Drop Down 1</a>
+                                <a class="dropdown-item" href="#">Drop Down 2</a>
+                                <li class="dropdown-submenu">
+                                <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                 <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                                 <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                                </ul>
+                               </li>
+                              </div>
+                            </div>
+				</div>
+				</div>
+				<div class="dashboard-avatar-text col-md-6 col-md-offset-3">
+					<div class="bio-intro box">
+					    <a class="edit-bio-intro edit" href="#"><i class="ti-pencil"></i></a>
+					    <a class="edit-bio-intro save" href="#"><i class="ti-save-alt"></i></a>
+					    <p class="addReadMore showlesscontent text click-rmv">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard 
+					    Dummy Text Ever Since The 1500s, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type 
+					    Specimen Book. It Has Survived Not Only Five Centuries, But Also The Leap Into Electronic Typesetting, Remaining 
+					    Essentially Unchanged.</p>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+</div> -->
 
 
-      <!-- <div class="col-lg-2 "> -->
-          <!--<div class=" aff-right">
-              <div class="ui-block">
-                  <h6 class="my-4">Recent</h6>
-                  <hr>
-                  <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist"
-                       aria-orientation="vertical">
-                      &lt;!&ndash;<a class="nav-link active" data-toggle="pill" href="javascript:void(0);"> Top Stories</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">New Questions</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Bookmarked Answers</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Links</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Payment Gateways</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Education</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">E-commerce</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Android Applications</a>&ndash;&gt;
-                  </div>
-              </div>
-          </div>
+<router-outlet></router-outlet>
 
-          <div class=" aff-right">
-              <div class="ui-block">
-                  <h6 class="my-4" >Activities</h6>
-                  <hr>
-                  <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" role="tablist"
-                       aria-orientation="vertical">
 
-                  </div>
-              </div>
-          </div>-->
-      <!-- </div> -->
-      <!-- /.col-lg-3 -->
-      <div class="col-lg-12">
-          <app-alert [dismissOnTimeout]=3000></app-alert>
-          <router-outlet></router-outlet>
-
-      </div> 
-      <!-- /.col-lg-6 -->
-      <!--col-lg-3-->
-      <!-- <div class="col-lg-2"> -->
-          <!--<div class=" q-wid">
-              <div class="ui-block">
-                  <h6 class="my-4">Today's News and Views</h6>
-                  <hr>
-                  <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
-                      &lt;!&ndash;<a class="nav-link" data-toggle="pill" href="javascript:void(0);"> Upvote 5 more good
-                          answers</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Ask your first question</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Add 3 credentials</a>
-                      <a class="nav-link" data-toggle="pill" href="javascript:void(0);">Answer a question</a>&ndash;&gt;
-                  </div>
-              </div>
-          </div>
-
-          <div class=" q-wid">
-              <div class="ui-block">
-                  <h6 class="my-4">Followers</h6>
-                  <hr>
-                  <div class="nav flex-column nav-pills nav-stacked" id="v-pills-tab" aria-orientation="vertical">
-
-                  </div>
-              </div>
-          </div>-->
-      <!-- </div> -->
-      <!-- /.col-lg-3 -->
-  </div>
-</div>
-</div>
-<!-- /.container -->
-<!-- The Modal -->
-<!-- </body> -->

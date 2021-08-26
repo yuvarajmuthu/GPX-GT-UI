@@ -1,7 +1,7 @@
 <!--
   https://bootsnipp.com/snippets/7nV1l
 -->
-<div class="box5">
+<!-- <div class="box5">
   <div class="row userMain">
           <div class="userBlock">
               <div class="backgrounImg">
@@ -29,10 +29,34 @@
               <div *ngIf="!isSelfProfile" >
                 <ul class="icon">
                   <li><a [routerLink]="" (click)="gotoUser()" class="fa fa-eye bg-warning" title="View Profile"> View Profile </a></li>
-                  <li><a *ngIf="manageMembers" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
+                  <li><a *ngIf="isCircle != '/circle' && !isSelfProfile" [routerLink]="" (click)="removMember()" class="fa fa-trash-o bg-warning" title="View Profile"> View Profile </a></li>
                 </ul>
               </div>
              
           </div>
     </div>
-  </div>  
+  </div>   -->
+
+  <div class="col-md-4 col-sm-6">
+    <div class="paid-candidate-container">
+      <div class="paid-candidate-box">
+        <div class="dropdown">
+          <div class="btn-group fl-right">
+            <button type="button" class="btn-trans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-star"></i></button>
+            <div class="dropdown-menu pull-right animated flipInX"><a href="#">Shortlist</a><a href="#">Send Message</a><a href="#">Dislike</a></div>
+          </div>
+        </div>
+        <div class="paid-candidate-inner--box">
+          <div class="paid-candidate-box-thumb"><img src="assets/img/client-1.jpg" class="img-responsive img-circle" alt=""></div>
+          <div class="paid-candidate-box-detail">
+            <h4>{{user.full_name}}</h4><span class="desination">{{user.username}}</span></div>
+        </div>
+        <div class="paid-candidate-box-extra list-show">
+                          <ul>
+                            <li class="more-skill"><span>{{followersCount}}</span> Followers</li>
+                            <li class="more-skill"><span>239</span> Following</li>
+                            <li class="more-skill"><span class="ti-trash" (click)="removMember()"></span> Remove</li>
+                          </ul>
+                        </div>
+      </div></div>
+  </div>

@@ -1,0 +1,154 @@
+<div class="theme-layout">
+
+<section>
+    <div class="feature-photo">
+
+        <figure><img src="assets/images/temp/timeline-1.jpg" alt=""></figure>
+        <div class="add-btn">
+            <span>
+            <button type="button" class="btn btn-primary">
+                Followers <span class="badge badge-light">{{followersCount}}</span> 
+            </button>
+        </span>
+            <span *ngIf="isUserLogged()">    
+                <button *ngIf="following" type="button" class="btn btn-success glyphicon glyphicon-ok">Following</button>       
+                <button *ngIf="requestedToFollow" type="button" class="btn btn-success glyphicon glyphicon-ok">Request sent</button>       
+                <button *ngIf="followRequestRejected" type="button" class="btn btn-success glyphicon glyphicon-ok">Request Rejected</button>       
+                <button *ngIf="!following && !requestedToFollow && !followRequestRejected" type="button" class="btn btn-primary" (click)="followEntity()">Follow</button>
+            </span>
+    
+        </div> 
+        <form class="edit-phto" *ngIf="isProfileEditable()">
+            <i class="fa fa-camera-retro"></i>
+            <label class="fileContainer">
+                Edit Cover Photo
+            <input type="file"/>
+            </label>
+        </form>
+        <div class="container-fluid">
+            <div class="row merged">
+                <div class="col-lg-2 col-sm-3">
+                    <div class="user-avatar">
+                        <figure>
+                            <img [src]="profileSmImage"
+                            alt="Place image title"
+                            *ngIf="!isImageLoading">
+                            <form class="edit-phto" *ngIf="isProfileEditable()">
+                                <i class="fa fa-camera-retro"></i>
+                                <label class="fileContainer">
+                                    Edit Display Photo
+                                    <input type="file" (change)="onProfileSmImageSelected($event)"/>
+                                </label>
+                            </form>
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5>{{firstName}} {{lastName}}</h5>
+                                </li>
+                             </ul>
+                        </div>
+                </div>                
+                <!---->
+            </div>
+        </div>
+    </div>
+</section><!-- top area -->
+
+
+
+<section>
+    <div class="gap gray-bg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row cols-reverse" id="page-contents">
+                        <div class="col-lg-3 cols-item1">
+                            
+                            <aside class="sidebar static">
+                                    <div class="widget" (click)="isProfileCollapsed=false; isActivityCollapsed=true;" aria-controls="ProfileCollapse">
+                                            <h4 class="widget-title">Profile</h4>
+                                            <ul class="naves">
+                                                    <li *ngFor="let profileTemplate of profilesTemplates">
+                                                        <i class="ti-info-alt"></i>
+                                                        <a class="" [routerLink]="" title="" data-ripple="" (click)="loadTemplate(profileTemplate.profile_template_id)">{{profileTemplate.name}}</a>
+                                                    </li>    
+
+                                            </ul>
+                                    </div>            
+                                <div class="widget stick-widget" (click)="isProfileCollapsed=true; isActivityCollapsed=false;" aria-controls="ActivityCollapse">
+                                    <h2 class="widget-title">Activities</h2>
+                                </div> 
+                                <div class="widget stick-widget">
+                                        <h2 class="widget-title">Townhalls
+                                            <button class="btn" data-toggle="tooltip" data-placement="bottom" title="Add Townhall Event">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </h2>
+                                </div>
+                                <div class="widget stick-widget">
+                                        <h2 class="widget-title">Upcoming events</h2>
+                                </div>                               
+                            </aside>
+                        </div><!-- sidebar -->
+                        <div class="col-lg-6 cols-item2">
+                                <div id="ActivityCollapse" [ngbCollapse]="isActivityCollapsed">
+                                        <app-post [type]="user" [userId]="admin1" [disableNewPost]=true></app-post>
+                                </div>   
+                            <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
+                              <!--  <div class="col-lg-12 col-sm-8">-->
+                                        <div class="timeline-info">
+                                                <ul>
+                                                    <!--
+                                                    <li *ngFor="let profileTemplate of profilesTemplates">
+                                                        <a class="" [routerLink]="" title="" data-ripple="" (click)="loadTemplate(profileTemplate.profile_template_id)">{{profileTemplate.name}}</a>
+                                                    </li>
+                                                    -->    
+                                                    <li *ngIf="isProfileEditable()">
+                                                        <div ngbDropdown class="d-inline-block">
+                                                            <button class="btn btn-outline-primary" id="dropdownAddSection" ngbDropdownToggle>Add Section</button>
+                                                            <div ngbDropdownMenu aria-labelledby="dropdownAddSection">
+                                                            <button class="dropdown-item" *ngFor="let profileTemplate of profilesTemplates" (click)="loadTemplate(profileTemplate.profile_template_id)">{{profileTemplate.name}}</button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li *ngIf="isUserLogged()">
+                                                        <div>
+                                                            <button type="button" class="btn btn-primary" (click)="editProfile()">{{editLabel}}</button>
+                                                         </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <app-usertemplate [type]="templateType"></app-usertemplate>
+                                    </div>
+                                      
+                                    <!--</div>-->
+                            <!--
+                            
+                        -->
+                        </div><!-- centerl meta -->
+                        <div class="col-lg-3 cols-item3">
+                            <aside class="sidebar static">
+                                <!--WHO'S FOLLOWING - START-->
+                                <div class="widget stick-widget">
+                                    <h4 class="widget-title">Followers</h4>
+                                    <ul class="followers">
+                                        <li *ngFor="let followingUser of followers">
+                                        <app-usercard1 [user]=followingUser></app-usercard1>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--WHO'S FOLLOWING - END-->
+                            </aside>
+                        </div><!-- sidebar -->
+                    </div>	
+                </div>
+            </div>
+        </div>
+    </div>	
+</section>
+
+</div>

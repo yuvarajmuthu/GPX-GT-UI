@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   serviceUrl:'http://localhost:5000',
-  searchServiceUrl:'http://localhost:8090/search',
-  address:'300 Chatham Park Drive,Pittsburgh, PA 15220'
+  searchServiceUrl:'http://localhost:8090/search'
 };
 
 /*

@@ -26,9 +26,9 @@
               "src/styles.css",
               "src/responsive.css",
               "src/color.css",
-              "src/gtTheme.css",
-              "./node_modules/font-awesome/css/font-awesome.min.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/gtTheme.css"
+              // "./node_modules/font-awesome/css/font-awesome.min.css",
+              // "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -38,30 +38,6 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            },
-            "prodlocal": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prodlocal.ts"
                 }
               ],
               "optimization": true,
@@ -91,9 +67,6 @@
           "configurations": {
             "production": {
               "browserTarget": "gpx-ui:build:production"
-            },
-            "prodlocal": {
-              "browserTarget": "gpx-ui:build:prodlocal"
             }
           }
         },
@@ -148,9 +121,6 @@
           "configurations": {
             "production": {
               "devServerTarget": "gpx-ui:serve:production"
-            },
-            "prodlocal": {
-              "devServerTarget": "gpx-ui:serve:prodlocal"
             }
           }
         },

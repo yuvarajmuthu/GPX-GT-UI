@@ -2,10 +2,17 @@
     width: 100%;
     display: flex;
 }
-
-
+div.ng-autocomplete{
+    background: #fff;
+    color: #636d75;
+    border: 1px solid #e3e9ef;
+    margin: 2px 2px 2px 2px;
+}
+.ng-autocomplete {
+    width: 375px;
+}
 @media screen and (max-width: 559px) {
     .ng-autocomplete {
-        width: 190px !important;
+        width: 99% !important;
     }
 }

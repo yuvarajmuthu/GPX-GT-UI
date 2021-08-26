@@ -1,297 +1,132 @@
-<div class="avatar-bg">
-    <div class="container-fluid">
-        <div class="dashboard-avatar">
-         <div class="col-md-12">	
-            <div class="text-right vedit-profile">
-                <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
-            </div>	
-            <div class="profile-details">
-              <div class="profile-width">
-                <div class="dashboard-avatar-thumb">
-                    <img [src]="profileSmImage" class="img-avater" *ngIf="!isImageLoading" alt="User avatar">
-                    <a class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
-                    <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
-                        <i class="fa fa-camera-retro"></i>
-                        <input type="file" class="uploadFile img" value="Upload Photo"
-                                      style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
-                    </label>
-                </div>
-                <div class="profile-name">
-                    <h4>{{userData.displayName}}</h4> 
-                    <span  class="badge badge-pill badge-danger" >
-                      <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
-                      </span>
-                    <div>{{userData.username}}</div>
-                    <div class="paid-candidate-box-extra">
-                        <ul>
-                            <li class="more-skill"><span>{{followersCount}}</span> Followers</li>
-                            <li class="more-skill"><span>{{followingsCount}}</span> Following</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div ngbDropdown  class="d-inline-block nav-item add-drop">
-                  <button class="btn btn-outline-primary btn-xs"
-                          id="dropdownAddSection"
-                          ngbDropdownToggle>
-                      Add Section<i class="fa fa-plus" aria-hidden="true"></i>
-                  </button>
-                  <div ngbDropdownMenu
-                       aria-labelledby="dropdownAddSection" id="dropdownAddSection">
-                      <button class="dropdown-item"
-                              *ngFor="let profileTemplate of availableProfileTemplates"
-                              (click)="addProfileData(profileTemplate)">
-                          {{profileTemplate.name}}
-                      </button>
-                  </div>
-                </div>
-
+<!-- <div class="avatar-bg">
+  <div class="container-fluid">
+    <div class="dashboard-avatar">
+     <div class="col-md-12">	 -->
+      <div class="text-right vedit-profile">
+          <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
+      </div>	
+      <div class="profile-details">
+          <div class="profile-width">
+      <div class="dashboard-avatar-thumb">
+        <img src="assets/img/can-2.png" class="img-avater" alt="" />
+        <a class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
+      </div>
+      <div class="profile-name">
+                  <h4>User 4A</h4>
+                  <span>user4a@gmail.com</span>
+                  <div class="paid-candidate-box-extra">
+          <ul>
+            <li class="more-skill"><span>129</span> Followers</li>
+            <li class="more-skill"><span>239</span> Following</li>
+          </ul>
+        </div>
+              </div>
+              <div class="dropdown add-drop">
+                            <a class="drop-add more-skill bg-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Add Section <i class="fa fa-angle-down"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Drop Down 1</a>
+                              <a class="dropdown-item" href="#">Drop Down 2</a>
+                              <li class="dropdown-submenu">
+                              <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                               <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                               <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                              </ul>
+                             </li>
+                            </div>
+                          </div>
+      </div>
+      </div>
+      <div class="dashboard-avatar-text col-md-6 col-md-offset-3">
+        <div class="bio-intro box">
+            <a class="edit-bio-intro edit" href="#"><i class="ti-pencil"></i></a>
+            <a class="edit-bio-intro save" href="#"><i class="ti-save-alt"></i></a>
+            <p class="addReadMore showlesscontent text click-rmv">Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting Industry. Lorem Ipsum Has Been The Industry's Standard 
+            Dummy Text Ever Since The 1500s, When An Unknown Printer Took A Galley Of Type And Scrambled It To Make A Type 
+            Specimen Book. It Has Survived Not Only Five Centuries, But Also The Leap Into Electronic Typesetting, Remaining 
+            Essentially Unchanged.</p>
+        </div>
+      </div>
+      <!-- </div>
+    </div>
+  </div>
+</div>		 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- General Detail Start -->
+    <section class="dashboard-wrap">
+      <div class="container-fluid">
+        <div class="row">
+        
+          <!-- Sidebar Wrap -->
+          <div class="col-lg-3 col-md-4">
+            <div class="side-dashboard">
+              <div class="dashboard-menu">
+                <ul>
+                  <li><a href="activities.html"><i class="ti-rss"></i> <span class="link-text">Activities</span> </a></li>
+                  <li><a href="biodata.html"><i class="ti-user"></i> <span class="link-text">Biodata </span> </a></li>
+                  <li><a href="managed-by.html"><i class="ti-flag-alt-2"></i> <span class="link-text">Managed by </span></a></li>
+                  <li><a href="settings.html" class="active"><i class="ti-settings"></i> <span class="link-text">Settings </span></a></li>
+                  <li class="dropdown desktop-view"><a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"><i class="ti-menu-alt"></i> <span class="link-text"> More </span></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="left: 0px">
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                      </ul>
+                  </li>
+                  <li class="dropup clearfix mobile-view"><a href="#" class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="false"><i class="ti-menu-alt"></i> <span class="link-text"> More </span></a>
+                  <ul class="dropdown-menu drop-up" role="menu" aria-labelledby="dropdownMenu2">
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                      </ul>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="dashboard-avatar-text col-md-6 col-md-offset-3">
-                <div class="bio-intro box">
-                    <a class="edit-bio-intro edit" href="#"><i class="ti ti-pencil"></i></a>
-                    <a class="edit-bio-intro save" href="#"><i class="ti ti-save-alt"></i></a>
-                    <p class="expclpse" [class.show]="show">{{userData.description}}</p>
-                    <button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>
+          </div>
+          
+          <!-- Content Wrap -->
+          <div class="col-lg-9 col-md-8">
+            <div class="dashboard-body">
+              <div class="dashboard-caption">
+              
+                <div class="dashboard-caption-header">
+                  <div class="col-md-6"><h4><i class="ti-id-badge"></i>Settings</h4></div>
+                  <div class="col-md-6 text-right"><a href="#" class="btn btn-blue manage-btn" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="ti-pencil-alt"></i></a></div>
                 </div>
+                
+                <div class="dashboard-caption-wrap">
+                <h4>Access Restriction</h4> <br>
+                <span class="custom-checkbox"> <input type="checkbox" id="aw"> <label for="aw">Public[OFF] / Private[ON]</label></span>
+                  
+                </div>
+                
+              </div>
             </div>
           </div>
+        
         </div>
-    </div>
-    </div>
-    <!-- General Detail Start -->
-        <section class="dashboard-wrap">
-            <div class="container-fluid">
-                <div class="row">
-                
-                    <!-- Sidebar Wrap -->
-                    <div class="col-lg-3 col-md-4">
-                        <div class="side-dashboard">
-                            <div class="dashboard-menu">
-                                <ul>
-                                    <li (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-rss"></i> <span class="link-text">Activities</span> </a></li>
-                                    <li (click)="showTwitterActivities()" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
-                                    <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
-                                        <a href="#" onclick="return false;">
-                                        <i class="{{profileTemplate.profileIcon}}"></i> <span class="link-text">{{profileTemplate.name}}</span></a>
-                                    </li>
-                                    <li *ngIf="managedBy" (click)="managedByUsers()" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Managed by</span></a></li>
-                                    <li *ngIf="isShowSettings" (click)="showSettings()" class="list-group-item pointer"
-                                      [ngClass]="{ 'active': settings, 'in-active': !settings}"><a href="#" onclick="return false;"><i class="fa fa-cog"></i> <span class="link-text">Settings </span></a>
-                                    </li>
-
-                                  </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Content Wrap -->
-                    <div class="col-lg-9 col-md-8" id="template-tabs">
-                      <div class="widget-div">
-                          <div class="widget widget-tabbed">
-                              <!-- Nav tab -->
-          
-                              <div class="gap gray-bg">
-                                  <div class="container-fluid">
-                                      <div class="row">
-                                          <div class="col-lg-12">
-                                              <div class="row cols-reverse" id="page-contents">
-                                                  <!-- sidebar -->
-                                                  <!-- Main stage area -->
-                                                  <div class="col-lg-12 cols-item2">
-                                                      <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
-                                                          <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
-                                                      </div>
-                                                      <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
-                                                          Please login to view the activies.
-                                                       </div>
-          
-                                                       <!--Twitter feed-->
-                                                       <div id="TwitterCollapse" *ngIf="twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
-                                                          <a class="twitter-timeline" href="{{twitterHandle}}">Tweets From Twitter</a>
-                                                       </div>
-                                                       <div id="TwitterCollapse" *ngIf="!twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
-                                                          <small>Twitter feed not available.</small>
-                                                       </div>
-          
-                                                      <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
-                                                           class="widget stick-widget">
-                                                          <ul class="followers">
-                                                              <li *ngFor="let followerUsername of followers">
-                                                                  <app-usercard1 [username]=followerUsername></app-usercard1>
-                                                              </li>
-                                                          </ul>
-                                                      </div>
-                                                      <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
-                                                              class="widget stick-widget">
-                                                          <ul class="followers">
-                                                              <li *ngFor="let followingUsername of followings">
-                                                                  <app-usercard1 [username]=followingUsername></app-usercard1>
-                                                              </li>
-                                                          </ul>
-                                                      </div>
-                                                      <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
-                                                      class="widget stick-widget">
-                                                          <div *ngIf="isEditable">
-                                                              <h6>Add Members:</h6>
-                                                              <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueSelect)='selectedUser($event)'></app-gps-global-search>
-                                                          </div>    
-          
-                                                      <!-- <div class="ng-autocomplete managedby-search">
-                                                          <ng-autocomplete
-                                                            [(ngModel)]="searchUserManagedBy"
-                                                            (selected)='addMember(searchUserManagedBy.username)'
-                                                            [data]="searchUsers"
-                                                            placeHolder="User Name"
-                                                            (inputChanged) = "onChangeSearch($event)"
-                                                            [searchKeyword]="keywordUser"
-                                                            [itemTemplate]="itemTemplate"
-                                                            [notFoundTemplate]="notFoundTemplate">
-                                                          </ng-autocomplete>
-          
-                                  
-                                                          <ng-template #itemTemplate let-item>
-                                                            <div class="item">
-                                                              <img src="{{item.photoUrl}}" height="25">
-                                                              <span [innerHTML]="item.full_name"></span>
-                                                              <small></small>
-                                                            </div>
-                                                          </ng-template>
-                                  
-                                                          <ng-template #notFoundTemplate let-notFound>
-                                                            <div [innerHTML]="notFound"></div>
-                                                          </ng-template>
-                                                        </div> -->
-          
-                                                        <div class="row">
-                                                          <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of managedBy">
-                                                            <app-usercard2 [username]="managedUsername" [manageMembers]="isEditable"></app-usercard2>
-                                                            <div class="overlay">
-                                                                <!-- <button class="delete-managedby-user" type="button" (click)="removeMember(username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button> -->
-                                                              </div>
-          
-                                                          </div>
-                                                        </div>
-                                   
-                                                     <!-- <ul class="followers">
-                                                         <li *ngFor="let managed of managedBy" class="managedby-user-list">
-                                                          <button class="delete-managedby-user" type="button" (click)="removeMember(managed.username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                             <app-usercard1 [user]=managed></app-usercard1>
-                                                         </li>
-                                                     </ul> -->
-                                                     </div>
-                                                     <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
-                                                         Please login to view the members.
-                                                     </div>
-          
-                                                     <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
-                                                     <form [formGroup]="settingsForm">
-                                                          <ul class="followers">
-                                                              <li>
-                                                                  <div class="form-row">
-                                                                      <div class="col form-group">
-                                                                        <label>Access Restriction</label>
-                                                                        <div class="custom-control custom-switch">
-                                                                          <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="accessRestriction" (change)="accessChange()">
-                                                                          <label class="custom-control-label" for="customSwitch1">Public[OFF] / Private[ON]</label>
-                                                                        </div>
-                                                                      </div>
-                                                                    </div>
-                                                              </li>
-                                                          </ul>
-                                                      </form>    
-                                                      </div>
-                                                      <div id="setingsSection" *ngIf="!isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
-                                                          Please login to manage the settings.
-                                                      </div>
-          
-                                                      <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
-                                                          <div class="card card-nav-tabs">
-                                                              <div class="card-header-1 card-header-primary"  id="myHeader">
-                                                                <!--   <div class="nav-tabs-navigation">
-                                                                      <div class="nav-tabs-wrapper">
-                                                                          <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
-                                                                              data-tabs="tabs">
-                                                                              <li class="nav-item"
-                                                                                  *ngFor="let profileTemplate of profilesTemplates">
-                                                                                  <div>
-                                                                                      <span>
-                                                                                          <a class="nav-link template-tab text-black-50" data-toggle="tab"
-                                                                                          [routerLink]=""
-                                                                                          (click)="loadTemplate(profileTemplate.profileTemplateId)"
-                                                                                          *ngIf="profileTemplate.profileTemplateId" [ngClass]="{'active-tab':profileTemplate.profileTemplateId == activeTemplate}">
-                                                                                              <i class="material-icons">{{profileTemplate.profileIcon}}</i>
-                                                                                              {{profileTemplate.name}}
-                                                                                          </a>
-                                                                                          <button *ngIf="isProfileInEditMode()" class="delete-image" type="button" (click)="deleteProfileData(profileTemplate)"> <i class="fa fa-times" aria-hidden="true"></i></button>
-          
-                                                                                      </span>
-                                                                                  </div>
-                                                                              </li>
-                                                                              <li *ngIf="isProfileInEditMode()" class="nav-item">
-                                                                                  <div ngbDropdown class="d-inline-block">
-                                                                                      <button class="btn btn-outline-primary btn-xs"
-                                                                                              id="dropdownAddSection"
-                                                                                              ngbDropdownToggle>
-                                                                                          <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                                      </button>
-                                                                                      <div ngbDropdownMenu
-                                                                                           aria-labelledby="dropdownAddSection">
-                                                                                          <button class="dropdown-item"
-                                                                                                  *ngFor="let profileTemplate of availableProfileTemplates"
-                                                                                                  (click)="addProfileData(profileTemplate)">
-                                                                                              {{profileTemplate.name}}
-                                                                                          </button>
-                                                                                      </div>
-                                                                                  </div>
-                                                                              </li>
-                                                                          </ul>
-                                                                      </div>
-                                                                  </div> -->
-                                                              </div>
-          
-                                                              <div class="card-body content">
-                                                                  <div class="tab-content text-center">
-                                                                      <div class="tab-pane active" id="templateType">
-                                                                          <app-usertemplate [type]="templateType"></app-usertemplate>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-                                                          <!--HORIZONTAL ITEMS FOR PROFILES / ADD SECTION IN EDIT MODE-->
-                                                      </div>
-                                                  </div><!-- centerl meta -->
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-          
-                              <!-- End nav tab -->
-          
-                              <!-- Tab panes -->
-                              <div class="tab-content">
-          
-          
-                                  <!-- Tab timeline -->
-                                  <div class="tab-pane animated active fadeInRight" id="my-timeline">
-                                      <div class="user-profile-content">
-          
-                                          <!-- Begin timeline -->
-          
-                                          <!-- End timeline -->
-                                      </div><!-- End div .user-profile-content -->
-                                  </div><!-- End div .tab-pane -->
-                                  <!-- End Tab timeline -->
-                                  <!-- Tab about -->
-                                  <!-- End Tab user messages -->
-                              </div><!-- End div .tab-content -->
-                          </div><!-- End div .box-info -->
-                      </div>
-                  </div>
-                
-                </div>
-            </div>
-        </section>
-        <!-- General Detail End -->
+      </div>
+    </section>
+    <!-- General Detail End -->

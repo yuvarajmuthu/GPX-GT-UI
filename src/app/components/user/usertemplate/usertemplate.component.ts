@@ -80,8 +80,7 @@ export class UsertemplateComponent implements OnChanges {
     'upOffices' : UserofficetemplateComponent,
     'upEvent' : UsereventtemplateComponent,
     'upBill' : UserbilltemplateComponent,
-    'upVote' : UservotetemplateComponent,
-    'upOtherContacts' : UservotetemplateComponent 
+    'upVote' : UservotetemplateComponent 
 };
 
 private componentRef: ComponentRef<{}>;

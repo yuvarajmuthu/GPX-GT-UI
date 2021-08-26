@@ -1,6 +1,6 @@
 {
   "name": "gpx-ui",
-  "version": "1.0.0.07302021",
+  "version": "1.0.0.07152021",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -28,7 +28,6 @@
     "angular-mentions": "1.1.6",
     "angular-ng-autocomplete": "^2.0.1",
     "angularx-social-login": "^1.2.7",
-    "bootstrap": "^4.2.1",
     "ckeditor4-angular": "1.2.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",

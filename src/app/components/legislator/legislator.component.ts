@@ -205,7 +205,7 @@ export class LegislatorComponent implements OnInit {
     if (legislator['full_name']) {
       console.log('legislator[full_name] ', legislator['full_name']);
       this.userName = legislator['full_name'];
-      this.searchService.getUsers(this.userName)//search for user existence user elasticsearch
+      this.searchService.getUsers(this.userName)
       .subscribe(
         (result) => {
           if(result.length > 0 && this.userName === result[0]['full_name']){

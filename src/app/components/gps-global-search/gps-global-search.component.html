@@ -1,9 +1,8 @@
 <div class="ng-autocomplete" [ngClass]="{'managedby-search':category=='managedby', 'party-search': from=='user' && (category=='userType' || category=='district' || category=='state' || category=='party'), 'create-page': from=='createPage' && (category=='userType' || category=='district' || category=='state' || category=='party')}">
   <ng-autocomplete
-    [(ngModel)]="selectedUser"
-    placeholder="Search Legislator, Person, District, Party..." 
     (selected)='onValueSelect($event)'
     [data]="searchUsers"
+	[placeholder]="placeholder"
     (inputChanged) = "onChangeSearch($event)"
     [searchKeyword]="keywordUser"
     [itemTemplate]="itemTemplate"
@@ -15,11 +14,29 @@
 
 
   <ng-template #itemTemplate let-item>
-    <div class="item">
+    <!-- <div class="item">
       <img src="{{item.photoUrl}}" height="25">
       <span [innerHTML]="item.full_name"></span>
       <small></small>
-    </div>
+    </div> -->
+    												<div class="segestions item">
+												    <ul>
+												    <li>
+												    <a href="#">
+												        <div class="search-img">
+												            <img src="{{item.photoUrl}}" class="img-fluid img-responsive img-autocomplete">
+												        </div>
+												        <div class="serach-result-text">
+												            <p [innerHTML]="item.full_name"></p>
+												        </div>
+												        <div class="adding-list">
+												            <i class="fa fa-plus"></i> 
+												        </div>
+												    </a>
+												    </li>
+												    </ul>
+												</div>
+
   </ng-template>
 
   <ng-template #notFoundTemplate let-notFound>

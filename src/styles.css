@@ -10429,6 +10429,6 @@ input:focus {
     color: #018ece;
 }
 
-.autocomplete-container .suggestions-container {
+/* .autocomplete-container .suggestions-container {
     position: fixed !important;
-}
+} */

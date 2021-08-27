@@ -9,8 +9,13 @@ div.ng-autocomplete{
     margin: 2px 2px 2px 2px;
 }
 .ng-autocomplete {
-    width: 375px;
+    width: 100%;
 }
+.img-autocomplete{
+    height: 100%;
+    width: 100%;
+}
+
 @media screen and (max-width: 559px) {
     .ng-autocomplete {
         width: 99% !important;

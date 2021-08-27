@@ -32,6 +32,7 @@ export class GpsGlobalSearchComponent implements OnInit {
     this.searchService.getUsers(e)
     .subscribe((data:any) => {
         this.searchUsers = data;
+        console.log(this.searchUsers);
     });
    }
 

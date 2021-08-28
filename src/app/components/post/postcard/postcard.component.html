@@ -1,434 +1,111 @@
-<!-- <div  *ngIf="idx==0 && selfActivities" id="newpost-on-selfactivites" >
-    <button  (click)="toggleNewPost()" class="open-post" title="Start New Conversation"><i class='fa fa-flag-o'></i></button>
 
-</div> -->
-
-<div class="cardbox shadow-lg bg-white">
-    <div class="cardbox-heading post-header">
-            <div class="media m-0">
-                <div class="mr-3" [routerLink]="['/user', post.entityId]">
-                    <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
+<div class="dashboard-caption-wrap">
+										
+    <ul class="list">
+        <li class="manage-list-row clearfix">
+            <div class="job-info">
+                <div class="job-img" [routerLink]="['/user', post.entityId]">
+                    <img [src]="profileSmImage" class="attachment-thumbnail" alt="Academy Pro Theme">
                 </div>
-                <div class="media-body">
-                    <div class="h6 m-0">
-                        <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
-                        
-                   </div>
-
-                    <div class="text-muted h7 mb-2">
-                        <i class="fa fa-clock-o"></i>
-                        {{post['lastModifiedDate'] | dateFormatPipe}}
-                    </div>
+                <h3 class="job-name"><a class="job_name_tag" href="#" [routerLink]="['/user', post.entityId]">{{post.entityId}}</a></h3>
+                    <small class="job-sallery"><i class="ti-time"></i>{{post['lastModifiedDate'] | dateFormatPipe}}</small>
+                <div class="job-details">
+                    <p *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" [innerHTML]="postText">
+                        <!-- <p class="card-text" >
+                        </p> -->
+                    </p>
+                    <!-- <p class="msg-pad">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
+                    text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+                    five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                     
+                    <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> -->
+                    <p *ngIf="post && post['containsImage']"><img [src]="postImage"></p>
                 </div>
             </div>
-            <!--
-            <div>
-                <div class="dropdown">
-                    <div class="btn-group">
-                        <div ngbDropdown class="d-inline-block">
-                            <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" id="postRightDropdown" ngbDropdownToggle>
-                                <i class="{{ icon }}"></i> {{ name }}
-                                <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                            <div ngbDropdownMenu aria-labelledby="postRightDropdown">
-                                <button class="btn btn-outline-success" ngbDropdownItem (click)="save('Saved')"
-                                        [ngClass]="{ 'active': savePost, 'in-active': !savePost}"><i
-                                        class="fa fa-floppy-o" aria-hidden="true"></i> Save
-                                </button>
-                                <button class="btn btn-outline-warning" ngbDropdownItem (click)="hide('Hide')"
-                                        [ngClass]="{ 'active': hidePost, 'in-active': !hidePost}"><i
-                                        class="fa fa-eye-slash" aria-hidden="true"></i> Hide
-                                </button>
-                                <button class="btn btn-outline-danger" ngbDropdownItem (click)="report('Report')"
-                                        [ngClass]="{ 'active': reportPost, 'in-active': !reportPost}"><i
-                                        class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report
-                                </button>
-                            </div>
-                        </div>
-
+            <div class="row post-card-footer"><a href="javascript:void(0);" class="col card-link post-footer-btn text-center post-active">
+            <i aria-hidden="true" class="ti-heart custom-size"></i><span>Like(1)</span>  </a>
+            <a class="col card-link post-footer-btn text-center" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="ti-comment-alt custom-size"></i><span> Comment(0) </span> </a>
+            <a class="col card-link post-footer-btn text-center" href="javascript:void(0);"><i class="ti-share custom-size"></i><span>Share(0)</span></a>
+            </div>
+            <ul class="comment-section collapse" id="collapseExample">
+                <li class="commment-box">
+                    <div class="comment-avatar">
+                        <img src="assets/img/can-1.png" class="attachment-thumbnail" alt="Academy Pro Theme">
                     </div>
-                </div>
-            </div>-->
-       
-    </div>
-    <div class="cardbox shadow-lg bg-white">
-
-
-        <div *ngIf="post && post['containsImage']" class="cardbox-item">
-            <img class="img-fluid" [src]="postImage" alt="">
-        </div>
-
-        <div *ngIf="post && post['containsVideo']" class="cardbox-item">
-            <div class="we-video-info">
-
-            </div>
-        </div>
-        <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
-            <!-- <p class="card-text" >
-            </p> -->
-        </div>
+                    <div class="commemnt-text">
+                        <div class="commenter-name"><p><a href="#"><b>Danial Rechi</b></a> <span><a href="#">@Raja Ram</a></span></p></div>
+                        <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop</p>
+                    <div class="comment-like">
+                        <a href="#"><i class="ti-heart custom-size"></i> Like(1)</a>
+                        <a href="#"><i class="ti-share custom-size"></i> Reply(0) </a>
+                    </div>
+                    </div>
+                    <ul class="expandible">
+                        <li class="sub-commment">
+                            <div class="comment-avatar">
+                        <img src="assets/img/can-1.png" class="attachment-thumbnail" alt="Academy Pro Theme">
+                    </div>
+                    <div class="commemnt-text">
+                        <div class="commenter-name"><p><a href="#"><b>Danial Rechi</b></a> <span><a href="#">@Raja Ram</a></span></p></div>
+                        <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop</p>
+                    <div class="comment-like">
+                        <a href="#"><i class="ti-heart custom-size"></i> Like(1)</a>
+                        <a href="#"><i class="ti-share custom-size"></i> Reply(0) </a>
+                    </div>
+                    </div>
+                        </li>
+                        <li class="sub-commment">
+                            <div class="comment-avatar">
+                        <img src="assets/img/can-1.png" class="attachment-thumbnail" alt="Academy Pro Theme">
+                    </div>
+                    <div class="commemnt-text">
+                        <div class="commenter-name"><p><a href="#"><b>Danial Rechi</b></a> <span><a href="#">@Raja Ram</a></span></p></div>
+                        <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop</p>
+                    <div class="comment-like">
+                        <a href="#"><i class="ti-heart custom-size"></i> Like(1)</a>
+                        <a href="#"><i class="ti-share custom-size"></i> Reply(0) </a>
+                    </div>
+                    </div>
+                        </li>
+                        <li class="sub-commment">
+                            <div class="comment-avatar">
+                        <img src="assets/img/can-1.png" class="attachment-thumbnail" alt="Academy Pro Theme">
+                    </div>
+                    <div class="commemnt-text">
+                        <div class="commenter-name"><p><a href="#"><b>Danial Rechi</b></a> <span><a href="#">@Raja Ram</a></span></p></div>
+                        <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop</p>
+                    <div class="comment-like">
+                        <a href="#"><i class="ti-heart custom-size"></i> Like(1)</a>
+                        <a href="#"><i class="ti-share custom-size"></i> Reply(0) </a>
+                    </div>
+                    </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="commment-box">
+                    <div class="comment-avatar">
+                        <img src="assets/img/can-1.png" class="attachment-thumbnail" alt="Academy Pro Theme">
+                    </div>
+                    <div class="commemnt-text">
+                        <div class="commenter-name"><p><a href="#"><b>Danial Rechi</b></a> <span><a href="#">@Raja Ram</a></span></p></div>
+                        <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                    and more recently with desktop</p>
+                    <div class="comment-like">
+                        <a href="#"><i class="ti-heart custom-size"></i> Like(1)</a>
+                        <a href="#"><i class="ti-share custom-size"></i> Reply(0) </a>
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
         
-        <!-- comments section starts
-        <div class="padding-top2" *ngIf="post.comments && post.comments.length > 0">
-            <div class="text-muted h7 mb-2">
-                Comments :
-             </div>
+   
+    </ul>
     
-             <div *ngFor="let comment of post.comments">
-                 <div class="commented-user">
-                    {{comment.entityId}}
-                 </div>
-                 <div>
-                    {{comment.postText}}
-                 </div>
-             </div>
-        </div>
-
-        comments section ends -->
-
-    </div>
-    <div class="card-footer">
-        <div class="row post-card-footer">
-            <a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)">
-                <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i> 
-                Like({{likedCount}})
-            </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
-                <i class="fa fa-comment custom-size"></i>
-                Comment({{commentsCount}})
-            </a>
-            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
-                <i class="fa fa-mail-forward custom-size"></i>
-                Share
-            </a> -->
-            <ng-template #popContent>
-                <tag-input [(ngModel)]="shareUsers"  placeholder="Share with" (input)="searchShareUser($event)" secondaryPlaceholder="Share with" >
-                    <tag-input-dropdown 
-                      [showDropdownIfEmpty]="true"
-                      [autocompleteObservable]="requestAutocompleteItems"
-                      [dynamicUpdate]="true"
-                      identifyBy="username" displayBy="username"
-                    >
-                    </tag-input-dropdown>
-                  </tag-input>
-                  <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
-            </ng-template>
-
-<!--
-            <button type="button" class="btn btn-outline-secondary mr-2 share-toggle-btn post-footer-btn" placement="bottom-right" popoverClass="share-popover"
-        [ngbPopover]="popContent"  [autoClose]="false" triggers="manual" #p="ngbPopover" (click)="p.toggle()">
-        Share
-</button>
--->
-        </div>
-
-
-
-        <ng-container *ngIf="showCommentInput">
-            <div class="row post-comment-section">
-                <div class="card gedf-card">
-                    <!--<div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                   aria-controls="posts" aria-selected="true">Make
-                                    a publication</a>
-                            </li>
-                        </ul>
-                    </div>-->
-
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                 aria-labelledby="posts-tab">
-                                <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <!-- <div id="commentContent" class="commentContent" contenteditable="true"
-                                    [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
-                                    [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
-                                    </div>
-        
-                                    <ng-template #mentionListTemplate let-item="item">
-                                        <img class="mr-3" src="{{item.img}}" alt="" width="30" height="30">
-                                        &nbsp;
-                                        <span>{{item.name}}</span>
-                                      </ng-template> -->
-
-                                      <div id="commentContent" class="commentContent form-control" contenteditable="true"
-                                      [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
-                                      [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
-                                      </div>
-          
-                                      <ng-template #mentionListTemplate let-item="item">
-                                          <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
-                                          &nbsp;
-                                          <span>{{item.firstName}} {{item.lastName}}</span>
-                                        </ng-template>
-
-                                                    
-                                    <div class="attachments">
-                                        <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
-                                        <ul>
-                                            <li>
-                                                <i class='attachment char-icon'
-                                                 (click)="toggled = !toggled"
-                                                 [(emojiPickerIf)]="toggled"
-                                                 [emojiPickerDirection]="'top'"
-                                                 (emojiPickerSelect)="handleSelection($event)">😄</i>
-                                          </li>
-
-                                            <li>
-                                                <i class="fa fa-image"></i>
-                                                <label class="fileContainer">
-                                                    <input type="file" accept="image/gif, image/jpg, image/jpeg, image/png" id="stageUploadedFile"
-                                                           (change)="onFileSelected($event)">
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-video-camera"></i>
-                                                <label class="fileContainer">
-                                                    <input type="file" id="stageUploadedFile1"
-                                                    (change)="onvideoSelected($event)">
-                                                </label>
-                                            </li>
-                                            <!--
-                                            <li>
-                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                <label class="fileContainer">
-                                                    <input type="checkbox" class="location" id="location">
-                                                </label>
-                                            </li>
-                                        -->
-                                        <li>
-                                            <div class="btn-group">
-                                                <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
-                                                </button>
-                                            </div>
-                                        </li> 
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
-                            <div class="file-container">
-                                <img [src]="stagingImage" height="200" class="image">
-                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
-                            </div>
-                        </div>
-                        <div class="video-upload-container" *ngIf="isvideoSelected==true">
-                            <div class="file-container">
-                                <video width="400" controls >
-                                </video>
-                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
-                            </div>
-                        </div>
-                        <!--
-                        <div class="btn-toolbar justify-content-between float-right">
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
-                                </button>
-                            </div>
-                            <div class="btn-group">
-                                <div ngbDropdown class="d-inline-block">
-                                    <button class="btn btn-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>
-                                        <i class="{{ icon }}"></i> {{ name }}
-                                    </button>
-                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                        <button ngbDropdownItem (click)="Public('Public')"
-                                                [ngClass]="{ 'active': public, 'in-active': !public}"><i class="fa fa-globe"></i> Public
-                                        </button>
-                                        <button ngbDropdownItem (click)="Friends('Friends')"
-                                                [ngClass]="{ 'active': friends, 'in-active': !friends}"><i class="fa fa-users"></i>
-                                            Friends
-                                        </button>
-                                        <button ngbDropdownItem (click)="OnlyMe('Only Me')"
-                                                [ngClass]="{ 'active': onlyMe, 'in-active': !onlyMe}"><i class="fa fa-user"></i> Only Me
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>-->
-
-
-                    </div>
-                </div>
-                <br/>
-            </div>
-        </ng-container>
-
-        <!--LIST IF COMMENTS FOR THE POST-->
-        <app-postcard *ngFor="let post of comments" [isComment]="true" [post]="post">
-        </app-postcard> 
-
-        <button *ngIf="loadMore" type="button" class="btn btn-xs load-more-comments" (click)="loadMoreComments()">Load more
-            comments
-        </button>
-    </div>
+    
 </div>
-
-
-<!-- COMMENT / POST DESIGN CAN BE REUSED-->
-
-<!--
-    <br/>
-<div class="cardbox shadow-lg bg-white"  *ngIf="isComment">
-    <div class="cardbox-heading comment-header">
-            <div class="media m-0">
-                <div class="mr-3" [routerLink]="['/user', post.entityId]">
-                    <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
-                </div>
-                <div class="media-body">
-                    <div class="h6 m-0">
-                        <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
-                    </div>
-                    <div class="text-muted h7 mb-2">
-                        <i class="fa fa-clock-o"></i>
-                        {{post.lastModifiedDate | dateFormatPipe}}
-                    </div>
-                </div>
-            </div>
-
-    </div>
-    <div class="cardbox shadow-lg bg-white">
-        <div *ngIf="post && post.containsImage" class="cardbox-item">
-            <img class="img-fluid" [src]="postImage" alt="">
-        </div>
-
-        <div *ngIf="post && post.containsVideo" class="cardbox-item">
-            <div class="we-video-info">
-
-            </div>
-        </div>
-        <div *ngIf="post && post.containsText" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
-
-        </div>
-        
-
-
-    </div>
-
-
-    <div class="card-footer">
-        <div class="row post-card-footer">
-            <a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)">
-                <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i>
-                Like({{likedCount}})
-            </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
-                <i class="fa fa-comment custom-size"></i>
-                Comment({{commentsCount}})
-            </a>
-
-            <ng-template #popContent>
-                <tag-input [(ngModel)]="shareUsers"  placeholder="Share with" (input)="searchShareUser($event)" secondaryPlaceholder="Share with" >
-                    <tag-input-dropdown 
-                      [showDropdownIfEmpty]="true"
-                      [autocompleteObservable]="requestAutocompleteItems"
-                      [dynamicUpdate]="true"
-                      identifyBy="username" displayBy="username"
-                    >
-                    </tag-input-dropdown>
-                  </tag-input>
-                  <button type="button" class="btn btn-secondary share-button-pop" (click)="shareToUsers();">Share</button>
-            </ng-template>
-
-
-        </div>
-
-
-
-        <ng-container *ngIf="showCommentInput">
-            <div class="row reply-section">
-                <div class="card gedf-card">
-                   <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                 aria-labelledby="posts-tab">
-                                <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-     
-
-                                      <div id="commentContent" class="commentContent form-control" contenteditable="true"
-                                      [mentionConfig]="mentionConfig" placeholder="Add Comments here..."
-                                      [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
-                                      </div>
-          
-                                        <ng-template #mentionListTemplate let-item="item">
-                                          <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
-                                          &nbsp;
-                                          <span>{{item.firstName}} {{item.lastName}}</span>
-                                        </ng-template>
-
-                                        <div class="attachments">
-                                            <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
- 
-                                            <ul>
-                                                <li>
-                                                    <i class='attachment char-icon'
-                                                     (click)="toggled = !toggled"
-                                                     [(emojiPickerIf)]="toggled"
-                                                     [emojiPickerDirection]="'top'"
-                                                     (emojiPickerSelect)="handleSelection($event)">😄</i>
-                                              </li>
-                                                <li>
-                                                    <i class="fa fa-image"></i>
-                                                    <label class="fileContainer">
-                                                        <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png"
-                                                            (change)="onFileSelected($event)">
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-video-camera"></i>
-                                                    <label class="fileContainer">
-                                                        <input type="file" id="stageUploadedFile1"
-                                                        (change)="onvideoSelected($event)">
-                                                    </label>
-                                                </li>
-              
-                                                <li>
-                                                    <div class="btn-group">
-                                                        <button type="submit" class="btn btn-xs btn-primary" (click)="postComment()">Post
-                                                        </button>
-                                                    </div>
-                                                </li>   
-                                            </ul>
-
-                                       
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
-                            <div class="file-container">
-                                <img [src]="stagingImage" height="200" class="image">
-                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
-                               </div>
-                        </div>
-                        <div class="video-upload-container" *ngIf="isvideoSelected==true">
-                            <div class="file-container">
-                                <video width="400" controls >
-                                </video>
-                                <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
-                            </div>
-                        </div>
-      
-
-                    </div>
-                </div>
-                <br/>
-            </div>
-        </ng-container>
-        <app-postcard  *ngFor="let post of post.comments" [isComment]="true" [post]="post">
-        </app-postcard>
-    </div>
-
-</div>
-
--->
-

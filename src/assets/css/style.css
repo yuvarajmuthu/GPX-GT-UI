@@ -11554,7 +11554,8 @@ a.cl-box.pink {
     }
     
     .manage-list-row .job-info {
-    	padding-left: 25px
+    	padding-left: 25px;
+		width: 100%;
     }
     
     .mysp-sites-list .site-options,
@@ -11581,7 +11582,7 @@ a.cl-box.pink {
     }
     
     .manage-list-row .job-details {
-    	display: inline-block;
+    	/* display: inline-block; */
     	font-size: 16px
     }
     

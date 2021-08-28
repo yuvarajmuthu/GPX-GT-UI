@@ -63,7 +63,7 @@
                         <div class="side-dashboard">
                             <div class="dashboard-menu">
                                 <ul>
-                                    <li><a href="activities.html"><i class="ti-rss"></i> <span class="link-text">Activities</span> </a></li>
+                                    <li><a (click)="showActivities()" href="javascript:void(0)"><i class="ti-rss"></i> <span class="link-text">Activities</span> </a></li>
                                     <li><a href="biodata.html"><i class="ti-user"></i> <span class="link-text">Biodata </span> </a></li>
                                     <li  (click)="managedByUsers()"><a href="javascript: void(0);"><i class="ti-flag-alt-2"></i> <span class="link-text">Managed by </span></a></li>
                                     <li (click)="showSettings()"><a href="javascript: void(0);" class="active"><i class="ti-settings"></i> <span class="link-text">Settings </span></a></li>
@@ -87,6 +87,22 @@
                             </div>
                         </div>
                     </div>
+
+						<!-- Content Wrap -->
+						<div class="col-lg-9 col-md-8" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
+							<div class="dashboard-body">
+								<div class="dashboard-caption">
+								
+									<div class="dashboard-caption-header">
+										<div class="col-md-6"><h4><i class="ti-user"></i>Activities</h4></div>
+									</div>
+									
+									<app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
+
+									
+								</div>
+							</div>
+						</div>
 
 
                     						<!-- Content Wrap -->

@@ -11306,6 +11306,19 @@ a.cl-box.pink {
         color: #028ece;
         cursor: pointer;
     }
+
+	.showLess {
+        display: block;
+    }
+	
+	.showMore {
+        font-weight: bold;
+        margin-left: 2px;
+        color: #028ece;
+        cursor: pointer;
+
+    }
+
     .addReadMoreWrapTxt.showmorecontent .SecSec,
     .addReadMoreWrapTxt.showmorecontent .readLess {
         display: block;
@@ -11454,7 +11467,7 @@ a.cl-box.pink {
     }
     .dashboard-avatar {
 	width: 100%;
-	padding: 2rem;
+	/*padding: 2rem;*/
 	text-align: center;
 	margin-top: 80px;
 	background: url(/assets/images/network7.png);
@@ -13041,6 +13054,18 @@ list-style: none;
 		display: flex;
 		align-items: center
 	}
+
+	.private-profile-label{
+		position: absolute;
+		z-index: 10;
+		top: 300px;
+		left: 13%;
+		text-align: center;
+		padding: 14px 10px;
+		width: 50px;
+		border-radius: 50%;
+		height: 50px;
+	  }
 }
 @media(max-width: 441px){
     .profile-details.fixed-header .add-drop {
@@ -13131,6 +13156,7 @@ margin-right: 2px;
     border-right: 1px solid #f3f5f9;
     border-bottom: none;
 }
+
 }
 @media(max-width: 1250px){
         .profile-name {
@@ -13148,7 +13174,7 @@ margin-right: 2px;
 }
 
     }
-    @media(max-width: 991px){
+    @media(max-width: 767px){
         .dashboard-avatar{
             width: 100%;text-align: center;background: url(/assets/images/network7.png);
 background-size: 100% 270px;
@@ -13172,6 +13198,13 @@ background-repeat: no-repeat;
     padding: 2rem 0;
     min-height: 350px;
 }
+.private-profile-label{
+    position: absolute;
+    bottom: 9em;
+    right: 3.5em;
+    font-size: 20px;
+  }
+
     }
 
     @media(max-width: 562px){
@@ -13192,7 +13225,7 @@ background-repeat: no-repeat;
 }
 /*DESCRIPTION expand collapse----------------*/
 .expclpse {
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 16px;
 	height: 32px;
 	overflow: hidden;
@@ -13202,6 +13235,8 @@ background-repeat: no-repeat;
 	overflow: visible;
 	height: auto;
   }
+
+
 /*-------------------------------------------------*/
 /*Media - Query*/
 /*----------------------------------------------*/

@@ -2,25 +2,29 @@
     <div class="container-fluid">
         <div class="dashboard-avatar">
          <div class="col-md-12">	
-            <div class="text-right vedit-profile">
+            <div *ngIf="isProfileInEditMode()" class="text-right vedit-profile">
                 <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
             </div>	
             <div class="profile-details">
               <div class="profile-width">
                 <div class="dashboard-avatar-thumb">
                     <img [src]="profileSmImage" class="img-avater" *ngIf="!isImageLoading" alt="User avatar">
-                    <a class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
+                    <a *ngIf="isProfileInEditMode()" class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
                     <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
                         <i class="fa fa-camera-retro"></i>
                         <input type="file" class="uploadFile img" value="Upload Photo"
                                       style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
                     </label>
                 </div>
+
+                <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
+                    <span  class="badge badge-pill badge-primary badge-danger" >
+                    <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
+                    </span>
+                </div>
+
                 <div class="profile-name">
                     <h4>{{userData.displayName}}</h4> 
-                    <span  class="badge badge-pill badge-danger" >
-                      <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
-                      </span>
                     <div>{{userData.username}}</div>
                     <div class="paid-candidate-box-extra">
                         <ul>
@@ -30,7 +34,7 @@
                     </div>
                 </div>
 
-                <div ngbDropdown  class="d-inline-block nav-item add-drop">
+                <div ngbDropdown *ngIf="isProfileInEditMode()" class="d-inline-block nav-item add-drop">
                   <button class="btn btn-outline-primary btn-xs"
                           id="dropdownAddSection"
                           ngbDropdownToggle>
@@ -53,7 +57,8 @@
                     <a class="edit-bio-intro edit" href="#"><i class="ti ti-pencil"></i></a>
                     <a class="edit-bio-intro save" href="#"><i class="ti ti-save-alt"></i></a>
                     <p class="expclpse" [class.show]="show">{{userData.description}}</p>
-                    <button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>
+                    <span (click)="show = !show" class="showMore">{{ show ? 'Show less': '... Show more' }}</span>
+                    <!--<button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>-->
                 </div>
             </div>
           </div>

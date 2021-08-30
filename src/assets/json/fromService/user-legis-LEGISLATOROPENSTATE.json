@@ -17,7 +17,7 @@
    "showSettings":true,
    "profileManaged":true,
    "settings":{
-         "accessRestriction":false
+         "accessRestriction":true
    },
    "modifiedBy":null,
    "firstName":null,

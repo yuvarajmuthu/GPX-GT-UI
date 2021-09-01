@@ -1,11 +1,15 @@
+<app-newpost class="new-posts" (newpost)="PostNewEvent($event)" *ngIf="!disableNewPost && isShowAllPosts" [selfActivities]="selfActivities"></app-newpost>
+
+<div class="dashboard-caption-header">
+    <div class="col-md-6"><h4><i class="ti-user"></i>Activities</h4></div>
+    <div class="col-md-6" *ngIf="selfActivities" id="newpost-on-selfactivites">
+        <button  (click)="openNewPost($event)" class="open-post" title="Start New Conversation"><i class='fa fa-flag-o'></i></button>
+    </div>
+</div>
 <div class="news-div">
-    <app-newpost class="new-posts" (newpost)="PostNewEvent($event)" *ngIf="!disableNewPost && isShowAllPosts" [selfActivities]="selfActivities"></app-newpost>
 
     <div class="card gedf-card post-list post-list-all">
-        <div *ngIf="selfActivities" id="newpost-on-selfactivites">
-            <button  (click)="openNewPost($event)" class="open-post" title="Start New Conversation"><i class='fa fa-flag-o'></i></button>
 
-        </div>
 
         <div *ngIf="posts.length > 0">
             <cdk-virtual-scroll-viewport style="height: 550px" class="all-posts" itemSize="90" (scroll)="onPostScroll($event)">

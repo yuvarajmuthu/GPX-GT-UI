@@ -12816,7 +12816,7 @@ list-style: none;
 	}
 	.newjob-list-layout .cll-wrap {
 		display: flex;
-		align-items: end;
+		align-items: flex-end;
 		width: 100%
 	}
 	.newjob-list-layout .cll-thumb {

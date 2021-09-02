@@ -10397,6 +10397,13 @@ input{
 
 }
 
+.autocomplete-container{
+    height: auto !important;
+}
+.navbar-nav{
+	font-size: 15px;
+}
+
 @media only screen and (max-width: 1200px) {
     .filterPill{
       white-space:nowrap; 

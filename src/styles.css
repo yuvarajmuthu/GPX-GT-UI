@@ -10155,6 +10155,8 @@ Search Expand CSS changes
    }
    .all-posts{
        background-color: white;
+       height: 600px;
+       overflow-y: scroll;
    }
  .reply-section{
     margin: 15px 0px 0px 0px;
@@ -10359,11 +10361,11 @@ input{
         margin-top: 120px;
     }
 
-    .news-div{
+    /* .news-div{
         margin-top: 5%;
         margin-left: 15%;
         width: 70%;
-    }
+    } */
 }
 
 
@@ -10453,4 +10455,8 @@ input{
 
 .autocomplete-container .suggestions-container {
     position: fixed !important;
+}
+.all-posts .cdk-virtual-scroll-content-wrapper{
+    display: inline-block !important;
+    width: 500px !important;
 }

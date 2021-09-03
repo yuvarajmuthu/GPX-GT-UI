@@ -15,13 +15,14 @@
                         <input type="file" class="uploadFile img" value="Upload Photo"
                                       style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
                     </label>
+
                 </div>
 
-                <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
+                <!-- <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
                     <span  class="badge badge-pill badge-primary badge-danger" >
                     <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
                     </span>
-                </div>
+                </div> -->
 
                 <div class="profile-name">
                     <h4>{{userData.displayName}}</h4> 
@@ -31,6 +32,11 @@
                             <li class="more-skill"><span>{{followersCount}}</span> Followers</li>
                             <li class="more-skill"><span>{{followingsCount}}</span> Following</li>
                         </ul>
+                    </div>
+                    <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
+                        <span  class="badge badge-pill badge-primary badge-danger" >
+                        <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
+                        </span>
                     </div>
                 </div>
 

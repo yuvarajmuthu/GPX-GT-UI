@@ -11353,9 +11353,9 @@ a.cl-box.pink {
             cursor: pointer;
     }
     .profile-name{
-        float: left;
+    float: left;
     position: relative;
-    top: 215px;
+    top: 170px;
     bottom: 0px;
     margin-left: 14px;
     text-align: left;
@@ -13056,12 +13056,12 @@ list-style: none;
 	}
 
 	.private-profile-label{
-		position: absolute;
+		/* position: absolute;
 		z-index: 10;
 		top: 300px;
 		left: 13%;
 		text-align: center;
-		padding: 14px 10px;
+		padding: 14px 10px; */
 		width: 50px;
 		border-radius: 50%;
 		height: 50px;
@@ -13080,10 +13080,10 @@ margin-right: 2px;
 }
 }
 @media(max-width: 413px){
-.profile-details.fixed-header .profile-name {
+/* .profile-details.fixed-header .profile-name {
     top: -90px;
     left: 106px;
-}
+} */
     .add-drop {
     float: right;
     margin-top: 20px;
@@ -13198,12 +13198,12 @@ background-repeat: no-repeat;
     padding: 2rem 0;
     min-height: 350px;
 }
-.private-profile-label{
+/* .private-profile-label{
     position: absolute;
     bottom: 9em;
     right: 3.5em;
     font-size: 20px;
-  }
+  } */
 
     }
 

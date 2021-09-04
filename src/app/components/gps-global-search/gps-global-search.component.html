@@ -3,7 +3,7 @@
     [(ngModel)]="selectedUser"
     (selected)='onValueSelect($event)'
     [data]="searchUsers"
-    (inputChanged) = "onChangeSearch($event)"
+    create-page-button-custom-position    (inputChanged) = "onChangeSearch($event)"
     [searchKeyword]="keywordUser"
     [itemTemplate]="itemTemplate"
     [notFoundTemplate]="notFoundTemplate">

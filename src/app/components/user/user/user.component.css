@@ -11287,7 +11287,7 @@ a.cl-box.pink {
     /*Profile-Section*/
     /*-----------------------------------------------*/
     .bio-intro{
-    margin-top: 20px;
+    /* margin-top: 20px; */
     text-align: justify;
     }
     .addReadMore.showlesscontent .SecSec,
@@ -11469,7 +11469,7 @@ a.cl-box.pink {
 	width: 100%;
 	/*padding: 2rem;*/
 	text-align: center;
-	margin-top: 80px;
+	margin-top: 5%;
 	background: url(/assets/images/network7.png);
 	min-height: 270px;
     }

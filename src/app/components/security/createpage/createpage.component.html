@@ -7,7 +7,7 @@
         </header>
 
         <article class="card-body">
-          <form *ngIf="category === 'USER'" [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+          <form  [formGroup]="userCreationForm" (ngSubmit)="createUser()">
             <div class="form-row">
               <div class="col form-group">
                 <label>Display Name</label>

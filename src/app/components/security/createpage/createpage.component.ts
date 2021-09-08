@@ -9,6 +9,9 @@ import {PostService} from '../../../services/post.service';
 import {AlertService} from '../../../services/alert.service';
 import {ProfileService} from '../../../services/profile.service';
 import {DatashareService} from '../../../services/datashare.service';
+
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 import {Route} from '@angular/router';
 
 import {User} from '../../../models/user';
@@ -100,6 +103,8 @@ export class CreatepageComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService,
     private postService: PostService,
+    public dialogRef: MatDialogRef<CreatepageComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private profileService: ProfileService) { }
 
   selectedParty(userDetails:any){

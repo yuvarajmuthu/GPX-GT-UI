@@ -13240,3 +13240,8 @@ background-repeat: no-repeat;
 /*-------------------------------------------------*/
 /*Media - Query*/
 /*----------------------------------------------*/
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+    background-image: -webkit-linear-gradient(top,#99cbf2 0,#69b8f5 100%);
+  }
+ 

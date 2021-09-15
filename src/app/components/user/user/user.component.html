@@ -81,13 +81,13 @@
                         <div class="side-dashboard">
                             <div class="dashboard-menu">
                                 <ul>
-                                    <li (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-rss"></i> <span class="link-text">Activities</span> </a></li>
-                                    <li (click)="showTwitterActivities()" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
-                                    <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
+                                    <li (click)="showActivities()" class="list-group-item pointer" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-rss"></i> <span class="link-text">Activities</span> </a></li>
+                                    <li (click)="showTwitterActivities()"  class="list-group-item pointer" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
+                                    <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)"  class="list-group-item pointer" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
                                         <a href="#" onclick="return false;">
                                         <i class="{{profileTemplate.profileIcon}}"></i> <span class="link-text">{{profileTemplate.name}}</span></a>
                                     </li>
-                                    <li *ngIf="managedBy" (click)="managedByUsers()" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Managed by</span></a></li>
+                                    <li *ngIf="managedBy" (click)="managedByUsers()"  class="list-group-item pointer" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Managed by</span></a></li>
                                     <li *ngIf="isShowSettings" (click)="showSettings()" class="list-group-item pointer"
                                       [ngClass]="{ 'active': settings, 'in-active': !settings}"><a href="#" onclick="return false;"><i class="fa fa-cog"></i> <span class="link-text">Settings </span></a>
                                     </li>

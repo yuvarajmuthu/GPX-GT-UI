@@ -53,6 +53,16 @@ a {
     background-position: center center;
 }
 
+.mylogoLg {
+    height: 50px;
+    width: 125px;
+    background-size: 100%;
+    background-image: url('../assets/images/logonew.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 0px 0px 0px 10px;
+}
+
 /*.searchbtnGroup {
     width: unset;
 }
@@ -69,9 +79,9 @@ a {
 
 .simplelogo {
     height: 40px;
-    width: 40px;
-    background-size: 40px 40px;
-    background-image: url('../assets/images/gpx-logo-default-sm.png');
+    width: 95px;
+    background-size: 100%;
+    background-image: url('../assets/images/logonew.png');
     background-repeat: no-repeat;
     background-position: center center;
     margin-right: 0px;

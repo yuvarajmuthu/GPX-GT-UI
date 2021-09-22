@@ -2,19 +2,35 @@
     <div class="container-fluid">
         <div class="dashboard-avatar">
          <div class="col-md-12">	
-            <div *ngIf="isProfileInEditMode()" class="text-right vedit-profile">
+            <div class="text-right vedit-profile">
+   <!--
                 <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
+                <input type="file" class="file-input" (change)="onProfileSmImageSelected($event)">
+-->             
+                <label for="actual-btn btn" class="btn btn-light manage-btn">Edit Cover Photo<i class="fa fa-camera"></i>
+                    <input type="file" class="file-input" id="actual-btn btn"/>
+                </label>
+
             </div>	
             <div class="profile-details">
               <div class="profile-width">
                 <div class="dashboard-avatar-thumb">
                     <img [src]="profileSmImage" class="img-avater" *ngIf="!isImageLoading" alt="User avatar">
-                    <a *ngIf="isProfileInEditMode()" class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
-                    <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
+
+                    <label for="profilePic" class="edit-icon pointer"><i class="fa fa-camera"></i>
+                        <input type="file" class="file-input" id="profilePic"/>
+                    </label>
+
+ <!--
+                    <input type="file" class="file-input" (change)="onProfileSmImageSelected($event)" #fileUpload>
+                    <a class="edit-icon" href="#" onclick="return false;fileUpload.click();"><i class="fa fa-camera"></i></a>
+                      
+                    <label class="btn btn-primary edit-photo">
                         <i class="fa fa-camera-retro"></i>
                         <input type="file" class="uploadFile img" value="Upload Photo"
                                       style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
                     </label>
+                -->
 
                 </div>
 
@@ -29,8 +45,13 @@
                     <div>{{userData.username}}</div>
                     <div class="paid-candidate-box-extra">
                         <ul>
-                            <li class="more-skill"><span>{{followersCount}}</span> Followers</li>
-                            <li class="more-skill"><span>{{followingsCount}}</span> Following</li>
+                            <li *ngIf="!isSelfProfile" class="badge badge-pill badge-primary pointer" (click)="followEntity()">{{followCntrlLabel}}</li>
+                            <li class="more-skill pointer" (click)="Followers()"><span>{{followersCount}}</span> Followers</li>
+                            <li class="more-skill pointer" (click)="Followings()"><span>{{followingsCount}}</span> Following</li>
+                            <li *ngIf="!isSelfProfile && !isInCircle" class="badge badge-pill badge-dark pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></li>
+                            <li *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></li>           
+                            <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></li>
+                            <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="badge badge-pill badge-success pointer" (click)="managedByUsers()">Members &nbsp;<span class="badge badge-light">{{managedBy.length}}</span></li>                                     
                         </ul>
                     </div>
                     <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
@@ -115,7 +136,9 @@
                                                           <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
                                                       </div>
                                                       <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
-                                                          Please login to view the activies.
+                                                          <ngb-alert type="primary" [dismissible]="false">
+                                                            Please login to view the activies.
+                                                          </ngb-alert>
                                                        </div>
           
                                                        <!--Twitter feed-->
@@ -193,7 +216,10 @@
                                                      </ul> -->
                                                      </div>
                                                      <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
-                                                         Please login to view the members.
+                                                       
+                                                         <ngb-alert type="primary" [dismissible]="false">
+                                                            Please login to view the members.
+                                                          </ngb-alert>
                                                      </div>
           
                                                      <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
@@ -214,7 +240,10 @@
                                                       </form>    
                                                       </div>
                                                       <div id="setingsSection" *ngIf="!isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
-                                                          Please login to manage the settings.
+                                                          
+                                                          <ngb-alert type="primary" [dismissible]="false">
+                                                            Please login to manage the settings.
+                                                          </ngb-alert>
                                                       </div>
           
                                                       <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">

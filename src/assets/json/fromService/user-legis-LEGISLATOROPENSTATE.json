@@ -13,7 +13,7 @@
    "profileManagedBy":null,
    "members":["user6@gmail.com"],
    "circleUsers":null,
-   "selfProfile":true,
+   "selfProfile":false,
    "showSettings":true,
    "profileManaged":true,
    "settings":{

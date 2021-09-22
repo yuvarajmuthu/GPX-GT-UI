@@ -144,7 +144,9 @@ section.gray,
 .post-card-footer a:last-child{
     border-right: none;
 }
-
+.pointer {
+	cursor: pointer;
+}
 .search-btn i {font-size:22px;}
 .text-left {text-align:left;}
 .work-process-caption.vcaption {margin:0px;margin-bottom: 20px;clear: left;padding-top: 35px;}
@@ -11352,6 +11354,9 @@ a.cl-box.pink {
     .dropdown{
             cursor: pointer;
     }
+	.file-input {
+		display: none;
+	  }
     .profile-name{
     float: left;
     position: relative;
@@ -11402,7 +11407,7 @@ a.cl-box.pink {
     .profile-details.fixed-header .dashboard-avatar-thumb {
         width: 80px;
         height: 80px;
-        margin: 90px auto 10px 20px;
+        margin: 60px auto 10px 20px;
     }
     .profile-details.fixed-header .dashboard-avatar-thumb img{
             max-width: 80px;

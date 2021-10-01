@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {AppConstants} from '../../../app.constant.enum';
@@ -38,6 +38,7 @@ export class CreatepageComponent implements OnInit {
   user = {};
   searchUsers:any;
   keyword = 'firstName';
+  roleList:any;
 
   createLegislatorPageForm = new FormGroup({
     category: new FormControl(this.constants.USERCATEGRORY_LEGISLATURE),
@@ -94,9 +95,10 @@ export class CreatepageComponent implements OnInit {
   userType:string=null;
   category:string=null;
   profileTemplateIdDefault:string = null;
-
+  modelPage:string;
 
   constructor(private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: {division: string, category:string},
     private router: Router,
     private constants:AppConstants,
     private datashareService: DatashareService,
@@ -105,7 +107,9 @@ export class CreatepageComponent implements OnInit {
     private postService: PostService,
     public dialogRef: MatDialogRef<CreatepageComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService) {
+      this.category = this.data.category;
+     }
 
   selectedParty(userDetails:any){
     console.log('Party ', userDetails);

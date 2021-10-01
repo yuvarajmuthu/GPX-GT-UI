@@ -29,7 +29,6 @@ import {GpxUIComponentsModule} from './components/gpx-uicomponents/gpx-uicompone
 //import {ConnectionModule} from './components/connection/connection.module';
 
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-
 import {AppComponent} from './app.component';
 //import { CKEditorModule } from 'ckeditor4-angular';
 

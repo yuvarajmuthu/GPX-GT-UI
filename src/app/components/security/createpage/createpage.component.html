@@ -7,7 +7,7 @@
         </header>
 
         <article class="card-body">
-          <form  [formGroup]="userCreationForm" (ngSubmit)="createUser()">
+          <form  [formGroup]="userCreationForm" *ngIf="category != 'LEGISLATURE'" (ngSubmit)="createUser()">
             <div class="form-row">
               <div class="col form-group">
                 <label>Display Name</label>
@@ -100,7 +100,12 @@
             <div class="form-row">
               <div class="col form-group">
                 <label class="create-page-label">Role</label>
-                <app-gps-global-search  placeholder="Role" from="createPage" (valueChange)='selectedRole($event)' category="userType" [inputvalue]=""></app-gps-global-search>
+                <!-- <app-gps-global-search  placeholder="Role" from="createPage" (valueChange)='selectedRole($event)' category="userType" [inputvalue]="data.division"></app-gps-global-search> -->
+                <mat-chip-list *ngIf="data.division" aria-label="Fish selection">
+                  <mat-chip>{{data.division}}</mat-chip>
+                </mat-chip-list>
+                
+                <app-gps-global-search *ngIf="!data.division" placeholder="Role" from="createPage" (valueChange)='selectedRole($event)' category="userType" [inputvalue]=""></app-gps-global-search>
               
 
               </div>

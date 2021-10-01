@@ -113,8 +113,8 @@ export class SearchlegislatorsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreatepageComponent, {
       width: '75%',
       maxHeight: '90%',
-      panelClass: 'modal-dialog'
-      // data: {name: this.name, animal: this.animal}
+      panelClass: 'modal-dialog',
+      data: {division: this.selectedDivision, category: 'LEGISLATURE'}
     });
 
     dialogRef.afterClosed().subscribe(result => {

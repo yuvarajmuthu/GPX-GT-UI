@@ -126,7 +126,7 @@ setPermission(data:string){
   }
 
 
-loadComponentTemplate() {
+loadComponentTemplate() { 
 
   console.log('in load template ' + this.type);
   if (this.type) {

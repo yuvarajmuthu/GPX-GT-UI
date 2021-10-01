@@ -706,6 +706,9 @@ export class UserComponent implements OnInit {
                     if(this.isUserLogged() && !this.isSelfProfile){
                         this.check4CircleStatus();
                     }
+
+                    //setting Activities page as default view
+                    this.showActivities();
                 }
             );
 

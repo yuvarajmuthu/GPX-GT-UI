@@ -44,6 +44,8 @@ export class UserComponent implements OnInit {
     activeTemplate: string="upOffices";
     activeTemplatName:string = "Office";
     showDropDown : boolean = false;
+    showLessDescription : boolean = false;
+    showDescriptionSlider : boolean = false;
     isInCircle: boolean;
     twitterHandle:string = null;
     twitterHandleExist:boolean = false;
@@ -609,6 +611,12 @@ export class UserComponent implements OnInit {
                     this.managedBy = this.userData['members'];
                     this.isProfileEditable();
 
+                    //description
+                    if(this.userData.description && this.userData.description.length > 100){
+                        this.showLessDescription = true;
+                        this.showDescriptionSlider = true;
+                    }
+
                     //Settings
                     this.isShowSettings = this.userData['showSettings'];
                     if(this.userData['settings'] && this.userData.settings['accessRestriction']){
@@ -639,7 +647,10 @@ export class UserComponent implements OnInit {
                         if(this.userData != null && this.userData['photoUrl'] != null){
                             this.profileSmImage = this.userData['photoUrl'];
                         }else{
-                            this.getProfileSmImage(this.viewingUser['userId']);
+                            //this.getProfileSmImage(this.viewingUser['userId']);
+                            if(this.userData.profileAvatarImgFileId){
+                                this.getProfileSmImage(this.userData.profileAvatarImgFileId);
+                            }
                         }
                     }
 
@@ -870,6 +881,8 @@ export class UserComponent implements OnInit {
                 this.profileSmImage = event.target['result'];
             };
             this.profileSmImageChanged = true;
+
+            this.saveProfile();
         }
     }
 

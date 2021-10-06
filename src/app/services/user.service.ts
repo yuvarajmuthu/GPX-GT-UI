@@ -681,8 +681,8 @@ updateProfileData(request:any):Observable<any>{
 
 //USED FOR ENTITY'S PROFILE SMALL IMAGE DOWNLOAD
 getImage(userId: string): Observable<Blob> {
-  //let serviceUrl = this.getPostService() + "/downloadFile/user/" + userId + "/";
-  let serviceUrl = this.getPostService() + "/downloadFile/entity/" + userId + "/";
+  //let serviceUrl = this.getPostService() + "/downloadFile/entity/" + userId + "/";
+  let serviceUrl = this.getPostService() + "/downloadFile/" + userId;
   console.log("getImage user.service " + serviceUrl);
 
   return this.http.get(serviceUrl, { responseType: 'blob' });

@@ -155,13 +155,13 @@ let config = new AuthServiceConfig([
       UserModule],
     providers: [
       //enable the interceptor only for DEV mode
-      
+      /*
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
         },
-        
+       */ 
         
         AuthenticationService,
         AuthGuard,

@@ -11360,7 +11360,7 @@ a.cl-box.pink {
     .profile-name{
     float: left;
     position: relative;
-    top: 170px;
+    top: 150px;
     bottom: 0px;
     margin-left: 14px;
     text-align: left;
@@ -11394,6 +11394,7 @@ a.cl-box.pink {
     border: 6px solid #e9ecf3;
     float: left;
     }
+	/*
     .profile-details.fixed-header{
        position: fixed;
     z-index: 100;
@@ -11401,6 +11402,17 @@ a.cl-box.pink {
     right: 0px;
     top: 0px;
     }
+	*/
+	.profile-details.fixed-header {
+		position: fixed;
+		z-index: 100;
+		background: #fff;
+		right: 0px;
+		top: 0px;
+		height: 30%;
+	  }
+	  
+
     .profile-details.fixed-header .edit-icon{
         display: none;
     }
@@ -11415,12 +11427,13 @@ a.cl-box.pink {
     .profile-details.fixed-header .profile-name {
         float: left;
         position: relative;
-        top: 100px;
         bottom: 0px;
         margin-left: 14px;
         text-align: left;
-            left: 0px;
+        left: 0px;
+		top: 0px;
     }
+
     .profile-details.fixed-header .add-drop{
             float: right;
         margin-top: 120px;
@@ -12220,6 +12233,16 @@ a.cl-box.pink {
 		display: flex;
 		align-items: center
 	}
+
+	.profile-details.fixed-header .profile-name {
+        float: left;
+        position: relative;
+        bottom: 0px;
+        margin-left: 14px;
+        text-align: left;
+        left: 0px;
+		top: 70px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {

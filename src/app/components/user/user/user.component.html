@@ -14,11 +14,11 @@
             </div>	
             <div class="profile-details">
               <div class="profile-width">
-                <div class="dashboard-avatar-thumb">
-                    <img [src]="profileSmImage" class="img-avater" *ngIf="!isImageLoading" alt="User avatar">
+                <div>
+                    <img [src]="profileSmImage" class="dashboard-avatar-thumb" *ngIf="!isImageLoading" alt="User avatar">
 
                     <label for="profilePic" class="edit-icon pointer"><i class="fa fa-camera"></i>
-                        <input type="file" class="file-input" id="profilePic"/>
+                        <input type="file" class="file-input" id="profilePic" (change)="onProfileSmImageSelected($event)"/>
                     </label>
 
  <!--
@@ -83,9 +83,8 @@
                 <div class="bio-intro box">
                     <a class="edit-bio-intro edit" href="#"><i class="ti ti-pencil"></i></a>
                     <a class="edit-bio-intro save" href="#"><i class="ti ti-save-alt"></i></a>
-                    <p class="expclpse" [class.show]="show">{{userData.description}}</p>
-                    <span (click)="show = !show" class="showMore">{{ show ? 'Show less': '... Show more' }}</span>
-                    <!--<button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>-->
+                    <p class="expclpse" [class.show]="showLessDescription">{{userData.description}}</p>
+                    <span *ngIf="showDescriptionSlider" (click)="showLessDescription = !showLessDescription" class="showMore">{{ showLessDescription ? 'Show less': '... Show more' }}</span>
                 </div>
             </div>
           </div>
@@ -102,7 +101,7 @@
                         <div class="side-dashboard">
                             <div class="dashboard-menu">
                                 <ul>
-                                    <li (click)="showActivities()" class="list-group-item pointer" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-rss"></i> <span class="link-text">Activities</span> </a></li>
+                                    <li (click)="showActivities()" class="list-group-item pointer" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-comment"></i> <span class="link-text">Activities</span> </a></li>
                                     <li (click)="showTwitterActivities()"  class="list-group-item pointer" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
                                     <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)"  class="list-group-item pointer" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
                                         <a href="#" onclick="return false;">
@@ -151,19 +150,15 @@
           
                                                       <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                            class="widget stick-widget">
-                                                          <ul class="followers">
-                                                              <li *ngFor="let followerUsername of followers">
+                                                              <div *ngFor="let followerUsername of followers">
                                                                   <app-usercard1 [username]=followerUsername></app-usercard1>
-                                                              </li>
-                                                          </ul>
+                                                              </div>
                                                       </div>
                                                       <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
                                                               class="widget stick-widget">
-                                                          <ul class="followers">
-                                                              <li *ngFor="let followingUsername of followings">
+                                                              <div *ngFor="let followingUsername of followings">
                                                                   <app-usercard1 [username]=followingUsername></app-usercard1>
-                                                              </li>
-                                                          </ul>
+                                                              </div>
                                                       </div>
                                                       <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
                                                       class="widget stick-widget">
@@ -225,7 +220,6 @@
                                                      <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
                                                      <form [formGroup]="settingsForm">
                                                           <ul class="followers">
-                                                              <li>
                                                                   <div class="form-row">
                                                                       <div class="col form-group">
                                                                         <label>Access Restriction</label>
@@ -235,7 +229,6 @@
                                                                         </div>
                                                                       </div>
                                                                     </div>
-                                                              </li>
                                                           </ul>
                                                       </form>    
                                                       </div>

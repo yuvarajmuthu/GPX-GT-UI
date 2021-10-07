@@ -11391,7 +11391,7 @@ a.cl-box.pink {
     border-radius: 50%;
     display: table;
     margin: 130px auto 10px 20px;
-    border: 6px solid #e9ecf3;
+    /*border: 6px solid #e9ecf3;*/
     float: left;
     }
 	/*

@@ -43,6 +43,81 @@
                 <div class="profile-name">
                     <h4>{{userData.displayName}}</h4> 
                     <div>{{userData.username}}</div>
+                     <!--yuvara-->
+                    <div *ngIf="category === 'LEGISLATURE' || category === 'legislature' || category === 'EXECUTIVE'  || category === 'executive' || category === 'municipalities'" class="paid-candidate-box-extra">
+                        <ul>
+                            <!-- Role-Begin -->
+                            <li *ngIf="userData.role && userData.role.type">
+
+
+                                <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
+                                    <a class="padding-pills" [routerLink]="['/user', userData.role.type]">{{userData.role.type}}</a>
+        
+                                </span>
+
+                                <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('type') === 'entity'" placeholder="Chamber" from="user" category="type" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
+
+                        
+                                <div *ngIf="isEditChamber && getPropertyDataType('type') === 'text'">
+                                    <input [(ngModel)]="userData.role.type" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>
+                            <!-- Role-end -->
+                    
+
+
+                            <!-- DISTRICT-begin -->
+                            <li *ngIf="userData.role && userData.role.district">
+                                <span *ngIf="!isEditDistrict" class="profile-pills margin-pills">
+                                    <a class="padding-pills" [routerLink]="['/user', userData.role.district]">{{userData.role.district}}</a>
+                                    
+                                </span>
+                                <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="District"  from="user" category="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
+                                
+                                <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'text'">
+                                    <input [(ngModel)]="userData.role.district" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>  
+                            <!-- DISTRICT-end -->
+
+
+
+                            <!-- STATE-begin -->
+                            <li *ngIf="userData.role && userData.role.state">  
+                            <div  *ngIf="!isEditState" class="profile-pills margin-pills">
+                                <a class="padding-pills" [routerLink]="['/user', userData.role.state]">{{userData.role.state | uppercase}}</a>
+                                
+                            </div>
+
+                                <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" category="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
+
+                            
+                                <div *ngIf="isEditState && getPropertyDataType('state') === 'text'">
+                                    <input [(ngModel)]="userData.role.state" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>    
+                            <!-- STATE-end -->
+
+                            <!-- PARTY-begin -->
+                            <li *ngIf="userData.role && userData.role.party">  
+                                <span *ngIf="!isEditParty" class="profile-pills margin-pills">
+                                    <a class="padding-pills" [routerLink]="['/user', userData.role.party]">{{userData.role.party}}</a>
+                                
+                                </span>
+                                <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="Party"  from="user" category="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
+                            
+                                <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
+                                    <input [(ngModel)]="userData.role.party" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>  
+                            <!-- PARTY-end -->
+                        </ul>
+                    </div>
+                    <!--yuvara-->
                     <div class="paid-candidate-box-extra">
                         <ul>
                             <li *ngIf="!isSelfProfile" class="badge badge-pill badge-primary pointer" (click)="followEntity()">{{followCntrlLabel}}</li>
@@ -59,9 +134,11 @@
                         <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
                         </span>
                     </div>
+                   
                 </div>
 
-                <div ngbDropdown *ngIf="isProfileInEditMode()" class="d-inline-block nav-item add-drop">
+                <!--*ngIf="isProfileInEditMode()" -->
+                <div ngbDropdown class="d-inline-block nav-item add-drop">
                   <button class="btn btn-outline-primary btn-xs"
                           id="dropdownAddSection"
                           ngbDropdownToggle>
@@ -103,7 +180,7 @@
                                 <ul>
                                     <li (click)="showActivities()" class="list-group-item pointer" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-comment"></i> <span class="link-text">Activities</span> </a></li>
                                     <li (click)="showTwitterActivities()"  class="list-group-item pointer" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
-                                    <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)"  class="list-group-item pointer" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
+                                    <li *ngFor="let profileTemplate of profileTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)"  class="list-group-item pointer" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
                                         <a href="#" onclick="return false;">
                                         <i class="{{profileTemplate.profileIcon}}"></i> <span class="link-text">{{profileTemplate.name}}</span></a>
                                     </li>
@@ -247,7 +324,7 @@
                                                                           <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
                                                                               data-tabs="tabs">
                                                                               <li class="nav-item"
-                                                                                  *ngFor="let profileTemplate of profilesTemplates">
+                                                                                  *ngFor="let profileTemplate of profileTemplates">
                                                                                   <div>
                                                                                       <span>
                                                                                           <a class="nav-link template-tab text-black-50" data-toggle="tab"

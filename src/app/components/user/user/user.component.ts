@@ -66,7 +66,7 @@ export class UserComponent implements OnInit {
     private viewingUser = {};
     private firstName;
     private lastName;
-    public profilesTemplates = [];
+    public profileTemplates = [];
     public availableProfileTemplates = [];
     public profilesDatas = [];
     public isLegislator = false;
@@ -660,8 +660,8 @@ export class UserComponent implements OnInit {
 
                     //getting the data for this user profile
                     //this.profilesData = this.viewingUser['profilesData'] = this.userData['profileData'];
-                    this.profilesTemplates = this.userData['profileTemplates'];
-                    this.viewingUser['profileTemplates'] = this.profilesTemplates;
+                    this.profileTemplates = this.userData['profileTemplates'];
+                    this.viewingUser['profileTemplates'] = this.profileTemplates;
 
                     //list the templates that are available to use, ignores the one that are already used
                     this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], this.category).subscribe(
@@ -895,8 +895,8 @@ export class UserComponent implements OnInit {
 
 
                 //getting the available profile templates for this user type
-                this.profilesTemplates = this.viewingUser['profileTemplates'] = this.userData['profile'];
-                console.log('loadTemplate()::userprofile.template - profile templates: ', this.profilesTemplates);
+                this.profileTemplates = this.viewingUser['profileTemplates'] = this.userData['profile'];
+                console.log('loadTemplate()::userprofile.template - profile templates: ', this.profileTemplates);
 
                 //indicate the dynamic loaded to load th default template
                 let compTypes = [];
@@ -1322,7 +1322,7 @@ export class UserComponent implements OnInit {
             this.availableProfileTemplates.splice(position, 1);
         }
 
-        this.profilesTemplates.push(profileTemplateParam);
+        this.profileTemplates.push(profileTemplateParam);
 
         this.templateType.push(profileTemplateParam['profileTemplateId']);
         
@@ -1342,14 +1342,14 @@ export class UserComponent implements OnInit {
         }
 
         position = -1;
-        this.profilesTemplates.forEach((profileTemplate, index) => {
+        this.profileTemplates.forEach((profileTemplate, index) => {
             if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
                 position = index;
             }
         });
 
         if (position > -1) {
-            this.profilesTemplates.splice(position, 1);
+            this.profileTemplates.splice(position, 1);
         }
 
         //this.profilesTemplates.push(profileTemplate);

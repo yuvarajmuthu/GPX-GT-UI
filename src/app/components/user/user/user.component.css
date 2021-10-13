@@ -11360,7 +11360,7 @@ a.cl-box.pink {
     .profile-name{
     float: left;
     position: relative;
-    top: 150px;
+    top: 120px;
     bottom: 0px;
     margin-left: 14px;
     text-align: left;
@@ -11426,11 +11426,11 @@ a.cl-box.pink {
     }
     .profile-details.fixed-header .profile-name {
         float: left;
-        position: relative;
+        position: absolute;
         bottom: 0px;
         margin-left: 14px;
         text-align: left;
-        left: 0px;
+        left: 120px;
 		top: 0px;
     }
 

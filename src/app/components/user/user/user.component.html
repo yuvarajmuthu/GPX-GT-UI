@@ -13,7 +13,6 @@
 
             </div>	
             <div class="profile-details">
-                    <i class="material-icons"> more_horiz</i>
 
               <div class="profile-width">
                 <div>
@@ -129,6 +128,29 @@
                             <li *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></li>           
                             <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></li>
                             <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="badge badge-pill badge-success pointer" (click)="managedByUsers()">Members &nbsp;<span class="badge badge-light">{{managedBy.length}}</span></li>                                     
+                            <li class="edit-profile-li">
+                                <!-- <span class="circle-button">
+                                <i class="material-icons"> more_horiz</i>
+                            </span> -->
+                            <button mat-icon-button class="circle-button" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <mat-icon>more_horiz</mat-icon>
+                                <!-- <i class="material-icons"> more_horiz</i> -->
+
+                              </button>
+                              <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                  <span>Edit Profile</span>
+                                </button>
+                                <button mat-menu-item>
+                                  <!-- <mat-icon>voicemail</mat-icon> -->
+                                  <span>Edit Profile photo</span>
+                                </button>
+                                <button mat-menu-item>
+                                  <!-- <mat-icon>notifications_off</mat-icon> -->
+                                  <span>Disable alerts</span>
+                                </button>
+                              </mat-menu>
+                        </li>
                         </ul>
                     </div>
                     <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">

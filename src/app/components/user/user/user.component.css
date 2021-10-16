@@ -11360,7 +11360,7 @@ a.cl-box.pink {
     .profile-name{
     float: left;
     position: relative;
-    top: 120px;
+    top: 70px;
     bottom: 0px;
     margin-left: 14px;
     text-align: left;
@@ -11369,11 +11369,32 @@ a.cl-box.pink {
             font-size: 20px;
                 margin: 0px;
     }
+
+	.circle-button:hover {
+		background-color: #04AA6D;
+		border: none;
+		color: white;
+		/* padding: 20px; */
+		text-align: centerq;
+		border-radius: 50%;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		/* margin: 4px 2px; */
+	  }
+	  .circle-button{
+		background: none;
+		border: none;
+	  }
+	  .edit-profile-li{
+		  position: absolute;
+	  }
+
    .edit-icon{
     position: absolute;
     z-index: 10;
-    top: 300px;
-    left: 5%;
+    top: 250px;
+    left: 10%;
     text-align: center;
     background: #028ece;
     padding: 14px 10px;
@@ -11390,7 +11411,7 @@ a.cl-box.pink {
     height: 170px;
     border-radius: 50%;
     display: table;
-    margin: 130px auto 10px 20px;
+    margin: 70px auto 10px 20px;
     /*border: 6px solid #e9ecf3;*/
     float: left;
     }

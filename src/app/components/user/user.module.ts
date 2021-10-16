@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+
 
 import { UserComponent } from './user/user.component';
 import { UsertemplateComponent } from './usertemplate/usertemplate.component';
@@ -47,6 +50,8 @@ import {SecurityModule} from '../../components/security/security.module';
     UserRoutingModule,
     GpxUIComponentsModule,
     NgbModule,
+    MatMenuModule,
+    MatIconModule,
     PostModule
   ],
   exports: [

@@ -108,7 +108,7 @@ export class UserComponent implements OnInit {
 
     postFormData: FormData;
     editLabel: string = null;
-    inEditMode:boolean = false;
+    inEditMode:boolean = true;
     followersCount:number = 0;
     followers: User[] = [];
     managedBy = [];

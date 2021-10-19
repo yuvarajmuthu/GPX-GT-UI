@@ -21,6 +21,18 @@
       <a href="javascript:void(0);"  *ngIf="inEditMode" class="lg-fa float-right" (click)="open(content, role)">
         <i class="fa fa-pencil-square-o"></i>
     </a>
+    
+    <div *ngIf="roleObj.entityType === 'LEGISLATIVE COMMITTEE'">
+      <div class="subtle">      
+       {{roleObj.data['title']}}
+      </div>
+      <div class="subtle">      
+        {{userData.displayName}}
+       </div>
+ 
+    </div>  
+    <div *ngIf="roleObj.entityType !== 'LEGISLATIVE COMMITTEE'">
+
       <span  *ngFor="let displayProperty of displayProperties">
         <span *ngIf="displayProperty.propId == 'start' && role[displayProperty.propId]" class="subtle"><i class="fa fa-calendar"></i>{{role[displayProperty.propId]}}</span>
         <span *ngIf="displayProperty.propId == 'end' && role[displayProperty.propId]" class="subtle"> to {{role[displayProperty.propId]}}</span>
@@ -31,6 +43,7 @@
 
              {{role[displayProperty.propId]}}</span>
       </span>
+    </div>
       <div class="card-media-body-supporting-bottom">
       </div>
     </div>

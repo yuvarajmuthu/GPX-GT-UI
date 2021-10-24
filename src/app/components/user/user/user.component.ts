@@ -40,6 +40,8 @@ import {stringify} from 'querystring';
 export class UserComponent implements OnInit {
 
     @Input() profileUserId: string = '';
+    isEditDescIcon = false;
+    isEditDesc = false;
     legisId: string = '';
     activeTemplate: string="upOffices";
     activeTemplatName:string = "Office";

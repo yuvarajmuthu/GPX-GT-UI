@@ -11339,8 +11339,8 @@ a.cl-box.pink {
     font-size: 20px;
     }
     .edit-bio-intro{
-            left: 99%;
-    top: 23px;
+            left: 98%;
+    /* top: 23px; */
     width: 30px;
     /* background: #fff; */
     color: #018ece;
@@ -11367,24 +11367,15 @@ a.cl-box.pink {
     }
     .profile-name h4{
             font-size: 20px;
-                margin: 0px;
+            margin: 0px;
     }
-
-	.circle-button:hover {
-		background-color: #04AA6D;
-		border: none;
-		color: white;
-		/* padding: 20px; */
-		text-align: centerq;
-		border-radius: 50%;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 16px;
-		/* margin: 4px 2px; */
-	  }
-	  .circle-button{
-		background: none;
-		border: none;
+	.badge{
+		line-height: 2 !important;
+		margin-left: 2px !important;
+	}
+	  .edit-profile-icon{
+		  font-size: 16px !important;
+		  height: auto !important;
 	  }
 	  .edit-profile-li{
 		  position: absolute;
@@ -11403,7 +11394,7 @@ a.cl-box.pink {
     height: 50px;
     }
     .dashboard-avatar-text{
-         max-width: 100%;
+         max-width: 75%;
     clear: both;
     }
     .dashboard-avatar-thumb {

@@ -11394,7 +11394,7 @@ a.cl-box.pink {
     height: 50px;
     }
     .dashboard-avatar-text{
-         max-width: 75%;
+    
     clear: both;
     }
     .dashboard-avatar-thumb {
@@ -12093,6 +12093,11 @@ a.cl-box.pink {
 	.tab .tab-content {
 		padding: 20px 25px
 	}
+
+	.profile-details.fixed-header .profile-name {
+     
+		top: 50px;
+    }
 }
 
 @media only screen and (max-width: 767px) {

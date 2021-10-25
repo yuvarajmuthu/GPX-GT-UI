@@ -174,9 +174,9 @@
 
               </div>
             </div>
-            <div class="dashboard-avatar-text col-md-6 col-md-offset-3" (mouseenter)="isEditDescIcon=true" (mouseleave)="isEditDescIcon=false">
+            <div class="dashboard-avatar-text col-md-6">
                 <div class="bio-intro box" *ngIf="!isEditDesc">
-                    <span class="edit-bio-intro edit" *ngIf="isEditDescIcon" (click)="isEditDesc=true"><mat-icon>edit</mat-icon></span>
+                    <span  *ngIf="isProfileInEditMode()" class="edit-bio-intro edit" (click)="isEditDesc=true"><mat-icon>edit</mat-icon></span>
                     <p class="expclpse" [class.show]="showLessDescription">{{userData.description}}</p>
                     <span *ngIf="showDescriptionSlider" (click)="showLessDescription = !showLessDescription" class="showMore">{{ showLessDescription ? 'Show less': '... Show more' }}</span>
                 </div>

@@ -129,14 +129,12 @@
                             <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></li>
                             <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="badge badge-pill badge-success pointer" (click)="managedByUsers()">Members &nbsp;<span class="badge badge-light">{{managedBy.length}}</span>                                    
                             <li  class="badge badge-pill badge-success pointer" >
-                                <span mat-icon-button class="circle-button" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <span mat-icon-button class="circle-button" [matMenuTriggerFor]="menu" aria-label="Profile menu items">
                                     <mat-icon class="edit-profile-icon">more_horiz</mat-icon>
-                                    <!-- <i class="material-icons"> more_horiz</i> -->
     
-                                </span>                            <!-- </li>                                      -->
-
+                                </span>  
                               <mat-menu #menu="matMenu">
-                                <button mat-menu-item>
+                                <button *ngIf="isEditable && !isProfileInEditMode()"  (click)="editProfile()" mat-menu-item>
                                   <span>Edit Profile</span>
                                 </button>
                                 <button *ngIf="isProfileInEditMode()" (click)="saveProfile()" mat-menu-item>

@@ -94,6 +94,10 @@
     .tab-card-header > .nav-tabs > li > a , .search-legislator-navpills {
       padding: 20px 15px 20px 15px;
     }
+
+    .top-alignment{
+      margin-top : 60px;
+    }
   }
   .cursor-hand{
     cursor: pointer;

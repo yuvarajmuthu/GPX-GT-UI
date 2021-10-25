@@ -3,7 +3,7 @@
  <div class="card tab-card">
     <div class="card-header tab-card-header">
 
-      <div style="margin-top:5px">
+      <div class="top-alignment">
         <div class="row" style="margin-left:1px">
           <span class="filterPill">
             <button class="btn button-color" [ngClass]="{'active': action == 'approvalPending'}" (click)="loadConnections('approvalPending')"> 
@@ -70,7 +70,7 @@
     </div>
 
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+      <div class="tab-pane show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
         <div class="row">
           <app-connectionrequest [username]=entityId [relationStatus]=action *ngFor="let entityId of connectionsEntityId" class="col-lg-4 col-md-4 col-sm-6 col-xs-12 custom-resize-card"></app-connectionrequest>
         </div>

@@ -18,7 +18,7 @@ export class ConnectionrequestComponent implements OnInit {
   @Input() relationStatus: string;
 
   loggedUsername: string = null;
-  public user:any;
+  public user:User;
 
   profileSmImage: any = 'assets/images/avatar1.png'; 
   isImageLoading:boolean = false;
@@ -39,6 +39,7 @@ export class ConnectionrequestComponent implements OnInit {
     this.userService.getUserData(this.username, this.loggedUsername).subscribe(
       data => {
         this.user = data;
+        console.log("connectionrequest.component userdata ", this.user);
 
        }
       );

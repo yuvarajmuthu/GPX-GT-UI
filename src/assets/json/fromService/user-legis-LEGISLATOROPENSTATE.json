@@ -385,6 +385,32 @@
             "Facebook":"RepDanMiller"
          },
          "entityId":"PAL000515"
-      }
+      },
+      {
+
+         "profileTemplateId": "upMember",
+         "data": {
+             "name": "Jeff Merkley",
+             "party": "majority",
+             "rank": 2,
+             "bioguide": "M001176"
+         },
+         "entityId": "SSAP01",
+         "entityType": "Member, LEGISLATIVE SUB COMMITTEE",
+         "current": false
+     },
+     {
+
+      "profileTemplateId": "upMember",
+      "data": {
+          "name": "Dianne Feinstein",
+          "party": "majority",
+          "rank": 3,
+          "bioguide": "F000062"
+      },
+      "entityId": "SSAP01",
+      "entityType": "Member, LEGISLATIVE SUB COMMITTEE",
+      "current": false
+  }
    ]
 }

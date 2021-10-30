@@ -5,7 +5,6 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 
-
 import { UserComponent } from './user/user.component';
 import { UsertemplateComponent } from './usertemplate/usertemplate.component';
 
@@ -14,7 +13,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { BannerComponent } from '../banner/banner.component';
+//import { BannerComponent } from '../banner/banner.component';
 
 import { UserbannertemplateComponent } from './usertemplate/userbannertemplate/userbannertemplate.component';
 import { UsercommitteetemplateComponent } from './usertemplate/usercommitteetemplate/usercommitteetemplate.component';
@@ -26,7 +25,6 @@ import { Usercard1Component } from './usercard1/usercard1.component';
 import { PostModule } from '../post/post.module';
 import {GpxUIComponentsModule} from '../../components/gpx-uicomponents/gpx-uicomponents.module';
 
-
 import { UserstageComponent } from './userstage/userstage.component';
 import { Usercard2Component } from './usercard2/usercard2.component';
 import { UserroleComponent } from './usertemplate/userroletemplate/userrole/userrole.component';
@@ -37,8 +35,11 @@ import { UserbilltemplateComponent } from './usertemplate/userbilltemplate/userb
 import { UsereventformComponent } from './usertemplate/usereventtemplate/usereventform/usereventform.component';
 //import {GAddressSearchComponent} from '../g-address-search/g-address-search.component';
 import { UservoteformComponent } from './usertemplate/uservotetemplate/uservoteform/uservoteform.component';
-import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
+import { UsermembertemplateComponent } from './usertemplate/usermembertemplate/usermembertemplate.component';
+
+//import { GpsGlobalSearchComponent } from '../gps-global-search/gps-global-search.component';
 import {SecurityModule} from '../../components/security/security.module';
+
 @NgModule({
   imports: [
     CommonModule, 
@@ -55,18 +56,20 @@ import {SecurityModule} from '../../components/security/security.module';
     PostModule
   ],
   exports: [
-    //GAddressSearchComponent, 
     Usercard2Component],
+  //Any component as well as directives and pipes need to be added in declarations array  
   declarations: [
     UserComponent, 
-    //GAddressSearchComponent,
     UsertemplateComponent, 
-    //BannerComponent, 
+    Usercard1Component, 
+    Usercard2Component,
     UserbannertemplateComponent, UsercommitteetemplateComponent, UserbiodatatemplateComponent, 
-    UserroletemplateComponent, UserofficetemplateComponent, Usercard1Component, UserstageComponent, Usercard2Component, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent, UsereventformComponent, UservoteformComponent
+    UserroletemplateComponent, UserofficetemplateComponent, UserstageComponent, UserroleComponent, UserofficeComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent, UsereventformComponent, UservoteformComponent, UsermembertemplateComponent
   ],
-  entryComponents:[UserstageComponent,UserbannertemplateComponent, UsercommitteetemplateComponent, 
-    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent,UsereventformComponent, UservoteformComponent],
+  //The entryComponents array is used to define only components that are not found in html and created dynamically with ComponentFactoryResolver.
+  entryComponents:[UserstageComponent, UserroleComponent, UserofficeComponent, UserbannertemplateComponent, UsercommitteetemplateComponent, 
+    UserbiodatatemplateComponent, UserroletemplateComponent, UserofficetemplateComponent, 
+    UsereventtemplateComponent, UservotetemplateComponent, UserbilltemplateComponent,UsereventformComponent, UservoteformComponent, UsermembertemplateComponent],
   //exports:[UserstageComponent]
 })
 export class UserModule { }

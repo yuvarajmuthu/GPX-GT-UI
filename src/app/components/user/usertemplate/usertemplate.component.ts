@@ -26,6 +26,7 @@ import { UserofficetemplateComponent } from './userofficetemplate/userofficetemp
 import { UsereventtemplateComponent } from './usereventtemplate/usereventtemplate.component';
 import { UserbilltemplateComponent } from './userbilltemplate/userbilltemplate.component';
 import { UservotetemplateComponent } from './uservotetemplate/uservotetemplate.component';
+import { UsermembertemplateComponent } from './usermembertemplate/usermembertemplate.component';
 
 import {AbstractTemplateComponent} from '../abstractTemplateComponent';
 
@@ -42,7 +43,8 @@ import {AbstractTemplateComponent} from '../abstractTemplateComponent';
     UserofficetemplateComponent,
     UsereventtemplateComponent,
     UserbilltemplateComponent,
-    UservotetemplateComponent
+    UservotetemplateComponent,
+    UsermembertemplateComponent
   ],
   imports: [
     GpxUIComponentsModule,
@@ -81,7 +83,8 @@ export class UsertemplateComponent implements OnChanges {
     'upEvent' : UsereventtemplateComponent,
     'upBill' : UserbilltemplateComponent,
     'upVote' : UservotetemplateComponent,
-    'upOtherContacts' : UservotetemplateComponent 
+    'upOtherContacts' : UservotetemplateComponent,
+    'upMember' : UsermembertemplateComponent 
 };
 
 private componentRef: ComponentRef<{}>;
@@ -100,14 +103,11 @@ ngOnChanges(type: SimpleChanges){
 }
 
 getPermission():string{
-              //console.log("calling getter");
-        let data = this.dataShareService.getPermission();
-    //console.log("getPermission() " + data);
+    let data = this.dataShareService.getPermission();
     return data;
 }
 
 setPermission(data:string){
-    //console.log("calling setter");
     this.dataShareService.setPermission(data);    
 
 }
@@ -135,32 +135,18 @@ loadComponentTemplate() {
       let componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);    
       this.container.clear();
       let viewContainerRef = this.container.createComponent(componentFactory);
-      //viewContainerRef = this.container.createEmbeddedView();
-      //this.loader.loadNextToLocation(component, this.viewContainerRef);
-      /*
-      this.loader.loadNextToLocation(component, this.viewContainerRef).then(componentRef=> {
-        if(this.isPop(component)){
-          componentRef.instance.show = true;}
-        });
-      */
+
     }
     
   }
 
 }
 
-/*  
-isPop(object: any): object is TemplatePopulationComponent {
-    return true;
-}
-
-
-*/
 
 }
 
 
-/******/
+
 
 
 

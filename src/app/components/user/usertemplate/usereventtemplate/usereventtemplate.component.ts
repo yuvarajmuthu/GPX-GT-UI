@@ -25,7 +25,6 @@ export class UsereventtemplateComponent extends AbstractTemplateComponent implem
   displayProperties = [];
   role = {};
   data = {};
-  viewingUser = {};
   editorData = '';
   isProfileInEditMode:boolean = false; 
   inEditMode:boolean = false;
@@ -44,7 +43,6 @@ export class UsereventtemplateComponent extends AbstractTemplateComponent implem
       super(dataShareService2, communicationService);
 
       console.log('constructor() usereventtemplate.component');
-      this.viewingUser = this.dataShareService2.getViewingUser();
 
       communicationService.userProfileEditChanged$.subscribe(
           editmode => {

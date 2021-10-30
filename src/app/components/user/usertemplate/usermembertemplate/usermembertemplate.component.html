@@ -1,0 +1,17 @@
+<!--MEMBERS-->
+<div id="membersDiv" class="widget stick-widget">
+  <div *ngIf="true">
+      <h6>Add Members:</h6>
+      <app-gps-global-search placeholder="User Name"  from="user" category="members" (valueSelect)='selectedUser($event)'></app-gps-global-search>
+  </div>    
+
+  <div class="row">
+    <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of members">
+      <app-usercard2 [username]="managedUsername" [manageMembers]="true"></app-usercard2>
+      <div class="overlay">
+          <!-- <button class="delete-managedby-user" type="button" (click)="removeMember(username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button> -->
+        </div>
+
+    </div>
+  </div>
+</div>

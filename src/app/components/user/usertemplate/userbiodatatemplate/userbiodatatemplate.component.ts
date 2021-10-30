@@ -11,10 +11,10 @@ import { Legislator } from 'src/app/models/legislator';
 
 @Component({
   selector: 'app-userbiodatatemplate',
-  templateUrl: './userbiodatatemplate.component.html',
+  templateUrl: './userbiodatatemplate.component.html', //this is used in UserbannertemplateComponent
   styleUrls: ['./userbiodatatemplate.component.css']
 })
-//OBSOLETE?
+//OBSOLETE, UserbannertemplateComponent is used
 export class UserbiodatatemplateComponent extends AbstractTemplateComponent  implements OnInit{ 
   //userId = "u001";
   //legisId:string = "";

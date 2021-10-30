@@ -126,8 +126,8 @@
                             <li class="more-skill pointer" (click)="Followings()"><span>{{followingsCount}}</span> Following</li>
                             <li *ngIf="!isSelfProfile && !isInCircle" class="badge badge-pill badge-dark pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></li>
                             <li *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></li>           
-                            <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></li>
-                            <li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="badge badge-pill badge-success pointer" (click)="managedByUsers()">Members &nbsp;<span class="badge badge-light">{{managedBy.length}}</span>                                    
+                            <!--<li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></li>-->
+                            <li *ngIf="members && members.length > 0" class="badge badge-pill badge-success pointer" (click)="loadTemplate('upMember')">Members &nbsp;<span class="badge badge-light">{{members.length}}</span>                                    
                             <li  class="badge badge-pill badge-success pointer" >
                                 <span mat-icon-button class="circle-button" [matMenuTriggerFor]="menu" aria-label="Profile menu items">
                                     <mat-icon class="edit-profile-icon">more_horiz</mat-icon>
@@ -203,11 +203,19 @@
                                 <ul>
                                     <li (click)="showActivities()" class="list-group-item pointer" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-comment"></i> <span class="link-text">Activities</span> </a></li>
                                     <li (click)="showTwitterActivities()"  class="list-group-item pointer" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
-                                    <li *ngFor="let profileTemplate of profileTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)"  class="list-group-item pointer" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
+                                    <li *ngFor="let profileTemplate of profileTemplates" (click)="loadTemplate(profileTemplate.profileTemplateId)"  
+                                    class="list-group-item pointer" 
+                                    [ngClass]="{ 'active': profileTemplate.profileTemplateId === activeTemplate && (isProfileTemplate), 
+                                                 'in-active': profileTemplate.profileTemplateId !== activeTemplate && (!isProfileTemplate)}">
                                         <a href="#" onclick="return false;">
                                         <i class="{{profileTemplate.profileIcon}}"></i> <span class="link-text">{{profileTemplate.name}}</span></a>
                                     </li>
-                                    <li *ngIf="managedBy" (click)="managedByUsers()"  class="list-group-item pointer" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Members</span></a></li>
+
+                                    <!--
+                                    <li *ngIf="members && members.length > 0" (click)="userMembers()"  class="list-group-item pointer" [ngClass]="{ 'active': !isMembersCollapsed, 'in-active': isMembersCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Members<span class="badge badge-light">{{members.length}}</span></span> </a></li>
+-->
+
+                                    <li *ngIf="managedBy && managedBy.length > 0" (click)="managedByUsers()"  class="list-group-item pointer" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Adminstrators</span></a></li>
                                     <li *ngIf="isShowSettings" (click)="showSettings()" class="list-group-item pointer"
                                       [ngClass]="{ 'active': settings, 'in-active': !settings}"><a href="#" onclick="return false;"><i class="fa fa-cog"></i> <span class="link-text">Settings </span></a>
                                     </li>
@@ -231,6 +239,7 @@
                                                   <!-- sidebar -->
                                                   <!-- Main stage area -->
                                                   <div class="col-lg-12 cols-item2">
+                                                     <!--ACTIVITIES-->
                                                       <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
                                                           <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
                                                       </div>
@@ -260,38 +269,16 @@
                                                                   <app-usercard1 [username]=followingUsername></app-usercard1>
                                                               </div>
                                                       </div>
+
+                                                      <!--MANAGED BY-->
                                                       <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
                                                       class="widget stick-widget">
                                                           <div *ngIf="isEditable">
-                                                              <h6>Add Members:</h6>
+                                                              <h6>Add Administrators:</h6>
                                                               <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueSelect)='selectedUser($event)'></app-gps-global-search>
                                                           </div>    
           
-                                                      <!-- <div class="ng-autocomplete managedby-search">
-                                                          <ng-autocomplete
-                                                            [(ngModel)]="searchUserManagedBy"
-                                                            (selected)='addMember(searchUserManagedBy.username)'
-                                                            [data]="searchUsers"
-                                                            placeHolder="User Name"
-                                                            (inputChanged) = "onChangeSearch($event)"
-                                                            [searchKeyword]="keywordUser"
-                                                            [itemTemplate]="itemTemplate"
-                                                            [notFoundTemplate]="notFoundTemplate">
-                                                          </ng-autocomplete>
-          
-                                  
-                                                          <ng-template #itemTemplate let-item>
-                                                            <div class="item">
-                                                              <img src="{{item.photoUrl}}" height="25">
-                                                              <span [innerHTML]="item.full_name"></span>
-                                                              <small></small>
-                                                            </div>
-                                                          </ng-template>
-                                  
-                                                          <ng-template #notFoundTemplate let-notFound>
-                                                            <div [innerHTML]="notFound"></div>
-                                                          </ng-template>
-                                                        </div> -->
+
           
                                                         <div class="row">
                                                           <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of managedBy">
@@ -302,21 +289,34 @@
           
                                                           </div>
                                                         </div>
-                                   
-                                                     <!-- <ul class="followers">
-                                                         <li *ngFor="let managed of managedBy" class="managedby-user-list">
-                                                          <button class="delete-managedby-user" type="button" (click)="removeMember(managed.username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                             <app-usercard1 [user]=managed></app-usercard1>
-                                                         </li>
-                                                     </ul> -->
+    
                                                      </div>
+
                                                      <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
                                                        
                                                          <ngb-alert type="primary" [dismissible]="false">
                                                             Please login to view the members.
                                                           </ngb-alert>
                                                      </div>
+                                                    
+                                                     <!--MEMBERS
+                                                     <div id="membersCollapse" [ngbCollapse]="isMembersCollapsed" class="widget stick-widget">
+                                                        <div *ngIf="isEditable">
+                                                             <h6>Add Members:</h6>
+                                                             <app-gps-global-search placeholder="User Name"  from="user" category="members" (valueSelect)='selectedUser($event)'></app-gps-global-search>
+                                                        </div>    
           
+                                                       <div class="row">
+                                                         <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of members">
+                                                           <app-usercard2 [username]="managedUsername" [manageMembers]="isEditable"></app-usercard2>
+                                                           <div class="overlay">
+                                                             </div>
+         
+                                                         </div>
+                                                       </div>
+                                                     </div>
+                                                        -->
+                                                     <!--SETTINGS-->
                                                      <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
                                                      <form [formGroup]="settingsForm">
                                                           <ul class="followers">

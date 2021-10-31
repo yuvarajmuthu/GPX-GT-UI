@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup,FormControl,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {AppConstants} from '../../../app.constant.enum';
@@ -9,6 +9,9 @@ import {PostService} from '../../../services/post.service';
 import {AlertService} from '../../../services/alert.service';
 import {ProfileService} from '../../../services/profile.service';
 import {DatashareService} from '../../../services/datashare.service';
+
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 import {Route} from '@angular/router';
 
 import {User} from '../../../models/user';
@@ -35,6 +38,7 @@ export class CreatepageComponent implements OnInit {
   user = {};
   searchUsers:any;
   keyword = 'firstName';
+  roleList:any;
 
   createLegislatorPageForm = new FormGroup({
     category: new FormControl(this.constants.USERCATEGRORY_LEGISLATURE),
@@ -91,16 +95,21 @@ export class CreatepageComponent implements OnInit {
   userType:string=null;
   category:string=null;
   profileTemplateIdDefault:string = null;
-
+  modelPage:string;
 
   constructor(private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public data: {division: string, category:string},
     private router: Router,
     private constants:AppConstants,
     private datashareService: DatashareService,
     private userService: UserService,
     private alertService: AlertService,
     private postService: PostService,
-    private profileService: ProfileService) { }
+    public dialogRef: MatDialogRef<CreatepageComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private profileService: ProfileService) {
+      this.category = this.data.category;
+     }
 
   selectedParty(userDetails:any){
     console.log('Party ', userDetails);

@@ -29,10 +29,10 @@ import {GpxUIComponentsModule} from './components/gpx-uicomponents/gpx-uicompone
 //import {ConnectionModule} from './components/connection/connection.module';
 
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-
 import {AppComponent} from './app.component';
 //import { CKEditorModule } from 'ckeditor4-angular';
 
+import {MatDialogModule} from '@angular/material/dialog';
 import {BannerComponent} from './components/banner/banner.component';
 import {TypeaheadComponent} from './components/typeahead/typeahead.component';
 import {SearchlegislatorsComponent} from './components/searchlegislators/searchlegislators.component';
@@ -105,6 +105,7 @@ let config = new AuthServiceConfig([
     ],
     imports: [
         BrowserModule,
+        MatDialogModule,
         BrowserAnimationsModule,
         DeviceDetectorModule,
         AppRoutingModule,

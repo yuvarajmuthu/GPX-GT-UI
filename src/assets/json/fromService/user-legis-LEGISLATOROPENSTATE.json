@@ -12,8 +12,9 @@
    "status":"PASSIVE",
    "profileManagedBy":null,
    "members":["user6@gmail.com"],
+   "adminstrators":["user6@gmail.com"],
    "circleUsers":null,
-   "selfProfile":true,
+   "selfProfile":false,
    "showSettings":true,
    "profileManaged":true,
    "settings":{
@@ -49,7 +50,7 @@
          "lastModifiedDate":"2020-06-09 20:56:11",
          "id":"5edff76bf453cde2b4d0b672",
          "profileTemplateId":"upRole",
-         "type":"LEGISLATOR",
+         "category":"LEGISLATOR",
          "name":"Role",
          "profileIcon":"fa fa-briefcase",
          "properties":[
@@ -110,7 +111,7 @@
          "lastModifiedDate":"2020-06-09 20:56:20",
          "id":"5edff774f453cde2b4d0b673",
          "profileTemplateId":"upOffices",
-         "type":"LEGISLATOR",
+         "category":"LEGISLATOR",
          "name":"Office",
          "profileIcon":"fa fa-building",
          "properties":[
@@ -155,7 +156,8 @@
                "type":"text"
             }
          ]
-      }
+      },
+      {"profileTemplateId":"upMember","category":"LEGISLATIVE COMMITTEE","name":"Committee Members","profileIcon":"person","properties":[{"propId":"bioguide","displayLabel":"Bioguide Id","type":"text"},{"propId":"name","displayLabel":"Name","type":"text"},{"propId":"party","displayLabel":"Party","type":"text"},{"propId":"rank","displayLabel":"Rank","type":"text"},{"propId":"chamber","displayLabel":"Chamber","type":"text"},{"propId":"title","displayLabel":"Title","type":"text"}]}
    ],
    "profileDatas":[
       {
@@ -383,6 +385,32 @@
             "Facebook":"RepDanMiller"
          },
          "entityId":"PAL000515"
-      }
+      },
+      {
+
+         "profileTemplateId": "upMember",
+         "data": {
+             "name": "Jeff Merkley",
+             "party": "majority",
+             "rank": 2,
+             "bioguide": "M001176"
+         },
+         "entityId": "SSAP01",
+         "entityType": "Member, LEGISLATIVE SUB COMMITTEE",
+         "current": false
+     },
+     {
+
+      "profileTemplateId": "upMember",
+      "data": {
+          "name": "Dianne Feinstein",
+          "party": "majority",
+          "rank": 3,
+          "bioguide": "F000062"
+      },
+      "entityId": "SSAP01",
+      "entityType": "Member, LEGISLATIVE SUB COMMITTEE",
+      "current": false
+  }
    ]
 }

@@ -17,6 +17,10 @@ import {SearchService} from '../../services/search.service';
 import {Legislator} from '../../models/legislator';
 import {User} from '../../models/user';
 import { AppConstants } from 'src/app/app.constant.enum';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {CreatepageComponent} from '../../components/security/createpage/createpage.component';
+
+
 
 import {LegislatorComponent} from '../../components/legislator/legislator.component';
 
@@ -76,6 +80,7 @@ export class SearchlegislatorsComponent implements OnInit {
               private alertService: AlertService,
               private datashareService: DatashareService,
               private changeDetector: ChangeDetectorRef,
+              public dialog: MatDialog, 
               private constants:AppConstants) {
                 //this.getScreenSize();
     if (this.stateData) {
@@ -103,6 +108,21 @@ export class SearchlegislatorsComponent implements OnInit {
     }
   }
   */
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreatepageComponent, {
+      width: '75%',
+      maxHeight: '90%',
+      panelClass: 'modal-dialog',
+      data: {division: this.selectedDivision, category: 'LEGISLATURE'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+
   ngOnInit() {
     if (isDevMode()) {
       this.address = environment.address;

@@ -2,39 +2,161 @@
     <div class="container-fluid">
         <div class="dashboard-avatar">
          <div class="col-md-12">	
-            <div *ngIf="isProfileInEditMode()" class="text-right vedit-profile">
+            <div class="text-right vedit-profile">
+   <!--
                 <a href="#" class="btn btn-light manage-btn"><i class="fa fa-camera"></i> Edit Cover Photo </a>
+                <input type="file" class="file-input" (change)="onProfileSmImageSelected($event)">
+-->             
+                <label for="actual-btn btn" *ngIf="isProfileInEditMode()" class="btn btn-light manage-btn">Edit Cover Photo<i class="fa fa-camera"></i>
+                    <input type="file" class="file-input" id="actual-btn btn"/>
+                </label>
+
             </div>	
             <div class="profile-details">
+
               <div class="profile-width">
-                <div class="dashboard-avatar-thumb">
-                    <img [src]="profileSmImage" class="img-avater" *ngIf="!isImageLoading" alt="User avatar">
-                    <a *ngIf="isProfileInEditMode()" class="edit-icon" href="#"><i class="fa fa-camera"></i></a>
-                    <label class="btn btn-primary edit-photo" *ngIf="inEditMode">
+                <div>
+                    <img [src]="profileSmImage" class="dashboard-avatar-thumb" *ngIf="!isImageLoading" alt="User avatar">
+
+                    <label for="profilePic" *ngIf="isProfileInEditMode()" class="edit-icon pointer"><i class="fa fa-camera"></i>
+                        <input type="file" class="file-input" id="profilePic" (change)="onProfileSmImageSelected($event)"/>
+                    </label>
+
+ <!--
+                    <input type="file" class="file-input" (change)="onProfileSmImageSelected($event)" #fileUpload>
+                    <a class="edit-icon" href="#" onclick="return false;fileUpload.click();"><i class="fa fa-camera"></i></a>
+                      
+                    <label class="btn btn-primary edit-photo">
                         <i class="fa fa-camera-retro"></i>
                         <input type="file" class="uploadFile img" value="Upload Photo"
                                       style="width: 0px;height: 0px;overflow: hidden;" (change)="onProfileSmImageSelected($event)">
                     </label>
+                -->
+
                 </div>
 
-                <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
+                <!-- <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
                     <span  class="badge badge-pill badge-primary badge-danger" >
                     <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
                     </span>
-                </div>
+                </div> -->
 
                 <div class="profile-name">
                     <h4>{{userData.displayName}}</h4> 
                     <div>{{userData.username}}</div>
-                    <div class="paid-candidate-box-extra">
+                     <!--yuvara-->
+                    <div *ngIf="category === 'LEGISLATURE' || category === 'legislature' || category === 'EXECUTIVE'  || category === 'executive' || category === 'municipalities'" class="paid-candidate-box-extra">
                         <ul>
-                            <li class="more-skill"><span>{{followersCount}}</span> Followers</li>
-                            <li class="more-skill"><span>{{followingsCount}}</span> Following</li>
+                            <!-- Role-Begin -->
+                            <li *ngIf="userData.role && userData.role.type">
+
+
+                                <span  *ngIf="!isEditChamber" class="profile-pills margin-pills">
+                                    <a class="padding-pills" [routerLink]="['/user', userData.role.type]">{{userData.role.type}}</a>
+        
+                                </span>
+
+                                <app-gps-global-search *ngIf="isEditChamber && getPropertyDataType('type') === 'entity'" placeholder="Chamber" from="user" category="type" (valueSave)='saveChamber($event)' [inputvalue]="editChamberInput"></app-gps-global-search>
+
+                        
+                                <div *ngIf="isEditChamber && getPropertyDataType('type') === 'text'">
+                                    <input [(ngModel)]="userData.role.type" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditChamber()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>
+                            <!-- Role-end -->
+                    
+
+
+                            <!-- DISTRICT-begin -->
+                            <li *ngIf="userData.role && userData.role.district">
+                                <span *ngIf="!isEditDistrict" class="profile-pills margin-pills">
+                                    <a class="padding-pills" [routerLink]="['/user', userData.role.district]">{{userData.role.district}}</a>
+                                    
+                                </span>
+                                <app-gps-global-search *ngIf="isEditDistrict && getPropertyDataType('district') === 'entity'" placeholder="District"  from="user" category="district" (valueSave)='saveDistrict($event)' [inputvalue]="editDistrictInput"></app-gps-global-search>
+                                
+                                <div *ngIf="isEditDistrict && getPropertyDataType('district') === 'text'">
+                                    <input [(ngModel)]="userData.role.district" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditDistrict()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>  
+                            <!-- DISTRICT-end -->
+
+
+
+                            <!-- STATE-begin -->
+                            <li *ngIf="userData.role && userData.role.state">  
+                            <div  *ngIf="!isEditState" class="profile-pills margin-pills">
+                                <a class="padding-pills" [routerLink]="['/user', userData.role.state]">{{userData.role.state | uppercase}}</a>
+                                
+                            </div>
+
+                                <app-gps-global-search *ngIf="isEditState && getPropertyDataType('state') === 'entity'" placeholder="State"  from="user" category="state" (valueSave)='saveState($event)' [inputvalue]="editStateInput"></app-gps-global-search>
+
+                            
+                                <div *ngIf="isEditState && getPropertyDataType('state') === 'text'">
+                                    <input [(ngModel)]="userData.role.state" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditState()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>    
+                            <!-- STATE-end -->
+
+                            <!-- PARTY-begin -->
+                            <li *ngIf="userData.role && userData.role.party">  
+                                <span *ngIf="!isEditParty" class="profile-pills margin-pills">
+                                    <a class="padding-pills" [routerLink]="['/user', userData.role.party]">{{userData.role.party}}</a>
+                                
+                                </span>
+                                <app-gps-global-search *ngIf="isEditParty && getPropertyDataType('party') === 'entity'" placeholder="Party"  from="user" category="party" (valueSave)='saveParty($event)' [inputvalue]="editPartyInput"></app-gps-global-search>
+                            
+                                <div *ngIf="isEditParty == true && getPropertyDataType('party') === 'text'">
+                                    <input [(ngModel)]="userData.role.party" type="text" />
+                                    <button class="save-button-input" type="button" (click)="toggleEditParty()"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                                </div>
+                            </li>  
+                            <!-- PARTY-end -->
                         </ul>
                     </div>
+                    <!--yuvara-->
+                    <div class="paid-candidate-box-extra">
+                        <ul>
+                            <li *ngIf="!isSelfProfile" class="badge badge-pill badge-primary pointer" (click)="followEntity()">{{followCntrlLabel}}</li>
+                            <li class="more-skill pointer" (click)="Followers()"><span>{{followersCount}}</span> Followers</li>
+                            <li class="more-skill pointer" (click)="Followings()"><span>{{followingsCount}}</span> Following</li>
+                            <li *ngIf="!isSelfProfile && !isInCircle" class="badge badge-pill badge-dark pointer" (click)="add2Circle()">Add to Circle<i class="fa fa-star-o"></i></li>
+                            <li *ngIf="!isSelfProfile && isInCircle" class="badge badge-pill badge-warning pointer" (click)="removeFromCircle()">In Circle<i class="fa fa-star-o"></i></li>           
+                            <!--<li *ngIf="!isSelfProfile && managedBy && managedBy.length > -1" class="vseparator"></li>-->
+                            <li *ngIf="members && members.length > 0" class="badge badge-pill badge-success pointer" (click)="loadTemplate('upMember')">Members &nbsp;<span class="badge badge-light">{{members.length}}</span>                                    
+                            <li  class="badge badge-pill badge-success pointer" >
+                                <span mat-icon-button class="circle-button" [matMenuTriggerFor]="menu" aria-label="Profile menu items">
+                                    <mat-icon class="edit-profile-icon">more_horiz</mat-icon>
+    
+                                </span>  
+                              <mat-menu #menu="matMenu">
+                                <button *ngIf="isEditable && !isProfileInEditMode()"  (click)="editProfile()" mat-menu-item>
+                                  <span>Edit Profile</span>
+                                </button>
+                                <button *ngIf="isProfileInEditMode()" (click)="saveProfile()" mat-menu-item>
+                                    <span>Save Profile</span>
+                                </button>
+                                <button *ngIf="isProfileInEditMode()" (click)="cancelEditProfile()" mat-menu-item>
+                                    <span>Cancel Editing</span>
+                                </button>
+                            </mat-menu>
+                        </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="isProfilePrivate" class="private-profile-label" title="This is a private profile">
+                        <span  class="badge badge-pill badge-primary badge-danger" >
+                        <i class="fa fa-lock" style="font-size: 25px" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                   
                 </div>
 
-                <div ngbDropdown *ngIf="isProfileInEditMode()" class="d-inline-block nav-item add-drop">
+                <!--*ngIf="isProfileInEditMode()" -->
+                <div *ngIf="isProfileInEditMode()" ngbDropdown class="d-inline-block nav-item add-drop">
                   <button class="btn btn-outline-primary btn-xs"
                           id="dropdownAddSection"
                           ngbDropdownToggle>
@@ -52,14 +174,18 @@
 
               </div>
             </div>
-            <div class="dashboard-avatar-text col-md-6 col-md-offset-3">
-                <div class="bio-intro box">
-                    <a class="edit-bio-intro edit" href="#"><i class="ti ti-pencil"></i></a>
-                    <a class="edit-bio-intro save" href="#"><i class="ti ti-save-alt"></i></a>
-                    <p class="expclpse" [class.show]="show">{{userData.description}}</p>
-                    <span (click)="show = !show" class="showMore">{{ show ? 'Show less': '... Show more' }}</span>
-                    <!--<button (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</button>-->
+            <div class="dashboard-avatar-text col-md-6">
+                <div class="bio-intro box" *ngIf="!isEditDesc">
+                    <span  *ngIf="isProfileInEditMode()" class="edit-bio-intro edit" (click)="isEditDesc=true"><mat-icon>edit</mat-icon></span>
+                    <p class="expclpse" [class.show]="showLessDescription">{{userData.description}}</p>
+                    <span *ngIf="showDescriptionSlider" (click)="showLessDescription = !showLessDescription" class="showMore">{{ showLessDescription ? 'Show less': '... Show more' }}</span>
                 </div>
+
+                <div class="bio-intro box" *ngIf="isEditDesc">
+                    <span class="edit-bio-intro edit" (click)="isEditDesc=false"><mat-icon>done_outline</mat-icon></span>
+                    <textarea class="form-control form-control-lg mb-3" rows="3" placeholder="Large textarea">{{userData.description}}</textarea>
+                </div>
+                
             </div>
           </div>
         </div>
@@ -75,13 +201,21 @@
                         <div class="side-dashboard">
                             <div class="dashboard-menu">
                                 <ul>
-                                    <li (click)="showActivities()" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-rss"></i> <span class="link-text">Activities</span> </a></li>
-                                    <li (click)="showTwitterActivities()" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
-                                    <li *ngFor="let profileTemplate of profilesTemplates" (click)="Profiles(profileTemplate.name);loadTemplate(profileTemplate.profileTemplateId)" [ngClass]="{ 'active': profileTemplate.profileTemplateId == activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed), 'in-active': profileTemplate.profileTemplateId != activeTemplate && (!activitiesData && !managedByActive && !settings && isTwitterActivityCollapsed)}">
+                                    <li (click)="showActivities()" class="list-group-item pointer" [ngClass]="{ 'active': activitiesData, 'in-active': !activitiesData}"><a href="#" onclick="return false;"><i class="ti ti-comment"></i> <span class="link-text">Activities</span> </a></li>
+                                    <li (click)="showTwitterActivities()"  class="list-group-item pointer" [ngClass]="{ 'active': !isTwitterActivityCollapsed, 'in-active': isTwitterActivityCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Twitter Feed</span> </a></li>
+                                    <li *ngFor="let profileTemplate of profileTemplates" (click)="loadTemplate(profileTemplate.profileTemplateId)"  
+                                    class="list-group-item pointer" 
+                                    [ngClass]="{ 'active': profileTemplate.profileTemplateId === activeTemplate && (isProfileTemplate), 
+                                                 'in-active': profileTemplate.profileTemplateId !== activeTemplate && (!isProfileTemplate)}">
                                         <a href="#" onclick="return false;">
                                         <i class="{{profileTemplate.profileIcon}}"></i> <span class="link-text">{{profileTemplate.name}}</span></a>
                                     </li>
-                                    <li *ngIf="managedBy" (click)="managedByUsers()" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Managed by</span></a></li>
+
+                                    <!--
+                                    <li *ngIf="members && members.length > 0" (click)="userMembers()"  class="list-group-item pointer" [ngClass]="{ 'active': !isMembersCollapsed, 'in-active': isMembersCollapsed}"><a href="#" onclick="return false;"><i class="ti ti-twitter"></i> <span class="link-text">Members<span class="badge badge-light">{{members.length}}</span></span> </a></li>
+-->
+
+                                    <li *ngIf="managedBy && managedBy.length > 0" (click)="managedByUsers()"  class="list-group-item pointer" [ngClass]="{ 'active': managedByActive, 'in-active': !managedByActive}"><a href="#" onclick="return false;"><i class="ti ti-user"></i> <span class="link-text">Adminstrators</span></a></li>
                                     <li *ngIf="isShowSettings" (click)="showSettings()" class="list-group-item pointer"
                                       [ngClass]="{ 'active': settings, 'in-active': !settings}"><a href="#" onclick="return false;"><i class="fa fa-cog"></i> <span class="link-text">Settings </span></a>
                                     </li>
@@ -105,11 +239,14 @@
                                                   <!-- sidebar -->
                                                   <!-- Main stage area -->
                                                   <div class="col-lg-12 cols-item2">
+                                                     <!--ACTIVITIES-->
                                                       <div id="ActivityCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isActivityCollapsed">
                                                           <app-post [userId]="profileUserId" [requestedBy]="loggedUser.username" [selfActivities]=true [disableNewPost]=true ></app-post>
                                                       </div>
                                                       <div id="ActivityCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isActivityCollapsed">
-                                                          Please login to view the activies.
+                                                          <ngb-alert type="primary" [dismissible]="false">
+                                                            Please login to view the activies.
+                                                          </ngb-alert>
                                                        </div>
           
                                                        <!--Twitter feed-->
@@ -122,52 +259,26 @@
           
                                                       <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                            class="widget stick-widget">
-                                                          <ul class="followers">
-                                                              <li *ngFor="let followerUsername of followers">
+                                                              <div *ngFor="let followerUsername of followers">
                                                                   <app-usercard1 [username]=followerUsername></app-usercard1>
-                                                              </li>
-                                                          </ul>
+                                                              </div>
                                                       </div>
                                                       <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
                                                               class="widget stick-widget">
-                                                          <ul class="followers">
-                                                              <li *ngFor="let followingUsername of followings">
+                                                              <div *ngFor="let followingUsername of followings">
                                                                   <app-usercard1 [username]=followingUsername></app-usercard1>
-                                                              </li>
-                                                          </ul>
+                                                              </div>
                                                       </div>
+
+                                                      <!--MANAGED BY-->
                                                       <div id="managedByCollapse" *ngIf="isUserLogged()" [ngbCollapse]="isManagedByCollapsed"
                                                       class="widget stick-widget">
                                                           <div *ngIf="isEditable">
-                                                              <h6>Add Members:</h6>
+                                                              <h6>Add Administrators:</h6>
                                                               <app-gps-global-search placeholder="User Name"  from="user" category="managedby" (valueSelect)='selectedUser($event)'></app-gps-global-search>
                                                           </div>    
           
-                                                      <!-- <div class="ng-autocomplete managedby-search">
-                                                          <ng-autocomplete
-                                                            [(ngModel)]="searchUserManagedBy"
-                                                            (selected)='addMember(searchUserManagedBy.username)'
-                                                            [data]="searchUsers"
-                                                            placeHolder="User Name"
-                                                            (inputChanged) = "onChangeSearch($event)"
-                                                            [searchKeyword]="keywordUser"
-                                                            [itemTemplate]="itemTemplate"
-                                                            [notFoundTemplate]="notFoundTemplate">
-                                                          </ng-autocomplete>
-          
-                                  
-                                                          <ng-template #itemTemplate let-item>
-                                                            <div class="item">
-                                                              <img src="{{item.photoUrl}}" height="25">
-                                                              <span [innerHTML]="item.full_name"></span>
-                                                              <small></small>
-                                                            </div>
-                                                          </ng-template>
-                                  
-                                                          <ng-template #notFoundTemplate let-notFound>
-                                                            <div [innerHTML]="notFound"></div>
-                                                          </ng-template>
-                                                        </div> -->
+
           
                                                         <div class="row">
                                                           <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of managedBy">
@@ -178,22 +289,37 @@
           
                                                           </div>
                                                         </div>
-                                   
-                                                     <!-- <ul class="followers">
-                                                         <li *ngFor="let managed of managedBy" class="managedby-user-list">
-                                                          <button class="delete-managedby-user" type="button" (click)="removeMember(managed.username)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                             <app-usercard1 [user]=managed></app-usercard1>
-                                                         </li>
-                                                     </ul> -->
+    
                                                      </div>
+
                                                      <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
-                                                         Please login to view the members.
+                                                       
+                                                         <ngb-alert type="primary" [dismissible]="false">
+                                                            Please login to view the members.
+                                                          </ngb-alert>
                                                      </div>
+                                                    
+                                                     <!--MEMBERS
+                                                     <div id="membersCollapse" [ngbCollapse]="isMembersCollapsed" class="widget stick-widget">
+                                                        <div *ngIf="isEditable">
+                                                             <h6>Add Members:</h6>
+                                                             <app-gps-global-search placeholder="User Name"  from="user" category="members" (valueSelect)='selectedUser($event)'></app-gps-global-search>
+                                                        </div>    
           
+                                                       <div class="row">
+                                                         <div class="managedby-user-list col-lg-4 col-md-3 col-sm-6 col-xs-12 card-body legislator-box-shadow" *ngFor="let managedUsername of members">
+                                                           <app-usercard2 [username]="managedUsername" [manageMembers]="isEditable"></app-usercard2>
+                                                           <div class="overlay">
+                                                             </div>
+         
+                                                         </div>
+                                                       </div>
+                                                     </div>
+                                                        -->
+                                                     <!--SETTINGS-->
                                                      <div id="setingsSection" *ngIf="isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
                                                      <form [formGroup]="settingsForm">
                                                           <ul class="followers">
-                                                              <li>
                                                                   <div class="form-row">
                                                                       <div class="col form-group">
                                                                         <label>Access Restriction</label>
@@ -203,12 +329,14 @@
                                                                         </div>
                                                                       </div>
                                                                     </div>
-                                                              </li>
                                                           </ul>
                                                       </form>    
                                                       </div>
                                                       <div id="setingsSection" *ngIf="!isUserLogged()" [ngbCollapse]="isSettingsCollapsed" class="widget stick-widget">
-                                                          Please login to manage the settings.
+                                                          
+                                                          <ngb-alert type="primary" [dismissible]="false">
+                                                            Please login to manage the settings.
+                                                          </ngb-alert>
                                                       </div>
           
                                                       <div id="ProfileCollapse" [ngbCollapse]="isProfileCollapsed">
@@ -219,7 +347,7 @@
                                                                           <ul class="nav nav-tabs justify-content-center nav-pills nav-pills nav-fill"
                                                                               data-tabs="tabs">
                                                                               <li class="nav-item"
-                                                                                  *ngFor="let profileTemplate of profilesTemplates">
+                                                                                  *ngFor="let profileTemplate of profileTemplates">
                                                                                   <div>
                                                                                       <span>
                                                                                           <a class="nav-link template-tab text-black-50" data-toggle="tab"

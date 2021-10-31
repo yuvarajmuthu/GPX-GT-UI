@@ -40,10 +40,14 @@ import {stringify} from 'querystring';
 export class UserComponent implements OnInit {
 
     @Input() profileUserId: string = '';
+    isEditDescIcon = false;
+    isEditDesc = false;
     legisId: string = '';
     activeTemplate: string="upOffices";
-    activeTemplatName:string = "Office";
+    //activeTemplatName:string = "Office";
     showDropDown : boolean = false;
+    showLessDescription : boolean = false;
+    showDescriptionSlider : boolean = false;
     isInCircle: boolean;
     twitterHandle:string = null;
     twitterHandleExist:boolean = false;
@@ -53,6 +57,7 @@ export class UserComponent implements OnInit {
     public isCMCollapsed: boolean = false;
     public isPartiesCollapsed: boolean = false;
     public isProfilePrivate: boolean = false;
+    public isProfileTemplate: boolean = false;
     public electedPersonsOld = [];
     public electedPersons: Array<Legislator>;
     public contestedPersons = [];
@@ -61,10 +66,10 @@ export class UserComponent implements OnInit {
     templateType = [];
     private componentRef: ComponentRef<{}>;
     public userData:User = new User();
-    private viewingUser = {};
+    private viewingUser:User = new User();
     private firstName;
     private lastName;
-    public profilesTemplates = [];
+    public profileTemplates = [];
     public availableProfileTemplates = [];
     public profilesDatas = [];
     public isLegislator = false;
@@ -78,6 +83,7 @@ export class UserComponent implements OnInit {
     isTwitterActivityCollapsed: boolean = true;
     isFollowersCollapsed: boolean = true;
     isFollowingsCollapsed: boolean = true;
+    isMembersCollapsed: boolean = true;
     isManagedByCollapsed:boolean = true;
     isSettingsCollapsed:boolean = true;
     externalUser:boolean;
@@ -106,10 +112,11 @@ export class UserComponent implements OnInit {
 
     postFormData: FormData;
     editLabel: string = null;
-    inEditMode:boolean = false;
+    inEditMode:boolean = true;
     followersCount:number = 0;
     followers: User[] = [];
-    managedBy = [];
+    managedBy:string[] = [];
+    members:string[] = [];
     followingsCount:number = 0;
     followings = [];
     selectedProfileSmImage: File;
@@ -427,6 +434,8 @@ export class UserComponent implements OnInit {
     }
 
     showActivities() {
+        this.isProfileTemplate = false;
+
         this.activitiesData = true;
         this.profileData = false;
         this.folow = false;
@@ -436,6 +445,7 @@ export class UserComponent implements OnInit {
 
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
+        this.isMembersCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isSettingsCollapsed = true;
         this.isTwitterActivityCollapsed = true;
@@ -444,6 +454,8 @@ export class UserComponent implements OnInit {
     }
     
     showTwitterActivities() {
+        this.isProfileTemplate = false;
+
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
@@ -453,6 +465,7 @@ export class UserComponent implements OnInit {
 
         this.isFollowersCollapsed = true;
         this.isProfileCollapsed = true;
+        this.isMembersCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isSettingsCollapsed = true;
         this.isActivityCollapsed = true;
@@ -461,6 +474,8 @@ export class UserComponent implements OnInit {
     }
 
     showSettings(){
+        this.isProfileTemplate = false;
+
         this.settings = true;       
         this.activitiesData = false;
         this.profileData = false;
@@ -471,6 +486,7 @@ export class UserComponent implements OnInit {
 
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
+        this.isMembersCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
@@ -482,13 +498,15 @@ export class UserComponent implements OnInit {
         //}
     }
 
-    Profiles(activeTemplatName) {
-        this.activeTemplatName =activeTemplatName;
+    Profiles() {
+        //this.activeTemplatName =activeTemplatName;
+        //this.activeTemplate = activeTemplateId;
         this.activitiesData = false;
         this.profileData = true;
         this.folow = false;
         this.followersActiveCss = false;
         this.followingsActiveCss = false;
+        //this.isMembersCollapsed = true;
         this.isManagedByCollapsed = true;
         this.managedByActive = false;
         this.isFollowersCollapsed = true;
@@ -512,6 +530,8 @@ export class UserComponent implements OnInit {
     */
 
     Followers() {
+        this.isProfileTemplate = false;
+
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
@@ -521,6 +541,7 @@ export class UserComponent implements OnInit {
         this.getFollowers(this.profileUserId);
         this.isFollowersCollapsed = false;
         this.isFollowingsCollapsed = true;
+        this.isMembersCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
@@ -533,6 +554,8 @@ export class UserComponent implements OnInit {
     }
 
     Followings() {
+        this.isProfileTemplate = false;
+
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
@@ -542,6 +565,7 @@ export class UserComponent implements OnInit {
         this.getFollowings(this.profileUserId);
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = false;
+        this.isMembersCollapsed = true;
         this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
@@ -553,6 +577,8 @@ export class UserComponent implements OnInit {
     }
 
     managedByUsers() {
+        this.isProfileTemplate = false;
+
         this.activitiesData = false;
         this.profileData = false;
         this.folow = false;
@@ -562,7 +588,30 @@ export class UserComponent implements OnInit {
         //this.getManagedBy(this.profileUserId);
         this.isFollowersCollapsed = true;
         this.isFollowingsCollapsed = true;
+        this.isMembersCollapsed = true;
         this.isManagedByCollapsed = false;
+        this.isProfileCollapsed = true;
+        this.isActivityCollapsed = true;
+        this.isTwitterActivityCollapsed = true;
+        this.isSettingsCollapsed = true;
+
+        this.settings = false;
+
+
+    }
+    
+    userMembers() {
+        this.activitiesData = false;
+        this.profileData = false;
+        this.folow = false;
+        this.followersActiveCss = false;
+        this.followingsActiveCss = false;
+        this.managedByActive = true;
+
+        this.isFollowersCollapsed = true;
+        this.isFollowingsCollapsed = true;
+        this.isMembersCollapsed = false;
+        this.isManagedByCollapsed = true;
         this.isProfileCollapsed = true;
         this.isActivityCollapsed = true;
         this.isTwitterActivityCollapsed = true;
@@ -576,7 +625,7 @@ export class UserComponent implements OnInit {
     loadComponent(id: string) {
         this.loggedUser = this.datashareService.getCurrentUser();
 
-        this.viewingUser['userId'] = this.profileUserId;
+        //this.viewingUser['userId'] = this.profileUserId;
         //this is allowed even for non-logged in user 
         //this.loadBioData();
         
@@ -597,7 +646,7 @@ export class UserComponent implements OnInit {
 
             this.userService.getUserData(this.profileUserId, this.loggedUsername).subscribe(
                 data => { 
-                    this.userData = data;
+                    this.viewingUser = this.userData = data;
 
                     //this.userData.description = 'Tst desc';
                     console.log('User data from service: ', this.userData);
@@ -609,6 +658,12 @@ export class UserComponent implements OnInit {
                     this.managedBy = this.userData['members'];
                     this.isProfileEditable();
 
+                    //description
+                    if(this.userData.description && this.userData.description.length > 100){
+                        this.showLessDescription = true;
+                        this.showDescriptionSlider = true;
+                    }
+
                     //Settings
                     this.isShowSettings = this.userData['showSettings'];
                     if(this.userData['settings'] && this.userData.settings['accessRestriction']){
@@ -616,7 +671,7 @@ export class UserComponent implements OnInit {
                         this.isProfilePrivate = this.userData.settings['accessRestriction'];
                     }
                     
-
+/*
                     if (this.userData['sourceSystem'] === 'GOVTRACK') {
                         this.viewingUser['external'] = true;
                         this.viewingUser['isLegislator'] = true;
@@ -630,7 +685,7 @@ export class UserComponent implements OnInit {
                         this.externalUser = true;
 
                     }
-                    
+  */                  
                     //load profile small image
 
                     this.profileSmImage = 'assets/images/avatar1.png'; 
@@ -639,7 +694,10 @@ export class UserComponent implements OnInit {
                         if(this.userData != null && this.userData['photoUrl'] != null){
                             this.profileSmImage = this.userData['photoUrl'];
                         }else{
-                            this.getProfileSmImage(this.viewingUser['userId']);
+                            //this.getProfileSmImage(this.viewingUser['userId']);
+                            if(this.userData.profileAvatarImgFileId){
+                                this.getProfileSmImage(this.userData.profileAvatarImgFileId);
+                            }
                         }
                     }
 
@@ -649,11 +707,11 @@ export class UserComponent implements OnInit {
 
                     //getting the data for this user profile
                     //this.profilesData = this.viewingUser['profilesData'] = this.userData['profileData'];
-                    this.profilesTemplates = this.userData['profileTemplates'];
-                    this.viewingUser['profileTemplates'] = this.profilesTemplates;
+                    this.profileTemplates = this.userData['profileTemplates'];
+                    //this.viewingUser['profileTemplates'] = this.profileTemplates;
 
                     //list the templates that are available to use, ignores the one that are already used
-                    this.profileService.getAvailableProfileTemplatesForEntity(this.viewingUser['userId'], this.category).subscribe(
+                    this.profileService.getAvailableProfileTemplatesForEntity(this.userData['username'], this.category).subscribe(
                         data => {
                             this.availableProfileTemplates = data;
                         });
@@ -688,6 +746,17 @@ export class UserComponent implements OnInit {
                             
                         }
 
+                        //any group/committee members
+                        if(profileData['profileTemplateId'] === 'upMember' &&
+                            profileData['data'] &&
+                            profileData['data']['bioguide']){
+                            this.members.push(profileData['data']['bioguide']);
+                        }
+
+                    }
+
+                    if(this.members && this.members.length > 0){
+                        this.userData['members'] = this.viewingUser['members'] = this.members;
                     }
 
                     if(this.twitterHandle && this.twitterHandle.trim().length > 0){
@@ -700,12 +769,16 @@ export class UserComponent implements OnInit {
 
                     //this.loadBioDataTemplate(this.category);
                     //setting here so it can be accessed globally
-                    this.datashareService.setViewingUser(this.viewingUser);
+
+                    this.datashareService.setViewingUser(this.viewingUser);//required for sharing the viewing user info to other user components
                     console.log('this.dataShareService.getViewingUser() ' + JSON.stringify(this.datashareService.getViewingUser()));
                     
                     if(this.isUserLogged() && !this.isSelfProfile){
                         this.check4CircleStatus();
                     }
+
+                    //setting Activities page as default view
+                    this.showActivities();
                 }
             );
 
@@ -867,6 +940,8 @@ export class UserComponent implements OnInit {
                 this.profileSmImage = event.target['result'];
             };
             this.profileSmImageChanged = true;
+
+            this.saveProfile();
         }
     }
 
@@ -879,8 +954,8 @@ export class UserComponent implements OnInit {
 
 
                 //getting the available profile templates for this user type
-                this.profilesTemplates = this.viewingUser['profileTemplates'] = this.userData['profile'];
-                console.log('loadTemplate()::userprofile.template - profile templates: ', this.profilesTemplates);
+                this.profileTemplates = this.viewingUser['profileTemplates'] = this.userData['profile'];
+                console.log('loadTemplate()::userprofile.template - profile templates: ', this.profileTemplates);
 
                 //indicate the dynamic loaded to load th default template
                 let compTypes = [];
@@ -1278,7 +1353,9 @@ export class UserComponent implements OnInit {
 //load the template based on tab selection
     loadTemplate(type: string) {
        // localStorage.setItem('editMode', String(this.inEditMode));
+        this.Profiles();
         this.activeTemplate = type;
+        this.isProfileTemplate = true;
         this.tap = true;
         let compTypes = [];
         compTypes.push(type);
@@ -1306,7 +1383,7 @@ export class UserComponent implements OnInit {
             this.availableProfileTemplates.splice(position, 1);
         }
 
-        this.profilesTemplates.push(profileTemplateParam);
+        this.profileTemplates.push(profileTemplateParam);
 
         this.templateType.push(profileTemplateParam['profileTemplateId']);
         
@@ -1326,14 +1403,14 @@ export class UserComponent implements OnInit {
         }
 
         position = -1;
-        this.profilesTemplates.forEach((profileTemplate, index) => {
+        this.profileTemplates.forEach((profileTemplate, index) => {
             if (profileTemplate['profileTemplateId'] === profileTemplateParam['profileTemplateId']) {
                 position = index;
             }
         });
 
         if (position > -1) {
-            this.profilesTemplates.splice(position, 1);
+            this.profileTemplates.splice(position, 1);
         }
 
         //this.profilesTemplates.push(profileTemplate);

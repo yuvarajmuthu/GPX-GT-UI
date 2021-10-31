@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { FormsModule } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +17,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   imports: [
+    MatChipsModule,
     CommonModule,
     ReactiveFormsModule,
     AutocompleteLibModule,

@@ -4,6 +4,7 @@ import {ComponentcommunicationService}     from '../../services/componentcommuni
 import { LegislatorService } from '../../services/legislator.service';
 
 import { Legislator } from '../../models/legislator';
+import {User} from '../../models/user';
 
 
 export abstract class AbstractTemplateComponent {
@@ -21,12 +22,12 @@ export abstract class AbstractTemplateComponent {
     public committeeKeys = [];
     public committees = [];
     public committeesLength:number = 0;
-    public viewingUser={};
+    public viewingUser:User = new User();
     
     constructor(private dataShareService:DatashareService, 
       private missionService: ComponentcommunicationService) {
       this.viewingUser = this.dataShareService.getViewingUser();
-      this.profileUserId = this.viewingUser['userId'];
+      this.profileUserId = this.viewingUser['username'];
      /* 
       if(this.viewingUser['isLegislator']){
         this.loadLegislator();

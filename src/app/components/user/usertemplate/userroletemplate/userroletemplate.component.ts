@@ -25,7 +25,6 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
     displayProperties = [];
     role = {};
     data = {};
-    viewingUser = {};
     editorData = '';
     isProfileInEditMode:boolean = false;
     inEditMode:boolean = false;
@@ -43,7 +42,6 @@ export class UserroletemplateComponent extends AbstractTemplateComponent impleme
         super(dataShareService2, communicationService);
 
         console.log('constructor() userroletemplate.component');
-        this.viewingUser = this.dataShareService2.getViewingUser();
 
         communicationService.userProfileEditChanged$.subscribe(
             editmode => {

@@ -144,7 +144,9 @@ section.gray,
 .post-card-footer a:last-child{
     border-right: none;
 }
-
+.pointer {
+	cursor: pointer;
+}
 .search-btn i {font-size:22px;}
 .text-left {text-align:left;}
 .work-process-caption.vcaption {margin:0px;margin-bottom: 20px;clear: left;padding-top: 35px;}
@@ -11287,7 +11289,7 @@ a.cl-box.pink {
     /*Profile-Section*/
     /*-----------------------------------------------*/
     .bio-intro{
-    margin-top: 20px;
+    /* margin-top: 20px; */
     text-align: justify;
     }
     .addReadMore.showlesscontent .SecSec,
@@ -11337,8 +11339,8 @@ a.cl-box.pink {
     font-size: 20px;
     }
     .edit-bio-intro{
-            left: 99%;
-    top: 23px;
+            left: 98%;
+    /* top: 23px; */
     width: 30px;
     /* background: #fff; */
     color: #018ece;
@@ -11352,23 +11354,38 @@ a.cl-box.pink {
     .dropdown{
             cursor: pointer;
     }
+	.file-input {
+		display: none;
+	  }
     .profile-name{
-        float: left;
+    float: left;
     position: relative;
-    top: 215px;
+    top: 70px;
     bottom: 0px;
     margin-left: 14px;
     text-align: left;
     }
     .profile-name h4{
             font-size: 20px;
-                margin: 0px;
+            margin: 0px;
     }
+	.badge{
+		line-height: 2 !important;
+		margin-left: 2px !important;
+	}
+	  .edit-profile-icon{
+		  font-size: 16px !important;
+		  height: auto !important;
+	  }
+	  .edit-profile-li{
+		  position: absolute;
+	  }
+
    .edit-icon{
     position: absolute;
     z-index: 10;
-    top: 300px;
-    left: 5%;
+    top: 250px;
+    left: 10%;
     text-align: center;
     background: #028ece;
     padding: 14px 10px;
@@ -11377,7 +11394,7 @@ a.cl-box.pink {
     height: 50px;
     }
     .dashboard-avatar-text{
-         max-width: 100%;
+    
     clear: both;
     }
     .dashboard-avatar-thumb {
@@ -11385,10 +11402,11 @@ a.cl-box.pink {
     height: 170px;
     border-radius: 50%;
     display: table;
-    margin: 130px auto 10px 20px;
-    border: 6px solid #e9ecf3;
+    margin: 70px auto 10px 20px;
+    /*border: 6px solid #e9ecf3;*/
     float: left;
     }
+	/*
     .profile-details.fixed-header{
        position: fixed;
     z-index: 100;
@@ -11396,26 +11414,38 @@ a.cl-box.pink {
     right: 0px;
     top: 0px;
     }
+	*/
+	.profile-details.fixed-header {
+		position: fixed;
+		z-index: 100;
+		background: #fff;
+		right: 0px;
+		top: 0px;
+		height: 30%;
+	  }
+	  
+
     .profile-details.fixed-header .edit-icon{
         display: none;
     }
     .profile-details.fixed-header .dashboard-avatar-thumb {
         width: 80px;
         height: 80px;
-        margin: 90px auto 10px 20px;
+        margin: 60px auto 10px 20px;
     }
     .profile-details.fixed-header .dashboard-avatar-thumb img{
             max-width: 80px;
     }
     .profile-details.fixed-header .profile-name {
         float: left;
-        position: relative;
-        top: 100px;
+        position: absolute;
         bottom: 0px;
         margin-left: 14px;
         text-align: left;
-            left: 0px;
+        left: 120px;
+		top: 0px;
     }
+
     .profile-details.fixed-header .add-drop{
             float: right;
         margin-top: 120px;
@@ -11469,7 +11499,7 @@ a.cl-box.pink {
 	width: 100%;
 	/*padding: 2rem;*/
 	text-align: center;
-	margin-top: 80px;
+	/* margin-top: 5%; */
 	background: url(/assets/images/network7.png);
 	min-height: 270px;
     }
@@ -12063,6 +12093,11 @@ a.cl-box.pink {
 	.tab .tab-content {
 		padding: 20px 25px
 	}
+
+	.profile-details.fixed-header .profile-name {
+     
+		top: 50px;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -12215,6 +12250,16 @@ a.cl-box.pink {
 		display: flex;
 		align-items: center
 	}
+
+	.profile-details.fixed-header .profile-name {
+        float: left;
+        position: relative;
+        bottom: 0px;
+        margin-left: 14px;
+        text-align: left;
+        left: 0px;
+		top: 70px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -12816,7 +12861,7 @@ list-style: none;
 	}
 	.newjob-list-layout .cll-wrap {
 		display: flex;
-		align-items: end;
+		align-items: flex-end;
 		width: 100%
 	}
 	.newjob-list-layout .cll-thumb {
@@ -13056,12 +13101,12 @@ list-style: none;
 	}
 
 	.private-profile-label{
-		position: absolute;
+		/* position: absolute;
 		z-index: 10;
 		top: 300px;
 		left: 13%;
 		text-align: center;
-		padding: 14px 10px;
+		padding: 14px 10px; */
 		width: 50px;
 		border-radius: 50%;
 		height: 50px;
@@ -13080,10 +13125,10 @@ margin-right: 2px;
 }
 }
 @media(max-width: 413px){
-.profile-details.fixed-header .profile-name {
+/* .profile-details.fixed-header .profile-name {
     top: -90px;
     left: 106px;
-}
+} */
     .add-drop {
     float: right;
     margin-top: 20px;
@@ -13198,12 +13243,12 @@ background-repeat: no-repeat;
     padding: 2rem 0;
     min-height: 350px;
 }
-.private-profile-label{
+/* .private-profile-label{
     position: absolute;
     bottom: 9em;
     right: 3.5em;
     font-size: 20px;
-  }
+  } */
 
     }
 
@@ -13240,3 +13285,8 @@ background-repeat: no-repeat;
 /*-------------------------------------------------*/
 /*Media - Query*/
 /*----------------------------------------------*/
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{
+    background-image: -webkit-linear-gradient(top,#99cbf2 0,#69b8f5 100%);
+  }
+ 

@@ -8,6 +8,8 @@ import {UserService} from '../../../../../services/user.service';
 import {DatashareService} from '../../../../../services/datashare.service';
 import {ComponentcommunicationService} from '../../../../../services/componentcommunication.service';
 
+import {ProfileData} from '../../../../../models/profiledata';
+import {User} from '../../../../../models/user';
 
 @Component({
   selector: 'app-userrole',
@@ -16,7 +18,7 @@ import {ComponentcommunicationService} from '../../../../../services/componentco
 })
 export class UserroleComponent extends AbstractTemplateComponent implements OnInit {
   id = 'upRole';
-  @Input() roleObj:{}; 
+  @Input() roleObj:ProfileData; 
   @Input() displayProperties: [];
   
   role: {};
@@ -25,6 +27,10 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
   data = {};
   isProfileInEditMode:boolean = false;
   inEditMode:boolean = false;
+  loggedUsername: string = null;
+  userData:User = new User();
+  //userData:User = null;
+
 
 
   constructor(private modalService: NgbModal,
@@ -46,9 +52,23 @@ export class UserroleComponent extends AbstractTemplateComponent implements OnIn
   }
 
   ngOnInit() {
+    this.userData = new User();
+
+    this.loggedUsername = this.dataShareService2.getLoggedinUsername();
+
     this.role = this.roleObj['data'];
-    //this.role = this.roleObj;
-    this.createFormGroup();
+    if(this.roleObj.entityType === 'LEGISLATIVE COMMITTEE'){
+      this.userService.getUserData(this.roleObj.data['committeeId'], this.loggedUsername).subscribe(
+        data => {
+          //console.log('committee data ', data);
+          this.userData = data;
+          console.log('committee userData ', this.userData);
+          this.changeDetector.detectChanges();
+  
+          });
+    }else{
+      this.createFormGroup();
+    }
     this.inEditMode = this.dataShareService2.isProfileEditable();
 
   }

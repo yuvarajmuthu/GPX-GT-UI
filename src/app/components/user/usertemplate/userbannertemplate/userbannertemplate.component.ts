@@ -14,6 +14,7 @@ import {UserService} from '../../../../services/user.service';
   templateUrl: '../userbiodatatemplate/userbiodatatemplate.component.html',//'./userbannertemplate.component.html',
   styleUrls: ['./userbannertemplate.component.css']
 })
+//this is used for biodata
 export class UserbannertemplateComponent extends AbstractTemplateComponent implements OnInit {
 
   id = "upDefault";

@@ -82,7 +82,13 @@
       <app-legislator [legislator]=legislator></app-legislator>
     </div>
     <div *ngIf="divisionOffices && divisionOffices.length === 0">
-      Relevant data not available.
+        <ngb-alert type="primary" [dismissible]="false">
+          Relevant data not available, you can contribute by adding data here.
+        </ngb-alert>      
+
+      <button (click)="openDialog()" class="btn btn-md btn-secondary btn-custom-horizondal fa fa-plus" type="button">
+        Add Data
+      </button>
     </div>
   </div>
 

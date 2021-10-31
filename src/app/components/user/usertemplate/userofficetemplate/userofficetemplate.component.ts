@@ -21,7 +21,7 @@ export class UserofficetemplateComponent extends AbstractTemplateComponent  impl
   offices:JSON[] = [];
   displayProperties = [];
   inEditMode:boolean = false;
-  officeTemplateForm: FormGroup; 
+  officeTemplateForm: FormGroup;  
   closeResult: string;
   office = {};
 

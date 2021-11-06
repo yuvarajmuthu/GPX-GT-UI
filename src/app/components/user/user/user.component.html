@@ -176,16 +176,19 @@
 
               </div>
             </div>
-            <div class="dashboard-avatar-text col-md-12">
-                <div class="bio-intro box" *ngIf="!isEditDesc">
+            <div class="dashboard-avatar-text col-md-12" [ngClass]="{'empty-desc':!isEditDesc && (!userData.description || userData.description.length==0)}">
+                <div class="bio-intro box" *ngIf="!isEditDesc && userData.description && userData.description.length>0">
                     <span  *ngIf="isProfileInEditMode()" class="edit-bio-intro edit" (click)="isEditDesc=true"><mat-icon>edit</mat-icon></span>
                     <p class="expclpse" [class.show]="showLessDescription">{{userData.description}}</p>
                     <span *ngIf="showDescriptionSlider" (click)="showLessDescription = !showLessDescription" class="showMore">{{ showLessDescription ? 'Show less': '... Show more' }}</span>
                 </div>
+                <div class="bio-intro box no-desc" *ngIf="!isEditDesc && (!userData.description || userData.description.length==0)">
+                         <span class="mat-edit-icon add-desc" (click)="isEditDesc=true">Add your description here <mat-icon>edit</mat-icon></span>
+                </div>
 
                 <div class="bio-intro box" *ngIf="isEditDesc">
                     <span class="edit-bio-intro edit" (click)="isEditDesc=false"><mat-icon>done_outline</mat-icon></span>
-                    <textarea class="form-control form-control-lg mb-3" rows="3" placeholder="Large textarea">{{userData.description}}</textarea>
+                    <textarea class="form-control form-control-lg mb-3" rows="3" placeholder="Add your description here">{{userData.description}}</textarea>
                 </div>
                 
             </div>

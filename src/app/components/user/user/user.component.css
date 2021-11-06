@@ -1430,7 +1430,24 @@ button:focus {
 .mat-edit-icon{
 	cursor: pointer;
 }
-
+.empty-desc{
+        padding-bottom: 5px;
+}
+.add-desc{
+	font-size: 15px !important;
+}
+.no-desc{
+	opacity: 0.5;
+	display: flex;
+    justify-content: center;
+    height: 50px;
+    /* background-color: #DDDD; */
+	border: 2px solid rgba(0,0,0,0.17);
+}
+.no-desc span{
+	margin: auto 0 !important;
+	font-size: 15px;
+}
 .btn-circle-30 {
 	width: 30px;
 	height: 30px;

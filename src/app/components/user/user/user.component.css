@@ -1427,6 +1427,9 @@ button:focus {
 .btn.btn-lg {
 	padding: 1rem
 }
+.mat-edit-icon{
+	cursor: pointer;
+}
 
 .btn-circle-30 {
 	width: 30px;
@@ -11452,11 +11455,14 @@ a.cl-box.pink {
     }
     .profile-details{
         width: 100%;
-    float: left;
+        float: left;
     }
+	.profile-non-edit{
+		margin-top: 5%;
+	}
     .add-drop{
-    float: right;
-    margin-top: 234px;
+		float: right;
+		margin-top: 234px;
     }
     /*-----------------------------------------------*/
     /*Profile-Section*/
@@ -13217,6 +13223,12 @@ margin-right: 2px;
     float: left;
     /*height: 350px;*/
 }
+.profile-non-edit{
+	margin-top: 5%;
+  }
+ .fixed-header{
+	margin-top: none !important;
+}
 
     }
     @media(max-width: 767px){
@@ -13258,9 +13270,15 @@ background-repeat: no-repeat;
     width: 100%;
     float: left;
 }
+.profile-non-edit{
+  margin-top: 5%;
+}
+.fixed-header{
+	margin-top: none !important;
+}
 .profile-name {
     float: left;
-}
+ }
 }
 
 @media(max-width: 513px){

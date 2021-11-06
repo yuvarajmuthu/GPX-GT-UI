@@ -15,6 +15,7 @@ export class User {
     profileAvatarImgFileId: string;
     profileBannerImgFileId: string;
     settings: {};
+    role:role;
     circleUsersInfo: string;
     members: string[];
     administrators: string[];
@@ -26,4 +27,14 @@ export class User {
     provider:string;//GOOGLE
     sourceSystem: string;
     sourceId: string;
+}
+
+export class role {
+    chamber:string;
+district: string;
+end_date: string;
+party: string;
+start_date: string;
+state: string;
+type: string;
 }

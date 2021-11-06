@@ -263,10 +263,12 @@ $(window).scroll(function(){
         if ($(window).scrollTop() >= 160 ) {
             $('.profile-details').addClass('fixed-header');
             $('.profile-width').addClass('container');
+			$('.profile-details').removeClass('profile-non-edit');
         }
         else {
 
             $('.profile-details').removeClass('fixed-header');
+			$('.profile-details').addClass('profile-non-edit');
             $('.profile-width').removeClass('container');
             }
     // }

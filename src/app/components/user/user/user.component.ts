@@ -269,72 +269,79 @@ export class UserComponent implements OnInit {
      }
  
      saveChamber(userDetails:any){
-         this.biodata.chamber = userDetails.full_name;
-         this.isEditChamber = !this.isEditChamber;
+          this.userData.role.type = userDetails.full_name;
+        //  this.isEditChamber = !this.isEditChamber;
       }
  
       saveDistrict(userDetails:any){
-         this.biodata.district = userDetails.full_name;
-         this.isEditDistrict = !this.isEditDistrict;
+         this.userData.role.district = userDetails.full_name;
+        //  this.isEditDistrict = !this.isEditDistrict;
       }
  
       saveState(userDetails:any){
-         this.biodata.state = userDetails.full_name;
-         this.isEditState = !this.isEditState;
+         this.userData.role.state = userDetails.full_name;
+        //  this.isEditState = !this.isEditState;
       }
  
       saveParty(userDetails:any){
-         this.biodata.party = userDetails.full_name;
-         this.isEditParty = !this.isEditParty;
+         this.userData.role.party = userDetails.full_name;
+        //  this.isEditParty = !this.isEditParty;
       }
 
       toggleEditParty(){
         /*
         this.changeParty=false*/
-        if(!this.isEditParty && this.biodata){
-            this.editPartyInput = this.biodata.party;
+        if(!this.isEditParty && this.userData){
+            this.editPartyInput = this.userData.role.party;
         }
         else{
             if(typeof(this.editPartyInput) == 'object')
-              this.biodata.party = this.editPartyInput.firstName;
+              this.userData.role.party = this.editPartyInput.firstName;
         }
-        
+        this.isEditChamber = false;
+        this.isEditState = false;
+        this.isEditDistrict = false;
         this.isEditParty = !this.isEditParty;
     }
 
     toggleEditDistrict(){
         /*
         this.changeDistrict=false;*/
-        if(!this.isEditDistrict && this.biodata){
-            this.editDistrictInput = this.biodata.district;
+        if(!this.isEditDistrict && this.userData){
+            this.editDistrictInput = this.userData.role.district;
         }
         else{
             if(typeof(this.editDistrictInput) == 'object')
-              this.biodata.district = this.editDistrictInput.firstName;
+            this.userData.role.district = this.editDistrictInput.firstName;
         }
-        
+        this.isEditChamber = false;
+        this.isEditState = false;
+        this.isEditParty =  false;
         this.isEditDistrict = !this.isEditDistrict;
     }
 
     toggleEditChamber(){
         /*
         this.changeChamber = false;*/
-        if(!this.isEditChamber && this.biodata){
-            this.editChamberInput = this.biodata.chamber;
+        if(!this.isEditChamber && this.userData){
+            this.editChamberInput = this.userData.role.type;
         }
         else{
-            if(typeof(this.editChamberInput) == 'object')
-               this.biodata.chamber = this.editChamberInput.firstName;
+            console.log(this.editChamberInput);
+            // if(typeof(this.editChamberInput) == 'object')
+            this.userData.role.type = this.editChamberInput;
         }
-        
+        this.isEditDistrict = false;
+        this.isEditState = false;
+        this.isEditParty =  false;
         this.isEditChamber = !this.isEditChamber;
     }
 
     toggleEditState(){
         /*
         this.changeState = false;*/
-        if(!this.isEditState && this.biodata){
-            this.editStateInput = this.biodata.state;
+        if(!this.isEditState && this.userData){
+            this.editStateInput = this.userData.role.state;
         }
         else{
             if(typeof(this.editStateInput) == 'object')
@@ -342,6 +349,9 @@ export class UserComponent implements OnInit {
             else
                 this.biodata.state = this.editStateInput;
         }
+        this.isEditDistrict = false;
+        this.isEditState = false;
+        this.isEditParty =  false;
         this.isEditState = !this.isEditState;
     }
     
@@ -424,6 +434,7 @@ export class UserComponent implements OnInit {
     let type:string=null;  
     let properties:[] = this.biodataTemplate['properties'];
     for (let property of properties) {
+
         if(property['propId'] === propertyName){
             type = property['type'];
             break;
@@ -627,7 +638,7 @@ export class UserComponent implements OnInit {
 
         //this.viewingUser['userId'] = this.profileUserId;
         //this is allowed even for non-logged in user 
-        //this.loadBioData();
+        // this.loadBioData();
         
         if (!isDevMode() && this.isUserLogged()) {
             this.getRelationStatus(this.loggedUser.username, this.profileUserId);
@@ -767,7 +778,7 @@ export class UserComponent implements OnInit {
                         this.templateType = compTypes;
                     }
 
-                    //this.loadBioDataTemplate(this.category);
+                    this.loadBioDataTemplate(this.category);
                     //setting here so it can be accessed globally
 
                     this.datashareService.setViewingUser(this.viewingUser);//required for sharing the viewing user info to other user components
@@ -973,6 +984,7 @@ export class UserComponent implements OnInit {
     }
 
     saveProfile() {
+        console.log(this.userData.role);
         console.log('Saving user.component Profile');
         //if image got change, submit that image
         if (this.profileSmImageChanged) {

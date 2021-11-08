@@ -10,6 +10,9 @@
 .post-card-footer a {
   color: #0000007d;
 }
+.post-content{
+  padding:10px;
+}
 .row.post-card-footer{
   background-color: #ECF0F1;
   margin-right: -20px;

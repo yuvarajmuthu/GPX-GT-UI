@@ -10,7 +10,7 @@
                     <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
                 </div>
                 <div class="media-body">
-                    <div class="h6 m-0">
+                    <div class="h5 m-0">
                         <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
                         
                    </div>
@@ -54,10 +54,10 @@
        
     </div>
     <div class="cardbox shadow-lg bg-white">
-
+      <div class="post-content">
 
         <div *ngIf="post && post['containsImage']" class="cardbox-item">
-            <img class="img-fluid" height="500px" width="500px" [src]="postImage" alt="">
+            <img class="img-fluid" height="50%" width="50%" [src]="postImage" alt="">
         </div>
 
         <div *ngIf="post && post['containsVideo']" class="cardbox-item">
@@ -68,6 +68,7 @@
         <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
             <!-- <p class="card-text" >
             </p> -->
+        </div>
         </div>
         
         <!-- comments section starts

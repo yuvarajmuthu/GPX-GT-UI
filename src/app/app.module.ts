@@ -130,12 +130,12 @@ let config = new AuthServiceConfig([
                 tokenGetter: tokenGetter,
                 //Authenticated requests should only be sent to whitelistedDomains
                 //DEV mode
-                whitelistedDomains: ['localhost:5000'],
+                //whitelistedDomains: ['localhost:5000'],
                 //PROD mode
-                //whitelistedDomains: ['www.gpxservice.xyz'],
+                whitelistedDomains: ['www.gpxservice.xyz'],
                 //specific routes that shouldn’t receive the JWT even if they are on a whitelisted domain
-                blacklistedRoutes: ['localhost:5000/login','localhost:5000/user/tokenVerify']
-                //blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
+                //blacklistedRoutes: ['localhost:5000/login','localhost:5000/user/tokenVerify']
+                blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
             }
         }),
         AngularFontAwesomeModule, //OBSOLETE
@@ -155,13 +155,13 @@ let config = new AuthServiceConfig([
       UserModule],
     providers: [
       //enable the interceptor only for DEV mode
-      
+      /*
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
         },
-        
+        */
         
         AuthenticationService,
         AuthGuard,

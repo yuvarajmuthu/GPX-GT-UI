@@ -427,6 +427,7 @@ isProfileEditable(profileId:string, userId:string):Observable<any>{
   }else{
     serviceUrl = this.getUserService() + "/isProfileEditable/" + profileId + "/" + userId + "/";
   }
+  console.log("isProfileEditable ", serviceUrl);
 
   let headers      = new Headers({ 'Content-Type': 'application/json' });
   return this.http.get(serviceUrl, this.httpOptions)

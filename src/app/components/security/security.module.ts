@@ -15,6 +15,9 @@ import {GAddressSearchComponent} from '../../components/g-address-search/g-addre
 import { CKEditorModule } from 'ckeditor4-angular';
 //import {UserModule} from '../../components/user/user.module';
 
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+
 @NgModule({
   imports: [
     MatChipsModule,
@@ -25,6 +28,10 @@ import { CKEditorModule } from 'ckeditor4-angular';
     CKEditorModule
   ],
   exports:[GpsGlobalSearchComponent, GAddressSearchComponent],
-  declarations: [RegisterComponent, LoginComponent, CreatepageComponent, GpsGlobalSearchComponent, GAddressSearchComponent]
+  declarations: [RegisterComponent, LoginComponent, CreatepageComponent, GpsGlobalSearchComponent, GAddressSearchComponent],
+  providers:[
+    {provide:MAT_DIALOG_DATA, useValue:{}},
+    {provide:MatDialogRef, useValue:{}}
+  ]
 })
 export class SecurityModule {}

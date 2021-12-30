@@ -10,7 +10,7 @@ import {AlertService} from '../../../services/alert.service';
 import {ProfileService} from '../../../services/profile.service';
 import {DatashareService} from '../../../services/datashare.service';
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {Route} from '@angular/router';
 

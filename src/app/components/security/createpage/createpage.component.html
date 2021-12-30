@@ -7,7 +7,7 @@
         </header>
 
         <article class="card-body">
-          <form  [formGroup]="userCreationForm" *ngIf="category != 'LEGISLATURE'" (ngSubmit)="createUser()">
+          <form  [formGroup]="userCreationForm" *ngIf="category === 'USER'" (ngSubmit)="createUser()">
             <div class="form-row">
               <div class="col form-group">
                 <label>Display Name</label>

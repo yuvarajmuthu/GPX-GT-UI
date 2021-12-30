@@ -2,23 +2,66 @@
     <button  (click)="toggleNewPost()" class="open-post" title="Start New Conversation"><i class='fa fa-flag-o'></i></button>
 
 </div> -->
+<div class="dashboard-caption-wrap">
+										
+    <ul class="list" >
+        <li class="manage-list-row clearfix">
+            <div class="job-info">
+                <div class="job-img">
+                    <div class="mr-3" [routerLink]="['/user', post.entityId]">
+                        <img [src]="profileSmImage" class="attachment-thumbnail" alt="Academy Pro Theme">
+                    </div>
+                </div>
+                <div style="width: 1000px;"><h2 class="job-name"><a [routerLink]="['/user', post.entityId]" style="
+                    color: #272f46;" class="job_name_tag">{{post.entityId}}</a></h2></div>
+                
+                    <div> <small class="job-sallery"><i class="ti ti-time"></i> {{post['lastModifiedDate']}}</small></div>
+<br>
+                                    <div class="job-details">
+                                        <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
+                                            <!-- <p class="card-text" >
+                                            </p> -->
+                                        </div>
+                     <div *ngIf="post && post['containsImage']" class="cardbox-item">
+                        <img class="img-fluid" height="50%" width="50%" [src]="postImage" alt="">
+                    </div>
+                </div>
+            </div>
+            
+        </li>
+    </ul>
+    <div class="row post-card-footer"><a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)" class="col card-link post-footer-btn text-center post-active">
+        <i aria-hidden="true" class="ti ti-heart custom-size" style=" 
+        color: #272f46;"></i><span style="
+        color: #272f46;">Like({{likedCount}})</span>  </a>
+        <a class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="ti-comment-alt custom-size" style="    
+           
+            color: #272f46;"></i><span style="
+            color: #272f46;"> Comment({{commentsCount}}) </span> </a>
+                    <a class="col card-link post-footer-btn text-center" href="javascript:void(0);"><i class="ti-share custom-size" style="  
+                        
+                        color: #272f46;"></i><span style="
+                        color: #272f46;">Share(0)</span></a>
+        </div>
+</div>
+
 
 <div class="cardbox shadow-lg bg-white">
     <div class="cardbox-heading post-header">
             <div class="media m-0">
-                <div class="mr-3" [routerLink]="['/user', post.entityId]">
-                    <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile">
+                <div class="mr-3">
+                    <!-- <img class="img-fluid rounded-circle" width="45" [src]="profileSmImage" alt="User Profile"> -->
                 </div>
                 <div class="media-body">
                     <div class="h5 m-0">
-                        <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a>
+                        <!-- <a [routerLink]="['/user', post.entityId]" title="">{{post.entityId}}</a> -->
                         
                    </div>
-
+<!-- 
                     <div class="text-muted h7 mb-2">
                         <i class="fa fa-clock-o"></i>
                         {{post['lastModifiedDate'] | dateFormatPipe}}
-                    </div>
+                    </div> -->
                     
                 </div>
             </div>
@@ -57,7 +100,7 @@
       <div class="post-content">
 
         <div *ngIf="post && post['containsImage']" class="cardbox-item">
-            <img class="img-fluid" height="50%" width="50%" [src]="postImage" alt="">
+            <!-- <img class="img-fluid" height="50%" width="50%" [src]="postImage" alt=""> -->
         </div>
 
         <div *ngIf="post && post['containsVideo']" class="cardbox-item">
@@ -65,10 +108,10 @@
 
             </div>
         </div>
-        <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
+        <!-- <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText"> -->
             <!-- <p class="card-text" >
             </p> -->
-        </div>
+        <!-- </div> -->
         </div>
         
         <!-- comments section starts
@@ -92,14 +135,14 @@
     </div>
     <div class="card-footer">
         <div class="row post-card-footer">
-            <a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)">
+            <!-- <a href="javascript:void(0);" [ngClass]="likeButtonCss" (click)="like($event)">
                 <i class="fa fa-thumbs-up custom-size" aria-hidden="true"></i> 
                 Like({{likedCount}})
-            </a>
-            <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
+            </a> -->
+            <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center" (click)="toggleCommentInput()">
                 <i class="fa fa-comment custom-size"></i>
                 Comment({{commentsCount}})
-            </a>
+            </a> -->
             <!-- <a href="javascript:void(0);" class="col card-link post-footer-btn text-center">
                 <i class="fa fa-mail-forward custom-size"></i>
                 Share

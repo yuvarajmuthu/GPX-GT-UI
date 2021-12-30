@@ -1,20 +1,59 @@
-.table td, .table th{
-    border: none;
-    text-align: left;
-  }
-  .lg-fa{
-    font-size: 20px;
-    position: absolute;
-    right: 0;
-  }
-  .box-shadow{
-    transition: 10ms;
-    -webkit-box-shadow: 1px 6px 23px 4px rgba(0,0,0,0.31);
-    box-shadow: 1px 6px 23px 4px rgba(0,0,0,0.31);
-  }
+.table td,
+.table th {
+  border: none;
+  text-align: left;
+}
+.lg-fa {
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+}
+.box-shadow {
+  transition: 10ms;
+  -webkit-box-shadow: 1px 6px 23px 4px rgba(0, 0, 0, 0.31);
+  box-shadow: 1px 6px 23px 4px rgba(0, 0, 0, 0.31);
+}
 
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 
-  
+body {
+  background: #f2f2f2;
+  font-family: "Poppins", sans-serif;
+}
+
+h3 {
+  font-family: "Poppins", sans-serif;
+}
+
+.social-box .box {
+  background: rgb(178, 215, 224);
+  border-radius: 10px;
+  padding: 0px 70px;
+  margin: 20px 0px;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+}
+
+.social-box .box:hover {
+  box-shadow: 0 0 6px #4183d7;
+}
+
+.social-box .box .box-text {
+  margin: 20px 0px;
+  font-size: 15px;
+  line-height: 30px;
+}
+
+.social-box .box .box-btn a {
+  text-decoration: none;
+  color: #4183d7;
+  font-size: 16px;
+}
+
+.fa {
+  color: #4183d7;
+}
+
 .container {
   /* margin: 50px auto 0; */
   width: auto;
@@ -23,7 +62,7 @@
 .u-float-right {
   float: right;
 }
-.fa-map-marker{
+.fa-map-marker {
   font-size: 16px;
   padding-right: 2px;
 }
@@ -37,16 +76,10 @@
   align-items: center;
 }
 
-.subtle {
-  color: #888;
-  font-size: 16px;
-  font-weight: 600;
-}
-
 .card-media {
-  border: 1px solid rgba(0,0,0,0.12);
+  border: 1px solid rgba(236, 13, 13, 0.12);
   border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   height: 170px;
   margin-bottom: 25px;
   transition: all 300ms ease-out;
@@ -65,7 +98,7 @@
   width: 35%;
   position: relative;
 }
-.date-time{
+.date-time {
   display: block;
   font-size: 16px;
   font-weight: 600;
@@ -196,8 +229,8 @@
   font-weight: 600;
 }
 
-.event-description{
-    font-size: 13px;
+.event-description {
+  font-size: 13px;
 }
 
 .card-media-body-supporting-bottom {
@@ -231,10 +264,6 @@
 } */
 
 .card-media-link {
-  color: #41C1F2;
+  color: #41c1f2;
   text-decoration: none;
 }
-
-
- 
-   

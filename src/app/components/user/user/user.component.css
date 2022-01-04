@@ -13496,6 +13496,8 @@ ul.job-detail-des li span {
   .bio-intro {
     text-align: left;
     margin: auto;
+	color: #667488;
+	font-family: 'Muli', sans-serif;
   }
   .profile-name {
     float: left;

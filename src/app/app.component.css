@@ -99,6 +99,11 @@ a {
   overflow-x: hidden;
   /* margin: 0 auto; */
 }
+
+.topalign{
+    margin-top: 57px;
+}
+
 @media only screen and (max-width: 600px) {
   .routlet .container-fluid {
     width: 90%;

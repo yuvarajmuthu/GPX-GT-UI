@@ -7,11 +7,11 @@
 
         </div>
 
-        <div *ngIf="posts.length > 0" class="cdk-virtual-scroll-data-source">
-            <cdk-virtual-scroll-viewport class="all-posts" itemSize="90" (scroll)="onPostScroll($event)">
+        <div *ngIf="posts.length > 0">
+            <div >
                 <app-postcard  *ngFor="let post of posts; let i = index" [post]="post" [isComment]="false" [idx]="i" [selfActivities]="selfActivities">
                 </app-postcard>
-            </cdk-virtual-scroll-viewport>
+            </div>
             <button *ngIf="!selfActivities" (click)="topFunction()" id="myBtn" title="Start New Conversation"><i class='fa fa-flag'></i></button>
         </div>
         

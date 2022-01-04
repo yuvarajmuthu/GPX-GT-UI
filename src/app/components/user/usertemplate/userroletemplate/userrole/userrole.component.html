@@ -15,9 +15,63 @@
   </tbody>
 </table> -->
 
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> 
+
+
+
+
 <div class="container">
     <div class="card-media" >
     <div class="card-media-body">
+
+
+      <div class="social-box">
+        <div class="container">
+           <div class="row">
+           
+           
+            
+            <div class="col-lg-4 col-xs-12 text-center">
+              <div class="box">
+                
+               
+                <div class="box-text">
+                  <div *ngIf="roleObj.entityType !== 'LEGISLATIVE COMMITTEE'">
+
+                    <span  *ngFor="let displayProperty of displayProperties">
+                      <span *ngIf="displayProperty.propId == 'start' && role[displayProperty.propId]" class="subtle"><i class="fa fa-calendar"></i>{{role[displayProperty.propId]}}</span>
+                      <span *ngIf="displayProperty.propId == 'end' && role[displayProperty.propId]" class="subtle"> to {{role[displayProperty.propId]}}</span>
+                      <span *ngIf="displayProperty.propId != 'start' && displayProperty.propId != 'end' && role[displayProperty.propId]" class="subtle date-time">
+                          <i class="fa fa-users" *ngIf="displayProperty.propId == 'committee' && role[displayProperty.propId]"></i>
+                          <i class="fa fa-flag" *ngIf="displayProperty.propId == 'party' && role[displayProperty.propId]"></i>
+                          <i class="fa fa-map" *ngIf="displayProperty.propId == 'district' && role[displayProperty.propId]"></i>
+              
+                           {{role[displayProperty.propId]}}</span>
+                    </span>
+                  </div>
+                </div>
+                
+               </div>
+            </div>	 
+            
+             <div class="col-lg-4 col-xs-12 text-center">
+              <div class="box">
+                  
+               </div>
+            </div>
+        
+        </div>		
+        </div>
+    </div>
+
+
+
       <a href="javascript:void(0);"  *ngIf="inEditMode" class="lg-fa float-right" (click)="open(content, role)">
         <i class="fa fa-pencil-square-o"></i>
     </a>
@@ -31,19 +85,7 @@
        </div>
  
     </div>  
-    <div *ngIf="roleObj.entityType !== 'LEGISLATIVE COMMITTEE'">
-
-      <span  *ngFor="let displayProperty of displayProperties">
-        <span *ngIf="displayProperty.propId == 'start' && role[displayProperty.propId]" class="subtle"><i class="fa fa-calendar"></i>{{role[displayProperty.propId]}}</span>
-        <span *ngIf="displayProperty.propId == 'end' && role[displayProperty.propId]" class="subtle"> to {{role[displayProperty.propId]}}</span>
-        <span *ngIf="displayProperty.propId != 'start' && displayProperty.propId != 'end' && role[displayProperty.propId]" class="subtle date-time">
-            <i class="fa fa-users" *ngIf="displayProperty.propId == 'committee' && role[displayProperty.propId]"></i>
-            <i class="fa fa-flag" *ngIf="displayProperty.propId == 'party' && role[displayProperty.propId]"></i>
-            <i class="fa fa-map" *ngIf="displayProperty.propId == 'district' && role[displayProperty.propId]"></i>
-
-             {{role[displayProperty.propId]}}</span>
-      </span>
-    </div>
+    
       <div class="card-media-body-supporting-bottom">
       </div>
     </div>

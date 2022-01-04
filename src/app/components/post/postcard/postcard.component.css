@@ -1,97 +1,16 @@
-.post-footer-btn:hover{
-  background-color: rgba(0, 0, 0, 0.13);
-}
-.post-footer-btn{
-  padding: 5px 0px 5px 0px;
-}
-.custom-size{
-  font-size: 20px;
-}
-.post-card-footer a {
-  color: #0000007d;
-}
-.post-content{
-  padding:10px;
-}
-.row.post-card-footer{
-  background-color: #ECF0F1;
-  margin-right: -20px;
-  margin-left: -20px;
-  margin-top: -12px;
-  margin-bottom: -12px
-}
-.card-footer{
-  background-color: white;
-}
-.card{
-  width: 100%;
-}
-.post-active{
-  color: cornflowerblue !important;
-}
-.fileContainer {
-  color: #d8d8d8;
-  font-size: 11px;
-  margin: 0 0 0 5px;
-  position: relative;
-  text-transform: capitalize;
-}
-.fileContainer [type=file], .fileContainer [type=checkbox] {
-  cursor: pointer;
-  display: block;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  position: absolute;
-  right: 0px;
-  text-align: right;
-  top: 0;
-  width: 100%;
-  overflow: hidden;
-}
-.new-postbox {
-  display: inline-block;
-  width: 100%;
-}
-.new-postbox > figure {
-  display: inline-block;
-  margin-bottom: 0;
-  vertical-align: top;
-  width: 10.4%;
-}
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800,900";
+@import "https://fonts.googleapis.com/css?family=Raleway:400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Josefin+Slab:400,600,700";
 
-.newpst-input {
-  display: inline-block;
-  margin-left: 10px;
-  vertical-align: top;
-  width: 100%;
-}
-
-.newpst-input > form {
-  display: inline-block;
-  width: 100%;
-}
-.newpst-input textarea {
-  float: left;
-  width: 100%;
-}
-.attachments {
-  border: 1px solid #eee;
-  display: block;
-  padding: 10px;
-  text-align: right;
-  border-top: 0;
+body {
   background: #fff;
-}
-
-.attachments > ul {
-  list-style: outside none none;
-  margin-bottom: 0;
-  padding-left: 0;
-}
-
-.attachments li {
-  display: inline-block;
-  margin-left: 5px;
+  font-family: "Muli", sans-serif;
+  position: relative;
+  font-size: 15px;
+  color: #667488;
+  line-height: 24px;
 }
 
 textarea {
@@ -135,7 +54,9 @@ form button {
   margin-left: 5px;
 }
 
-#sidebar, #sidebar a, #sidebar-footer a {
+#sidebar,
+#sidebar a,
+#sidebar-footer a {
   padding-left: 3px;
 }
 
@@ -163,93 +84,286 @@ form button {
     margin-left: 5px;
   }
 
-  #sidebar, #sidebar a, #sidebar-footer a {
-    padding-left:3px;
+  #sidebar,
+  #sidebar a,
+  #sidebar-footer a {
+    padding-left: 3px;
   }
 }
 
-.commented-user{
+.commented-user {
   margin-top: -5px !important;
   font-size: 15px;
 }
-.commented-date{
+.commented-date {
   font-size: 11px;
-  color: rgba(0,0,0,0.54);
+  color: rgba(0, 0, 0, 0.54);
 }
-.comments-card{
+.comments-card {
   /* border: none !important; */
-  background-color: #FDFEFE;
+  background-color: #fdfefe;
 }
-.post-header{
-  background-color: #D6EAF8;
+.post-header {
+  background-color: #d6eaf8;
 }
-.comment-header{
+.comment-header {
   background-color: #0fc4b5;
 }
-.post-comment-section{
+.post-comment-section {
   margin: 15px 0px 0px 0px;
 }
-.comments-card .card-header{
+.comments-card .card-header {
   border: none !important;
 }
-.load-more-comments{
-  color:rgba(0,0,0,0.54);
+.load-more-comments {
+  color: rgba(0, 0, 0, 0.54);
 }
-.load-more-comments:hover{
-  background-color:rgba(0,0,0,0.13);
+.load-more-comments:hover {
+  background-color: rgba(0, 0, 0, 0.13);
 }
 
-.image-upload{
+.image-upload {
   padding: 0px 15px 15px 15px;
 }
-.rounded-circle:hover{
+.rounded-circle:hover {
   cursor: pointer;
 }
-.tagged-users{
-  color:#007bff;
+.tagged-users {
+  color: #007bff;
 }
-.tagged-users:hover{
+.tagged-users:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.commentContent{
+.commentContent {
   height: 100px;
-  border: 1px solid rgba(0,0,0,0.14);
+  border: 1px solid rgba(0, 0, 0, 0.14);
   border-radius: 5px;
   overflow: auto;
 }
 .commentContent[placeholder]:empty:before {
   content: attr(placeholder);
-  color: #555; 
+  color: #555;
 }
-.post-list{
-  background-color:#FBFCFC;
+.post-list {
+  background-color: #fbfcfc;
 }
-.share-button-pop{
+.share-button-pop {
   padding: 5px;
   float: right;
   margin: 5px 0px 5px 0px;
 }
-.share-toggle-btn{
+.share-toggle-btn {
   width: 30%;
   border: none;
   margin: 0 !important;
   border-radius: 0px;
 }
-.open-post{
+.open-post {
   background-color: black;
   border: none;
   color: white;
   float: right;
 }
 
-
-
-.open-post:focus{
+.open-post:focus {
   background-color: black;
   border: none;
   color: white;
   float: right;
 }
 
+.dashboard-caption-wrap {
+  padding: 2rem;
+}
+
+ul.list {
+  margin: 0;
+  padding: 0;
+}
+.manage-list-row {
+  background: #fff;
+  border: 1px solid #e9f0f3;
+  border-radius: 4px;
+  padding: 20px 0;
+  padding-bottom: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
+  list-style: none;
+  box-shadow: 0 3px 10px 0 rgba(62, 28, 131, 0.02);
+  -webkit-box-shadow: 0 3px 10px 0 rgba(62, 28, 131, 0.02);
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-backface-visibility: hidden;
+}
+.manage-list-row:hover,
+.manage-list-row:focus {
+  box-shadow: 0 3px 10px 0 rgba(62, 28, 131, 0.06);
+  -webkit-box-shadow: 0 3px 10px 0 rgba(62, 28, 131, 0.06);
+}
+
+.mysp-sites-list .site-name,
+.manage-list-row .job-info {
+  float: left;
+  padding-left: 80px;
+  position: relative;
+}
+
+.manage-list-row .job-info {
+  padding-left: 25px;
+}
+
+.mysp-sites-list .site-options,
+.manage-list-row .job-buttons {
+  float: right;
+  margin-right: 25px;
+  position: relative;
+}
+
+.manage-list-row .job-buttons {
+  margin-top: 7px;
+}
+
+.manage-list-row .job-info .job-img {
+  border-radius: 2px;
+  float: left;
+  margin-right: 25px;
+  width: 36px;
+}
+
+.manage-list-row .job-info .job-img img {
+  display: block;
+  max-width: 48px;
+}
+
+.manage-list-row .job-details {
+  display: inline-block;
+  font-size: 16px;
+  padding-right: 5rem;
+  /* top: 35%; */
+  /* left: 35%; */
+  /* position: absolute; */
+}
+
+.manage-list-row .job-info h2 {
+  display: block;
+  font-size: 18px;
+  /* font-size: 1.8rem; */
+  margin: 0;
+  line-height: 1.3;
+}
+
+.manage-list-row .job-info h2 a:hover,
+.manage-list-row .job-info h2 a:focus {
+  text-decoration: none;
+}
+
+.manage-list-row small {
+  color: #546e7a;
+  display: inline-block;
+  line-height: 1.3;
+  margin-right: 15px;
+}
+
+.manage-list-row small i {
+  margin-right: 7px;
+}
+.job-details img {
+  width: 610px;
+  margin-top: 15px;
+
+  padding-bottom: 2rem;
+}
+.comment-section {
+  background: #fff;
+  padding: 20px;
+}
+.comment-section li {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.comment-avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 25px;
+  float: left;
+}
+.comment-section li img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+.commemnt-text {
+  /*    background: #f2f2f2;*/
+  /*padding: 5px 15px;*/
+  /*border-radius: 5px;*/
+  float: left;
+  width: calc(100% - 80px);
+}
+.commemnt-text::before {
+  content: "";
+}
+.sub-commment {
+  display: inline-block;
+  margin-top: 20px;
+}
+.comment-like a {
+  font-size: 10px;
+  margin: 0px 15px;
+}
+.mobile-view .dropdown-menu {
+  top: 54px;
+}
+.mobile-view.open .dropdown-menu {
+  top: auto;
+}
+.commenter-name p {
+  margin: 0px;
+}
+.sub-commment .comment-avatar::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 97px;
+  background: #c3c3c3;
+  left: 120px;
+  margin-top: 51px;
+  border-radius: 10px;
+}
+.sub-commment span.showmore {
+  position: relative;
+  top: 14px;
+}
+.sub-commment span.showmore:hover {
+  cursor: pointer;
+}
+/*-------------------------*/
+/*activity.html*/
+/*-------------------------*/
+
+@media screen and (max-width: 767px) {
+  .job-details img {
+    width: 250px;
+
+    margin-top: 15px;
+  }
+  .post-card-footer .post-footer-btn span {
+    display: none;
+  }
+  .manage-list-row .job-details {
+    display: inline-block;
+    font-size: 16px;
+    padding-right: 56rem;
+  }
+  .manage-list-row .job-info h2 {
+    display: block;
+    /* font-size: 18px; */
+    font-size: 20px;
+    margin: 0;
+    line-height: 1.3;
+    padding-right: 50rem;
+  }
+}

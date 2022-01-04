@@ -231,6 +231,7 @@ input{
     text-align: left;
     display: inline-block;
     width: 100%;
+    margin-top: 60px;
 }
 .search-btn-div .form-group{
     float: left;
@@ -422,9 +423,10 @@ input{
     color: #018ece;
 }
 
-/* .autocomplete-container .suggestions-container {
+.autocomplete-container .suggestions-container {
     position: fixed !important;
-} */
+}
+
 .all-posts .cdk-virtual-scroll-content-wrapper{
     display: inline-block !important;
     width: 500px !important;

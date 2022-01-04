@@ -1,4 +1,5 @@
-<nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top">
+<div>
+<nav id="navbar" class="navbar navbar-light bg-light justify-content-between fixed-top">
   <div class="container-fluid">
       <a [ngClass]="{'navbar-brand mylogoLg':!isMobile , 'navbar-brand simplelogo':isMobile}" (click)="hideNav()" routerLink="/"></a>
 
@@ -14,7 +15,7 @@
       </div> -->
 
       <div *ngIf="isMobile">
-        <app-gps-global-search   placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
+        <app-gps-global-search placeholder="Search Legislator, Person, District, Party..." from="commonSearch" (valueSelect)='selectEvent($event)' category="all" [inputvalue]=""></app-gps-global-search>
       </div>
       
      <!-- <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button> -->
@@ -111,6 +112,7 @@
       </form>
   </div>
 </nav>
+</div>
 <!-- <body> -->
 <div class="routlet">  
 <div class="container-fluid">
@@ -177,7 +179,7 @@
           </div>-->
       <!-- </div> -->
       <!-- /.col-lg-3 -->
-      <div class="col-lg-12">
+      <div class="col-lg-12 topalign">
           <app-alert [dismissOnTimeout]=3000></app-alert>
           <router-outlet></router-outlet>
 

@@ -434,3 +434,13 @@ input{
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .modal-dialog{ overflow: auto;}
+
+.input-tweeter{
+    display: inline !important;
+    width: 70% !important;
+}
+.add-tweeter-btn{
+    padding: 3px !important;
+    line-height: 2px !important;
+    margin-left: 5px !important;
+}

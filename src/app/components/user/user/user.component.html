@@ -262,6 +262,8 @@
                                                        </div>
                                                        <div id="TwitterCollapse" *ngIf="!twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
                                                           <small>Twitter feed not available.</small>
+                                                          <input type="text" class="form-control input-tweeter" placeholder="twitter Id" [(ngModel)]="tweeterId"/>
+                                                          <button class="btn btn-primary add-tweeter-btn my-2 my-sm-0" type="button" (click)="addtweeter()"><mat-icon>add</mat-icon></button>
                                                        </div>
           
                                                       <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"

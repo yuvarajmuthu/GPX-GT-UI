@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+
 .table td,
 .table th {
   border: none;
@@ -14,7 +16,6 @@
   box-shadow: 1px 6px 23px 4px rgba(0, 0, 0, 0.31);
 }
 
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 
 body {
   background: #f2f2f2;

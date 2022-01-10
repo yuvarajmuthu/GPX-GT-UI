@@ -40,6 +40,7 @@ import {stringify} from 'querystring';
 export class UserComponent implements OnInit {
 
     @Input() profileUserId: string = '';
+    tweeterId:string;
     isEditDescIcon = false;
     isEditDesc = false;
     legisId: string = '';
@@ -258,6 +259,10 @@ export class UserComponent implements OnInit {
                 this.biodata = data;
         });
 
+    }
+
+    addtweeter(){
+        console.log(this.tweeterId);
     }
 
     toggleEditDisplayname(){

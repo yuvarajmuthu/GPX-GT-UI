@@ -9,6 +9,7 @@ if (environment.production) {
   enableProdMode();
 
   //DISABLE CONSOLE LOG IN PRODUCTION
+  //Uncomment for Production
   if (window) {
     //window.console.log = function() {};
   }

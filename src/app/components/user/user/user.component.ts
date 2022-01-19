@@ -40,7 +40,7 @@ import {stringify} from 'querystring';
 export class UserComponent implements OnInit {
 
     @Input() profileUserId: string = '';
-    tweeterId:string;
+    twitterId:string;
     isEditDescIcon = false;
     isEditDesc = false;
     legisId: string = '';
@@ -261,9 +261,26 @@ export class UserComponent implements OnInit {
 
     }
 
-    addtweeter(){
-        console.log(this.tweeterId);
-    }
+    addtwitterhandle(){
+        let request = {};
+
+        console.log(this.twitterId);
+        request['entityId'] = this.loggedUsername;
+        request['profileTemplateId'] = 'upOtherContacts';
+        request['key'] = 'Twitter';
+        request['value'] = this.twitterId;
+
+        this.userService.updateProfileDataSelective(request)
+        .subscribe((response) => {
+            console.log("response from adding twitter id ", response);
+
+            if(response && response['data']){
+                console.log("response['data] ", response['data']);
+                this.loadContactsData(response['data']);
+            }
+            
+        });  
+        }
 
     toggleEditDisplayname(){
         this.isEditDisplayname = !this.isEditDisplayname;
@@ -750,6 +767,8 @@ export class UserComponent implements OnInit {
                         //retrieving contacts
                         if(profileData['profileTemplateId'] === 'upOtherContacts'){
                             this.contactsData = profileData['data'];
+                            this.loadContactsData(this.contactsData);
+                            /*
                             if(this.contactsData && this.contactsData['Twitter']){
                                 this.twitterHandle = "https://twitter.com/" + this.contactsData['Twitter'] +"?ref_src=twsrc%5Etfw";
 
@@ -759,7 +778,7 @@ export class UserComponent implements OnInit {
                             if(this.contactsData && this.contactsData['Facebook']){
                                 this.facebookHandle = this.contactsData['Facebook'];
                             }
-                            
+                            */
                         }
 
                         //any group/committee members
@@ -774,11 +793,11 @@ export class UserComponent implements OnInit {
                     if(this.members && this.members.length > 0){
                         this.userData['members'] = this.viewingUser['members'] = this.members;
                     }
-
+/*
                     if(this.twitterHandle && this.twitterHandle.trim().length > 0){
                         this.twitterHandleExist = true;
                     }
-
+*/
                     if (compTypes.length > 0) {
                         this.templateType = compTypes;
                     }
@@ -802,6 +821,20 @@ export class UserComponent implements OnInit {
         //}
 
         
+    }
+
+    loadContactsData(contactsData:{}){
+        console.log("contactsData ", contactsData);
+        if(contactsData && contactsData['Twitter']){
+            this.twitterHandle = "https://twitter.com/" + contactsData['Twitter'] +"?ref_src=twsrc%5Etfw";
+            
+            this.twitterHandleExist = true;
+        }
+        console.log('this.twitterHandle ', this.twitterHandle);
+
+        if(contactsData && contactsData['Facebook']){
+            this.facebookHandle = contactsData['Facebook'];
+        }
     }
 
     accessChange(){

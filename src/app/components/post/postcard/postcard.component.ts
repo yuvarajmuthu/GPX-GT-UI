@@ -285,8 +285,8 @@ export class PostcardComponent implements OnInit {
 
         //check if logged in user LIKED the Post
         if(this.entityId && this.post.likedBy && this.post.likedBy.indexOf(this.entityId) != -1){
-            this.liked = true;    
-            this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+            //this.liked = true;    
+            //this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
         }
         
         //COMMENT count
@@ -366,6 +366,7 @@ export class PostcardComponent implements OnInit {
     }
 
     like(event:any) {
+        
         if(!this.liked){    
             let entityId = this.dataShareService.getLoggedinUsername();
             this.postService.postLike(this.post.id, entityId)
@@ -381,6 +382,8 @@ export class PostcardComponent implements OnInit {
             });
         }
         
+        this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+
     }
 
     deleteAttachedFile(e) {

@@ -175,7 +175,7 @@ form button {
 }
 
 .dashboard-caption-wrap {
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 ul.list {
@@ -346,7 +346,7 @@ ul.list {
 
 @media screen and (max-width: 767px) {
   .job-details img {
-    width: 250px;
+    /*width: 250px;*/
 
     margin-top: 15px;
   }
@@ -356,7 +356,7 @@ ul.list {
   .manage-list-row .job-details {
     display: inline-block;
     font-size: 16px;
-    padding-right: 56rem;
+    padding-right: 48rem;
   }
   .manage-list-row .job-info h2 {
     display: block;
@@ -366,4 +366,12 @@ ul.list {
     line-height: 1.3;
     padding-right: 50rem;
   }
+}
+
+.fa-heart {
+  color: #ccc;
+}
+
+.fa-heart.active {
+  color: rgb(223, 46, 90);
 }

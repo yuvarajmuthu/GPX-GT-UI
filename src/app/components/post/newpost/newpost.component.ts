@@ -26,7 +26,7 @@ export class NewpostComponent implements OnInit {
       
     stagingImage: any = null;
     isvideoSelected : boolean = false;
-    public isFileStagingAreaCollapsed: boolean = true;
+    public isFileStagingAreaCollapsed: boolean = false;
     public: boolean = false;
     friends: boolean = false;
     onlyMe: boolean = false;

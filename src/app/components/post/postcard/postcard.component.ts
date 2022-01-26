@@ -77,6 +77,7 @@ export class PostcardComponent implements OnInit {
 
     items: any;
     mentionConfig:any;
+    isActive:boolean = false;
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
@@ -285,8 +286,8 @@ export class PostcardComponent implements OnInit {
 
         //check if logged in user LIKED the Post
         if(this.entityId && this.post.likedBy && this.post.likedBy.indexOf(this.entityId) != -1){
-            //this.liked = true;    
-            //this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+            this.liked = true;    
+            this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
         }
         
         //COMMENT count
@@ -372,19 +373,25 @@ export class PostcardComponent implements OnInit {
             this.postService.postLike(this.post.id, entityId)
             .subscribe((data:any) => {
 
-                let postResponse = data;
-                this.liked = true;
+                //let postResponse = data;
+                this.liked = data['liked'];
                 this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
-                if(postResponse.likedBy){
-                    this.likedCount = postResponse.likedBy.length
+                if(data['likedBy']){
+                    this.likedCount = data['likedBy'].length
                 }    
 
             });
         }
         
-        this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+//        this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+        
+
 
     }
+
+    onClick() {
+        this.isActive = !this.isActive;
+      }  
 
     deleteAttachedFile(e) {
         this.postFormData = new FormData();

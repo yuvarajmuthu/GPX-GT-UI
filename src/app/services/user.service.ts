@@ -650,7 +650,7 @@ updateUserSmProfileImage(request:FormData):Observable<any>{
 
   return this.http.post(serviceUrl,  request )
   .pipe(
-    map((response:Response) => response.json()),
+    //map((response:Response) => response.json()),
     tap(_ => this.log(`User profile image got uploaded successfully`)),
     catchError(this.handleError<any>(`Error in updateUserSmProfileImage()`))
   );
@@ -662,7 +662,7 @@ updateConnectionAction(request:Connection):Observable<any>{
  
   return this.http.post(serviceUrl, request, this.httpOptions)
   .pipe(
-    map((response:Response) => response.json()),
+    //map((response:Response) => response.json()),
     tap(_ => this.log(`posted updateConnectionAction`)),
     catchError(this.handleError<any>(`Error in updateConnectionAction()`))
   );
@@ -674,9 +674,21 @@ updateProfileData(request:any):Observable<any>{
  
   return this.http.post(serviceUrl, request, this.httpOptions)
   .pipe(
-    map((response:Response) => response.json()),
+    //map((response:Response) => response.json()),
     tap(_ => this.log(`posted updateProfileData`)),
     catchError(this.handleError<any>(`Error in updateProfileData()`))
+  );
+}
+
+updateProfileDataSelective(request:any):Observable<any>{
+  let serviceUrl = this.getUserService()+"/updateUserProfileDataSelective";
+  console.log("updateProfileDataSelective user.service " + request + " serviceUrl " + serviceUrl);
+ 
+  return this.http.post(serviceUrl, request, this.httpOptions)
+  .pipe(
+    //map((response:Response) => response.json()),
+    tap(_ => this.log(`posted updateProfileDataSelective`)),
+    catchError(this.handleError<any>(`Error in updateProfileDataSelective`))
   );
 }
 

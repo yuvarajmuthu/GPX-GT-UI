@@ -327,17 +327,28 @@ export class PostService  extends AbstractService{
     var serviceUrl = "";
 
     if(this.devMode){
-      serviceUrl = '/assets/json/fromService/newlike.json?entityId='+entityId; 
+      serviceUrl = '/assets/json/fromService/newlike.json'; 
+
+      console.log("in postLike - serviceUrl ", serviceUrl);
+
+        
+      return this.http.get(serviceUrl, this.httpOptions).pipe(
+        tap(_ => this.log(`postLike`)),
+        catchError(this.handleError<any>(`Error in postLike`))
+      );                     
+
     }else{
       serviceUrl = this.serviceUrl + "/like/" + postId + "?entityId=" + entityId;
+      console.log("in postLike - serviceUrl ", serviceUrl);
+
+      return this.http.post(serviceUrl, this.httpOptions).pipe(
+        tap(_ => this.log(`updating postLike`)),
+        catchError(this.handleError<any>(`Error in postLike()`))
+      );                     
+  
     }
 
-    console.log("in postLike - serviceUrl ", serviceUrl);
 
-    return this.http.post(serviceUrl, this.httpOptions).pipe(
-      tap(_ => this.log(`updating postLike`)),
-      catchError(this.handleError<any>(`Error in postLike()`))
-    );                     
   }
 
   getNotifications(){

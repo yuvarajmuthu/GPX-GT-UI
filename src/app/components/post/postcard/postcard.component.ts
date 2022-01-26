@@ -77,6 +77,7 @@ export class PostcardComponent implements OnInit {
 
     items: any;
     mentionConfig:any;
+    isActive:boolean = false;
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,
@@ -366,22 +367,31 @@ export class PostcardComponent implements OnInit {
     }
 
     like(event:any) {
+        
         if(!this.liked){    
             let entityId = this.dataShareService.getLoggedinUsername();
             this.postService.postLike(this.post.id, entityId)
             .subscribe((data:any) => {
 
-                let postResponse = data;
-                this.liked = true;
+                //let postResponse = data;
+                this.liked = data['liked'];
                 this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
-                if(postResponse.likedBy){
-                    this.likedCount = postResponse.likedBy.length
+                if(data['likedBy']){
+                    this.likedCount = data['likedBy'].length
                 }    
 
             });
         }
         
+//        this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
+        
+
+
     }
+
+    onClick() {
+        this.isActive = !this.isActive;
+      }  
 
     deleteAttachedFile(e) {
         this.postFormData = new FormData();

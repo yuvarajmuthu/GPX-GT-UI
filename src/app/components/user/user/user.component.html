@@ -258,20 +258,31 @@
           
                                                        <!--Twitter feed-->
                                                        <div id="TwitterCollapse" *ngIf="twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
-                                                          <a class="twitter-timeline" href="{{twitterHandle}}">Tweets From Twitter</a>
+                                                          <a class="twitter-timeline" href="{{twitterHandle}}">Tweets</a>
+                                                          
                                                        </div>
-                                                       <div id="TwitterCollapse" *ngIf="!twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">                                                
-                                                          <small>Twitter feed not available.</small>
-                                                          <input type="text" class="form-control input-tweeter" placeholder="twitter Id" [(ngModel)]="tweeterId"/>
-                                                          <button class="btn btn-primary add-tweeter-btn my-2 my-sm-0" type="button" (click)="addtweeter()"><mat-icon>add</mat-icon></button>
+                                                       <div id="TwitterCollapse" *ngIf="!twitterHandleExist" [ngbCollapse]="isTwitterActivityCollapsed">
+                                                        <div *ngIf="isUserLogged()">                                                
+                                                          <small>Please add the Twitter handle here.</small>
+                                                          <div>
+                                                            <input type="text" class="form-control input-tweeter" placeholder="twitter Id" [(ngModel)]="twitterId"/>
+                                                            <button class="btn btn-primary add-tweeter-btn my-2 my-sm-0" type="button" (click)="addtwitterhandle()"><mat-icon>add</mat-icon></button>
+                                                          </div>
+                                                        </div>
+                                                        <div *ngIf="!isUserLogged()"> 
+                                                            Please login to update the profile.
+                                                        </div>    
                                                        </div>
-          
+
+                                                       <!--Followers-->
                                                       <div id="FollowersCollapse" [ngbCollapse]="isFollowersCollapsed"
                                                            class="widget stick-widget">
                                                               <div *ngFor="let followerUsername of followers">
                                                                   <app-usercard1 [username]=followerUsername></app-usercard1>
                                                               </div>
                                                       </div>
+
+                                                       <!--Followings-->                                                      
                                                       <div id="FollowingsCollapse" [ngbCollapse]="isFollowingsCollapsed"
                                                               class="widget stick-widget">
                                                               <div *ngFor="let followingUsername of followings">
@@ -301,6 +312,7 @@
     
                                                      </div>
 
+                                                     <!--Members-->
                                                      <div id="managedByCollapse" *ngIf="!isUserLogged()" [ngbCollapse]="isManagedByCollapsed" class="widget stick-widget">
                                                        
                                                          <ngb-alert type="primary" [dismissible]="false">

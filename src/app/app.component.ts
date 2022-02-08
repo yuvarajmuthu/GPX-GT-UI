@@ -55,6 +55,7 @@ export class AppComponent implements OnInit {
     title = 'gpx-ui';
     isUserLogged: boolean;
     isCollaped: boolean = true;
+    isClickedNav = false;
     profileSmImage: any = 'assets/images/avatar1.png';
     isImageLoading: boolean = false;
     screenHeight:any;
@@ -62,11 +63,17 @@ export class AppComponent implements OnInit {
 
     @HostListener('click', ['$event.target'])
     onClick(evt) {
+        // console.log(evt.id);
+        // if(evt.id == 'test1' || evt.id == 'test2'){
+        //     this.isCollaped = true;
+        // }
       if(evt.id != 'dropdownMenuButton'){
             var element = document.getElementById("createpagemenu");
             element.classList.remove("createpage-option");
             this.iscreateOptEnabled = false;
+
       }
+     
    }
    @HostListener('window:scroll', ['$event']) onScrollEvent($event){
        let postConent = document.getElementById("postContent");
@@ -193,7 +200,7 @@ export class AppComponent implements OnInit {
       selectEvent(e){
           console.log(e.username);
       //this.isCollaped = !this.isCollaped;
-       this.hideNav();
+       this.hideNav(this.isCollaped);
        let routePath= '/user/'+e.username+"/";
        this.router.navigate([routePath]);
      }
@@ -233,8 +240,24 @@ export class AppComponent implements OnInit {
         //return false;
     }
 
-    hideNav(){
-        this.isCollaped = true;
+    hideNav(isCollap){
+        // this.isClickedNav = true;
+        // if(isCollap == false)
+        //  this.isCollaped = true;
+    }
+
+    toggleNav(isCollapse){
+
+        if(this.isClickedNav){
+            this.isClickedNav = false;
+            this.isCollaped = false;
+            return;
+        }
+        console.log(isCollapse);
+        if(isCollapse == true)
+             this.isCollaped = false;
+         else
+              return;
     }
 
     clickTab(event: string) {

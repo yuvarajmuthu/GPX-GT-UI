@@ -1,6 +1,6 @@
 [{
-	"id": "5e42f2b17e56cd27105bd842",
-	"parentPostId": "",
+	"id": 1,
+	"parent_Id": null,
 	"entityId": "user6@gmail.com",
 	"postType": "T",
 	"postText": "hi <span class='tagged-users' data-username='user5@gmail.com' data-entitytype='PUBLICUSER' readonly='true' contenteditable='false' value='user5 five'>user5 five</span><span>&nbsp;</span>😃 fine",
@@ -10,18 +10,31 @@
 	"likedBy":["u001","u002"],
 	"likedByCurrentUser":true,
 	"comments":[{
-		"commentId":"1",
-		"entityId": "user7@gmail.com",
+		"id":2,
+		"parent_Id":1,
+		"entityId": "user13@gmail.com",
 	     "postType": "T",
 	     "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-	     "createdDate": "2020-02-09T18:54:02.524Z",
-		 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+	     "createdDate": "2020-02-10T18:54:02.524Z",
+		 "lastModifiedDate": "2020-02-10T18:54:02.524Z",
 		 "likedBy":["u001"],
-		 "likedByCurrentUser":true
+		 "likedByCurrentUser":true,
+		 "comments":[{
+			"id":3,
+			"parent_Id":2,
+			"entityId": "user13A@gmail.com",
+			 "postType": "T",
+			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			 "createdDate": "2020-02-09T18:54:02.524Z",
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+			 "likedBy":["u001"],
+			 "likedByCurrentUser":true
+			}]
 		},
 		{
-			"commentId":"2",
-			"entityId": "user7@gmail.com",
+			"id":4,
+			"parent_Id":1,
+			"entityId": "user14@gmail.com",
 			 "postType": "T",
 			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 			 "createdDate": "2020-02-09T18:54:02.524Z",
@@ -30,8 +43,9 @@
 			 "likedByCurrentUser":true
 		},
 		{
-			"commentId":"3",
-			"entityId": "user7@gmail.com",
+			"id":5,
+			"parent_Id":1,
+			"entityId": "user15@gmail.com",
 			 "postType": "T",
 			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 			 "createdDate": "2020-02-09T18:54:02.524Z",
@@ -42,36 +56,60 @@
 	]
 },
 {
-	"id": "5e4089a9f453cd5244441df0",
-	"parentPostId": "5e42f2b17e56cd27105bd842",
-	"entityId": "user6@gmail.com",
-	"postType": "TI",
-	"postText": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam omnis nihil, aliquam est, voluptates officiis iure soluta alias vel odit, placeat reiciendis ut libero! Quas aliquid natus cumque quae repellendus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, excepturi. Doloremque, reprehenderit! Quos in maiores, soluta doloremque molestiae reiciendis libero expedita assumenda fuga quae. Consectetur id molestias itaque facere? Hic!",
-	"relatedFiles": ["5e4055ddf453cd5244441dee"],
-	"createdDate": "2020-02-09T18:56:29.445Z",
-	"lastModifiedDate": "2020-02-09T18:56:29.904Z",
-	"likedBy":["u001"],
+	"id": 6,
+	"parent_Id": null,
+	"entityId": "user12@gmail.com",
+	"postType": "T",
+	"postText": "hi <span class='tagged-users' data-username='user5@gmail.com' data-entitytype='PUBLICUSER' readonly='true' contenteditable='false' value='user5 five'>user5 five</span><span>&nbsp;</span>😃 fine",
+	"createdDate": "2020-02-09T18:54:02.524Z",
+	"lastModifiedDate": "2020-02-09T18:54:02.524Z",
+	"totalComments": 5,
+	"likedBy":["u001","u002"],
 	"likedByCurrentUser":true,
 	"comments":[{
-		"commentId":"1",
-		"entityId": "user7@gmail.com",
+		"id":7,
+		"parent_Id":6,
+		"entityId": "user11@gmail.com",
 	     "postType": "T",
-	     "postText": "test comment 1",
+	     "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 	     "createdDate": "2020-02-09T18:54:02.524Z",
 		 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
 		 "likedBy":["u001"],
-		 "likedByCurrentUser":true
-		},
-		{
-			"commentId":"2",
-			"entityId": "user7@gmail.com",
+		 "likedByCurrentUser":true,
+		 "comments":[{
+			"id":8,
+			"parent_Id":7,
+			"entityId": "user10@gmail.com",
 			 "postType": "T",
-			 "postText": "test comment 2",
+			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
 			 "createdDate": "2020-02-09T18:54:02.524Z",
 			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
 			 "likedBy":["u001"],
 			 "likedByCurrentUser":true
-		}],
-	"totalComments": 2
+			}]
+		},
+		{
+			"id":9,
+			"parent_Id":6,
+			"entityId": "user9@gmail.com",
+			 "postType": "T",
+			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			 "createdDate": "2020-02-09T18:54:02.524Z",
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+			 "likedBy":["u001"],
+			 "likedByCurrentUser":true
+		},
+		{
+			"id":10,
+			"parent_Id":6,
+			"entityId": "user9@gmail.com",
+			 "postType": "T",
+			 "postText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+			 "createdDate": "2020-02-09T18:54:02.524Z",
+			 "lastModifiedDate": "2020-02-09T18:54:02.524Z",
+			 "likedBy":["u001"],
+			 "likedByCurrentUser":true
+		}
+	]
 }
 ]

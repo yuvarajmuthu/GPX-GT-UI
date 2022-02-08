@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import  {  NgxEmojiPickerModule  }  from  'ngx-emoji-picker';
 import { MentionModule } from 'angular-mentions';
+import {MatIconModule} from '@angular/material/icon';
+
 //import {GpxUIComponentsModule} from '../gpx-uicomponents/gpx-uicomponents.module';
 
 
@@ -24,6 +26,7 @@ import { TagInputModule } from 'ngx-chips';
   imports: [
     //BrowserModule,
     //BrowserAnimationsModule,
+    MatIconModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,

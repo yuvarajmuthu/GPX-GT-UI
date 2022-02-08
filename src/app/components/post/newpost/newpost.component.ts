@@ -382,7 +382,7 @@ submitPost() {
     }
 
     if (this.parentPost != null) {
-        this.post.parentPostId = this.parentPost.id;
+        this.post.parentPostId = String(this.parentPost.id);
     }
     this.postFormData.append('post', JSON.stringify(this.post));
     this.postService.postComment(this.postFormData)

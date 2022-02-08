@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, isDevMode, Output, EventEmitter, ViewEncapsulation, ElementRef} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Input, isDevMode, Output, EventEmitter, ViewEncapsulation, ElementRef, ChangeDetectorRef} from '@angular/core';
 import { Router } from "@angular/router";
 import {PostService} from '../../../services/post.service';
 import {UserService} from '../../../services/user.service';
@@ -11,6 +11,7 @@ import 'rxjs/Rx';
 
 import {DomSanitizer} from "@angular/platform-browser";
 import { tagUser } from 'src/app/models/tagusers';
+import { CdkRow } from '@angular/cdk/table';
 export interface AutoCompleteModel {
     value: any;
     display: string;
@@ -22,7 +23,7 @@ export interface AutoCompleteModel {
     encapsulation: ViewEncapsulation.None
 })
 
-export class PostcardComponent implements OnInit {
+export class PostcardComponent implements AfterViewInit {
     @Input() post: Post;
     @Input() idx: string;
     @Input() isComment : boolean;
@@ -83,6 +84,7 @@ export class PostcardComponent implements OnInit {
                 private dataShareService: DatashareService,
                 private userService: UserService,
                 private elementRef: ElementRef,
+                private cdr: ChangeDetectorRef,
                 private sanitizer: DomSanitizer,
                 private http:HttpClient,
                 private router: Router) {
@@ -252,11 +254,12 @@ export class PostcardComponent implements OnInit {
     
 
 
-    ngOnInit(): void {
+    ngAfterViewInit(){
         this.entityId = this.dataShareService.getLoggedinUsername();
 
         if (this.post && this.post.postType) {
             this.postText = this.sanitizer.bypassSecurityTrustHtml(this.post.postText);
+            console.log(this.postText);
             if (this.post.postType.indexOf('V') !== -1) {
                 this.post['containsVideo'] = true;
             }
@@ -289,7 +292,7 @@ export class PostcardComponent implements OnInit {
             this.liked = true;    
             this.likeButtonCss = "col card-link post-footer-btn text-center post-active";
         }
-        
+        this.cdr.detectChanges();
         //COMMENT count
         this.getCommentsCount();
         
@@ -370,7 +373,7 @@ export class PostcardComponent implements OnInit {
         
         if(!this.liked){    
             let entityId = this.dataShareService.getLoggedinUsername();
-            this.postService.postLike(this.post.id, entityId)
+            this.postService.postLike(String(this.post.id), entityId)
             .subscribe((data:any) => {
 
                 //let postResponse = data;
@@ -455,7 +458,7 @@ export class PostcardComponent implements OnInit {
         // CHANGE THE NAME OF THE BUTTON.
         if(this.showCommentInput){
             //this.buttonName = "Hide";
-            this.getComments(this.post.id, this.pageNumber);
+            this.getComments(String(this.post.id), this.pageNumber);
         }
         //else
             //this.buttonName = "Show";
@@ -510,7 +513,7 @@ export class PostcardComponent implements OnInit {
         this.comment.entityId = this.dataShareService.getLoggedinUsername();
         this.comment.postText = this.txtPost; 
 
-        this.comment.parentPostId = this.post.id;
+        this.comment.parentPostId = String(this.post.id);
         console.log('Submitting Comment ', this.comment, JSON.stringify(this.comment));
 
         if(!this.postFormData){
@@ -550,7 +553,7 @@ getComments(postId:string, pageNumber:number): void {
 
 loadMoreComments() {
     this.pageNumber++;
-    this.getComments(this.post.id, this.pageNumber);
+    this.getComments(String(this.post.id), this.pageNumber);
 }
 
 managePagination(){
@@ -563,7 +566,7 @@ managePagination(){
 }
 
 getCommentsCount() {
-    this.postService.getCommentsCount(this.post.id)
+    this.postService.getCommentsCount(String(this.post.id))
     .subscribe((data:any) => {
         this.commentsCount = data;
         console.log("Comments count for " + this.post.id + ": " + data);
@@ -575,7 +578,7 @@ getCommentsCount() {
     //OBSOLETE
    //not used for now, post.likedBy.length is being used
    getLikedCount() {
-    this.postService.getLikedCount(this.post.id)
+    this.postService.getLikedCount(String(this.post.id))
     .subscribe((data:any) => {
         this.likedCount = data;
         console.log(data);

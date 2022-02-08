@@ -6,16 +6,29 @@
             <button  (click)="openNewPost($event)" class="open-post" title="Start New Conversation"><i class='fa fa-flag-o'></i></button>
 
         </div>
+        <div *ngIf="posts && posts.length > 0">
+            <mat-icon *ngIf="posts[0].parent_Id != null" class="keyboard_backspace" (click)="backToParent(posts[0].parent_Id)">keyboard_backspace</mat-icon>
 
-        <div *ngIf="posts.length > 0">
-            <div >
-                <app-postcard  *ngFor="let post of posts; let i = index" [post]="post" [isComment]="false" [idx]="i" [selfActivities]="selfActivities">
+            <div>
+               
+                <app-postcard  *ngIf="parentPost" [post]="parentPost">
                 </app-postcard>
             </div>
+            <div *ngFor="let post of posts; let i = index" (click)="getMorePostdetails(post, i, true)">
+
+                <app-postcard  *ngIf="isPosts" [post]="post" [selfActivities]="selfActivities">
+                </app-postcard>
+            </div>
+            <!-- <div *ngFor="let post of comments; let i = index" (click)="getMorePostdetails(post, true)"  *ngIf="isPosts">
+                <app-postcard   *ngIf="i==0" [post]="post" [isComment]="false" [idx]="i" [selfActivities]="selfActivities">
+                </app-postcard>
+                <app-postcard   [post]="post" [isComment]="true" [idx]="i" [selfActivities]="selfActivities">
+                </app-postcard>
+            </div> -->
             <button *ngIf="!selfActivities" (click)="topFunction()" id="myBtn" title="Start New Conversation"><i class='fa fa-flag'></i></button>
         </div>
         
-        <div *ngIf="posts.length < 1">
+        <div *ngIf="!posts || posts.length < 1">
             No Post to show 
         </div>
     </div>

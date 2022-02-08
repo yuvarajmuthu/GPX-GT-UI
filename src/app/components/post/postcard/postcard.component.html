@@ -3,7 +3,6 @@
 
 </div> -->
 <div class="dashboard-caption-wrap">
-										
     <ul class="list" >
         <li class="manage-list-row clearfix">
             <div class="job-info">
@@ -18,9 +17,8 @@
                     <div> <small class="job-sallery"><i class="ti ti-time"></i> {{post['lastModifiedDate']}}</small></div>
 <br>
                                     <div class="job-details">
-                                        <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="postText">
-                                            <!-- <p class="card-text" >
-                                            </p> -->
+                                        <div *ngIf="post && post['containsText']" (click)="tagUsersRedirectTo($event)" class="card-text" [innerHTML]="post['postText']">
+
                                         </div>
                      <div *ngIf="post && post['containsImage']" class="cardbox-item">
                         <img class="img-fluid" height="50%" width="50%" [src]="postImage" alt="">
@@ -315,12 +313,12 @@
         </ng-container>
 
         <!--LIST IF COMMENTS FOR THE POST-->
-        <app-postcard *ngFor="let post of comments" [isComment]="true" [post]="post">
+        <!-- <app-postcard *ngFor="let post of comments" [isComment]="true" [post]="post">
         </app-postcard> 
 
         <button *ngIf="loadMore" type="button" class="btn btn-xs load-more-comments" (click)="loadMoreComments()">Load more
             comments
-        </button>
+        </button> -->
     </div>
 </div>
 

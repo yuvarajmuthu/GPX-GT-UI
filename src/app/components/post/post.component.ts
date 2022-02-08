@@ -28,6 +28,11 @@ export class PostComponent implements OnInit {
     postsByPage : Post[]=[];
     pageNumber: number = 1;
 
+    parentPost:any;
+    allPosts : Post[] = [];
+    isPosts = true;
+    postViewDetails=[];
+
     constructor(private route: ActivatedRoute,
         private postService: PostService,
         private dataShareService: DatashareService) {
@@ -72,6 +77,103 @@ export class PostComponent implements OnInit {
         }
     }
 
+     dfs(obj, targetId) {
+        if (obj.id === targetId) {
+          return obj
+        }
+        if (obj.comments) {
+          for (let item of obj.comments) {
+            let check = this.dfs(item, targetId)
+            if (check) {
+              return obj.comments
+            }
+          }
+        }
+        return null
+      }
+
+
+
+
+    backToParent(parentId){
+        console.log(parentId);
+        let backToParent=[];
+        //  backToParent.push(this.allPosts.find(c=>c.parent_Id == parentId));
+        //  console.log(backToParent);
+        // if(!backToParent || backToParent.length == 0){
+            let result = null
+            console.log(typeof(backToParent));
+
+
+            for (let obj of this.allPosts) {
+            result = this.dfs(obj, parentId)
+            if (result) {
+                console.log(result);
+                if(result.parent_Id == null){
+                    this.parentPost = null;
+                }
+                else{
+                    this.parentPost = null;
+                    this.parentPost = obj;
+                }
+                console.log(typeof(result));
+                if(result[0]){
+                    for(let i=0; i<=result.length-1;i++){
+                        console.log(result[i]);
+                        backToParent.push(result[i]);
+                    }
+                }
+                else{
+                    backToParent.concat(result);
+                }
+                   
+                break
+            }
+            }
+        // }
+        
+        console.log(this.allPosts);
+        console.log(backToParent);
+        console.log(typeof(backToParent));
+        if(backToParent && backToParent.length>0 && backToParent[0].parent_Id != null){
+            // this.posts.length = 0;
+           console.log("=========1");
+            this.posts=backToParent;
+        }
+        else{
+            console.log("=========2");
+            let allPosts = this.allPosts
+            this.posts = allPosts;
+            console.log(this.posts);
+        }
+
+    }
+
+    getMorePostdetails(post:any, idx: number, isPost:boolean){
+        this.parentPost = null;
+        this.parentPost = post;
+        console.log(this.parentPost);
+        console.log("testing more posts");
+        console.log(this.allPosts);
+        console.log(idx);
+        
+        this.isPosts = isPost;
+        let details:any;
+        // if(post.parentPostId)
+        //    details = {"type":"post", "index": idx };
+        // else
+        //    details = {"type":"comment", "index": idx };
+
+        // this.postViewDetails.push(details);
+
+        // this.posts.length = 0;
+        let allpost = this.posts[idx].comments
+        console.log(allpost);
+        this.posts=allpost;
+
+        // console.log(this.postViewDetails);
+    }
+
     ngOnInit(): void {
         if(!this.userId){
             this.userId = this.dataShareService.getLoggedinUsername();
@@ -107,6 +209,8 @@ export class PostComponent implements OnInit {
         this.postService.getSharedPost(postId).subscribe((result) => {
             if(result){
                 this.posts = result;
+                this.allPosts=[];
+                this.allPosts = result;
             }
         });
     }
@@ -129,6 +233,8 @@ export class PostComponent implements OnInit {
             if(result){
                 this.postsByPage = result;
                 this.posts = this.posts.concat(this.postsByPage);
+                this.allPosts = [];
+                this.allPosts = result;
             }
             //this.reloadPost(entity, entityType);
         });

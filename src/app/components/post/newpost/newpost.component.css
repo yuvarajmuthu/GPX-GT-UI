@@ -79,6 +79,7 @@ form button {
   padding: 3px 10px;
 }
 
+
 .attachments .fileContainer [type="file"] {
   right: 6px;
   top: -18px;
@@ -229,7 +230,6 @@ img {
   width: 100%;
   /* max-width: 300px; */
 }
-
 /* Make the image to responsive */
 /* .image {
   display: block;

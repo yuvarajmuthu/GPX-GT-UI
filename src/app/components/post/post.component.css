@@ -1,6 +1,9 @@
 .post-list{
     background-color:#FBFCFC;
 }
+.keyboard_backspace{
+             cursor: pointer;
+}
 .open-post{
   background-color: black;
   border: none;

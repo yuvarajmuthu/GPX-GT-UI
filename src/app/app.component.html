@@ -21,8 +21,7 @@
       
      <!-- <button *ngIf="isMobile && isUserLogged" type="button" [ngbPopover]="shareContent"  #p="ngbPopover"  class="notify-button"><i *ngIf="notifications" class="fa fa-bell-o" aria-hidden="true"></i><span class="circle" *ngIf="notifications">{{notifications.length}}</span></button> -->
       <button *ngIf="isMobile" type="button" [ngbPopover]="popContent"  #p="ngbPopover"  class="mobile-avatar-button"> <img src="assets/images/avatars/avatar.png" class="img-responsive"/></button>
-      
-      <button class="navbar-toggler" type="button" (click)="isCollaped = !isCollaped"
+      <button class="navbar-toggler" type="button" (click)="toggleNav(isCollaped)"
               data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -39,20 +38,20 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollaped" [style.height.px]="screenHeight">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
+              <a class="nav-link" [ngClass]="{'active': activeTab=='searchLegislator'}"  routerLink="searchLegislator" routerLinkActive="active"><i class="fa fa-search"></i>Find Representatives</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
+              <a class="nav-link" [ngClass]="{'active': activeTab=='circle'}"  routerLink="circle" routerLinkActive="active">
                 <i class="fa fa-user"></i>
                 Circle
               </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
+            <a class="nav-link" [ngClass]="{'active': activeTab=='news'}"  routerLink="news" routerLinkActive="active"><i class="fa fa-rss"></i>News</a>
           </li>
 
           <li class="nav-item">
-              <a class="nav-link" (click)="hideNav()" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
+              <a class="nav-link" [ngClass]="{'active': activeTab=='request'}"  routerLink="request" routerLinkActive="active"><i class="fa fa-link"></i>Connections</a>
           </li>
           </ul>
 

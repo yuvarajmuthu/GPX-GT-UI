@@ -1,5 +1,6 @@
 export class Post {
-	public id:string;
+	public id:number;
+	public parent_Id: number;
 	public entityId:string;
 	public parentPostId:string;		
 	public userId: string;

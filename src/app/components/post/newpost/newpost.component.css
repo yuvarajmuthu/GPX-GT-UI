@@ -43,25 +43,6 @@
   float: left;
   width: 100%;
 }
-.attachments {
-  border: 1px solid #eee;
-  display: block;
-  padding: 10px;
-  text-align: right;
-  border-top: 0;
-  background: #fff;
-}
-
-.attachments > ul {
-  list-style: outside none none;
-  margin-bottom: 0;
-  padding-left: 0;
-}
-
-.attachments li {
-  display: inline-block;
-  margin-left: 5px;
-}
 
 textarea {
   border: 1px solid #eeeeee;

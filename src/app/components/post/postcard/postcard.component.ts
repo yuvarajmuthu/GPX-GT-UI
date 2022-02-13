@@ -9,6 +9,10 @@ import { Observable, of, from, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import 'rxjs/Rx';
 
+import { CommentformComponent } from "../commentform/commentform.component";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+
 import {DomSanitizer} from "@angular/platform-browser";
 import { tagUser } from 'src/app/models/tagusers';
 import { CdkRow } from '@angular/cdk/table';
@@ -87,6 +91,8 @@ export class PostcardComponent implements AfterViewInit {
                 private cdr: ChangeDetectorRef,
                 private sanitizer: DomSanitizer,
                 private http:HttpClient,
+                public dialog: MatDialog, 
+                private commentformComponent: CommentformComponent,
                 private router: Router) {
         for (let index = 0; index < 10000; index++) {
             this.numbers.push(index);
@@ -449,6 +455,15 @@ export class PostcardComponent implements AfterViewInit {
                 this.isFileSizeError = true;
             }
           }
+    }
+
+    openCommentModel(){
+        console.log("================================")
+        const dialogRef = this.dialog.open(CommentformComponent, {
+            width: '75%',
+            maxHeight: '90%',
+            panelClass: 'modal-dialog'
+          });
     }
 
     //SHOW and LOAD/HIDE Comments

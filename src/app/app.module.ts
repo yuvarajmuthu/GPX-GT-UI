@@ -47,6 +47,7 @@ import { CreatepageselectionComponent } from './components/security/createpage/c
 import { CircleComponent } from './components/circle/circle.component';
 import { GpsGlobalSearchComponent } from './components/gps-global-search/gps-global-search.component';
 import { HomeComponent } from './components/home/home.component';
+import { CommentformComponent } from './components/post/commentform/commentform.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';
@@ -144,7 +145,7 @@ let config = new AuthServiceConfig([
         SecurityModule,
         PostModule,
         UserModule,
-        GpxUIComponentsModule,
+        GpxUIComponentsModule
         //ConnectionModule
         // RouterModule.forRoot(
         //   appRoutes,
@@ -164,7 +165,7 @@ let config = new AuthServiceConfig([
             multi: true
         },
       
-        
+        CommentformComponent,
         AuthenticationService,
         AuthGuard,
         //dateFormatPipe
@@ -174,7 +175,8 @@ let config = new AuthServiceConfig([
             useFactory: provideConfig
           }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents:[CommentformComponent]
 })
 export class AppModule {
 

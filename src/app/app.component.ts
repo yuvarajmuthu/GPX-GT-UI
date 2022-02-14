@@ -61,13 +61,17 @@ export class AppComponent implements OnInit {
     screenHeight:any;
 
 
-    @HostListener('click', ['$event.target'])
-    onClick(evt) {
-        // console.log(evt.id);
+    @HostListener('click', ['$event'])
+    onClick(evt:any) {
+         console.log(evt.target);
         // if(evt.id == 'test1' || evt.id == 'test2'){
         //     this.isCollaped = true;
         // }
-      if(evt.id != 'dropdownMenuButton'){
+      if(evt.target.id == 'comment'){
+        evt.stopPropagation();
+      }
+
+      if(evt.target.id != 'dropdownMenuButton'){
             var element = document.getElementById("createpagemenu");
             element.classList.remove("createpage-option");
             this.iscreateOptEnabled = false;

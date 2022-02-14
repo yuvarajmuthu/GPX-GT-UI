@@ -29,7 +29,10 @@ form button {
   padding: 3px 10px;
 }
 
-
+#comment{
+  border: none;
+  background-color: transparent;
+}
 
 .row-offcanvas {
   position: relative;

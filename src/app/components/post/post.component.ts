@@ -149,16 +149,17 @@ export class PostComponent implements OnInit {
 
     }
 
-    getMorePostdetails(post:any, idx: number, isPost:boolean){
+    getMorePostdetails(evt:any, post:any, idx: number, isPost:boolean){
+        console.log(evt.target.id);
+        if(evt.target.id == 'comment'){
+            return;
+        }
         this.parentPost = null;
         this.parentPost = post;
-        console.log(this.parentPost);
-        console.log("testing more posts");
-        console.log(this.allPosts);
-        console.log(idx);
-        
         this.isPosts = isPost;
         let details:any;
+
+
         // if(post.parentPostId)
         //    details = {"type":"post", "index": idx };
         // else

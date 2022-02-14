@@ -18,6 +18,9 @@ import {dateFormatPipe} from '../../util/pipes/dateformat.pipe';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TagInputModule } from 'ngx-chips';
 
+import { CommentformComponent } from './commentform/commentform.component';
+
+
 //import { BrowserModule } from '@angular/platform-browser'; 
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -40,7 +43,7 @@ import { TagInputModule } from 'ngx-chips';
   ],
   declarations: [
     //BannerComponent, 
-    PostComponent, PostcardComponent, NewpostComponent, dateFormatPipe
+    PostComponent, PostcardComponent, NewpostComponent, dateFormatPipe, CommentformComponent
   ],
   exports:[PostComponent] 
 }) 

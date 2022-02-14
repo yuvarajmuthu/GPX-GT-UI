@@ -1,0 +1,65 @@
+<button class="close" mat-button (click)="onNoClick()">X</button>
+<div class="form-group">
+    <label class="sr-only" for="message">post</label>
+
+            <div id="replyContent" class="form-control" contenteditable="true"
+            [mentionConfig]="mentionConfig" placeholder="Please share your thoughts"
+            [mentionListTemplate]="mentionListTemplate" spellcheck="true" (keyup)="getUsers($event)"> 
+            </div>
+
+            <ng-template #mentionListTemplate let-item="item">
+                <img class="mr-3" src="{{item.photoUrl}}" alt="" width="30" height="30">
+                &nbsp;
+                <!-- <span>{{item.firstName}} {{item.lastName}}</span> -->
+                <span>{{item.full_name}}</span>
+              </ng-template>
+
+        <div class="attachments">
+        <span *ngIf="isFileSizeError" class="file-upload-error" >Please upload image file with size less than 2MB.</span>
+            <ul>
+                <li>
+                    <i class='attachment char-icon'
+                    (click)="toggled = !toggled"
+                    [(emojiPickerIf)]="toggled"
+                    [emojiPickerDirection]="'top'"
+                    (emojiPickerSelect)="handleSelection($event)">😄</i>
+            </li>
+                <li>
+                    <i class="fa fa-image"></i>
+                    <label class="fileContainer">
+                        <input type="file" id="stageUploadedFile" accept="image/gif, image/jpg, image/jpeg, image/png" (change)="onFileSelected($event)">
+                    </label>
+                </li>
+                <li>
+                    <i class="fa fa-video-camera"></i>
+                    <label class="fileContainer">
+                        <input type="file" id="stageUploadedFile1"
+                        (change)="onvideoSelected($event)">
+                    </label>
+                </li>
+            </ul>
+    </div>
+    <div class="btn-group reply-btn">
+        <button type="submit" class="btn btn-xs btn-primary" (click)="submitPost()">Reply</button>
+    </div>
+</div>
+
+
+<div class="image-upload-container" *ngIf="stagingImage && stagingImage != null">
+    <div class="file-container">
+    <!-- <button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button> -->
+    <img [src]="stagingImage" height="200" class="image">
+    <div class="overlay"><button class="delete-image" type="button" (click)="deleteAttachedFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+   </div>
+    <!-- <img class="image-upload" [src]="stagingImage" id="stageUploadedImgFile" alt="" width="100%"> -->
+</div>
+
+<div class="video-upload-container" *ngIf="isvideoSelected==true">
+    <div class="file-container">
+        <!-- <button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-times" aria-hidden="true"></i></button> -->
+        <video width="400" controls >
+        </video>
+        <div class="overlay"><button class="delete-image" type="button" (click)="deleteVideoFile($event)"> <i class="fa fa-trash-o" aria-hidden="true"></i></button></div>
+    </div>
+
+</div>

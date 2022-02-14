@@ -29,11 +29,7 @@ form button {
   padding: 3px 10px;
 }
 
-.attachments .fileContainer [type="file"] {
-  right: 6px;
-  top: -18px;
-  width: 20px;
-}
+
 
 .row-offcanvas {
   position: relative;

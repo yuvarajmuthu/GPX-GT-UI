@@ -83,6 +83,7 @@ export class PostcardComponent implements AfterViewInit {
     items: any;
     mentionConfig:any;
     isActive:boolean = false;
+    
 
     constructor(private postService: PostService,
                 private dataShareService: DatashareService,

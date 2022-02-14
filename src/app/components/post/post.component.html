@@ -14,7 +14,7 @@
                 <app-postcard  *ngIf="parentPost" [post]="parentPost">
                 </app-postcard>
             </div>
-            <div *ngFor="let post of posts; let i = index" (click)="getMorePostdetails(post, i, true)">
+            <div *ngFor="let post of posts; let i = index" (click)="getMorePostdetails($event, post, i, true)">
 
                 <app-postcard  *ngIf="isPosts" [post]="post" [selfActivities]="selfActivities">
                 </app-postcard>

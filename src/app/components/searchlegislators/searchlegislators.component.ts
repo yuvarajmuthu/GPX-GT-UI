@@ -128,7 +128,9 @@ export class SearchlegislatorsComponent implements OnInit {
       this.address = environment.address;
     }
 
-    if(!this.registration){ // Component being in NON-Home page
+    //If User address is found, load the data based on that information
+
+    if(!this.registration){ // Component loaded in NON-Home page
 
       let address = this.route.snapshot.queryParamMap.get('address');
       console.log('searchlegislators ngOnInit() address ', address);

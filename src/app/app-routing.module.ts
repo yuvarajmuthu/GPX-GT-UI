@@ -10,6 +10,8 @@ import {CircleComponent} from './components/circle/circle.component';
 import {ProtectedComponent} from './components/protected/protected.component';
 import {CreatepageComponent} from './components/security/createpage/createpage.component';
 import {CreatepageselectionComponent} from './components/security/createpage/createpageselection/createpageselection.component';
+import { PrivacyComponent } from './components/legal/privacy/privacy.component';
+import { TermsComponent } from './components/legal/terms/terms.component';
 
 import {AuthGuard} from '../app/auth/auth.guard';
 
@@ -26,6 +28,8 @@ const routes: Routes = [
   {path: 'createpageoptions', component: CreatepageselectionComponent, canActivate: [AuthGuard]},
   {path: 'request', loadChildren: './components/connection/connection.module#ConnectionModule', canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent},
+  {path: 'privacy', component: PrivacyComponent},
+  {path: 'terms', component: TermsComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'}
 
 ];

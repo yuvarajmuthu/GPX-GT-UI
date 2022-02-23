@@ -48,6 +48,8 @@ import { CircleComponent } from './components/circle/circle.component';
 import { GpsGlobalSearchComponent } from './components/gps-global-search/gps-global-search.component';
 import { HomeComponent } from './components/home/home.component';
 import { CommentformComponent } from './components/post/commentform/commentform.component';
+import { PrivacyComponent } from './components/legal/privacy/privacy.component';
+import { TermsComponent } from './components/legal/terms/terms.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';
@@ -101,7 +103,9 @@ let config = new AuthServiceConfig([
         // GAddressSearchComponent,
         CreatepageselectionComponent,
         CircleComponent,
-        HomeComponent
+        HomeComponent,
+        PrivacyComponent,
+        TermsComponent
         //dateFormatPipe
         //UserComponent
         //GpxInputComponent,

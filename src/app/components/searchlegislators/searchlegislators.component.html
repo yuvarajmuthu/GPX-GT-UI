@@ -54,7 +54,9 @@
 
   <div style="margin-top:5px" *ngIf="divisions && divisions.length > 0">
     <div class="sub-title sub-title-size">
-      <strong>Level:</strong>
+      <ngb-alert type="primary" [dismissible]="false">
+        <strong>Category:</strong>
+      </ngb-alert>
     </div>
     <div class="row" style="margin-left:1px">
       <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': selectedDivision == division}" (click)="selectDivision(division);"
@@ -66,7 +68,9 @@
   </div>
   <div style="margin-top:5px" *ngIf="divisionOffices && divisionOffices.length > 0">
     <div class="sub-title sub-title-size">
-      <strong>Role:</strong>
+      <ngb-alert type="primary" [dismissible]="false">
+        <strong>Role:</strong>
+      </ngb-alert>  
     </div>
     <div class="row" style="margin-left:1px">
       <span class="filterPill"><button class="btn button-color" [ngClass]="{'active': selectedDivisionOffice == divisionOffice}"

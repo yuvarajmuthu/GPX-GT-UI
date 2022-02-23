@@ -204,7 +204,7 @@ export class AppComponent implements OnInit {
       selectEvent(e){
           console.log(e.username);
       //this.isCollaped = !this.isCollaped;
-       this.hideNav(this.isCollaped);
+       this.hideNav();
        let routePath= '/user/'+e.username+"/";
        this.router.navigate([routePath]);
      }
@@ -244,7 +244,7 @@ export class AppComponent implements OnInit {
         //return false;
     }
 
-    hideNav(isCollap){
+    hideNav(){
         // this.isClickedNav = true;
         // if(isCollap == false)
         //  this.isCollaped = true;

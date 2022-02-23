@@ -48,6 +48,8 @@ import { CircleComponent } from './components/circle/circle.component';
 import { GpsGlobalSearchComponent } from './components/gps-global-search/gps-global-search.component';
 import { HomeComponent } from './components/home/home.component';
 import { CommentformComponent } from './components/post/commentform/commentform.component';
+import { PrivacyComponent } from './components/legal/privacy/privacy.component';
+import { TermsComponent } from './components/legal/terms/terms.component';
 //import {UserComponent} from './components/user/user/user.component';
 
 //import { GpxInputComponent } from './gpx-input/gpx-input.component';
@@ -101,7 +103,9 @@ let config = new AuthServiceConfig([
         // GAddressSearchComponent,
         CreatepageselectionComponent,
         CircleComponent,
-        HomeComponent
+        HomeComponent,
+        PrivacyComponent,
+        TermsComponent
         //dateFormatPipe
         //UserComponent
         //GpxInputComponent,
@@ -133,12 +137,12 @@ let config = new AuthServiceConfig([
                 tokenGetter: tokenGetter,
                 //Authenticated requests should only be sent to whitelistedDomains
                 //DEV mode
-                whitelistedDomains: ['localhost:5000'],
+                //whitelistedDomains: ['localhost:5000'],
                 //PROD mode
-                //whitelistedDomains: ['www.gpxservice.xyz'],
+                whitelistedDomains: ['www.gpxservice.xyz'],
                 //specific routes that shouldn’t receive the JWT even if they are on a whitelisted domain
-                blacklistedRoutes: ['localhost:5000/login','localhost:5000/user/tokenVerify']
-                //blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
+                //blacklistedRoutes: ['localhost:5000/login','localhost:5000/user/tokenVerify']
+                blacklistedRoutes: ['https://www.gpxservice.xyz/login','https://www.gpxservice.xyz/user/tokenVerify']
             }
         }),
         AngularFontAwesomeModule, //OBSOLETE
@@ -158,13 +162,13 @@ let config = new AuthServiceConfig([
       UserModule],
     providers: [
       //enable the interceptor only for DEV mode
-      
+      /*
         {
             provide: HTTP_INTERCEPTORS,
             useClass: MockHttpInterceptorService,
             multi: true
         },
-      
+      */
         CommentformComponent,
         AuthenticationService,
         AuthGuard,
